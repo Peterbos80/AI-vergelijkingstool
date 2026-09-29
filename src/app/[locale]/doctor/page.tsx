@@ -1,0 +1,242 @@
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import type { Locale } from '@/i18n/config';
+import { getT } from '@/i18n/server';
+import { formatMoney } from '@/i18n/formatters';
+import { getCatalog, nameOf, stepLabel, taskTextOf } from '@/lib/catalog';
+import { diagnose, PAINS, type Pain } from '@/lib/engine/doctor';
+import { href } from '@/lib/routes';
+import { alternates } from '@/lib/seo';
+import { track } from '@/lib/analytics/track';
+import { LeadForm } from '@/components/forms/LeadForm';
+import { leadAction } from './actions';
+
+export async function generateMetadata({ params, searchParams }: PageProps<'/[locale]/doctor'>): Promise<Metadata> {
+  const { locale } = (await params) as { locale: Locale };
+  const sp = await searchParams;
+  const t = getT(locale);
+  return {
+    title: t('doctor.metaTitle'),
+    description: t('doctor.metaDescription'),
+    alternates: alternates(locale, (l) => href.doctor(l)),
+    robots: Object.keys(sp).length ? { index: false, follow: true } : undefined,
+  };
+}
+
+const SLOTS = [0, 1, 2, 3, 4, 5, 6, 7];
+
+export default async function DoctorPage({ params, searchParams }: PageProps<'/[locale]/doctor'>) {
+  const { locale } = (await params) as { locale: Locale };
+  const sp = await searchParams;
+  const t = getT(locale);
+  const catalog = await getCatalog();
+  await track({ path: href.doctor(locale), pageType: 'doctor', locale });
+  const slugs = ([] as string[]).concat(sp.t ?? []).flatMap((x) => x.split(',')).filter(Boolean);
+  const tools = [...new Set(slugs)].map((s) => catalog.toolsBySlug.get(s)).filter((x): x is NonNullable<typeof x> => Boolean(x));
+  const pains = ([] as string[]).concat(sp.p ?? []).filter((p): p is Pain => (PAINS as string[]).includes(p));
+  const task = typeof sp.task === 'string' ? (catalog.tasksById.get(sp.task) ?? null) : null;
+  const submitted = slugs.length > 0 || sp.submitted === '1';
+  const d = tools.length ? diagnose(catalog, tools.map((x) => x.id), pains, task) : null;
+  const name = (id: string) => catalog.toolsById.get(id)?.name ?? id;
+  const money = (list: { cents: number; currency: string }[]) => list.map((m) => formatMoney(m.cents, m.currency, locale)).join(' + ');
+  const options = [...catalog.tools].sort((a, b) => a.name.localeCompare(b.name));
+
+  return (
+    <div className="container-page py-10">
+      <h1 className="text-3xl md:text-4xl">{t('doctor.title')}</h1>
+      <p className="mt-2 max-w-2xl text-ink-2">{t('doctor.intro')}</p>
+
+      <form method="get" action={href.doctor(locale)} className="card mt-6 space-y-5 p-4">
+        <input type="hidden" name="submitted" value="1" />
+        <fieldset>
+          <legend className="eyebrow">{t('doctor.yourTools')}</legend>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {SLOTS.map((i) => (
+              <div key={i}>
+                <label htmlFor={`doc-${i}`} className="label">
+                  {t('doctor.toolN', { n: i + 1 })}
+                </label>
+                <select id={`doc-${i}`} name="t" defaultValue={tools[i]?.slug ?? ''} className="input">
+                  <option value="">{t('doctor.choose')}</option>
+                  {options.map((o) => (
+                    <option key={o.id} value={o.slug}>
+                      {o.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ))}
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend className="eyebrow">{t('doctor.pains')}</legend>
+          <div className="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {PAINS.map((p) => (
+              <label key={p} className="flex items-center gap-2">
+                <input type="checkbox" name="p" value={p} defaultChecked={pains.includes(p)} className="h-4 w-4 accent-[var(--ink)]" />
+                {t(`doctor.pain.${p}`)}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+        <div className="max-w-md">
+          <label htmlFor="doc-task" className="label">
+            {t('doctor.goal')}
+          </label>
+          <select id="doc-task" name="task" defaultValue={task?.id ?? ''} className="input">
+            <option value="">{t('doctor.goalAny')}</option>
+            {catalog.tasks.map((x) => (
+              <option key={x.id} value={x.id}>
+                {taskTextOf(x, locale).title}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button type="submit" className="btn">
+          {t('doctor.submit')}
+        </button>
+      </form>
+
+      {submitted && !d && <p className="mt-6 text-danger">{t('doctor.needTools')}</p>}
+
+      {d && (
+        <section className="mt-10 space-y-8" aria-labelledby="diagnosis" aria-live="polite">
+          <h2 id="diagnosis" className="text-2xl">
+            {t('doctor.diagnosis')}
+          </h2>
+          {d.roasts.length > 0 && (
+            <ul className="space-y-2">
+              {d.roasts.map((r) => (
+                <li key={r} className="receipt px-4 py-3 font-sans text-base">
+                  {t(`doctor.roast.${r}`)}
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="card p-4">
+            {d.monthly.length ? (
+              <p>
+                {t('doctor.monthly')} <strong className="tabular">{money(d.monthly)}{t('period.month')}</strong>
+              </p>
+            ) : (
+              <p>{t('doctor.monthlyFree')}</p>
+            )}
+            <p className="mt-1 text-xs text-ink-3">{t('doctor.monthlyNote')}</p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {d.overlaps.length > 0 && (
+              <div>
+                <h3 className="eyebrow">{t('doctor.overlapTitle')}</h3>
+                <ul className="mt-2 space-y-1 text-sm">
+                  {d.overlaps.map((o) => (
+                    <li key={o.capabilityId}>
+                      • {t('doctor.overlapItem', { tools: o.toolIds.map(name).join(', '), capability: nameOf(catalog.capabilitiesById.get(o.capabilityId)!, locale).name.toLowerCase() })}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {d.risks.length > 0 && (
+              <div>
+                <h3 className="eyebrow">{t('doctor.risksTitle')}</h3>
+                <ul className="mt-2 space-y-1 text-sm">
+                  {d.risks.map((r, i) => (
+                    <li key={i}>! {t(`doctor.risk.${r.kind}`, { tool: name(r.toolId) })}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {d.savings.length > 0 && (
+              <div>
+                <h3 className="eyebrow">{t('doctor.savingsTitle')}</h3>
+                <ul className="mt-2 space-y-1 text-sm">
+                  {d.savings.map((s) => (
+                    <li key={s.toolId}>
+                      →{' '}
+                      {t('doctor.savingsItem', { alt: name(s.alternativeId), tool: name(s.toolId), saving: formatMoney(s.savingCents, s.currency, locale) })}{' '}
+                      <Link href={href.compare(locale, [catalog.toolsById.get(s.toolId)!.slug, catalog.toolsById.get(s.alternativeId)!.slug])}>
+                        {t('common.compare')}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {d.consolidation.length > 0 && (
+              <div>
+                <h3 className="eyebrow">{t('doctor.consolidationTitle')}</h3>
+                <ul className="mt-2 space-y-1 text-sm">
+                  {d.consolidation.map((c) => (
+                    <li key={c.toolId}>→ {t('doctor.consolidationItem', { tool: name(c.toolId), replaces: c.replaces.map(name).join(', ') })}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {d.gaps.length > 0 && task && (
+              <div>
+                <h3 className="eyebrow">{t('doctor.gapsTitle')}</h3>
+                <ul className="mt-2 space-y-1 text-sm">
+                  {d.gaps.map((g) => (
+                    <li key={g.stepKey}>
+                      +{' '}
+                      {t('doctor.gapsItem', {
+                        step: stepLabel(task.steps.find((s) => s.key === g.stepKey)!, locale).label,
+                        tools: g.suggestionIds.map(name).join(', '),
+                      })}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          <div>
+            <h3 className="text-xl">{t('doctor.recipeTitle')}</h3>
+            {d.recipe.every((r) => r.action === 'keep') ? (
+              <p className="mt-2 text-ink-2">{t('doctor.nothing')}</p>
+            ) : null}
+            <ol className="receipt mt-3 divide-y divide-dashed divide-line px-4 py-3">
+              {d.recipe.map((r, i) => (
+                <li key={i} className="flex flex-wrap items-baseline gap-2 py-2">
+                  <span className="w-24 shrink-0 font-semibold uppercase">{t(`doctor.action.${r.action}`)}</span>
+                  <Link href={href.tool(locale, catalog.toolsById.get(r.toolId)?.slug ?? '')}>{name(r.toolId)}</Link>
+                  {r.withId && <span className="text-ink-2">{t('doctor.withTool', { tool: name(r.withId) })}</span>}
+                </li>
+              ))}
+            </ol>
+            {d.estimatedSaving.length > 0 && <p className="mt-2 text-sm text-verified">{t('doctor.saving', { amount: money(d.estimatedSaving) })}</p>}
+            {task && (
+              <Link href={href.match(locale, { q: taskTextOf(task, locale).title })} className="btn btn-ghost mt-4">
+                {t('doctor.saveCta')} →
+              </Link>
+            )}
+          </div>
+
+          <section className="card grid gap-6 p-6 md:grid-cols-2" aria-labelledby="lead">
+            <div>
+              <h3 id="lead" className="text-lg">
+                {t('doctor.leadTitle')}
+              </h3>
+              <p className="mt-2 text-sm text-ink-2">{t('doctor.leadBody')}</p>
+            </div>
+            <LeadForm
+              action={leadAction}
+              locale={locale}
+              labels={{
+                name: t('lead.name'),
+                email: t('lead.email'),
+                company: t('lead.company'),
+                size: t('lead.size'),
+                message: t('lead.message'),
+                consent: t('lead.consent'),
+                submit: t('lead.submit'),
+              }}
+              sizes={['1', '2-10', '11-50', '51-250', '250+'].map((v) => ({ value: v, label: t(`lead.sizeOptions.${v}`) }))}
+            />
+          </section>
+        </section>
+      )}
+    </div>
+  );
+}

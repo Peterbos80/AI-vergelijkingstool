@@ -24,6 +24,8 @@ const schema = z.object({
     .default('true')
     .transform((v) => v === 'true'),
   RESEND_API_KEY: optional,
+  /** 'log' keeps e-mail in the outbox only (development/tests); never set in production. */
+  EMAIL_MODE: z.enum(['send', 'log']).default('send'),
   EMAIL_FROM: optional,
   OWNER_EMAIL: optional,
   HEARTBEAT_URL: optional,
@@ -68,6 +70,12 @@ export function appSecret(): string {
   if (secret && secret.length >= 32) return secret;
   if (env().NODE_ENV === 'production') throw new Error('APP_SECRET (≥ 32 chars) is required in production');
   return 'development-only-insecure-secret-change-me-0123456789';
+}
+
+/** E-mail features (Watch, newsletter) are only offered when mail can actually be delivered. */
+export function emailEnabled(): boolean {
+  const e = env();
+  return Boolean(e.RESEND_API_KEY) || (e.EMAIL_MODE === 'log' && e.NODE_ENV !== 'production');
 }
 
 export function legalDetails() {
