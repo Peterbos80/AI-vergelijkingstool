@@ -58,6 +58,11 @@ Het dashboard toont:
 - **Gemiste kansen:** tools met veel outbound kliks maar zonder programma (lijst voor outreach).
 - **Scenariomodel** met aanpasbare parameters, naast de gemeten waarden (zie §6).
 
+**Regels voor echte data (doc 12 §6.2):**
+- Elke omzettegel toont de bron en "data t/m {datum}".
+- **Onbekend is nooit €0.** Zonder import of koppeling toont de tegel "—" met de reden en de actie.
+- Omzet komt binnen via een netwerk-API waar die bestaat (connector per netwerk, klasse B). Anders via een CSV-import (maandelijks, ±15 min per netwerk). Een import ouder dan 35 dagen wordt één keer geëscaleerd en staat daarna in elk weekrapport.
+
 ## 6. Scenario's naar €500/maand
 
 > Dit zijn **projecties met expliciete aannames, geen feiten**. Het dashboard vervangt elke aanname door de gemeten waarde zodra er data is.
@@ -118,10 +123,13 @@ Sponsoring €/mnd  = actieve slots × slotprijs                         (pas va
 |---|---|
 | Hosting (Vercel Pro of VPS) | €6–20 |
 | Database (Neon of lokaal) | €0–19 |
-| LLM (Match-intentie, snel model; ≈ €0,002–0,004 per Match) | €5–40 bij 2.000–10.000 Matches |
+| LLM Match-intentie (optioneel; standaardmodel `claude-opus-5-5`, met caching en gating: de LLM draait bij ±40% van de Matches, ±$0,011–0,018 per call) | ±$9–14 per 2.000 Matches · ±$45–72 per 10.000 Matches |
+| LLM voor de autonome operatie (extractie, classificatie, concepten, rapport; zie doc 12 §11) | ±$5–10 |
 | E-mail (Resend free tier tot 3.000 mails/mnd) | €0–20 |
 | Domein | ≈ €1 |
-| **Totaal** | **≈ €15–100** |
+| **Totaal** | **≈ €20–150** (bovengrens bij 10.000 LLM-Matches) |
+
+*De Match-LLM is het enige onderdeel dat met het verkeer meeschaalt. De kosten per Match staan in het weekrapport naast de gemeten meerwaarde. Een goedkoper model kiezen (`ANTHROPIC_MODEL`) is een keuze van de eigenaar, geen automatische.*
 
 ## 7. Aanbod richting vendors (wanneer het bereik er is)
 
@@ -141,3 +149,15 @@ Sponsoring €/mnd  = actieve slots × slotprijs                         (pas va
 - [x] Geen trackingcookies. Kliktracking zonder persoonsgegevens (bezoekershash met dagelijkse salt).
 - [ ] Affiliatevoorwaarden per programma nalopen (brand bidding, disclosuretekst, verboden claims) bij aanmelding.
 - [ ] Btw en valuta voor buitenlandse commissies afstemmen met de boekhouder.
+
+## 9. Autonome omzetlussen (samenvatting van doc 12 §9)
+
+| Lus | Het systeem doet zelf | De eigenaar doet |
+|---|---|---|
+| Contentprioriteit (vraag × EPC) | Kansen rangschikken; datapagina's aanmaken die door de poort komen | Nieuwe taken en categorieën goedkeuren |
+| Programmadekking | Detecteert affiliateprogramma's bij tools met veel kliks en berekent de verwachte waarde: `kliks (30 d) × c × r`, gelabeld als schatting | Aanmelden (contract) |
+| Linkgezondheid | Controleert redirectketens en valt terug op een directe link | — |
+| Readiness | Signaleert drempels: ≥ 1.000 abonnees, ≥ 10k bezoekers/mnd, ≥ 10k Matches/mnd | Aanbod, prijs, contract |
+| LLM-kosten tegenover meerwaarde | Stuurt de gatingdrempel binnen de grenzen van de eigenaar | Grenzen en modelkeuze |
+
+**Omzetdata stuurt nooit de ranking, de volgorde van aanbevelingen of de keuze van interne links** (§1 en doc 12 C11).

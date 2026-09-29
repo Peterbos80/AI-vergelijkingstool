@@ -38,15 +38,18 @@ interface AgentContext {
 | 5 | **Broken Link** | Bereikbaarheid van website en prijspagina | HEAD/GET | elke 6 uur | website_status, event bij 3× falen | Down → event (auto, gemarkeerd); status "shutdown" → mens |
 | 6 | **Duplicate** | Dubbele tools en kandidaten | Interne data | dagelijks | `review_items` (duplicate) | Altijd queue |
 | 7 | **Quality** | Datakwaliteit en indexeerbaarheid | Interne data | elk uur | quality_score, issues, indexable | Auto (intern) |
-| 8 | **Editorial** | Queue-beleid uitvoeren, verlopen items opruimen | Interne data | elk uur | Promoties en herbeoordelingen | Past §5 toe |
+| 8 | **Escalation** (was: Editorial) | Queue- en inboxbeleid: SLA's, veilige standaardacties, automatisch sluiten, bundeling, escalatiebudget | Interne data | elk uur | Promoties, standaardacties, gebundelde inbox-items | Past §5 en doc 12 §5 toe |
 | 9 | **Social Intelligence** | Momentum meten | GitHub API (sterren, releases), HN Algolia (vermeldingen 7d/30d) | dagelijks | `social_signals`, "buzz"-event bij z-score > 3 | Event met label COMMUNITY (auto) |
 | 10 | **Video** | Relevante video's | YouTube Data API (zoeken, met key), kanaal-RSS (zonder key), oEmbed-validatie | wekelijks | `videos` (official/review/tutorial/comparison) | Officieel kanaal → auto; overige → relevantiedrempel, anders queue |
 | 11 | **Content** | Conceptbeschrijvingen en vertalingen | Interne feiten + LLM | op aanvraag, nachtelijk | `review_items` (content_draft) | Altijd queue |
-| 12 | **SEO** | Pagina-inventaris, poorten, kansen | Interne data + Match-queries | dagelijks | Rapport: ontbrekende vergelijkingen met vraag, pagina's zonder poort | Advies (info) |
+| 12 | **Opportunity** (was: SEO) | SEO- en omzetkansen, readiness (nieuwsbrief, sponsorslot), detectie van affiliateprogramma's | Interne data, Match-queries, Search Console (optioneel), vendorsites | dagelijks | Gerangschikte kansen met verwachte waarde; vergelijkingspagina's die door de datapoort komen | Datapagina's: auto (R1). Taxonomie en aanmeldingen: mens |
 | 13 | **Recommendation** | Relaties herberekenen (alternatieven) | Capability-overlap + prijzen | dagelijks | `tool_relations` (computed) | Auto |
 | 14 | **Monetization** | Linkgezondheid, disclosure-check, kansen | Affiliatelinks, clicks, programma's | dagelijks | Rapport + events | Kapotte affiliatelink → deactiveren + queue |
 | 15 | **Notifier** | Watchers informeren | `change_events` × `watches` | dagelijks/wekelijks | `email_outbox` | Auto (alleen gepubliceerde events) |
 | 16 | **FX** | Wisselkoersen | ECB-referentiekoersen (XML) | dagelijks | `fx_rates` | Auto |
+| 17 | **Health** | Gezondheid en afhankelijkhedenregister (doc 12 §6.3), heartbeat-ping naar de externe monitor | Interne checks, `HEARTBEAT_URL` | elke 15 min | `health_checks`, inbox-items bij verouderde afhankelijkheden | Auto; escalatie volgens doc 12 §5 |
+| 18 | **Reporter** | Wekelijks autonoom rapport (doc 12 §7) | Interne data | ma 07:00 (Europe/Amsterdam) | `reports`, e-mail aan `OWNER_EMAIL` | Auto |
+| 19 | **Audit** | Maandelijkse steekproef van automatisch gepubliceerde feiten, precisie per confidenceband | `agent_actions`, `facts` | maandelijks | Inbox-item `audit_sample`; drempelvoorstellen | Voorstel; mens beslist |
 
 ## 4. Confidence: berekend uit bewijs
 
@@ -87,6 +90,14 @@ penalties:          sanity-check faalt → confidence max 0.40 (bijv. negatieve 
 - Nieuwe tool → altijd `queued` (instelbaar: `newToolsAutoPublish`).
 - Vendorclaims en humor → altijd mens.
 - Autonomieniveau per agent: `auto` / `queue_only` / `off`.
+
+**Aanvullingen uit doc 12 (autonome operatie):**
+- **Risicoklassen R0–R3** bepalen wat überhaupt automatisch mag (doc 12 §4.2). R3 (juridisch, financieel, contractueel, security, strategie) is altijd mens.
+- **Bevestiging door herhaling:** een prijswijziging wordt pas gepubliceerd na 2 identieke observaties met ≥ 6 uur ertussen.
+- **Anomaliewacht:** wijzigt een run meer dan 10% van de tools, meer dan 5 prijzen of meer dan 3 statussen, dan wordt de hele run `queued` en volgt één escalatie.
+- **Shutdown** met een letterlijke officiële aankondiging (bronzin op het eigen domein van de vendor) → `auto_published_flagged`. Zonder die aankondiging alleen het feitelijke label "niet bereikbaar sinds …".
+- **Nieuwe tools:** `newToolMode` = `queue` (standaard) of `quarantine` (noindex + label "Nieuw, nog in controle", na 7 groene dagen automatisch gepromoveerd).
+- **Veilige standaardactie:** elk inbox-item heeft een standaardactie en een deadline (doc 12 §5.5).
 
 ## 6. Versheidsregels (configureerbaar)
 
@@ -144,6 +155,8 @@ Admin → AI Operations toont:
   ```
 
 ## 11. Human-in-the-loop
+
+> Het volledige escalatiemodel (P1/P2/P3, "waarom jij", veilige standaardacties, escalatiebudget, bundeling, leren van beslissingen) staat in **doc 12 §5**. Het eigenaarsdashboard staat in doc 12 §6.
 
 - **Review-queue:** gesorteerd op prioriteit (impact × onzekerheid). Per item: voorstel, bewijs, bron en een diff. Acties: goedkeuren, afwijzen, aanpassen en goedkeuren, of batch.
 - **Correcties van vendors en gebruikers** komen als `correction`-items in dezelfde queue. De afhandeling komt in het publieke correctielog.

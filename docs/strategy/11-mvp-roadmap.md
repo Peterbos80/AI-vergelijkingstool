@@ -36,6 +36,13 @@ Score 1–5 (5 = hoogst; bij Effort betekent 5 = *weinig* werk). **Totaal = Impa
 | 28 | Battle Lab met gegenereerde output | 3 | 1 | 1 | 2 | 4 | 18 | NOT NOW |
 | 29 | Gebruikersreviews | 2 | 2 | 1 | 2 | 1 | 11 | NOT NOW |
 | 30 | Accounts/teams | 2 | 2 | 3 | 3 | 1 | 14 | NOT NOW |
+| 31 | Eigenaarsdashboard + inbox (P1/P2/P3, standaardacties) | 5 | 3 | 3 | 0 | 3 | 22 | **MVP** |
+| 32 | Wekelijks autonoom rapport | 4 | 4 | 2 | 0 | 2 | 18 | **MVP** |
+| 33 | Health + externe heartbeat + afhankelijkhedenregister | 5 | 4 | 1 | 0 | 1 | 17 | **MVP** |
+| 34 | Anomaliewacht + herhaalbevestiging + terugdraaien | 5 | 3 | 1 | 1 | 4 | 23 | **MVP** |
+| 35 | Steekproefaudit (precisie per confidenceband) | 4 | 5 | 0 | 0 | 4 | 21 | **MVP** |
+| 36 | Quarantainepublicatie van nieuwe tools | 3 | 3 | 1 | 1 | 2 | 15 | **MVP** (instelbaar; standaard `queue`) |
+| 37 | Netwerk-API-connectors voor conversies | 3 | 2 | 4 | 0 | 1 | 14 | Na aanmelding per netwerk (CSV-import is de MVP) |
 
 ## 2. MVP-definitie
 
@@ -91,17 +98,22 @@ Score 1–5 (5 = hoogst; bij Effort betekent 5 = *weinig* werk). **Totaal = Impa
 | 23 | CDN-caching van HTML / ISR | App-cache volstaat | > 200k bezoeken/mnd |
 | 24 | Mobiele app | Web is voldoende | Retentie via app aantoonbaar beter |
 | 25 | Forum/Discord | Communitybeheer kost tijd | ≥ 5.000 abonnees |
+| 26 | Autonome outreach naar vendors en sponsors | Tw art. 11.7/AVG en reputatierisico (doc 12 C10) | Nooit autonoom; het systeem schrijft wel concepten |
+| 27 | Automatisch tunen van rankinggewichten | Neutraliteit + Omnibus (doc 12 C11) | Nooit autonoom; wel voorstellen met offline-evaluatie |
+| 28 | Automatische codewijzigingen en deploys | Risico; zelfherstel beperkt zich tot data en planning | Nooit autonoom; wel automatische GitHub-issues |
+| 29 | Pagina-experimenten (A/B) | Te weinig power: ±8.155 bezoekers per variant voor 5% → 6% (doc 12 C3) | Benodigde steekproef haalbaar binnen 8 weken |
+| 30 | Google Trends als bron | Geen algemeen beschikbare officiële API; scrapen strijdt met de voorwaarden | Officiële API algemeen beschikbaar |
 
 ## 4. Fasering (elke fase: STOP → TEST → REVIEW → FIX → CONTINUE)
 
 | Fase | Inhoud | Exitcriteria |
 |---|---|---|
-| **0: Audit en architectuur** | Documenten 00–11 | Beslissingen vastgelegd, NOT NOW-lijst akkoord |
+| **0: Audit en architectuur** | Documenten 00–12 (12 = autonome operatie) | Beslissingen vastgelegd, NOT NOW-lijst akkoord |
 | **1: Foundation** | Next.js, TypeScript, Tailwind, design tokens, i18n (nl/en + de/fr voorbereid), Postgres + Drizzle-schema + migraties, seed-framework, security headers, CI | Build groen, migraties draaien, lege pagina's renderen per locale, lint/typecheck/unit groen |
 | **2: Core product** | Catalogus, toolpagina's, verkenner + filters, vergelijken, alternatieven, prijzen, bronnen, freshness | E2E: tool bekijken → vergelijken → bezoeken werkt; SEO-metadata aanwezig |
 | **3: AI intelligence** | Intentie (lexicaal + Claude), verduidelijking, stack-composer, varianten, uitleg met guards, Doctor | 20+ use cases geven zinnige stacks; LLM-uitval → fallback werkt |
-| **4: Automation** | Agent-framework, fetcher, confidence/beleid, 16 agents, runner/worker, Admin Operations/Queue/Errors | Agents op fixtures groen; acties traceerbaar; drempels configureerbaar |
-| **5: Monetization** | /go-tracking, programma's/links, disclosure, conversie-import, omzet- en scenariodashboard, leads, nieuwsbrief, placements | Omzet per pagina berekenbaar; disclosure-test groen; ranking-onafhankelijkheid-test groen |
+| **4: Automation** | Agent-framework, fetcher, confidence/beleid + risicoklassen, anomaliewacht, herhaalbevestiging, terugdraaien, 19 agents (incl. Escalation, Health, Reporter, Audit, Opportunity), runner/worker, inbox, Admin Operations/Inbox/Errors/Automatisering | Agents op fixtures groen; acties traceerbaar en omkeerbaar; standaardacties getest; drempels configureerbaar |
+| **5: Monetization + eigenaarsdashboard** | /go-tracking, programma's/links, disclosure, conversie-import, eigenaarsdashboard (doc 12 §6), weekrapport, omzet- en scenariodashboard, leads, nieuwsbrief, placements | Omzet per pagina berekenbaar; "onbekend ≠ 0"-test groen; disclosure-test groen; ranking-onafhankelijkheid-test groen |
 | **6: Growth** | Sitemap/poorten, JSON-LD, hreflang, OG-bonnetjes, llms.txt, publieke API, Pulse, Watch/Notifier | SEO-checks groen; deelkaart rendert; digest wordt gegenereerd |
 | **7: Internationalization** | Vertaaldekking meten, de/fr-berichten, locale-poort | Dekkingsrapport in Admin; nl/en 100% |
 
@@ -123,3 +135,5 @@ Score 1–5 (5 = hoogst; bij Effort betekent 5 = *weinig* werk). **Totaal = Impa
 - [ ] `ANTHROPIC_API_KEY` (optioneel), `RESEND_API_KEY` (voor alerts), `YOUTUBE_API_KEY` (optioneel) en `GITHUB_TOKEN` (voor hogere rate limits) instellen.
 - [ ] Netwerktoegang voor de agent-worker tot vendor-sites (in productie standaard).
 - [ ] De eerste nachtelijke agent-run controleren in Admin → Operations; seedfeiten die op de officiële bron zijn bevestigd, promoveren automatisch naar GECONTROLEERD.
+- [ ] `OWNER_EMAIL` en `HEARTBEAT_URL` instellen (externe dead man's switch, doc 12 C5) en een externe uptimecheck op de homepage zetten.
+- [ ] De eerste steekproefaudit (maand 1) uitvoeren en de precisie per confidenceband bekijken.
