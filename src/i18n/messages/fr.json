@@ -1,0 +1,37 @@
+{
+ "meta": {
+  "siteName": "AIToolsWijzer",
+  "tagline": "Des outils d'IA, avec justificatifs.",
+  "titleTemplate": "{title} · AIToolsWijzer"
+ },
+ "a11y": {
+  "skipToContent": "Aller au contenu",
+  "mainNav": "Navigation principale"
+ },
+ "nav": {
+  "match": "Match",
+  "explore": "Explorer",
+  "compare": "Comparer",
+  "doctor": "Doctor",
+  "pulse": "Pulse",
+  "tasks": "Tâches",
+  "search": "Rechercher un outil"
+ },
+ "status": {
+  "verified": {
+   "label": "Vérifié"
+  },
+  "supported": {
+   "label": "Étayé"
+  },
+  "community": {
+   "label": "Communauté"
+  },
+  "unverified": {
+   "label": "Non confirmé"
+  }
+ },
+ "freshness": {
+  "staleBanner": "⚠️ Informations peut-être obsolètes. Dernière vérification le {date}."
+ }
+}

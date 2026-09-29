@@ -1,0 +1,120 @@
+{
+ "meta": {
+  "siteName": "AIToolsWijzer",
+  "tagline": "AI-tools, met bonnetje.",
+  "defaultTitle": "AIToolsWijzer — welke AI-tool past bij wat je wilt doen?",
+  "defaultDescription": "Vertel wat je wilt doen en krijg een onderbouwde AI-stack: welke tools, waarom, wat het kost, met bronnen, versheid en alternatieven.",
+  "titleTemplate": "{title} · AIToolsWijzer"
+ },
+ "a11y": {
+  "skipToContent": "Naar de inhoud",
+  "mainNav": "Hoofdnavigatie",
+  "footerNav": "Voettekstnavigatie",
+  "languageSwitcher": "Taal kiezen",
+  "breadcrumbs": "Kruimelpad",
+  "openMenu": "Menu openen",
+  "closeMenu": "Menu sluiten",
+  "external": "(opent externe site)"
+ },
+ "nav": {
+  "match": "Match",
+  "explore": "Verkennen",
+  "compare": "Vergelijken",
+  "doctor": "Doctor",
+  "pulse": "Pulse",
+  "tasks": "Taken",
+  "search": "Zoek een tool",
+  "searchLabel": "Zoek in de tooldatabase",
+  "menu": "Menu"
+ },
+ "footer": {
+  "about": "Over",
+  "methodology": "Methodologie",
+  "disclosure": "Disclosure",
+  "corrections": "Correcties",
+  "privacy": "Privacy",
+  "newsletter": "Nieuwsbrief",
+  "api": "Data-API",
+  "pulse": "Pulse",
+  "tasks": "Taken",
+  "categories": "Categorieën",
+  "explanation": "Onafhankelijk: geld verandert nooit de volgorde. Elke bewering heeft een bron, een datum en een status.",
+  "dataLine": "{tools} tools · {facts} feiten en prijzen · laatst gecontroleerd {date}",
+  "language": "Taal"
+ },
+ "common": {
+  "backToTop": "Terug naar boven",
+  "loading": "Bonnetjes aan het natellen…",
+  "more": "Meer",
+  "showAll": "Alles tonen",
+  "learnMore": "Meer weten",
+  "source": "Bron",
+  "sources": "Bronnen",
+  "yes": "ja",
+  "no": "nee",
+  "unknown": "onbekend",
+  "notApplicable": "n.v.t.",
+  "perMonth": "/mnd",
+  "perYear": "/jaar",
+  "free": "Gratis",
+  "from": "vanaf",
+  "custom": "Op aanvraag",
+  "compare": "Vergelijken",
+  "visit": "Bezoek site",
+  "close": "Sluiten",
+  "submit": "Versturen",
+  "cancel": "Annuleren",
+  "save": "Opslaan",
+  "share": "Delen",
+  "copied": "Gekopieerd",
+  "copyLink": "Kopieer link",
+  "tools": "{count, plural, =0 {geen tools} one {# tool} other {# tools}}",
+  "approxEur": "≈ {amount}",
+  "fxNote": "Omgerekend met ECB-referentiekoers van {date}.",
+  "updated": "Bijgewerkt {date}"
+ },
+ "status": {
+  "verified": {
+   "label": "Gecontroleerd",
+   "short": "Gecontr.",
+   "tooltip": "Bevestigd op de officiële bron, met letterlijke bronzin."
+  },
+  "supported": {
+   "label": "Ondersteund",
+   "short": "Onderst.",
+   "tooltip": "Meerdere onafhankelijke bronnen komen overeen, of de officiële bron noemt het maar het is nog niet letterlijk gecontroleerd."
+  },
+  "community": {
+   "label": "Community",
+   "short": "Comm.",
+   "tooltip": "Alleen gebaseerd op community- of socialebronnen."
+  },
+  "unverified": {
+   "label": "Onbevestigd",
+   "short": "Onbev.",
+   "tooltip": "Nog niet bevestigd op de officiële site."
+  }
+ },
+ "freshness": {
+  "fresh": "Vers gecontroleerd",
+  "aging": "Controle wordt binnenkort herhaald",
+  "stale": "Mogelijk verouderd",
+  "unknown": "Nog niet gecontroleerd",
+  "staleBanner": "⚠️ Informatie mogelijk verouderd. Laatst gecontroleerd op {date}.",
+  "checkedOn": "Gecontroleerd {date}"
+ },
+ "ticker": {
+  "label": "AI Pulse: recente wijzigingen",
+  "pause": "Ticker pauzeren",
+  "play": "Ticker afspelen",
+  "all": "Alle wijzigingen"
+ },
+ "errors": {
+  "notFoundTitle": "Deze pagina heeft geen bonnetje.",
+  "notFoundBody": "De pagina bestaat niet (meer), of het adres klopt niet helemaal.",
+  "notFoundCta": "Terug naar de start",
+  "errorTitle": "Er ging iets mis.",
+  "errorBody": "We hebben de fout gelogd. Probeer het opnieuw; lukt het niet, dan kijken we ernaar.",
+  "retry": "Opnieuw proberen"
+ }
+}

@@ -104,11 +104,11 @@ Sponsoring €/mnd  = actieve slots × slotprijs                         (pas va
 | 3 | 800 | ≈ €8 | 1.500 | ≈ €74 | 3.000 | ≈ €593 |
 | 6 | 2.000 | ≈ €21 | 4.000 | ≈ €199 | 9.000 | ≈ €1.778 |
 | 9 | 3.500 | ≈ €37 | 8.000 | ≈ €397 | 18.000 | ≈ €4.210 |
-| 12 | 5.000 | ≈ €52 | 12.000 | ≈ €746 | 30.000 | ≈ €6.743 |
-| 18 | 9.000 | ≈ €94 | 20.000 | ≈ €1.248 | 45.000 | ≈ €10.169 |
+| 12 | 5.000 | ≈ €53 | 12.000 | ≈ €746 | 30.000 | ≈ €6.743 |
+| 18 | 9.000 | ≈ €95 | 20.000 | ≈ €1.248 | 45.000 | ≈ €10.169 |
 | **Eerste maand ≥ €500** | | **niet binnen 18 mnd** | | **maand 11** | | **maand 3** |
 
-*(Berekend met de formules hierboven. Verkeer is lineair geïnterpoleerd tussen de ankerpunten en de nieuwsbrief rekent met 2% afmeldingen per maand. De nieuwsbrief draagt in het conservatieve en het basisscenario pas vanaf maand 17–18 bij, omdat de drempel van 1.000 abonnees laat wordt gehaald. Het rekenscript staat in `scripts/revenue-scenarios.ts` en dezelfde logica zit in het Admin-dashboard.)*
+*(Berekend met de formules hierboven. Verkeer is lineair geïnterpoleerd tussen de ankerpunten en de nieuwsbrief rekent met 2% afmeldingen per maand. In het basisscenario draagt de nieuwsbrief pas vanaf maand 17–18 bij, omdat de drempel van 1.000 abonnees laat wordt gehaald; in het conservatieve scenario wordt die drempel binnen 18 maanden niet gehaald. Bedragen zijn afgerond op hele euro's (half naar boven). Het rekenscript staat in `scripts/revenue-scenarios.ts` en dezelfde logica zit in het Admin-dashboard.)*
 
 ### Conclusies
 

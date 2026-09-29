@@ -1,0 +1,37 @@
+{
+ "meta": {
+  "siteName": "AIToolsWijzer",
+  "tagline": "KI-Tools, mit Beleg.",
+  "titleTemplate": "{title} · AIToolsWijzer"
+ },
+ "a11y": {
+  "skipToContent": "Zum Inhalt springen",
+  "mainNav": "Hauptnavigation"
+ },
+ "nav": {
+  "match": "Match",
+  "explore": "Entdecken",
+  "compare": "Vergleichen",
+  "doctor": "Doctor",
+  "pulse": "Pulse",
+  "tasks": "Aufgaben",
+  "search": "Tool suchen"
+ },
+ "status": {
+  "verified": {
+   "label": "Geprüft"
+  },
+  "supported": {
+   "label": "Gestützt"
+  },
+  "community": {
+   "label": "Community"
+  },
+  "unverified": {
+   "label": "Unbestätigt"
+  }
+ },
+ "freshness": {
+  "staleBanner": "⚠️ Informationen möglicherweise veraltet. Zuletzt geprüft am {date}."
+ }
+}

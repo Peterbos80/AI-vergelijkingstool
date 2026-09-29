@@ -63,7 +63,9 @@ CREATE TABLE "agent_actions" (
 	"confidence" integer,
 	"decision" text DEFAULT 'info' NOT NULL,
 	"reason" text,
-	"created_at" timestamp with time zone DEFAULT now() NOT NULL
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"reverted_at" timestamp with time zone,
+	"reverted_by" text
 );
 --> statement-breakpoint
 CREATE TABLE "agent_configs" (
@@ -251,6 +253,15 @@ CREATE TABLE "fx_rates" (
 	CONSTRAINT "fx_rates_day_quote_pk" PRIMARY KEY("day","quote")
 );
 --> statement-breakpoint
+CREATE TABLE "health_checks" (
+	"key" text PRIMARY KEY NOT NULL,
+	"status" text NOT NULL,
+	"message" text,
+	"detail" jsonb,
+	"last_checked_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"last_ok_at" timestamp with time zone
+);
+--> statement-breakpoint
 CREATE TABLE "leads" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"kind" text NOT NULL,
@@ -313,6 +324,22 @@ CREATE TABLE "outbound_clicks" (
 	"device" text
 );
 --> statement-breakpoint
+CREATE TABLE "pending_changes" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"tool_id" uuid NOT NULL,
+	"key" text NOT NULL,
+	"proposed_value" jsonb NOT NULL,
+	"value_hash" text NOT NULL,
+	"source_id" uuid,
+	"evidence" text,
+	"confidence" integer NOT NULL,
+	"observations" integer DEFAULT 1 NOT NULL,
+	"first_observed_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"last_observed_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"status" text DEFAULT 'pending' NOT NULL,
+	"agent" text NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE "placements" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tool_id" uuid NOT NULL,
@@ -363,6 +390,18 @@ CREATE TABLE "rate_limits" (
 	CONSTRAINT "rate_limits_key_window_start_pk" PRIMARY KEY("key","window_start")
 );
 --> statement-breakpoint
+CREATE TABLE "reports" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"kind" text NOT NULL,
+	"period_start" date NOT NULL,
+	"period_end" date NOT NULL,
+	"data" jsonb NOT NULL,
+	"summary" jsonb NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"created_by" text NOT NULL,
+	"emailed_at" timestamp with time zone
+);
+--> statement-breakpoint
 CREATE TABLE "revenue_entries" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"kind" text NOT NULL,
@@ -379,19 +418,30 @@ CREATE TABLE "revenue_entries" (
 CREATE TABLE "review_items" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"kind" text NOT NULL,
+	"severity" text DEFAULT 'p3' NOT NULL,
+	"category" text DEFAULT 'data' NOT NULL,
 	"tool_id" uuid,
 	"title" text NOT NULL,
+	"reason_code" text,
 	"payload" jsonb NOT NULL,
+	"impact" jsonb,
 	"confidence" integer,
 	"priority" integer DEFAULT 50 NOT NULL,
 	"status" text DEFAULT 'pending' NOT NULL,
+	"default_action" text,
+	"due_at" timestamp with time zone,
+	"snoozed_until" timestamp with time zone,
+	"group_key" text,
+	"group_count" integer DEFAULT 1 NOT NULL,
 	"created_by" text NOT NULL,
 	"run_id" uuid,
 	"dedupe_key" text,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"reviewed_by" text,
 	"reviewed_at" timestamp with time zone,
-	"review_note" text
+	"review_note" text,
+	"resolution" text
 );
 --> statement-breakpoint
 CREATE TABLE "settings" (
@@ -616,6 +666,8 @@ CREATE TABLE "tools" (
 	"social_checked_at" timestamp with time zone,
 	"video_checked_at" timestamp with time zone,
 	"website_status" text DEFAULT 'unknown' NOT NULL,
+	"unreachable_since" timestamp with time zone,
+	"quarantine_until" timestamp with time zone,
 	"quality_score" integer DEFAULT 0 NOT NULL,
 	"quality_issues" jsonb DEFAULT '[]'::jsonb NOT NULL,
 	"indexable" jsonb DEFAULT '{"tool":false,"pricing":false,"alternatives":false}'::jsonb NOT NULL,
@@ -672,6 +724,8 @@ ALTER TABLE "facts" ADD CONSTRAINT "facts_source_id_sources_id_fk" FOREIGN KEY (
 ALTER TABLE "leads" ADD CONSTRAINT "leads_stack_id_stacks_id_fk" FOREIGN KEY ("stack_id") REFERENCES "public"."stacks"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "outbound_clicks" ADD CONSTRAINT "outbound_clicks_tool_id_tools_id_fk" FOREIGN KEY ("tool_id") REFERENCES "public"."tools"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "outbound_clicks" ADD CONSTRAINT "outbound_clicks_affiliate_link_id_affiliate_links_id_fk" FOREIGN KEY ("affiliate_link_id") REFERENCES "public"."affiliate_links"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "pending_changes" ADD CONSTRAINT "pending_changes_tool_id_tools_id_fk" FOREIGN KEY ("tool_id") REFERENCES "public"."tools"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "pending_changes" ADD CONSTRAINT "pending_changes_source_id_sources_id_fk" FOREIGN KEY ("source_id") REFERENCES "public"."sources"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "placements" ADD CONSTRAINT "placements_tool_id_tools_id_fk" FOREIGN KEY ("tool_id") REFERENCES "public"."tools"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "pricing_plans" ADD CONSTRAINT "pricing_plans_tool_id_tools_id_fk" FOREIGN KEY ("tool_id") REFERENCES "public"."tools"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "pricing_plans" ADD CONSTRAINT "pricing_plans_source_id_sources_id_fk" FOREIGN KEY ("source_id") REFERENCES "public"."sources"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
@@ -724,9 +778,12 @@ CREATE INDEX "match_queries_task_idx" ON "match_queries" USING btree ("task_id")
 CREATE INDEX "outbound_clicks_ts_idx" ON "outbound_clicks" USING btree ("ts");--> statement-breakpoint
 CREATE INDEX "outbound_clicks_tool_idx" ON "outbound_clicks" USING btree ("tool_id","ts");--> statement-breakpoint
 CREATE INDEX "outbound_clicks_page_idx" ON "outbound_clicks" USING btree ("page_path");--> statement-breakpoint
+CREATE UNIQUE INDEX "pending_changes_open" ON "pending_changes" USING btree ("tool_id","key","value_hash","status");--> statement-breakpoint
 CREATE INDEX "pricing_plans_current_idx" ON "pricing_plans" USING btree ("tool_id") WHERE "pricing_plans"."valid_to" IS NULL;--> statement-breakpoint
 CREATE INDEX "pricing_plans_history_idx" ON "pricing_plans" USING btree ("tool_id","plan_key","valid_from");--> statement-breakpoint
-CREATE INDEX "review_items_queue_idx" ON "review_items" USING btree ("status","priority");--> statement-breakpoint
+CREATE UNIQUE INDEX "reports_period" ON "reports" USING btree ("kind","period_start");--> statement-breakpoint
+CREATE INDEX "review_items_queue_idx" ON "review_items" USING btree ("status","severity","priority");--> statement-breakpoint
+CREATE INDEX "review_items_due_idx" ON "review_items" USING btree ("status","due_at");--> statement-breakpoint
 CREATE UNIQUE INDEX "review_items_dedupe" ON "review_items" USING btree ("dedupe_key");--> statement-breakpoint
 CREATE INDEX "social_signals_series_idx" ON "social_signals" USING btree ("tool_id","provider","metric","observed_at");--> statement-breakpoint
 CREATE INDEX "source_snapshots_source_idx" ON "source_snapshots" USING btree ("source_id","fetched_at");--> statement-breakpoint

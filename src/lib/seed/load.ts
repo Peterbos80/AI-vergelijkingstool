@@ -9,8 +9,8 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import {
   eventSeed,
-  factSeed,
-  planSeed,
+  type factSeed,
+  type planSeed,
   taxonomySeed,
   toolSeed,
   type EventSeed,

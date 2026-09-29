@@ -259,6 +259,8 @@ export const tools = pgTable(
     socialCheckedAt: ts('social_checked_at'),
     videoCheckedAt: ts('video_checked_at'),
     websiteStatus: text('website_status').$type<'up' | 'down' | 'unknown'>().notNull().default('unknown'),
+    unreachableSince: ts('unreachable_since'),
+    quarantineUntil: ts('quarantine_until'),
     qualityScore: integer('quality_score').notNull().default(0),
     qualityIssues: jsonb('quality_issues').$type<string[]>().notNull().default(sql`'[]'::jsonb`),
     indexable: jsonb('indexable')
@@ -568,46 +570,128 @@ export const agentActions = pgTable(
     decision: text('decision').$type<Decision>().notNull().default('info'),
     reason: text('reason'),
     createdAt: createdAt(),
+    revertedAt: ts('reverted_at'),
+    revertedBy: text('reverted_by'),
   },
   (t) => [index('agent_actions_run_idx').on(t.runId), index('agent_actions_created_idx').on(t.createdAt)],
 );
 
+export type InboxKind =
+  | 'fact_change'
+  | 'price_change'
+  | 'new_tool'
+  | 'duplicate'
+  | 'content_draft'
+  | 'broken_link'
+  | 'correction'
+  | 'status_change'
+  | 'video'
+  | 'anomaly_freeze'
+  | 'dependency'
+  | 'agent_failing'
+  | 'opportunity'
+  | 'audit_sample'
+  | 'security'
+  | 'autonomy_proposal'
+  | 'legal';
+export type Severity = 'p1' | 'p2' | 'p3';
+export type InboxCategory = 'data' | 'commercial' | 'legal' | 'security' | 'technical' | 'content';
+
+/**
+ * The owner inbox / review queue (docs/strategy/12 §5). Human-facing text is
+ * rendered from `kind`, `reasonCode`, `defaultAction` and `payload` via i18n
+ * keys, so items are locale-independent. `title` is a plain fallback for logs.
+ */
 export const reviewItems = pgTable(
   'review_items',
   {
     id: uuid('id').primaryKey().defaultRandom(),
-    kind: text('kind')
-      .$type<
-        | 'fact_change'
-        | 'price_change'
-        | 'new_tool'
-        | 'duplicate'
-        | 'content_draft'
-        | 'broken_link'
-        | 'correction'
-        | 'status_change'
-        | 'video'
-      >()
-      .notNull(),
+    kind: text('kind').$type<InboxKind>().notNull(),
+    severity: text('severity').$type<Severity>().notNull().default('p3'),
+    category: text('category').$type<InboxCategory>().notNull().default('data'),
     toolId: uuid('tool_id').references(() => tools.id, { onDelete: 'cascade' }),
     title: text('title').notNull(),
+    reasonCode: text('reason_code'),
     payload: jsonb('payload').$type<Record<string, unknown>>().notNull(),
+    impact: jsonb('impact').$type<{ pages?: number; visits30d?: number; evCentsPerMonth?: number; evBasis?: string }>(),
     confidence: integer('confidence'),
     priority: integer('priority').notNull().default(50),
-    status: text('status').$type<'pending' | 'approved' | 'rejected' | 'auto_resolved'>().notNull().default('pending'),
+    status: text('status')
+      .$type<'pending' | 'approved' | 'rejected' | 'auto_resolved' | 'defaulted' | 'expired'>()
+      .notNull()
+      .default('pending'),
+    defaultAction: text('default_action'),
+    dueAt: ts('due_at'),
+    snoozedUntil: ts('snoozed_until'),
+    groupKey: text('group_key'),
+    groupCount: integer('group_count').notNull().default(1),
     createdBy: text('created_by').notNull(),
     runId: uuid('run_id').references(() => agentRuns.id, { onDelete: 'set null' }),
     dedupeKey: text('dedupe_key'),
     createdAt: createdAt(),
+    updatedAt: updatedAt(),
     reviewedBy: text('reviewed_by'),
     reviewedAt: ts('reviewed_at'),
     reviewNote: text('review_note'),
+    resolution: text('resolution'),
   },
   (t) => [
-    index('review_items_queue_idx').on(t.status, t.priority),
+    index('review_items_queue_idx').on(t.status, t.severity, t.priority),
+    index('review_items_due_idx').on(t.status, t.dueAt),
     uniqueIndex('review_items_dedupe').on(t.dedupeKey),
   ],
 );
+
+/**
+ * Confirmation by repetition (docs/strategy/12 §4.4): a detected change is only
+ * applied after N identical observations at least `confirmHours` apart.
+ */
+export const pendingChanges = pgTable(
+  'pending_changes',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    toolId: uuid('tool_id')
+      .notNull()
+      .references(() => tools.id, { onDelete: 'cascade' }),
+    key: text('key').notNull(),
+    proposedValue: jsonb('proposed_value').$type<unknown>().notNull(),
+    valueHash: text('value_hash').notNull(),
+    sourceId: uuid('source_id').references(() => sources.id, { onDelete: 'set null' }),
+    evidence: text('evidence'),
+    confidence: integer('confidence').notNull(),
+    observations: integer('observations').notNull().default(1),
+    firstObservedAt: ts('first_observed_at').notNull().defaultNow(),
+    lastObservedAt: ts('last_observed_at').notNull().defaultNow(),
+    status: text('status').$type<'pending' | 'confirmed' | 'superseded' | 'expired'>().notNull().default('pending'),
+    agent: text('agent').notNull(),
+  },
+  (t) => [uniqueIndex('pending_changes_open').on(t.toolId, t.key, t.valueHash, t.status)],
+);
+
+export const reports = pgTable(
+  'reports',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    kind: text('kind').$type<'weekly'>().notNull(),
+    periodStart: date('period_start', { mode: 'string' }).notNull(),
+    periodEnd: date('period_end', { mode: 'string' }).notNull(),
+    data: jsonb('data').$type<Record<string, unknown>>().notNull(),
+    summary: jsonb('summary').$type<LocalizedText>().notNull(),
+    createdAt: createdAt(),
+    createdBy: text('created_by').notNull(),
+    emailedAt: ts('emailed_at'),
+  },
+  (t) => [uniqueIndex('reports_period').on(t.kind, t.periodStart)],
+);
+
+export const healthChecks = pgTable('health_checks', {
+  key: text('key').primaryKey(),
+  status: text('status').$type<'ok' | 'warn' | 'fail' | 'unknown' | 'not_configured'>().notNull(),
+  message: text('message'),
+  detail: jsonb('detail').$type<Record<string, unknown>>(),
+  lastCheckedAt: ts('last_checked_at').notNull().defaultNow(),
+  lastOkAt: ts('last_ok_at'),
+});
 
 export const toolCandidates = pgTable(
   'tool_candidates',
@@ -988,4 +1072,7 @@ export type ChangeEvent = typeof changeEvents.$inferSelect;
 export type AgentRun = typeof agentRuns.$inferSelect;
 export type AgentAction = typeof agentActions.$inferSelect;
 export type ReviewItem = typeof reviewItems.$inferSelect;
+export type PendingChange = typeof pendingChanges.$inferSelect;
+export type Report = typeof reports.$inferSelect;
+export type HealthCheck = typeof healthChecks.$inferSelect;
 export type Video = typeof videos.$inferSelect;

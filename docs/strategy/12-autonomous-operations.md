@@ -217,14 +217,14 @@ De zeven vragen:
 |---|---|---|---|---|---|---|---|
 | Discovery | Ja: HN Algolia, GitHub Search, RSS | Openbare API's; Product Hunt: token + voorwaarden checken | Laag per los signaal, hoog na dossier + poorten | Kandidaat blijft onzichtbaar | ≈ $0–2 | Ja: dekking groeit zonder handwerk | Grijze zone, wekelijks gebundeld |
 | Monitoring | Ja: fetcher + hash-diff | robots.txt/ToS gerespecteerd; snapshots intern, niet publiek | Hoog (deterministisch) | n.v.t. | €0 (worker) | Ja | Nee |
-| Verificatie | Ja: verankering; LLM voor extractie | Korte citaten als bewijs (citaatrecht) met bron | Hoog bij verankering, middel bij fuzzy | Status blijft ONDERSTEUND/ONGECONTROLEERD, zichtbaar | ≈ $2–5 | Ja: kern van het vertrouwen | Conflict tussen officiële bronnen |
+| Verificatie | Ja: verankering; LLM voor extractie | Korte citaten als bewijs (citaatrecht) met bron | Hoog bij verankering, middel bij fuzzy | Status blijft ONDERSTEUND/ONBEVESTIGD, zichtbaar | ≈ $2–5 | Ja: kern van het vertrouwen | Conflict tussen officiële bronnen |
 | Prijzen | Ja, met render-modus en geo-kanttekening | Idem | Middel-hoog, met herhaalbevestiging | Oude prijs + "mogelijk gewijzigd" | in verificatie | Ja: het meest gezochte feit | Grote sprong zonder verankering; bevriezing |
 | Features | Ja via changelog/RSS; homepage-diffs zijn ruisgevoelig | Idem | Hoog (changelog) / laag (diff) | Diff → wekelijkse batch, niet gepubliceerd | ≈ $2 | Ja voor changelogs, nee voor losse diffs | Alleen batch met twijfelgevallen |
 | Stopgezet | Signalen: DNS, 404, domeinparkering, aankondiging | Onterecht "stopgezet" = reputatieschade voor de vendor | Signaal hoog; conclusie laag zonder aankondiging | Feitelijk label "niet bereikbaar sinds …" | €0 | Ja | "Stopgezet" zonder officiële bron |
 | Duplicaten | Ja: domein, naam, aliassen | — | Hoog bij hetzelfde domein | Kandidaat → queue | €0 | Ja | Samenvoegen van bestaande tools |
 | Links | Ja | — | Hoog na 3 pogingen over 24 u | Label pas na herhaling | €0 | Ja | Nee |
 | Verrijking | Ja: GitHub-API, sitemetadata | Logo's alleen ter identificatie; verwijderen op verzoek | Hoog voor API-data | Veld leeg laten in plaats van gokken | ≈ $0–1 | Ja | Klacht van een merkhouder |
-| Nieuws | Ja via officiële feeds | Geen artikelen kopiëren: titel + link + eigen feitensamenvatting | Hoog (officieel), middel (media) | Media-only → label GEMEENSCHAP/ONGECONTROLEERD of queue | ≈ $2 | Ja: voedt Pulse | Media-only claims met impact |
+| Nieuws | Ja via officiële feeds | Geen artikelen kopiëren: titel + link + eigen feitensamenvatting | Hoog (officieel), middel (media) | Media-only → label COMMUNITY/ONBEVESTIGD of queue | ≈ $2 | Ja: voedt Pulse | Media-only claims met impact |
 | Video/social | YouTube Data API (standaardquotum 10.000 units/dag; een zoekopdracht kost 100 units, dus ±100 per dag); kanaal-RSS; HN; GitHub | YouTube API-voorwaarden (officiële speler, regels voor opslag van API-data); Reddit/X betaald of op toestemming → D | Middel (relevantie) | Onder de drempel → niet tonen | €0 (quotum) | Ja voor YouTube/HN/GitHub; nee voor Reddit/X | Nee |
 
 ### 3.2 Groei en content
