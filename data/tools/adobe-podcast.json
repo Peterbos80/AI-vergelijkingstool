@@ -1,0 +1,47 @@
+{
+  "slug": "adobe-podcast",
+  "name": "Adobe Podcast",
+  "website": "https://podcast.adobe.com",
+  "company": { "name": "Adobe", "slug": "adobe", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["podcasters", "creators", "educators"],
+  "capabilities": [
+    { "id": "audio-enhancement", "strength": "primary" },
+    { "id": "audio-editing", "strength": "secondary" },
+    { "id": "podcast-recording", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Enhance Speech is completely free with no Adobe subscription required… The Premium plan costs $9.99/month (also available at $99.99/year)… The free tier includes Enhance Speech processing for 1 hour daily\"",
+    "sources": [
+      { "url": "https://www.buildfastwithai.com/ai-tools/adobe-podcast", "type": "secondary" },
+      { "url": "https://thepodcastconsultant.com/blog/adobe-podcast-enhance", "type": "secondary" },
+      { "url": "https://www.timtis.com/blog/adobe-podcast-ai-tools-explained-enhance-speech-captions-pricing-and-real-ratings-2026/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://podcast.adobe.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Enhance Speech 1 hour per day, files up to 30 minutes" },
+    { "key": "premium", "name": "Premium", "price": 9.99, "currency": "USD", "period": "month", "annualMonthly": 8.33, "quota": "Enhance Speech 4 hours per day, files up to 2 hours, batch and video" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt spraakopnames met één klik als uit een studio",
+      "description": "Adobe Podcast (met Enhance Speech) haalt ruis en galm uit spraakopnames en laat ze klinken alsof ze in een studio zijn opgenomen. De basis is gratis te gebruiken in de browser; Premium verhoogt de limieten en voegt video en batch-verwerking toe.",
+      "bestFor": ["Slechte opnames redden (ruis, galm)", "Podcasters en docenten zonder studio"],
+      "notFor": ["Muziek- of geluidsproductie"],
+      "limitations": ["Gratis: 1 uur verwerking per dag, bestanden tot 30 minuten"]
+    },
+    "en": {
+      "tagline": "One-click studio-quality speech from any recording",
+      "description": "Adobe Podcast (with Enhance Speech) removes noise and echo from speech recordings so they sound studio-recorded. The basics are free in the browser; Premium raises limits and adds video and batch processing.",
+      "bestFor": ["Rescuing poor recordings (noise, echo)", "Podcasters and teachers without a studio"],
+      "notFor": ["Music or sound production"],
+      "limitations": ["Free: 1 hour of processing per day, files up to 30 minutes"]
+    }
+  },
+  "relations": [{ "tool": "auphonic", "kind": "alternative" }, { "tool": "descript", "kind": "alternative" }]
+}

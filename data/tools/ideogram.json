@@ -1,0 +1,49 @@
+{
+  "slug": "ideogram",
+  "name": "Ideogram",
+  "website": "https://ideogram.ai",
+  "pricingUrl": "https://ideogram.ai/pricing",
+  "company": { "name": "Ideogram", "slug": "ideogram", "country": "CA" },
+  "skillLevel": "beginner",
+  "audience": ["designers", "marketers", "smb"],
+  "capabilities": [
+    { "id": "image-generation", "strength": "primary" },
+    { "id": "logo-design", "strength": "secondary" },
+    { "id": "graphic-design", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free gives you 10 credits a week… Plus starts at $15/month (billed annually) with 1,000 priority credits… monthly… $15-20/month. Pro is $42/month (billed annually) with 3,500 credits. The monthly billing rate is approximately $60/month.\"",
+    "sources": [
+      { "url": "https://ideogram.ai/pricing", "type": "official", "title": "Pricing — Ideogram" },
+      { "url": "https://www.eesel.ai/blog/ideogram-pricing", "type": "secondary" },
+      { "url": "https://pricepertoken.com/ideogram-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://ideogram.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "10 slow credits per week" },
+    { "key": "plus", "name": "Plus", "price": 20, "currency": "USD", "period": "month", "annualMonthly": 15, "quota": "1,000 priority credits per month", "note": "Monthly price reported as $15–20." },
+    { "key": "pro", "name": "Pro", "price": 60, "currency": "USD", "period": "month", "annualMonthly": 42, "quota": "3,500 priority credits per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-beeldgenerator die sterk is in tekst en typografie in beeld",
+      "description": "Ideogram maakt afbeeldingen waarin tekst goed leesbaar is: posters, logo-ideeën, social visuals en thumbnails. Daarnaast biedt het bewerken, uitbreiden en stijlreferenties. Het gratis plan geeft wekelijks een klein aantal credits.",
+      "bestFor": ["Posters en visuals met leesbare tekst", "Logo- en merkideeën"],
+      "notFor": ["Fotorealistische productfoto's van je eigen product"],
+      "limitations": ["Gratis: 10 trage credits per week"]
+    },
+    "en": {
+      "tagline": "AI image generator that excels at text and typography",
+      "description": "Ideogram creates images with legible text: posters, logo ideas, social visuals and thumbnails, plus editing, extending and style references. The free plan offers a small weekly credit allowance.",
+      "bestFor": ["Posters and visuals with readable text", "Logo and brand ideas"],
+      "notFor": ["Photorealistic shots of your own product"],
+      "limitations": ["Free: 10 slow credits per week"]
+    }
+  },
+  "relations": [{ "tool": "midjourney", "kind": "alternative" }, { "tool": "adobe-firefly", "kind": "alternative" }, { "tool": "canva", "kind": "alternative" }]
+}

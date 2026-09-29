@@ -1,0 +1,47 @@
+{
+  "slug": "languagetool",
+  "name": "LanguageTool",
+  "website": "https://languagetool.org",
+  "company": { "name": "LanguageTooler", "slug": "languagetooler", "country": "DE" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "students", "professionals"],
+  "capabilities": [
+    { "id": "grammar-checking", "strength": "primary" },
+    { "id": "translation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Monthly subscription: €19.90 per month; Quarterly subscription: €39.90 per quarter (€13.30 per month); Annual subscription: €59.89 per year (€4.90 per month)… LanguageTool offers full support for English, Spanish, German, French, Portuguese, Dutch, and 25+ other languages\"",
+    "sources": [
+      { "url": "https://help.languagetool.org/hc/en-us/articles/39254510973335-What-subscriptions-does-LanguageTool-offer", "type": "official_docs", "title": "What subscriptions does LanguageTool offer?" },
+      { "url": "https://omr.com/en/reviews/product/languagetool/pricing", "type": "secondary" },
+      { "url": "https://toolradar.com/tools/languagetool/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "evidence": "Search result title: \"LanguageTool Pricing 2026: Start Free — What Upgrades Cost\"" },
+    "supports_dutch": { "value": true },
+    "platforms": { "value": ["web", "windows", "macos", "chrome_extension"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://languagetool.org", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true },
+    { "key": "premium", "name": "Premium", "price": 19.9, "currency": "EUR", "period": "month", "annualMonthly": 4.99, "quota": "Annual: €59.89 per year" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Spelling- en grammaticacontrole die ook goed Nederlands kent",
+      "description": "LanguageTool, van een Duits bedrijf, controleert spelling, grammatica en stijl in meer dan 25 talen, waaronder Nederlands. Werkt in de browser, Word, e-mail en desktop, en kan zinnen herformuleren. Het jaarabonnement is opvallend goedkoop.",
+      "bestFor": ["Foutloze Nederlandstalige teksten", "Wie in meerdere talen schrijft", "Een goedkope Europese schrijfhulp"],
+      "notFor": ["Wie vooral complete teksten wil laten genereren"],
+      "limitations": ["Maandelijks betalen is veel duurder dan jaarlijks"]
+    },
+    "en": {
+      "tagline": "Spelling and grammar checker that also knows Dutch well",
+      "description": "LanguageTool, from a German company, checks spelling, grammar and style in more than 25 languages including Dutch, German and French. It works in the browser, Word, email and desktop, and can rephrase sentences. The annual plan is notably cheap.",
+      "bestFor": ["Error-free texts in Dutch, German or French", "Writers working in several languages", "An affordable European writing aid"],
+      "notFor": ["People who mainly want full texts generated"],
+      "limitations": ["Monthly billing is much more expensive than annual"]
+    }
+  },
+  "relations": [{ "tool": "grammarly", "kind": "alternative" }, { "tool": "deepl", "kind": "complements" }]
+}

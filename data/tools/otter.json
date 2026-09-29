@@ -1,0 +1,49 @@
+{
+  "slug": "otter",
+  "name": "Otter.ai",
+  "aliases": ["Otter"],
+  "website": "https://otter.ai",
+  "company": { "name": "Otter.ai", "slug": "otter-ai", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "sales", "educators", "enterprise"],
+  "capabilities": [
+    { "id": "meeting-notes", "strength": "primary" },
+    { "id": "transcription", "strength": "primary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The Basic plan is free but limited to 300 minutes per month. Pro is $16.99/user/mo or $8.33/user/mo when billed annually. Business is $30/user/mo or $19.99/user/mo when billed annually.\"",
+    "sources": [
+      { "url": "https://www.claap.io/blog/otter-pricing", "type": "secondary" },
+      { "url": "https://sonix.ai/resources/otter-ai-pricing/", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-meeting-assistants/otter-ai/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android", "chrome_extension"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://otter.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "basic", "name": "Basic", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "300 minutes per month" },
+    { "key": "pro", "name": "Pro", "price": 16.99, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 8.33 },
+    { "key": "business", "name": "Business", "price": 30, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 19.99 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Notuleert en transcribeert Zoom-, Teams- en Meet-vergaderingen",
+      "description": "Otter neemt deel aan online vergaderingen, schrijft live mee en maakt samenvattingen met actiepunten. Je kunt later vragen stellen over wat er besproken is. Sterk in Engelstalige gesprekken.",
+      "bestFor": ["Engelstalige meetings automatisch notuleren", "Live meeschrijven tijdens colleges en calls"],
+      "notFor": ["Vergaderingen die grotendeels in het Nederlands zijn (controleer de taalondersteuning)"],
+      "limitations": ["Gratis: 300 minuten per maand"]
+    },
+    "en": {
+      "tagline": "Takes notes and transcribes Zoom, Teams and Meet calls",
+      "description": "Otter joins online meetings, transcribes live and creates summaries with action items. You can ask questions about what was discussed afterwards. Strong for English-language conversations.",
+      "bestFor": ["Automatic notes for English-language meetings", "Live transcription of lectures and calls"],
+      "notFor": ["Meetings mostly held in other languages (check language support)"],
+      "limitations": ["Free: 300 minutes per month"]
+    }
+  },
+  "relations": [{ "tool": "fireflies", "kind": "alternative" }, { "tool": "tldv", "kind": "alternative" }, { "tool": "fathom", "kind": "alternative" }]
+}

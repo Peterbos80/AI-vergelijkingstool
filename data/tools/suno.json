@@ -1,0 +1,45 @@
+{
+  "slug": "suno",
+  "name": "Suno",
+  "website": "https://suno.com",
+  "company": { "name": "Suno", "slug": "suno", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "musicians", "marketers"],
+  "capabilities": [{ "id": "music-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free ($0), Pro ($10 per month or $8 per month when billed annually), and Premier ($30 per month or $24 per month when billed annually)… The Free plan caps you at 10 songs a day with no commercial rights.\"",
+    "sources": [
+      { "url": "https://www.layer3labs.io/guides/suno-pricing", "type": "secondary" },
+      { "url": "https://techjacksolutions.com/ai-tools/suno/suno-pricing/", "type": "secondary", "title": "Suno Pricing Explained: Free, Pro $10, Premier $30 (2026)" },
+      { "url": "https://costbench.com/software/ai-music-generators/suno/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "commercial_use_free_tier": { "value": false },
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://suno.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "About 50 credits per day (≈ 10 songs), non-commercial use" },
+    { "key": "pro", "name": "Pro", "price": 10, "currency": "USD", "period": "month", "annualMonthly": 8, "quota": "2,500 credits per month (≈ 500 songs), commercial rights" },
+    { "key": "premier", "name": "Premier", "price": 30, "currency": "USD", "period": "month", "annualMonthly": 24, "quota": "10,000 credits per month (≈ 2,000 songs), Suno Studio" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Complete nummers met zang genereren uit een beschrijving",
+      "description": "Suno maakt volledige nummers, inclusief zang en tekst, op basis van een korte beschrijving of eigen songtekst. Betaalde plannen geven commerciële rechten op nieuwe nummers; Premier voegt een browser-studio toe voor multitrack-bewerking.",
+      "bestFor": ["Jingles en achtergrondmuziek", "Snel muzikale ideeën uitproberen"],
+      "notFor": ["Commercieel gebruik op het gratis plan"],
+      "limitations": ["Gratis plan: geen commerciële rechten"]
+    },
+    "en": {
+      "tagline": "Generate complete songs with vocals from a description",
+      "description": "Suno creates full songs, including vocals and lyrics, from a short description or your own lyrics. Paid plans include commercial rights for new songs; Premier adds a browser studio for multitrack editing.",
+      "bestFor": ["Jingles and background music", "Quickly trying musical ideas"],
+      "notFor": ["Commercial use on the free plan"],
+      "limitations": ["Free plan: no commercial rights"]
+    }
+  },
+  "relations": [{ "tool": "udio", "kind": "alternative" }]
+}

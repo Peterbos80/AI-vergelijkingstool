@@ -1,0 +1,51 @@
+{
+  "slug": "ollama",
+  "name": "Ollama",
+  "website": "https://ollama.com",
+  "githubRepo": "ollama/ollama",
+  "company": { "name": "Ollama", "slug": "ollama", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "privacy-conscious", "researchers"],
+  "capabilities": [
+    { "id": "local-llm", "strength": "primary" },
+    { "id": "chat-assistant", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Local model use is free… The local runtime is free and unlimited on your own hardware… Ollama Cloud ships three published tiers as of April 2026: Free Plan: $0… Cloud Pro: Around $20 per month… Cloud Pro Max: ~$200 per month\"",
+    "sources": [
+      { "url": "https://pooyagolchian.com/blog/ollama-cloud-pricing-hardware-requirements-2026/", "type": "secondary" },
+      { "url": "https://hackup.ai/ai-plans/ollama/", "type": "secondary" },
+      { "url": "https://toolradar.com/tools/ollama/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "self_hostable": { "value": true },
+    "open_source": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Open-source runtime (MIT). Editorial knowledge; pending verification.", "sources": [{ "url": "https://github.com/ollama/ollama", "type": "github" }] },
+    "api_available": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Local REST API. Editorial knowledge; pending verification.", "sources": [{ "url": "https://ollama.com", "type": "official" }] },
+    "platforms": { "value": ["windows", "macos", "linux", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://ollama.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "local", "name": "Local (own hardware)", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Unlimited on your own machine" },
+    { "key": "cloud-pro", "name": "Cloud Pro", "price": 20, "currency": "USD", "period": "month", "quota": "Full open-weight catalog in the cloud, higher limits" },
+    { "key": "cloud-pro-max", "name": "Cloud Pro Max", "price": 200, "currency": "USD", "period": "month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Open taalmodellen lokaal draaien met één commando",
+      "description": "Ollama maakt het eenvoudig om open taalmodellen (zoals Llama, Mistral, Qwen en Gemma) op je eigen computer te draaien, met een lokale API voor eigen apps. Lokaal gebruik is gratis en je data verlaat het apparaat niet; er is ook een optionele cloudversie.",
+      "bestFor": ["Privacygevoelige toepassingen zonder cloud", "Ontwikkelaars die lokaal met LLM's bouwen"],
+      "notFor": ["Wie geen krachtige computer heeft", "Wie de allerbeste modelkwaliteit nodig heeft"],
+      "limitations": ["Kwaliteit en snelheid hangen af van je hardware"]
+    },
+    "en": {
+      "tagline": "Run open language models locally with one command",
+      "description": "Ollama makes it easy to run open language models (such as Llama, Mistral, Qwen and Gemma) on your own computer, with a local API for your apps. Local use is free and your data never leaves the device; an optional cloud version exists.",
+      "bestFor": ["Privacy-sensitive use without the cloud", "Developers building locally with LLMs"],
+      "notFor": ["People without a capable computer", "Needing the very best model quality"],
+      "limitations": ["Quality and speed depend on your hardware"]
+    }
+  },
+  "relations": [{ "tool": "lm-studio", "kind": "alternative" }, { "tool": "le-chat", "kind": "complements" }]
+}

@@ -1,0 +1,48 @@
+{
+  "slug": "luma-dream-machine",
+  "name": "Luma Dream Machine",
+  "website": "https://lumalabs.ai",
+  "company": { "name": "Luma AI", "slug": "luma-ai", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["creators", "designers", "agencies"],
+  "capabilities": [
+    { "id": "video-generation", "strength": "primary" },
+    { "id": "image-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Lite: $9.99/month (or $7.99/month with annual billing); Plus: $29.99/month (or $23.99/month…); Unlimited: $94.99/month (or $75.99/month…)… The legacy Dream Machine plans (Lite, Plus, Unlimited) still exist and keep a free tier, while the newer Luma Agents tiers launched in March 2026… at $30, $90 and $300\"",
+    "sources": [
+      { "url": "https://lumalabs.ai/learning-hub/payments-subscriptions", "type": "official_docs", "title": "Dream Machine Guide: Payments & Subscriptions" },
+      { "url": "https://www.eesel.ai/blog/luma-ai-pricing", "type": "secondary" },
+      { "url": "https://magichour.ai/blog/luma-dream-machine-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "note": "Free tier applies to the legacy Dream Machine plans; the Luma Agents plans launched in March 2026 have no free option." },
+    "platforms": { "value": ["web", "ios", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://lumalabs.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "lite", "name": "Lite", "price": 9.99, "currency": "USD", "period": "month", "annualMonthly": 7.99 },
+    { "key": "plus", "name": "Plus", "price": 29.99, "currency": "USD", "period": "month", "annualMonthly": 23.99 },
+    { "key": "unlimited", "name": "Unlimited", "price": 94.99, "currency": "USD", "period": "month", "annualMonthly": 75.99 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Vloeiende AI-video en beelden, van prompt tot scène",
+      "description": "Luma's Dream Machine genereert video en afbeeldingen uit tekst en beeld, met aandacht voor vloeiende camerabewegingen. Sinds maart 2026 biedt Luma daarnaast 'Luma Agents'-abonnementen voor grotere creatieve workflows.",
+      "bestFor": ["Sfeervolle clips en camerabewegingen", "Snelle visuele concepten"],
+      "notFor": ["Wie één eenvoudig prijsmodel zoekt"],
+      "limitations": ["Twee naast elkaar bestaande abonnementsvormen (Dream Machine en Luma Agents)"]
+    },
+    "en": {
+      "tagline": "Smooth AI video and images, from prompt to scene",
+      "description": "Luma's Dream Machine generates video and images from text and images, with a focus on smooth camera motion. Since March 2026 Luma also offers 'Luma Agents' subscriptions for larger creative workflows.",
+      "bestFor": ["Atmospheric clips and camera moves", "Fast visual concepts"],
+      "notFor": ["People who want one simple pricing model"],
+      "limitations": ["Two parallel subscription families (Dream Machine and Luma Agents)"]
+    }
+  },
+  "relations": [{ "tool": "runway", "kind": "alternative" }, { "tool": "kling", "kind": "alternative" }]
+}

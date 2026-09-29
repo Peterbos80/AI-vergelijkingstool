@@ -1,0 +1,68 @@
+{
+  "slug": "heygen",
+  "name": "HeyGen",
+  "website": "https://www.heygen.com",
+  "pricingUrl": "https://www.heygen.com/pricing",
+  "company": { "name": "HeyGen", "slug": "heygen", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["marketers", "smb", "educators", "creators"],
+  "capabilities": [
+    { "id": "avatar-video", "strength": "primary" },
+    { "id": "ai-dubbing", "strength": "primary" },
+    { "id": "voice-cloning", "strength": "secondary" },
+    { "id": "text-to-speech", "strength": "secondary" }
+  ],
+  "facts": {
+    "has_free_tier": {
+      "value": true, "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"The HeyGen free plan includes 3 videos per month at 1-minute max, 720p output with a HeyGen watermark\"",
+      "sources": [{ "url": "https://www.heygen.com/pricing", "type": "official" }, { "url": "https://www.eesel.ai/blog/heygen-pricing", "type": "secondary" }]
+    },
+    "watermark_free_tier": {
+      "value": true, "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"720p output with a HeyGen watermark\" (Free) and \"watermark removed\" (Creator)",
+      "sources": [{ "url": "https://www.heygen.com/pricing", "type": "official" }, { "url": "https://www.arcade.software/post/heygen-pricing", "type": "secondary" }]
+    },
+    "platforms": {
+      "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29",
+      "note": "Editorial knowledge; pending automated verification.",
+      "sources": [{ "url": "https://www.heygen.com", "type": "official" }]
+    },
+    "api_available": {
+      "value": true, "status": "unverified", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Search result title: \"HeyGen Pricing: App, API, and Enterprise\"",
+      "sources": [{ "url": "https://flowith.io/blog/heygen-pricing-free-vs-creator-vs-business-plan/", "type": "secondary" }]
+    }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "3 videos per month, max 1 minute, 720p, watermark",
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"The HeyGen free plan includes 3 videos per month at 1-minute max, 720p output with a HeyGen watermark\"",
+      "sources": [{ "url": "https://www.heygen.com/pricing", "type": "official" }, { "url": "https://www.eesel.ai/blog/heygen-pricing", "type": "secondary" }] },
+    { "key": "creator", "name": "Creator", "price": 29, "currency": "USD", "period": "month", "annualMonthly": 24, "quota": "600 credits, videos up to 30 minutes, voice cloning, no watermark",
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"The Creator plan costs $29 per month and includes 600 credits… It costs $29 a month or $288 a year, which equals $24 per month on annual billing.\"",
+      "sources": [{ "url": "https://www.heygen.com/pricing", "type": "official" }, { "url": "https://creatify.ai/blog/heygen-pricing-(2026)-plans-and-what-you-ll-actually-pay", "type": "secondary" }] }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Video's met AI-avatars en automatische video-vertaling",
+      "description": "Met HeyGen maak je video's met een digitale presentator: je typt een script en een (stock- of eigen) avatar spreekt het uit. Daarnaast vertaalt HeyGen bestaande video's naar andere talen met gekloonde stem en lipsync. Populair voor marketing, uitleg- en trainingsvideo's zonder camera.",
+      "bestFor": ["Video's zonder zelf voor de camera te staan", "Bestaande video's vertalen met eigen stem", "Snel veel varianten van dezelfde boodschap"],
+      "notFor": ["Wie echte, persoonlijke opnames wil", "Uitgebreide montage met eigen beeldmateriaal"],
+      "limitations": ["Gratis plan: 3 video's per maand van max. 1 minuut, 720p en watermerk", "Verbruik op basis van credits"]
+    },
+    "en": {
+      "tagline": "Videos with AI avatars and automatic video translation",
+      "description": "HeyGen creates videos with a digital presenter: type a script and a stock or custom avatar speaks it. It also translates existing videos into other languages with a cloned voice and lip sync. Popular for marketing, explainer and training videos without a camera.",
+      "bestFor": ["Videos without appearing on camera yourself", "Translating existing videos with your own voice", "Producing many variants of the same message"],
+      "notFor": ["People who want authentic, personal footage", "Heavy editing of your own footage"],
+      "limitations": ["Free plan: 3 videos per month, max 1 minute, 720p with watermark", "Usage is credit-based"]
+    }
+  },
+  "relations": [
+    { "tool": "synthesia", "kind": "alternative" },
+    { "tool": "colossyan", "kind": "alternative" },
+    { "tool": "elevenlabs", "kind": "complements" }
+  ]
+}

@@ -1,0 +1,419 @@
+{
+  "categories": [
+    { "id": "assistant", "icon": "sparkle", "i18n": {
+      "nl": { "name": "AI-assistenten", "slug": "ai-assistenten", "description": "Algemene AI-assistenten om mee te schrijven, denken, rekenen en zoeken." },
+      "en": { "name": "AI assistants", "slug": "ai-assistants", "description": "General-purpose AI assistants for writing, thinking, analysis and search." } } },
+    { "id": "writing", "icon": "pen", "i18n": {
+      "nl": { "name": "Tekst & schrijven", "slug": "tekst-en-schrijven", "description": "Schrijven, herschrijven, vertalen, corrigeren en optimaliseren voor zoekmachines." },
+      "en": { "name": "Writing", "slug": "writing", "description": "Writing, rewriting, translating, proofreading and search optimisation." } } },
+    { "id": "research", "icon": "search", "i18n": {
+      "nl": { "name": "Onderzoek & kennis", "slug": "onderzoek-en-kennis", "description": "Onderzoek met bronnen, documenten analyseren, notuleren en kennis vastleggen." },
+      "en": { "name": "Research & knowledge", "slug": "research-and-knowledge", "description": "Research with citations, document analysis, meeting notes and knowledge capture." } } },
+    { "id": "image", "icon": "image", "i18n": {
+      "nl": { "name": "Beeld & design", "slug": "beeld-en-design", "description": "Afbeeldingen genereren en bewerken, productfoto's, logo's, presentaties en grafisch ontwerp." },
+      "en": { "name": "Images & design", "slug": "images-and-design", "description": "Generate and edit images, product photos, logos, presentations and graphic design." } } },
+    { "id": "video", "icon": "film", "i18n": {
+      "nl": { "name": "Video", "slug": "video", "description": "Video genereren, monteren, avatars, korte clips, ondertiteling en nasynchronisatie." },
+      "en": { "name": "Video", "slug": "video", "description": "Generate and edit video, avatars, short clips, subtitles and dubbing." } } },
+    { "id": "audio", "icon": "wave", "i18n": {
+      "nl": { "name": "Audio & spraak", "slug": "audio-en-spraak", "description": "Voice-overs, stemmen klonen, transcriptie, podcasts en muziek." },
+      "en": { "name": "Audio & voice", "slug": "audio-and-voice", "description": "Voice-overs, voice cloning, transcription, podcasts and music." } } },
+    { "id": "code", "icon": "code", "i18n": {
+      "nl": { "name": "Code & apps", "slug": "code-en-apps", "description": "Programmeren met AI, apps en websites bouwen, ook zonder code." },
+      "en": { "name": "Code & apps", "slug": "code-and-apps", "description": "Code with AI and build apps and websites, with or without code." } } },
+    { "id": "automation", "icon": "bolt", "i18n": {
+      "nl": { "name": "Automatisering & agents", "slug": "automatisering-en-agents", "description": "Taken en koppelingen automatiseren en AI-agents inzetten." },
+      "en": { "name": "Automation & agents", "slug": "automation-and-agents", "description": "Automate tasks and integrations and put AI agents to work." } } },
+    { "id": "marketing", "icon": "megaphone", "i18n": {
+      "nl": { "name": "Marketing & social", "slug": "marketing-en-social", "description": "Social media plannen en e-mailmarketing met AI-hulp." },
+      "en": { "name": "Marketing & social", "slug": "marketing-and-social", "description": "Social media scheduling and email marketing with AI help." } } },
+    { "id": "business", "icon": "chat", "i18n": {
+      "nl": { "name": "Klantcontact", "slug": "klantcontact", "description": "Klantenservice en chatbots voor je website of helpdesk." },
+      "en": { "name": "Customer service", "slug": "customer-service", "description": "Customer service and chatbots for your website or help desk." } } }
+  ],
+  "capabilities": [
+    { "id": "chat-assistant", "category": "assistant", "i18n": {
+      "nl": { "name": "Algemene AI-assistent", "slug": "ai-assistent", "synonyms": ["chatbot", "ai assistent", "ai-assistent", "assistent", "chatgpt alternatief", "vragen stellen", "sparren", "brainstormen", "chat", "taalmodel", "llm"] },
+      "en": { "name": "General AI assistant", "slug": "ai-assistant", "synonyms": ["chatbot", "ai assistant", "assistant", "chatgpt alternative", "ask questions", "brainstorm", "chat", "language model", "llm"] } } },
+    { "id": "local-llm", "category": "assistant", "i18n": {
+      "nl": { "name": "AI lokaal draaien", "slug": "ai-lokaal-draaien", "synonyms": ["lokaal", "lokale ai", "offline", "eigen computer", "eigen laptop", "zelf hosten", "self-hosted", "privacy", "zonder cloud", "open source model"] },
+      "en": { "name": "Run AI locally", "slug": "run-ai-locally", "synonyms": ["local", "local ai", "offline", "on device", "own computer", "self-hosted", "self host", "privacy", "no cloud", "open source model", "run llm"] } } },
+    { "id": "long-form-writing", "category": "writing", "i18n": {
+      "nl": { "name": "Lange teksten schrijven", "slug": "lange-teksten-schrijven", "synonyms": ["blog", "blogs", "blogpost", "blogartikel", "artikel", "artikelen", "lange tekst", "content schrijven", "teksten schrijven", "whitepaper"] },
+      "en": { "name": "Long-form writing", "slug": "long-form-writing", "synonyms": ["blog", "blogs", "blog post", "article", "articles", "long form", "write content", "content writing", "whitepaper"] } } },
+    { "id": "copywriting", "category": "writing", "i18n": {
+      "nl": { "name": "Copywriting", "slug": "copywriting", "synonyms": ["advertentietekst", "advertentieteksten", "slogan", "productteksten", "productbeschrijving", "social posts", "captions", "marketingtekst", "marketingteksten", "wervende tekst", "linkedin post"] },
+      "en": { "name": "Copywriting", "slug": "copywriting", "synonyms": ["ad copy", "slogan", "product descriptions", "product copy", "social posts", "captions", "marketing copy", "sales copy", "linkedin post"] } } },
+    { "id": "script-writing", "category": "writing", "i18n": {
+      "nl": { "name": "Scripts schrijven", "slug": "scripts-schrijven", "synonyms": ["script", "videoscript", "scenario", "draaiboek", "tekst voor video", "storyboard", "hook"] },
+      "en": { "name": "Script writing", "slug": "script-writing", "synonyms": ["script", "video script", "screenplay", "storyboard", "hook", "outline for video"] } } },
+    { "id": "email-writing", "category": "writing", "i18n": {
+      "nl": { "name": "E-mails schrijven", "slug": "e-mails-schrijven", "synonyms": ["mail", "mails", "e-mail", "email", "inbox", "mail beantwoorden", "cold email"] },
+      "en": { "name": "Email writing", "slug": "email-writing", "synonyms": ["email", "emails", "inbox", "reply to email", "cold email", "outreach email"] } } },
+    { "id": "grammar-checking", "category": "writing", "i18n": {
+      "nl": { "name": "Spelling & grammatica", "slug": "spelling-en-grammatica", "synonyms": ["spelling", "spellingscontrole", "spellingcontrole", "grammatica", "taalfouten", "taalcontrole", "herschrijven", "foutloos", "corrigeren", "proeflezen", "tekst verbeteren"] },
+      "en": { "name": "Grammar & spelling", "slug": "grammar-and-spelling", "synonyms": ["grammar", "spelling", "spell check", "proofread", "proofreading", "rewrite", "paraphrase", "improve writing", "typos"] } } },
+    { "id": "translation", "category": "writing", "i18n": {
+      "nl": { "name": "Vertalen", "slug": "vertalen", "synonyms": ["vertalen", "vertaling", "vertaler", "meertalig", "engels", "duits", "frans", "nederlands naar engels", "anderstalig"] },
+      "en": { "name": "Translation", "slug": "translation", "synonyms": ["translate", "translation", "translator", "multilingual", "localize", "localization"] } } },
+    { "id": "summarization", "category": "writing", "i18n": {
+      "nl": { "name": "Samenvatten", "slug": "samenvatten", "synonyms": ["samenvatting", "samenvatten", "kort samenvatten", "hoofdpunten", "tldr"] },
+      "en": { "name": "Summarization", "slug": "summarization", "synonyms": ["summary", "summarize", "summarise", "key points", "tldr"] } } },
+    { "id": "seo-optimization", "category": "writing", "i18n": {
+      "nl": { "name": "SEO-optimalisatie", "slug": "seo-optimalisatie", "synonyms": ["seo", "zoekmachine", "zoekmachineoptimalisatie", "vindbaarheid", "google", "ranking", "zoekwoorden", "keywords", "hoger in google"] },
+      "en": { "name": "SEO optimization", "slug": "seo-optimization", "synonyms": ["seo", "search engine", "search engine optimization", "rank on google", "ranking", "keywords", "serp"] } } },
+    { "id": "research-assistant", "category": "research", "i18n": {
+      "nl": { "name": "Onderzoek met bronnen", "slug": "onderzoek-met-bronnen", "synonyms": ["onderzoek", "onderzoeken", "bronnen", "met bronnen", "bronvermelding", "deep research", "uitzoeken", "zoekmachine", "feiten checken", "marktonderzoek"] },
+      "en": { "name": "Research with citations", "slug": "research-with-citations", "synonyms": ["research", "sources", "citations", "cited", "deep research", "look up", "search engine", "fact check", "market research"] } } },
+    { "id": "document-chat", "category": "research", "i18n": {
+      "nl": { "name": "Documenten analyseren", "slug": "documenten-analyseren", "synonyms": ["pdf", "pdf's", "document", "documenten", "rapport", "rapporten", "contract", "vragen over document", "bestanden analyseren"] },
+      "en": { "name": "Chat with documents", "slug": "chat-with-documents", "synonyms": ["pdf", "pdfs", "document", "documents", "report", "reports", "contract", "ask questions about documents", "analyze files"] } } },
+    { "id": "academic-research", "category": "research", "i18n": {
+      "nl": { "name": "Wetenschappelijk onderzoek", "slug": "wetenschappelijk-onderzoek", "synonyms": ["wetenschappelijk", "papers", "paper", "literatuur", "literatuuronderzoek", "literatuurstudie", "scriptie", "studie", "academisch", "promotie"] },
+      "en": { "name": "Academic research", "slug": "academic-research", "synonyms": ["scientific", "papers", "paper", "literature", "literature review", "thesis", "study", "academic", "peer reviewed"] } } },
+    { "id": "meeting-notes", "category": "research", "i18n": {
+      "nl": { "name": "Vergaderingen notuleren", "slug": "vergaderingen-notuleren", "synonyms": ["notulen", "notuleren", "vergadering", "vergaderingen", "meeting", "meetings", "teams", "zoom", "google meet", "actiepunten", "overleg"] },
+      "en": { "name": "Meeting notes", "slug": "meeting-notes", "synonyms": ["meeting notes", "minutes", "meeting", "meetings", "zoom", "teams", "google meet", "action items", "call notes", "notetaker"] } } },
+    { "id": "note-taking", "category": "research", "i18n": {
+      "nl": { "name": "Notities & kennisbeheer", "slug": "notities-en-kennisbeheer", "synonyms": ["notities", "aantekeningen", "kennisbank", "wiki", "documentatie", "tweede brein", "kennis vastleggen"] },
+      "en": { "name": "Notes & knowledge base", "slug": "notes-and-knowledge-base", "synonyms": ["notes", "note taking", "knowledge base", "wiki", "documentation", "second brain"] } } },
+    { "id": "data-analysis", "category": "research", "i18n": {
+      "nl": { "name": "Data-analyse", "slug": "data-analyse", "synonyms": ["data", "data analyseren", "excel", "spreadsheet", "spreadsheets", "grafieken", "csv", "cijfers", "dashboard", "formules", "google sheets"] },
+      "en": { "name": "Data analysis", "slug": "data-analysis", "synonyms": ["data", "analyze data", "analyse data", "excel", "spreadsheet", "spreadsheets", "charts", "csv", "numbers", "dashboard", "formulas", "google sheets"] } } },
+    { "id": "image-generation", "category": "image", "i18n": {
+      "nl": { "name": "Afbeeldingen genereren", "slug": "afbeeldingen-genereren", "synonyms": ["afbeelding", "afbeeldingen", "plaatje", "plaatjes", "illustratie", "illustraties", "ai kunst", "beeld genereren", "beelden maken", "foto's genereren", "tekst naar beeld", "visuals"] },
+      "en": { "name": "Image generation", "slug": "image-generation", "synonyms": ["image", "images", "picture", "pictures", "illustration", "illustrations", "ai art", "generate images", "text to image", "visuals"] } } },
+    { "id": "image-editing", "category": "image", "i18n": {
+      "nl": { "name": "Afbeeldingen bewerken", "slug": "afbeeldingen-bewerken", "synonyms": ["foto bewerken", "foto's bewerken", "fotobewerking", "retoucheren", "object verwijderen", "inpainting", "uitbreiden", "photoshop"] },
+      "en": { "name": "Image editing", "slug": "image-editing", "synonyms": ["photo editing", "edit photos", "retouch", "remove object", "inpainting", "outpainting", "photoshop"] } } },
+    { "id": "background-removal", "category": "image", "i18n": {
+      "nl": { "name": "Achtergrond verwijderen", "slug": "achtergrond-verwijderen", "synonyms": ["achtergrond weghalen", "achtergrond verwijderen", "vrijstaand", "uitknippen", "transparante achtergrond"] },
+      "en": { "name": "Background removal", "slug": "background-removal", "synonyms": ["remove background", "background remover", "cut out", "cutout", "transparent background"] } } },
+    { "id": "upscaling", "category": "image", "i18n": {
+      "nl": { "name": "Beeld opschalen", "slug": "beeld-opschalen", "synonyms": ["opschalen", "hogere resolutie", "scherper maken", "vergroten", "upscale", "kwaliteit verbeteren"] },
+      "en": { "name": "Image upscaling", "slug": "image-upscaling", "synonyms": ["upscale", "upscaling", "higher resolution", "sharpen", "enlarge", "enhance image"] } } },
+    { "id": "product-photography", "category": "image", "i18n": {
+      "nl": { "name": "Productfoto's", "slug": "productfotos", "synonyms": ["productfoto", "productfoto's", "packshot", "packshots", "webshop", "webwinkel", "e-commerce", "bol.com", "amazon listing", "productbeelden"] },
+      "en": { "name": "Product photography", "slug": "product-photography", "synonyms": ["product photo", "product photos", "packshot", "packshots", "ecommerce", "e-commerce", "online store", "shopify", "amazon listing", "product images"] } } },
+    { "id": "logo-design", "category": "image", "i18n": {
+      "nl": { "name": "Logo's & huisstijl", "slug": "logos-en-huisstijl", "synonyms": ["logo", "logo's", "huisstijl", "branding", "merk", "merkidentiteit", "visitekaartje"] },
+      "en": { "name": "Logo & branding", "slug": "logo-and-branding", "synonyms": ["logo", "logos", "branding", "brand identity", "brand kit", "business card"] } } },
+    { "id": "graphic-design", "category": "image", "i18n": {
+      "nl": { "name": "Grafisch ontwerp", "slug": "grafisch-ontwerp", "synonyms": ["ontwerpen", "design", "poster", "flyer", "social media afbeelding", "templates", "sjablonen", "banner", "thumbnail", "infographic"] },
+      "en": { "name": "Graphic design", "slug": "graphic-design", "synonyms": ["design", "poster", "flyer", "social media graphics", "templates", "banner", "thumbnail", "infographic"] } } },
+    { "id": "presentation-generation", "category": "image", "i18n": {
+      "nl": { "name": "Presentaties maken", "slug": "presentaties-maken", "synonyms": ["presentatie", "presentaties", "slides", "dia's", "powerpoint", "pitch deck", "keynote", "google slides"] },
+      "en": { "name": "Presentation generation", "slug": "presentation-generation", "synonyms": ["presentation", "presentations", "slides", "slide deck", "powerpoint", "pitch deck", "keynote", "google slides"] } } },
+    { "id": "video-generation", "category": "video", "i18n": {
+      "nl": { "name": "Video genereren", "slug": "video-genereren", "synonyms": ["video genereren", "ai video", "tekst naar video", "text to video", "beeld naar video", "animatie", "filmpjes maken met ai", "videoclips genereren"] },
+      "en": { "name": "Video generation", "slug": "video-generation", "synonyms": ["generate video", "ai video", "text to video", "image to video", "animation", "generative video", "video model"] } } },
+    { "id": "video-editing", "category": "video", "i18n": {
+      "nl": { "name": "Video bewerken", "slug": "video-bewerken", "synonyms": ["video bewerken", "video's bewerken", "monteren", "montage", "videomontage", "knippen", "editen", "video editor", "filmpjes maken"] },
+      "en": { "name": "Video editing", "slug": "video-editing", "synonyms": ["edit video", "edit videos", "video editor", "montage", "cut video", "trim", "editing"] } } },
+    { "id": "avatar-video", "category": "video", "i18n": {
+      "nl": { "name": "AI-avatarvideo's", "slug": "ai-avatarvideos", "synonyms": ["avatar", "avatars", "ai presentator", "presentator", "digitale mens", "spreker", "talking head", "zonder zelf in beeld", "niet zelf in beeld"] },
+      "en": { "name": "AI avatar videos", "slug": "ai-avatar-videos", "synonyms": ["avatar", "avatars", "ai presenter", "presenter", "digital human", "spokesperson", "talking head", "without being on camera", "faceless"] } } },
+    { "id": "clip-generation", "category": "video", "i18n": {
+      "nl": { "name": "Korte clips uit lange video's", "slug": "clips-uit-lange-videos", "synonyms": ["shorts", "tiktok", "tiktoks", "reels", "clips", "korte video's", "korte clips", "uit lange video", "hergebruiken", "repurpose", "highlights"] },
+      "en": { "name": "Long-to-short clips", "slug": "long-to-short-clips", "synonyms": ["shorts", "tiktok", "tiktoks", "reels", "clips", "short videos", "short clips", "from long video", "repurpose", "highlights"] } } },
+    { "id": "auto-subtitles", "category": "video", "i18n": {
+      "nl": { "name": "Automatische ondertiteling", "slug": "automatische-ondertiteling", "synonyms": ["ondertitels", "ondertiteling", "ondertitelen", "captions", "bijschriften", "subtitles", "tekst in beeld"] },
+      "en": { "name": "Auto subtitles", "slug": "auto-subtitles", "synonyms": ["subtitles", "captions", "closed captions", "srt", "burned in captions", "text on screen"] } } },
+    { "id": "ai-dubbing", "category": "video", "i18n": {
+      "nl": { "name": "AI-nasynchronisatie", "slug": "ai-nasynchronisatie", "synonyms": ["nasynchroniseren", "nasynchronisatie", "dubben", "dubbing", "video vertalen", "video's vertalen", "stem vertalen", "lipsync"] },
+      "en": { "name": "AI dubbing", "slug": "ai-dubbing", "synonyms": ["dubbing", "dub", "translate video", "translate videos", "voice translation", "lip sync"] } } },
+    { "id": "text-to-speech", "category": "audio", "i18n": {
+      "nl": { "name": "Tekst naar spraak", "slug": "tekst-naar-spraak", "synonyms": ["voice-over", "voiceover", "voice over", "stem", "stemmen", "inspreken", "ingesproken", "voorlezen", "tts", "spraak genereren", "ai stem"] },
+      "en": { "name": "Text to speech", "slug": "text-to-speech", "synonyms": ["voice-over", "voiceover", "voice over", "voice", "voices", "narration", "narrate", "read aloud", "tts", "ai voice"] } } },
+    { "id": "voice-cloning", "category": "audio", "i18n": {
+      "nl": { "name": "Stem klonen", "slug": "stem-klonen", "synonyms": ["stem klonen", "eigen stem", "stemkloon", "mijn stem", "voice clone"] },
+      "en": { "name": "Voice cloning", "slug": "voice-cloning", "synonyms": ["clone voice", "voice clone", "my own voice", "custom voice"] } } },
+    { "id": "transcription", "category": "audio", "i18n": {
+      "nl": { "name": "Transcriptie", "slug": "transcriptie", "synonyms": ["transcriberen", "transcriptie", "uitschrijven", "uittypen", "spraak naar tekst", "interview uitwerken", "audio naar tekst"] },
+      "en": { "name": "Transcription", "slug": "transcription", "synonyms": ["transcribe", "transcription", "speech to text", "audio to text", "interview transcript", "dictation"] } } },
+    { "id": "audio-editing", "category": "audio", "i18n": {
+      "nl": { "name": "Audio bewerken", "slug": "audio-bewerken", "synonyms": ["audio bewerken", "geluid bewerken", "podcast bewerken", "audio knippen", "montage audio"] },
+      "en": { "name": "Audio editing", "slug": "audio-editing", "synonyms": ["edit audio", "audio editor", "podcast editing", "cut audio"] } } },
+    { "id": "audio-enhancement", "category": "audio", "i18n": {
+      "nl": { "name": "Audio verbeteren", "slug": "audio-verbeteren", "synonyms": ["ruis verwijderen", "ruisonderdrukking", "geluid verbeteren", "audio verbeteren", "studio geluid", "galm verwijderen"] },
+      "en": { "name": "Audio enhancement", "slug": "audio-enhancement", "synonyms": ["noise removal", "remove noise", "noise reduction", "enhance audio", "studio sound", "remove echo"] } } },
+    { "id": "music-generation", "category": "audio", "i18n": {
+      "nl": { "name": "Muziek genereren", "slug": "muziek-genereren", "synonyms": ["muziek", "muziek maken", "liedje", "liedjes", "nummer maken", "soundtrack", "achtergrondmuziek", "jingle"] },
+      "en": { "name": "Music generation", "slug": "music-generation", "synonyms": ["music", "make music", "song", "songs", "soundtrack", "background music", "jingle"] } } },
+    { "id": "podcast-recording", "category": "audio", "i18n": {
+      "nl": { "name": "Podcasts opnemen", "slug": "podcasts-opnemen", "synonyms": ["podcast", "podcasts", "podcast opnemen", "interview opnemen", "opnemen op afstand", "videopodcast"] },
+      "en": { "name": "Podcast recording", "slug": "podcast-recording", "synonyms": ["podcast", "podcasts", "record podcast", "record interview", "remote recording", "video podcast"] } } },
+    { "id": "code-assistant", "category": "code", "i18n": {
+      "nl": { "name": "Programmeerassistent", "slug": "programmeerassistent", "synonyms": ["programmeren", "code schrijven", "coderen", "developer", "ontwikkelaar", "autocomplete", "code aanvullen", "ide", "vscode"] },
+      "en": { "name": "Coding assistant", "slug": "coding-assistant", "synonyms": ["coding", "programming", "write code", "developer", "autocomplete", "code completion", "ide", "vscode", "pair programmer"] } } },
+    { "id": "agentic-coding", "category": "code", "i18n": {
+      "nl": { "name": "Autonoom programmeren (agents)", "slug": "autonoom-programmeren", "synonyms": ["coding agent", "code agent", "terminal", "zelfstandig programmeren", "pull requests", "refactoren", "bugs fixen"] },
+      "en": { "name": "Agentic coding", "slug": "agentic-coding", "synonyms": ["coding agent", "code agent", "terminal", "autonomous coding", "pull requests", "refactor", "fix bugs"] } } },
+    { "id": "app-builder", "category": "code", "i18n": {
+      "nl": { "name": "Apps bouwen zonder code", "slug": "apps-bouwen-zonder-code", "synonyms": ["app bouwen", "app maken", "applicatie", "prototype", "mvp", "zonder programmeren", "zonder code", "no-code", "webapp", "saas bouwen"] },
+      "en": { "name": "AI app builder", "slug": "ai-app-builder", "synonyms": ["build app", "build an app", "make an app", "prototype", "mvp", "without coding", "no code", "no-code", "web app", "prompt to app"] } } },
+    { "id": "website-builder", "category": "code", "i18n": {
+      "nl": { "name": "Websites bouwen", "slug": "websites-bouwen", "synonyms": ["website", "website maken", "website bouwen", "site", "webpagina", "landingspagina", "homepage", "webdesign", "zonder te kunnen programmeren", "portfolio site", "webshop bouwen"] },
+      "en": { "name": "Website builder", "slug": "website-builder", "synonyms": ["website", "build a website", "make a website", "site", "web page", "landing page", "homepage", "web design", "portfolio site"] } } },
+    { "id": "workflow-automation", "category": "automation", "i18n": {
+      "nl": { "name": "Workflow-automatisering", "slug": "workflow-automatisering", "synonyms": ["automatiseren", "automatisering", "koppelingen", "koppelen", "integraties", "zapier", "taken automatiseren", "workflow", "workflows", "handmatig werk"] },
+      "en": { "name": "Workflow automation", "slug": "workflow-automation", "synonyms": ["automate", "automation", "integrations", "connect apps", "zapier", "automate tasks", "workflow", "workflows", "manual work"] } } },
+    { "id": "ai-agents", "category": "automation", "i18n": {
+      "nl": { "name": "AI-agents bouwen", "slug": "ai-agents-bouwen", "synonyms": ["agent", "agents", "ai agent", "ai medewerker", "digitale medewerker", "autonome assistent", "virtuele assistent"] },
+      "en": { "name": "AI agents", "slug": "ai-agents", "synonyms": ["agent", "agents", "ai agent", "ai employee", "digital worker", "autonomous assistant", "virtual assistant"] } } },
+    { "id": "social-scheduling", "category": "marketing", "i18n": {
+      "nl": { "name": "Social media plannen", "slug": "social-media-plannen", "synonyms": ["inplannen", "plannen", "posten", "publiceren", "social media beheer", "contentkalender", "instagram", "linkedin", "facebook"] },
+      "en": { "name": "Social media scheduling", "slug": "social-media-scheduling", "synonyms": ["schedule posts", "scheduling", "publish", "posting", "social media management", "content calendar", "instagram", "linkedin", "facebook"] } } },
+    { "id": "email-marketing", "category": "marketing", "i18n": {
+      "nl": { "name": "E-mailmarketing", "slug": "e-mailmarketing", "synonyms": ["nieuwsbrief", "nieuwsbrieven", "mailing", "mailings", "e-mailcampagne", "e-mailmarketing", "mailchimp", "automations e-mail"] },
+      "en": { "name": "Email marketing", "slug": "email-marketing", "synonyms": ["newsletter", "newsletters", "mailing", "email campaign", "email campaigns", "mailchimp", "email automation"] } } },
+    { "id": "support-chatbot", "category": "business", "i18n": {
+      "nl": { "name": "Klantenservice-chatbot", "slug": "klantenservice-chatbot", "synonyms": ["klantenservice", "klantvragen", "chatbot op website", "helpdesk", "support", "livechat", "veelgestelde vragen", "klantcontact"] },
+      "en": { "name": "Customer support chatbot", "slug": "customer-support-chatbot", "synonyms": ["customer service", "customer support", "website chatbot", "helpdesk", "help desk", "support", "live chat", "faq", "support tickets"] } } }
+  ],
+  "tasks": [
+    { "id": "create-social-media-videos", "category": "video",
+      "i18n": {
+        "nl": { "title": "Social-media-video's maken", "slug": "social-media-videos-maken", "summary": "Van idee tot geplande post: script, beeld, voice-over, ondertiteling en publiceren.", "intentPhrases": ["social media video's maken", "video's voor social media", "video's voor tiktok", "instagram reels maken", "video's voor mijn bedrijf", "professionele video's maken", "youtube shorts maken", "videocontent maken", "promotievideo's"] },
+        "en": { "title": "Create social media videos", "slug": "create-social-media-videos", "summary": "From idea to scheduled post: script, visuals, voice-over, subtitles and publishing.", "intentPhrases": ["create social media videos", "social media videos", "videos for tiktok", "make instagram reels", "videos for my business", "professional videos", "make youtube shorts", "video content", "promo videos"] } },
+      "steps": [
+        { "key": "script", "capabilities": ["script-writing"], "required": true, "i18n": { "nl": { "label": "Script schrijven", "hint": "Hook, boodschap en call-to-action." }, "en": { "label": "Write the script", "hint": "Hook, message and call to action." } } },
+        { "key": "visuals", "capabilities": ["video-editing", "video-generation", "avatar-video"], "required": true, "i18n": { "nl": { "label": "Video maken of monteren", "hint": "Zelf filmen en monteren, genereren of een AI-presentator." }, "en": { "label": "Create or edit the video", "hint": "Film and edit, generate, or use an AI presenter." } } },
+        { "key": "voice", "capabilities": ["text-to-speech"], "required": false, "i18n": { "nl": { "label": "Voice-over", "hint": "Alleen nodig als je niet zelf inspreekt." }, "en": { "label": "Voice-over", "hint": "Only needed if you don't record your own voice." } } },
+        { "key": "subtitles", "capabilities": ["auto-subtitles"], "required": true, "i18n": { "nl": { "label": "Ondertiteling", "hint": "De meeste social video's worden zonder geluid bekeken." }, "en": { "label": "Subtitles", "hint": "Most social videos are watched without sound." } } },
+        { "key": "publish", "capabilities": ["social-scheduling"], "required": false, "i18n": { "nl": { "label": "Inplannen en publiceren" }, "en": { "label": "Schedule and publish" } } }
+      ] },
+    { "id": "long-videos-to-shorts", "category": "video",
+      "i18n": {
+        "nl": { "title": "Lange video's omzetten naar shorts", "slug": "lange-videos-naar-shorts", "summary": "Automatisch de beste fragmenten uit webinars, podcasts of YouTube-video's knippen, in staand formaat met ondertiteling.", "intentPhrases": ["lange video's naar tiktoks", "lange video omzetten naar shorts", "clips uit podcast", "shorts maken van youtube video", "reels uit webinar", "korte clips uit lange video", "video hergebruiken"] },
+        "en": { "title": "Turn long videos into shorts", "slug": "long-videos-to-shorts", "summary": "Automatically cut the best moments from webinars, podcasts or YouTube videos into vertical clips with captions.", "intentPhrases": ["turn long videos into tiktoks", "long videos into shorts", "clips from podcast", "shorts from youtube video", "reels from webinar", "repurpose long videos", "long video to short clips"] } },
+      "steps": [
+        { "key": "clips", "capabilities": ["clip-generation"], "required": true, "i18n": { "nl": { "label": "Fragmenten knippen", "hint": "Automatische selectie en herkadrering naar 9:16." }, "en": { "label": "Cut the clips", "hint": "Automatic selection and reframing to 9:16." } } },
+        { "key": "subtitles", "capabilities": ["auto-subtitles"], "required": true, "i18n": { "nl": { "label": "Ondertiteling" }, "en": { "label": "Subtitles" } } },
+        { "key": "publish", "capabilities": ["social-scheduling"], "required": false, "i18n": { "nl": { "label": "Inplannen en publiceren" }, "en": { "label": "Schedule and publish" } } }
+      ] },
+    { "id": "build-website-no-code", "category": "code",
+      "i18n": {
+        "nl": { "title": "Website maken zonder code", "slug": "website-maken-zonder-code", "summary": "Een professionele website of landingspagina bouwen zonder te programmeren, met teksten en beelden.", "intentPhrases": ["website maken zonder code", "professionele website maken zonder te kunnen programmeren", "website bouwen zonder programmeren", "landingspagina maken", "website voor mijn bedrijf", "site maken met ai"] },
+        "en": { "title": "Build a website without code", "slug": "build-website-without-code", "summary": "Build a professional website or landing page without programming, including copy and images.", "intentPhrases": ["build a website without code", "professional website without coding", "make a website without programming", "create a landing page", "website for my business", "ai website builder"] } },
+      "steps": [
+        { "key": "build", "capabilities": ["website-builder"], "required": true, "i18n": { "nl": { "label": "Website bouwen" }, "en": { "label": "Build the website" } } },
+        { "key": "copy", "capabilities": ["copywriting"], "required": false, "i18n": { "nl": { "label": "Teksten schrijven" }, "en": { "label": "Write the copy" } } },
+        { "key": "images", "capabilities": ["image-generation"], "required": false, "i18n": { "nl": { "label": "Beelden" }, "en": { "label": "Images" } } },
+        { "key": "seo", "capabilities": ["seo-optimization"], "required": false, "i18n": { "nl": { "label": "Vindbaarheid (SEO)" }, "en": { "label": "Findability (SEO)" } } }
+      ] },
+    { "id": "write-seo-blog-posts", "category": "writing",
+      "i18n": {
+        "nl": { "title": "Blogartikelen schrijven voor SEO", "slug": "seo-blogs-schrijven", "summary": "Onderwerpen onderzoeken, artikelen schrijven en optimaliseren zodat ze gevonden worden.", "intentPhrases": ["blogs schrijven", "seo teksten schrijven", "blogartikelen voor seo", "hoger in google met blogs", "content marketing artikelen", "artikelen voor mijn website"] },
+        "en": { "title": "Write SEO blog posts", "slug": "write-seo-blog-posts", "summary": "Research topics, write articles and optimise them so they get found.", "intentPhrases": ["write blog posts", "seo content writing", "blog posts for seo", "rank higher with blogs", "content marketing articles", "articles for my website"] } },
+      "steps": [
+        { "key": "research", "capabilities": ["research-assistant"], "required": false, "i18n": { "nl": { "label": "Onderwerp onderzoeken" }, "en": { "label": "Research the topic" } } },
+        { "key": "write", "capabilities": ["long-form-writing"], "required": true, "i18n": { "nl": { "label": "Artikel schrijven" }, "en": { "label": "Write the article" } } },
+        { "key": "seo", "capabilities": ["seo-optimization"], "required": true, "i18n": { "nl": { "label": "SEO-optimalisatie" }, "en": { "label": "SEO optimisation" } } },
+        { "key": "proof", "capabilities": ["grammar-checking"], "required": false, "i18n": { "nl": { "label": "Corrigeren" }, "en": { "label": "Proofread" } } },
+        { "key": "images", "capabilities": ["image-generation"], "required": false, "i18n": { "nl": { "label": "Afbeeldingen" }, "en": { "label": "Images" } } }
+      ] },
+    { "id": "automatic-meeting-notes", "category": "research",
+      "i18n": {
+        "nl": { "title": "Vergaderingen automatisch notuleren", "slug": "vergaderingen-notuleren", "summary": "Automatische notulen, samenvattingen en actiepunten van Teams-, Zoom- en Meet-gesprekken.", "intentPhrases": ["vergaderingen notuleren", "automatisch notuleren", "notulen maken", "teams vergadering samenvatten", "zoom meeting notities", "actiepunten uit vergadering"] },
+        "en": { "title": "Take meeting notes automatically", "slug": "automatic-meeting-notes", "summary": "Automatic notes, summaries and action items from Teams, Zoom and Meet calls.", "intentPhrases": ["meeting notes", "take meeting notes automatically", "meeting minutes", "summarize teams meeting", "zoom meeting notes", "action items from meetings"] } },
+      "steps": [
+        { "key": "notes", "capabilities": ["meeting-notes"], "required": true, "i18n": { "nl": { "label": "Opnemen en notuleren" }, "en": { "label": "Record and take notes" } } },
+        { "key": "share", "capabilities": ["note-taking"], "required": false, "i18n": { "nl": { "label": "Vastleggen en delen" }, "en": { "label": "Store and share" } } }
+      ] },
+    { "id": "create-product-photos", "category": "image",
+      "i18n": {
+        "nl": { "title": "Productfoto's maken voor je webshop", "slug": "productfotos-maken", "summary": "Van telefoonfoto naar professionele productfoto: vrijstaand, in sfeer en in hoge resolutie.", "intentPhrases": ["productfoto's maken", "productfoto's voor webshop", "packshots maken", "foto's voor bol.com", "productfoto achtergrond", "e-commerce foto's"] },
+        "en": { "title": "Create product photos for e-commerce", "slug": "create-product-photos", "summary": "From phone snapshot to professional product photo: cut out, styled scenes and high resolution.", "intentPhrases": ["product photos", "product photos for my store", "make packshots", "ecommerce product images", "product photo background", "photos for amazon listing"] } },
+      "steps": [
+        { "key": "photos", "capabilities": ["product-photography"], "required": true, "i18n": { "nl": { "label": "Productfoto's in sfeer" }, "en": { "label": "Styled product photos" } } },
+        { "key": "background", "capabilities": ["background-removal"], "required": true, "i18n": { "nl": { "label": "Vrijstaand maken" }, "en": { "label": "Remove background" } } },
+        { "key": "upscale", "capabilities": ["upscaling"], "required": false, "i18n": { "nl": { "label": "Opschalen" }, "en": { "label": "Upscale" } } }
+      ] },
+    { "id": "automate-work", "category": "automation",
+      "i18n": {
+        "nl": { "title": "Werk automatiseren met AI", "slug": "werk-automatiseren", "summary": "Terugkerende taken en koppelingen tussen apps automatiseren, eventueel met AI-agents.", "intentPhrases": ["werk automatiseren", "taken automatiseren", "apps koppelen", "handmatig werk automatiseren", "processen automatiseren met ai", "zapier alternatief"] },
+        "en": { "title": "Automate work with AI", "slug": "automate-work-with-ai", "summary": "Automate recurring tasks and connections between apps, optionally with AI agents.", "intentPhrases": ["automate work", "automate tasks", "connect apps", "automate manual work", "automate processes with ai", "zapier alternative"] } },
+      "steps": [
+        { "key": "automation", "capabilities": ["workflow-automation"], "required": true, "i18n": { "nl": { "label": "Workflows en koppelingen" }, "en": { "label": "Workflows and integrations" } } },
+        { "key": "agents", "capabilities": ["ai-agents"], "required": false, "i18n": { "nl": { "label": "AI-agents" }, "en": { "label": "AI agents" } } }
+      ] },
+    { "id": "code-with-ai", "category": "code",
+      "i18n": {
+        "nl": { "title": "Programmeren met AI", "slug": "programmeren-met-ai", "summary": "Sneller code schrijven, begrijpen en verbeteren met een AI-assistent of coding agent.", "intentPhrases": ["programmeren met ai", "code schrijven met ai", "ai voor developers", "sneller programmeren", "copilot alternatief", "ai code assistent"] },
+        "en": { "title": "Code with AI", "slug": "code-with-ai", "summary": "Write, understand and improve code faster with an AI assistant or coding agent.", "intentPhrases": ["code with ai", "ai for developers", "program faster", "copilot alternative", "ai coding assistant", "write code with ai"] } },
+      "steps": [
+        { "key": "assistant", "capabilities": ["code-assistant"], "required": true, "i18n": { "nl": { "label": "Assistent in je editor" }, "en": { "label": "Assistant in your editor" } } },
+        { "key": "agent", "capabilities": ["agentic-coding"], "required": false, "i18n": { "nl": { "label": "Coding agent" }, "en": { "label": "Coding agent" } } }
+      ] },
+    { "id": "build-app-without-code", "category": "code",
+      "i18n": {
+        "nl": { "title": "Een app bouwen zonder te programmeren", "slug": "app-bouwen-zonder-code", "summary": "Beschrijf je idee en laat AI een werkende webapp of prototype bouwen.", "intentPhrases": ["app bouwen zonder code", "app maken zonder programmeren", "prototype bouwen", "mvp bouwen", "webapp laten bouwen door ai", "saas bouwen zonder developer"] },
+        "en": { "title": "Build an app without coding", "slug": "build-app-without-coding", "summary": "Describe your idea and let AI build a working web app or prototype.", "intentPhrases": ["build an app without code", "make an app without programming", "build a prototype", "build an mvp", "ai builds my web app", "build saas without developer"] } },
+      "steps": [
+        { "key": "build", "capabilities": ["app-builder"], "required": true, "i18n": { "nl": { "label": "App bouwen" }, "en": { "label": "Build the app" } } },
+        { "key": "automation", "capabilities": ["workflow-automation"], "required": false, "i18n": { "nl": { "label": "Koppelingen" }, "en": { "label": "Integrations" } } }
+      ] },
+    { "id": "customer-support-chatbot", "category": "business",
+      "i18n": {
+        "nl": { "title": "Klantenservice automatiseren met een chatbot", "slug": "klantenservice-chatbot", "summary": "Een AI-chatbot die klantvragen beantwoordt op basis van je eigen informatie, met doorschakeling naar mensen.", "intentPhrases": ["klantenservice automatiseren", "chatbot voor website", "klantvragen beantwoorden met ai", "ai klantenservice", "helpdesk chatbot", "chatbot op mijn webshop"] },
+        "en": { "title": "Automate customer support with a chatbot", "slug": "customer-support-chatbot", "summary": "An AI chatbot that answers customer questions from your own content, with hand-off to humans.", "intentPhrases": ["automate customer support", "chatbot for my website", "answer customer questions with ai", "ai customer service", "helpdesk chatbot", "chatbot for my online store"] } },
+      "steps": [
+        { "key": "bot", "capabilities": ["support-chatbot"], "required": true, "i18n": { "nl": { "label": "Chatbot en inbox" }, "en": { "label": "Chatbot and inbox" } } },
+        { "key": "automation", "capabilities": ["workflow-automation"], "required": false, "i18n": { "nl": { "label": "Koppelingen" }, "en": { "label": "Integrations" } } }
+      ] },
+    { "id": "make-presentations", "category": "image",
+      "i18n": {
+        "nl": { "title": "Presentaties maken", "slug": "presentaties-maken", "summary": "Van ruwe tekst of idee naar een strakke presentatie met beelden.", "intentPhrases": ["presentatie maken", "powerpoint maken met ai", "slides maken", "pitch deck maken", "dia's maken"] },
+        "en": { "title": "Make presentations", "slug": "make-presentations", "summary": "From rough notes or an idea to a polished presentation with visuals.", "intentPhrases": ["make a presentation", "powerpoint with ai", "create slides", "make a pitch deck", "slide deck"] } },
+      "steps": [
+        { "key": "slides", "capabilities": ["presentation-generation"], "required": true, "i18n": { "nl": { "label": "Slides genereren" }, "en": { "label": "Generate slides" } } },
+        { "key": "images", "capabilities": ["image-generation"], "required": false, "i18n": { "nl": { "label": "Beelden" }, "en": { "label": "Images" } } }
+      ] },
+    { "id": "produce-podcast", "category": "audio",
+      "i18n": {
+        "nl": { "title": "Een podcast maken", "slug": "podcast-maken", "summary": "Opnemen (ook op afstand), bewerken, geluid verbeteren, uitschrijven en clips maken.", "intentPhrases": ["podcast maken", "podcast opnemen", "podcast bewerken", "videopodcast maken", "interview opnemen op afstand"] },
+        "en": { "title": "Produce a podcast", "slug": "produce-a-podcast", "summary": "Record (also remotely), edit, enhance audio, transcribe and create clips.", "intentPhrases": ["make a podcast", "record a podcast", "edit a podcast", "video podcast", "record remote interview"] } },
+      "steps": [
+        { "key": "record", "capabilities": ["podcast-recording"], "required": true, "i18n": { "nl": { "label": "Opnemen" }, "en": { "label": "Record" } } },
+        { "key": "edit", "capabilities": ["audio-editing"], "required": true, "i18n": { "nl": { "label": "Bewerken" }, "en": { "label": "Edit" } } },
+        { "key": "enhance", "capabilities": ["audio-enhancement"], "required": false, "i18n": { "nl": { "label": "Geluid verbeteren" }, "en": { "label": "Enhance audio" } } },
+        { "key": "clips", "capabilities": ["clip-generation"], "required": false, "i18n": { "nl": { "label": "Clips voor social" }, "en": { "label": "Social clips" } } }
+      ] },
+    { "id": "make-music", "category": "audio",
+      "i18n": {
+        "nl": { "title": "Muziek maken met AI", "slug": "muziek-maken", "summary": "Nummers, jingles en achtergrondmuziek genereren op basis van een beschrijving.", "intentPhrases": ["muziek maken met ai", "liedje maken", "achtergrondmuziek voor video", "jingle maken", "nummer genereren"] },
+        "en": { "title": "Make music with AI", "slug": "make-music-with-ai", "summary": "Generate songs, jingles and background music from a description.", "intentPhrases": ["make music with ai", "make a song", "background music for video", "create a jingle", "generate a song"] } },
+      "steps": [
+        { "key": "music", "capabilities": ["music-generation"], "required": true, "i18n": { "nl": { "label": "Muziek genereren" }, "en": { "label": "Generate music" } } }
+      ] },
+    { "id": "translate-and-dub-videos", "category": "video",
+      "i18n": {
+        "nl": { "title": "Video's vertalen en nasynchroniseren", "slug": "videos-vertalen", "summary": "Bestaande video's in andere talen uitbrengen met vertaalde stem en ondertiteling.", "intentPhrases": ["video vertalen", "video's vertalen naar engels", "video nasynchroniseren", "video in andere taal", "dubbing met ai"] },
+        "en": { "title": "Translate and dub videos", "slug": "translate-and-dub-videos", "summary": "Publish existing videos in other languages with translated voice and subtitles.", "intentPhrases": ["translate video", "translate videos to spanish", "dub a video", "video in another language", "ai dubbing"] } },
+      "steps": [
+        { "key": "dub", "capabilities": ["ai-dubbing"], "required": true, "i18n": { "nl": { "label": "Vertalen en inspreken" }, "en": { "label": "Translate and voice" } } },
+        { "key": "subtitles", "capabilities": ["auto-subtitles"], "required": true, "i18n": { "nl": { "label": "Ondertiteling" }, "en": { "label": "Subtitles" } } }
+      ] },
+    { "id": "research-with-sources", "category": "research",
+      "i18n": {
+        "nl": { "title": "Onderzoek doen met betrouwbare bronnen", "slug": "onderzoek-met-bronnen", "summary": "Vragen beantwoorden en onderwerpen uitzoeken met bronvermelding, en eigen documenten doorzoeken.", "intentPhrases": ["onderzoek doen met ai", "antwoorden met bronnen", "marktonderzoek doen", "uitzoeken met bronvermelding", "deep research"] },
+        "en": { "title": "Research with reliable sources", "slug": "research-with-sources", "summary": "Answer questions and investigate topics with citations, and search your own documents.", "intentPhrases": ["research with ai", "answers with sources", "market research", "research with citations", "deep research"] } },
+      "steps": [
+        { "key": "research", "capabilities": ["research-assistant"], "required": true, "i18n": { "nl": { "label": "Onderzoek met bronnen" }, "en": { "label": "Research with citations" } } },
+        { "key": "documents", "capabilities": ["document-chat"], "required": false, "i18n": { "nl": { "label": "Eigen documenten" }, "en": { "label": "Your own documents" } } }
+      ] },
+    { "id": "literature-review", "category": "research",
+      "i18n": {
+        "nl": { "title": "Wetenschappelijke literatuur doorzoeken", "slug": "literatuuronderzoek", "summary": "Relevante papers vinden, samenvatten en vergelijken voor scriptie of onderzoek.", "intentPhrases": ["wetenschappelijke artikelen zoeken", "literatuuronderzoek", "papers samenvatten", "bronnen voor mijn scriptie", "literatuurstudie"] },
+        "en": { "title": "Search scientific literature", "slug": "literature-review", "summary": "Find, summarise and compare relevant papers for a thesis or research.", "intentPhrases": ["find scientific papers", "literature review", "summarize papers", "sources for my thesis", "academic research"] } },
+      "steps": [
+        { "key": "find", "capabilities": ["academic-research"], "required": true, "i18n": { "nl": { "label": "Papers vinden en samenvatten" }, "en": { "label": "Find and summarise papers" } } },
+        { "key": "read", "capabilities": ["document-chat"], "required": false, "i18n": { "nl": { "label": "PDF's doorvragen" }, "en": { "label": "Question the PDFs" } } }
+      ] },
+    { "id": "design-logo-and-brand", "category": "image",
+      "i18n": {
+        "nl": { "title": "Logo en huisstijl ontwerpen", "slug": "logo-ontwerpen", "summary": "Een logo, kleuren en basismaterialen voor een nieuw merk of bedrijf.", "intentPhrases": ["logo maken", "logo ontwerpen met ai", "huisstijl maken", "branding voor mijn bedrijf", "logo voor mijn startup"] },
+        "en": { "title": "Design a logo and brand", "slug": "design-logo-and-brand", "summary": "A logo, colours and basic brand assets for a new brand or business.", "intentPhrases": ["make a logo", "design a logo with ai", "create a brand identity", "branding for my business", "logo for my startup"] } },
+      "steps": [
+        { "key": "logo", "capabilities": ["logo-design"], "required": true, "i18n": { "nl": { "label": "Logo en merk" }, "en": { "label": "Logo and brand" } } },
+        { "key": "graphics", "capabilities": ["graphic-design"], "required": false, "i18n": { "nl": { "label": "Ontwerpen en templates" }, "en": { "label": "Designs and templates" } } }
+      ] },
+    { "id": "email-marketing", "category": "marketing",
+      "i18n": {
+        "nl": { "title": "E-mailmarketing en nieuwsbrieven", "slug": "e-mailmarketing", "summary": "Nieuwsbrieven en automatische e-mailflows maken en versturen, met AI-hulp bij teksten.", "intentPhrases": ["nieuwsbrief maken", "e-mailmarketing", "mailchimp alternatief", "e-mailcampagnes", "nieuwsbrief versturen"] },
+        "en": { "title": "Email marketing and newsletters", "slug": "email-marketing", "summary": "Create and send newsletters and automated email flows, with AI help for copy.", "intentPhrases": ["send a newsletter", "email marketing", "mailchimp alternative", "email campaigns", "newsletter tool"] } },
+      "steps": [
+        { "key": "platform", "capabilities": ["email-marketing"], "required": true, "i18n": { "nl": { "label": "E-mailplatform" }, "en": { "label": "Email platform" } } },
+        { "key": "copy", "capabilities": ["email-writing", "copywriting"], "required": false, "i18n": { "nl": { "label": "Teksten" }, "en": { "label": "Copy" } } }
+      ] },
+    { "id": "analyze-data", "category": "research",
+      "i18n": {
+        "nl": { "title": "Data analyseren zonder formules", "slug": "data-analyseren", "summary": "Vragen stellen aan je Excel-, CSV- of Sheets-data en grafieken laten maken.", "intentPhrases": ["data analyseren", "excel analyseren met ai", "grafieken maken van data", "spreadsheet analyseren", "csv analyseren"] },
+        "en": { "title": "Analyze data without formulas", "slug": "analyze-data", "summary": "Ask questions of your Excel, CSV or Sheets data and get charts.", "intentPhrases": ["analyze data", "analyze excel with ai", "make charts from data", "analyze spreadsheet", "analyze csv"] } },
+      "steps": [
+        { "key": "analysis", "capabilities": ["data-analysis"], "required": true, "i18n": { "nl": { "label": "Analyseren en visualiseren" }, "en": { "label": "Analyse and visualise" } } }
+      ] },
+    { "id": "write-marketing-copy", "category": "writing",
+      "i18n": {
+        "nl": { "title": "Marketingteksten schrijven", "slug": "marketingteksten-schrijven", "summary": "Advertenties, productteksten, social posts en slogans in je eigen merkstem.", "intentPhrases": ["marketingteksten schrijven", "advertentieteksten maken", "productbeschrijvingen schrijven", "social media posts schrijven", "linkedin posts schrijven"] },
+        "en": { "title": "Write marketing copy", "slug": "write-marketing-copy", "summary": "Ads, product descriptions, social posts and slogans in your brand voice.", "intentPhrases": ["write marketing copy", "write ad copy", "product descriptions", "write social media posts", "write linkedin posts"] } },
+      "steps": [
+        { "key": "copy", "capabilities": ["copywriting"], "required": true, "i18n": { "nl": { "label": "Teksten schrijven" }, "en": { "label": "Write copy" } } },
+        { "key": "proof", "capabilities": ["grammar-checking"], "required": false, "i18n": { "nl": { "label": "Corrigeren" }, "en": { "label": "Proofread" } } }
+      ] },
+    { "id": "generate-images", "category": "image",
+      "i18n": {
+        "nl": { "title": "Afbeeldingen genereren", "slug": "afbeeldingen-genereren", "summary": "Illustraties, sfeerbeelden en visuals genereren en bijwerken.", "intentPhrases": ["afbeeldingen genereren", "ai plaatjes maken", "illustraties maken", "beelden voor mijn website", "ai kunst maken"] },
+        "en": { "title": "Generate images", "slug": "generate-images", "summary": "Generate and refine illustrations, mood images and visuals.", "intentPhrases": ["generate images", "make ai images", "create illustrations", "images for my website", "ai art"] } },
+      "steps": [
+        { "key": "generate", "capabilities": ["image-generation"], "required": true, "i18n": { "nl": { "label": "Genereren" }, "en": { "label": "Generate" } } },
+        { "key": "edit", "capabilities": ["image-editing"], "required": false, "i18n": { "nl": { "label": "Bijwerken" }, "en": { "label": "Refine" } } },
+        { "key": "upscale", "capabilities": ["upscaling"], "required": false, "i18n": { "nl": { "label": "Opschalen" }, "en": { "label": "Upscale" } } }
+      ] },
+    { "id": "training-videos-ai-presenter", "category": "video",
+      "i18n": {
+        "nl": { "title": "Trainingsvideo's met een AI-presentator", "slug": "trainingsvideos-met-avatar", "summary": "Instructie-, onboarding- en e-learningvideo's met een digitale presentator, zonder camera.", "intentPhrases": ["trainingsvideo's maken", "e-learning video's", "instructievideo zonder camera", "onboarding video maken", "video met ai presentator", "video zonder zelf in beeld"] },
+        "en": { "title": "Training videos with an AI presenter", "slug": "training-videos-ai-presenter", "summary": "Instruction, onboarding and e-learning videos with a digital presenter, no camera needed.", "intentPhrases": ["training videos", "e-learning videos", "instruction video without camera", "onboarding video", "video with ai presenter", "faceless videos"] } },
+      "steps": [
+        { "key": "script", "capabilities": ["script-writing"], "required": true, "i18n": { "nl": { "label": "Script schrijven" }, "en": { "label": "Write the script" } } },
+        { "key": "avatar", "capabilities": ["avatar-video"], "required": true, "i18n": { "nl": { "label": "Video met presentator" }, "en": { "label": "Presenter video" } } },
+        { "key": "translate", "capabilities": ["ai-dubbing"], "required": false, "i18n": { "nl": { "label": "Andere talen" }, "en": { "label": "Other languages" } } }
+      ] },
+    { "id": "create-ai-voiceovers", "category": "audio",
+      "i18n": {
+        "nl": { "title": "Voice-overs laten inspreken door AI", "slug": "voice-over-maken", "summary": "Natuurlijk klinkende voice-overs voor video's, e-learning en advertenties, ook in het Nederlands.", "intentPhrases": ["voice-over maken", "ai stem voor video", "tekst laten inspreken", "voice over in het nederlands", "stem klonen"] },
+        "en": { "title": "Create AI voice-overs", "slug": "create-ai-voiceovers", "summary": "Natural-sounding voice-overs for videos, e-learning and ads.", "intentPhrases": ["create a voiceover", "ai voice for video", "text to speech voice over", "narration for video", "clone my voice"] } },
+      "steps": [
+        { "key": "voice", "capabilities": ["text-to-speech"], "required": true, "i18n": { "nl": { "label": "Stem genereren" }, "en": { "label": "Generate voice" } } },
+        { "key": "clone", "capabilities": ["voice-cloning"], "required": false, "i18n": { "nl": { "label": "Eigen stem klonen" }, "en": { "label": "Clone your voice" } } }
+      ] },
+    { "id": "edit-videos-faster", "category": "video",
+      "i18n": {
+        "nl": { "title": "Video's sneller monteren", "slug": "videos-monteren", "summary": "Monteren via tekst, stiltes knippen, ondertitels en geluid verbeteren.", "intentPhrases": ["video monteren", "video's sneller bewerken", "videomontage met ai", "video editor met ai", "youtube video bewerken"] },
+        "en": { "title": "Edit videos faster", "slug": "edit-videos-faster", "summary": "Edit by text, cut silences, add subtitles and clean up audio.", "intentPhrases": ["edit videos", "edit videos faster", "video editing with ai", "ai video editor", "edit youtube videos"] } },
+      "steps": [
+        { "key": "edit", "capabilities": ["video-editing"], "required": true, "i18n": { "nl": { "label": "Monteren" }, "en": { "label": "Edit" } } },
+        { "key": "subtitles", "capabilities": ["auto-subtitles"], "required": false, "i18n": { "nl": { "label": "Ondertiteling" }, "en": { "label": "Subtitles" } } },
+        { "key": "audio", "capabilities": ["audio-enhancement"], "required": false, "i18n": { "nl": { "label": "Geluid verbeteren" }, "en": { "label": "Enhance audio" } } }
+      ] },
+    { "id": "proofread-writing", "category": "writing",
+      "i18n": {
+        "nl": { "title": "Foutloos schrijven en herschrijven", "slug": "foutloos-schrijven", "summary": "Spelling, grammatica en stijl verbeteren, ook in het Nederlands, en teksten vertalen.", "intentPhrases": ["foutloos schrijven", "spelling controleren", "tekst verbeteren", "grammatica controleren nederlands", "tekst herschrijven"] },
+        "en": { "title": "Write and proofread flawlessly", "slug": "proofread-writing", "summary": "Improve spelling, grammar and style, and translate texts.", "intentPhrases": ["proofread my writing", "check grammar", "improve my text", "spell check", "rewrite text"] } },
+      "steps": [
+        { "key": "proof", "capabilities": ["grammar-checking"], "required": true, "i18n": { "nl": { "label": "Corrigeren en herschrijven" }, "en": { "label": "Proofread and rewrite" } } },
+        { "key": "translate", "capabilities": ["translation"], "required": false, "i18n": { "nl": { "label": "Vertalen" }, "en": { "label": "Translate" } } }
+      ] },
+    { "id": "plan-social-media", "category": "marketing",
+      "i18n": {
+        "nl": { "title": "Social media plannen en beheren", "slug": "social-media-plannen", "summary": "Posts voor meerdere kanalen maken, inplannen en analyseren.", "intentPhrases": ["social media plannen", "posts inplannen", "social media beheren", "contentkalender", "hootsuite alternatief"] },
+        "en": { "title": "Plan and manage social media", "slug": "plan-social-media", "summary": "Create, schedule and analyse posts across channels.", "intentPhrases": ["plan social media", "schedule posts", "manage social media", "content calendar", "hootsuite alternative"] } },
+      "steps": [
+        { "key": "schedule", "capabilities": ["social-scheduling"], "required": true, "i18n": { "nl": { "label": "Inplannen en analyseren" }, "en": { "label": "Schedule and analyse" } } },
+        { "key": "graphics", "capabilities": ["graphic-design"], "required": false, "i18n": { "nl": { "label": "Visuals" }, "en": { "label": "Visuals" } } }
+      ] },
+    { "id": "everyday-ai-assistant", "category": "assistant",
+      "i18n": {
+        "nl": { "title": "Een AI-assistent voor dagelijks werk", "slug": "ai-assistent-dagelijks-werk", "summary": "Eén assistent om mee te schrijven, samenvatten, analyseren en sparren.", "intentPhrases": ["welke ai assistent", "beste ai chatbot", "chatgpt of claude", "ai assistent voor werk", "ai hulp bij dagelijks werk"] },
+        "en": { "title": "An AI assistant for everyday work", "slug": "ai-assistant-everyday-work", "summary": "One assistant for writing, summarising, analysing and brainstorming.", "intentPhrases": ["which ai assistant", "best ai chatbot", "chatgpt or claude", "ai assistant for work", "ai help for daily work"] } },
+      "steps": [
+        { "key": "assistant", "capabilities": ["chat-assistant"], "required": true, "i18n": { "nl": { "label": "AI-assistent" }, "en": { "label": "AI assistant" } } }
+      ] },
+    { "id": "local-private-ai", "category": "assistant",
+      "i18n": {
+        "nl": { "title": "AI lokaal en privé gebruiken", "slug": "lokale-ai", "summary": "Open taalmodellen op je eigen computer draaien, zonder dat data het apparaat verlaat.", "intentPhrases": ["ai lokaal draaien", "ai zonder cloud", "privé ai gebruiken", "offline chatbot", "llm op eigen computer"] },
+        "en": { "title": "Use AI locally and privately", "slug": "local-private-ai", "summary": "Run open models on your own computer so data never leaves the device.", "intentPhrases": ["run ai locally", "ai without cloud", "private ai", "offline chatbot", "llm on my computer"] } },
+      "steps": [
+        { "key": "run", "capabilities": ["local-llm"], "required": true, "i18n": { "nl": { "label": "Model lokaal draaien" }, "en": { "label": "Run a local model" } } }
+      ] },
+    { "id": "transcribe-audio", "category": "audio",
+      "i18n": {
+        "nl": { "title": "Audio en interviews uitschrijven", "slug": "audio-transcriberen", "summary": "Interviews, colleges en opnames automatisch uitschrijven, ook in het Nederlands.", "intentPhrases": ["interview uitschrijven", "audio transcriberen", "opname uittypen", "spraak naar tekst nederlands", "college uitschrijven"] },
+        "en": { "title": "Transcribe audio and interviews", "slug": "transcribe-audio", "summary": "Automatically transcribe interviews, lectures and recordings.", "intentPhrases": ["transcribe an interview", "transcribe audio", "speech to text", "transcribe a recording", "transcribe lectures"] } },
+      "steps": [
+        { "key": "transcribe", "capabilities": ["transcription"], "required": true, "i18n": { "nl": { "label": "Uitschrijven" }, "en": { "label": "Transcribe" } } },
+        { "key": "summarize", "capabilities": ["summarization"], "required": false, "i18n": { "nl": { "label": "Samenvatten" }, "en": { "label": "Summarise" } } }
+      ] }
+  ]
+}

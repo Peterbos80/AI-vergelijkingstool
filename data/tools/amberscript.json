@@ -1,0 +1,49 @@
+{
+  "slug": "amberscript",
+  "name": "Amberscript",
+  "website": "https://www.amberscript.com",
+  "company": { "name": "Amberscript", "slug": "amberscript", "country": "NL" },
+  "skillLevel": "beginner",
+  "audience": ["researchers", "journalists", "educators", "government"],
+  "capabilities": [
+    { "id": "transcription", "strength": "primary" },
+    { "id": "auto-subtitles", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Amberscript offers AI-automated transcription at €10 per audio hour (one-time credits), human-reviewed transcription starting from €1.85 per minute, and monthly subscriptions starting at €19/month… Starter… €19 per month… 300 minutes… Pro… 600 minutes for €29 per month… Power… €49/month… 1,500 minutes\"",
+    "sources": [
+      { "url": "https://sonix.ai/resources/amberscript-pricing/", "type": "secondary" },
+      { "url": "https://transkriptor.com/amberscript-review/", "type": "secondary" },
+      { "url": "https://www.capterra.com/p/186740/AmberScript/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "supports_dutch": { "value": true, "evidence": "Web search summary: \"Amberscript supports Dutch among its languages\"" },
+    "eu_data_residency": { "value": true, "status": "unverified", "evidence": "Search result title: \"Amberscript review: flawless transcription within EU borders - ITdaily\"", "sources": [{ "url": "https://itdaily.com/reviews/software/amberscript-review-flawless-transcription-within-eu-borders/", "type": "media", "publisher": "ITdaily" }] },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.amberscript.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "pay-as-you-go", "name": "Automatic (pay as you go)", "price": 10, "currency": "EUR", "period": "usage", "unit": "usage", "quota": "€10 per audio hour" },
+    { "key": "starter", "name": "Starter", "price": 19, "currency": "EUR", "period": "month", "quota": "300 minutes per month" },
+    { "key": "pro", "name": "Pro", "price": 29, "currency": "EUR", "period": "month", "quota": "600 minutes per month" },
+    { "key": "power", "name": "Power", "price": 49, "currency": "EUR", "period": "month", "quota": "1,500 minutes per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Nederlandse transcriptiedienst: automatisch of door mensen gecontroleerd",
+      "description": "Amberscript, een Amsterdams bedrijf, zet audio en video om in tekst en ondertitels, automatisch of met menselijke controle. Het is sterk in het Nederlands en wordt gebruikt door onderzoekers, journalisten en overheden die belang hechten aan Europese dataverwerking.",
+      "bestFor": ["Nederlandstalige interviews en onderzoek uitschrijven", "Organisaties die een Europese aanbieder zoeken", "Ondertitels met menselijke controle"],
+      "notFor": ["Live notuleren tijdens vergaderingen"],
+      "limitations": ["Menselijke controle kost per minuut en is relatief duur"]
+    },
+    "en": {
+      "tagline": "Dutch transcription service: automatic or human-reviewed",
+      "description": "Amberscript, an Amsterdam company, turns audio and video into text and subtitles, automatically or with human review. It is strong in Dutch and used by researchers, journalists and governments that value European data processing.",
+      "bestFor": ["Transcribing Dutch interviews and research", "Organisations that want a European provider", "Human-checked subtitles"],
+      "notFor": ["Live note-taking during meetings"],
+      "limitations": ["Human review is charged per minute and relatively expensive"]
+    }
+  },
+  "relations": [{ "tool": "happy-scribe", "kind": "alternative" }, { "tool": "turboscribe", "kind": "alternative" }]
+}

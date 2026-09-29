@@ -1,0 +1,48 @@
+{
+  "slug": "surfer-seo",
+  "name": "Surfer SEO",
+  "aliases": ["Surfer"],
+  "website": "https://surferseo.com",
+  "company": { "name": "Surfer", "slug": "surfer", "country": "PL" },
+  "skillLevel": "intermediate",
+  "audience": ["marketers", "agencies", "content-teams"],
+  "capabilities": [
+    { "id": "seo-optimization", "strength": "primary" },
+    { "id": "long-form-writing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Discovery — $49/month (or $59/month without annual billing)… Standard — $99/month (or $119/month…)… Pro — $182/month (or $219/month…)… Peace of Mind — $299/month (or $359/month…)… Enterprise — $999/month\"; another search noted \"Surfer SEO renamed its plans in 2026, and the Essential plan ($89/month) and Scale plan ($129/month)… no longer exist\"",
+    "sources": [
+      { "url": "https://costbench.com/software/ai-seo-tools/surfer-seo/", "type": "secondary", "title": "Surfer SEO Pricing 2026: 5 Plans from $49–$999/month" },
+      { "url": "https://www.rankup.so/academy/surfer-pricing/", "type": "secondary" },
+      { "url": "https://pricingsaas.com/companies/surferseo", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web", "chrome_extension"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://surferseo.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "discovery", "name": "Discovery", "price": 59, "currency": "USD", "period": "month", "annualMonthly": 49, "quota": "120 documents per month, 10 tracked pages, 1 seat" },
+    { "key": "standard", "name": "Standard", "price": 119, "currency": "USD", "period": "month", "annualMonthly": 99, "quota": "360 documents per month, 50 tracked pages" },
+    { "key": "pro", "name": "Pro", "price": 219, "currency": "USD", "period": "month", "annualMonthly": 182, "quota": "200 tracked pages, 5 seats" },
+    { "key": "peace-of-mind", "name": "Peace of Mind", "price": 359, "currency": "USD", "period": "month", "annualMonthly": 299, "quota": "Unlimited documents, 500 tracked pages, 10 seats" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Content optimaliseren voor Google én AI-zoekmachines",
+      "description": "Surfer analyseert de best scorende pagina's voor een zoekwoord en geeft aanwijzingen voor onderwerpen, structuur en woordgebruik, met een AI-schrijfhulp. Sinds 2026 volgt Surfer ook zichtbaarheid in AI-antwoorden. De plannen zijn in 2026 hernoemd.",
+      "bestFor": ["Contentteams die op SEO sturen", "Bestaande artikelen verbeteren"],
+      "notFor": ["Wie incidenteel één blog schrijft"],
+      "limitations": ["Relatief hoge instapprijs; limieten per documenten per maand"]
+    },
+    "en": {
+      "tagline": "Optimise content for Google and AI search engines",
+      "description": "Surfer analyses the top-ranking pages for a keyword and guides topics, structure and wording, with an AI writing assistant. Since 2026 it also tracks visibility in AI answers. Plans were renamed in 2026.",
+      "bestFor": ["Content teams steering on SEO", "Improving existing articles"],
+      "notFor": ["Occasional single blog posts"],
+      "limitations": ["Relatively high entry price; document limits per month"]
+    }
+  },
+  "relations": [{ "tool": "frase", "kind": "alternative" }]
+}

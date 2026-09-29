@@ -1,0 +1,49 @@
+{
+  "slug": "looka",
+  "name": "Looka",
+  "website": "https://looka.com",
+  "company": { "name": "Looka", "slug": "looka", "country": "CA" },
+  "skillLevel": "beginner",
+  "audience": ["startups", "smb", "freelancers"],
+  "capabilities": [
+    { "id": "logo-design", "strength": "primary" },
+    { "id": "graphic-design", "strength": "secondary" },
+    { "id": "website-builder", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The Basic Logo Package is a one-time purchase of $20, which includes a low-resolution PNG file. The Premium Logo Package costs $65… Brand Kit subscription starting at $129 annually… the Brand Kit Subscription is priced at $96 per year… The Brand Kit Web Subscription… $129 per year… creating a logo with Looka is free\"",
+    "sources": [
+      { "url": "https://www.wpcrafter.com/review/looka-logo-generator/", "type": "secondary", "title": "Looka Logo Generator Review (September 2026)" },
+      { "url": "https://costbench.com/software/ai-design-tools/looka/", "type": "secondary" },
+      { "url": "https://www.tooljunction.io/ai-tools/looka", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_trial": { "value": true, "evidence": "Web search summary: \"creating a logo with Looka is free; however, to download and use the final high-resolution logo files, you need to purchase a logo package\"" },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://looka.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "basic-logo", "name": "Basic Logo Package", "price": 20, "currency": "USD", "period": "one_time", "quota": "Low-resolution PNG" },
+    { "key": "premium-logo", "name": "Premium Logo Package", "price": 65, "currency": "USD", "period": "one_time", "quota": "High-resolution files, unlimited changes, full ownership" },
+    { "key": "brand-kit", "name": "Brand Kit", "price": 96, "currency": "USD", "period": "year", "status": "unverified", "note": "Sources disagree ($96 vs $129 per year)." },
+    { "key": "brand-kit-web", "name": "Brand Kit Web", "price": 129, "currency": "USD", "period": "year", "quota": "Includes an AI-generated website" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-logomaker met complete merkkit voor je bedrijf",
+      "description": "Looka genereert logovoorstellen op basis van je bedrijfsnaam en voorkeuren. Ontwerpen is gratis; voor de bestanden betaal je eenmalig, of je neemt een merkkit-abonnement met visitekaartjes, social media-templates en een eenvoudige website.",
+      "bestFor": ["Starters die snel een logo en huisstijl nodig hebben", "Eenmalig betalen in plaats van een abonnement"],
+      "notFor": ["Merken die een uniek, handgemaakt logo willen"],
+      "limitations": ["Basispakket bevat alleen een lage-resolutie PNG"]
+    },
+    "en": {
+      "tagline": "AI logo maker with a complete brand kit for your business",
+      "description": "Looka generates logo proposals from your business name and preferences. Designing is free; you pay once for the files, or take a brand kit subscription with business cards, social templates and a simple website.",
+      "bestFor": ["Starters who need a logo and brand quickly", "Paying once instead of subscribing"],
+      "notFor": ["Brands wanting a unique, hand-crafted logo"],
+      "limitations": ["Basic package only includes a low-resolution PNG"]
+    }
+  },
+  "relations": [{ "tool": "canva", "kind": "alternative" }, { "tool": "ideogram", "kind": "alternative" }]
+}

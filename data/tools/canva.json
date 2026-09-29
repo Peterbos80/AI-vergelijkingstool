@@ -1,0 +1,53 @@
+{
+  "slug": "canva",
+  "name": "Canva",
+  "aliases": ["Canva Magic Studio"],
+  "website": "https://www.canva.com",
+  "company": { "name": "Canva", "slug": "canva", "country": "AU" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "smb", "marketers", "educators"],
+  "capabilities": [
+    { "id": "graphic-design", "strength": "primary" },
+    { "id": "presentation-generation", "strength": "secondary" },
+    { "id": "video-editing", "strength": "secondary" },
+    { "id": "background-removal", "strength": "secondary" },
+    { "id": "image-generation", "strength": "secondary" },
+    { "id": "logo-design", "strength": "secondary" },
+    { "id": "social-scheduling", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Canva Pro costs $18/month billed monthly, or $144/year if you pay annually… Canva Business costs $25/user/month or $250/user/year… The Free plan includes 50 Magic Studio AI credits per month, while Pro includes 500\"",
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/canva-ai-pricing", "type": "secondary" },
+      { "url": "https://www.usecarly.com/blog/canva-pricing/", "type": "secondary", "title": "Canva Pricing in 2026: Canva Pro Is $18/mo" },
+      { "url": "https://socialrails.com/blog/canva-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "windows", "macos", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.canva.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "50 Magic Studio AI credits per month, 5 GB storage" },
+    { "key": "pro", "name": "Pro", "price": 18, "currency": "USD", "period": "month", "annualMonthly": 12, "quota": "500 AI credits per month, background remover, brand kit" },
+    { "key": "business", "name": "Business", "price": 25, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 20.83, "quota": "Formerly Teams" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Alles-in-één ontwerptool met AI (Magic Studio) en templates",
+      "description": "Canva maakt ontwerpen voor social media, presentaties, video's, drukwerk en meer met duizenden templates en AI-functies zoals beeldgeneratie, achtergrond verwijderen en automatisch aanpassen van formaten. Ook in het Nederlands te gebruiken.",
+      "bestFor": ["Ondernemers zonder ontwerpachtergrond", "Social visuals en presentaties in huisstijl", "Teams die snel veel formaten nodig hebben"],
+      "notFor": ["Professionele fotobewerking of complexe illustraties"],
+      "limitations": ["AI-functies begrensd via credits per maand"]
+    },
+    "en": {
+      "tagline": "All-in-one design tool with AI (Magic Studio) and templates",
+      "description": "Canva creates designs for social media, presentations, video, print and more with thousands of templates and AI features such as image generation, background removal and automatic resizing.",
+      "bestFor": ["Entrepreneurs without a design background", "On-brand social visuals and presentations", "Teams needing many formats fast"],
+      "notFor": ["Professional photo editing or complex illustration"],
+      "limitations": ["AI features capped by monthly credits"]
+    }
+  },
+  "relations": [{ "tool": "adobe-express", "kind": "alternative" }, { "tool": "gamma", "kind": "alternative" }]
+}

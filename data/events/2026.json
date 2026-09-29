@@ -1,0 +1,146 @@
+[
+  {
+    "tool": "sora", "kind": "shutdown", "occurred": "2026-09-24", "significance": 75, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "OpenAI zet de Sora-API definitief stop", "en": "OpenAI shuts down the Sora API" },
+    "summary": { "nl": "Na de app (april) is nu ook de API van videogenerator Sora uitgeschakeld. Kies voor nieuwe projecten een actief alternatief.", "en": "After the app (April), the API of video generator Sora has now been switched off too. Pick an active alternative for new projects." },
+    "sources": [
+      { "url": "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation", "type": "official_docs", "title": "What to know about the Sora discontinuation" },
+      { "url": "https://the-decoder.com/openai-sets-two-stage-sora-shutdown-with-app-closing-april-2026-and-api-following-in-september/", "type": "media", "publisher": "The Decoder" }
+    ]
+  },
+  {
+    "tool": "sora", "kind": "shutdown", "occurred": "2026-04-26", "significance": 85, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Sora-app en -website gesloten", "en": "Sora app and website closed" },
+    "summary": { "nl": "OpenAI sloot de consumentenapp en webversie van Sora; gebruikers moesten hun video's vóór de deadline downloaden.", "en": "OpenAI closed Sora's consumer app and web experience; users had to download their videos before the deadline." },
+    "sources": [
+      { "url": "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation", "type": "official_docs" },
+      { "url": "https://techcrunch.com/2026/03/24/openais-sora-was-the-creepiest-app-on-your-phone-now-its-shutting-down/", "type": "media", "publisher": "TechCrunch" }
+    ]
+  },
+  {
+    "tool": "sora", "kind": "news", "occurred": "2026-03-24", "significance": 80, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "OpenAI kondigt stopzetting van Sora aan", "en": "OpenAI announces Sora discontinuation" },
+    "summary": { "nl": "Tweetrapsafbouw: de app sluit in april, de API in september 2026.", "en": "Two-stage wind-down: the app closes in April, the API in September 2026." },
+    "sources": [
+      { "url": "https://techcrunch.com/2026/03/24/openais-sora-was-the-creepiest-app-on-your-phone-now-its-shutting-down/", "type": "media", "publisher": "TechCrunch" },
+      { "url": "https://the-decoder.com/openai-sets-two-stage-sora-shutdown-with-app-closing-april-2026-and-api-following-in-september/", "type": "media", "publisher": "The Decoder" }
+    ]
+  },
+  {
+    "tool": "gemini", "kind": "price_decrease", "occurred": "2026-06-08", "significance": 70, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Google AI Plus 38% goedkoper: van $7,99 naar $4,99 per maand", "en": "Google AI Plus drops 38%: from $7.99 to $4.99 per month" },
+    "summary": { "nl": "Tegelijk verdubbelde de opslag naar 400 GB. Geldt ook voor Gemini Notebook Plus en Flow-credits.", "en": "Storage doubled to 400 GB at the same time. Also applies to Gemini Notebook Plus and Flow credits." },
+    "sources": [
+      { "url": "https://9to5google.com/2026/06/08/google-ai-plus-price-drop/", "type": "media", "publisher": "9to5Google" },
+      { "url": "https://techcrunch.com/2026/06/09/google-just-fired-a-warning-shot-in-the-ai-subscription-price-wars/", "type": "media", "publisher": "TechCrunch" },
+      { "url": "https://www.engadget.com/2190039/google-cuts-the-price-of-its-ai-plus-plan-and-doubles-the-storage/", "type": "media", "publisher": "Engadget" }
+    ]
+  },
+  {
+    "tool": "gemini-notebook", "kind": "rename", "occurred": "2026-07-16", "significance": 60, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "NotebookLM heet voortaan Gemini Notebook", "en": "NotebookLM is now called Gemini Notebook" },
+    "summary": { "nl": "Zelfde product, nieuwe naam, plus een 'cloudcomputer' die code kan uitvoeren op je bronnen.", "en": "Same product, new name, plus a 'cloud computer' that can run code against your sources." },
+    "sources": [
+      { "url": "https://workspaceupdates.googleblog.com/2026/07/notebooklm-now-gemini-notebook.html", "type": "official_blog", "title": "Google Workspace Updates: NotebookLM is now Gemini Notebook" },
+      { "url": "https://oit.ncsu.edu/2026/07/17/notebooklm-changes-name-to-gemini-notebook/", "type": "media", "publisher": "NC State OIT" }
+    ]
+  },
+  {
+    "tool": "github-copilot", "kind": "policy", "occurred": "2026-06-01", "significance": 60, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "GitHub Copilot rekent premium gebruik af in AI-credits", "en": "GitHub Copilot moves premium usage to AI credits" },
+    "summary": { "nl": "Premium requests zijn vervangen door op tokens gebaseerde AI-credits; de basisprijzen van de plannen bleven gelijk.", "en": "Premium requests were replaced by token-based AI credits; base plan prices stayed the same." },
+    "sources": [
+      { "url": "https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/", "type": "official_blog", "title": "GitHub Copilot is moving to usage-based billing" },
+      { "url": "https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing", "type": "official_docs" }
+    ]
+  },
+  {
+    "tool": "webflow", "kind": "plan_added", "occurred": "2026-05-13", "significance": 45, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Webflow vervangt CMS- en Business-plan door één Premium-plan", "en": "Webflow replaces CMS and Business plans with one Premium plan" },
+    "summary": { "nl": "Premium kost $25 per maand bij jaarbetaling ($39 maandelijks).", "en": "Premium costs $25 per month billed annually ($39 monthly)." },
+    "sources": [
+      { "url": "https://webflow.com/blog/simplified-plans-and-updated-pricing-2026", "type": "official_blog" },
+      { "url": "https://help.webflow.com/hc/en-us/articles/51059955082387-Updated-pricing-and-simplified-plans-for-May-2026", "type": "official_docs" }
+    ]
+  },
+  {
+    "tool": "mailerlite", "kind": "price_increase", "occurred": "2026-06", "significance": 55, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "MailerLite verhoogt prijzen met 10–30% en hernoemt plannen", "en": "MailerLite raises prices 10–30% and renames plans" },
+    "summary": { "nl": "Growing Business heet nu Comfort, Advanced heet Power.", "en": "Growing Business is now Comfort, Advanced is now Power." },
+    "sources": [
+      { "url": "https://www.mailmodo.com/guides/mailerlite-pricing/", "type": "secondary" },
+      { "url": "https://blog.groupmail.io/mailerlite-free-plan-limits/", "type": "secondary" },
+      { "url": "https://www.emailsoftwareinsights.com/reviews/mailerlite/", "type": "secondary" }
+    ]
+  },
+  {
+    "tool": "magnific", "kind": "rename", "occurred": "2026-04-28", "significance": 45, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Magnific wordt het AI-merk van Freepik", "en": "Magnific becomes Freepik's AI brand" },
+    "summary": { "nl": "De AI-suite van Freepik (beeld, video, audio, 3D) gaat verder onder de naam Magnific, met nieuwe creditplannen.", "en": "Freepik's AI suite (image, video, audio, 3D) continues under the Magnific name, with new credit plans." },
+    "sources": [
+      { "url": "https://oakgen.ai/blog/magnific-ai-freepik-rebrand-pricing", "type": "secondary" },
+      { "url": "https://www.renderahouse.com/blog/magnific-ai-pricing", "type": "secondary" }
+    ]
+  },
+  {
+    "tool": "runway", "kind": "plan_added", "occurred": "2026-05-29", "significance": 40, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Runway introduceert Max ($95/mnd) als opvolger van Unlimited", "en": "Runway introduces Max ($95/mo) replacing Unlimited" },
+    "summary": { "nl": "Nieuwe abonnees krijgen Max; bestaande Unlimited-abonnementen stappen volgens de bronnen op 30 november 2026 over.", "en": "New subscribers get Max; existing Unlimited subscriptions switch on 30 November 2026 according to the sources." },
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/runway-ai-pricing", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-video-generators/runway/", "type": "secondary" }
+    ]
+  },
+  {
+    "tool": "v0", "kind": "plan_removed", "occurred": "2026-07", "significance": 45, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "v0 schrapt Premium-plan van $20 voor nieuwe gebruikers", "en": "v0 drops the $20 Premium plan for new users" },
+    "summary": { "nl": "Het goedkoopste betaalde plan is nu Team ($30 per gebruiker).", "en": "The cheapest paid plan is now Team ($30 per user)." },
+    "sources": [
+      { "url": "https://vercel.com/blog/updated-v0-pricing", "type": "official_blog", "title": "Updated v0 pricing - Vercel" },
+      { "url": "https://automationatlas.io/answers/v0-pricing-explained-2026/", "type": "secondary" }
+    ]
+  },
+  {
+    "tool": "replit", "kind": "plan_removed", "occurred": "2026-02", "significance": 40, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Replit herziet prijzen: nieuw Pro-plan, Teams verdwijnt", "en": "Replit overhauls pricing: new Pro plan, Teams retired" },
+    "sources": [
+      { "url": "https://www.lowcode.agency/blog/replit-pricing-explained", "type": "secondary" },
+      { "url": "https://www.eesel.ai/blog/replit-pricing", "type": "secondary" }
+    ]
+  },
+  {
+    "tool": "windsurf", "kind": "policy", "occurred": "2026-03", "significance": 35, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Windsurf stapt over van credits naar quota", "en": "Windsurf switches from credits to quotas" },
+    "summary": { "nl": "Bestaande Pro- en Teams-abonnees behielden hun prijs.", "en": "Existing Pro and Teams subscribers kept their price." },
+    "sources": [
+      { "url": "https://www.cloudzero.com/blog/windsurf-pricing/", "type": "secondary" },
+      { "url": "https://www.verdent.ai/guides/windsurf-pricing-2026", "type": "secondary" }
+    ]
+  },
+  {
+    "tool": "luma-dream-machine", "kind": "plan_added", "occurred": "2026-03", "significance": 35, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Luma lanceert 'Luma Agents'-plannen ($30, $90 en $300)", "en": "Luma launches 'Luma Agents' plans ($30, $90 and $300)" },
+    "summary": { "nl": "De oudere Dream Machine-plannen blijven bestaan, inclusief gratis tier.", "en": "The legacy Dream Machine plans remain, including the free tier." },
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/luma-ai-pricing", "type": "secondary" },
+      { "url": "https://magichour.ai/blog/luma-dream-machine-pricing", "type": "secondary" }
+    ]
+  },
+  {
+    "tool": "openai-codex", "kind": "plan_added", "occurred": "2026-04", "significance": 50, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Nieuw ChatGPT Pro-niveau van $100 met 5× meer Codex-gebruik", "en": "New $100 ChatGPT Pro tier with 5× more Codex usage" },
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/openai-codex-pricing", "type": "secondary" },
+      { "url": "https://developers.openai.com/codex/pricing", "type": "official_docs" }
+    ]
+  },
+  {
+    "tool": "microsoft-copilot", "kind": "plan_removed", "occurred": "2026-08-01", "significance": 40, "status": "supported", "observed": "2026-09-29",
+    "title": { "nl": "Ondersteuning voor losse Copilot Pro-abonnementen beëindigd", "en": "Support for standalone Copilot Pro subscriptions ends" },
+    "summary": { "nl": "De functies zitten sinds oktober 2025 in Microsoft 365 Premium ($19,99 per maand).", "en": "The features have been part of Microsoft 365 Premium ($19.99/month) since October 2025." },
+    "sources": [
+      { "url": "https://www.aguidetocloud.com/licensing/copilot-pro/", "type": "secondary" },
+      { "url": "https://www.microsoft.com/en-us/microsoft-365-copilot/pricing/individuals", "type": "official" }
+    ]
+  }
+]

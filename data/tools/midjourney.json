@@ -1,0 +1,49 @@
+{
+  "slug": "midjourney",
+  "name": "Midjourney",
+  "website": "https://www.midjourney.com",
+  "company": { "name": "Midjourney", "slug": "midjourney", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["designers", "creators", "agencies"],
+  "capabilities": [
+    { "id": "image-generation", "strength": "primary" },
+    { "id": "image-editing", "strength": "secondary" },
+    { "id": "video-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Basic Plan: $10/month; Standard Plan: $30/month; Pro Plan: $60/month; Mega Plan: $120/month… Annual… Basic $8/month, Standard $24/month, Pro $48/month, Mega $96/month\"",
+    "sources": [
+      { "url": "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans", "type": "official_docs", "title": "Comparing Midjourney Plans" },
+      { "url": "https://www.eesel.ai/blog/midjourney-pricing", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-image-generators/midjourney/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": false, "status": "unverified", "note": "No free plan listed in the sources." },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.midjourney.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "basic", "name": "Basic", "price": 10, "currency": "USD", "period": "month", "annualMonthly": 8, "quota": "About 3.3 fast GPU hours per month" },
+    { "key": "standard", "name": "Standard", "price": 30, "currency": "USD", "period": "month", "annualMonthly": 24, "quota": "About 15 fast GPU hours, unlimited relaxed mode" },
+    { "key": "pro", "name": "Pro", "price": 60, "currency": "USD", "period": "month", "annualMonthly": 48, "quota": "About 30 fast GPU hours, stealth mode" },
+    { "key": "mega", "name": "Mega", "price": 120, "currency": "USD", "period": "month", "annualMonthly": 96, "quota": "About 60 fast GPU hours, stealth mode" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Toonaangevende AI-beeldgenerator voor artistieke beelden",
+      "description": "Midjourney genereert afbeeldingen met een uitgesproken esthetiek, populair bij ontwerpers en creatieven. Je werkt via de webapp met prompts, stijlreferenties en bewerkingen, en kunt beelden animeren tot korte video. Alleen betaalde plannen.",
+      "bestFor": ["Artistieke en sfeervolle beelden", "Moodboards en concept art"],
+      "notFor": ["Wie gratis wil beginnen", "Exacte productfoto's of tekst in beeld"],
+      "limitations": ["Geen gratis plan", "Privé genereren (stealth) alleen op Pro en Mega"]
+    },
+    "en": {
+      "tagline": "Leading AI image generator for artistic visuals",
+      "description": "Midjourney generates images with a distinctive aesthetic, popular with designers and creatives. You work in the web app with prompts, style references and edits, and can animate images into short videos. Paid plans only.",
+      "bestFor": ["Artistic, atmospheric visuals", "Moodboards and concept art"],
+      "notFor": ["People who want to start for free", "Exact product photos or text in images"],
+      "limitations": ["No free plan", "Private (stealth) generation only on Pro and Mega"]
+    }
+  },
+  "relations": [{ "tool": "adobe-firefly", "kind": "alternative" }, { "tool": "ideogram", "kind": "alternative" }, { "tool": "leonardo", "kind": "alternative" }, { "tool": "flux", "kind": "alternative" }]
+}

@@ -1,0 +1,45 @@
+{
+  "slug": "beautiful-ai",
+  "name": "Beautiful.ai",
+  "website": "https://www.beautiful.ai",
+  "pricingUrl": "https://www.beautiful.ai/pricing",
+  "company": { "name": "Beautiful.ai", "slug": "beautiful-ai", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "sales", "consultants"],
+  "capabilities": [{ "id": "presentation-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Pro: $12/month (annual) or $45 for a single month; Team: $40/user/month (annual billing) or $50/user/month (monthly billing); 14-day free trial available\"",
+    "sources": [
+      { "url": "https://www.beautiful.ai/pricing", "type": "official", "title": "Beautiful.ai Pricing and Plans" },
+      { "url": "https://www.presentations.ai/blog/beautiful-ai-pricing", "type": "secondary" },
+      { "url": "https://www.chatslide.ai/articles/beautiful-ai-review", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": false, "status": "unverified", "note": "Only a 14-day trial is mentioned." },
+    "has_free_trial": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.beautiful.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "pro", "name": "Pro", "price": 45, "currency": "USD", "period": "month", "annualMonthly": 12, "note": "Single-month price $45; $12/month on annual billing." },
+    { "key": "team", "name": "Team", "price": 50, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 40, "quota": "2–20 seats" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Presentaties die zichzelf netjes opmaken met 'Smart Slides'",
+      "description": "Beautiful.ai past de opmaak van dia's automatisch aan terwijl je inhoud toevoegt, zodat presentaties consistent en verzorgd blijven. Met AI-generatie en teamfuncties voor huisstijl.",
+      "bestFor": ["Consistente presentaties in huisstijl", "Sales- en klantpresentaties"],
+      "notFor": ["Wie vrij en creatief elke dia wil ontwerpen"],
+      "limitations": ["Geen gratis plan, alleen een proefperiode van 14 dagen"]
+    },
+    "en": {
+      "tagline": "Presentations that format themselves with 'Smart Slides'",
+      "description": "Beautiful.ai automatically adapts slide layouts as you add content, keeping decks consistent and polished, with AI generation and team features for brand control.",
+      "bestFor": ["Consistent on-brand decks", "Sales and client presentations"],
+      "notFor": ["People who want free-form creative slide design"],
+      "limitations": ["No free plan, only a 14-day trial"]
+    }
+  },
+  "relations": [{ "tool": "gamma", "kind": "alternative" }, { "tool": "pitch", "kind": "alternative" }]
+}

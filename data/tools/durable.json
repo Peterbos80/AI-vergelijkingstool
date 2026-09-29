@@ -1,0 +1,45 @@
+{
+  "slug": "durable",
+  "name": "Durable",
+  "website": "https://durable.com",
+  "company": { "name": "Durable", "slug": "durable", "country": "CA" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "freelancers"],
+  "capabilities": [
+    { "id": "website-builder", "strength": "primary" },
+    { "id": "copywriting", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Starter Plan: $12/month on annual billing (or $25/month if billed monthly). Business Plan: $20/month annual. The pricing was verified on Durable's live pricing page in May 2026.\"",
+    "sources": [
+      { "url": "https://hostadvice.com/hosting-company/durable-reviews/", "type": "secondary" },
+      { "url": "https://www.b12.io/ai-website-builder-directory/durable/", "type": "secondary" },
+      { "url": "https://cybernews.com/best-website-builders/durable-ai-website-builder-review/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://durable.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "starter", "name": "Starter", "price": 25, "currency": "USD", "period": "month", "annualMonthly": 12, "quota": "Custom domain, CRM, invoices" },
+    { "key": "business", "name": "Business", "price": null, "currency": "USD", "period": "month", "annualMonthly": 20, "note": "Only the annual-billing price was reported." }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI bouwt in seconden een website voor je kleine bedrijf",
+      "description": "Durable genereert op basis van je bedrijfsnaam en branche een complete website met teksten en beelden, en voegt eenvoudige bedrijfstools toe zoals een CRM en facturen. Gericht op zzp'ers en kleine ondernemers.",
+      "bestFor": ["Zzp'ers die snel online willen", "Een eenvoudige site met basis-bedrijfstools"],
+      "notFor": ["Wie veel ontwerpvrijheid of een grote webshop wil"],
+      "limitations": ["Minder ontwerpvrijheid dan Framer of Webflow"]
+    },
+    "en": {
+      "tagline": "AI builds a website for your small business in seconds",
+      "description": "Durable generates a complete website with copy and images from your business name and industry, and adds simple business tools such as a CRM and invoicing. Aimed at freelancers and small business owners.",
+      "bestFor": ["Freelancers who want to get online fast", "A simple site with basic business tools"],
+      "notFor": ["People who want lots of design freedom or a large store"],
+      "limitations": ["Less design freedom than Framer or Webflow"]
+    }
+  },
+  "relations": [{ "tool": "wix", "kind": "alternative" }, { "tool": "hostinger-website-builder", "kind": "alternative" }, { "tool": "framer", "kind": "alternative" }]
+}

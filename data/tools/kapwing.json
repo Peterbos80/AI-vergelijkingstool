@@ -1,0 +1,50 @@
+{
+  "slug": "kapwing",
+  "name": "Kapwing",
+  "website": "https://www.kapwing.com",
+  "pricingUrl": "https://www.kapwing.com/pricing",
+  "company": { "name": "Kapwing", "slug": "kapwing", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "marketers", "educators"],
+  "capabilities": [
+    { "id": "video-editing", "strength": "primary" },
+    { "id": "auto-subtitles", "strength": "secondary" },
+    { "id": "clip-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Pro plan pricing starts at $16 per member per month when billed annually or $24 per member per month when billed monthly. Business… $50… annually or $64… monthly.\"",
+    "sources": [
+      { "url": "https://www.kapwing.com/pricing", "type": "official", "title": "Pricing — Kapwing" },
+      { "url": "https://socialrails.com/blog/kapwing-pricing", "type": "secondary" },
+      { "url": "https://www.capterra.com/p/180041/Kapwing/pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "watermark_free_tier": { "value": true, "evidence": "Web search summary: \"The free plan includes 10 lifetime credits, 720p watermarked exports up to 4 minutes\"" },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.kapwing.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "720p watermarked exports up to 4 minutes; 10 lifetime AI credits" },
+    { "key": "pro", "name": "Pro", "price": 24, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 16 },
+    { "key": "business", "name": "Business", "price": 64, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 50 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Samenwerken aan video's in de browser, met AI-assistent",
+      "description": "Kapwing is een online video-editor voor teams, met ondertitels, clips maken, formaten omzetten en een AI-assistent die bewerkingen voorstelt. Alle plannen rekenen per teamlid.",
+      "bestFor": ["Teams die samen video's bewerken", "Snel formaten en ondertitels maken voor social"],
+      "notFor": ["Solo-makers met een klein budget voor veel minuten"],
+      "limitations": ["Gratis plan: 720p met watermerk, max. 4 minuten", "Prijzen per teamlid"]
+    },
+    "en": {
+      "tagline": "Collaborative browser video editing with an AI assistant",
+      "description": "Kapwing is an online video editor for teams, with subtitles, clip creation, resizing and an AI assistant that suggests edits. All plans are priced per team member.",
+      "bestFor": ["Teams editing videos together", "Quick social formats and subtitles"],
+      "notFor": ["Solo creators on a tight budget with heavy usage"],
+      "limitations": ["Free plan: 720p with watermark, max 4 minutes", "Priced per team member"]
+    }
+  },
+  "relations": [{ "tool": "veed", "kind": "alternative" }, { "tool": "capcut", "kind": "alternative" }]
+}

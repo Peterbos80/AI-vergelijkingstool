@@ -1,0 +1,51 @@
+{
+  "slug": "auphonic",
+  "name": "Auphonic",
+  "website": "https://auphonic.com",
+  "pricingUrl": "https://auphonic.com/pricing",
+  "company": { "name": "Auphonic", "slug": "auphonic", "country": "AT" },
+  "skillLevel": "intermediate",
+  "audience": ["podcasters", "broadcasters", "educators"],
+  "capabilities": [
+    { "id": "audio-enhancement", "strength": "primary" },
+    { "id": "transcription", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Auphonic is free for 2 hours of monthly processed audio… S: $11/month for 9 hours; M: $23/month for 21 hours; L: $45/month for 45 hours; XL: $89/month for 100 hours. Yearly plans save 20%.\"",
+    "sources": [
+      { "url": "https://auphonic.com/pricing", "type": "official", "title": "Pricing" },
+      { "url": "https://auphonic.com/help/web/pricing_faq.html", "type": "official_docs", "title": "Pricing FAQ — Auphonic Help" },
+      { "url": "https://toolradar.com/tools/auphonic/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "api_available": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://auphonic.com", "type": "official" }] },
+    "platforms": { "value": ["web", "windows", "macos", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://auphonic.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "2 hours of processed audio per month" },
+    { "key": "s", "name": "S", "price": 11, "currency": "USD", "period": "month", "quota": "9 hours per month" },
+    { "key": "m", "name": "M", "price": 23, "currency": "USD", "period": "month", "quota": "21 hours per month" },
+    { "key": "l", "name": "L", "price": 45, "currency": "USD", "period": "month", "quota": "45 hours per month" },
+    { "key": "xl", "name": "XL", "price": 89, "currency": "USD", "period": "month", "quota": "100 hours per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Automatische audio-nabewerking: niveaus, ruis en loudness",
+      "description": "Auphonic, een Oostenrijks bedrijf, bewerkt audio automatisch na: gelijkmatige volumes, ruisreductie, filtering en loudness volgens broadcast-normen. Het koppelt met podcastplatforms en heeft een API. Je betaalt per uur verwerkte audio.",
+      "bestFor": ["Podcasts op consistente loudness brengen", "Automatische verwerking via API of workflows"],
+      "notFor": ["Wie audio handmatig wil knippen en monteren"],
+      "limitations": ["Gratis: 2 uur verwerkte audio per maand; ongebruikte credits vervallen"]
+    },
+    "en": {
+      "tagline": "Automatic audio post-production: levels, noise and loudness",
+      "description": "Auphonic, an Austrian company, automatically post-processes audio: balanced levels, noise reduction, filtering and loudness to broadcast standards. It integrates with podcast platforms and has an API. You pay per hour of processed audio.",
+      "bestFor": ["Bringing podcasts to consistent loudness", "Automated processing via API or workflows"],
+      "notFor": ["People who want to cut and edit audio manually"],
+      "limitations": ["Free: 2 hours of processed audio per month; unused credits expire"]
+    }
+  },
+  "relations": [{ "tool": "adobe-podcast", "kind": "alternative" }]
+}

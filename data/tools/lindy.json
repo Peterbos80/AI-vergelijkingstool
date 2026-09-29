@@ -1,0 +1,50 @@
+{
+  "slug": "lindy",
+  "name": "Lindy",
+  "website": "https://www.lindy.ai",
+  "company": { "name": "Lindy", "slug": "lindy", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "sales", "operations"],
+  "capabilities": [
+    { "id": "ai-agents", "strength": "primary" },
+    { "id": "workflow-automation", "strength": "secondary" },
+    { "id": "email-writing", "strength": "secondary" },
+    { "id": "meeting-notes", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Lindy AI offers four pricing plans: Plus ($49.99/mo), Pro ($99.99/mo), Max ($199.99/mo), and Enterprise (custom)… As of August 2026, Lindy's live pricing page shows Plus, Pro, Max, and Enterprise with a 7-day free trial and no permanent free tier.\"",
+    "sources": [
+      { "url": "https://zapier.com/blog/lindy-pricing/", "type": "secondary", "title": "Lindy pricing and plans for 2026" },
+      { "url": "https://www.nocode.mba/articles/lindy-ai-pricing", "type": "secondary" },
+      { "url": "https://coworker.ai/blog/lindy-ai-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": false },
+    "has_free_trial": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.lindy.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "plus", "name": "Plus", "price": 49.99, "currency": "USD", "period": "month", "unit": "per_user", "quota": "3,000 credits per month" },
+    { "key": "pro", "name": "Pro", "price": 99.99, "currency": "USD", "period": "month", "unit": "per_user", "quota": "15,000 credits per month" },
+    { "key": "max", "name": "Max", "price": 199.99, "currency": "USD", "period": "month", "unit": "per_user", "quota": "35,000 credits per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-medewerkers die e-mail, agenda en opvolging afhandelen",
+      "description": "Met Lindy bouw je AI-agents ('Lindies') voor terugkerend werk: e-mails sorteren en beantwoorden, afspraken plannen, leads opvolgen en meetingnotities verwerken, gekoppeld aan je bestaande apps. Er is een proefperiode maar geen gratis plan.",
+      "bestFor": ["Ondernemers die inbox- en opvolgwerk willen uitbesteden", "Sales-opvolging automatiseren"],
+      "notFor": ["Wie volledige technische controle wil (dan eerder n8n)"],
+      "limitations": ["Geen gratis plan; verbruik via credits"]
+    },
+    "en": {
+      "tagline": "AI employees that handle email, calendar and follow-ups",
+      "description": "Lindy lets you build AI agents ('Lindies') for recurring work: triaging and answering email, scheduling meetings, following up leads and processing meeting notes, connected to your existing apps. There is a trial but no free plan.",
+      "bestFor": ["Entrepreneurs offloading inbox and follow-up work", "Automating sales follow-ups"],
+      "notFor": ["People who want full technical control (consider n8n)"],
+      "limitations": ["No free plan; credit-based usage"]
+    }
+  },
+  "relations": [{ "tool": "n8n", "kind": "alternative" }, { "tool": "zapier", "kind": "alternative" }]
+}

@@ -1,0 +1,50 @@
+{
+  "slug": "perplexity",
+  "name": "Perplexity",
+  "website": "https://www.perplexity.ai",
+  "company": { "name": "Perplexity AI", "slug": "perplexity-ai", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "researchers", "students", "marketers"],
+  "capabilities": [
+    { "id": "research-assistant", "strength": "primary" },
+    { "id": "chat-assistant", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Perplexity costs $0 on the Free plan, $20 a month for Pro, and $200 a month for Max as of September 2026… Enterprise Pro listed at $40 per user per month\"",
+    "sources": [
+      { "url": "https://www.cloudzero.com/blog/perplexity-pricing/", "type": "secondary" },
+      { "url": "https://www.eesel.ai/blog/perplexity-pricing", "type": "secondary" },
+      { "url": "https://techjacksolutions.com/ai-tools/perplexity/perplexity-pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "api_available": { "value": true, "evidence": "Search result title: \"Perplexity Pricing 2026: Pro, Max, Comet & Sonar API Costs\"" },
+    "platforms": { "value": ["web", "ios", "android", "windows", "macos", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.perplexity.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "pro", "name": "Pro", "price": 20, "currency": "USD", "period": "month", "annualMonthly": 16.67 },
+    { "key": "max", "name": "Max", "price": 200, "currency": "USD", "period": "month", "annualMonthly": 166.67 },
+    { "key": "enterprise-pro", "name": "Enterprise Pro", "price": 40, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 33.33 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-zoekmachine die antwoorden geeft mét bronnen",
+      "description": "Perplexity beantwoordt vragen door het web te doorzoeken en toont de bronnen bij elk antwoord. Met diepere onderzoeksmodi, bestandsanalyse en een eigen browser. Handig om snel iets uit te zoeken en te controleren waar een bewering vandaan komt.",
+      "bestFor": ["Snel onderzoek met bronvermelding", "Actuele vragen", "Marktverkenning"],
+      "notFor": ["Lange creatieve teksten"],
+      "limitations": ["Bronnen zijn vaak secundair; controleer altijd de primaire bron"]
+    },
+    "en": {
+      "tagline": "AI search engine that answers with sources",
+      "description": "Perplexity answers questions by searching the web and shows the sources behind every answer, with deeper research modes, file analysis and its own browser. Useful to look something up fast and check where a claim comes from.",
+      "bestFor": ["Quick research with citations", "Current events questions", "Market exploration"],
+      "notFor": ["Long creative writing"],
+      "limitations": ["Sources are often secondary; always check the primary source"]
+    }
+  },
+  "relations": [{ "tool": "chatgpt", "kind": "alternative" }, { "tool": "gemini", "kind": "alternative" }, { "tool": "gemini-notebook", "kind": "complements" }]
+}

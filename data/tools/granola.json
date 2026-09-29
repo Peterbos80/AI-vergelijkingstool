@@ -1,0 +1,48 @@
+{
+  "slug": "granola",
+  "name": "Granola",
+  "website": "https://www.granola.ai",
+  "pricingUrl": "https://www.granola.ai/pricing",
+  "company": { "name": "Granola", "slug": "granola" },
+  "skillLevel": "beginner",
+  "audience": ["founders", "consultants", "sales", "smb"],
+  "capabilities": [
+    { "id": "meeting-notes", "strength": "primary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Basic (Free): $0 per user per month… limited meeting history… Business: $14 per user per month… unlimited meeting notes and history… Enterprise: $35 per user per month… Previous 'Pro' or 'Individual' plans around $18 are out of date, as both solo tiers were retired in the 2026 restructure.\"",
+    "sources": [
+      { "url": "https://www.granola.ai/pricing", "type": "official", "title": "Pricing plans" },
+      { "url": "https://get-alfred.ai/blog/granola-pricing", "type": "secondary", "title": "Granola AI Pricing 2026: The Free Plan's 25-Note History Cap" },
+      { "url": "https://meetergo.com/en/magazine/granola-ai", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["macos", "windows", "ios"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.granola.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "basic", "name": "Basic", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Limited meeting history" },
+    { "key": "business", "name": "Business", "price": 14, "currency": "USD", "period": "month", "unit": "per_user", "quota": "Unlimited notes and history, integrations, API" },
+    { "key": "enterprise", "name": "Enterprise", "price": 35, "currency": "USD", "period": "month", "unit": "per_user", "quota": "SSO, team-wide training opt-out" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-notitieblok voor meetings, zonder bot in het gesprek",
+      "description": "Granola neemt vergaderingen op via je computer (zonder zichtbare bot), combineert het transcript met je eigen aantekeningen en maakt nette notities. Je kunt vragen stellen over eerdere meetings en notities delen met je team of CRM.",
+      "bestFor": ["Wie geen notulistbot in gesprekken wil", "Founders en consultants met veel calls"],
+      "notFor": ["Wie volledige opnames wil terugkijken"],
+      "limitations": ["Gratis plan met beperkte meetinggeschiedenis"]
+    },
+    "en": {
+      "tagline": "AI notepad for meetings, with no bot joining the call",
+      "description": "Granola records meetings through your computer (no visible bot), combines the transcript with your own notes and produces clean meeting notes. You can query past meetings and share notes with your team or CRM.",
+      "bestFor": ["People who don't want a notetaker bot in calls", "Founders and consultants with many calls"],
+      "notFor": ["People who want to rewatch full recordings"],
+      "limitations": ["Free plan has limited meeting history"]
+    }
+  },
+  "relations": [{ "tool": "otter", "kind": "alternative" }, { "tool": "fathom", "kind": "alternative" }, { "tool": "notion", "kind": "complements" }]
+}

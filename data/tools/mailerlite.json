@@ -1,0 +1,48 @@
+{
+  "slug": "mailerlite",
+  "name": "MailerLite",
+  "website": "https://www.mailerlite.com",
+  "company": { "name": "MailerLite", "slug": "mailerlite", "country": "LT" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "creators", "freelancers"],
+  "capabilities": [
+    { "id": "email-marketing", "strength": "primary" },
+    { "id": "email-writing", "strength": "secondary" },
+    { "id": "website-builder", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"MailerLite renamed Growing Business to Comfort and Advanced to Power in June 2026, and raised paid prices by roughly 10 to 30 percent across every subscriber tier… Free Plan: 250 subscribers and 2,500 monthly emails… Comfort… Starts at $10/month for 500 subscribers… Power… Starts at $20/month for 500 subscribers\"",
+    "sources": [
+      { "url": "https://www.mailmodo.com/guides/mailerlite-pricing/", "type": "secondary", "title": "MailerLite Pricing in 2026: Plans, Changes & Alternatives" },
+      { "url": "https://blog.groupmail.io/mailerlite-free-plan-limits/", "type": "secondary", "title": "MailerLite Free Plan 2026: Limits, Branding & What Changed" },
+      { "url": "https://www.emailsoftwareinsights.com/reviews/mailerlite/", "type": "secondary", "title": "MailerLite Review: Still Worth It After the 2026 Price Changes?" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.mailerlite.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "250 subscribers, 2,500 emails per month" },
+    { "key": "comfort", "name": "Comfort", "price": 10, "currency": "USD", "period": "month", "quota": "From 500 subscribers; formerly Growing Business" },
+    { "key": "power", "name": "Power", "price": 20, "currency": "USD", "period": "month", "quota": "From 500 subscribers; formerly Advanced" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Eenvoudige, betaalbare e-mailmarketing uit Litouwen",
+      "description": "MailerLite is een overzichtelijke tool voor nieuwsbrieven, automatiseringen, landingspagina's en digitale productverkoop, met AI-hulp bij teksten. In juni 2026 zijn de plannen hernoemd (Comfort en Power) en zijn de prijzen met 10 tot 30% gestegen.",
+      "bestFor": ["Creators en kleine bedrijven met een nieuwsbrief", "Wie gratis tot 250 abonnees wil starten"],
+      "notFor": ["Grote e-commercebedrijven met complexe flows"],
+      "limitations": ["Prijzen in juni 2026 met 10–30% verhoogd", "Prijs schaalt met het aantal abonnees"]
+    },
+    "en": {
+      "tagline": "Simple, affordable email marketing from Lithuania",
+      "description": "MailerLite is a clean tool for newsletters, automations, landing pages and selling digital products, with AI help for copy. In June 2026 plans were renamed (Comfort and Power) and prices rose by 10 to 30%.",
+      "bestFor": ["Creators and small businesses with a newsletter", "Starting free with up to 250 subscribers"],
+      "notFor": ["Large e-commerce companies with complex flows"],
+      "limitations": ["Prices rose 10–30% in June 2026", "Price scales with subscriber count"]
+    }
+  },
+  "relations": [{ "tool": "brevo", "kind": "alternative" }, { "tool": "mailchimp", "kind": "alternative" }]
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "tldv",
+  "name": "tl;dv",
+  "aliases": ["tldv"],
+  "website": "https://tldv.io",
+  "company": { "name": "tl;dv", "slug": "tldv", "country": "DE" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "sales", "product"],
+  "capabilities": [
+    { "id": "meeting-notes", "strength": "primary" },
+    { "id": "transcription", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"tl;dv offers a free plan at $0 per month… unlimited recordings but only 10 AI summaries a month. The Pro plan is $18 per user per month when billed annually. On monthly billing, Pro is $29. The Business plan is $59 per user per month when billed annually… currently offering 40% off annual subscriptions\"",
+    "sources": [
+      { "url": "https://www.claap.io/blog/tl-dv-pricing", "type": "secondary" },
+      { "url": "https://get-alfred.ai/blog/tldv-pricing", "type": "secondary" },
+      { "url": "https://www.g2.com/products/tl-dv/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "chrome_extension"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://tldv.io", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Unlimited recordings, 10 AI summaries per month" },
+    { "key": "pro", "name": "Pro", "price": 29, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 18, "note": "Annual price reflects a 40% promotional discount at the time of observation." },
+    { "key": "business", "name": "Business", "price": null, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 59, "note": "Only the annual (discounted) price was reported." }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Europese AI-notulist voor Google Meet, Zoom en Teams",
+      "description": "tl;dv, een Duits bedrijf uit Aken, neemt meetings op, schrijft ze uit en maakt samenvattingen en actiepunten. Het gratis plan heeft onbeperkte opnames maar een beperkt aantal AI-samenvattingen. Interessant voor teams die een Europese aanbieder zoeken.",
+      "bestFor": ["Teams die een Europese notulist willen", "Gratis onbeperkt opnemen"],
+      "notFor": ["Wie veel AI-samenvattingen gratis wil"],
+      "limitations": ["Gratis: 10 AI-samenvattingen per maand"]
+    },
+    "en": {
+      "tagline": "European AI notetaker for Google Meet, Zoom and Teams",
+      "description": "tl;dv, a German company from Aachen, records meetings, transcribes them and creates summaries and action items. The free plan has unlimited recordings but a limited number of AI summaries. Interesting for teams that prefer a European provider.",
+      "bestFor": ["Teams that want a European notetaker", "Free unlimited recording"],
+      "notFor": ["People who need many free AI summaries"],
+      "limitations": ["Free: 10 AI summaries per month"]
+    }
+  },
+  "relations": [{ "tool": "otter", "kind": "alternative" }, { "tool": "fireflies", "kind": "alternative" }, { "tool": "fathom", "kind": "alternative" }]
+}

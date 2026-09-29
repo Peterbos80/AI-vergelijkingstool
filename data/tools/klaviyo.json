@@ -1,0 +1,46 @@
+{
+  "slug": "klaviyo",
+  "name": "Klaviyo",
+  "website": "https://www.klaviyo.com",
+  "company": { "name": "Klaviyo", "slug": "klaviyo", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["ecommerce", "marketers"],
+  "capabilities": [
+    { "id": "email-marketing", "strength": "primary" },
+    { "id": "email-writing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Klaviyo's free plan supports up to 250 active profiles and includes 500 email sends per month… starts at $20/month for 251 to 500 active profiles on the email plan; $30/month at up to 1,000 contacts\"",
+    "sources": [
+      { "url": "https://www.emailtooltester.com/en/reviews/klaviyo/pricing/", "type": "secondary" },
+      { "url": "https://automationatlas.io/answers/klaviyo-pricing-explained-2026/", "type": "secondary", "title": "Klaviyo Pricing 2026: Free, Email $20, Email+SMS $35" },
+      { "url": "https://www.omnisend.com/blog/klaviyo-pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.klaviyo.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "250 active profiles, 500 sends per month" },
+    { "key": "email", "name": "Email", "price": 20, "currency": "USD", "period": "month", "quota": "251–500 active profiles; $30/month up to 1,000" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "E-mail- en sms-marketing gebouwd voor webshops",
+      "description": "Klaviyo koppelt diep met webshopplatforms zoals Shopify en gebruikt aankoopgedrag voor segmentatie, productaanbevelingen en geautomatiseerde flows (verlaten winkelwagen, heraankopen), met AI-functies voor teksten en voorspellingen.",
+      "bestFor": ["Webshops die omzet uit e-mail willen halen", "Segmentatie op basis van aankoopgedrag"],
+      "notFor": ["Nieuwsbrieven zonder webshop"],
+      "limitations": ["Prijs schaalt met het aantal actieve profielen"]
+    },
+    "en": {
+      "tagline": "Email and SMS marketing built for online stores",
+      "description": "Klaviyo integrates deeply with store platforms such as Shopify and uses purchase behaviour for segmentation, product recommendations and automated flows (abandoned cart, replenishment), with AI features for copy and predictions.",
+      "bestFor": ["Stores driving revenue from email", "Segmentation based on purchase behaviour"],
+      "notFor": ["Newsletters without a store"],
+      "limitations": ["Price scales with active profiles"]
+    }
+  },
+  "relations": [{ "tool": "mailchimp", "kind": "alternative" }, { "tool": "brevo", "kind": "alternative" }]
+}

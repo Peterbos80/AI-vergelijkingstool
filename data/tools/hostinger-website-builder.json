@@ -1,0 +1,46 @@
+{
+  "slug": "hostinger-website-builder",
+  "name": "Hostinger Website Builder",
+  "aliases": ["Hostinger", "Hostinger AI Builder"],
+  "website": "https://www.hostinger.com/ai-website-builder",
+  "company": { "name": "Hostinger", "slug": "hostinger", "country": "LT" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "freelancers", "ecommerce"],
+  "capabilities": [
+    { "id": "website-builder", "strength": "primary" },
+    { "id": "copywriting", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The Business plan starts from $3.99/mo… 48-month term: $2.99/mo with renewal at $16.99/mo; 24-month term: $3.99/mo with renewal at $16.99/mo… the Premium plan starts from $2.99/mo\"",
+    "sources": [
+      { "url": "https://www.hostinger.com/business-website", "type": "official", "title": "Business Website Builder" },
+      { "url": "https://tech.co/website-builders/hostinger-website-builder-pricing", "type": "secondary" },
+      { "url": "https://www.sitebuilderreport.com/hostinger-website-builder-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.hostinger.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "premium", "name": "Premium", "price": null, "currency": "USD", "period": "month", "annualMonthly": 2.99, "quota": "Introductory price on a multi-year term", "note": "Introductory price requires a long prepaid term; renewal prices are higher." },
+    { "key": "business", "name": "Business", "price": null, "currency": "USD", "period": "month", "annualMonthly": 3.99, "quota": "E-commerce; renews at $16.99/month", "note": "Introductory price on a 24-month term; renews at $16.99/month according to the sources." }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Goedkope AI-websitebouwer inclusief hosting, van het Litouwse Hostinger",
+      "description": "Hostinger (Litouwen) combineert webhosting met een AI-websitebouwer die een site genereert op basis van een korte beschrijving, inclusief webshop-opties. De instapprijzen zijn laag, maar gelden bij een lange looptijd; bij verlenging betaal je fors meer.",
+      "bestFor": ["Een goedkope site met hosting bij een Europese aanbieder", "Kleine webshops"],
+      "notFor": ["Wie maandelijks opzegbaar wil blijven tegen de instapprijs"],
+      "limitations": ["Lage prijs alleen bij meerjarige vooruitbetaling; verlenging tegen hoger tarief"]
+    },
+    "en": {
+      "tagline": "Budget AI website builder with hosting, from Lithuania's Hostinger",
+      "description": "Hostinger (Lithuania) combines web hosting with an AI website builder that generates a site from a short description, including store options. Entry prices are low but require a long term; renewals cost considerably more.",
+      "bestFor": ["A cheap site with hosting from a European provider", "Small online stores"],
+      "notFor": ["People who want monthly cancellation at the intro price"],
+      "limitations": ["Low price only with multi-year prepayment; renewals at a higher rate"]
+    }
+  },
+  "relations": [{ "tool": "wix", "kind": "alternative" }, { "tool": "durable", "kind": "alternative" }]
+}

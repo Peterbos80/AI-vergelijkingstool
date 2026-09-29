@@ -1,0 +1,47 @@
+{
+  "slug": "lovable",
+  "name": "Lovable",
+  "website": "https://lovable.dev",
+  "company": { "name": "Lovable", "slug": "lovable", "country": "SE" },
+  "skillLevel": "beginner",
+  "audience": ["founders", "smb", "product", "designers"],
+  "capabilities": [
+    { "id": "app-builder", "strength": "primary" },
+    { "id": "website-builder", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Lovable costs $0 per month on the Free plan, $25 per month for Pro with 100 credits, and $50 per month for Business with 100 credits… Pro… ($21 a month billed annually)… Business… ($42 annually)\"",
+    "sources": [
+      { "url": "https://www.nocode.mba/articles/lovable-pricing", "type": "secondary" },
+      { "url": "https://www.softr.io/blog/lovable-pricing", "type": "secondary" },
+      { "url": "https://blog.reviewaitool.com/2026/09/01/lovable-pricing-2026/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://lovable.dev", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "5 credits per day, max 30 per month" },
+    { "key": "pro", "name": "Pro", "price": 25, "currency": "USD", "period": "month", "annualMonthly": 21, "quota": "100 monthly credits plus daily credits" },
+    { "key": "business", "name": "Business", "price": 50, "currency": "USD", "period": "month", "annualMonthly": 42, "quota": "100 credits, SSO and governance" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Bouw werkende webapps door te beschrijven wat je wilt",
+      "description": "Lovable, een Zweeds bedrijf, bouwt complete webapplicaties uit een gesprek: interface, logica, database en inloggen. Je past de app aan door wijzigingen te beschrijven en kunt de code naar GitHub exporteren. Populair om snel een MVP of intern hulpmiddel te maken.",
+      "bestFor": ["Een MVP of prototype zonder developer", "Interne tools en dashboards"],
+      "notFor": ["Complexe software met strenge performance- of compliance-eisen"],
+      "limitations": ["Verbruik via credits; grotere projecten vragen hogere tiers"]
+    },
+    "en": {
+      "tagline": "Build working web apps by describing what you want",
+      "description": "Lovable, a Swedish company, builds complete web applications from a conversation: interface, logic, database and login. You change the app by describing edits and can export the code to GitHub. Popular for quickly building an MVP or internal tool.",
+      "bestFor": ["An MVP or prototype without a developer", "Internal tools and dashboards"],
+      "notFor": ["Complex software with strict performance or compliance needs"],
+      "limitations": ["Credit-based usage; larger projects need higher tiers"]
+    }
+  },
+  "relations": [{ "tool": "bolt", "kind": "alternative" }, { "tool": "v0", "kind": "alternative" }, { "tool": "replit", "kind": "alternative" }]
+}

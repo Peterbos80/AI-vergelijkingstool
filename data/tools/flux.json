@@ -1,0 +1,52 @@
+{
+  "slug": "flux",
+  "name": "FLUX (Black Forest Labs)",
+  "aliases": ["FLUX", "Black Forest Labs", "BFL"],
+  "website": "https://bfl.ai",
+  "pricingUrl": "https://bfl.ai/pricing",
+  "company": { "name": "Black Forest Labs", "slug": "black-forest-labs", "country": "DE" },
+  "skillLevel": "advanced",
+  "audience": ["developers", "designers", "agencies"],
+  "capabilities": [
+    { "id": "image-generation", "strength": "primary" },
+    { "id": "image-editing", "strength": "secondary" },
+    { "id": "video-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The same price applies for both API and Playground, with 1 credit equaling $0.01 USD… FLUX.2 API text-to-image prices start at $0.014 for Klein 4B, $0.015 for Klein 9B, $0.03 for Pro, $0.05 for Flex, and $0.07 for Max.\"",
+    "sources": [
+      { "url": "https://bfl.ai/pricing", "type": "official", "title": "FLUX API Pricing - Black Forest Labs" },
+      { "url": "https://docs.bfl.ml/quick_start/pricing", "type": "official_docs", "title": "Overview - Black Forest Labs" },
+      { "url": "https://pricepertoken.com/flux-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "api_available": { "value": true },
+    "open_source": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Some FLUX models are released as open weights (licences differ per model). Editorial knowledge; pending verification.", "sources": [{ "url": "https://bfl.ai", "type": "official" }] },
+    "self_hostable": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Open-weight models can run locally, e.g. via ComfyUI. Editorial knowledge; pending verification.", "sources": [{ "url": "https://bfl.ai", "type": "official" }] },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://bfl.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "klein", "name": "FLUX.2 Klein (per image)", "price": 0.014, "currency": "USD", "period": "usage", "unit": "usage", "quota": "From $0.014 per image (first megapixel)" },
+    { "key": "pro", "name": "FLUX.2 Pro (per image)", "price": 0.03, "currency": "USD", "period": "usage", "unit": "usage" },
+    { "key": "max", "name": "FLUX.2 Max (per image)", "price": 0.07, "currency": "USD", "period": "usage", "unit": "usage" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Europese beeldmodellen (Duitsland), via API, playground of lokaal",
+      "description": "FLUX is de modelfamilie van Black Forest Labs uit Freiburg. Je gebruikt de modellen via een API of playground en betaalt per afbeelding; een deel van de modellen is als open weights beschikbaar om zelf te draaien. Veel andere tools bouwen op FLUX.",
+      "bestFor": ["Ontwikkelaars die beeldgeneratie in eigen producten bouwen", "Lage prijs per afbeelding op schaal", "Wie een Europese modelaanbieder zoekt"],
+      "notFor": ["Beginners die een kant-en-klare app met templates willen"],
+      "limitations": ["Betalen per gebruik; licenties verschillen per model"]
+    },
+    "en": {
+      "tagline": "European image models (Germany), via API, playground or locally",
+      "description": "FLUX is the model family from Freiburg-based Black Forest Labs. You use the models through an API or playground and pay per image; some models are available as open weights to run yourself. Many other tools build on FLUX.",
+      "bestFor": ["Developers building image generation into products", "Low cost per image at scale", "People who prefer a European model provider"],
+      "notFor": ["Beginners who want a ready-made app with templates"],
+      "limitations": ["Pay per use; licences differ per model"]
+    }
+  },
+  "relations": [{ "tool": "midjourney", "kind": "alternative" }, { "tool": "krea", "kind": "complements" }]
+}

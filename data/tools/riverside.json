@@ -1,0 +1,50 @@
+{
+  "slug": "riverside",
+  "name": "Riverside",
+  "website": "https://riverside.com",
+  "company": { "name": "Riverside", "slug": "riverside" },
+  "skillLevel": "beginner",
+  "audience": ["podcasters", "creators", "marketers"],
+  "capabilities": [
+    { "id": "podcast-recording", "strength": "primary" },
+    { "id": "audio-editing", "strength": "secondary" },
+    { "id": "clip-generation", "strength": "secondary" },
+    { "id": "transcription", "strength": "secondary" },
+    { "id": "video-editing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Riverside's free Basic plan includes 2 one-off hours. Riverside Pro costs $29 a month billed monthly or $24 a month billed annually… Business pricing is custom\"",
+    "sources": [
+      { "url": "https://riverside.com/blog/is-riverside-free", "type": "official_blog", "title": "Is Riverside Free? Pricing and Free Trial Explained (2026)" },
+      { "url": "https://www.castmagic.io/blog/riverside-pricing", "type": "secondary" },
+      { "url": "https://www.g2.com/products/riverside/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://riverside.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "2 one-off hours" },
+    { "key": "pro", "name": "Pro", "price": 29, "currency": "USD", "period": "month", "annualMonthly": 24 },
+    { "key": "business", "name": "Business", "price": null, "currency": null, "period": "custom", "isCustom": true, "note": "Further self-serve tiers exist ($24–$79/month annually per the sources)." }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Podcasts en video-interviews opnemen in studiokwaliteit, ook op afstand",
+      "description": "Riverside neemt audio en video per deelnemer lokaal op, zodat een internetstoring de opname niet verpest. Daarna bewerk je via transcript, maak je automatisch clips voor social en exporteer je in hoge kwaliteit.",
+      "bestFor": ["Podcasts en interviews met gasten op afstand", "Videopodcasts met social clips"],
+      "notFor": ["Wie alleen al bestaande audio wil bewerken"],
+      "limitations": ["Gratis plan: eenmalig 2 uur opnametijd"]
+    },
+    "en": {
+      "tagline": "Record studio-quality podcasts and video interviews remotely",
+      "description": "Riverside records audio and video locally for each participant, so a bad connection doesn't ruin the recording. You then edit via transcript, auto-create social clips and export in high quality.",
+      "bestFor": ["Podcasts and interviews with remote guests", "Video podcasts with social clips"],
+      "notFor": ["People who only need to edit existing audio"],
+      "limitations": ["Free plan: 2 one-off hours of recording"]
+    }
+  },
+  "relations": [{ "tool": "descript", "kind": "alternative" }]
+}

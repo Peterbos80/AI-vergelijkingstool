@@ -1,0 +1,51 @@
+{
+  "slug": "synthesia",
+  "name": "Synthesia",
+  "website": "https://www.synthesia.io",
+  "pricingUrl": "https://www.synthesia.io/pricing",
+  "company": { "name": "Synthesia", "slug": "synthesia", "country": "GB" },
+  "skillLevel": "beginner",
+  "audience": ["enterprise", "educators", "smb", "marketers"],
+  "capabilities": [
+    { "id": "avatar-video", "strength": "primary" },
+    { "id": "ai-dubbing", "strength": "secondary" },
+    { "id": "text-to-speech", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The Starter plan costs $29 per month or $264 if you go with an annual plan… The Creator plan costs $89/month or $804/year… The Synthesia free plan offers 10 minutes of video per month… watermarked output\"",
+    "sources": [
+      { "url": "https://www.synthesia.io/pricing", "type": "official", "title": "Synthesia Pricing - Compare Free and Paid Plans" },
+      { "url": "https://www.eesel.ai/blog/synthesia-pricing", "type": "secondary" },
+      { "url": "https://creatify.ai/blog/synthesia-pricing-(2026)-plans-credits-and-what-you-ll-actually-pay", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "watermark_free_tier": { "value": true },
+    "api_available": { "value": true, "evidence": "Web search summary: Creator \"adds… interactive video, branded video pages, and API access\"" },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.synthesia.io", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "10 minutes of video per month, 9 avatars, watermark" },
+    { "key": "starter", "name": "Starter", "price": 29, "currency": "USD", "period": "month", "annualMonthly": 22, "quota": "10 minutes per month, 125+ avatars, 3 personal avatars" },
+    { "key": "creator", "name": "Creator", "price": 89, "currency": "USD", "period": "month", "annualMonthly": 67, "quota": "30 minutes per month, 180+ avatars, API access" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Zakelijke video's met AI-presentatoren, zonder camera",
+      "description": "Synthesia maakt video's met realistische AI-presentatoren op basis van een script. Het richt zich op bedrijven: trainingen, onboarding, productuitleg en interne communicatie, in veel talen. Hogere plannen bieden eigen avatars, merkpagina's en een API.",
+      "bestFor": ["Trainings- en onboardingvideo's", "Meertalige bedrijfscommunicatie", "Teams zonder videoproductie-ervaring"],
+      "notFor": ["Snelle, informele social-content", "Wie op minuten per maand wil besparen"],
+      "limitations": ["Gratis plan: 10 minuten per maand met watermerk", "Aantal videominuten per maand is beperkt per plan"]
+    },
+    "en": {
+      "tagline": "Business videos with AI presenters, no camera",
+      "description": "Synthesia creates videos with realistic AI presenters from a script. It targets businesses: training, onboarding, product explainers and internal communication, in many languages. Higher plans add custom avatars, branded pages and an API.",
+      "bestFor": ["Training and onboarding videos", "Multilingual business communication", "Teams without video production experience"],
+      "notFor": ["Quick, informal social content", "Budget-sensitive heavy usage"],
+      "limitations": ["Free plan: 10 minutes per month with watermark", "Video minutes per month are capped per plan"]
+    }
+  },
+  "relations": [{ "tool": "heygen", "kind": "alternative" }, { "tool": "colossyan", "kind": "alternative" }]
+}

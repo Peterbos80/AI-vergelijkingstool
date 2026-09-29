@@ -1,0 +1,223 @@
+{
+  "slug": "gemini",
+  "name": "Gemini",
+  "website": "https://gemini.google.com",
+  "pricingUrl": "https://gemini.google/subscriptions/",
+  "company": {
+    "name": "Google",
+    "slug": "google",
+    "country": "US"
+  },
+  "skillLevel": "beginner",
+  "audience": [
+    "everyone",
+    "students",
+    "smb"
+  ],
+  "capabilities": [
+    {
+      "id": "chat-assistant",
+      "strength": "primary"
+    },
+    {
+      "id": "research-assistant",
+      "strength": "secondary"
+    },
+    {
+      "id": "long-form-writing",
+      "strength": "secondary"
+    },
+    {
+      "id": "summarization",
+      "strength": "secondary"
+    },
+    {
+      "id": "image-generation",
+      "strength": "secondary"
+    },
+    {
+      "id": "video-generation",
+      "strength": "secondary"
+    },
+    {
+      "id": "data-analysis",
+      "strength": "secondary"
+    },
+    {
+      "id": "translation",
+      "strength": "secondary"
+    }
+  ],
+  "pricingEvidence": {
+    "status": "supported",
+    "method": "web_search",
+    "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Gemini is free on Google's base plan, with paid consumer tiers including Google AI Plus at about $7.99 per month, Google AI Pro at $19.99 per month, and Google AI Ultra at $99.99 or $199.99 per month.\"",
+    "sources": [
+      {
+        "url": "https://gemini.google/subscriptions/",
+        "type": "official",
+        "title": "Google AI Pro & Ultra"
+      },
+      {
+        "url": "https://www.ai-toolbox.co/gemini-models/gemini-pricing-plans-2026",
+        "type": "secondary"
+      },
+      {
+        "url": "https://www.cloudzero.com/blog/gemini-pricing/",
+        "type": "secondary"
+      }
+    ]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true
+    },
+    "platforms": {
+      "value": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-09-29",
+      "note": "Editorial knowledge; pending automated verification.",
+      "sources": [
+        {
+          "url": "https://gemini.google.com",
+          "type": "official"
+        }
+      ]
+    }
+  },
+  "plans": [
+    {
+      "key": "free",
+      "name": "Free",
+      "price": 0,
+      "currency": "USD",
+      "period": "month",
+      "isFree": true
+    },
+    {
+      "key": "ai-plus",
+      "name": "Google AI Plus",
+      "price": 4.99,
+      "currency": "USD",
+      "period": "month",
+      "status": "supported",
+      "method": "web_search",
+      "observed": "2026-09-29",
+      "evidence": "Web search summary: \"Google announced that its AI Plus subscription is getting a price drop to $4.99 per month and now includes 400 GB of storage. At launch in the US, Google AI Plus was $7.99… The 38% price cut went into effect on June 8, 2026\"",
+      "sources": [
+        {
+          "url": "https://9to5google.com/2026/06/08/google-ai-plus-price-drop/",
+          "type": "media",
+          "publisher": "9to5Google"
+        },
+        {
+          "url": "https://techcrunch.com/2026/06/09/google-just-fired-a-warning-shot-in-the-ai-subscription-price-wars/",
+          "type": "media",
+          "publisher": "TechCrunch"
+        },
+        {
+          "url": "https://www.engadget.com/2190039/google-cuts-the-price-of-its-ai-plus-plan-and-doubles-the-storage/",
+          "type": "media",
+          "publisher": "Engadget"
+        }
+      ],
+      "previous": [
+        {
+          "price": 7.99,
+          "currency": "USD",
+          "validTo": "2026-06-08",
+          "status": "supported",
+          "method": "web_search",
+          "observed": "2026-09-29",
+          "evidence": "Web search summary: \"At launch in the US, Google AI Plus was $7.99 with 200 GB of storage.\"",
+          "sources": [
+            {
+              "url": "https://9to5google.com/2026/06/08/google-ai-plus-price-drop/",
+              "type": "media",
+              "publisher": "9to5Google"
+            },
+            {
+              "url": "https://www.digitaltrends.com/computing/google-ai-plus-drops-to-4-99-a-month-and-doubles-your-storage/",
+              "type": "media",
+              "publisher": "Digital Trends"
+            }
+          ]
+        }
+      ],
+      "quota": "Includes 400 GB storage (since June 2026)"
+    },
+    {
+      "key": "ai-pro",
+      "name": "Google AI Pro",
+      "price": 19.99,
+      "currency": "USD",
+      "period": "month",
+      "quota": "Deep Research, Veo video, 1,000 AI credits"
+    },
+    {
+      "key": "ai-ultra",
+      "name": "Google AI Ultra",
+      "price": 99.99,
+      "currency": "USD",
+      "period": "month",
+      "status": "unverified",
+      "note": "Two Ultra tiers are reported ($99.99 and $199.99)."
+    }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Google's AI-assistent, geïntegreerd met Gmail, Docs en zoeken",
+      "description": "Gemini is de AI-assistent van Google, met onderzoek (Deep Research), beeld- en videogeneratie en integratie in Google-diensten zoals Gmail, Docs en Drive. De basis is gratis; Google AI-abonnementen voegen meer gebruik en functies toe.",
+      "bestFor": [
+        "Wie veel in Google Workspace werkt",
+        "Onderzoek met Deep Research",
+        "Beeld en video in één abonnement"
+      ],
+      "notFor": [
+        "Wie Google-diensten wil vermijden"
+      ],
+      "limitations": [
+        "Functies verschillen per abonnement en land"
+      ]
+    },
+    "en": {
+      "tagline": "Google's AI assistant, integrated with Gmail, Docs and search",
+      "description": "Gemini is Google's AI assistant, with research (Deep Research), image and video generation and integration with Google services such as Gmail, Docs and Drive. The basics are free; Google AI subscriptions add usage and features.",
+      "bestFor": [
+        "People who work in Google Workspace",
+        "Research with Deep Research",
+        "Images and video in one subscription"
+      ],
+      "notFor": [
+        "People who want to avoid Google services"
+      ],
+      "limitations": [
+        "Features differ by subscription and country"
+      ]
+    }
+  },
+  "relations": [
+    {
+      "tool": "chatgpt",
+      "kind": "alternative"
+    },
+    {
+      "tool": "claude",
+      "kind": "alternative"
+    },
+    {
+      "tool": "google-veo",
+      "kind": "complements"
+    },
+    {
+      "tool": "gemini-notebook",
+      "kind": "complements"
+    }
+  ]
+}

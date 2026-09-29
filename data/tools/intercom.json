@@ -1,0 +1,45 @@
+{
+  "slug": "intercom",
+  "name": "Intercom (Fin)",
+  "aliases": ["Intercom", "Fin AI"],
+  "website": "https://www.intercom.com",
+  "company": { "name": "Intercom", "slug": "intercom" },
+  "skillLevel": "intermediate",
+  "audience": ["saas", "enterprise", "support-teams"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Essential at $29/seat/month (annual), Advanced at $85, and Expert at $132… Monthly: $39, $99, $139… Fin AI Agent is billed separately at $0.99 per successful outcome.\"",
+    "sources": [
+      { "url": "https://www.intercom.com/learning-center/intercom-pricing", "type": "official_blog", "title": "Intercom Pricing: Plans, Features & Costs (2026)" },
+      { "url": "https://www.helpdesk.com/blog/intercom-pricing/", "type": "secondary" },
+      { "url": "https://www.getmacha.com/blog/intercom-pricing-explained", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web", "ios", "android", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.intercom.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "essential", "name": "Essential", "price": 39, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 29 },
+    { "key": "advanced", "name": "Advanced", "price": 99, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 85 },
+    { "key": "expert", "name": "Expert", "price": 139, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 132 },
+    { "key": "fin", "name": "Fin AI Agent", "price": 0.99, "currency": "USD", "period": "usage", "unit": "usage", "quota": "Per successful resolution (on top of seats)" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Klantenservicesuite met AI-agent Fin die vragen zelf oplost",
+      "description": "Intercom combineert een gedeelde inbox, helpcenter en chat met Fin, een AI-agent die klantvragen beantwoordt op basis van je kennisbank. Je betaalt per medewerker-seat plus een bedrag per door Fin opgeloste vraag.",
+      "bestFor": ["SaaS- en e-commercebedrijven met veel supportvolume", "Teams die AI willen laten oplossen in plaats van doorsturen"],
+      "notFor": ["Kleine bedrijven met weinig klantvragen"],
+      "limitations": ["Kosten stapelen: seats plus $0,99 per opgeloste vraag"]
+    },
+    "en": {
+      "tagline": "Customer service suite with Fin, an AI agent that resolves questions",
+      "description": "Intercom combines a shared inbox, help center and chat with Fin, an AI agent that answers customer questions from your knowledge base. You pay per agent seat plus a fee per question Fin resolves.",
+      "bestFor": ["SaaS and e-commerce companies with high support volume", "Teams wanting AI to resolve, not just route"],
+      "notFor": ["Small businesses with few customer questions"],
+      "limitations": ["Costs stack: seats plus $0.99 per resolution"]
+    }
+  },
+  "relations": [{ "tool": "tidio", "kind": "alternative" }, { "tool": "chatbase", "kind": "alternative" }, { "tool": "crisp", "kind": "alternative" }]
+}

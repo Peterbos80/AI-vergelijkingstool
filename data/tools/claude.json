@@ -1,0 +1,59 @@
+{
+  "slug": "claude",
+  "name": "Claude",
+  "website": "https://claude.ai",
+  "pricingUrl": "https://claude.com/pricing",
+  "company": { "name": "Anthropic", "slug": "anthropic", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "smb", "developers", "writers"],
+  "capabilities": [
+    { "id": "chat-assistant", "strength": "primary" },
+    { "id": "long-form-writing", "strength": "secondary" },
+    { "id": "copywriting", "strength": "secondary" },
+    { "id": "script-writing", "strength": "secondary" },
+    { "id": "email-writing", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" },
+    { "id": "document-chat", "strength": "secondary" },
+    { "id": "research-assistant", "strength": "secondary" },
+    { "id": "data-analysis", "strength": "secondary" },
+    { "id": "code-assistant", "strength": "secondary" },
+    { "id": "translation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free: $0. Pro: $17 per month billed annually ($200 up front), or $20 billed monthly. Max: from $100 per month, with a choice of 5x or 20x Pro's usage. Team… Standard seats are $20 per seat per month billed annually ($25 monthly)\"",
+    "sources": [
+      { "url": "https://www.ai-toolbox.co/claude-models/claude-pricing-plans-2026", "type": "secondary" },
+      { "url": "https://vantagepoint.io/blog/ai/claude-plans-tiers-explained-business", "type": "secondary", "title": "Claude Plans & Pricing (September 2026)" },
+      { "url": "https://intuitionlabs.ai/articles/claude-pricing-plans-api-costs", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "api_available": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "The Claude API is offered separately by Anthropic. Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.anthropic.com", "type": "official" }] },
+    "platforms": { "value": ["web", "windows", "macos", "ios", "android", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://claude.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "pro", "name": "Pro", "price": 20, "currency": "USD", "period": "month", "annualMonthly": 17 },
+    { "key": "max", "name": "Max", "price": 100, "currency": "USD", "period": "month", "quota": "5× Pro usage; a 20× tier costs more" },
+    { "key": "team", "name": "Team (standard seat)", "price": 25, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 20, "quota": "2–150 seats" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-assistent van Anthropic, sterk in schrijven, analyse en code",
+      "description": "Claude is de AI-assistent van Anthropic. Hij is sterk in lange teksten, genuanceerd schrijven, documenten en data analyseren en programmeren, en werkt met projecten, bestanden en koppelingen. Er is een gratis versie; Pro en Max verhogen het gebruik.",
+      "bestFor": ["Lange documenten en rapporten analyseren", "Zorgvuldig schrijven en herschrijven", "Programmeren en technische vragen"],
+      "notFor": ["Beeld- of videogeneratie"],
+      "limitations": ["Gebruikslimieten per tijdvenster, ook op betaalde plannen"]
+    },
+    "en": {
+      "tagline": "Anthropic's AI assistant, strong at writing, analysis and code",
+      "description": "Claude is Anthropic's AI assistant. It excels at long texts, nuanced writing, analysing documents and data, and programming, and works with projects, files and integrations. There is a free version; Pro and Max raise usage.",
+      "bestFor": ["Analysing long documents and reports", "Careful writing and rewriting", "Programming and technical questions"],
+      "notFor": ["Image or video generation"],
+      "limitations": ["Usage limits per time window, also on paid plans"]
+    }
+  },
+  "relations": [{ "tool": "chatgpt", "kind": "alternative" }, { "tool": "gemini", "kind": "alternative" }, { "tool": "le-chat", "kind": "alternative" }, { "tool": "claude-code", "kind": "complements" }]
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "deepl",
+  "name": "DeepL",
+  "aliases": ["DeepL Translator", "DeepL Write"],
+  "website": "https://www.deepl.com",
+  "company": { "name": "DeepL", "slug": "deepl", "country": "DE" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "professionals", "enterprise"],
+  "capabilities": [
+    { "id": "translation", "strength": "primary" },
+    { "id": "grammar-checking", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Starter plan: $10.49/month; Team (Advanced): $28.74/user annual billing; Business (Ultimate): $57.49/user annual billing… Monthly billing prices: Individual/Starter: $10.49; Team/Advanced: $34.49; Business/Ultimate: $68.99\"",
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/deepl-pricing", "type": "secondary" },
+      { "url": "https://www.capterra.com/p/219412/DeepL-Pro/pricing/", "type": "secondary" },
+      { "url": "https://toolradar.com/tools/deepl/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "The free DeepL Translator is widely available. Editorial knowledge; pending verification.", "sources": [{ "url": "https://www.deepl.com", "type": "official" }] },
+    "supports_dutch": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending verification.", "sources": [{ "url": "https://www.deepl.com", "type": "official" }] },
+    "api_available": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending verification.", "sources": [{ "url": "https://www.deepl.com", "type": "official" }] },
+    "platforms": { "value": ["web", "windows", "macos", "ios", "android", "chrome_extension", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.deepl.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "status": "unverified", "method": "editorial", "sources": [{ "url": "https://www.deepl.com", "type": "official" }] },
+    { "key": "starter", "name": "Starter", "price": 10.49, "currency": "USD", "period": "month", "unit": "per_user" },
+    { "key": "advanced", "name": "Advanced", "price": 34.49, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 28.74 },
+    { "key": "ultimate", "name": "Ultimate", "price": 68.99, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 57.49 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Europese vertaalmachine, bekend om natuurlijke vertalingen",
+      "description": "DeepL, gevestigd in Keulen, vertaalt teksten en complete documenten met behoud van opmaak, en helpt met DeepL Write teksten te verbeteren. Pro-plannen bieden onbeperkte tekstvertaling, woordenlijsten en extra dataveiligheid voor bedrijven.",
+      "bestFor": ["Zakelijke vertalingen NL–EN–DE–FR", "Documenten vertalen met behoud van opmaak", "Organisaties die een Europese aanbieder willen"],
+      "notFor": ["Talen die DeepL niet ondersteunt"],
+      "limitations": ["Documentvertalingen zijn per maand beperkt, afhankelijk van het plan"]
+    },
+    "en": {
+      "tagline": "European translation engine known for natural translations",
+      "description": "Cologne-based DeepL translates text and whole documents while keeping formatting, and DeepL Write helps improve texts. Pro plans add unlimited text translation, glossaries and extra data security for businesses.",
+      "bestFor": ["Business translations EN–DE–FR–NL", "Translating documents with formatting intact", "Organisations that prefer a European provider"],
+      "notFor": ["Languages DeepL doesn't support"],
+      "limitations": ["Document translations are capped per month depending on plan"]
+    }
+  },
+  "relations": [{ "tool": "languagetool", "kind": "complements" }, { "tool": "chatgpt", "kind": "alternative" }]
+}

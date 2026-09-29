@@ -1,0 +1,50 @@
+{
+  "slug": "writesonic",
+  "name": "Writesonic",
+  "website": "https://writesonic.com",
+  "pricingUrl": "https://writesonic.com/pricing",
+  "company": { "name": "Writesonic", "slug": "writesonic", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["marketers", "agencies", "smb"],
+  "capabilities": [
+    { "id": "seo-optimization", "strength": "primary" },
+    { "id": "long-form-writing", "strength": "primary" },
+    { "id": "copywriting", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Starter ($99/month or $79/month annually), Basic ($249/month or $199/month annually), and Growth ($499/month or $399/month annually), plus a custom Enterprise plan… Writesonic has a free plan at no cost\"",
+    "sources": [
+      { "url": "https://writesonic.com/pricing", "type": "official", "title": "Pricing" },
+      { "url": "https://www.eesel.ai/blog/writesonic-pricing", "type": "secondary" },
+      { "url": "https://socialrails.com/blog/writesonic-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://writesonic.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Limited features" },
+    { "key": "starter", "name": "Starter", "price": 99, "currency": "USD", "period": "month", "annualMonthly": 79, "quota": "15 articles per month" },
+    { "key": "basic", "name": "Basic", "price": 249, "currency": "USD", "period": "month", "annualMonthly": 199 },
+    { "key": "growth", "name": "Growth", "price": 499, "currency": "USD", "period": "month", "annualMonthly": 399 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "SEO-content en zichtbaarheid in AI-zoekmachines",
+      "description": "Writesonic schrijft SEO-artikelen en helpt merken zichtbaar te worden in AI-zoekmachines zoals ChatGPT en Perplexity, met analyses van hoe je merk daar genoemd wordt. De betaalde plannen zijn gericht op marketingteams en bureaus.",
+      "bestFor": ["Zichtbaarheid in AI-antwoorden meten en verbeteren", "SEO-artikelen op schaal"],
+      "notFor": ["Wie alleen af en toe een tekst schrijft"],
+      "limitations": ["Instap betaald plan is $79–$99 per maand"]
+    },
+    "en": {
+      "tagline": "SEO content and visibility in AI search engines",
+      "description": "Writesonic writes SEO articles and helps brands become visible in AI search engines such as ChatGPT and Perplexity, with analysis of how your brand is mentioned there. Paid plans target marketing teams and agencies.",
+      "bestFor": ["Measuring and improving visibility in AI answers", "SEO articles at scale"],
+      "notFor": ["People who only write occasionally"],
+      "limitations": ["Entry paid plan costs $79–$99 per month"]
+    }
+  },
+  "relations": [{ "tool": "surfer-seo", "kind": "alternative" }, { "tool": "jasper", "kind": "alternative" }]
+}

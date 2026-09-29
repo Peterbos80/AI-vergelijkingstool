@@ -1,0 +1,46 @@
+{
+  "slug": "replit",
+  "name": "Replit",
+  "website": "https://replit.com",
+  "company": { "name": "Replit", "slug": "replit", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["founders", "students", "developers"],
+  "capabilities": [
+    { "id": "app-builder", "strength": "primary" },
+    { "id": "agentic-coding", "strength": "secondary" },
+    { "id": "code-assistant", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Replit Core costs $20/month on annual billing or $25/month monthly… Core includes $20 in monthly credits… In February 2026, Replit rolled out its biggest pricing overhaul yet - a new Pro plan, a revamped Core, and the retirement of the old Teams tier.\"",
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/replit-pricing", "type": "secondary" },
+      { "url": "https://www.lowcode.agency/blog/replit-pricing-explained", "type": "secondary", "title": "Replit pricing explained (Sept 2026)" },
+      { "url": "https://www.nocode.mba/articles/replit-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "status": "unverified", "note": "Sources refer to a free tier (\"4x compute power versus the free tier\")." },
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://replit.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "core", "name": "Core", "price": 25, "currency": "USD", "period": "month", "annualMonthly": 20, "quota": "$20 in monthly AI credits, up to 5 collaborators" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Online ontwikkelomgeving met een AI-agent die apps bouwt en host",
+      "description": "Replit is een ontwikkelomgeving in de browser waar de Replit Agent apps voor je bouwt, test en online zet. Hosting, databases en samenwerken zitten erin. Sinds februari 2026 kent Replit een nieuwe planstructuur met Core en Pro.",
+      "bestFor": ["Apps bouwen én hosten op één plek", "Leren programmeren met AI-hulp"],
+      "notFor": ["Teams die volledig op eigen infrastructuur willen draaien"],
+      "limitations": ["Verbruik boven de inbegrepen credits wordt apart afgerekend"]
+    },
+    "en": {
+      "tagline": "Online dev environment with an AI agent that builds and hosts apps",
+      "description": "Replit is a browser-based development environment where Replit Agent builds, tests and deploys apps for you, with hosting, databases and collaboration built in. Since February 2026 Replit uses a new plan structure with Core and Pro.",
+      "bestFor": ["Building and hosting apps in one place", "Learning to code with AI help"],
+      "notFor": ["Teams that must run entirely on their own infrastructure"],
+      "limitations": ["Usage beyond included credits is billed separately"]
+    }
+  },
+  "relations": [{ "tool": "lovable", "kind": "alternative" }, { "tool": "bolt", "kind": "alternative" }]
+}

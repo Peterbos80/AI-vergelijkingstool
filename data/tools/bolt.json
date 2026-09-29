@@ -1,0 +1,48 @@
+{
+  "slug": "bolt",
+  "name": "Bolt.new",
+  "aliases": ["Bolt", "bolt.new"],
+  "website": "https://bolt.new",
+  "company": { "name": "StackBlitz", "slug": "stackblitz", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["founders", "developers", "smb"],
+  "capabilities": [
+    { "id": "app-builder", "strength": "primary" },
+    { "id": "website-builder", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The Pro plan costs $25/month billed monthly… drops… to $18/month billed yearly… includes 10M tokens per month… Bolt offers a free plan with 1M tokens per month… the Teams plan costs $30 per member per month\"",
+    "sources": [
+      { "url": "https://www.nocode.mba/articles/bolt-pricing-2026", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-coding-assistants/bolt-new/", "type": "secondary" },
+      { "url": "https://www.softr.io/blog/bolt-ai-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://bolt.new", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "1M tokens per month with a daily limit" },
+    { "key": "pro", "name": "Pro", "price": 25, "currency": "USD", "period": "month", "annualMonthly": 18, "quota": "10M tokens per month" },
+    { "key": "teams", "name": "Teams", "price": 30, "currency": "USD", "period": "month", "unit": "per_user", "quota": "10M tokens per member" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Webapps en sites bouwen in de browser met een AI-agent",
+      "description": "Bolt.new van StackBlitz bouwt full-stack webapps in je browser op basis van een prompt, met een live preview en directe publicatie. Je betaalt in tokens: complexere wijzigingen kosten er meer.",
+      "bestFor": ["Snel een werkend prototype", "Makers die de code willen zien en aanpassen"],
+      "notFor": ["Grote bestaande codebases"],
+      "limitations": ["Tokenverbruik loopt snel op bij grote projecten"]
+    },
+    "en": {
+      "tagline": "Build web apps and sites in the browser with an AI agent",
+      "description": "StackBlitz's Bolt.new builds full-stack web apps in your browser from a prompt, with live preview and instant deployment. You pay in tokens: more complex changes cost more.",
+      "bestFor": ["A working prototype, fast", "Makers who want to see and tweak the code"],
+      "notFor": ["Large existing codebases"],
+      "limitations": ["Token usage adds up quickly on large projects"]
+    }
+  },
+  "relations": [{ "tool": "lovable", "kind": "alternative" }, { "tool": "v0", "kind": "alternative" }, { "tool": "replit", "kind": "alternative" }]
+}

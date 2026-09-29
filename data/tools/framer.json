@@ -1,0 +1,47 @@
+{
+  "slug": "framer",
+  "name": "Framer",
+  "website": "https://www.framer.com",
+  "company": { "name": "Framer", "slug": "framer", "country": "NL" },
+  "skillLevel": "beginner",
+  "audience": ["designers", "startups", "smb", "freelancers"],
+  "capabilities": [
+    { "id": "website-builder", "strength": "primary" },
+    { "id": "copywriting", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"On yearly billing, Free is $0, Basic is $10 a month and Pro is $30 a month; on monthly billing, Basic is $15 and Pro is $45… The Free tier allows 3 websites built on a framer.website subdomain with their branding in the footer.\"",
+    "sources": [
+      { "url": "https://onepagelove.com/framer-pricing", "type": "secondary" },
+      { "url": "https://www.nocode.mba/articles/framer-pricing", "type": "secondary" },
+      { "url": "https://www.g2.com/products/framer/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "windows", "macos"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.framer.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "framer.website subdomain with Framer branding" },
+    { "key": "basic", "name": "Basic", "price": 15, "currency": "USD", "period": "month", "annualMonthly": 10, "quota": "Custom domain; 50 GB bandwidth and 2 CMS collections" },
+    { "key": "pro", "name": "Pro", "price": 45, "currency": "USD", "period": "month", "annualMonthly": 30 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Websites ontwerpen en publiceren zonder code, met AI",
+      "description": "Framer, opgericht in Amsterdam, is een visuele websitebouwer waarmee je professionele, geanimeerde sites ontwerpt en direct publiceert, met CMS, vertalingen en AI om pagina's te genereren. Populair bij startups en ontwerpers.",
+      "bestFor": ["Strakke marketingsites en landingspagina's", "Ontwerpers die volledige visuele controle willen"],
+      "notFor": ["Grote webshops"],
+      "limitations": ["Gratis plan alleen op een Framer-subdomein met Framer-branding"]
+    },
+    "en": {
+      "tagline": "Design and publish websites without code, with AI",
+      "description": "Framer, founded in Amsterdam, is a visual website builder for designing and publishing professional, animated sites, with a CMS, localisation and AI to generate pages. Popular with startups and designers.",
+      "bestFor": ["Sleek marketing sites and landing pages", "Designers who want full visual control"],
+      "notFor": ["Large online stores"],
+      "limitations": ["Free plan only on a Framer subdomain with Framer branding"]
+    }
+  },
+  "relations": [{ "tool": "webflow", "kind": "alternative" }, { "tool": "wix", "kind": "alternative" }, { "tool": "durable", "kind": "alternative" }]
+}

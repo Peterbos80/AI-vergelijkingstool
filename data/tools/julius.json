@@ -1,0 +1,47 @@
+{
+  "slug": "julius",
+  "name": "Julius AI",
+  "aliases": ["Julius"],
+  "website": "https://julius.ai",
+  "pricingUrl": "https://julius.ai/pricing",
+  "company": { "name": "Julius AI", "slug": "julius-ai", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["analysts", "smb", "students", "marketers"],
+  "capabilities": [{ "id": "data-analysis", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Julius AI offers a free tier with 15 messages per month… Plus is listed at $20 per month, or $16 per month when billed annually… Pro is listed at $45 per month, or $37 per month annually… Max Plan available at $200 monthly\"",
+    "sources": [
+      { "url": "https://julius.ai/pricing", "type": "official", "title": "Julius AI Pricing: Compare Free and Paid Plans" },
+      { "url": "https://coefficient.io/julius-ai-pricing", "type": "secondary" },
+      { "url": "https://dupple.com/tools/julius-ai", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://julius.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "15 messages per month" },
+    { "key": "plus", "name": "Plus", "price": 20, "currency": "USD", "period": "month", "annualMonthly": 16, "quota": "2,000 credits per month" },
+    { "key": "pro", "name": "Pro", "price": 45, "currency": "USD", "period": "month", "annualMonthly": 37, "quota": "5,000 credits per month" },
+    { "key": "max", "name": "Max", "price": 200, "currency": "USD", "period": "month", "annualMonthly": 166 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Data-analist in chatvorm: upload een bestand en stel vragen",
+      "description": "Julius analyseert Excel-, CSV- en andere databestanden via een gesprek: het schrijft en draait code op de achtergrond en levert tabellen, grafieken en uitleg. Geschikt voor wie geen formules of Python wil schrijven.",
+      "bestFor": ["Snel inzicht uit spreadsheets zonder formules", "Grafieken voor rapportages"],
+      "notFor": ["Grote datawarehouses met live koppelingen"],
+      "limitations": ["Gratis: 15 berichten per maand"]
+    },
+    "en": {
+      "tagline": "A data analyst in chat form: upload a file and ask questions",
+      "description": "Julius analyses Excel, CSV and other data files through conversation: it writes and runs code behind the scenes and returns tables, charts and explanations. Suited to people who don't want to write formulas or Python.",
+      "bestFor": ["Quick insights from spreadsheets without formulas", "Charts for reports"],
+      "notFor": ["Large data warehouses with live connections"],
+      "limitations": ["Free: 15 messages per month"]
+    }
+  },
+  "relations": [{ "tool": "rows", "kind": "alternative" }, { "tool": "chatgpt", "kind": "alternative" }]
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "fathom",
+  "name": "Fathom",
+  "website": "https://www.fathom.ai",
+  "pricingUrl": "https://www.fathom.ai/pricing",
+  "company": { "name": "Fathom", "slug": "fathom", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "sales", "consultants"],
+  "capabilities": [
+    { "id": "meeting-notes", "strength": "primary" },
+    { "id": "transcription", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Plan: … unlimited recordings, call storage, and transcription… only 5 AI summaries per month. Premium Plan: $20 per user per month (billed monthly) or $16… (billed annually). Team Edition Plan: $19… or $15… Business Plan: $34… or $25\"",
+    "sources": [
+      { "url": "https://www.fathom.ai/pricing", "type": "official", "title": "Fathom Pricing 2026: Free Plan or Plans from $15/mo" },
+      { "url": "https://www.claap.io/blog/fathom-pricing", "type": "secondary" },
+      { "url": "https://meetgeek.ai/blog/fathom-ai-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "windows", "macos"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.fathom.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Unlimited recordings and transcription, 5 AI summaries per month" },
+    { "key": "premium", "name": "Premium", "price": 20, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 16 },
+    { "key": "team", "name": "Team", "price": 19, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 15 },
+    { "key": "business", "name": "Business", "price": 34, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 25 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis AI-notulist met onbeperkt opnemen en transcriberen",
+      "description": "Fathom neemt je Zoom-, Meet- en Teams-gesprekken op en transcribeert ze onbeperkt, ook op het gratis plan. AI-samenvattingen zijn gratis beperkt; betaalde plannen voegen meer samenvattingen en teamfuncties toe.",
+      "bestFor": ["Zzp'ers en kleine teams die gratis willen starten", "Klant- en salesgesprekken terugkijken"],
+      "notFor": ["Wie veel AI-samenvattingen gratis wil"],
+      "limitations": ["Gratis: 5 AI-samenvattingen per maand"]
+    },
+    "en": {
+      "tagline": "Free AI notetaker with unlimited recording and transcription",
+      "description": "Fathom records and transcribes your Zoom, Meet and Teams calls without limits, even on the free plan. AI summaries are limited for free; paid plans add more summaries and team features.",
+      "bestFor": ["Freelancers and small teams starting for free", "Reviewing client and sales calls"],
+      "notFor": ["People who need many free AI summaries"],
+      "limitations": ["Free: 5 AI summaries per month"]
+    }
+  },
+  "relations": [{ "tool": "otter", "kind": "alternative" }, { "tool": "fireflies", "kind": "alternative" }, { "tool": "tldv", "kind": "alternative" }]
+}

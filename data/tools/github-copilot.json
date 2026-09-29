@@ -1,0 +1,51 @@
+{
+  "slug": "github-copilot",
+  "name": "GitHub Copilot",
+  "aliases": ["Copilot for developers"],
+  "website": "https://github.com/features/copilot",
+  "company": { "name": "GitHub (Microsoft)", "slug": "github", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "enterprise"],
+  "capabilities": [
+    { "id": "code-assistant", "strength": "primary" },
+    { "id": "agentic-coding", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free: $0; Pro: $10/month ($100/year); Pro+: $39/month; Max: $100/month; Business: $19/user/month; Enterprise: $39/user/month… As of June 1, 2026, GitHub replaced premium requests with usage-based AI Credits… Base plan prices were unchanged\"",
+    "sources": [
+      { "url": "https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing", "type": "official_docs", "title": "Models and pricing for GitHub Copilot - GitHub Docs" },
+      { "url": "https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/", "type": "official_blog", "title": "GitHub Copilot is moving to usage-based billing" },
+      { "url": "https://www.cloudzero.com/blog/github-copilot-cost/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["vscode", "jetbrains", "web", "cli"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://github.com/features/copilot", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "pro", "name": "Pro", "price": 10, "currency": "USD", "period": "month", "annualMonthly": 8.33 },
+    { "key": "pro-plus", "name": "Pro+", "price": 39, "currency": "USD", "period": "month" },
+    { "key": "max", "name": "Max", "price": 100, "currency": "USD", "period": "month" },
+    { "key": "business", "name": "Business", "price": 19, "currency": "USD", "period": "month", "unit": "per_user" },
+    { "key": "enterprise", "name": "Enterprise", "price": 39, "currency": "USD", "period": "month", "unit": "per_user" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-programmeerassistent in je editor en op GitHub",
+      "description": "GitHub Copilot helpt ontwikkelaars met code-aanvullingen, chat in de editor en een agent-modus die taken zelfstandig uitvoert en pull requests maakt. Sinds juni 2026 rekent GitHub premium-gebruik af via AI-credits op basis van tokengebruik.",
+      "bestFor": ["Ontwikkelaars die in VS Code of JetBrains werken", "Teams die al op GitHub samenwerken"],
+      "notFor": ["Mensen zonder programmeerkennis die een app willen laten bouwen"],
+      "limitations": ["Premium-gebruik via AI-credits kan de kosten laten oplopen"]
+    },
+    "en": {
+      "tagline": "AI coding assistant in your editor and on GitHub",
+      "description": "GitHub Copilot helps developers with code completions, in-editor chat and an agent mode that carries out tasks and opens pull requests. Since June 2026 GitHub bills premium usage through token-based AI credits.",
+      "bestFor": ["Developers working in VS Code or JetBrains", "Teams already collaborating on GitHub"],
+      "notFor": ["Non-programmers who want an app built for them"],
+      "limitations": ["Premium usage via AI credits can raise costs"]
+    }
+  },
+  "relations": [{ "tool": "cursor", "kind": "alternative" }, { "tool": "claude-code", "kind": "alternative" }, { "tool": "windsurf", "kind": "alternative" }]
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "murf",
+  "name": "Murf AI",
+  "website": "https://murf.ai",
+  "company": { "name": "Murf AI", "slug": "murf-ai" },
+  "skillLevel": "beginner",
+  "audience": ["educators", "marketers", "smb"],
+  "capabilities": [
+    { "id": "text-to-speech", "strength": "primary" },
+    { "id": "voice-cloning", "strength": "secondary" },
+    { "id": "ai-dubbing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The free plan includes 10 minutes of voice generation total… no downloads… no commercial rights. Creator is $29/month (monthly) or $19/month (annual)… Business is $99/month (monthly) or $66/month (annual).\"",
+    "sources": [
+      { "url": "https://smallest.ai/blog/murf-ai-pricing-plans-cost-what-you-get-in-2026", "type": "secondary" },
+      { "url": "https://fish.audio/vs/pricing/murf-ai/", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-voice-tools/murf-ai/free-plan/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "commercial_use_free_tier": { "value": false, "evidence": "Web search summary: free plan exports are \"preview-only with no commercial rights\"" },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://murf.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "10 minutes of voice generation in total, no downloads, no commercial rights" },
+    { "key": "creator", "name": "Creator", "price": 29, "currency": "USD", "period": "month", "annualMonthly": 19, "quota": "24 hours of voice generation per year, commercial rights" },
+    { "key": "business", "name": "Business", "price": 99, "currency": "USD", "period": "month", "annualMonthly": 66, "quota": "96 hours of voice generation per year (annual plan)" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Voice-over-studio met AI-stemmen voor video en e-learning",
+      "description": "Murf is een studio om voice-overs te maken met AI-stemmen: je plakt je script, kiest een stem, past klemtoon en tempo aan en synchroniseert met beeld. Gericht op uitlegvideo's, presentaties en e-learning.",
+      "bestFor": ["Voice-overs met fijne controle over uitspraak", "E-learning en presentaties"],
+      "notFor": ["Wie gratis commercieel wil publiceren"],
+      "limitations": ["Gratis plan: geen downloads en geen commercieel gebruik"]
+    },
+    "en": {
+      "tagline": "Voice-over studio with AI voices for video and e-learning",
+      "description": "Murf is a studio for producing voice-overs with AI voices: paste your script, pick a voice, adjust emphasis and pace and sync to visuals. Aimed at explainer videos, presentations and e-learning.",
+      "bestFor": ["Voice-overs with fine control over delivery", "E-learning and presentations"],
+      "notFor": ["People who need free commercial use"],
+      "limitations": ["Free plan: no downloads and no commercial use"]
+    }
+  },
+  "relations": [{ "tool": "elevenlabs", "kind": "alternative" }]
+}

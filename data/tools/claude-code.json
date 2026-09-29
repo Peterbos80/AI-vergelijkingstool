@@ -1,0 +1,47 @@
+{
+  "slug": "claude-code",
+  "name": "Claude Code",
+  "website": "https://www.anthropic.com/claude-code",
+  "company": { "name": "Anthropic", "slug": "anthropic", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers"],
+  "capabilities": [
+    { "id": "agentic-coding", "strength": "primary" },
+    { "id": "code-assistant", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Claude Code pricing is bundled into Claude Pro ($20/month), Max 5x ($100/month), Max 20x ($200/month), Team and enterprise plans, or pay-as-you-go API… Claude Code is included in all paid plans… at no additional charge.\"",
+    "sources": [
+      { "url": "https://www.cloudzero.com/blog/claude-code-pricing/", "type": "secondary" },
+      { "url": "https://www.lowcode.agency/blog/claude-code-pricing", "type": "secondary", "title": "Claude Code pricing: all plans and real costs (Sept 2026)" },
+      { "url": "https://www.finout.io/blog/claude-code-pricing-2026", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": false, "status": "unverified", "note": "Included in paid Claude plans or billed via the API; no free plan mentioned in the sources." },
+    "platforms": { "value": ["cli", "vscode", "jetbrains", "web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.anthropic.com/claude-code", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "pro", "name": "Via Claude Pro", "price": 20, "currency": "USD", "period": "month", "annualMonthly": 17 },
+    { "key": "max-5x", "name": "Via Claude Max 5x", "price": 100, "currency": "USD", "period": "month" },
+    { "key": "max-20x", "name": "Via Claude Max 20x", "price": 200, "currency": "USD", "period": "month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Anthropic's coding agent voor terminal en editor",
+      "description": "Claude Code is een programmeeragent die in je terminal, editor of browser werkt: hij leest je codebase, voert opdrachten uit, schrijft en test code en maakt commits of pull requests. Inbegrepen bij betaalde Claude-abonnementen of af te rekenen via de API.",
+      "bestFor": ["Ontwikkelaars die complete taken willen delegeren", "Werken vanuit de terminal"],
+      "notFor": ["Beginners zonder programmeerkennis"],
+      "limitations": ["Deelt de gebruikslimieten van je Claude-abonnement"]
+    },
+    "en": {
+      "tagline": "Anthropic's coding agent for terminal and editor",
+      "description": "Claude Code is a coding agent that works in your terminal, editor or browser: it reads your codebase, runs commands, writes and tests code and makes commits or pull requests. Included with paid Claude plans or billed through the API.",
+      "bestFor": ["Developers delegating complete tasks", "Working from the terminal"],
+      "notFor": ["Beginners without programming knowledge"],
+      "limitations": ["Shares the usage limits of your Claude plan"]
+    }
+  },
+  "relations": [{ "tool": "cursor", "kind": "alternative" }, { "tool": "github-copilot", "kind": "alternative" }, { "tool": "openai-codex", "kind": "alternative" }, { "tool": "claude", "kind": "complements" }]
+}

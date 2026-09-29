@@ -1,0 +1,76 @@
+{
+  "slug": "capcut",
+  "name": "CapCut",
+  "website": "https://www.capcut.com",
+  "company": { "name": "ByteDance", "slug": "bytedance" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "smb", "marketers"],
+  "capabilities": [
+    { "id": "video-editing", "strength": "primary" },
+    { "id": "auto-subtitles", "strength": "primary" },
+    { "id": "clip-generation", "strength": "secondary" },
+    { "id": "text-to-speech", "strength": "secondary" }
+  ],
+  "facts": {
+    "has_free_tier": {
+      "value": true, "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"Plans: Free (free), Standard at $9.99/month, and Pro at $19.99/month.\"",
+      "sources": [
+        { "url": "https://www.eesel.ai/blog/capcut-pricing", "type": "secondary", "title": "CapCut pricing 2026: A complete guide" },
+        { "url": "https://socialrails.com/blog/capcut-pricing-guide", "type": "secondary", "title": "CapCut Pricing 2026: Free, Standard, Pro & Team Plans" }
+      ]
+    },
+    "platforms": {
+      "value": ["web", "windows", "macos", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29",
+      "note": "Editorial knowledge; pending automated verification.",
+      "sources": [{ "url": "https://www.capcut.com", "type": "official" }]
+    }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true,
+      "quota": "Basic editing and 1080p export; some templates and effects require a paid plan",
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"CapCut offers a robust free plan with full basic editing, 1080p export… some templates and effects now require a paid subscription\"",
+      "sources": [
+        { "url": "https://bigvu.tv/blog/capcut-pricing-2026-free-vs-pro-whats-included-alternatives/", "type": "secondary" },
+        { "url": "https://costbench.com/software/video-editing/capcut/free-plan/", "type": "secondary" }
+      ] },
+    { "key": "standard", "name": "Standard", "price": 9.99, "currency": "USD", "period": "month",
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"the old 'Pro' tier was renamed Standard (around $9.99/month)\"",
+      "note": "Prices differ per region and between app stores and the website.",
+      "sources": [
+        { "url": "https://bigvu.tv/blog/capcut-free-vs-pro-what-2026s-restructure-actually-gives-you/", "type": "secondary" },
+        { "url": "https://socialrails.com/blog/capcut-pricing-guide", "type": "secondary" }
+      ] },
+    { "key": "pro", "name": "Pro", "price": 19.99, "currency": "USD", "period": "month", "annualMonthly": 15,
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"CapCut Pro costs $19.99 per month, or $179.99 per year (about $15/month) on the annual plan, when you subscribe through CapCut's website\"",
+      "note": "App-store prices can be higher than website prices.",
+      "sources": [
+        { "url": "https://costbench.com/software/video-editing/capcut/", "type": "secondary", "title": "CapCut Pro Price: $19.99/mo or $179.99/yr (2026)" },
+        { "url": "https://www.eesel.ai/blog/capcut-pricing", "type": "secondary" }
+      ] }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis videobewerker met automatische ondertiteling en templates",
+      "description": "CapCut is een videobewerker voor telefoon, browser en desktop, sterk gericht op korte social-video's. Je monteert met templates, voegt automatisch ondertitels toe en gebruikt AI-functies zoals tekst-naar-spraak. Het gratis plan is ruim; geavanceerde effecten en templates vragen een betaald abonnement.",
+      "bestFor": ["Snel social-video's monteren met templates", "Automatische ondertitels voor TikTok en Reels", "Beginners die gratis willen starten"],
+      "notFor": ["Teams die strikte controle over dataverwerking eisen", "Professionele lange-formaat montage"],
+      "limitations": ["Sommige templates en effecten vereisen een betaald plan", "Prijzen verschillen per land en tussen app store en website"]
+    },
+    "en": {
+      "tagline": "Free video editor with auto captions and templates",
+      "description": "CapCut is a video editor for phone, browser and desktop, built around short social videos. You edit with templates, add automatic captions and use AI features such as text-to-speech. The free plan is generous; advanced effects and templates require a paid subscription.",
+      "bestFor": ["Quickly editing social videos with templates", "Automatic captions for TikTok and Reels", "Beginners who want to start for free"],
+      "notFor": ["Teams that need strict control over data processing", "Professional long-form editing"],
+      "limitations": ["Some templates and effects require a paid plan", "Prices vary by country and between app stores and the website"]
+    }
+  },
+  "relations": [
+    { "tool": "descript", "kind": "alternative" },
+    { "tool": "veed", "kind": "alternative" },
+    { "tool": "kapwing", "kind": "alternative" }
+  ]
+}

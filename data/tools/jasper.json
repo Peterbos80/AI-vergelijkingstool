@@ -1,0 +1,47 @@
+{
+  "slug": "jasper",
+  "name": "Jasper",
+  "website": "https://www.jasper.ai",
+  "pricingUrl": "https://www.jasper.ai/pricing",
+  "company": { "name": "Jasper", "slug": "jasper", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["marketers", "enterprise", "agencies"],
+  "capabilities": [
+    { "id": "copywriting", "strength": "primary" },
+    { "id": "long-form-writing", "strength": "secondary" },
+    { "id": "email-writing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The Pro plan costs $59/month billed yearly or $69/month billed monthly (per seat)… The Business plan features custom pricing\"",
+    "sources": [
+      { "url": "https://www.jasper.ai/pricing", "type": "official", "title": "Plans & Pricing" },
+      { "url": "https://www.eesel.ai/blog/jasper-ai-pricing", "type": "secondary" },
+      { "url": "https://www.demandsage.com/jasper-ai-pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web", "chrome_extension"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.jasper.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "pro", "name": "Pro", "price": 69, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 59 },
+    { "key": "business", "name": "Business", "price": null, "currency": null, "period": "custom", "isCustom": true }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-contentplatform voor marketingteams, met merkstem",
+      "description": "Jasper is gericht op marketingteams: campagnes, advertenties, blogs en social content in een vaste merkstem en huisstijl, met templates, workflows en samenwerking. Duurder dan algemene assistenten, maar ingericht op merkconsistentie.",
+      "bestFor": ["Marketingteams die op schaal content maken", "Merkstem vastleggen en bewaken"],
+      "notFor": ["Individuen die af en toe een tekst nodig hebben"],
+      "limitations": ["Prijs per seat; Business-plan alleen op aanvraag"]
+    },
+    "en": {
+      "tagline": "AI content platform for marketing teams, with brand voice",
+      "description": "Jasper is built for marketing teams: campaigns, ads, blogs and social content in a consistent brand voice and style, with templates, workflows and collaboration. Pricier than general assistants but designed for brand consistency.",
+      "bestFor": ["Marketing teams producing content at scale", "Capturing and enforcing brand voice"],
+      "notFor": ["Individuals who occasionally need some copy"],
+      "limitations": ["Priced per seat; Business plan on request only"]
+    }
+  },
+  "relations": [{ "tool": "copy-ai", "kind": "alternative" }, { "tool": "writesonic", "kind": "alternative" }]
+}

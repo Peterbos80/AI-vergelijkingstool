@@ -1,0 +1,48 @@
+{
+  "slug": "zapier",
+  "name": "Zapier",
+  "website": "https://zapier.com",
+  "company": { "name": "Zapier", "slug": "zapier", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "operations", "marketers"],
+  "capabilities": [
+    { "id": "workflow-automation", "strength": "primary" },
+    { "id": "ai-agents", "strength": "secondary" },
+    { "id": "support-chatbot", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Plan: $0, includes two-step Zaps, 100 tasks/month. Professional Plan: $19.99/month (annual billing) or $29.99/month (monthly billing), includes 750 tasks per month… Team Plan: $69/month (annual billing) or $103.50/month (monthly billing) for 2,000 base tasks\"",
+    "sources": [
+      { "url": "https://www.nocode.mba/articles/zapier-pricing-2026", "type": "secondary" },
+      { "url": "https://automationatlas.io/answers/zapier-pricing-explained-2026/", "type": "secondary" },
+      { "url": "https://www.activepieces.com/blog/zapier-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "chrome_extension"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://zapier.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "100 tasks per month, two-step Zaps" },
+    { "key": "professional", "name": "Professional", "price": 29.99, "currency": "USD", "period": "month", "annualMonthly": 19.99, "quota": "750 tasks per month, multi-step Zaps" },
+    { "key": "team", "name": "Team", "price": 103.5, "currency": "USD", "period": "month", "annualMonthly": 69, "quota": "2,000 tasks per month, up to 25 users" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Apps koppelen en werk automatiseren, met duizenden integraties",
+      "description": "Zapier verbindt duizenden apps met automatiseringen ('Zaps'): als er iets gebeurt in app A, voert Zapier acties uit in app B, eventueel met AI-stappen en agents. Zeer toegankelijk, maar de kosten stijgen met het aantal taken.",
+      "bestFor": ["Niet-technische teams die apps willen koppelen", "Snel een automatisering zonder code"],
+      "notFor": ["Zeer grote volumes (kosten per taak lopen op)"],
+      "limitations": ["Prijs schaalt met het aantal taken per maand"]
+    },
+    "en": {
+      "tagline": "Connect apps and automate work, with thousands of integrations",
+      "description": "Zapier connects thousands of apps with automations ('Zaps'): when something happens in app A, Zapier runs actions in app B, optionally with AI steps and agents. Very accessible, but costs grow with task volume.",
+      "bestFor": ["Non-technical teams connecting apps", "A quick no-code automation"],
+      "notFor": ["Very high volumes (per-task costs add up)"],
+      "limitations": ["Price scales with tasks per month"]
+    }
+  },
+  "relations": [{ "tool": "make", "kind": "alternative" }, { "tool": "n8n", "kind": "alternative" }]
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "microsoft-copilot",
+  "name": "Microsoft Copilot",
+  "website": "https://copilot.microsoft.com",
+  "pricingUrl": "https://www.microsoft.com/en-us/microsoft-365-copilot/pricing/individuals",
+  "company": { "name": "Microsoft", "slug": "microsoft", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "enterprise", "smb"],
+  "capabilities": [
+    { "id": "chat-assistant", "strength": "primary" },
+    { "id": "presentation-generation", "strength": "secondary" },
+    { "id": "data-analysis", "strength": "secondary" },
+    { "id": "meeting-notes", "strength": "secondary" },
+    { "id": "email-writing", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Microsoft 365 Premium costs $19.99 per user/month… includes the core Microsoft 365 Personal or Family apps plus the Copilot assistant… Microsoft stopped selling the standalone Copilot Pro subscription… on October 1, 2025… Support for existing subscribers ends on 1 August 2026… Copilot for Microsoft 365 costs $30/user/month\"",
+    "sources": [
+      { "url": "https://www.microsoft.com/en-us/microsoft-365-copilot/pricing/individuals", "type": "official", "title": "Copilot Pricing Plans for Individuals" },
+      { "url": "https://www.aguidetocloud.com/licensing/copilot-pro/", "type": "secondary" },
+      { "url": "https://geotoolbox.ai/blog/copilot-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "The consumer Copilot app has a free version (editorial knowledge; pending verification).", "sources": [{ "url": "https://copilot.microsoft.com", "type": "official" }] },
+    "platforms": { "value": ["web", "windows", "macos", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://copilot.microsoft.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Copilot (free)", "price": 0, "currency": "USD", "period": "month", "isFree": true, "status": "unverified", "method": "editorial", "sources": [{ "url": "https://copilot.microsoft.com", "type": "official" }] },
+    { "key": "m365-premium", "name": "Microsoft 365 Premium", "price": 19.99, "currency": "USD", "period": "month", "quota": "Office apps + Copilot + 1 TB storage (replaced Copilot Pro)" },
+    { "key": "m365-copilot-business", "name": "Microsoft 365 Copilot (business)", "price": 30, "currency": "USD", "period": "month", "unit": "per_user", "quota": "Requires an eligible Microsoft 365 business licence" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-assistent in Windows, Word, Excel, PowerPoint en Teams",
+      "description": "Microsoft Copilot is de AI-assistent van Microsoft, met een gratis app en integratie in Microsoft 365: teksten in Word, analyses in Excel, presentaties in PowerPoint en samenvattingen van vergaderingen in Teams. Voor consumenten zit het in Microsoft 365 Premium; bedrijven kopen een aparte licentie.",
+      "bestFor": ["Organisaties die al in Microsoft 365 werken", "Samenvattingen van Teams-vergaderingen", "Excel- en PowerPoint-hulp"],
+      "notFor": ["Wie geen Microsoft 365 gebruikt"],
+      "limitations": ["Zakelijke licentie vereist een geschikt Microsoft 365-basisabonnement"]
+    },
+    "en": {
+      "tagline": "AI assistant in Windows, Word, Excel, PowerPoint and Teams",
+      "description": "Microsoft Copilot is Microsoft's AI assistant, with a free app and integration into Microsoft 365: drafting in Word, analysis in Excel, slides in PowerPoint and meeting summaries in Teams. Consumers get it in Microsoft 365 Premium; businesses buy a separate licence.",
+      "bestFor": ["Organisations already on Microsoft 365", "Teams meeting summaries", "Help in Excel and PowerPoint"],
+      "notFor": ["People who don't use Microsoft 365"],
+      "limitations": ["Business licence requires an eligible Microsoft 365 base plan"]
+    }
+  },
+  "relations": [{ "tool": "chatgpt", "kind": "alternative" }, { "tool": "gemini", "kind": "alternative" }]
+}

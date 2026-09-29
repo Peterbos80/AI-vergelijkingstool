@@ -1,0 +1,51 @@
+{
+  "slug": "krea",
+  "name": "Krea",
+  "website": "https://www.krea.ai",
+  "pricingUrl": "https://www.krea.ai/pricing",
+  "company": { "name": "Krea", "slug": "krea", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["designers", "creators", "agencies"],
+  "capabilities": [
+    { "id": "image-generation", "strength": "primary" },
+    { "id": "upscaling", "strength": "primary" },
+    { "id": "video-generation", "strength": "secondary" },
+    { "id": "image-editing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Tier: Free with 100 daily compute units; Basic: $9/month; Pro: $35/month; Max: $105/month for the displayed Max configuration… with annual billing… approximately $5/month for Basic, $21/month for Pro, and $63/month for Max… variations in Max pricing reported across sources ($70-$105/month…)\"",
+    "sources": [
+      { "url": "https://www.krea.ai/pricing", "type": "official", "title": "Krea Pricing" },
+      { "url": "https://costbench.com/software/ai-image-generators/krea/", "type": "secondary", "title": "Krea AI Pricing 2026: Free, $9 Basic, $35 Pro, $70 Max" },
+      { "url": "https://www.tooljunction.io/ai-tools/krea", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.krea.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "100 compute units per day" },
+    { "key": "basic", "name": "Basic", "price": 9, "currency": "USD", "period": "month", "annualMonthly": 5 },
+    { "key": "pro", "name": "Pro", "price": 35, "currency": "USD", "period": "month", "annualMonthly": 21 },
+    { "key": "max", "name": "Max", "price": 70, "currency": "USD", "period": "month", "status": "unverified", "note": "Max has selectable allowances; sources report $70–$105/month." }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Eén studio met tientallen beeld- en videomodellen, plus opschalen",
+      "description": "Krea bundelt veel beeld- en videomodellen in één interface, met realtime genereren, bewerken en een sterke upscaler. Je betaalt met compute units die je over alle modellen verdeelt.",
+      "bestFor": ["Verschillende modellen vergelijken in één tool", "Beelden opschalen en verfijnen"],
+      "notFor": ["Wie precies één model met vaste prijs wil"],
+      "limitations": ["Verbruik op basis van compute units; prijs van Max varieert per configuratie"]
+    },
+    "en": {
+      "tagline": "One studio with dozens of image and video models, plus upscaling",
+      "description": "Krea bundles many image and video models in one interface, with real-time generation, editing and a strong upscaler. You pay with compute units shared across all models.",
+      "bestFor": ["Comparing different models in one tool", "Upscaling and refining images"],
+      "notFor": ["People who want exactly one model at a fixed price"],
+      "limitations": ["Compute-unit based usage; Max price varies by configuration"]
+    }
+  },
+  "relations": [{ "tool": "magnific", "kind": "alternative" }, { "tool": "leonardo", "kind": "alternative" }, { "tool": "midjourney", "kind": "alternative" }]
+}

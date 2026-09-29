@@ -1,0 +1,50 @@
+{
+  "slug": "openai-codex",
+  "name": "OpenAI Codex",
+  "aliases": ["Codex"],
+  "website": "https://developers.openai.com/codex",
+  "pricingUrl": "https://developers.openai.com/codex/pricing",
+  "company": { "name": "OpenAI", "slug": "openai", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers"],
+  "capabilities": [
+    { "id": "agentic-coding", "strength": "primary" },
+    { "id": "code-assistant", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"OpenAI Codex is bundled into ChatGPT plans. The Free tier costs $0 with limited trial access, Plus is $20/month with 10–60 cloud tasks per 5-hour window, Pro 5x is $100/month… Pro 20x is $200/month… The new Pro 5x tier at $100/month (launched April 2026)\"",
+    "sources": [
+      { "url": "https://developers.openai.com/codex/pricing", "type": "official_docs", "title": "Pricing" },
+      { "url": "https://www.eesel.ai/blog/openai-codex-pricing", "type": "secondary" },
+      { "url": "https://www.cloudzero.com/blog/openai-codex-pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "note": "Limited trial access on the ChatGPT Free tier." },
+    "platforms": { "value": ["web", "cli", "vscode", "ios"], "evidence": "Web search summary: \"These plans include access across web, CLI, IDE extensions, and iOS platforms\"" }
+  },
+  "plans": [
+    { "key": "free", "name": "Via ChatGPT Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Limited trial access" },
+    { "key": "plus", "name": "Via ChatGPT Plus", "price": 20, "currency": "USD", "period": "month", "quota": "10–60 cloud tasks per 5-hour window" },
+    { "key": "pro-5x", "name": "Via ChatGPT Pro 5x", "price": 100, "currency": "USD", "period": "month", "quota": "5× Plus usage" },
+    { "key": "pro-20x", "name": "Via ChatGPT Pro 20x", "price": 200, "currency": "USD", "period": "month", "quota": "20× Plus usage" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "OpenAI's coding agent in de cloud, CLI en editor",
+      "description": "Codex is de programmeeragent van OpenAI. Hij voert taken uit in een cloudomgeving of lokaal via de CLI en editor-extensies: features bouwen, bugs oplossen, code reviewen en pull requests voorstellen. Inbegrepen bij betaalde ChatGPT-plannen.",
+      "bestFor": ["Taken parallel in de cloud laten uitvoeren", "Code reviews automatiseren"],
+      "notFor": ["Beginners zonder programmeerkennis"],
+      "limitations": ["Gebruik begrensd per tijdvenster, afhankelijk van het ChatGPT-plan"]
+    },
+    "en": {
+      "tagline": "OpenAI's coding agent in the cloud, CLI and editor",
+      "description": "Codex is OpenAI's coding agent. It runs tasks in a cloud environment or locally through the CLI and editor extensions: building features, fixing bugs, reviewing code and proposing pull requests. Included with paid ChatGPT plans.",
+      "bestFor": ["Running tasks in parallel in the cloud", "Automating code reviews"],
+      "notFor": ["Beginners without programming knowledge"],
+      "limitations": ["Usage capped per time window depending on the ChatGPT plan"]
+    }
+  },
+  "relations": [{ "tool": "claude-code", "kind": "alternative" }, { "tool": "cursor", "kind": "alternative" }, { "tool": "chatgpt", "kind": "complements" }]
+}

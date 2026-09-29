@@ -1,0 +1,47 @@
+{
+  "slug": "copy-ai",
+  "name": "Copy.ai",
+  "website": "https://www.copy.ai",
+  "company": { "name": "Copy.ai", "slug": "copy-ai", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["marketers", "sales", "smb"],
+  "capabilities": [
+    { "id": "copywriting", "strength": "primary" },
+    { "id": "email-writing", "strength": "secondary" },
+    { "id": "workflow-automation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Copy.ai's entry-level Chat plan starts at $29 per month for 5 seats… or $24/month billed annually… The Agents plan starts at $249 per month… Copy.ai no longer offers a full free plan for new customers.\"",
+    "sources": [
+      { "url": "https://www.hyperwriteai.com/articles/copy-ai-pricing", "type": "secondary" },
+      { "url": "https://www.allable.ai/blog/copy-ai-pricing/", "type": "secondary" },
+      { "url": "https://socialrails.com/blog/copy-ai-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": false },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.copy.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "chat", "name": "Chat", "price": 29, "currency": "USD", "period": "month", "annualMonthly": 24, "quota": "5 seats, unlimited chat" },
+    { "key": "agents", "name": "Agents", "price": 249, "currency": "USD", "period": "month", "quota": "Workflow credits for go-to-market automation" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI voor marketing- en salesteksten en go-to-market-workflows",
+      "description": "Copy.ai begon als copywritingtool en richt zich nu op go-to-market-teams: teksten schrijven én workflows automatiseren, zoals leadonderzoek en gepersonaliseerde outreach. Een gratis plan voor nieuwe klanten is er niet meer.",
+      "bestFor": ["Sales- en marketingteams met terugkerende tekstklussen", "Outreach en campagnes op schaal"],
+      "notFor": ["Wie gratis wil beginnen"],
+      "limitations": ["Geen gratis plan meer voor nieuwe klanten"]
+    },
+    "en": {
+      "tagline": "AI for marketing and sales copy and go-to-market workflows",
+      "description": "Copy.ai started as a copywriting tool and now focuses on go-to-market teams: writing copy and automating workflows such as lead research and personalised outreach. There is no longer a free plan for new customers.",
+      "bestFor": ["Sales and marketing teams with recurring copy tasks", "Outreach and campaigns at scale"],
+      "notFor": ["People who want to start for free"],
+      "limitations": ["No free plan for new customers"]
+    }
+  },
+  "relations": [{ "tool": "jasper", "kind": "alternative" }, { "tool": "writesonic", "kind": "alternative" }]
+}

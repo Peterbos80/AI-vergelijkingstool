@@ -1,0 +1,51 @@
+{
+  "slug": "invideo-ai",
+  "name": "InVideo AI",
+  "website": "https://invideo.io",
+  "company": { "name": "InVideo", "slug": "invideo" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "marketers", "smb"],
+  "capabilities": [
+    { "id": "video-editing", "strength": "primary" },
+    { "id": "video-generation", "strength": "secondary" },
+    { "id": "script-writing", "strength": "secondary" },
+    { "id": "text-to-speech", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Plus costs $60 monthly or $50 with annual billing… 2,000 base credits per seat/month. Max costs $150 monthly or $100 with annual billing… InVideo AI offers a limited free plan, with watermarked exports and 2 AI minutes/week.\"",
+    "note": "Sources noted some variation in reported prices; one source reported checking the official pricing page on 2026-09-13.",
+    "sources": [
+      { "url": "https://magichour.ai/blog/invideo-ai-pricing", "type": "secondary" },
+      { "url": "https://flowith.io/blog/invideo-pricing-2026-free-vs-plus-vs-max/", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-video-generators/invideo-ai/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "watermark_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://invideo.io", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "2 AI minutes per week, watermarked exports" },
+    { "key": "plus", "name": "Plus", "price": 60, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 50, "quota": "2,000 base credits per seat per month" },
+    { "key": "max", "name": "Max", "price": 150, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 100, "quota": "5,000 base credits per seat per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Van tekstprompt naar complete video met stockbeelden en voice-over",
+      "description": "InVideo AI maakt op basis van een prompt een complete video: script, stockbeelden of gegenereerde beelden, voice-over en muziek. Daarna pas je de video aan met tekstopdrachten. Geschikt voor uitleg-, marketing- en YouTube-video's.",
+      "bestFor": ["Snel een eerste versie van een video uit een idee", "Faceless YouTube- en marketingvideo's"],
+      "notFor": ["Montage van eigen, gefilmd materiaal"],
+      "limitations": ["Gratis plan met watermerk en weinig AI-minuten", "Relatief hoge prijs per seat"]
+    },
+    "en": {
+      "tagline": "From text prompt to finished video with stock footage and voice-over",
+      "description": "InVideo AI creates a complete video from a prompt: script, stock or generated visuals, voice-over and music. You then refine it with text commands. Suited to explainer, marketing and YouTube videos.",
+      "bestFor": ["A quick first draft of a video from an idea", "Faceless YouTube and marketing videos"],
+      "notFor": ["Editing your own filmed footage"],
+      "limitations": ["Free plan with watermark and few AI minutes", "Relatively high price per seat"]
+    }
+  },
+  "relations": [{ "tool": "capcut", "kind": "alternative" }, { "tool": "veed", "kind": "alternative" }]
+}

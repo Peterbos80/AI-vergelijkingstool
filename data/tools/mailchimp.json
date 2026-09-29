@@ -1,0 +1,48 @@
+{
+  "slug": "mailchimp",
+  "name": "Mailchimp",
+  "website": "https://mailchimp.com",
+  "company": { "name": "Intuit Mailchimp", "slug": "intuit-mailchimp", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "marketers", "ecommerce"],
+  "capabilities": [
+    { "id": "email-marketing", "strength": "primary" },
+    { "id": "email-writing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The free plan covers 250 contacts with 500 monthly sends. The Essentials plan starts at $13/month for 500 contacts… The Standard plan… starting at $20/month. Premium starts at $350/month for 10,000 contacts… Mailchimp prices by how many contacts sit in your audience\"",
+    "sources": [
+      { "url": "https://www.emailtooltester.com/en/reviews/mailchimp/pricing/", "type": "secondary" },
+      { "url": "https://www.emailvendorselection.com/mailchimp-pricing/", "type": "secondary" },
+      { "url": "https://blog.groupmail.io/mailchimp-pricing-2026/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://mailchimp.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "250 contacts, 500 sends per month" },
+    { "key": "essentials", "name": "Essentials", "price": 13, "currency": "USD", "period": "month", "quota": "From 500 contacts" },
+    { "key": "standard", "name": "Standard", "price": 20, "currency": "USD", "period": "month", "quota": "From 500 contacts; advanced automations" },
+    { "key": "premium", "name": "Premium", "price": 350, "currency": "USD", "period": "month", "quota": "From 10,000 contacts" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Bekend e-mailmarketingplatform met AI-hulp en automatisering",
+      "description": "Mailchimp verstuurt nieuwsbrieven en geautomatiseerde e-mails, met templates, segmentatie, AI-hulp bij teksten en koppelingen met webshops. De prijs hangt af van het aantal contacten in je lijst.",
+      "bestFor": ["Mkb dat een bekend, compleet platform zoekt", "Webshops met eenvoudige automatiseringen"],
+      "notFor": ["Grote lijsten met een krap budget"],
+      "limitations": ["Prijs stijgt snel met het aantal contacten"]
+    },
+    "en": {
+      "tagline": "Well-known email marketing platform with AI help and automation",
+      "description": "Mailchimp sends newsletters and automated emails with templates, segmentation, AI copy help and store integrations. Pricing depends on the number of contacts in your audience.",
+      "bestFor": ["SMBs wanting a familiar, complete platform", "Stores with simple automations"],
+      "notFor": ["Large lists on a tight budget"],
+      "limitations": ["Price rises quickly with contact count"]
+    }
+  },
+  "relations": [{ "tool": "brevo", "kind": "alternative" }, { "tool": "mailerlite", "kind": "alternative" }, { "tool": "klaviyo", "kind": "alternative" }]
+}

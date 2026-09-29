@@ -1,0 +1,190 @@
+{
+  "slug": "google-veo",
+  "name": "Google Veo (Flow)",
+  "website": "https://labs.google/flow",
+  "company": {
+    "name": "Google",
+    "slug": "google",
+    "country": "US"
+  },
+  "skillLevel": "intermediate",
+  "audience": [
+    "creators",
+    "filmmakers",
+    "marketers"
+  ],
+  "capabilities": [
+    {
+      "id": "video-generation",
+      "strength": "primary"
+    }
+  ],
+  "pricingEvidence": {
+    "status": "supported",
+    "method": "web_search",
+    "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Google AI Plus: $4.99/month, Google AI Pro: $19.99/month, and two Google AI Ultra tiers: $99.99 or $199.99/month… Google Flow costs nothing without a Google AI subscription, at 50 Flow credits per day… AI Pro at $19.99/month with 1,000 extra [monthly Flow credits]\"",
+    "note": "Veo is accessed through Flow and the Gemini app as part of Google AI plans; Ultra pricing reported differently across sources.",
+    "sources": [
+      {
+        "url": "https://magichour.ai/blog/google-flow",
+        "type": "secondary"
+      },
+      {
+        "url": "https://costgoat.com/pricing/google-flow",
+        "type": "secondary"
+      },
+      {
+        "url": "https://www.digitalapplied.com/blog/google-ai-plans-free-plus-pro-ultra-2026",
+        "type": "secondary"
+      }
+    ]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "evidence": "Web search summary: \"Google Flow costs nothing without a Google AI subscription, at 50 Flow credits per day\""
+    },
+    "platforms": {
+      "value": [
+        "web",
+        "api"
+      ],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-09-29",
+      "note": "Editorial knowledge; pending automated verification.",
+      "sources": [
+        {
+          "url": "https://labs.google/flow",
+          "type": "official"
+        }
+      ]
+    }
+  },
+  "plans": [
+    {
+      "key": "free",
+      "name": "Flow (free)",
+      "price": 0,
+      "currency": "USD",
+      "period": "month",
+      "isFree": true,
+      "quota": "50 Flow credits per day"
+    },
+    {
+      "key": "ai-plus",
+      "name": "Google AI Plus",
+      "price": 4.99,
+      "currency": "USD",
+      "period": "month",
+      "quota": "200 extra Flow credits per month",
+      "status": "supported",
+      "method": "web_search",
+      "observed": "2026-09-29",
+      "evidence": "Web search summary: \"Google announced that its AI Plus subscription is getting a price drop to $4.99 per month and now includes 400 GB of storage. At launch in the US, Google AI Plus was $7.99… The 38% price cut went into effect on June 8, 2026\"",
+      "sources": [
+        {
+          "url": "https://9to5google.com/2026/06/08/google-ai-plus-price-drop/",
+          "type": "media",
+          "publisher": "9to5Google"
+        },
+        {
+          "url": "https://techcrunch.com/2026/06/09/google-just-fired-a-warning-shot-in-the-ai-subscription-price-wars/",
+          "type": "media",
+          "publisher": "TechCrunch"
+        },
+        {
+          "url": "https://www.engadget.com/2190039/google-cuts-the-price-of-its-ai-plus-plan-and-doubles-the-storage/",
+          "type": "media",
+          "publisher": "Engadget"
+        }
+      ],
+      "previous": [
+        {
+          "price": 7.99,
+          "currency": "USD",
+          "validTo": "2026-06-08",
+          "status": "supported",
+          "method": "web_search",
+          "observed": "2026-09-29",
+          "evidence": "Web search summary: \"At launch in the US, Google AI Plus was $7.99 with 200 GB of storage.\"",
+          "sources": [
+            {
+              "url": "https://9to5google.com/2026/06/08/google-ai-plus-price-drop/",
+              "type": "media",
+              "publisher": "9to5Google"
+            },
+            {
+              "url": "https://www.digitaltrends.com/computing/google-ai-plus-drops-to-4-99-a-month-and-doubles-your-storage/",
+              "type": "media",
+              "publisher": "Digital Trends"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ai-pro",
+      "name": "Google AI Pro",
+      "price": 19.99,
+      "currency": "USD",
+      "period": "month",
+      "quota": "1,000 extra Flow credits per month (≈ 100 Veo Lite or 10 Veo Quality videos)"
+    },
+    {
+      "key": "ai-ultra",
+      "name": "Google AI Ultra",
+      "price": 99.99,
+      "currency": "USD",
+      "period": "month",
+      "quota": "10,000 extra Flow credits per month",
+      "status": "unverified",
+      "note": "Sources report different Ultra tiers ($99.99/$199.99; older listings $249.99)."
+    }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Google's videomodel met geluid, via Flow en Gemini",
+      "description": "Veo is het videogeneratiemodel van Google DeepMind. Je gebruikt het via Flow (een filmmaak-tool) en de Gemini-app, met credits die bij Google AI-abonnementen horen. Flow biedt ook een dagelijks gratis tegoed.",
+      "bestFor": [
+        "Clips met gegenereerd geluid en dialoog",
+        "Wie al een Google AI-abonnement heeft"
+      ],
+      "notFor": [
+        "Wie een losse video-editor zoekt"
+      ],
+      "limitations": [
+        "Verbruik op basis van Flow-credits; kwaliteitsniveaus kosten verschillend"
+      ]
+    },
+    "en": {
+      "tagline": "Google's video model with sound, via Flow and Gemini",
+      "description": "Veo is Google DeepMind's video generation model. You use it through Flow (a filmmaking tool) and the Gemini app, with credits bundled in Google AI subscriptions. Flow also offers a free daily allowance.",
+      "bestFor": [
+        "Clips with generated sound and dialogue",
+        "People who already pay for Google AI"
+      ],
+      "notFor": [
+        "People looking for a standalone video editor"
+      ],
+      "limitations": [
+        "Usage via Flow credits; quality levels cost differently"
+      ]
+    }
+  },
+  "relations": [
+    {
+      "tool": "runway",
+      "kind": "alternative"
+    },
+    {
+      "tool": "kling",
+      "kind": "alternative"
+    },
+    {
+      "tool": "gemini",
+      "kind": "complements"
+    }
+  ]
+}

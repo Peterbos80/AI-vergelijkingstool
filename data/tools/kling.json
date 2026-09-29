@@ -1,0 +1,48 @@
+{
+  "slug": "kling",
+  "name": "Kling AI",
+  "website": "https://kling.ai",
+  "company": { "name": "Kuaishou", "slug": "kuaishou", "country": "CN" },
+  "skillLevel": "intermediate",
+  "audience": ["creators", "filmmakers", "agencies"],
+  "capabilities": [
+    { "id": "video-generation", "strength": "primary" },
+    { "id": "image-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Standard Plan: $6.99 first month, then $8.80/month; Annual: $79.20; 660 credits/month. Pro Plan: … $32.56/month; Annual: $293.04; 3,000 credits/month. Premier Plan: … $80.96/month; Annual: $728.64; 8,000 credits/month\"",
+    "sources": [
+      { "url": "https://kling.ai/app/membership/membership-plan", "type": "official", "title": "Kling AI Pricing & Subscription Plans" },
+      { "url": "https://www.eesel.ai/blog/kling-ai-pricing", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-video-generators/kling/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "evidence": "Web search summary: \"Kling AI has a free Basic tier with image-to-video access, though the amount and validity of free credits can vary\"" },
+    "platforms": { "value": ["web", "ios", "android", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://kling.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "basic", "name": "Basic", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Free credits vary by account or campaign" },
+    { "key": "standard", "name": "Standard", "price": 8.8, "currency": "USD", "period": "month", "annualMonthly": 6.6, "quota": "660 credits per month" },
+    { "key": "pro", "name": "Pro", "price": 32.56, "currency": "USD", "period": "month", "annualMonthly": 24.42, "quota": "3,000 credits per month" },
+    { "key": "premier", "name": "Premier", "price": 80.96, "currency": "USD", "period": "month", "annualMonthly": 60.72, "quota": "8,000 credits per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Realistische AI-video uit tekst of beeld, met credits",
+      "description": "Kling AI van het Chinese Kuaishou genereert video's uit tekst of afbeeldingen, met sterke bewegingsrealisme en opties als lip-sync en camera-instructies. Een veelgebruikt alternatief voor Runway en Veo.",
+      "bestFor": ["Realistische korte clips uit een beeld", "Makers die veel varianten willen genereren"],
+      "notFor": ["Organisaties die dataverwerking buiten de EU/VS willen vermijden"],
+      "limitations": ["Verbruik op basis van credits", "Eerste maand vaak afgeprijsd; daarna hoger tarief"]
+    },
+    "en": {
+      "tagline": "Realistic AI video from text or images, credit-based",
+      "description": "Kling AI from China's Kuaishou generates videos from text or images, with strong motion realism and options such as lip sync and camera instructions. A popular alternative to Runway and Veo.",
+      "bestFor": ["Realistic short clips from an image", "Creators who generate many variations"],
+      "notFor": ["Organisations that avoid data processing outside the EU/US"],
+      "limitations": ["Credit-based usage", "First month is often discounted; regular rate is higher"]
+    }
+  },
+  "relations": [{ "tool": "runway", "kind": "alternative" }, { "tool": "google-veo", "kind": "alternative" }, { "tool": "luma-dream-machine", "kind": "alternative" }]
+}

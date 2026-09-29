@@ -1,0 +1,50 @@
+{
+  "slug": "brevo",
+  "name": "Brevo",
+  "aliases": ["Sendinblue"],
+  "website": "https://www.brevo.com",
+  "company": { "name": "Brevo", "slug": "brevo", "country": "FR" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "ecommerce", "marketers"],
+  "capabilities": [
+    { "id": "email-marketing", "strength": "primary" },
+    { "id": "email-writing", "strength": "secondary" },
+    { "id": "support-chatbot", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The free plan sends 300 emails/day, Starter runs from $9/month, Standard from $18/month, and Professional from $499/month… The free plan and all Starter plans exclude marketing automation. Automation starts on the Standard plan.\"",
+    "sources": [
+      { "url": "https://help.brevo.com/hc/en-us/articles/208589409-About-Brevo-s-pricing-plans", "type": "official_docs", "title": "About Brevo's pricing plans" },
+      { "url": "https://www.emailtooltester.com/en/reviews/brevo/pricing/", "type": "secondary" },
+      { "url": "https://www.omnisend.com/blog/brevo-pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.brevo.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "300 emails per day" },
+    { "key": "starter", "name": "Starter", "price": 9, "currency": "USD", "period": "month", "quota": "From 5,000 emails per month; no marketing automation" },
+    { "key": "standard", "name": "Standard", "price": 18, "currency": "USD", "period": "month", "quota": "From 5,000 emails per month; marketing automation" },
+    { "key": "professional", "name": "Professional", "price": 499, "currency": "USD", "period": "month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Franse marketingsuite: e-mail, sms, WhatsApp en CRM",
+      "description": "Brevo (voorheen Sendinblue, uit Parijs) combineert e-mailmarketing, sms, WhatsApp-campagnes, een eenvoudig CRM en chat, met AI-hulp bij teksten. Je betaalt op basis van het aantal verstuurde e-mails, niet het aantal contacten.",
+      "bestFor": ["Mkb dat een Europese aanbieder wil", "Veel contacten maar weinig verzendingen"],
+      "notFor": ["Wie geavanceerde e-commerce-segmentatie nodig heeft"],
+      "limitations": ["Marketingautomatisering pas vanaf het Standard-plan"]
+    },
+    "en": {
+      "tagline": "French marketing suite: email, SMS, WhatsApp and CRM",
+      "description": "Brevo (formerly Sendinblue, from Paris) combines email marketing, SMS, WhatsApp campaigns, a simple CRM and chat, with AI help for copy. You pay by emails sent rather than number of contacts.",
+      "bestFor": ["SMBs that prefer a European provider", "Many contacts but few sends"],
+      "notFor": ["Advanced e-commerce segmentation"],
+      "limitations": ["Marketing automation starts on the Standard plan"]
+    }
+  },
+  "relations": [{ "tool": "mailerlite", "kind": "alternative" }, { "tool": "mailchimp", "kind": "alternative" }, { "tool": "klaviyo", "kind": "alternative" }]
+}

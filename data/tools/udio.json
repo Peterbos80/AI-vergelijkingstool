@@ -1,0 +1,45 @@
+{
+  "slug": "udio",
+  "name": "Udio",
+  "website": "https://www.udio.com",
+  "pricingUrl": "https://www.udio.com/pricing",
+  "company": { "name": "Udio", "slug": "udio", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "musicians"],
+  "capabilities": [{ "id": "music-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Plan: $0/month with 100 credits/month. Standard Plan: $10/month with 2,400 credits/month. Pro Plan: $30/month with 6,000 credits/month… Annual billing discounts every paid tier by 20% (Standard $8/mo, Pro $24/mo)\"",
+    "sources": [
+      { "url": "https://www.udio.com/pricing", "type": "official", "title": "Udio Pricing - Flexible Plans for AI Music Creation" },
+      { "url": "https://www.eesel.ai/blog/udio-pricing", "type": "secondary" },
+      { "url": "https://melodycraft.app/tutorials/udio-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.udio.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "10 credits per day, 100 per month" },
+    { "key": "standard", "name": "Standard", "price": 10, "currency": "USD", "period": "month", "annualMonthly": 8, "quota": "2,400 credits per month" },
+    { "key": "pro", "name": "Pro", "price": 30, "currency": "USD", "period": "month", "annualMonthly": 24, "quota": "6,000 credits per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-muziek met veel controle over stijl en structuur",
+      "description": "Udio genereert muziek met zang uit tekstprompts en laat je nummers verlengen en onderdelen opnieuw maken. Een alternatief voor Suno met een vergelijkbaar creditmodel.",
+      "bestFor": ["Muzikale experimenten en demo's", "Nummers stap voor stap uitbouwen"],
+      "notFor": ["Wie een complete DAW zoekt"],
+      "limitations": ["Gratis plan: 10 credits per dag"]
+    },
+    "en": {
+      "tagline": "AI music with control over style and structure",
+      "description": "Udio generates music with vocals from text prompts and lets you extend tracks and regenerate sections. An alternative to Suno with a similar credit model.",
+      "bestFor": ["Musical experiments and demos", "Building tracks step by step"],
+      "notFor": ["People looking for a complete DAW"],
+      "limitations": ["Free plan: 10 credits per day"]
+    }
+  },
+  "relations": [{ "tool": "suno", "kind": "alternative" }]
+}

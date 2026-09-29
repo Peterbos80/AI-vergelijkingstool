@@ -1,0 +1,51 @@
+{
+  "slug": "veed",
+  "name": "VEED",
+  "website": "https://www.veed.io",
+  "company": { "name": "VEED", "slug": "veed", "country": "GB" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "marketers", "smb"],
+  "capabilities": [
+    { "id": "video-editing", "strength": "primary" },
+    { "id": "auto-subtitles", "strength": "primary" },
+    { "id": "clip-generation", "strength": "secondary" },
+    { "id": "avatar-video", "strength": "secondary" },
+    { "id": "audio-enhancement", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Plan: $0, with 720p export, watermark, and a 10-minute cap. Lite Plan: $9/month… Pro Plan: $24/month for the full AI toolkit\"",
+    "sources": [
+      { "url": "https://dupple.com/pricing/veed", "type": "secondary" },
+      { "url": "https://magichour.ai/blog/veed-pricing", "type": "secondary" },
+      { "url": "https://www.saasworthy.com/product/veed-io/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "watermark_free_tier": { "value": true, "evidence": "Web search summary: \"The free plan adds a small VEED watermark to every export\"" },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.veed.io", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "720p export, watermark, 10-minute cap" },
+    { "key": "lite", "name": "Lite", "price": 9, "currency": "USD", "period": "month", "quota": "1080p, no watermark, auto subtitles (144 hours/year)" },
+    { "key": "pro", "name": "Pro", "price": 24, "currency": "USD", "period": "month", "quota": "Full AI toolkit incl. Clean Audio, Magic Cut, AI Clips, subtitle translation" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Online video-editor met ondertitels en AI-hulpmiddelen",
+      "description": "VEED is een browsergebaseerde video-editor met automatische ondertiteling, vertaalde ondertitels, audio-opschoning en AI-functies zoals clips maken en een digitale avatar. Handig voor teams die zonder installatie video's willen maken.",
+      "bestFor": ["Ondertitels en vertaalde ondertitels", "Samenwerken aan video's in de browser"],
+      "notFor": ["Zware montage met veel effecten"],
+      "limitations": ["Gratis plan: 720p, watermerk en maximaal 10 minuten"]
+    },
+    "en": {
+      "tagline": "Online video editor with subtitles and AI tools",
+      "description": "VEED is a browser-based video editor with automatic subtitles, translated captions, audio clean-up and AI features such as clip creation and a digital avatar. Handy for teams that want to make videos without installing software.",
+      "bestFor": ["Subtitles and translated captions", "Collaborating on videos in the browser"],
+      "notFor": ["Heavy effects-driven editing"],
+      "limitations": ["Free plan: 720p, watermark and a 10-minute cap"]
+    }
+  },
+  "relations": [{ "tool": "kapwing", "kind": "alternative" }, { "tool": "capcut", "kind": "alternative" }, { "tool": "descript", "kind": "alternative" }]
+}

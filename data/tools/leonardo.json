@@ -1,0 +1,51 @@
+{
+  "slug": "leonardo",
+  "name": "Leonardo.Ai",
+  "aliases": ["Leonardo", "Leonardo AI"],
+  "website": "https://leonardo.ai",
+  "company": { "name": "Leonardo.Ai (Canva)", "slug": "leonardo-ai", "country": "AU" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "designers", "game-developers"],
+  "capabilities": [
+    { "id": "image-generation", "strength": "primary" },
+    { "id": "video-generation", "strength": "secondary" },
+    { "id": "upscaling", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Apprentice plan at $10/month, the Artisan plan at $24/month, and the Maestro plan at $48/month [annual]… monthly… Apprentice $12/month, Artisan $30/month, Maestro $60/month… Free: 150 tokens/day\"",
+    "note": "One source reports that the tiers were renamed (Essential, Premium, Ultimate) in 2026.",
+    "sources": [
+      { "url": "https://costbench.com/software/ai-image-generators/leonardo-ai/", "type": "secondary" },
+      { "url": "https://gptprompts.ai/ai-pricing/leonardo-ai-pricing", "type": "secondary" },
+      { "url": "https://cybernews.com/ai-tools/leonardo-ai-review/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://leonardo.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "150 tokens per day" },
+    { "key": "apprentice", "name": "Apprentice", "price": 12, "currency": "USD", "period": "month", "annualMonthly": 10, "quota": "8,500 tokens per month" },
+    { "key": "artisan", "name": "Artisan", "price": 30, "currency": "USD", "period": "month", "annualMonthly": 24, "quota": "25,000 tokens per month" },
+    { "key": "maestro", "name": "Maestro", "price": 60, "currency": "USD", "period": "month", "annualMonthly": 48, "quota": "60,000 tokens per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Veelzijdige AI-beeld- en videostudio, onderdeel van Canva",
+      "description": "Leonardo.Ai biedt beeld- en videogeneratie met veel stijlen en modellen, plus hulpmiddelen voor consistente personages, bewerken en opschalen. Populair bij makers en game-ontwikkelaars. Leonardo is sinds 2024 onderdeel van Canva.",
+      "bestFor": ["Game-assets en consistente personages", "Veel stijlen uitproberen met een gratis dagtegoed"],
+      "notFor": ["Wie één eenvoudig model zoekt zonder instellingen"],
+      "limitations": ["Tokens per dag of maand; ongebruikte dagtokens vervallen"]
+    },
+    "en": {
+      "tagline": "Versatile AI image and video studio, part of Canva",
+      "description": "Leonardo.Ai offers image and video generation with many styles and models, plus tools for consistent characters, editing and upscaling. Popular with creators and game developers. Leonardo has been part of Canva since 2024.",
+      "bestFor": ["Game assets and consistent characters", "Trying many styles with a free daily allowance"],
+      "notFor": ["People who want one simple model with no settings"],
+      "limitations": ["Tokens per day or month; unused daily tokens expire"]
+    }
+  },
+  "relations": [{ "tool": "midjourney", "kind": "alternative" }, { "tool": "ideogram", "kind": "alternative" }, { "tool": "krea", "kind": "alternative" }]
+}

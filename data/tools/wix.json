@@ -1,0 +1,48 @@
+{
+  "slug": "wix",
+  "name": "Wix",
+  "website": "https://www.wix.com",
+  "pricingUrl": "https://www.wix.com/plans",
+  "company": { "name": "Wix.com", "slug": "wix", "country": "IL" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "freelancers", "ecommerce"],
+  "capabilities": [
+    { "id": "website-builder", "strength": "primary" },
+    { "id": "copywriting", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"On August 1, 2026, Wix's official US annual-billing guide listed Light at USD 17 per month, Core at USD 29, Business at USD 39, and Business Elite at USD 159… Monthly billing typically costs more\"",
+    "sources": [
+      { "url": "https://www.wix.com/plans", "type": "official", "title": "Wix Pricing Information" },
+      { "url": "https://www.websitebuilderexpert.com/website-builders/wix-pricing/", "type": "secondary" },
+      { "url": "https://www.tooltester.com/en/reviews/wix-review/prices/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.wix.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "light", "name": "Light", "price": null, "currency": "USD", "period": "month", "annualMonthly": 17, "note": "Only the annual-billing price was reported." },
+    { "key": "core", "name": "Core", "price": null, "currency": "USD", "period": "month", "annualMonthly": 29, "quota": "E-commerce tools, 50 GB storage" },
+    { "key": "business", "name": "Business", "price": null, "currency": "USD", "period": "month", "annualMonthly": 39 },
+    { "key": "business-elite", "name": "Business Elite", "price": null, "currency": "USD", "period": "month", "annualMonthly": 159 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Bekende websitebouwer met AI-sitegenerator en webshop",
+      "description": "Wix laat je met een AI-sitegenerator of templates een website bouwen, met ingebouwde webshop, boekingen, marketing en hosting. Geschikt voor ondernemers die alles op één plek willen.",
+      "bestFor": ["Ondernemers die snel een complete site met webshop willen", "Beginners met veel templates"],
+      "notFor": ["Wie volledige controle over code en hosting wil"],
+      "limitations": ["Maandelijks betalen is duurder dan jaarlijks"]
+    },
+    "en": {
+      "tagline": "Popular website builder with AI site generator and store",
+      "description": "Wix lets you build a website with an AI site generator or templates, with a built-in store, bookings, marketing and hosting. Suited to entrepreneurs who want everything in one place.",
+      "bestFor": ["Entrepreneurs who need a complete site with a store fast", "Beginners who like many templates"],
+      "notFor": ["People who want full control over code and hosting"],
+      "limitations": ["Monthly billing costs more than annual"]
+    }
+  },
+  "relations": [{ "tool": "framer", "kind": "alternative" }, { "tool": "hostinger-website-builder", "kind": "alternative" }, { "tool": "durable", "kind": "alternative" }]
+}

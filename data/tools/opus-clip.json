@@ -1,0 +1,70 @@
+{
+  "slug": "opus-clip",
+  "name": "OpusClip",
+  "website": "https://www.opus.pro",
+  "pricingUrl": "https://www.opus.pro/pricing",
+  "company": { "name": "OpusClip", "slug": "opusclip" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "marketers", "podcasters"],
+  "capabilities": [
+    { "id": "clip-generation", "strength": "primary" },
+    { "id": "auto-subtitles", "strength": "primary" },
+    { "id": "social-scheduling", "strength": "secondary" },
+    { "id": "video-editing", "strength": "secondary" }
+  ],
+  "facts": {
+    "has_free_tier": {
+      "value": true, "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"The free plan includes 60 processing credits a month\"",
+      "sources": [{ "url": "https://www.castmagic.io/blog/opus-clip-pricing", "type": "secondary" }, { "url": "https://www.eesel.ai/blog/opusclip-pricing", "type": "secondary" }]
+    },
+    "watermark_free_tier": {
+      "value": true, "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"The Free plan gives you 60 processing minutes per month with watermarked exports. Starter gets you 150 minutes watermark-free.\"",
+      "sources": [{ "url": "https://quso.ai/blog/opus-clip-pricing", "type": "secondary" }, { "url": "https://www.ssemble.com/blog/opus-clip-pricing-2026", "type": "secondary" }]
+    },
+    "platforms": {
+      "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29",
+      "note": "Editorial knowledge; pending automated verification.",
+      "sources": [{ "url": "https://www.opus.pro", "type": "official" }]
+    }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "60 credits (≈ minutes of source video) per month, watermarked exports",
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"The free plan includes 60 processing credits a month\"",
+      "sources": [{ "url": "https://creatify.ai/blog/opusclip-pricing-plans-and-what-you-ll-actually-pay-in-2026", "type": "secondary" }, { "url": "https://www.castmagic.io/blog/opus-clip-pricing", "type": "secondary" }] },
+    { "key": "starter", "name": "Starter", "price": 15, "currency": "USD", "period": "month", "quota": "150 credits per month, no watermark",
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"the Starter plan costs $15 a month for 150 credits\"",
+      "sources": [{ "url": "https://quso.ai/blog/opus-clip-pricing", "type": "secondary" }, { "url": "https://www.eesel.ai/blog/opusclip-pricing", "type": "secondary" }] },
+    { "key": "pro", "name": "Pro", "price": 29, "currency": "USD", "period": "month", "annualMonthly": 14.5, "quota": "300 credits per month",
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"the Pro plan costs $29 monthly or $174 annually\"; \"Pro offers annual billing at $174/year (an effective $14.50/month)\"",
+      "sources": [{ "url": "https://creatify.ai/blog/opusclip-pricing-plans-and-what-you-ll-actually-pay-in-2026", "type": "secondary" }, { "url": "https://www.vidpal.ai/blog/opus-clip-pricing", "type": "secondary" }] },
+    { "key": "business", "name": "Business", "price": null, "currency": null, "period": "custom", "isCustom": true,
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"the Business plan has custom pricing\"",
+      "sources": [{ "url": "https://creatify.ai/blog/opusclip-pricing-plans-and-what-you-ll-actually-pay-in-2026", "type": "secondary" }, { "url": "https://www.eesel.ai/blog/opusclip-pricing", "type": "secondary" }] }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Knipt automatisch virale shorts uit lange video's",
+      "description": "OpusClip analyseert een lange video (podcast, webinar, YouTube) en knipt er automatisch korte, staande clips uit met ondertiteling en een inschatting van het virale potentieel. Je betaalt met credits: ongeveer één credit per minuut bronvideo.",
+      "bestFor": ["Podcasts en webinars hergebruiken als shorts", "Snel veel clips maken zonder montagekennis", "Makers die op meerdere kanalen publiceren"],
+      "notFor": ["Video's zonder gesproken tekst", "Wie volledige creatieve controle over elke clip wil"],
+      "limitations": ["Gratis plan exporteert met watermerk", "Verbruik op basis van credits (≈ minuten bronvideo)"]
+    },
+    "en": {
+      "tagline": "Automatically cuts viral shorts from long videos",
+      "description": "OpusClip analyses a long video (podcast, webinar, YouTube) and automatically cuts short vertical clips with captions and an estimate of viral potential. You pay with credits: roughly one credit per minute of source video.",
+      "bestFor": ["Repurposing podcasts and webinars as shorts", "Producing many clips without editing skills", "Creators publishing on several channels"],
+      "notFor": ["Videos without spoken content", "People who want full creative control over every clip"],
+      "limitations": ["Free plan exports with a watermark", "Usage is credit-based (≈ minutes of source video)"]
+    }
+  },
+  "relations": [
+    { "tool": "vizard", "kind": "alternative" },
+    { "tool": "submagic", "kind": "alternative" }
+  ]
+}

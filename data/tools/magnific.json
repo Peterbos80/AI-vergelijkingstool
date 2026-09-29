@@ -1,0 +1,49 @@
+{
+  "slug": "magnific",
+  "name": "Magnific (Freepik)",
+  "aliases": ["Magnific AI", "Freepik AI"],
+  "website": "https://magnific.ai",
+  "company": { "name": "Freepik", "slug": "freepik", "country": "ES" },
+  "skillLevel": "intermediate",
+  "audience": ["designers", "architects", "creators"],
+  "capabilities": [
+    { "id": "upscaling", "strength": "primary" },
+    { "id": "image-generation", "strength": "secondary" },
+    { "id": "image-editing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The pricing has changed significantly due to Magnific's rebrand as part of Freepik in April 2026… Premium: $16/month; Premium+: $37/month; Pro: $90/month… Annual: Premium $11/month, Premium+ $27.50/month, Pro $66.92/month… Since April 28, 2026, Magnific became the new brand for Freepik's AI suite\"",
+    "sources": [
+      { "url": "https://oakgen.ai/blog/magnific-ai-freepik-rebrand-pricing", "type": "secondary", "title": "Magnific AI in 2026: The Freepik Rebrand, Pricing, and What Changed" },
+      { "url": "https://www.renderahouse.com/blog/magnific-ai-pricing", "type": "secondary", "title": "Magnific AI Pricing 2026: $16, $37 & $90 Plans" },
+      { "url": "https://www.myarchitectai.com/blog/magnific-ai-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://magnific.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "premium", "name": "Premium", "price": 16, "currency": "USD", "period": "month", "annualMonthly": 11 },
+    { "key": "premium-plus", "name": "Premium+", "price": 37, "currency": "USD", "period": "month", "annualMonthly": 27.5 },
+    { "key": "pro", "name": "Pro", "price": 90, "currency": "USD", "period": "month", "annualMonthly": 66.92 },
+    { "key": "business", "name": "Business", "price": 69, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 55, "quota": "2–100 seats" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Upscaler die details 'bijverzint', nu het AI-merk van Freepik",
+      "description": "Magnific is bekend om zijn creatieve upscaler die beelden vergroot en details toevoegt. Sinds 28 april 2026 is Magnific het merk voor de complete AI-suite van het Spaanse Freepik (beeld, video, audio, 3D), met credit-gebaseerde plannen.",
+      "bestFor": ["Renders en AI-beelden naar hoge resolutie met extra detail", "Architecten en ontwerpers"],
+      "notFor": ["Wie een getrouwe, niet-creatieve vergroting nodig heeft"],
+      "limitations": ["Oudere prijzen (voor de rebrand) circuleren nog online"]
+    },
+    "en": {
+      "tagline": "Upscaler that 'invents' detail, now Freepik's AI brand",
+      "description": "Magnific is known for its creative upscaler that enlarges images while adding detail. Since 28 April 2026 Magnific has been the brand for Spanish company Freepik's full AI suite (image, video, audio, 3D), on credit-based plans.",
+      "bestFor": ["Renders and AI images at high resolution with extra detail", "Architects and designers"],
+      "notFor": ["People who need faithful, non-creative enlargement"],
+      "limitations": ["Pre-rebrand prices still circulate online"]
+    }
+  },
+  "relations": [{ "tool": "krea", "kind": "alternative" }, { "tool": "leonardo", "kind": "alternative" }]
+}

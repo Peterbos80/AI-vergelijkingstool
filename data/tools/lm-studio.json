@@ -1,0 +1,49 @@
+{
+  "slug": "lm-studio",
+  "name": "LM Studio",
+  "website": "https://lmstudio.ai",
+  "company": { "name": "Element Labs", "slug": "element-labs", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["privacy-conscious", "developers", "professionals"],
+  "capabilities": [
+    { "id": "local-llm", "strength": "primary" },
+    { "id": "chat-assistant", "strength": "secondary" },
+    { "id": "document-chat", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"LM Studio's desktop app is completely free for both personal and commercial use as of September 2026, with no per-seat license fee for local inference… Enterprise deployment… is sold through a 'contact sales' form\"",
+    "sources": [
+      { "url": "https://lmstudio.ai/blog/free-for-work", "type": "official_blog", "title": "LM Studio is free for use at work" },
+      { "url": "https://toolradar.com/tools/lm-studio", "type": "secondary" },
+      { "url": "https://www.promptquorum.com/power-local-llm/lm-studio-review", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "commercial_use_free_tier": { "value": true },
+    "self_hostable": { "value": true },
+    "platforms": { "value": ["windows", "macos", "linux"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://lmstudio.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Desktop app", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Free for personal and commercial use" },
+    { "key": "enterprise", "name": "Enterprise", "price": null, "currency": null, "period": "custom", "isCustom": true, "quota": "SSO, model gating, private collaboration" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Gebruiksvriendelijke desktopapp om AI-modellen lokaal te draaien",
+      "description": "LM Studio laat je open taalmodellen downloaden en lokaal gebruiken via een overzichtelijke chat-interface, inclusief chatten met eigen documenten en een lokale server voor ontwikkelaars. De desktopapp is gratis, ook voor zakelijk gebruik.",
+      "bestFor": ["Lokale AI zonder commandline", "Bedrijven die data op het apparaat willen houden"],
+      "notFor": ["Computers met weinig geheugen"],
+      "limitations": ["Prestaties afhankelijk van je hardware"]
+    },
+    "en": {
+      "tagline": "User-friendly desktop app for running AI models locally",
+      "description": "LM Studio lets you download open language models and use them locally through a clean chat interface, including chatting with your own documents and a local server for developers. The desktop app is free, including for work use.",
+      "bestFor": ["Local AI without the command line", "Businesses keeping data on the device"],
+      "notFor": ["Computers with little memory"],
+      "limitations": ["Performance depends on your hardware"]
+    }
+  },
+  "relations": [{ "tool": "ollama", "kind": "alternative" }]
+}

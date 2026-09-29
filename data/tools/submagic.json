@@ -1,0 +1,48 @@
+{
+  "slug": "submagic",
+  "name": "Submagic",
+  "website": "https://www.submagic.co",
+  "pricingUrl": "https://www.submagic.co/pricing",
+  "company": { "name": "Submagic", "slug": "submagic" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "marketers"],
+  "capabilities": [
+    { "id": "auto-subtitles", "strength": "primary" },
+    { "id": "clip-generation", "strength": "primary" },
+    { "id": "video-editing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Starter: $19/month, Pro: $39/month, Business: $69/month… Annual: Starter $12/month, Pro $23/month, Business $41/month\"",
+    "sources": [
+      { "url": "https://www.submagic.co/pricing", "type": "official", "title": "Pricing for Submagic" },
+      { "url": "https://omr.com/en/reviews/product/submagic/pricing", "type": "secondary" },
+      { "url": "https://www.saasworthy.com/product/submagic.co/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.submagic.co", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "starter", "name": "Starter", "price": 19, "currency": "USD", "period": "month", "annualMonthly": 12, "quota": "15 videos per month, up to 2 minutes, 1080p, no watermark" },
+    { "key": "pro", "name": "Pro", "price": 39, "currency": "USD", "period": "month", "annualMonthly": 23, "quota": "40 videos per month, up to 5 minutes, premium templates, brand kit" },
+    { "key": "business", "name": "Business", "price": 69, "currency": "USD", "period": "month", "annualMonthly": 41, "quota": "Up to 100 videos, 30-minute videos, 4K/60fps" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Opvallende, geanimeerde ondertitels en clips voor shorts",
+      "description": "Submagic voegt automatisch geanimeerde ondertitels, emoji's, zooms en B-roll toe aan korte video's, en kan clips uit langere video's maken. Gericht op makers die veel shorts, Reels en TikToks publiceren.",
+      "bestFor": ["Virale-stijl ondertitels voor shorts", "Snel afwerken van staande video's"],
+      "notFor": ["Lange video's monteren"],
+      "limitations": ["Aantal video's en maximale lengte per maand beperkt per plan"]
+    },
+    "en": {
+      "tagline": "Eye-catching animated captions and clips for shorts",
+      "description": "Submagic automatically adds animated captions, emojis, zooms and B-roll to short videos and can create clips from longer videos. Aimed at creators who publish lots of shorts, Reels and TikToks.",
+      "bestFor": ["Viral-style captions for shorts", "Quickly finishing vertical videos"],
+      "notFor": ["Editing long-form video"],
+      "limitations": ["Number of videos and maximum length per month are capped per plan"]
+    }
+  },
+  "relations": [{ "tool": "opus-clip", "kind": "alternative" }, { "tool": "capcut", "kind": "alternative" }]
+}

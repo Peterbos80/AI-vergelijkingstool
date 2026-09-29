@@ -1,0 +1,50 @@
+{
+  "slug": "n8n",
+  "name": "n8n",
+  "website": "https://n8n.io",
+  "githubRepo": "n8n-io/n8n",
+  "company": { "name": "n8n", "slug": "n8n", "country": "DE" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "operations", "smb", "agencies"],
+  "capabilities": [
+    { "id": "workflow-automation", "strength": "primary" },
+    { "id": "ai-agents", "strength": "primary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Starter Plan: €20 per month billed annually (€24 billed monthly) for 2,500 executions; Pro Plan: €50 per month billed annually (€60 billed monthly) for 10,000 executions… The Community Edition is free for self-hosted deployments with unlimited executions.\"",
+    "sources": [
+      { "url": "https://www.cloudzero.com/blog/n8n-pricing/", "type": "secondary" },
+      { "url": "https://sliplane.io/blog/n8n-pricing", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-automation/n8n/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "note": "Free self-hosted Community Edition; the cloud service is paid." },
+    "self_hostable": { "value": true },
+    "open_source": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Source-available under a fair-code licence (not OSI open source). Editorial knowledge; pending verification.", "sources": [{ "url": "https://github.com/n8n-io/n8n", "type": "github" }] },
+    "platforms": { "value": ["web", "self_hosted"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://n8n.io", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "community", "name": "Community (self-hosted)", "price": 0, "currency": "EUR", "period": "month", "isFree": true, "quota": "Unlimited executions on your own server" },
+    { "key": "starter", "name": "Starter (cloud)", "price": 24, "currency": "EUR", "period": "month", "annualMonthly": 20, "quota": "2,500 executions per month" },
+    { "key": "pro", "name": "Pro (cloud)", "price": 60, "currency": "EUR", "period": "month", "annualMonthly": 50, "quota": "10,000 executions per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Workflow-automatisering en AI-agents, zelf te hosten (Duitsland)",
+      "description": "n8n, uit Berlijn, is een automatiseringsplatform met een visuele editor, honderden integraties en sterke AI-agent-bouwstenen. Je kunt het gratis op je eigen server draaien, zodat data binnen je eigen omgeving blijft, of de betaalde cloudversie gebruiken.",
+      "bestFor": ["Zelf hosten met volledige controle over data", "AI-agents en complexe workflows", "Technische teams met veel automatiseringen"],
+      "notFor": ["Wie geen technische kennis heeft of wil opdoen"],
+      "limitations": ["Zelf hosten vraagt onderhoud; cloudprijzen zijn gebaseerd op executions"]
+    },
+    "en": {
+      "tagline": "Workflow automation and AI agents you can self-host (Germany)",
+      "description": "Berlin-based n8n is an automation platform with a visual editor, hundreds of integrations and strong AI-agent building blocks. You can run it free on your own server, keeping data in your own environment, or use the paid cloud version.",
+      "bestFor": ["Self-hosting with full data control", "AI agents and complex workflows", "Technical teams with many automations"],
+      "notFor": ["People without (or unwilling to gain) technical knowledge"],
+      "limitations": ["Self-hosting requires maintenance; cloud pricing is execution-based"]
+    }
+  },
+  "relations": [{ "tool": "make", "kind": "alternative" }, { "tool": "zapier", "kind": "alternative" }]
+}

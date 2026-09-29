@@ -1,0 +1,49 @@
+{
+  "slug": "v0",
+  "name": "v0 (Vercel)",
+  "aliases": ["v0", "v0.dev", "v0.app"],
+  "website": "https://v0.app",
+  "company": { "name": "Vercel", "slug": "vercel", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "designers", "founders"],
+  "capabilities": [
+    { "id": "app-builder", "strength": "primary" },
+    { "id": "website-builder", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"as of July 2026 the new-user lineup is Free ($5/month of credits, 7 messages/day, watermarked deployments), Team $30/user/month (the entry paid tier), Business $100/user/month, and custom Enterprise… v0 switched from fixed credit counts to token-based pricing in February 2026\"",
+    "sources": [
+      { "url": "https://vercel.com/blog/updated-v0-pricing", "type": "official_blog", "title": "Updated v0 pricing - Vercel" },
+      { "url": "https://automationatlas.io/answers/v0-pricing-explained-2026/", "type": "secondary", "title": "v0 Pricing 2026: Free, Team $30, Business $100" },
+      { "url": "https://www.nocode.mba/articles/v0-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "watermark_free_tier": { "value": true, "evidence": "Web search summary: Free includes \"watermarked deployments\"" },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://v0.app", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "$5 credits per month, 7 messages per day, watermarked deployments" },
+    { "key": "team", "name": "Team", "price": 30, "currency": "USD", "period": "month", "unit": "per_user" },
+    { "key": "business", "name": "Business", "price": 100, "currency": "USD", "period": "month", "unit": "per_user" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Genereert React-interfaces en webapps, direct te publiceren op Vercel",
+      "description": "v0 van Vercel maakt uit een beschrijving of ontwerp een werkende interface of webapp met moderne webtechnologie, en publiceert die direct. Sterk voor ontwerpers en developers die snel UI willen bouwen.",
+      "bestFor": ["Snel UI's en landingspagina's in React bouwen", "Ontwerpen omzetten naar code"],
+      "notFor": ["Mensen die helemaal niet met code in aanraking willen komen"],
+      "limitations": ["Het vroegere Premium-plan van $20 is niet meer beschikbaar voor nieuwe gebruikers"]
+    },
+    "en": {
+      "tagline": "Generates React interfaces and web apps, deployable on Vercel",
+      "description": "Vercel's v0 turns a description or design into a working interface or web app built on modern web technology, and deploys it right away. Strong for designers and developers who want to build UI fast.",
+      "bestFor": ["Building UIs and landing pages in React quickly", "Turning designs into code"],
+      "notFor": ["People who never want to touch code"],
+      "limitations": ["The former $20 Premium plan is no longer available to new users"]
+    }
+  },
+  "relations": [{ "tool": "lovable", "kind": "alternative" }, { "tool": "bolt", "kind": "alternative" }]
+}

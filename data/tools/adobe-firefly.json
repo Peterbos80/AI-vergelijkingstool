@@ -1,0 +1,50 @@
+{
+  "slug": "adobe-firefly",
+  "name": "Adobe Firefly",
+  "website": "https://firefly.adobe.com",
+  "company": { "name": "Adobe", "slug": "adobe", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["designers", "marketers", "enterprise"],
+  "capabilities": [
+    { "id": "image-generation", "strength": "primary" },
+    { "id": "image-editing", "strength": "primary" },
+    { "id": "video-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Adobe Firefly has a free plan (25 credits/mo) plus paid tiers: Standard $9.99/mo (2,000 credits), Pro $19.99/mo (4,000), Pro Plus $49.99/mo (10,000) and Premium $199.99/mo (50,000).\"",
+    "sources": [
+      { "url": "https://costbench.com/software/ai-image-generators/adobe-firefly/", "type": "secondary" },
+      { "url": "https://photutorial.com/adobe-firefly-price/", "type": "secondary" },
+      { "url": "https://www.capterra.com/p/10012410/Adobe-Firefly/pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://firefly.adobe.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "25 generative credits per month" },
+    { "key": "standard", "name": "Firefly Standard", "price": 9.99, "currency": "USD", "period": "month", "quota": "2,000 credits per month" },
+    { "key": "pro", "name": "Firefly Pro", "price": 19.99, "currency": "USD", "period": "month", "quota": "4,000 credits per month" },
+    { "key": "pro-plus", "name": "Firefly Pro Plus", "price": 49.99, "currency": "USD", "period": "month", "quota": "10,000 credits per month" },
+    { "key": "premium", "name": "Firefly Premium", "price": 199.99, "currency": "USD", "period": "month", "quota": "50,000 credits per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Adobe's generatieve AI voor beeld en video, veilig voor commercieel gebruik",
+      "description": "Firefly is de generatieve AI van Adobe voor afbeeldingen, bewerkingen (zoals generatief vullen) en video, geïntegreerd in Photoshop, Express en andere Adobe-apps. Adobe positioneert het als geschikt voor commercieel gebruik; je betaalt met generatieve credits.",
+      "bestFor": ["Ontwerpers die in Adobe-apps werken", "Beelden bewerken en uitbreiden", "Merken die op commerciële veiligheid letten"],
+      "notFor": ["Wie los van het Adobe-ecosysteem wil werken"],
+      "limitations": ["Gratis: 25 credits per maand"]
+    },
+    "en": {
+      "tagline": "Adobe's generative AI for images and video, positioned as commercially safe",
+      "description": "Firefly is Adobe's generative AI for images, edits (such as generative fill) and video, integrated into Photoshop, Express and other Adobe apps. Adobe positions it for commercial use; you pay with generative credits.",
+      "bestFor": ["Designers working in Adobe apps", "Editing and extending images", "Brands focused on commercial safety"],
+      "notFor": ["People who want to work outside the Adobe ecosystem"],
+      "limitations": ["Free: 25 credits per month"]
+    }
+  },
+  "relations": [{ "tool": "midjourney", "kind": "alternative" }, { "tool": "canva", "kind": "alternative" }, { "tool": "adobe-express", "kind": "complements" }]
+}

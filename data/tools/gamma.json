@@ -1,0 +1,51 @@
+{
+  "slug": "gamma",
+  "name": "Gamma",
+  "website": "https://gamma.app",
+  "company": { "name": "Gamma", "slug": "gamma", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "smb", "educators", "consultants"],
+  "capabilities": [
+    { "id": "presentation-generation", "strength": "primary" },
+    { "id": "website-builder", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Gamma offers six plans: Free, Plus ($12/mo), Pro ($25/mo), Ultra ($100/mo) for individuals, and Team ($20/seat/mo) and Business ($40/seat/mo)… Free users get 400 one-time credits… Gamma branding appears on all free-tier work.\"",
+    "note": "Some sources list lower prices ($8–12 Plus, $15–25 Pro), likely annual vs monthly billing.",
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/gamma-pricing", "type": "secondary" },
+      { "url": "https://flowith.io/blog/gamma-app-pricing-2026-free-vs-plus-vs-pro/", "type": "secondary" },
+      { "url": "https://www.saasworthy.com/product/gamma-app/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "watermark_free_tier": { "value": true, "evidence": "Web search summary: \"Gamma branding appears on all free-tier work. Plus and above removes it.\"" },
+    "api_available": { "value": true, "evidence": "Web search summary: \"Pro adds premium AI models, API access\"" },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://gamma.app", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "400 one-time AI credits, Gamma branding" },
+    { "key": "plus", "name": "Plus", "price": 12, "currency": "USD", "period": "month", "quota": "Up to 1,000 AI credits per month" },
+    { "key": "pro", "name": "Pro", "price": 25, "currency": "USD", "period": "month", "quota": "4,000 AI credits per month, API, custom domains" },
+    { "key": "team", "name": "Team", "price": 20, "currency": "USD", "period": "month", "unit": "per_seat" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Presentaties, documenten en webpagina's genereren uit een prompt",
+      "description": "Gamma maakt uit een onderwerp, notities of document een complete presentatie met opmaak en beelden, die je daarna aanpast. Je kunt exporteren naar PowerPoint of pdf, of het resultaat als webpagina delen.",
+      "bestFor": ["Snel een eerste versie van een presentatie", "Pitches en workshops zonder ontwerpwerk"],
+      "notFor": ["Wie volledige controle over elke dia wil"],
+      "limitations": ["Gratis: eenmalig 400 credits en Gamma-branding"]
+    },
+    "en": {
+      "tagline": "Generate presentations, docs and web pages from a prompt",
+      "description": "Gamma turns a topic, notes or a document into a complete, designed presentation with visuals that you can then edit. Export to PowerPoint or PDF, or share the result as a web page.",
+      "bestFor": ["A quick first draft of a deck", "Pitches and workshops without design work"],
+      "notFor": ["People wanting full control over every slide"],
+      "limitations": ["Free: 400 one-time credits and Gamma branding"]
+    }
+  },
+  "relations": [{ "tool": "beautiful-ai", "kind": "alternative" }, { "tool": "pitch", "kind": "alternative" }, { "tool": "canva", "kind": "alternative" }]
+}

@@ -1,0 +1,50 @@
+{
+  "slug": "runway",
+  "name": "Runway",
+  "website": "https://runwayml.com",
+  "company": { "name": "Runway", "slug": "runway", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["creators", "filmmakers", "agencies"],
+  "capabilities": [
+    { "id": "video-generation", "strength": "primary" },
+    { "id": "video-editing", "strength": "secondary" },
+    { "id": "image-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Standard: $15/month, Pro: $35/month, Max: $95/month… Annual: Standard $144/year ($12/month equivalent), Pro $336/year ($28/month)… Free plan: 125 one-time credits. Standard: 625 credits/month. Pro: 2,250 credits/month.\"",
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/runway-ai-pricing", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-video-generators/runway/", "type": "secondary" },
+      { "url": "https://melies.co/runway-ml-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "evidence": "Web search summary: \"Free plan: 125 one-time credits\"" },
+    "api_available": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://runwayml.com", "type": "official" }] },
+    "platforms": { "value": ["web", "ios", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://runwayml.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "125 one-time credits" },
+    { "key": "standard", "name": "Standard", "price": 15, "currency": "USD", "period": "month", "annualMonthly": 12, "quota": "625 credits per month" },
+    { "key": "pro", "name": "Pro", "price": 35, "currency": "USD", "period": "month", "annualMonthly": 28, "quota": "2,250 credits per month" },
+    { "key": "max", "name": "Max", "price": 95, "currency": "USD", "period": "month", "note": "Max replaced Unlimited for new subscribers on 2026-05-29 according to the sources." }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Generatieve video: van tekst of beeld naar cinematische clips",
+      "description": "Runway is een platform voor generatieve video. Je maakt clips vanuit tekst of een afbeelding, bewerkt bestaande beelden met AI en werkt aan scènes met consistente personages. Gericht op makers, filmmakers en creatieve bureaus.",
+      "bestFor": ["Cinematische B-roll en conceptvideo's", "Creatieve experimenten met beeld-naar-video"],
+      "notFor": ["Beginners die alleen een simpele montage nodig hebben", "Lange video's in één keer genereren"],
+      "limitations": ["Verbruik op basis van credits; gratis plan heeft eenmalig 125 credits"]
+    },
+    "en": {
+      "tagline": "Generative video: from text or image to cinematic clips",
+      "description": "Runway is a generative video platform. You create clips from text or an image, edit existing footage with AI and build scenes with consistent characters. Aimed at creators, filmmakers and creative agencies.",
+      "bestFor": ["Cinematic B-roll and concept videos", "Creative image-to-video experiments"],
+      "notFor": ["Beginners who only need simple editing", "Generating long videos in one go"],
+      "limitations": ["Credit-based usage; the free plan has 125 one-time credits"]
+    }
+  },
+  "relations": [{ "tool": "kling", "kind": "alternative" }, { "tool": "luma-dream-machine", "kind": "alternative" }, { "tool": "google-veo", "kind": "alternative" }]
+}

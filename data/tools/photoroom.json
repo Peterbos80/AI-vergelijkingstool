@@ -1,0 +1,50 @@
+{
+  "slug": "photoroom",
+  "name": "Photoroom",
+  "website": "https://www.photoroom.com",
+  "pricingUrl": "https://www.photoroom.com/pricing",
+  "company": { "name": "Photoroom", "slug": "photoroom", "country": "FR" },
+  "skillLevel": "beginner",
+  "audience": ["ecommerce", "smb", "marketplaces"],
+  "capabilities": [
+    { "id": "product-photography", "strength": "primary" },
+    { "id": "background-removal", "strength": "primary" },
+    { "id": "image-editing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Photoroom offers a Free plan… exports are limited to 250 per month and include a watermark… Pro… $7.50 per month when you pay for a full year… Monthly billing costs $12.99/month… Max… $20.99 per month when billed annually… Monthly billing on Max costs $34.99\"",
+    "sources": [
+      { "url": "https://www.photoroom.com/pricing", "type": "official", "title": "Photoroom Pricing: Plans, Prices & Free Trial" },
+      { "url": "https://www.eesel.ai/blog/photoroom-pricing", "type": "secondary" },
+      { "url": "https://pikes.ai/blog/photoroom-pricing-2026", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "watermark_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.photoroom.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "250 exports per month, watermark" },
+    { "key": "pro", "name": "Pro", "price": 12.99, "currency": "USD", "period": "month", "annualMonthly": 7.5 },
+    { "key": "max", "name": "Max", "price": 34.99, "currency": "USD", "period": "month", "annualMonthly": 20.99, "quota": "3× Pro AI credits, 1,500 batch exports per month, Shopify listings" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Professionele productfoto's vanaf je telefoon, uit Parijs",
+      "description": "Photoroom, een Frans bedrijf, maakt van een simpele productfoto een professioneel beeld: achtergrond verwijderen, AI-sfeerachtergronden, schaduwen en batchbewerking voor marketplaces en webshops.",
+      "bestFor": ["Webshops en verkopers op marketplaces", "Snel consistente productfoto's in bulk"],
+      "notFor": ["Kunstzinnige illustraties"],
+      "limitations": ["Gratis plan met watermerk"]
+    },
+    "en": {
+      "tagline": "Professional product photos from your phone, from Paris",
+      "description": "Photoroom, a French company, turns a simple product shot into a professional image: background removal, AI scene backgrounds, shadows and batch editing for marketplaces and online stores.",
+      "bestFor": ["Online stores and marketplace sellers", "Consistent product photos in bulk"],
+      "notFor": ["Artistic illustration"],
+      "limitations": ["Free plan adds a watermark"]
+    }
+  },
+  "relations": [{ "tool": "remove-bg", "kind": "alternative" }, { "tool": "pebblely", "kind": "alternative" }]
+}

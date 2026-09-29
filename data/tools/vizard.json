@@ -1,0 +1,49 @@
+{
+  "slug": "vizard",
+  "name": "Vizard",
+  "website": "https://vizard.ai",
+  "pricingUrl": "https://vizard.ai/pricing",
+  "company": { "name": "Vizard", "slug": "vizard" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "marketers", "podcasters"],
+  "capabilities": [
+    { "id": "clip-generation", "strength": "primary" },
+    { "id": "auto-subtitles", "strength": "secondary" },
+    { "id": "video-editing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Vizard's free plan includes 60 credits per month. Creator starts at $29/month, while the advertised price with yearly billing is about $14.50/month… Business starts at $39/month (or approximately $19.50/month with yearly billing)\"",
+    "sources": [
+      { "url": "https://vizard.ai/pricing", "type": "official", "title": "Pricing - Choose the perfect plan for you" },
+      { "url": "https://creatify.ai/review/vizard-ai", "type": "secondary" },
+      { "url": "https://contenttoolslab.com/reviews/vizard-ai-pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://vizard.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "60 credits per month" },
+    { "key": "creator", "name": "Creator", "price": 29, "currency": "USD", "period": "month", "annualMonthly": 14.5, "quota": "600 upload minutes, 4K export, no watermark" },
+    { "key": "business", "name": "Business", "price": 39, "currency": "USD", "period": "month", "annualMonthly": 19.5 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Clips uit lange video's met AI, met eigen branding",
+      "description": "Vizard knipt automatisch korte clips uit lange video's, voegt ondertitels toe en past je huisstijl toe. Een alternatief voor OpusClip, met een credit-model op basis van geüploade minuten.",
+      "bestFor": ["Podcasts en webinars omzetten in clips", "Teams die branding consistent willen houden"],
+      "notFor": ["Wie volledig handmatig wil monteren"],
+      "limitations": ["Verbruik op basis van geüploade minuten"]
+    },
+    "en": {
+      "tagline": "AI clips from long videos, with your branding",
+      "description": "Vizard automatically cuts short clips from long videos, adds captions and applies your branding. An alternative to OpusClip with a credit model based on uploaded minutes.",
+      "bestFor": ["Turning podcasts and webinars into clips", "Teams that need consistent branding"],
+      "notFor": ["People who prefer fully manual editing"],
+      "limitations": ["Usage is based on uploaded minutes"]
+    }
+  },
+  "relations": [{ "tool": "opus-clip", "kind": "alternative" }, { "tool": "submagic", "kind": "alternative" }]
+}

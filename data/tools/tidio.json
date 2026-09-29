@@ -1,0 +1,47 @@
+{
+  "slug": "tidio",
+  "name": "Tidio",
+  "aliases": ["Tidio Lyro", "Lyro"],
+  "website": "https://www.tidio.com",
+  "pricingUrl": "https://www.tidio.com/pricing/",
+  "company": { "name": "Tidio", "slug": "tidio" },
+  "skillLevel": "beginner",
+  "audience": ["ecommerce", "smb"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Tidio's pricing page lists five plans: Free, Starter ($29/mo), Growth ($59/mo), Plus ($749/mo), and Premium (contact sales)… The Free plan offers 50 conversations… plus a one-time 50 Lyro conversations… The Lyro AI Agent add-on starts at $39 per month\"",
+    "sources": [
+      { "url": "https://www.tidio.com/pricing/", "type": "official", "title": "Tidio Pricing" },
+      { "url": "https://www.dragapp.com/blog/tidio-pricing/", "type": "secondary" },
+      { "url": "https://www.eesel.ai/blog/lyro-ai-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.tidio.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "50 conversations per month, one-time 50 Lyro AI conversations" },
+    { "key": "starter", "name": "Starter", "price": 29, "currency": "USD", "period": "month", "quota": "100 billable conversations" },
+    { "key": "growth", "name": "Growth", "price": 59, "currency": "USD", "period": "month", "quota": "From 250 billable conversations" },
+    { "key": "lyro", "name": "Lyro AI Agent (add-on)", "price": 39, "currency": "USD", "period": "month", "annualMonthly": 32.5, "quota": "50 Lyro AI conversations per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Livechat en AI-chatbot Lyro voor webshops en mkb",
+      "description": "Tidio biedt livechat, e-mail en social in één inbox, plus de AI-agent Lyro die veelgestelde vragen beantwoordt op basis van je eigen informatie. Populair bij webshops. Let op: gesprekken, AI-gesprekken en flows worden apart afgerekend.",
+      "bestFor": ["Webshops die snel een chatbot willen", "Kleine teams met één gedeelde inbox"],
+      "notFor": ["Wie één voorspelbare all-in prijs zoekt"],
+      "limitations": ["Drie aparte verbruiksmeters maken de totaalprijs lastig voorspelbaar"]
+    },
+    "en": {
+      "tagline": "Live chat and the Lyro AI chatbot for stores and SMBs",
+      "description": "Tidio offers live chat, email and social in one inbox, plus Lyro, an AI agent that answers common questions from your own content. Popular with online stores. Note: conversations, AI conversations and flows are billed separately.",
+      "bestFor": ["Stores wanting a chatbot quickly", "Small teams with one shared inbox"],
+      "notFor": ["People wanting one predictable all-in price"],
+      "limitations": ["Three separate usage meters make total cost hard to predict"]
+    }
+  },
+  "relations": [{ "tool": "intercom", "kind": "alternative" }, { "tool": "crisp", "kind": "alternative" }, { "tool": "chatbase", "kind": "alternative" }]
+}

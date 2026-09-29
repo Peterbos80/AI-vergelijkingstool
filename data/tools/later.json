@@ -1,0 +1,47 @@
+{
+  "slug": "later",
+  "name": "Later",
+  "website": "https://later.com",
+  "pricingUrl": "https://later.com/pricing/",
+  "company": { "name": "Later", "slug": "later" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "smb", "marketers"],
+  "capabilities": [
+    { "id": "social-scheduling", "strength": "primary" },
+    { "id": "copywriting", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Starter: $25/month (or $18.75/month when billed annually)… Growth: $50/month (or $37.50/month…)… Scale: $110/month (or $82.50/month…)\"",
+    "sources": [
+      { "url": "https://later.com/pricing/", "type": "official", "title": "Later Pricing Plans for Brands, Agencies & Social Media Managers" },
+      { "url": "https://www.socialpilot.co/insights/later-pricing", "type": "secondary" },
+      { "url": "https://www.blotato.com/blog/later-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://later.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "starter", "name": "Starter", "price": 25, "currency": "USD", "period": "month", "annualMonthly": 18.75, "quota": "1 user, 1 social set, 30 posts per month per platform" },
+    { "key": "growth", "name": "Growth", "price": 50, "currency": "USD", "period": "month", "annualMonthly": 37.5, "quota": "2 users, 2 social sets, 180 posts per month per platform" },
+    { "key": "scale", "name": "Scale", "price": 110, "currency": "USD", "period": "month", "annualMonthly": 82.5, "quota": "4 users, 6 social sets, unlimited posts" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Visueel social media plannen, sterk in Instagram en TikTok",
+      "description": "Later is een planner met visuele contentkalender, link-in-bio-pagina's en analyses, oorspronkelijk gericht op Instagram. Met AI-hulp voor captions en de beste posttijden.",
+      "bestFor": ["Visuele planning voor Instagram en TikTok", "Creators en merken met veel beeldcontent"],
+      "notFor": ["Wie vooral LinkedIn- of X-teksten plant"],
+      "limitations": ["Aantal posts per maand beperkt op lagere plannen"]
+    },
+    "en": {
+      "tagline": "Visual social media planning, strong on Instagram and TikTok",
+      "description": "Later is a planner with a visual content calendar, link-in-bio pages and analytics, originally built around Instagram, with AI help for captions and best posting times.",
+      "bestFor": ["Visual planning for Instagram and TikTok", "Creators and brands with lots of visual content"],
+      "notFor": ["People mainly scheduling LinkedIn or X text posts"],
+      "limitations": ["Posts per month are capped on lower plans"]
+    }
+  },
+  "relations": [{ "tool": "buffer", "kind": "alternative" }, { "tool": "metricool", "kind": "alternative" }]
+}

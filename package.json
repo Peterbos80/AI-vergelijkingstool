@@ -1,0 +1,61 @@
+{
+  "name": "aitoolswijzer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AIToolsWijzer — AI tools, with receipts. A decision platform that turns a goal into a verified AI tool stack.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:reset": "tsx scripts/reset.ts",
+    "agents": "tsx scripts/agents.ts",
+    "agents:worker": "tsx scripts/worker.ts",
+    "admin:create": "tsx scripts/create-admin.ts",
+    "i18n:check": "tsx scripts/i18n-check.ts",
+    "revenue:scenarios": "tsx scripts/revenue-scenarios.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.129.0",
+    "@fontsource-variable/schibsted-grotesk": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "cheerio": "^1.2.0",
+    "drizzle-orm": "^0.45.3",
+    "fast-xml-parser": "^5.11.2",
+    "next": "^16.3.7",
+    "pg": "^8.23.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@electric-sql/pglite": "^0.5.8",
+    "@fontsource/schibsted-grotesk": "^5.3.0",
+    "@playwright/test": "1.56.1",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.20.4",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "^16.3.7",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.2"
+  }
+}

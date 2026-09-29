@@ -1,0 +1,83 @@
+{
+  "slug": "descript",
+  "name": "Descript",
+  "website": "https://www.descript.com",
+  "pricingUrl": "https://www.descript.com/pricing",
+  "company": { "name": "Descript", "slug": "descript", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "podcasters", "marketers", "smb"],
+  "capabilities": [
+    { "id": "video-editing", "strength": "primary" },
+    { "id": "audio-editing", "strength": "primary" },
+    { "id": "transcription", "strength": "primary" },
+    { "id": "podcast-recording", "strength": "secondary" },
+    { "id": "auto-subtitles", "strength": "secondary" },
+    { "id": "audio-enhancement", "strength": "secondary" },
+    { "id": "clip-generation", "strength": "secondary" },
+    { "id": "voice-cloning", "strength": "secondary" }
+  ],
+  "facts": {
+    "has_free_tier": {
+      "value": true, "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"Descript offers a Free plan at $0, Hobbyist runs $16 to $24, Creator is $24 to $35, and Business is $50 to $65 per user per month\"",
+      "sources": [
+        { "url": "https://www.castmagic.io/blog/descript-pricing", "type": "secondary" },
+        { "url": "https://costbench.com/software/ai-video-generators/descript/", "type": "secondary" }
+      ]
+    },
+    "watermark_free_tier": {
+      "value": true, "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"Hobbyist ($16 to $24/user/month) removes the watermark\"",
+      "sources": [
+        { "url": "https://www.layer3labs.io/guides/descript-pricing", "type": "secondary" },
+        { "url": "https://www.eesel.ai/blog/descript-pricing", "type": "secondary" }
+      ]
+    },
+    "platforms": {
+      "value": ["web", "windows", "macos"], "status": "unverified", "method": "editorial", "observed": "2026-09-29",
+      "note": "Editorial knowledge; pending automated verification.",
+      "sources": [{ "url": "https://www.descript.com", "type": "official" }]
+    }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true,
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"Descript offers a Free plan at $0\"",
+      "sources": [{ "url": "https://sonix.ai/resources/descript-pricing/", "type": "secondary" }, { "url": "https://www.castmagic.io/blog/descript-pricing", "type": "secondary" }] },
+    { "key": "hobbyist", "name": "Hobbyist", "price": 24, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 16,
+      "quota": "About 10 hours of media per user per month",
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"The Hobbyist plan runs $16/user/month billed annually (or $24/month billed monthly) and includes roughly 10 hours per user per month\"",
+      "sources": [{ "url": "https://www.eesel.ai/blog/descript-pricing", "type": "secondary" }, { "url": "https://shade.inc/blog/descript-pricing", "type": "secondary" }] },
+    { "key": "creator", "name": "Creator", "price": 35, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 24,
+      "quota": "Adds Studio Sound, full Underlord AI assistant and 4K export",
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"The Creator plan… priced at $24/user/month billed annually or $35/user/month billed monthly.\"",
+      "sources": [{ "url": "https://www.castmagic.io/blog/descript-pricing", "type": "secondary" }, { "url": "https://www.layer3labs.io/guides/descript-pricing", "type": "secondary" }] },
+    { "key": "business", "name": "Business", "price": 65, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 50,
+      "status": "supported", "method": "web_search", "observed": "2026-09-29",
+      "evidence": "Web search summary: \"The Business plan jumps to $50 per user per month… (when billed annually), or $65/month when billed monthly.\"",
+      "sources": [{ "url": "https://costbench.com/software/ai-video-editing-saas/descript-video/", "type": "secondary" }, { "url": "https://www.castmagic.io/blog/descript-pricing", "type": "secondary" }] }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Video en podcasts bewerken door tekst aan te passen",
+      "description": "Descript zet je opname om in een transcript; door tekst te knippen of te verplaatsen bewerk je de video of audio. Daarnaast verwijdert het stiltes en stopwoorden, verbetert het geluid (Studio Sound) en maakt het ondertitels en clips. Sterk voor podcasts, uitlegvideo's en interviews.",
+      "bestFor": ["Podcasts en interviews monteren via tekst", "Stopwoorden en stiltes automatisch knippen", "Makers die video en audio in één tool willen"],
+      "notFor": ["Effectrijke, cinematografische montage", "Wie alleen korte templates voor social nodig heeft"],
+      "limitations": ["Gratis plan exporteert met watermerk", "Prijzen per gebruiker; teams betalen per seat"]
+    },
+    "en": {
+      "tagline": "Edit video and podcasts by editing text",
+      "description": "Descript turns your recording into a transcript; cutting or moving text edits the video or audio. It also removes silences and filler words, cleans up sound (Studio Sound) and creates captions and clips. Strong for podcasts, explainer videos and interviews.",
+      "bestFor": ["Editing podcasts and interviews via text", "Automatically cutting filler words and silences", "Creators who want video and audio in one tool"],
+      "notFor": ["Effects-heavy, cinematic editing", "People who only need short social templates"],
+      "limitations": ["Free plan exports with a watermark", "Priced per user; teams pay per seat"]
+    }
+  },
+  "relations": [
+    { "tool": "capcut", "kind": "alternative" },
+    { "tool": "riverside", "kind": "alternative" },
+    { "tool": "veed", "kind": "alternative" }
+  ]
+}

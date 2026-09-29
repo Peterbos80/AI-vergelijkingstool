@@ -1,0 +1,45 @@
+{
+  "slug": "pitch",
+  "name": "Pitch",
+  "website": "https://pitch.com",
+  "company": { "name": "Pitch", "slug": "pitch", "country": "DE" },
+  "skillLevel": "beginner",
+  "audience": ["startups", "teams", "smb"],
+  "capabilities": [{ "id": "presentation-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Plan: $0… Plus: $10 per user/month (annual billing) or $12/month (monthly billing); Team: $15… or $18…; Business: $20… or $24… Free: … 100 one-time AI credits that do not renew\"",
+    "sources": [
+      { "url": "https://www.anygen.io/showcase/pitch-pricing/index.html", "type": "secondary" },
+      { "url": "https://www.trustradius.com/products/pitch/pricing", "type": "secondary" },
+      { "url": "https://www.capterra.com/p/186431/Pitch/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "windows", "macos", "ios"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://pitch.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Up to 5 members, 100 one-time AI credits, Pitch-branded links" },
+    { "key": "plus", "name": "Plus", "price": 12, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 10, "quota": "500 AI credits per month, PowerPoint export" },
+    { "key": "team", "name": "Team", "price": 18, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 15 },
+    { "key": "business", "name": "Business", "price": 24, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 20 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Samenwerken aan presentaties, van het Berlijnse Pitch",
+      "description": "Pitch is een Duitse presentatietool voor teams: samen dia's maken, AI-hulp bij opzet en tekst, analytics op gedeelde presentaties en export naar PowerPoint. Een Europees alternatief voor Google Slides en Gamma.",
+      "bestFor": ["Teams die samen aan decks werken", "Wie een Europese aanbieder zoekt"],
+      "notFor": ["Wie alleen losse dia's in PowerPoint maakt"],
+      "limitations": ["Gratis: eenmalig 100 AI-credits"]
+    },
+    "en": {
+      "tagline": "Collaborative presentations, from Berlin-based Pitch",
+      "description": "Pitch is a German presentation tool for teams: co-edit slides, AI help for structure and copy, analytics on shared decks and export to PowerPoint. A European alternative to Google Slides and Gamma.",
+      "bestFor": ["Teams collaborating on decks", "People who prefer a European provider"],
+      "notFor": ["People only making single slides in PowerPoint"],
+      "limitations": ["Free: 100 one-time AI credits"]
+    }
+  },
+  "relations": [{ "tool": "gamma", "kind": "alternative" }, { "tool": "beautiful-ai", "kind": "alternative" }]
+}

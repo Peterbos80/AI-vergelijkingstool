@@ -1,0 +1,48 @@
+{
+  "slug": "windsurf",
+  "name": "Windsurf",
+  "website": "https://windsurf.com",
+  "company": { "name": "Cognition", "slug": "cognition", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers"],
+  "capabilities": [
+    { "id": "code-assistant", "strength": "primary" },
+    { "id": "agentic-coding", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free: $0, Pro: $20/month, Max: $200/month, Teams: $40/user/month, and Enterprise: custom pricing… Windsurf replaced credits with quotas in March 2026… Cognition AI acquired Windsurf in 2025\"",
+    "sources": [
+      { "url": "https://www.cloudzero.com/blog/windsurf-pricing/", "type": "secondary" },
+      { "url": "https://www.verdent.ai/guides/windsurf-pricing-2026", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-coding-assistants/windsurf/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["windows", "macos", "linux", "jetbrains"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://windsurf.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Limited daily quota" },
+    { "key": "pro", "name": "Pro", "price": 20, "currency": "USD", "period": "month" },
+    { "key": "max", "name": "Max", "price": 200, "currency": "USD", "period": "month" },
+    { "key": "teams", "name": "Teams", "price": 40, "currency": "USD", "period": "month", "unit": "per_user", "note": "Sources also mention an $80/month base fee for Teams." }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-code-editor met agent 'Cascade', onderdeel van Cognition",
+      "description": "Windsurf is een AI-code-editor met een agent die meerdere stappen zelfstandig uitvoert. Sinds de overname door Cognition (de maker van Devin) in 2025 werken beide producten samen. In maart 2026 stapte Windsurf over van credits naar quota.",
+      "bestFor": ["Ontwikkelaars die een alternatief voor Cursor zoeken", "Agent-gestuurd programmeren"],
+      "notFor": ["Mensen zonder programmeerervaring"],
+      "limitations": ["Gebruik begrensd via dagelijkse en wekelijkse quota"]
+    },
+    "en": {
+      "tagline": "AI code editor with the 'Cascade' agent, part of Cognition",
+      "description": "Windsurf is an AI code editor with an agent that carries out multi-step tasks. Since Cognition (maker of Devin) acquired it in 2025, the products work together. In March 2026 Windsurf moved from credits to quotas.",
+      "bestFor": ["Developers looking for a Cursor alternative", "Agent-driven coding"],
+      "notFor": ["People without programming experience"],
+      "limitations": ["Usage capped by daily and weekly quotas"]
+    }
+  },
+  "relations": [{ "tool": "cursor", "kind": "alternative" }, { "tool": "github-copilot", "kind": "alternative" }]
+}

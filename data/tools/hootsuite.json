@@ -1,0 +1,46 @@
+{
+  "slug": "hootsuite",
+  "name": "Hootsuite",
+  "website": "https://www.hootsuite.com",
+  "company": { "name": "Hootsuite", "slug": "hootsuite", "country": "CA" },
+  "skillLevel": "intermediate",
+  "audience": ["enterprise", "agencies", "marketers"],
+  "capabilities": [
+    { "id": "social-scheduling", "strength": "primary" },
+    { "id": "copywriting", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Standard Plan: $99.00 per user, per month. Advanced Plan: $399.00 per user, per month… the Standard plan starts at $99 per user per month when billed annually\"",
+    "sources": [
+      { "url": "https://www.socialpilot.co/insights/hootsuite-pricing", "type": "secondary" },
+      { "url": "https://napoleoncat.com/blog/hootsuite-pricing/", "type": "secondary" },
+      { "url": "https://www.g2.com/products/hootsuite/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": false, "status": "unverified", "note": "No free plan mentioned in the sources." },
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.hootsuite.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "standard", "name": "Standard", "price": 99, "currency": "USD", "period": "month", "unit": "per_user", "note": "Reported price applies to annual billing." },
+    { "key": "advanced", "name": "Advanced", "price": 399, "currency": "USD", "period": "month", "unit": "per_user", "quota": "Approval workflows, team permissions, bulk scheduling, custom reports" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Uitgebreid social-mediabeheer voor teams en organisaties",
+      "description": "Hootsuite combineert inplannen, een gedeelde inbox, social listening, goedkeuringsflows en rapportages voor organisaties die veel kanalen en teamleden beheren. Met AI-hulp voor posts.",
+      "bestFor": ["Grotere teams met goedkeuringsflows", "Rapportages over veel kanalen"],
+      "notFor": ["Zzp'ers en kleine bedrijven met een klein budget"],
+      "limitations": ["Hoge prijs per gebruiker"]
+    },
+    "en": {
+      "tagline": "Comprehensive social media management for teams and organisations",
+      "description": "Hootsuite combines scheduling, a shared inbox, social listening, approval flows and reporting for organisations that manage many channels and team members, with AI help for posts.",
+      "bestFor": ["Larger teams with approval flows", "Reporting across many channels"],
+      "notFor": ["Freelancers and small businesses on a tight budget"],
+      "limitations": ["High price per user"]
+    }
+  },
+  "relations": [{ "tool": "buffer", "kind": "alternative" }, { "tool": "later", "kind": "alternative" }, { "tool": "metricool", "kind": "alternative" }]
+}

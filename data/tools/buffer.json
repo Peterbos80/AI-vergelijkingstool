@@ -1,0 +1,47 @@
+{
+  "slug": "buffer",
+  "name": "Buffer",
+  "website": "https://buffer.com",
+  "company": { "name": "Buffer", "slug": "buffer", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "creators", "marketers"],
+  "capabilities": [
+    { "id": "social-scheduling", "strength": "primary" },
+    { "id": "copywriting", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Plan: Supports up to 3 connected channels with 10 scheduled posts per channel… Essentials Plan: $5 per channel per month on annual billing, or $6 per channel on monthly billing. Team Plan: $10 per channel per month on annual billing, or $12 per channel on monthly billing\"",
+    "sources": [
+      { "url": "https://www.blotato.com/blog/buffer-pricing", "type": "secondary" },
+      { "url": "https://postplanify.com/buffer-pricing", "type": "secondary" },
+      { "url": "https://socialk.it/en/pricing/buffer", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android", "chrome_extension"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://buffer.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Up to 3 channels, 10 scheduled posts per channel" },
+    { "key": "essentials", "name": "Essentials", "price": 6, "currency": "USD", "period": "month", "unit": "per_channel", "annualMonthly": 5 },
+    { "key": "team", "name": "Team", "price": 12, "currency": "USD", "period": "month", "unit": "per_channel", "annualMonthly": 10, "quota": "Unlimited team members" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Eenvoudig social media inplannen, met AI-hulp bij posts",
+      "description": "Buffer plant posts in voor onder meer Instagram, LinkedIn, TikTok en Facebook, met een AI-assistent voor ideeën en herformuleringen, en eenvoudige statistieken. Je betaalt per gekoppeld kanaal.",
+      "bestFor": ["Kleine teams en ondernemers", "Eenvoudig plannen zonder veel toeters en bellen"],
+      "notFor": ["Grote teams met uitgebreide rapportage-eisen"],
+      "limitations": ["Gratis: 3 kanalen en 10 geplande posts per kanaal", "Kosten stijgen per kanaal"]
+    },
+    "en": {
+      "tagline": "Simple social media scheduling with AI help for posts",
+      "description": "Buffer schedules posts for Instagram, LinkedIn, TikTok, Facebook and more, with an AI assistant for ideas and rewrites, plus simple analytics. You pay per connected channel.",
+      "bestFor": ["Small teams and entrepreneurs", "Simple scheduling without bloat"],
+      "notFor": ["Large teams with extensive reporting needs"],
+      "limitations": ["Free: 3 channels and 10 scheduled posts per channel", "Costs grow per channel"]
+    }
+  },
+  "relations": [{ "tool": "hootsuite", "kind": "alternative" }, { "tool": "later", "kind": "alternative" }, { "tool": "metricool", "kind": "alternative" }]
+}

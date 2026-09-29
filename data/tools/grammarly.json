@@ -1,0 +1,47 @@
+{
+  "slug": "grammarly",
+  "name": "Grammarly",
+  "website": "https://www.grammarly.com",
+  "company": { "name": "Grammarly", "slug": "grammarly", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "students", "professionals"],
+  "capabilities": [
+    { "id": "grammar-checking", "strength": "primary" },
+    { "id": "email-writing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free is $0, Pro is $144/year billed annually ($12/month averaged) or $360/year billed monthly ($30/month), and Enterprise is custom pricing… The company folded its old Premium and Business plans into one Pro tier\"",
+    "sources": [
+      { "url": "https://support.grammarly.com/hc/en-us/articles/115000090011-How-much-does-Grammarly-Pro-cost", "type": "official_docs", "title": "How much does Grammarly Pro cost?" },
+      { "url": "https://www.eesel.ai/blog/grammarly-pricing", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-writing-tools/grammarly/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "supports_dutch": { "value": false, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Grammarly focuses on English. Editorial knowledge; pending verification.", "sources": [{ "url": "https://www.grammarly.com", "type": "official" }] },
+    "platforms": { "value": ["web", "windows", "macos", "ios", "android", "chrome_extension"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.grammarly.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "pro", "name": "Pro", "price": 30, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 12 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Schrijfassistent voor foutloos en helder Engels",
+      "description": "Grammarly controleert spelling, grammatica, toon en helderheid terwijl je typt, in de browser, e-mail en Office, en kan teksten herschrijven met AI. Vooral sterk voor Engelstalige teksten; voor Nederlands is een alternatief zoals LanguageTool geschikter.",
+      "bestFor": ["Engelstalige e-mails en documenten", "Toon en helderheid verbeteren"],
+      "notFor": ["Nederlandstalige teksten"],
+      "limitations": ["Pro kost $30 per maand bij maandelijkse betaling"]
+    },
+    "en": {
+      "tagline": "Writing assistant for clear, error-free English",
+      "description": "Grammarly checks spelling, grammar, tone and clarity as you type, in the browser, email and Office, and can rewrite text with AI. Strongest for English; for Dutch or German a tool such as LanguageTool fits better.",
+      "bestFor": ["English emails and documents", "Improving tone and clarity"],
+      "notFor": ["Texts in Dutch"],
+      "limitations": ["Pro costs $30 per month on monthly billing"]
+    }
+  },
+  "relations": [{ "tool": "languagetool", "kind": "alternative" }, { "tool": "quillbot", "kind": "alternative" }]
+}

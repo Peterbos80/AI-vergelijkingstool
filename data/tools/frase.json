@@ -1,0 +1,49 @@
+{
+  "slug": "frase",
+  "name": "Frase",
+  "aliases": ["Frase.io"],
+  "website": "https://www.frase.io",
+  "pricingUrl": "https://www.frase.io/pricing",
+  "company": { "name": "Frase", "slug": "frase", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["marketers", "content-teams", "agencies"],
+  "capabilities": [
+    { "id": "seo-optimization", "strength": "primary" },
+    { "id": "long-form-writing", "strength": "secondary" },
+    { "id": "research-assistant", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Frase costs $49/month for Starter, $129/month for Professional, and $299/month for Scale with annual billing reducing each plan by 20%, bringing Starter to $39/month, Professional to $103/month, and Scale to $239/month… the older Solo/Basic/Team tiers are now Starter/Professional/Scale, and prices went up with the entry tier moving from $15 to $49.\"",
+    "sources": [
+      { "url": "https://www.frase.io/pricing", "type": "official", "title": "Frase Pricing" },
+      { "url": "https://docs.frase.io/get-started/plans-and-pricing", "type": "official_docs", "title": "Plans & Pricing" },
+      { "url": "https://www.rankup.so/academy/frase-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.frase.io", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "starter", "name": "Starter", "price": 49, "currency": "USD", "period": "month", "annualMonthly": 39 },
+    { "key": "professional", "name": "Professional", "price": 129, "currency": "USD", "period": "month", "annualMonthly": 103, "quota": "Extra seats $29/month" },
+    { "key": "scale", "name": "Scale", "price": 299, "currency": "USD", "period": "month", "annualMonthly": 239 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "SEO-onderzoek en contentbriefings met AI",
+      "description": "Frase helpt bij het onderzoeken van zoekintentie, het maken van contentbriefings en het schrijven en optimaliseren van artikelen voor Google en AI-zoekmachines. De oude, goedkope Solo-instap bestaat niet meer; het instapplan kost nu $49 per maand.",
+      "bestFor": ["Contentbriefings op basis van concurrentieanalyse", "Bureaus met veel SEO-content"],
+      "notFor": ["Kleine budgetten"],
+      "limitations": ["Instapprijs fors gestegen ten opzichte van het vroegere Solo-plan"]
+    },
+    "en": {
+      "tagline": "SEO research and content briefs with AI",
+      "description": "Frase helps research search intent, build content briefs and write and optimise articles for Google and AI search. The old low-cost Solo tier is gone; the entry plan now costs $49 per month.",
+      "bestFor": ["Content briefs based on competitor analysis", "Agencies producing lots of SEO content"],
+      "notFor": ["Small budgets"],
+      "limitations": ["Entry price rose sharply compared with the former Solo plan"]
+    }
+  },
+  "relations": [{ "tool": "surfer-seo", "kind": "alternative" }]
+}

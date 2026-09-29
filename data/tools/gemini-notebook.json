@@ -1,0 +1,51 @@
+{
+  "slug": "gemini-notebook",
+  "name": "Gemini Notebook",
+  "aliases": ["NotebookLM", "Notebook LM", "Google NotebookLM"],
+  "website": "https://notebooklm.google.com",
+  "company": { "name": "Google", "slug": "google", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["students", "researchers", "educators", "smb"],
+  "capabilities": [
+    { "id": "document-chat", "strength": "primary" },
+    { "id": "research-assistant", "strength": "primary" },
+    { "id": "summarization", "strength": "secondary" },
+    { "id": "note-taking", "strength": "secondary" },
+    { "id": "academic-research", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The free plan gives you 100 notebooks, 50 sources per notebook, and 50 chats a day… NotebookLM Plus is $4.99 per month, though it was $7.99/month before a June 2026 price cut. Pro is $19.99 a month, and Ultra starts at $99.99 a month… The paid plans are bundled into Google's consumer AI plans\"",
+    "sources": [
+      { "url": "https://www.layer3labs.io/guides/notebooklm-pricing", "type": "secondary" },
+      { "url": "https://elephas.app/blog/notebooklm-free-vs-plus", "type": "secondary" },
+      { "url": "https://aiproductivity.ai/pricing/notebooklm/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://notebooklm.google.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "100 notebooks, 50 sources per notebook, 50 chats and 3 Audio Overviews per day" },
+    { "key": "plus", "name": "Plus (Google AI Plus)", "price": 4.99, "currency": "USD", "period": "month", "quota": "200 notebooks, 100 sources per notebook, 200 chats per day" },
+    { "key": "pro", "name": "Pro (Google AI Pro)", "price": 19.99, "currency": "USD", "period": "month", "quota": "500 notebooks, 300 sources per notebook, 500 chats per day" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Onderzoeksnotitieboek van Google, vroeger NotebookLM",
+      "description": "Gemini Notebook (tot juli 2026 NotebookLM) laat je vragen stellen over je eigen bronnen: pdf's, websites, video's en notities. Antwoorden verwijzen naar de passages in je bronnen, en je kunt samenvattingen en 'Audio Overviews' (podcast-achtige samenvattingen) laten maken.",
+      "bestFor": ["Studeren en onderzoek in eigen bronnen", "Samenvattingen met verwijzingen naar de bron", "Audio-samenvattingen van documenten"],
+      "notFor": ["Onderzoek op het open web zonder eigen bronnen"],
+      "limitations": ["Gratis: 50 bronnen per notitieboek en 50 chats per dag"]
+    },
+    "en": {
+      "tagline": "Google's research notebook, formerly NotebookLM",
+      "description": "Gemini Notebook (NotebookLM until July 2026) lets you ask questions about your own sources: PDFs, websites, videos and notes. Answers cite passages in your sources, and you can generate summaries and 'Audio Overviews' (podcast-style summaries).",
+      "bestFor": ["Studying and research in your own sources", "Summaries that cite the source", "Audio summaries of documents"],
+      "notFor": ["Open-web research without your own sources"],
+      "limitations": ["Free: 50 sources per notebook and 50 chats per day"]
+    }
+  },
+  "relations": [{ "tool": "perplexity", "kind": "complements" }, { "tool": "gemini", "kind": "complements" }, { "tool": "elicit", "kind": "alternative" }]
+}

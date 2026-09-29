@@ -1,0 +1,50 @@
+{
+  "slug": "cursor",
+  "name": "Cursor",
+  "website": "https://cursor.com",
+  "company": { "name": "Anysphere", "slug": "anysphere", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "startups"],
+  "capabilities": [
+    { "id": "code-assistant", "strength": "primary" },
+    { "id": "agentic-coding", "strength": "primary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Hobby: Free; Pro: $20; Pro+: $60; Ultra: $200… Teams Standard: $40/user/month; Teams Premium: $120/user/month… Annual billing saves around 20%, with Pro dropping to approximately $16/month\"",
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/cursor-pricing", "type": "secondary" },
+      { "url": "https://www.lowcode.agency/blog/cursor-ai-pricing", "type": "secondary", "title": "Cursor AI pricing: all plans and credits (Sept 2026)" },
+      { "url": "https://dev.to/rahulxsingh/cursor-pricing-in-2026-hobby-pro-pro-ultra-teams-and-enterprise-plans-explained-4b89", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "model_dependencies": { "value": ["anthropic-claude", "openai-gpt", "google-gemini", "cursor-own"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Cursor lets users pick models from several providers. Editorial knowledge; pending verification.", "sources": [{ "url": "https://cursor.com", "type": "official" }] },
+    "platforms": { "value": ["windows", "macos", "linux"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://cursor.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "hobby", "name": "Hobby", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "pro", "name": "Pro", "price": 20, "currency": "USD", "period": "month", "annualMonthly": 16, "quota": "Credit pool equal to the plan price for manually selected models" },
+    { "key": "pro-plus", "name": "Pro+", "price": 60, "currency": "USD", "period": "month" },
+    { "key": "ultra", "name": "Ultra", "price": 200, "currency": "USD", "period": "month", "quota": "About 20× Pro usage" },
+    { "key": "teams", "name": "Teams Standard", "price": 40, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 32 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-code-editor met agents die zelfstandig code schrijven",
+      "description": "Cursor is een code-editor (gebaseerd op VS Code) waarin AI centraal staat: slimme aanvullingen, chat met je codebase en agents die taken over meerdere bestanden uitvoeren. Je kiest zelf uit modellen van verschillende aanbieders.",
+      "bestFor": ["Ontwikkelaars die sneller willen bouwen", "Grote wijzigingen over meerdere bestanden"],
+      "notFor": ["Mensen zonder programmeerervaring"],
+      "limitations": ["Verbruik boven de inbegrepen credits kost extra"]
+    },
+    "en": {
+      "tagline": "AI code editor with agents that write code on their own",
+      "description": "Cursor is a code editor (based on VS Code) built around AI: smart completions, chat with your codebase and agents that carry out multi-file tasks. You can choose models from several providers.",
+      "bestFor": ["Developers who want to ship faster", "Large multi-file changes"],
+      "notFor": ["People without programming experience"],
+      "limitations": ["Usage beyond the included credits costs extra"]
+    }
+  },
+  "relations": [{ "tool": "github-copilot", "kind": "alternative" }, { "tool": "windsurf", "kind": "alternative" }, { "tool": "claude-code", "kind": "alternative" }]
+}

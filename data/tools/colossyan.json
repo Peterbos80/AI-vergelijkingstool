@@ -1,0 +1,45 @@
+{
+  "slug": "colossyan",
+  "name": "Colossyan",
+  "website": "https://www.colossyan.com",
+  "company": { "name": "Colossyan", "slug": "colossyan" },
+  "skillLevel": "beginner",
+  "audience": ["educators", "enterprise", "hr"],
+  "capabilities": [
+    { "id": "avatar-video", "strength": "primary" },
+    { "id": "ai-dubbing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Starter Plan: $19/month (annual billing) or $27/month (monthly billing). Business Plan: … $70/month for annual billing and $88/month for monthly billing\"",
+    "sources": [
+      { "url": "https://www.guidde.com/knowledge-hub/colossyan-features-pricing-review-2026", "type": "secondary" },
+      { "url": "https://www.g2.com/products/colossyan-creator/pricing", "type": "secondary" },
+      { "url": "https://www.capterra.com/p/264645/Colossyan-Creator/pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.colossyan.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "starter", "name": "Starter", "price": 27, "currency": "USD", "period": "month", "annualMonthly": 19 },
+    { "key": "business", "name": "Business", "price": 88, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 70, "quota": "Priced per editor" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-presentatoren voor e-learning en trainingen",
+      "description": "Colossyan maakt instructie- en trainingsvideo's met AI-presentatoren, met functies die op e-learning zijn gericht, zoals scenario's en export naar leerplatforms. Een alternatief voor Synthesia en HeyGen met focus op L&D-teams.",
+      "bestFor": ["E-learning en compliance-trainingen", "L&D-teams die snel modules willen maken"],
+      "notFor": ["Marketingvideo's voor social media"],
+      "limitations": ["Business-plan wordt per editor afgerekend"]
+    },
+    "en": {
+      "tagline": "AI presenters for e-learning and training",
+      "description": "Colossyan creates instruction and training videos with AI presenters, with features aimed at e-learning such as scenarios and export to learning platforms. An alternative to Synthesia and HeyGen focused on L&D teams.",
+      "bestFor": ["E-learning and compliance training", "L&D teams that need modules fast"],
+      "notFor": ["Social media marketing videos"],
+      "limitations": ["Business plan is billed per editor"]
+    }
+  },
+  "relations": [{ "tool": "synthesia", "kind": "alternative" }, { "tool": "heygen", "kind": "alternative" }]
+}

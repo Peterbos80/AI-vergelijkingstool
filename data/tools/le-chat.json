@@ -1,0 +1,52 @@
+{
+  "slug": "le-chat",
+  "name": "Le Chat (Mistral AI)",
+  "aliases": ["Mistral", "Mistral Le Chat", "Le Chat"],
+  "website": "https://chat.mistral.ai",
+  "company": { "name": "Mistral AI", "slug": "mistral-ai", "country": "FR" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "smb", "developers", "enterprise"],
+  "capabilities": [
+    { "id": "chat-assistant", "strength": "primary" },
+    { "id": "research-assistant", "strength": "secondary" },
+    { "id": "document-chat", "strength": "secondary" },
+    { "id": "long-form-writing", "strength": "secondary" },
+    { "id": "translation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Tier: Free ($0). Pro Plan: Pro ($14.99/month). Team Plan: Team ($24.99/user/month)… dropping to $19.99 per user per month when billed annually… Le Chat offers a Pro plan around EUR 14.99/month\"",
+    "sources": [
+      { "url": "https://www.cloudzero.com/blog/mistral-api-pricing/", "type": "secondary" },
+      { "url": "https://techjacksolutions.com/ai-tools/mistral/mistral-pricing/", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-chatbots/mistral/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "api_available": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Mistral offers an API platform separately. Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://mistral.ai", "type": "official" }] },
+    "platforms": { "value": ["web", "ios", "android", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://chat.mistral.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "pro", "name": "Pro", "price": 14.99, "currency": "USD", "period": "month", "quota": "Includes API credits according to the sources" },
+    { "key": "team", "name": "Team", "price": 24.99, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 19.99 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Europese AI-assistent van het Franse Mistral AI",
+      "description": "Le Chat is de AI-assistent van Mistral AI, een Frans bedrijf. Hij biedt chat, zoeken op het web, documentanalyse en koppelingen, en is goedkoper dan de grote Amerikaanse alternatieven. Interessant voor wie de voorkeur geeft aan een Europese aanbieder.",
+      "bestFor": ["Wie een Europese AI-aanbieder zoekt", "Dagelijkse assistentie tegen een lagere prijs"],
+      "notFor": ["Wie beeld- en videogeneratie op topniveau zoekt"],
+      "limitations": ["Kleinere ecosysteem aan koppelingen dan de grootste spelers"]
+    },
+    "en": {
+      "tagline": "European AI assistant from France's Mistral AI",
+      "description": "Le Chat is the AI assistant from Mistral AI, a French company. It offers chat, web search, document analysis and integrations, and costs less than the big US alternatives. Interesting for people who prefer a European provider.",
+      "bestFor": ["People looking for a European AI provider", "Everyday assistance at a lower price"],
+      "notFor": ["Top-tier image and video generation"],
+      "limitations": ["Smaller integration ecosystem than the largest players"]
+    }
+  },
+  "relations": [{ "tool": "chatgpt", "kind": "alternative" }, { "tool": "claude", "kind": "alternative" }, { "tool": "gemini", "kind": "alternative" }]
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "pebblely",
+  "name": "Pebblely",
+  "website": "https://pebblely.com",
+  "pricingUrl": "https://pebblely.com/pricing/",
+  "company": { "name": "Pebblely", "slug": "pebblely", "country": "SG" },
+  "skillLevel": "beginner",
+  "audience": ["ecommerce", "smb"],
+  "capabilities": [
+    { "id": "product-photography", "strength": "primary" },
+    { "id": "background-removal", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Pebblely pricing starts at $9/month for the Lite plan (30 images/month), $19/month for the Basic plan (200 images/month), and $39/month for the Pro plan (500 images/month)… Pebblely offers a free plan that includes 40 AI-generated product images per month.\"",
+    "sources": [
+      { "url": "https://pebblely.com/pricing/", "type": "official", "title": "Pricing" },
+      { "url": "https://wizcommerce.com/blog/pebblely-pricing/", "type": "secondary" },
+      { "url": "https://toolradar.com/tools/pebblely", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://pebblely.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "40 images per month (reported)", "status": "unverified", "note": "Reported free allowance exceeds the Lite plan quota; pending verification on the official page." },
+    { "key": "lite", "name": "Lite", "price": 9, "currency": "USD", "period": "month", "quota": "30 images per month" },
+    { "key": "basic", "name": "Basic", "price": 19, "currency": "USD", "period": "month", "quota": "200 images per month" },
+    { "key": "pro", "name": "Pro", "price": 39, "currency": "USD", "period": "month", "quota": "500 images per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Productfoto's in sfeervolle scènes, zonder fotostudio",
+      "description": "Pebblely zet je product in gegenereerde achtergronden en scènes, met templates voor bijvoorbeeld marmer, natuur of seizoenen, en bulkgeneratie in verschillende formaten. Plannen verschillen alleen in het aantal beelden per maand.",
+      "bestFor": ["Kleine webshops die sfeerbeelden willen", "Snel veel varianten voor advertenties"],
+      "notFor": ["Complexe fotobewerking"],
+      "limitations": ["Aantal beelden per maand beperkt per plan"]
+    },
+    "en": {
+      "tagline": "Product photos in styled scenes, no photo studio",
+      "description": "Pebblely places your product in generated backgrounds and scenes, with templates such as marble, nature or seasonal themes, and bulk generation in multiple sizes. Plans differ only in images per month.",
+      "bestFor": ["Small online stores wanting lifestyle shots", "Many ad variations quickly"],
+      "notFor": ["Complex photo editing"],
+      "limitations": ["Images per month capped per plan"]
+    }
+  },
+  "relations": [{ "tool": "photoroom", "kind": "alternative" }]
+}

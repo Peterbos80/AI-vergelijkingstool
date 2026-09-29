@@ -1,0 +1,48 @@
+{
+  "slug": "adobe-express",
+  "name": "Adobe Express",
+  "website": "https://www.adobe.com/express/",
+  "company": { "name": "Adobe", "slug": "adobe", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "marketers", "creators", "educators"],
+  "capabilities": [
+    { "id": "graphic-design", "strength": "primary" },
+    { "id": "background-removal", "strength": "secondary" },
+    { "id": "image-generation", "strength": "secondary" },
+    { "id": "video-editing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The free plan costs $0 and needs no payment card. Premium costs US$9.99 a month and adds 250 Firefly generative credits, brand kits, and 100GB of storage, as of September 2026… annual option available at $99.99/yr.\"",
+    "sources": [
+      { "url": "https://photutorial.com/adobe-express-price/", "type": "secondary" },
+      { "url": "https://www.krea.ai/blog/what-is-adobe-express-free-plan-pricing-and-how-it-compares-in-2026", "type": "secondary" },
+      { "url": "https://www.g2.com/products/adobe-express/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.adobe.com/express/", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "premium", "name": "Premium", "price": 9.99, "currency": "USD", "period": "month", "annualMonthly": 8.33, "quota": "250 Firefly generative credits, brand kits, 100 GB" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Snelle ontwerpen en korte video's met Adobe-kwaliteit en Firefly-AI",
+      "description": "Adobe Express is Adobe's eenvoudige ontwerptool voor social posts, flyers en korte video's, met templates, merkkits en generatieve AI van Firefly. Een directe concurrent van Canva, met het voordeel van integratie met Photoshop en Illustrator.",
+      "bestFor": ["Snelle social content in huisstijl", "Wie al met Adobe-apps werkt"],
+      "notFor": ["Complexe ontwerpprojecten"],
+      "limitations": ["Premium-generaties begrensd via Firefly-credits"]
+    },
+    "en": {
+      "tagline": "Quick designs and short videos with Adobe quality and Firefly AI",
+      "description": "Adobe Express is Adobe's easy design tool for social posts, flyers and short videos, with templates, brand kits and Firefly generative AI. A direct Canva competitor, with integration into Photoshop and Illustrator.",
+      "bestFor": ["Fast on-brand social content", "People already using Adobe apps"],
+      "notFor": ["Complex design projects"],
+      "limitations": ["Premium generations capped by Firefly credits"]
+    }
+  },
+  "relations": [{ "tool": "canva", "kind": "alternative" }, { "tool": "adobe-firefly", "kind": "complements" }]
+}

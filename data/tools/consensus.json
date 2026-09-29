@@ -1,0 +1,47 @@
+{
+  "slug": "consensus",
+  "name": "Consensus",
+  "website": "https://consensus.app",
+  "company": { "name": "Consensus", "slug": "consensus", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["students", "researchers", "clinicians"],
+  "capabilities": [
+    { "id": "academic-research", "strength": "primary" },
+    { "id": "research-assistant", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Plan: Free for basic research; Pro Plan: $12 per month billed annually at $144 per year, against $20 per month month to month; Deep Plan: $45 per month billed annually at $540 per year, against $65 month to month\"",
+    "sources": [
+      { "url": "https://costbench.com/software/ai-research-tools/consensus/", "type": "secondary" },
+      { "url": "https://www.tooljunction.io/ai-tools/consensus-ai", "type": "secondary" },
+      { "url": "https://aitoolradar.io/guides/consensus", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://consensus.app", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "15 Pro messages and 3 Deep reviews per month" },
+    { "key": "pro", "name": "Pro", "price": 20, "currency": "USD", "period": "month", "annualMonthly": 12, "quota": "Unlimited Pro messages, 15 Deep reviews" },
+    { "key": "deep", "name": "Deep", "price": 65, "currency": "USD", "period": "month", "annualMonthly": 45, "quota": "200 Deep reviews" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Zoekmachine die antwoorden uit wetenschappelijk onderzoek haalt",
+      "description": "Consensus beantwoordt vragen op basis van peer-reviewed onderzoek en laat zien in hoeverre studies het met elkaar eens zijn, met verwijzingen naar de papers. Handig voor studenten, onderzoekers en zorgprofessionals.",
+      "bestFor": ["Snel zien wat onderzoek zegt over een vraag", "Studenten die betrouwbare bronnen zoeken"],
+      "notFor": ["Vragen zonder wetenschappelijke onderbouwing"],
+      "limitations": ["Gratis: 3 Deep reviews per maand"]
+    },
+    "en": {
+      "tagline": "Search engine that answers from scientific research",
+      "description": "Consensus answers questions from peer-reviewed research and shows how far studies agree, with links to the papers. Useful for students, researchers and clinicians.",
+      "bestFor": ["Quickly seeing what research says on a question", "Students looking for reliable sources"],
+      "notFor": ["Questions without a scientific evidence base"],
+      "limitations": ["Free: 3 Deep reviews per month"]
+    }
+  },
+  "relations": [{ "tool": "elicit", "kind": "alternative" }, { "tool": "perplexity", "kind": "alternative" }]
+}

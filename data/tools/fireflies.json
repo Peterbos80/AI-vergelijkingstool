@@ -1,0 +1,51 @@
+{
+  "slug": "fireflies",
+  "name": "Fireflies.ai",
+  "aliases": ["Fireflies"],
+  "website": "https://fireflies.ai",
+  "pricingUrl": "https://fireflies.ai/pricing",
+  "company": { "name": "Fireflies.ai", "slug": "fireflies-ai", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["sales", "smb", "enterprise"],
+  "capabilities": [
+    { "id": "meeting-notes", "strength": "primary" },
+    { "id": "transcription", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Fireflies.ai pricing starts at $0 (Free), $10/user/month (Pro, billed annually), $19/user/month (Business, billed annually), and $39/user/month (Enterprise, billed annually)… Pro runs $18/month with monthly billing, and Business runs $29/month\"",
+    "sources": [
+      { "url": "https://fireflies.ai/pricing", "type": "official", "title": "Pricing & Plans" },
+      { "url": "https://sonix.ai/resources/fireflies-ai-pricing/", "type": "secondary" },
+      { "url": "https://www.layer3labs.io/guides/fireflies-ai-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android", "chrome_extension"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://fireflies.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "pro", "name": "Pro", "price": 18, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 10 },
+    { "key": "business", "name": "Business", "price": 29, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 19 },
+    { "key": "enterprise", "name": "Enterprise", "price": 39, "currency": "USD", "period": "month", "unit": "per_seat", "annualMonthly": 39, "quota": "Annual billing only" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-notulist met zoekbare gesprekken en CRM-koppelingen",
+      "description": "Fireflies neemt deel aan je online meetings, transcribeert ze, maakt samenvattingen en zet actiepunten door naar je CRM of projecttool. Alle gesprekken worden doorzoekbaar, handig voor sales- en klantteams.",
+      "bestFor": ["Sales- en klantgesprekken vastleggen", "Koppelingen met CRM en projecttools"],
+      "notFor": ["Wie geen bot in vergaderingen wil"],
+      "limitations": ["Prijzen per seat; Enterprise alleen jaarlijks"]
+    },
+    "en": {
+      "tagline": "AI notetaker with searchable conversations and CRM sync",
+      "description": "Fireflies joins your online meetings, transcribes them, writes summaries and pushes action items to your CRM or project tool. All conversations become searchable, handy for sales and customer teams.",
+      "bestFor": ["Capturing sales and customer calls", "CRM and project tool integrations"],
+      "notFor": ["People who don't want a bot in meetings"],
+      "limitations": ["Priced per seat; Enterprise annual only"]
+    }
+  },
+  "relations": [{ "tool": "otter", "kind": "alternative" }, { "tool": "tldv", "kind": "alternative" }, { "tool": "fathom", "kind": "alternative" }]
+}

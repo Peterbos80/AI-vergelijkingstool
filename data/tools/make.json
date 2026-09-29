@@ -1,0 +1,49 @@
+{
+  "slug": "make",
+  "name": "Make",
+  "aliases": ["Make.com", "Integromat"],
+  "website": "https://www.make.com",
+  "company": { "name": "Make", "slug": "make", "country": "CZ" },
+  "skillLevel": "intermediate",
+  "audience": ["smb", "operations", "agencies"],
+  "capabilities": [
+    { "id": "workflow-automation", "strength": "primary" },
+    { "id": "ai-agents", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free ($0, 1,000 credits/month), Core ($12/month), Pro ($21/month), and Teams ($38/month), each based around a 10,000-credit monthly allowance… Make's pricing page defaults to the annual toggle, where Core at 10,000 credits is $12/month. Billed month to month, the same plan is $16.\"",
+    "sources": [
+      { "url": "https://costbench.com/software/ai-automation/make/", "type": "secondary" },
+      { "url": "https://www.usecarly.com/blog/make-com-pricing/", "type": "secondary" },
+      { "url": "https://www.lindy.ai/blog/make-com-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.make.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "1,000 credits per month" },
+    { "key": "core", "name": "Core", "price": 16, "currency": "USD", "period": "month", "annualMonthly": 12, "quota": "10,000 credits per month" },
+    { "key": "pro", "name": "Pro", "price": null, "currency": "USD", "period": "month", "annualMonthly": 21, "quota": "10,000 credits per month" },
+    { "key": "teams", "name": "Teams", "price": null, "currency": "USD", "period": "month", "annualMonthly": 38, "quota": "10,000 credits per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Visuele automatisering van het Tsjechische Make, voordelig op volume",
+      "description": "Make (voorheen Integromat, uit Praag) laat je complexe automatiseringen visueel bouwen met vertakkingen, lussen en AI-stappen. Per uitgevoerde handeling voordeliger dan Zapier, met een iets steilere leercurve.",
+      "bestFor": ["Complexe workflows met veel stappen", "Lagere kosten bij grotere volumes", "Wie een Europese aanbieder zoekt"],
+      "notFor": ["Absolute beginners die één simpele koppeling willen"],
+      "limitations": ["Credits per maand; AI-functies verbruiken credits anders dan gewone stappen"]
+    },
+    "en": {
+      "tagline": "Visual automation from Czech company Make, cost-effective at volume",
+      "description": "Make (formerly Integromat, from Prague) lets you build complex automations visually with branches, loops and AI steps. Cheaper per operation than Zapier, with a slightly steeper learning curve.",
+      "bestFor": ["Complex multi-step workflows", "Lower cost at higher volumes", "People who prefer a European provider"],
+      "notFor": ["Absolute beginners wanting one simple connection"],
+      "limitations": ["Monthly credits; AI features consume credits differently"]
+    }
+  },
+  "relations": [{ "tool": "zapier", "kind": "alternative" }, { "tool": "n8n", "kind": "alternative" }]
+}

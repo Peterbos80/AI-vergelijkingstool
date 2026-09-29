@@ -1,0 +1,47 @@
+{
+  "slug": "quillbot",
+  "name": "QuillBot",
+  "website": "https://quillbot.com",
+  "company": { "name": "Learneo", "slug": "learneo", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["students", "writers"],
+  "capabilities": [
+    { "id": "grammar-checking", "strength": "primary" },
+    { "id": "summarization", "strength": "secondary" },
+    { "id": "translation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"QuillBot offers a free plan… capped at 125 words per paraphrase… The monthly option costs $19.95 per month, while the annual option is $8.33 per month billed as $99.95 once a year.\"",
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/quillbot-pricing", "type": "secondary" },
+      { "url": "https://costbench.com/software/ai-writing-tools/quillbot/", "type": "secondary" },
+      { "url": "https://tekpon.com/software/quillbot/pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "chrome_extension", "windows", "macos"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://quillbot.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "125 words per paraphrase" },
+    { "key": "premium", "name": "Premium", "price": 19.95, "currency": "USD", "period": "month", "annualMonthly": 8.33 }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Herformuleren, samenvatten en grammatica checken",
+      "description": "QuillBot herschrijft zinnen in verschillende stijlen, vat teksten samen en controleert grammatica, met een plagiaatcheck en citatiehulp. Populair bij studenten.",
+      "bestFor": ["Teksten herformuleren", "Studenten die samenvattingen maken"],
+      "notFor": ["Complete marketingcampagnes"],
+      "limitations": ["Gratis: 125 woorden per herformulering"]
+    },
+    "en": {
+      "tagline": "Paraphrase, summarise and check grammar",
+      "description": "QuillBot rewrites sentences in different styles, summarises text and checks grammar, with a plagiarism checker and citation help. Popular with students.",
+      "bestFor": ["Paraphrasing text", "Students writing summaries"],
+      "notFor": ["Full marketing campaigns"],
+      "limitations": ["Free: 125 words per paraphrase"]
+    }
+  },
+  "relations": [{ "tool": "grammarly", "kind": "alternative" }, { "tool": "languagetool", "kind": "alternative" }]
+}

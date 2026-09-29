@@ -1,0 +1,47 @@
+{
+  "slug": "rask-ai",
+  "name": "Rask AI",
+  "website": "https://www.rask.ai",
+  "company": { "name": "Rask AI", "slug": "rask-ai" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "marketers", "educators", "enterprise"],
+  "capabilities": [
+    { "id": "ai-dubbing", "strength": "primary" },
+    { "id": "auto-subtitles", "strength": "secondary" },
+    { "id": "translation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The Creator plan costs $60 per month and includes 25 minutes per month, while the Creator Pro plan is $150 per month for 100 minutes per month… The Business plan costs $750 per month and includes 500 minutes… lip-sync features cost 3 times the minutes\"",
+    "sources": [
+      { "url": "https://perso.ai/blog/rask-ai-dubbing-review-2026-features-pricing-how-it-compares", "type": "secondary" },
+      { "url": "https://www.saasworthy.com/product/rask-ai/pricing", "type": "secondary" },
+      { "url": "https://www.stork.ai/en/rask-ai", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.rask.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "creator", "name": "Creator", "price": 60, "currency": "USD", "period": "month", "quota": "25 minutes per month" },
+    { "key": "creator-pro", "name": "Creator Pro", "price": 150, "currency": "USD", "period": "month", "quota": "100 minutes per month" },
+    { "key": "business", "name": "Business", "price": 750, "currency": "USD", "period": "month", "annualMonthly": 500, "quota": "500 minutes per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Video's vertalen en nasynchroniseren in meer dan honderd talen",
+      "description": "Rask AI vertaalt video's automatisch: transcriptie, vertaling, ingesproken stem (ook gekloond) en optioneel lipsync. Geschikt om bestaande content internationaal te hergebruiken.",
+      "bestFor": ["YouTube- en trainingsvideo's in meerdere talen", "Teams die veel minuten video lokaliseren"],
+      "notFor": ["Incidenteel gebruik met een klein budget"],
+      "limitations": ["Lipsync verbruikt drie keer zoveel minuten", "Hoge instapprijs per minuut"]
+    },
+    "en": {
+      "tagline": "Translate and dub videos into more than a hundred languages",
+      "description": "Rask AI translates videos automatically: transcription, translation, voice-over (including cloned voices) and optional lip sync. Suited to reusing existing content internationally.",
+      "bestFor": ["YouTube and training videos in multiple languages", "Teams localising many video minutes"],
+      "notFor": ["Occasional use on a small budget"],
+      "limitations": ["Lip sync consumes three times the minutes", "High entry price per minute"]
+    }
+  },
+  "relations": [{ "tool": "heygen", "kind": "alternative" }, { "tool": "elevenlabs", "kind": "alternative" }]
+}

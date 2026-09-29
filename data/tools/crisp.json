@@ -1,0 +1,46 @@
+{
+  "slug": "crisp",
+  "name": "Crisp",
+  "aliases": ["Crisp Chat", "Crisp Hugo"],
+  "website": "https://crisp.chat",
+  "company": { "name": "Crisp IM", "slug": "crisp-im", "country": "FR" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "saas", "ecommerce"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Crisp's 2026 plans are Free ($0, 2 seats), Mini ($45, 4 seats), Essentials ($95, 10 seats), and Plus ($295, 20 seats, then $10 per extra seat), each priced per workspace per month… AI credit allowance… $5 on Mini, $25 on Essentials, $75 on Plus\"",
+    "sources": [
+      { "url": "https://www.dragapp.com/blog/crisp-pricing/", "type": "secondary" },
+      { "url": "https://www.eesel.ai/blog/crisp-ai-chatbot", "type": "secondary" },
+      { "url": "https://myaskai.com/blog/crisp-pricing-explained", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "ios", "android", "windows", "macos"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://crisp.chat", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "2 seats" },
+    { "key": "mini", "name": "Mini", "price": 45, "currency": "USD", "period": "month", "quota": "4 seats, $5 AI credits" },
+    { "key": "essentials", "name": "Essentials", "price": 95, "currency": "USD", "period": "month", "quota": "10 seats, $25 AI credits, knowledge base and chatbot builder" },
+    { "key": "plus", "name": "Plus", "price": 295, "currency": "USD", "period": "month", "quota": "20 seats, $75 AI credits" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Franse klantcontactsuite met AI-agent Hugo, prijs per werkruimte",
+      "description": "Crisp, uit Frankrijk, bundelt livechat, e-mail, social en een helpcenter in één inbox, met de AI-agent Hugo voor automatische antwoorden. Je betaalt per werkruimte in plaats van per medewerker, wat voordelig is voor teams.",
+      "bestFor": ["Teams die niet per seat willen betalen", "Wie een Europese aanbieder zoekt"],
+      "notFor": ["Wie de kennisbank en chatbotbouwer op het goedkoopste plan nodig heeft"],
+      "limitations": ["Kennisbank en chatbotbouwer pas vanaf Essentials ($95/maand)"]
+    },
+    "en": {
+      "tagline": "French customer messaging suite with the Hugo AI agent, priced per workspace",
+      "description": "France-based Crisp bundles live chat, email, social and a help center in one inbox, with Hugo, an AI agent for automatic replies. You pay per workspace rather than per agent, which suits teams.",
+      "bestFor": ["Teams that don't want per-seat pricing", "People who prefer a European provider"],
+      "notFor": ["Needing the knowledge base and bot builder on the cheapest plan"],
+      "limitations": ["Knowledge base and bot builder start at Essentials ($95/month)"]
+    }
+  },
+  "relations": [{ "tool": "tidio", "kind": "alternative" }, { "tool": "intercom", "kind": "alternative" }]
+}

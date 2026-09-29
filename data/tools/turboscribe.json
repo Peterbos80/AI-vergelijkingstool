@@ -1,0 +1,47 @@
+{
+  "slug": "turboscribe",
+  "name": "TurboScribe",
+  "website": "https://turboscribe.ai",
+  "pricingUrl": "https://turboscribe.ai/pricing",
+  "company": { "name": "TurboScribe", "slug": "turboscribe", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["students", "researchers", "creators"],
+  "capabilities": [
+    { "id": "transcription", "strength": "primary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The free plan costs $0 and lets you transcribe up to 3 files per day (around 30 minutes per file). TurboScribe Unlimited costs $10/month (billed yearly) or $20/month (billed monthly).\"",
+    "sources": [
+      { "url": "https://turboscribe.ai/pricing", "type": "official", "title": "Pricing" },
+      { "url": "https://www.toolsforhumans.ai/ai-tools/turboscribe", "type": "secondary" },
+      { "url": "https://convertaudiototext.com/pricing-comparison/turboscribe", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://turboscribe.ai", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "3 files per day, up to about 30 minutes each" },
+    { "key": "unlimited", "name": "Unlimited", "price": 20, "currency": "USD", "period": "month", "annualMonthly": 10, "quota": "Unlimited transcription" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Onbeperkt transcriberen voor een vaste prijs",
+      "description": "TurboScribe schrijft audio en video uit met een Whisper-achtig spraakmodel, in tientallen talen, met exports naar tekst en ondertitels. Het betaalde plan heeft geen minutenlimiet, wat het voordelig maakt bij veel opnames.",
+      "bestFor": ["Veel uren audio uitschrijven voor een vaste prijs", "Studenten en onderzoekers"],
+      "notFor": ["Wie menselijke controle of meetingbots nodig heeft"],
+      "limitations": ["Gratis: 3 bestanden per dag"]
+    },
+    "en": {
+      "tagline": "Unlimited transcription for a flat price",
+      "description": "TurboScribe transcribes audio and video with a Whisper-class speech model in dozens of languages, exporting to text and subtitles. The paid plan has no minute cap, which pays off when you have lots of recordings.",
+      "bestFor": ["Transcribing many hours for a flat fee", "Students and researchers"],
+      "notFor": ["People who need human review or meeting bots"],
+      "limitations": ["Free: 3 files per day"]
+    }
+  },
+  "relations": [{ "tool": "happy-scribe", "kind": "alternative" }, { "tool": "amberscript", "kind": "alternative" }]
+}

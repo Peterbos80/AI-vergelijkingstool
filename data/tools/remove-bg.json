@@ -1,0 +1,47 @@
+{
+  "slug": "remove-bg",
+  "name": "remove.bg",
+  "aliases": ["removebg", "remove bg"],
+  "website": "https://www.remove.bg",
+  "company": { "name": "Kaleido AI (Canva)", "slug": "kaleido-ai", "country": "AT" },
+  "skillLevel": "beginner",
+  "audience": ["ecommerce", "designers", "smb"],
+  "capabilities": [{ "id": "background-removal", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Remove.bg subscription plans begin at Lite for $9/month (40 credits), with the Pro plan at $39/month ($35.10/month annually) for 200 credits, and Volume+ at $89/month ($80.10/month annually) with 500 credits… Remove.bg offers a free version and starts at €3 one time for the Pay-as-you-go plan with 3 credits.\"",
+    "sources": [
+      { "url": "https://costbench.com/software/ai-design-tools/remove-bg/", "type": "secondary" },
+      { "url": "https://saascrmreview.com/remove-bg-review/", "type": "secondary" },
+      { "url": "https://www.softwaresuggest.com/remove-bg/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "api_available": { "value": true, "evidence": "Search result title: \"Remove.bg API Pricing 2026: $3.0-$80.1/User Plans Compared\"" },
+    "platforms": { "value": ["web", "api", "windows", "macos"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.remove.bg", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Preview resolution" },
+    { "key": "lite", "name": "Lite", "price": 9, "currency": "USD", "period": "month", "annualMonthly": 8.1, "quota": "40 credits per month" },
+    { "key": "pro", "name": "Pro", "price": 39, "currency": "USD", "period": "month", "annualMonthly": 35.1, "quota": "200 credits per month" },
+    { "key": "volume-plus", "name": "Volume+", "price": 89, "currency": "USD", "period": "month", "annualMonthly": 80.1, "quota": "500 credits per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Achtergrond verwijderen in één klik, ook via API",
+      "description": "remove.bg, oorspronkelijk van het Oostenrijkse Kaleido en nu onderdeel van Canva, haalt automatisch de achtergrond uit foto's van producten, mensen en dieren. Beschikbaar via web, desktop en API voor bulkverwerking.",
+      "bestFor": ["Snel vrijstaande productfoto's", "Bulkverwerking via API"],
+      "notFor": ["Complete productfotoscènes genereren"],
+      "limitations": ["Gratis downloads alleen in lage resolutie"]
+    },
+    "en": {
+      "tagline": "One-click background removal, also via API",
+      "description": "remove.bg, originally from Austria's Kaleido and now part of Canva, automatically removes backgrounds from photos of products, people and animals. Available on web, desktop and via API for bulk processing.",
+      "bestFor": ["Fast cut-out product photos", "Bulk processing via API"],
+      "notFor": ["Generating complete product photo scenes"],
+      "limitations": ["Free downloads only in low resolution"]
+    }
+  },
+  "relations": [{ "tool": "photoroom", "kind": "alternative" }, { "tool": "canva", "kind": "alternative" }]
+}

@@ -1,0 +1,48 @@
+{
+  "slug": "rows",
+  "name": "Rows",
+  "website": "https://rows.com",
+  "pricingUrl": "https://rows.com/pricing",
+  "company": { "name": "Rows", "slug": "rows" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "marketers", "analysts"],
+  "capabilities": [
+    { "id": "data-analysis", "strength": "primary" },
+    { "id": "workflow-automation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free Plan: $0/month, includes 5 AI tasks per month… Plus Plan: $8/month per user, includes 200 AI tasks per month. When billed annually, the Plus Plan is $6/month per user. Pro Plan: $79/month + $8/month per user, includes 1,000 AI tasks per month.\"",
+    "sources": [
+      { "url": "https://rows.com/pricing", "type": "official", "title": "Rows Pricing Plans: Free, Plus, Pro and Enterprise" },
+      { "url": "https://www.buildfastwithai.com/ai-tools/rows", "type": "secondary" },
+      { "url": "https://www.saasworthy.com/product/rows-spreadsheet/pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://rows.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "5 AI tasks per month" },
+    { "key": "plus", "name": "Plus", "price": 8, "currency": "USD", "period": "month", "unit": "per_user", "annualMonthly": 6, "quota": "200 AI tasks per month" },
+    { "key": "pro", "name": "Pro", "price": 79, "currency": "USD", "period": "month", "annualMonthly": 59, "quota": "1,000 AI tasks per month, plus $8 per user" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Spreadsheet met ingebouwde AI en live datakoppelingen",
+      "description": "Rows is een online spreadsheet met een AI-analist die data samenvat, grafieken maakt en tabellen transformeert, plus koppelingen met bronnen als Google Analytics, HubSpot en Stripe voor live rapportages.",
+      "bestFor": ["Marketing- en salesrapportages met live data", "Teams die van Excel naar het web willen"],
+      "notFor": ["Zeer grote datasets of complexe BI"],
+      "limitations": ["Gratis: 5 AI-taken per maand"]
+    },
+    "en": {
+      "tagline": "Spreadsheet with built-in AI and live data connections",
+      "description": "Rows is an online spreadsheet with an AI analyst that summarises data, builds charts and transforms tables, plus integrations with sources such as Google Analytics, HubSpot and Stripe for live reporting.",
+      "bestFor": ["Marketing and sales reports with live data", "Teams moving from Excel to the web"],
+      "notFor": ["Very large datasets or complex BI"],
+      "limitations": ["Free: 5 AI tasks per month"]
+    }
+  },
+  "relations": [{ "tool": "julius", "kind": "alternative" }]
+}

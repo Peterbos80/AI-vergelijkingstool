@@ -1,0 +1,49 @@
+{
+  "slug": "happy-scribe",
+  "name": "Happy Scribe",
+  "website": "https://www.happyscribe.com",
+  "pricingUrl": "https://www.happyscribe.com/pricing",
+  "company": { "name": "Happy Scribe", "slug": "happy-scribe", "country": "ES" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "journalists", "educators", "smb"],
+  "capabilities": [
+    { "id": "transcription", "strength": "primary" },
+    { "id": "auto-subtitles", "strength": "primary" },
+    { "id": "translation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Happy Scribe offers a free 10-minute trial, Basic at $17/month (120 AI minutes), Pro at $29/month (600 AI minutes), and Business at $89/month (6,000 AI minutes). Annual billing lowers prices to Basic $8.50/month, Pro $19/month, and Business $59/month.\"",
+    "sources": [
+      { "url": "https://www.happyscribe.com/pricing", "type": "official", "title": "Pricing and Rates" },
+      { "url": "https://www.eesel.ai/blog/happyscribe-pricing", "type": "secondary" },
+      { "url": "https://sonix.ai/resources/happy-scribe-pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_trial": { "value": true, "evidence": "Web search summary: \"a free 10-minute trial\"" },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.happyscribe.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "basic", "name": "Basic", "price": 17, "currency": "USD", "period": "month", "annualMonthly": 8.5, "quota": "120 AI minutes per month" },
+    { "key": "pro", "name": "Pro", "price": 29, "currency": "USD", "period": "month", "annualMonthly": 19, "quota": "600 AI minutes per month" },
+    { "key": "business", "name": "Business", "price": 89, "currency": "USD", "period": "month", "annualMonthly": 59, "quota": "6,000 AI minutes per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Transcriptie en ondertiteling in veel talen, uit Barcelona",
+      "description": "Happy Scribe, een Spaans bedrijf, zet audio en video om in transcripties en ondertitels in tientallen talen, met een editor om te corrigeren en optionele menselijke transcriptie. Geschikt voor makers, redacties en onderwijs.",
+      "bestFor": ["Ondertitels voor video's in meerdere talen", "Interviews en podcasts uitschrijven"],
+      "notFor": ["Live meeting-notulen"],
+      "limitations": ["Extra AI-minuten boven de bundel kosten $0,20 per minuut"]
+    },
+    "en": {
+      "tagline": "Transcription and subtitles in many languages, from Barcelona",
+      "description": "Happy Scribe, a Spanish company, turns audio and video into transcripts and subtitles in dozens of languages, with an editor for corrections and optional human transcription. Suits creators, newsrooms and education.",
+      "bestFor": ["Subtitles for videos in several languages", "Transcribing interviews and podcasts"],
+      "notFor": ["Live meeting notes"],
+      "limitations": ["Extra AI minutes beyond the bundle cost $0.20 per minute"]
+    }
+  },
+  "relations": [{ "tool": "amberscript", "kind": "alternative" }, { "tool": "turboscribe", "kind": "alternative" }]
+}

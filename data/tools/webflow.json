@@ -1,0 +1,47 @@
+{
+  "slug": "webflow",
+  "name": "Webflow",
+  "website": "https://webflow.com",
+  "company": { "name": "Webflow", "slug": "webflow", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["designers", "agencies", "marketers"],
+  "capabilities": [
+    { "id": "website-builder", "strength": "primary" },
+    { "id": "seo-optimization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Basic Plan: $14/month (billed annually) or $18/month (billed monthly)… Premium Plan (combines former CMS and Business plans): … $25/month for a yearly plan or $39/month for a monthly plan… Starter Plan: Free… Premium replaced the old CMS and Business plans on May 13, 2026\"",
+    "sources": [
+      { "url": "https://webflow.com/blog/simplified-plans-and-updated-pricing-2026", "type": "official_blog", "title": "We're updating our pricing — and simplifying our plans" },
+      { "url": "https://help.webflow.com/hc/en-us/articles/51059955082387-Updated-pricing-and-simplified-plans-for-May-2026", "type": "official_docs", "title": "Updated pricing and simplified plans for May 2026" },
+      { "url": "https://brixtemplates.com/blog/webflow-may-2026-pricing-changes-explained", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://webflow.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "starter", "name": "Starter", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "basic", "name": "Basic", "price": 18, "currency": "USD", "period": "month", "annualMonthly": 14, "quota": "300 static pages, 10 GB bandwidth, no CMS", "note": "One source lists $15/month on annual billing." },
+    { "key": "premium", "name": "Premium", "price": 39, "currency": "USD", "period": "month", "annualMonthly": 25, "quota": "20,000 CMS items, 40 collections, 50 GB bandwidth" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Professionele websitebouwer voor ontwerpers, met CMS en AI",
+      "description": "Webflow geeft ontwerpers en bureaus volledige visuele controle over HTML/CSS zonder te programmeren, met een krachtig CMS, SEO-instellingen en AI-hulp. In mei 2026 vereenvoudigde Webflow zijn plannen: Premium verving CMS en Business.",
+      "bestFor": ["Bureaus en ontwerpers die maatwerk sites bouwen", "Contentrijke sites met CMS"],
+      "notFor": ["Beginners die in een uur online willen"],
+      "limitations": ["Leercurve is steiler dan bij Wix of Framer"]
+    },
+    "en": {
+      "tagline": "Professional website builder for designers, with CMS and AI",
+      "description": "Webflow gives designers and agencies full visual control over HTML/CSS without coding, with a powerful CMS, SEO settings and AI help. In May 2026 Webflow simplified its plans: Premium replaced CMS and Business.",
+      "bestFor": ["Agencies and designers building custom sites", "Content-heavy sites with a CMS"],
+      "notFor": ["Beginners who want to be online within an hour"],
+      "limitations": ["Steeper learning curve than Wix or Framer"]
+    }
+  },
+  "relations": [{ "tool": "framer", "kind": "alternative" }, { "tool": "wix", "kind": "alternative" }]
+}

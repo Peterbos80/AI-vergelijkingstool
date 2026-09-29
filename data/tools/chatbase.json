@@ -1,0 +1,49 @@
+{
+  "slug": "chatbase",
+  "name": "Chatbase",
+  "website": "https://www.chatbase.co",
+  "company": { "name": "Chatbase", "slug": "chatbase" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "ecommerce", "saas"],
+  "capabilities": [
+    { "id": "support-chatbot", "strength": "primary" },
+    { "id": "ai-agents", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Free: $0/month with 50 message credits; Hobby: $32/month (annual billing) or $40/month (monthly)…; Standard: $120/month (annual billing) or $150/month (monthly) with 4,000 message credits; Pro: $400/month (annual billing) or $500/month (monthly) with 15,000 message credits\"",
+    "sources": [
+      { "url": "https://chatarmin.com/en/blog/chatbase-pricing", "type": "secondary" },
+      { "url": "https://www.featurebase.app/blog/chatbase-pricing", "type": "secondary" },
+      { "url": "https://www.capterra.com/p/10012414/Chatbase/pricing/", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "api_available": { "value": true, "evidence": "Web search summary: \"The Standard plan adds Helpdesk, voice, telephony, and API access.\"" },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.chatbase.co", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "50 message credits per month" },
+    { "key": "hobby", "name": "Hobby", "price": 40, "currency": "USD", "period": "month", "annualMonthly": 32, "quota": "500–700 message credits per month" },
+    { "key": "standard", "name": "Standard", "price": 150, "currency": "USD", "period": "month", "annualMonthly": 120, "quota": "4,000 message credits per month" },
+    { "key": "pro", "name": "Pro", "price": 500, "currency": "USD", "period": "month", "annualMonthly": 400, "quota": "15,000 message credits per month" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Eigen AI-chatbot trainen op je website en documenten",
+      "description": "Met Chatbase train je een AI-agent op je eigen website, documenten en helpcenter en plaats je die als chatwidget of koppel je hem aan kanalen als WhatsApp en Slack. Je betaalt per AI-antwoord (message credits).",
+      "bestFor": ["Snel een chatbot op eigen content", "Kleine bedrijven zonder helpdesksoftware"],
+      "notFor": ["Grote supportteams met complexe tickets"],
+      "limitations": ["Verbruik per bericht; extra credits bijkopen kost circa $40 per 1.000"]
+    },
+    "en": {
+      "tagline": "Train your own AI chatbot on your website and documents",
+      "description": "Chatbase lets you train an AI agent on your website, documents and help center and deploy it as a chat widget or on channels such as WhatsApp and Slack. You pay per AI reply (message credits).",
+      "bestFor": ["A chatbot on your own content, fast", "Small businesses without helpdesk software"],
+      "notFor": ["Large support teams with complex tickets"],
+      "limitations": ["Per-message usage; extra credits cost about $40 per 1,000"]
+    }
+  },
+  "relations": [{ "tool": "tidio", "kind": "alternative" }, { "tool": "intercom", "kind": "alternative" }]
+}

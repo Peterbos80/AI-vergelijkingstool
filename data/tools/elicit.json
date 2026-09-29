@@ -1,0 +1,49 @@
+{
+  "slug": "elicit",
+  "name": "Elicit",
+  "website": "https://elicit.com",
+  "company": { "name": "Elicit", "slug": "elicit", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["researchers", "students", "analysts"],
+  "capabilities": [
+    { "id": "academic-research", "strength": "primary" },
+    { "id": "document-chat", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Basic (Free), Pro at $49/mo, Scale at $169/mo, Enterprise (custom pricing)… pricing was restructured from the earlier Plus/Pro model… Basic (Free): Unlimited search and 2 automated reports per month\"",
+    "sources": [
+      { "url": "https://aiproductivity.ai/pricing/elicit/", "type": "secondary", "title": "Elicit Pricing 2026: Free + $49/mo Pro, $169/mo Scale" },
+      { "url": "https://fast.io/resources/elicit-ai-review-2026/", "type": "secondary" },
+      { "url": "https://ideaproof.io/saas-pricing/product/elicit", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "api_available": { "value": true, "evidence": "Web search summary: Pro includes \"API access\"" },
+    "platforms": { "value": ["web", "api"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://elicit.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "basic", "name": "Basic", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Unlimited search, 2 automated reports per month" },
+    { "key": "pro", "name": "Pro", "price": 49, "currency": "USD", "period": "month", "quota": "Research agent, systematic reviews (screen 5,000 papers), 144 reports per year" },
+    { "key": "scale", "name": "Scale", "price": 169, "currency": "USD", "period": "month", "quota": "5× Pro usage for teams" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-onderzoeksassistent voor wetenschappelijke literatuur",
+      "description": "Elicit doorzoekt miljoenen wetenschappelijke papers, vat bevindingen samen, extraheert gegevens in tabellen en ondersteunt systematische reviews. Gericht op onderzoekers en analisten die onderbouwde antwoorden nodig hebben.",
+      "bestFor": ["Literatuurstudies en systematische reviews", "Gegevens uit veel papers extraheren"],
+      "notFor": ["Algemene vragen buiten de wetenschap"],
+      "limitations": ["Gratis: 2 automatische rapporten per maand"]
+    },
+    "en": {
+      "tagline": "AI research assistant for scientific literature",
+      "description": "Elicit searches millions of scientific papers, summarises findings, extracts data into tables and supports systematic reviews. Built for researchers and analysts who need evidence-backed answers.",
+      "bestFor": ["Literature reviews and systematic reviews", "Extracting data from many papers"],
+      "notFor": ["General questions outside science"],
+      "limitations": ["Free: 2 automated reports per month"]
+    }
+  },
+  "relations": [{ "tool": "consensus", "kind": "alternative" }, { "tool": "gemini-notebook", "kind": "complements" }]
+}

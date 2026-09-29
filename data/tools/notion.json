@@ -1,0 +1,50 @@
+{
+  "slug": "notion",
+  "name": "Notion",
+  "aliases": ["Notion AI"],
+  "website": "https://www.notion.com",
+  "company": { "name": "Notion Labs", "slug": "notion-labs", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["teams", "startups", "students", "smb"],
+  "capabilities": [
+    { "id": "note-taking", "strength": "primary" },
+    { "id": "meeting-notes", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" },
+    { "id": "ai-agents", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"Notion pricing in 2026 has four tiers: Free ($0), Plus ($10 per user/month), Business ($20 per user/month), and Enterprise (custom)… Full Notion AI is built into the Business plan… with Free and Plus limited to a capped trial\"",
+    "sources": [
+      { "url": "https://www.eesel.ai/blog/notion-pricing", "type": "secondary" },
+      { "url": "https://costbench.com/software/project-management/notion/", "type": "secondary", "title": "Notion Pricing 2026: Free, $10 Plus, $20 Business per User" },
+      { "url": "https://coworker.ai/blog/notion-ai-pricing", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true },
+    "platforms": { "value": ["web", "windows", "macos", "ios", "android"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://www.notion.com", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true, "quota": "Limited AI trial" },
+    { "key": "plus", "name": "Plus", "price": 10, "currency": "USD", "period": "month", "unit": "per_user", "quota": "Limited AI trial" },
+    { "key": "business", "name": "Business", "price": 20, "currency": "USD", "period": "month", "unit": "per_user", "quota": "Full Notion AI incl. Notion Agent" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Werkruimte voor notities, wiki's en projecten met ingebouwde AI",
+      "description": "Notion combineert documenten, wiki's, databases en projectbeheer in één werkruimte. Met Notion AI (volledig in het Business-plan) vat je pagina's samen, schrijf je teksten, notuleer je meetings en zet je agents in voor terugkerend werk.",
+      "bestFor": ["Teamkennis en documentatie op één plek", "Meetingnotities koppelen aan projecten"],
+      "notFor": ["Wie alleen een losse AI-chat zoekt"],
+      "limitations": ["Volledige AI alleen in het Business-plan"]
+    },
+    "en": {
+      "tagline": "Workspace for notes, wikis and projects with built-in AI",
+      "description": "Notion combines documents, wikis, databases and project management in one workspace. With Notion AI (fully included in Business) you summarise pages, draft text, take meeting notes and use agents for recurring work.",
+      "bestFor": ["Team knowledge and documentation in one place", "Linking meeting notes to projects"],
+      "notFor": ["People who only want a standalone AI chat"],
+      "limitations": ["Full AI only on the Business plan"]
+    }
+  },
+  "relations": [{ "tool": "granola", "kind": "complements" }, { "tool": "gemini-notebook", "kind": "alternative" }]
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "elevenlabs",
+  "name": "ElevenLabs",
+  "website": "https://elevenlabs.io",
+  "pricingUrl": "https://elevenlabs.io/pricing",
+  "company": { "name": "ElevenLabs", "slug": "elevenlabs" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "marketers", "developers", "educators"],
+  "capabilities": [
+    { "id": "text-to-speech", "strength": "primary" },
+    { "id": "voice-cloning", "strength": "primary" },
+    { "id": "ai-dubbing", "strength": "secondary" },
+    { "id": "music-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "supported", "method": "web_search", "observed": "2026-09-29",
+    "evidence": "Web search summary: \"The Starter plan costs $6 per month, and the Creator plan costs $22 per month ($11 for the first month as a promotion)… With annual billing you pay for 10 months (two months free), bringing the equivalent monthly price to $5 for Starter and $18.33 for Creator.\"",
+    "sources": [
+      { "url": "https://elevenlabs.io/pricing", "type": "official", "title": "ElevenLabs Pricing" },
+      { "url": "https://costbench.com/software/ai-voice-tools/elevenlabs/", "type": "secondary", "title": "ElevenLabs Pricing 2026: 7 Plans from Free to $990/month" },
+      { "url": "https://flexprice.io/blog/elevenlabs-pricing-breakdown", "type": "secondary" }
+    ]
+  },
+  "facts": {
+    "has_free_tier": { "value": true, "evidence": "Search result title: \"ElevenLabs Pricing 2026: 7 Plans from Free to $990/month\"" },
+    "api_available": { "value": true, "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://elevenlabs.io", "type": "official" }] },
+    "platforms": { "value": ["web", "api", "ios"], "status": "unverified", "method": "editorial", "observed": "2026-09-29", "note": "Editorial knowledge; pending automated verification.", "sources": [{ "url": "https://elevenlabs.io", "type": "official" }] }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "starter", "name": "Starter", "price": 6, "currency": "USD", "period": "month", "annualMonthly": 5, "quota": "30,000 credits per month; instant voice cloning" },
+    { "key": "creator", "name": "Creator", "price": 22, "currency": "USD", "period": "month", "annualMonthly": 18.33, "quota": "121,000 credits per month; professional voice cloning", "note": "First month discounted to $11 at the time of observation." }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Realistische AI-stemmen, stemklonen en nasynchronisatie",
+      "description": "ElevenLabs genereert natuurlijk klinkende spraak uit tekst, in veel talen. Je kunt je eigen stem klonen, video's nasynchroniseren en via een API spraak in eigen apps gebruiken. Veel gebruikt voor voice-overs, luisterboeken en e-learning.",
+      "bestFor": ["Voice-overs voor video en e-learning", "Je eigen stem klonen", "Ontwikkelaars die spraak via een API willen"],
+      "notFor": ["Wie een complete video-editor zoekt"],
+      "limitations": ["Verbruik op basis van credits per maand"]
+    },
+    "en": {
+      "tagline": "Realistic AI voices, voice cloning and dubbing",
+      "description": "ElevenLabs generates natural-sounding speech from text in many languages. You can clone your own voice, dub videos and use speech in your own apps through an API. Widely used for voice-overs, audiobooks and e-learning.",
+      "bestFor": ["Voice-overs for video and e-learning", "Cloning your own voice", "Developers who want speech via an API"],
+      "notFor": ["People looking for a complete video editor"],
+      "limitations": ["Usage is based on monthly credits"]
+    }
+  },
+  "relations": [{ "tool": "murf", "kind": "alternative" }, { "tool": "heygen", "kind": "complements" }]
+}
