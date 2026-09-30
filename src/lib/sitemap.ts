@@ -47,10 +47,11 @@ export function sitemapEntries(catalog: Catalog, locales: Locale[], opts: { news
       .every((s) => catalog.tools.filter((x) => x.status !== 'shutdown' && x.capabilities.some((c) => s.capabilityIds.includes(c.id))).length >= 2);
     if (ok) add('task', (l) => href.task(l, taskSlug(task, l)), { locales: Object.keys(task.text) as Locale[], priority: 0.7 });
   }
-  for (const cat of catalog.categories) add('category', (l) => href.category(l, entitySlug(cat, l)), { priority: 0.5 });
+  // Taxonomy pages only in locales that have their own text (no fallback duplicates in the index).
+  for (const cat of catalog.categories) add('category', (l) => href.category(l, entitySlug(cat, l)), { locales: Object.keys(cat.text) as Locale[], priority: 0.5 });
   for (const cap of catalog.capabilities) {
     const primary = catalog.tools.filter((x) => x.status !== 'shutdown' && x.capabilities.some((c) => c.id === cap.id && c.strength === 'primary')).length;
-    if (primary >= 4) add('capability', (l) => href.capability(l, entitySlug(cap, l)), { priority: 0.6 });
+    if (primary >= 4) add('capability', (l) => href.capability(l, entitySlug(cap, l)), { locales: Object.keys(cap.text) as Locale[], priority: 0.6 });
   }
   const seen = new Set<string>();
   for (const tool of catalog.tools) {
