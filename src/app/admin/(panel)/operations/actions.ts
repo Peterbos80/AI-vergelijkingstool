@@ -11,6 +11,8 @@ import { ensureAgentConfigs, runAgent } from '@/agents/runner';
 import { revertAction, revertRun } from '@/agents/actions';
 
 const UUID = /^[0-9a-f-]{36}$/i;
+/** Only plain admin paths are accepted as return targets (no dot segments, queries or hosts). */
+const SAFE_BACK = /^\/admin(\/[A-Za-z0-9-]+){0,4}$/;
 
 export async function runNowAction(formData: FormData): Promise<void> {
   const user = await requireAdmin('editor');
@@ -38,7 +40,7 @@ export async function revertActionAction(formData: FormData): Promise<void> {
   const user = await requireAdmin('owner');
   const id = String(formData.get('actionId') ?? '');
   const back = String(formData.get('back') ?? '/admin/operations');
-  if (!UUID.test(id) || !back.startsWith('/admin/')) redirect('/admin/operations');
+  if (!UUID.test(id) || !SAFE_BACK.test(back)) redirect('/admin/operations');
   const r = await revertAction(getDb(), id, `owner:${user.email}`);
   await audit(user, 'revert_action', 'agent_action', id, { result: r });
   redirect(`${back}?flash=${r === 'not_reversible' ? 'notReversible' : r}`);

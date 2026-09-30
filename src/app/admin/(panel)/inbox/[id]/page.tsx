@@ -181,6 +181,42 @@ async function Evidence({ item, ctx }: { item: Item; ctx: AdminContext }) {
         </div>
       );
     }
+    case 'correction': {
+      const c = p as { field?: string; correct?: string; source?: string; email?: string | null; vendor?: boolean };
+      const safeSource = typeof c.source === 'string' && /^https?:\/\//i.test(c.source) ? c.source : null;
+      return (
+        <dl className="grid gap-3 text-sm md:grid-cols-2">
+          <div>
+            <dt className="eyebrow">{t('admin.inbox.correctionField')}</dt>
+            <dd>{c.field ?? '—'}</dd>
+          </div>
+          <div>
+            <dt className="eyebrow">{t('admin.common.source')}</dt>
+            <dd className="break-all">{safeSource ? <TextLink href={safeSource} external>{safeSource}</TextLink> : '—'}</dd>
+          </div>
+          <div className="md:col-span-2">
+            <dt className="eyebrow">{t('admin.inbox.correctionValue')}</dt>
+            <dd>
+              <blockquote className="border-l-2 border-line pl-2 whitespace-pre-wrap text-ink-2">{c.correct ?? ''}</blockquote>
+            </dd>
+          </div>
+          <div>
+            <dt className="eyebrow">{t('admin.inbox.correctionFrom')}</dt>
+            <dd>
+              {c.email ?? '—'} {c.vendor ? <Badge tone="info">{t('admin.inbox.vendor')}</Badge> : null}
+            </dd>
+          </div>
+          {item.toolId && (
+            <div>
+              <dt className="eyebrow">{t('admin.common.tool')}</dt>
+              <dd>
+                <TextLink href={`/admin/tools/${item.toolId}`}>{t('admin.tools.edit')}</TextLink>
+              </dd>
+            </div>
+          )}
+        </dl>
+      );
+    }
     case 'opportunity':
     case 'autonomy_proposal':
     case 'duplicate':

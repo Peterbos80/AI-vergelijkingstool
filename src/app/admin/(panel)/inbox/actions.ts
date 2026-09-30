@@ -13,6 +13,8 @@ import { resolveItem } from '@/lib/ops/inbox';
 import type { AuditSampleItem, Verdict } from '@/agents/defs/audit';
 
 const UUID = /^[0-9a-f-]{36}$/i;
+/** Only plain admin paths are accepted as return targets (no dot segments, queries or hosts). */
+const SAFE_BACK = /^\/admin(\/[A-Za-z0-9-]+){0,4}$/;
 const OWNER_ONLY = new Set(['commercial', 'legal', 'security']);
 
 async function loadItem(formData: FormData) {
@@ -69,7 +71,7 @@ export async function revertFromInboxAction(formData: FormData): Promise<void> {
   const user = await requireAdmin('owner');
   const actionId = String(formData.get('actionId') ?? '');
   const back = String(formData.get('back') ?? '/admin/inbox');
-  if (!UUID.test(actionId) || !back.startsWith('/admin/')) redirect('/admin/inbox');
+  if (!UUID.test(actionId) || !SAFE_BACK.test(back)) redirect('/admin/inbox');
   const r = await revertAction(getDb(), actionId, `owner:${user.email}`);
   await audit(user, 'revert_action', 'agent_action', actionId, { result: r });
   redirect(`${back}?flash=${r === 'not_reversible' ? 'notReversible' : r}`);

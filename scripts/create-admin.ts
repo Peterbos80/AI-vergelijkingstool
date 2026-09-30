@@ -6,7 +6,7 @@
 import './_env';
 import { eq } from 'drizzle-orm';
 import { closeDb, getDb } from '../src/lib/db/client';
-import { adminUsers } from '../src/lib/db/schema';
+import { adminSessions, adminUsers } from '../src/lib/db/schema';
 import { hashPassword } from '../src/lib/auth/password';
 
 function arg(name: string): string | undefined {
@@ -25,7 +25,9 @@ async function main() {
   const [existing] = await db.select().from(adminUsers).where(eq(adminUsers.email, email));
   if (existing) {
     await db.update(adminUsers).set({ passwordHash, role, disabled: false, name: arg('name') ?? existing.name }).where(eq(adminUsers.id, existing.id));
-    console.log(`[admin] updated ${email} (${role})`);
+    // A new password ends every existing session of this account.
+    const revoked = await db.delete(adminSessions).where(eq(adminSessions.userId, existing.id)).returning({ id: adminSessions.id });
+    console.log(`[admin] updated ${email} (${role}); ${revoked.length} session(s) revoked`);
   } else {
     await db.insert(adminUsers).values({ email, passwordHash, role, name: arg('name') ?? null });
     console.log(`[admin] created ${email} (${role})`);

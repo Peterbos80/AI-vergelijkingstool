@@ -1255,7 +1255,9 @@
       "precision_below_target": "The monthly audit shows automatic decisions in this band are less accurate than the target.",
       "monthly_audit": "Judge a random sample of automated decisions; this keeps autonomy honest.",
       "dependency": "An integration the system relies on is failing.",
-      "login_failures": "Many failed admin logins in a short time: possibly a password-guessing attack. Logins are rate-limited; consider changing passwords and checking the audit log."
+      "login_failures": "Many failed admin logins in a short time: possibly a password-guessing attack. Logins are rate-limited; consider changing passwords and checking the audit log.",
+      "vendor_correction": "The maker of this tool reports an error. Check the source and update the data if it holds up.",
+      "user_correction": "A visitor reports an error with a source. Check it and update the data if it holds up."
     },
     "inbox": {
       "title": "Inbox",
@@ -1303,7 +1305,11 @@
       },
       "recentActions": "Automated changes in the 24 hours before the regression",
       "cases": "Failing cases",
-      "payload": "Technical details"
+      "payload": "Technical details",
+      "correctionField": "Reported field",
+      "correctionValue": "Proposed correction",
+      "correctionFrom": "Reported by",
+      "vendor": "vendor"
     },
     "operations": {
       "title": "Operations",

@@ -1255,7 +1255,9 @@
       "precision_below_target": "De maandelijkse audit laat zien dat automatische beslissingen in deze band minder nauwkeurig zijn dan het doel.",
       "monthly_audit": "Beoordeel een willekeurige steekproef van automatische beslissingen; zo blijft de autonomie eerlijk.",
       "dependency": "Een koppeling waar het systeem op leunt, faalt.",
-      "login_failures": "Veel mislukte beheerlogins in korte tijd: mogelijk een poging om wachtwoorden te raden. Logins zijn begrensd; overweeg wachtwoorden te wijzigen en de auditlog te bekijken."
+      "login_failures": "Veel mislukte beheerlogins in korte tijd: mogelijk een poging om wachtwoorden te raden. Logins zijn begrensd; overweeg wachtwoorden te wijzigen en de auditlog te bekijken.",
+      "vendor_correction": "De maker van deze tool meldt een fout. Controleer de bron en pas de data aan als het klopt.",
+      "user_correction": "Een bezoeker meldt een fout met een bron. Controleer het en pas de data aan als het klopt."
     },
     "inbox": {
       "title": "Inbox",
@@ -1303,7 +1305,11 @@
       },
       "recentActions": "Automatische wijzigingen in de 24 uur vóór de regressie",
       "cases": "Falende cases",
-      "payload": "Technische details"
+      "payload": "Technische details",
+      "correctionField": "Gemeld veld",
+      "correctionValue": "Voorgestelde correctie",
+      "correctionFrom": "Gemeld door",
+      "vendor": "maker"
     },
     "operations": {
       "title": "Operatie",
