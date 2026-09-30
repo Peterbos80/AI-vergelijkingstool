@@ -6,7 +6,7 @@ import { href } from '@/lib/routes';
 import type { CatalogStats } from '@/lib/catalog/types';
 import { Logo } from './Logo';
 
-export function Footer({ locale, t, stats }: { locale: Locale; t: Translator; stats: CatalogStats | null }) {
+export function Footer({ locale, t, stats, newsletter }: { locale: Locale; t: Translator; stats: CatalogStats | null; newsletter: boolean }) {
   const cols: { label: string; href: string }[][] = [
     [
       { label: t('nav.match'), href: href.home(locale) },
@@ -22,7 +22,7 @@ export function Footer({ locale, t, stats }: { locale: Locale; t: Translator; st
       { label: t('footer.api'), href: href.page(locale, 'api') },
     ],
     [
-      { label: t('footer.newsletter'), href: href.page(locale, 'newsletter') },
+      ...(newsletter ? [{ label: t('footer.newsletter'), href: href.page(locale, 'newsletter') }] : []),
       { label: t('footer.about'), href: href.page(locale, 'about') },
       { label: t('footer.privacy'), href: href.page(locale, 'privacy') },
     ],

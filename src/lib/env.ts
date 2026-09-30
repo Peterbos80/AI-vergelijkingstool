@@ -12,6 +12,12 @@ const optional = z
 
 const schema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
+  /**
+   * 'server' (default): the full platform with a database at request time.
+   * 'static': the free edition, rendered once and published as static files
+   * (GitHub Pages). Server-only features are left out, not faked.
+   */
+  SITE_MODE: z.enum(['server', 'static']).default('server'),
   SITE_URL: z.string().url().default('http://localhost:3000'),
   DATABASE_URL: optional,
   APP_SECRET: optional,
@@ -39,6 +45,8 @@ const schema = z.object({
   LEGAL_ADDRESS: optional,
   LEGAL_EMAIL: optional,
   ENABLED_LOCALES: optional,
+  /** Static edition: where visitors report corrections (e.g. a GitHub "new issue" link). */
+  PUBLIC_ISSUES_URL: optional,
 });
 
 export type Env = z.infer<typeof schema>;
@@ -68,9 +76,15 @@ export function appSecret(): string {
   return 'development-only-insecure-secret-change-me-0123456789';
 }
 
+/** The free, static edition (docs/DEPLOYMENT.md): no request-time server features. */
+export function staticSite(): boolean {
+  return env().SITE_MODE === 'static';
+}
+
 /** E-mail features (Watch, newsletter) are only offered when mail can actually be delivered. */
 export function emailEnabled(): boolean {
   const e = env();
+  if (e.SITE_MODE === 'static') return false;
   return Boolean(e.RESEND_API_KEY) || (e.EMAIL_MODE === 'log' && e.NODE_ENV !== 'production');
 }
 

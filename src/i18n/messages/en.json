@@ -977,6 +977,20 @@
     "contactEmail": "E-mail us at {email}.",
     "contactCorrections": "Or report an error on the corrections page."
   },
+  "static": {
+    "loading": "Loading…",
+    "failed": "This could not be loaded. Check your connection and try again.",
+    "needsJs": "This feature runs in your browser and needs JavaScript.",
+    "correctionsIntro": "Is something wrong? Report the tool, what is wrong and a link to the source. We check it on the official page.",
+    "correctionsIssue": "Report it on GitHub",
+    "correctionsEmail": "Or e-mail {email}.",
+    "privacyHostingTitle": "Hosting",
+    "privacyHosting": "This site consists of static pages delivered by GitHub Pages. GitHub processes technical data such as your IP address to deliver the pages and prevent abuse (see GitHub's privacy statement). We do not count visits and set no cookies.",
+    "privacyBrowserTitle": "Match and Stack Doctor",
+    "privacyBrowser": "Match and Stack Doctor run entirely in your browser. What you enter is not sent to us and not stored.",
+    "disclosureClicks": "Links to tools go through a redirect page straight to the tool's website. We do not count clicks.",
+    "apiTermsBody": "Use is free with attribution and a link to the relevant AIToolsWijzer page. The API consists of static JSON files that are rebuilt whenever the data changes. No guarantee of accuracy or availability; always check important decisions at the source."
+  },
   "apiPage": {
     "title": "Public data API",
     "metaDescription": "Free, read-only JSON API with AI tools, pricing, statuses and sources from AIToolsWijzer.",
@@ -1339,6 +1353,22 @@
       "open": "Open in Admin",
       "footer": "You receive this because OWNER_EMAIL is set. Only P1 items (act today) are e-mailed, at most {max} per day; everything else waits for the weekly report."
     },
+    "github": {
+      "impactPages": "{n} pages affected",
+      "impactVisits": "{n} visits (30 d)",
+      "impactEv": "expected €{amount}/month",
+      "details": "Details and evidence",
+      "commands": "Reply with one command: `/approve` (optionally with a note), `/reject` (optionally with a note), `/snooze` (7 days) or `/default` (apply the default action now). Doing nothing is fine too: then what is described above happens.",
+      "footer": "Item {id} · created by {by}",
+      "resolved": "Resolved ({status}): {resolution}",
+      "reportTitle": "Weekly report {start} – {end}",
+      "notFound": "There is no inbox item for this issue.",
+      "notPending": "This item has already been handled.",
+      "applied": "Done: {command}. The site is updated if needed.",
+      "conflict": "This could not be applied: the data has changed in the meantime. The item stays open.",
+      "snoozed": "Snoozed for 7 days.",
+      "defaulted": "The default action has been applied: {action}."
+    },
     "operations": {
       "title": "Operations",
       "agents": "Agents",
@@ -1448,7 +1478,8 @@
         "ev": "expected {amount}/month",
         "minutes": "~{n} min",
         "unmeasured": "Not measured this week",
-        "footer": "Full report: {url}"
+        "footer": "Full report: {url}",
+        "trafficUnmeasured": "Visits, Matches and clicks: not measured (static edition, no analytics)."
       }
     },
     "dependency": {

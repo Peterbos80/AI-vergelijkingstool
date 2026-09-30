@@ -920,6 +920,20 @@
     "contactEmail": "Écrivez-nous à {email}.",
     "contactCorrections": "Ou signalez une erreur sur la page des corrections."
   },
+  "static": {
+    "loading": "Chargement…",
+    "failed": "Le chargement a échoué. Vérifiez votre connexion et réessayez.",
+    "needsJs": "Cette fonction s’exécute dans votre navigateur et nécessite JavaScript.",
+    "correctionsIntro": "Une erreur ? Indiquez l’outil, ce qui ne va pas et un lien vers la source. Nous vérifions sur la page officielle.",
+    "correctionsIssue": "Le signaler sur GitHub",
+    "correctionsEmail": "Ou écrivez à {email}.",
+    "privacyHostingTitle": "Hébergement",
+    "privacyHosting": "Ce site est composé de pages statiques servies par GitHub Pages. GitHub traite à cette occasion des données techniques comme votre adresse IP pour livrer les pages et prévenir les abus (voir la déclaration de confidentialité de GitHub). Nous ne mesurons pas les visites et ne déposons aucun cookie.",
+    "privacyBrowserTitle": "Match et Stack Doctor",
+    "privacyBrowser": "Match et Stack Doctor s’exécutent entièrement dans votre navigateur. Ce que vous saisissez ne nous est pas envoyé et n’est pas conservé.",
+    "disclosureClicks": "Les liens vers les outils passent par une page de redirection qui mène directement au site de l’outil. Nous ne comptons pas les clics.",
+    "apiTermsBody": "L’utilisation est gratuite avec mention de la source et un lien vers la page concernée d’AIToolsWijzer. L’API est un ensemble de fichiers JSON statiques, régénérés dès que les données changent. Aucune garantie d’exactitude ni de disponibilité ; vérifiez toujours les décisions importantes à la source."
+  },
   "apiPage": {
     "title": "API de données publique",
     "metaDescription": "API JSON gratuite en lecture seule avec les outils d’IA, les tarifs, les statuts et les sources d’AIToolsWijzer.",

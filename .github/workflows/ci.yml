@@ -1,8 +1,10 @@
 name: CI
 
 on:
-  # Every branch: the repository's default branch is not necessarily `main`.
+  # Every branch (the repository's default branch is not necessarily `main`),
+  # except the database snapshots written by the "Site and agents" workflow.
   push:
+    branches-ignore: [ops-state]
   pull_request:
   workflow_dispatch:
 
@@ -65,3 +67,42 @@ jobs:
           name: playwright-report
           path: playwright-report
           retention-days: 7
+
+  static:
+    name: Static edition (GitHub Pages) export and smoke tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: checks
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: aitw
+          POSTGRES_PASSWORD: aitw
+          POSTGRES_DB: aitoolswijzer
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U aitw" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://aitw:aitw@localhost:5432/aitoolswijzer
+      SITE_URL: https://www.aitoolswijzer.nl
+      APP_SECRET: ci-app-secret-ci-app-secret-ci-app-secret-0123
+      PUBLIC_ISSUES_URL: https://github.com/${{ github.repository }}/issues/new?template=correction.yml
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run db:migrate && npm run db:seed
+      - run: npm run build
+      - name: Export the static site
+        run: |
+          SITE_MODE=static NODE_ENV=production npx next start -p 3000 -H 127.0.0.1 > server.log 2>&1 &
+          for i in $(seq 1 60); do curl -fs -o /dev/null http://127.0.0.1:3000/nl && break; sleep 1; done
+          BASE=http://127.0.0.1:3000 OUT=out npx tsx scripts/static-export.ts || { tail -50 server.log; exit 1; }
+      - run: npx playwright test -c playwright.static.config.ts
+        env:
+          OUT: out

@@ -977,6 +977,20 @@
     "contactEmail": "Mail ons op {email}.",
     "contactCorrections": "Of meld een fout via de correctiepagina."
   },
+  "static": {
+    "loading": "Bezig met laden…",
+    "failed": "Dit kon niet worden geladen. Controleer je verbinding en probeer het opnieuw.",
+    "needsJs": "Deze functie rekent in je browser en heeft JavaScript nodig.",
+    "correctionsIntro": "Klopt er iets niet? Meld de tool, wat er niet klopt en een link naar de bron. We controleren het op de officiële pagina.",
+    "correctionsIssue": "Meld het op GitHub",
+    "correctionsEmail": "Of mail naar {email}.",
+    "privacyHostingTitle": "Hosting",
+    "privacyHosting": "Deze site bestaat uit statische pagina's die GitHub Pages levert. GitHub verwerkt daarbij technische gegevens zoals je IP-adres om de pagina's af te leveren en misbruik te voorkomen (zie de privacyverklaring van GitHub). Wij meten geen bezoeken en plaatsen geen cookies.",
+    "privacyBrowserTitle": "Match en Stack Doctor",
+    "privacyBrowser": "Match en Stack Doctor rekenen volledig in je browser. Wat je invult, wordt niet naar ons gestuurd en niet opgeslagen.",
+    "disclosureClicks": "Links naar tools gaan via een doorverwijspagina rechtstreeks naar de website van de tool. We tellen geen klikken.",
+    "apiTermsBody": "Gebruik is gratis met naamsvermelding en een link naar de betreffende pagina op AIToolsWijzer. De API bestaat uit statische JSON-bestanden die opnieuw worden gemaakt zodra de gegevens veranderen. Geen garantie op juistheid of beschikbaarheid; controleer belangrijke beslissingen altijd bij de bron."
+  },
   "apiPage": {
     "title": "Publieke data-API",
     "metaDescription": "Gratis, read-only JSON-API met AI-tools, prijzen, statussen en bronnen van AIToolsWijzer.",
@@ -1339,6 +1353,22 @@
       "open": "Openen in Admin",
       "footer": "Je krijgt dit omdat OWNER_EMAIL is ingesteld. Alleen P1-items (vandaag handelen) worden gemaild, maximaal {max} per dag; al het andere wacht op het weekrapport."
     },
+    "github": {
+      "impactPages": "{n} pagina's geraakt",
+      "impactVisits": "{n} bezoeken (30 d)",
+      "impactEv": "verwacht € {amount}/mnd",
+      "details": "Details en bewijs",
+      "commands": "Reageer met één commando: `/approve` (goedkeuren, eventueel met een notitie), `/reject` (afwijzen, eventueel met een notitie), `/snooze` (7 dagen later) of `/default` (pas de standaardactie nu toe). Niets doen mag ook: dan gebeurt wat hierboven staat.",
+      "footer": "Item {id} · aangemaakt door {by}",
+      "resolved": "Afgehandeld ({status}): {resolution}",
+      "reportTitle": "Weekrapport {start} – {end}",
+      "notFound": "Bij dit issue hoort geen inboxitem.",
+      "notPending": "Dit item is al afgehandeld.",
+      "applied": "Uitgevoerd: {command}. De site wordt zo nodig bijgewerkt.",
+      "conflict": "Dit kon niet worden toegepast: de gegevens zijn intussen veranderd. Het item blijft open.",
+      "snoozed": "Gesnoozed voor 7 dagen.",
+      "defaulted": "De standaardactie is toegepast: {action}."
+    },
     "operations": {
       "title": "Operatie",
       "agents": "Agents",
@@ -1448,7 +1478,8 @@
         "ev": "verwacht {amount}/mnd",
         "minutes": "~{n} min",
         "unmeasured": "Niet gemeten deze week",
-        "footer": "Volledig rapport: {url}"
+        "footer": "Volledig rapport: {url}",
+        "trafficUnmeasured": "Bezoeken, Matches en kliks: niet gemeten (statische editie, zonder analytics)."
       }
     },
     "dependency": {

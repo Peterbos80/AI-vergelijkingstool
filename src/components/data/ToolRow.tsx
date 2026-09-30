@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
-import { nameOf, toolText } from '@/lib/catalog';
+import { nameOf, toolText } from '@/lib/catalog/helpers';
 import type { Catalog, CatalogTool } from '@/lib/catalog/types';
 import { href } from '@/lib/routes';
 import { FreshnessDial } from './FreshnessDial';

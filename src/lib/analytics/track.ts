@@ -2,12 +2,14 @@
  * First-party, cookieless analytics. Page views are recorded server-side after
  * the response is sent (next/server `after`), so there is no client script,
  * no cookie and nothing for ad blockers to break. Prefetches, bots and
- * synthetic monitoring requests are excluded.
+ * synthetic monitoring requests are excluded. The static edition records
+ * nothing (docs/DEPLOYMENT.md).
  */
 import { after } from 'next/server';
 import { headers } from 'next/headers';
 import { getDb } from '@/lib/db/client';
 import { events } from '@/lib/db/schema';
+import { staticSite } from '@/lib/env';
 import { clientIp, deviceOf, isBot, referrerDomain, visitorHash } from './visitor';
 
 export type PageType =
@@ -46,6 +48,8 @@ function first(v: string | string[] | undefined): string | null {
 }
 
 export async function track(input: TrackInput): Promise<void> {
+  // The static edition is rendered once at build time: there are no visits to count.
+  if (staticSite()) return;
   const h = await headers();
   if (h.get('next-router-prefetch') || h.get('purpose') === 'prefetch' || h.get('x-aitw-synthetic')) return;
   const ua = h.get('user-agent');

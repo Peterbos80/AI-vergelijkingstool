@@ -1,0 +1,38 @@
+name: Correction / correctie
+description: Report wrong or outdated data about a tool (price, plan, feature, status). Meld onjuiste of verouderde gegevens.
+title: "Correction: "
+labels: [correction]
+body:
+  - type: input
+    id: tool
+    attributes:
+      label: Tool
+      description: Name or page URL of the tool.
+    validations:
+      required: true
+  - type: dropdown
+    id: field
+    attributes:
+      label: What is wrong? / Wat klopt er niet?
+      options: [Price / prijs, Free plan / gratis plan, Feature / functie, Status, Privacy / EU, Other / anders]
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: What is correct? / Wat is juist?
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source (link to the official page) / Bron
+      placeholder: https://
+    validations:
+      required: true
+  - type: checkboxes
+    id: vendor
+    attributes:
+      label: Vendor / leverancier
+      options:
+        - label: I work for this vendor. / Ik werk voor deze leverancier.

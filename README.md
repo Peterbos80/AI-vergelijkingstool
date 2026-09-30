@@ -32,6 +32,13 @@
 - Zod 4, Vitest 5 and Playwright.
 - Optional: Claude (Anthropic API) for intent understanding, extraction and drafts. It is always budgeted and gated, and a deterministic fallback exists for every use.
 
+## Hosting
+
+Two editions of the same code ([DEPLOYMENT.md](docs/DEPLOYMENT.md)):
+
+- **Free edition**: GitHub Pages serves the site; GitHub Actions runs the agents every hour, keeps their database on the `ops-state` branch, and turns the owner inbox and weekly report into GitHub issues. Match and Stack Doctor run in the browser. Costs nothing for a public repository.
+- **Full platform**: a Node host plus PostgreSQL, with the admin area, the LLM, e-mail (Watch, newsletter, alerts) and first-party statistics.
+
 ## Quick start
 
 Requirements: Node ≥ 22.12 and PostgreSQL 16. For a local database you can run `docker compose up -d`.
@@ -72,6 +79,7 @@ The dependency register (Admin → Automation) shows what is configured.
 | `i18n:check` | Message coverage per locale (the build fails on gaps in live locales) |
 | `revenue:scenarios` | Revenue projections with explicit assumptions |
 | `e2e:serve` | Serve the build against an isolated, freshly seeded e2e database |
+| `static:export` / `static:serve` | Export the static edition from a server running with `SITE_MODE=static` / serve it like GitHub Pages |
 
 ## Repository layout
 

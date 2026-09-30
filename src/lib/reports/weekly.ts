@@ -236,7 +236,18 @@ export interface RenderedEmail {
 }
 
 /** Plain-text e-mail (deliberately no HTML: robust, private, readable everywhere). */
-export function renderReportEmail(d: WeeklyReportData, locale: OwnerLocale, adminUrl: string): RenderedEmail {
+/**
+ * Plain-text weekly report (e-mail, and the GitHub issue in the static
+ * edition). `adminUrl` null: no link to a full report (no admin area);
+ * `trafficMeasured` false: the static edition has no analytics, so traffic is
+ * reported as unmeasured instead of as zero.
+ */
+export function renderReportEmail(
+  d: WeeklyReportData,
+  locale: OwnerLocale,
+  adminUrl: string | null,
+  opts: { trafficMeasured?: boolean } = {},
+): RenderedEmail {
   const t = getT(locale);
   const nf = new Intl.NumberFormat(INTL[locale]);
   const lines: string[] = [];
@@ -255,10 +266,14 @@ export function renderReportEmail(d: WeeklyReportData, locale: OwnerLocale, admi
   lines.push('');
 
   lines.push(`■ ${t('admin.report.email.numbers')}`);
-  lines.push(`  ${t('admin.metric.visits')}: ${nf.format(d.traffic.visits.value)} (${trendLabel(d.traffic.visits.trend)})`);
-  lines.push(`  ${t('admin.metric.organic')}: ${nf.format(d.traffic.channels.organic.value)} · ${t('admin.metric.ai')}: ${nf.format(d.traffic.channels.ai.value)}`);
-  lines.push(`  ${t('admin.metric.matches')}: ${nf.format(d.traffic.matches.value)} (${trendLabel(d.traffic.matches.trend)})`);
-  lines.push(`  ${t('admin.metric.clicks')}: ${nf.format(d.commerce.clicks.value)} · ${t('admin.metric.affiliateClicks')}: ${nf.format(d.commerce.affiliateClicks.value)}`);
+  if (opts.trafficMeasured === false) {
+    lines.push(`  ${t('admin.report.email.trafficUnmeasured')}`);
+  } else {
+    lines.push(`  ${t('admin.metric.visits')}: ${nf.format(d.traffic.visits.value)} (${trendLabel(d.traffic.visits.trend)})`);
+    lines.push(`  ${t('admin.metric.organic')}: ${nf.format(d.traffic.channels.organic.value)} · ${t('admin.metric.ai')}: ${nf.format(d.traffic.channels.ai.value)}`);
+    lines.push(`  ${t('admin.metric.matches')}: ${nf.format(d.traffic.matches.value)} (${trendLabel(d.traffic.matches.trend)})`);
+    lines.push(`  ${t('admin.metric.clicks')}: ${nf.format(d.commerce.clicks.value)} · ${t('admin.metric.affiliateClicks')}: ${nf.format(d.commerce.affiliateClicks.value)}`);
+  }
   for (const s of d.revenue.streams.filter((x) => x.status !== 'none')) {
     const value =
       s.status === 'not_configured' || s.status === 'unknown'
@@ -292,6 +307,6 @@ export function renderReportEmail(d: WeeklyReportData, locale: OwnerLocale, admi
     lines.push('');
   }
 
-  lines.push(t('admin.report.email.footer', { url: adminUrl }));
+  if (adminUrl) lines.push(t('admin.report.email.footer', { url: adminUrl }));
   return { subject: t('admin.report.email.subject', { range, attention: d.inbox.attention.length }), text: lines.join('\n') };
 }

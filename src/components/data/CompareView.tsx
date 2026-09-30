@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
 import { formatMoney } from '@/i18n/formatters';
-import { nameOf } from '@/lib/catalog';
+import { nameOf } from '@/lib/catalog/helpers';
 import type { Catalog, CatalogTool } from '@/lib/catalog/types';
 import { buildMatrix, verdicts, type Cell, type Row, type VerdictReason } from '@/lib/engine/compare';
 import { href } from '@/lib/routes';

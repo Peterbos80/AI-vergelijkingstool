@@ -1,0 +1,174 @@
+name: Site and agents
+
+# The free edition (docs/DEPLOYMENT.md, "Free edition on GitHub Pages"):
+#  - GitHub Pages serves the site as static files;
+#  - every hour this workflow runs the agents that are due, on a database
+#    kept between runs on the `ops-state` branch;
+#  - the owner inbox (P1/P2) and the weekly report become issues, and owner
+#    commands in issue comments (/approve, /reject, /snooze, /default) apply;
+#  - the site is rebuilt and deployed after green CI on the default branch,
+#    and whenever the agents changed published data.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write # the ops-state branch
+  issues: write # owner inbox and weekly report
+  pages: write
+  id-token: write
+
+concurrency:
+  group: site-and-agents
+  cancel-in-progress: false
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://www.aitoolswijzer.nl' }}
+  DATABASE_URL: postgres://aitw:aitw@localhost:5432/aitoolswijzer
+  STATE_BRANCH: ops-state
+  PUBLIC_ISSUES_URL: ${{ github.server_url }}/${{ github.repository }}/issues/new?template=correction.yml
+  LEGAL_NAME: ${{ vars.LEGAL_NAME }}
+  LEGAL_KVK: ${{ vars.LEGAL_KVK }}
+  LEGAL_ADDRESS: ${{ vars.LEGAL_ADDRESS }}
+  LEGAL_EMAIL: ${{ vars.LEGAL_EMAIL }}
+
+jobs:
+  run:
+    name: Agents, inbox and build
+    # Green CI pushes on the default branch, the hourly schedule, manual runs,
+    # and slash commands from the repository owner on ops issues.
+    if: >-
+      (github.event_name != 'workflow_run' ||
+        (github.event.workflow_run.conclusion == 'success' &&
+         github.event.workflow_run.event == 'push' &&
+         github.event.workflow_run.head_branch == github.event.repository.default_branch)) &&
+      (github.event_name != 'issue_comment' ||
+        (github.event.comment.author_association == 'OWNER' &&
+         startsWith(github.event.comment.body, '/') &&
+         contains(github.event.issue.labels.*.name, 'ops')))
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: aitw
+          POSTGRES_PASSWORD: aitw
+          POSTGRES_DB: aitoolswijzer
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U aitw" --health-interval 5s --health-timeout 5s --health-retries 10
+    outputs:
+      deploy: ${{ steps.save.outputs.deploy }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.event.repository.default_branch }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+
+      - name: Per-run secret
+        # Only salts visitor hashes, which the static edition never computes.
+        run: |
+          s=$(openssl rand -hex 32)
+          echo "::add-mask::$s"
+          echo "APP_SECRET=$s" >> "$GITHUB_ENV"
+
+      - name: Restore the ops database
+        id: restore
+        run: |
+          if git ls-remote --exit-code --heads origin "$STATE_BRANCH" >/dev/null 2>&1; then
+            git fetch --depth=1 origin "$STATE_BRANCH"
+            git show "origin/$STATE_BRANCH:state.sql.gz" | gunzip | psql "$DATABASE_URL" -q -v ON_ERROR_STOP=1 >/dev/null
+            echo "restored=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "restored=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "version=$(psql "$DATABASE_URL" -tAc "SELECT value #>> '{}' FROM settings WHERE key = 'data_version'" 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
+
+      - name: Migrate
+        run: npm run db:migrate
+
+      - name: Sync the dataset from data/
+        # New tools and taxonomy arrive by commit; agents own the data afterwards.
+        if: steps.restore.outputs.restored != 'true' || github.event_name == 'workflow_run' || github.event_name == 'workflow_dispatch'
+        run: npm run db:seed
+
+      - name: Apply the owner's command
+        if: github.event_name == 'issue_comment'
+        run: npx tsx scripts/ops-github.ts command
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run the agents that are due
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: npm run agents -- due
+        env:
+          # Higher GitHub API rate limit for the social and discovery agents.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Owner inbox and weekly report as issues
+        run: npx tsx scripts/ops-github.ts sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Save the ops database
+        id: save
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT: ${{ github.event_name }}
+          RESTORED: ${{ steps.restore.outputs.restored }}
+          BEFORE: ${{ steps.restore.outputs.version }}
+        run: |
+          after=$(psql "$DATABASE_URL" -tAc "SELECT value #>> '{}' FROM settings WHERE key = 'data_version'")
+          pg_dump --no-owner --no-privileges "$DATABASE_URL" | gzip -9 > "$RUNNER_TEMP/state.sql.gz"
+          dir=$(mktemp -d)
+          cp "$RUNNER_TEMP/state.sql.gz" "$dir/"
+          cd "$dir"
+          printf '%s\n' '# Ops state' '' 'The database of the free edition, written by the "Site and agents" workflow after every run.' 'Not for editing by hand. It holds catalog data and the agent and inbox log, no personal data.' > README.md
+          git init -q
+          git checkout -q --orphan "$STATE_BRANCH"
+          git add .
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -q -m "Ops state (data version $after)"
+          git push -q -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:$STATE_BRANCH"
+          deploy=false
+          if [ "$EVENT" = workflow_run ] || [ "$EVENT" = workflow_dispatch ] || [ "$RESTORED" != true ] || [ "$after" != "$BEFORE" ]; then deploy=true; fi
+          echo "data version: ${BEFORE:-none} → $after, deploy: $deploy"
+          echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
+
+      - name: Build
+        if: steps.save.outputs.deploy == 'true'
+        run: npm run build
+
+      - name: Export the static site
+        if: steps.save.outputs.deploy == 'true'
+        run: |
+          SITE_MODE=static NODE_ENV=production npx next start -p 3000 -H 127.0.0.1 > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 60); do curl -fs -o /dev/null http://127.0.0.1:3000/nl && break; sleep 1; done
+          BASE=http://127.0.0.1:3000 OUT=out npx tsx scripts/static-export.ts || { tail -50 "$RUNNER_TEMP/server.log"; exit 1; }
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.save.outputs.deploy == 'true'
+        with:
+          path: out
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: run
+    if: needs.run.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

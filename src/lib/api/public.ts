@@ -6,6 +6,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { createHash } from 'node:crypto';
 import { DEFAULT_LOCALE, isEnabledLocale, type Locale } from '@/i18n/config';
 import { rateLimit } from '@/lib/security/rate-limit';
+import { staticSite } from '@/lib/env';
 import { clientIp } from '@/lib/analytics/visitor';
 
 export function apiLocale(req: NextRequest): Locale {
@@ -14,6 +15,8 @@ export function apiLocale(req: NextRequest): Locale {
 }
 
 export async function apiGuard(req: NextRequest): Promise<NextResponse | null> {
+  // The static edition is exported once at build time: nothing to protect, and the crawler must not be throttled.
+  if (staticSite()) return null;
   const ipKey = createHash('sha256').update(clientIp(req.headers)).digest('hex').slice(0, 24);
   if (!(await rateLimit(`api:${ipKey}`, 60, 60))) {
     return json({ error: 'rate_limited', message: 'Max 60 requests per minute.' }, 429, { 'Retry-After': '60' });

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
 import { formatDate, formatMoney } from '@/i18n/formatters';
-import { nameOf, stepLabel } from '@/lib/catalog';
+import { nameOf, stepLabel } from '@/lib/catalog/helpers';
 import type { Catalog, CatalogTask } from '@/lib/catalog/types';
 import type { LimitationCode, Money, ReasonCode, StackResult } from '@/lib/engine/compose';
 import { href } from '@/lib/routes';

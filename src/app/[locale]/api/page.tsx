@@ -3,7 +3,7 @@ import type { Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
 import { href } from '@/lib/routes';
 import { alternates } from '@/lib/seo';
-import { siteUrl } from '@/lib/env';
+import { siteUrl, staticSite } from '@/lib/env';
 import { track } from '@/lib/analytics/track';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/api'>): Promise<Metadata> {
@@ -16,12 +16,20 @@ export default async function ApiDocsPage({ params }: PageProps<'/[locale]/api'>
   const { locale } = (await params) as { locale: Locale };
   const t = getT(locale);
   await track({ path: href.page(locale, 'api'), pageType: 'static', locale });
-  const endpoints: [string, string][] = [
-    [`/api/v1/tools?locale=${locale}`, t('apiPage.tools')],
-    [`/api/v1/tools/elevenlabs?locale=${locale}`, t('apiPage.tool')],
-    [`/api/v1/tasks?locale=${locale}`, t('apiPage.tasks')],
-    [`/api/v1/changes?locale=${locale}`, t('apiPage.changes')],
-  ];
+  // The static edition publishes the same JSON as files (scripts/static-export.ts).
+  const endpoints: [string, string][] = staticSite()
+    ? [
+        [`/api/v1/${locale}/tools.json`, t('apiPage.tools')],
+        [`/api/v1/${locale}/tools/elevenlabs.json`, t('apiPage.tool')],
+        [`/api/v1/${locale}/tasks.json`, t('apiPage.tasks')],
+        [`/api/v1/${locale}/changes.json`, t('apiPage.changes')],
+      ]
+    : [
+        [`/api/v1/tools?locale=${locale}`, t('apiPage.tools')],
+        [`/api/v1/tools/elevenlabs?locale=${locale}`, t('apiPage.tool')],
+        [`/api/v1/tasks?locale=${locale}`, t('apiPage.tasks')],
+        [`/api/v1/changes?locale=${locale}`, t('apiPage.changes')],
+      ];
   return (
     <article className="container-page py-10">
       <h1 className="text-3xl md:text-4xl">{t('apiPage.title')}</h1>
@@ -39,7 +47,7 @@ export default async function ApiDocsPage({ params }: PageProps<'/[locale]/api'>
           ))}
         </ul>
         <h2>{t('apiPage.terms')}</h2>
-        <p>{t('apiPage.termsBody')}</p>
+        <p>{staticSite() ? t('static.apiTermsBody') : t('apiPage.termsBody')}</p>
         <p>{t('apiPage.llms')}</p>
       </div>
     </article>

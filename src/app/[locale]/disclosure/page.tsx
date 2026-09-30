@@ -6,6 +6,7 @@ import { getCatalog } from '@/lib/catalog';
 import { affiliateToolIds } from '@/lib/monetization/affiliate';
 import { href } from '@/lib/routes';
 import { alternates } from '@/lib/seo';
+import { staticSite } from '@/lib/env';
 import { track } from '@/lib/analytics/track';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/disclosure'>): Promise<Metadata> {
@@ -29,7 +30,7 @@ export default async function DisclosurePage({ params }: PageProps<'/[locale]/di
         <h2>{t('disclosureInfo.affiliateTitle')}</h2>
         <p>{t('disclosureInfo.affiliateBody')}</p>
         <h2>{t('disclosureInfo.clicksTitle')}</h2>
-        <p>{t('disclosureInfo.clicksBody')}</p>
+        <p>{staticSite() ? t('static.disclosureClicks') : t('disclosureInfo.clicksBody')}</p>
         <h2>{t('disclosureInfo.sponsoredTitle')}</h2>
         <p>{t('disclosureInfo.sponsoredBody')}</p>
         <h2>{t('disclosureInfo.neverTitle')}</h2>

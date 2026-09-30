@@ -8,7 +8,7 @@ import { getT } from '@/i18n/server';
 import { getCatalog } from '@/lib/catalog';
 import { EVENT_ICON, eventTitle } from '@/lib/catalog/events';
 import { href } from '@/lib/routes';
-import { siteUrl } from '@/lib/env';
+import { emailEnabled, siteUrl } from '@/lib/env';
 import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
 import { PulseTicker, type TickerItem } from '@/components/site/PulseTicker';
@@ -84,7 +84,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
         </main>
-        <Footer locale={locale} t={t} stats={stats} />
+        <Footer locale={locale} t={t} stats={stats} newsletter={emailEnabled()} />
       </body>
     </html>
   );

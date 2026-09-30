@@ -3,14 +3,11 @@
  * constraints → clarification → stack variants.
  */
 import { createHash } from 'node:crypto';
-import type { Locale } from '@/i18n/config';
-import type { Catalog, CatalogTask } from '@/lib/catalog/types';
+import type { Catalog } from '@/lib/catalog/types';
 import { env } from '@/lib/env';
-import { budgetAnswer, nextClarification, type Clarification } from './clarify';
-import { adHocTask, composeVariants, type StackResult, type Variant } from './compose';
-import { detectIntent, mergeConstraints, type Constraints, type Intent } from './intent';
+import { detectIntent } from './intent';
 import { llmIntent } from './llm-intent';
-import { searchTools } from './search';
+import { completeMatch, type CoreMatchInput, type CoreMatchOutput } from './match-core';
 import { normalize } from './text';
 
 /**
@@ -26,26 +23,12 @@ export function inLlmHoldout(query: string, now: Date = new Date()): boolean {
   return createHash('sha256').update(`${week}|${normalize(query)}`).digest().readUInt32BE(0) % 100 < LLM_HOLDOUT_PCT;
 }
 
-export interface MatchInput {
-  query: string;
-  locale: Locale;
-  explicit: Constraints;
-  approach: Record<string, string>;
-  taskOverride?: string;
-  budget?: string;
-  skip?: boolean;
-  answered: number;
+export interface MatchInput extends CoreMatchInput {
   gatingThreshold: number;
   allowLlm: boolean;
 }
 
-export interface MatchOutput {
-  intent: Intent;
-  task: CatalogTask | null;
-  constraints: Constraints;
-  clarification: Clarification | null;
-  variants: Record<Variant, StackResult> | null;
-  suggestions: { taskIds: string[]; toolIds: string[] };
+export interface MatchOutput extends CoreMatchOutput {
   llmUsed: boolean;
   /** Low lexical confidence and an LLM available. */
   llmEligible: boolean;
@@ -67,32 +50,7 @@ export async function runMatch(input: MatchInput, catalog: Catalog): Promise<Mat
       llmUsed = true;
     }
   }
-  if (input.taskOverride && catalog.tasksById.has(input.taskOverride)) {
-    intent = { ...intent, taskId: input.taskOverride, confidence: Math.max(intent.confidence, 0.9) };
-  }
-  const constraints = mergeConstraints(intent.constraints, {
-    ...input.explicit,
-    ...budgetAnswer(input.budget),
-    approach: { ...(intent.constraints.approach ?? {}), ...input.approach },
-  });
-  intent = { ...intent, constraints };
-
-  const task = intent.taskId
-    ? (catalog.tasksById.get(intent.taskId) ?? null)
-    : intent.capabilityIds.length
-      ? adHocTask(intent.capabilityIds.slice(0, 5))
-      : null;
-  const clarification = nextClarification(intent, catalog, {
-    answered: input.answered,
-    budgetAnswered: input.budget !== undefined,
-    skipAll: Boolean(input.skip),
-  });
-  const variants = task ? composeVariants(catalog, task, constraints) : null;
-  const suggestions = {
-    taskIds: intent.taskCandidates.map((c) => c.id).slice(0, 4),
-    toolIds: task ? [] : searchTools(catalog, { q: input.query }, input.locale).slice(0, 5).map((h) => h.tool.id),
-  };
-  return { intent, task, constraints, clarification, variants, suggestions, llmUsed, llmEligible, llmHoldout };
+  return { ...completeMatch(intent, input, catalog), llmUsed, llmEligible, llmHoldout };
 }
 
 /** Remove personal data before storing a query (e-mail, phone, URLs, long numbers). */

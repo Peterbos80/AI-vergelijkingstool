@@ -920,6 +920,20 @@
     "contactEmail": "Schreib uns an {email}.",
     "contactCorrections": "Oder melde einen Fehler über die Korrekturseite."
   },
+  "static": {
+    "loading": "Wird geladen …",
+    "failed": "Das konnte nicht geladen werden. Prüfe deine Verbindung und versuche es erneut.",
+    "needsJs": "Diese Funktion rechnet in deinem Browser und braucht JavaScript.",
+    "correctionsIntro": "Stimmt etwas nicht? Melde das Tool, was nicht stimmt, und einen Link zur Quelle. Wir prüfen es auf der offiziellen Seite.",
+    "correctionsIssue": "Auf GitHub melden",
+    "correctionsEmail": "Oder schreib an {email}.",
+    "privacyHostingTitle": "Hosting",
+    "privacyHosting": "Diese Website besteht aus statischen Seiten, die GitHub Pages ausliefert. GitHub verarbeitet dabei technische Daten wie deine IP-Adresse, um die Seiten auszuliefern und Missbrauch zu verhindern (siehe die Datenschutzerklärung von GitHub). Wir zählen keine Besuche und setzen keine Cookies.",
+    "privacyBrowserTitle": "Match und Stack Doctor",
+    "privacyBrowser": "Match und Stack Doctor rechnen vollständig in deinem Browser. Was du eingibst, wird nicht an uns gesendet und nicht gespeichert.",
+    "disclosureClicks": "Links zu Tools führen über eine Weiterleitungsseite direkt zur Website des Tools. Wir zählen keine Klicks.",
+    "apiTermsBody": "Die Nutzung ist kostenlos mit Quellenangabe und einem Link zur jeweiligen Seite auf AIToolsWijzer. Die API besteht aus statischen JSON-Dateien, die neu erstellt werden, sobald sich die Daten ändern. Keine Gewähr für Richtigkeit oder Verfügbarkeit; prüfe wichtige Entscheidungen immer an der Quelle."
+  },
   "apiPage": {
     "title": "Öffentliche Daten-API",
     "metaDescription": "Kostenlose, schreibgeschützte JSON-API mit KI-Tools, Preisen, Status und Quellen von AIToolsWijzer.",

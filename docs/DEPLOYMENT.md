@@ -1,14 +1,53 @@
 # Deployment
 
-AIToolsWijzer needs three things in production:
+There are two editions of the same code.
 
+| | Free edition | Full platform |
+| --- | --- | --- |
+| Hosting | GitHub Pages (static files) + GitHub Actions | A Node host (VPS, Vercel, Fly.io, Railway…) + PostgreSQL |
+| Cost | €0 (public repository) | hosting + database |
+| Agents | every hour in GitHub Actions | worker or cron, as often as configured |
+| Match, Stack Doctor | in the visitor's browser (lexical engine) | on the server, optionally with the LLM |
+| Owner inbox, weekly report | GitHub issues, with comment commands | Admin area and e-mail |
+| Not available | admin area, newsletter/Watch, saved stacks, advice requests, visit statistics, click counts | — |
+
+The free edition leaves server-only features out instead of showing buttons that do not work. Moving to the full platform later only needs a host and a database: the data travels as a Postgres dump (the `ops-state` branch).
+
+## Free edition on GitHub Pages
+
+**How it works.** The workflow `.github/workflows/site.yml` ("Site and agents"):
+
+1. restores the database from the `ops-state` branch (a gzipped `pg_dump`) into a Postgres service container;
+2. runs the agents that are due (hourly schedule), or applies an owner command from an issue comment;
+3. turns new P1/P2 inbox items and each new weekly report into issues, and closes issues whose item is resolved;
+4. saves the database back to `ops-state` (one force-pushed commit, so the branch never grows);
+5. when code changed (green CI on the default branch) or the agents changed published data: builds the app, starts it with `SITE_MODE=static`, exports every page with `scripts/static-export.ts` and deploys the files to GitHub Pages.
+
+CI tests the static edition on every push (`playwright.static.config.ts`).
+
+**One-time setup** (repository settings):
+
+1. *Settings → Pages → Build and deployment → Source*: **GitHub Actions**.
+2. *Custom domain*: `www.aitoolswijzer.nl` → Save. When the DNS check is green, tick **Enforce HTTPS**.
+3. DNS at the registrar (TransIP): `@` A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`; `www` CNAME `peterbos80.github.io.`. GitHub redirects the bare domain to `www`.
+4. Optional repository variables (*Settings → Secrets and variables → Actions → Variables*): `SITE_URL` (if not `https://www.aitoolswijzer.nl`), `LEGAL_NAME`, `LEGAL_KVK`, `LEGAL_ADDRESS`, `LEGAL_EMAIL` (shown on /about; required for a commercial site in the Netherlands). No secrets are needed.
+5. Run the workflow once (*Actions → Site and agents → Run workflow*) or push to the default branch.
+
+**Limits to know.**
+
+- The repository is public, so the `ops-state` branch and the inbox issues are public too. They contain catalog data and the agent and inbox log. The free edition collects no personal data (no forms, no analytics, no cookies).
+- GitHub pauses scheduled workflows in a public repository after 60 days without repository activity, and e-mails you before it does. Any push or a manual run resumes them.
+- Pages are rebuilt at most hourly; Match and Stack Doctor use the lexical engine only (no LLM costs).
+- Owner commands in issue comments are applied only for the repository owner.
+
+## Full platform
+
+The rest of this document covers the full platform. It needs three things in production:
 1. **Web**: the Next.js server (Node ≥ 22.12), behind a TLS-terminating reverse proxy or platform.
 2. **Scheduler**: either the long-running worker, or a scheduler calling the cron endpoint.
 3. **PostgreSQL 16**, with backups.
 
 Everything else (e-mail, LLM, YouTube, GitHub, heartbeat) is optional and degrades honestly when missing. Admin → Automation shows what is configured.
-
-> **Not GitHub Pages.** GitHub Pages only hosts static files. This app renders pages per request, has server actions, an owner area and a database, so it needs a Node host (Vercel, Fly.io, Railway, Render, or a VPS with Node) plus Postgres. GitHub holds the code and runs CI; hosting happens elsewhere.
 
 ## Environment variables
 

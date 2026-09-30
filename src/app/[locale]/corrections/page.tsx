@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { and, desc, eq, inArray } from 'drizzle-orm';
 import type { Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
+import { env, legalDetails, staticSite } from '@/lib/env';
 import { formatDate } from '@/i18n/formatters';
 import { getCatalog } from '@/lib/catalog';
 import { getDb } from '@/lib/db/client';
@@ -37,24 +38,42 @@ export default async function CorrectionsPage({ params, searchParams }: PageProp
       <div>
         <h1 className="text-3xl md:text-4xl">{t('corrections.title')}</h1>
         <p className="mt-2 max-w-2xl text-ink-2">{t('corrections.intro')}</p>
-        <div className="card mt-6 p-5">
-          <CorrectionForm
-            action={correctionAction}
-            locale={locale}
-            defaultTool={typeof sp.tool === 'string' ? sp.tool : undefined}
-            tools={[...catalog.tools].sort((a, b) => a.name.localeCompare(b.name)).map((x) => ({ slug: x.slug, name: x.name }))}
-            fields={fields.map((f) => ({ value: f, label: t(`corrections.fieldOptions.${f}`) }))}
-            labels={{
-              tool: t('corrections.tool'),
-              field: t('corrections.field'),
-              correct: t('corrections.correct'),
-              source: t('corrections.source'),
-              email: t('corrections.email'),
-              vendor: t('corrections.vendor'),
-              submit: t('corrections.submit'),
-            }}
-          />
-        </div>
+        {staticSite() ? (
+          <div className="card mt-6 space-y-3 p-5" data-testid="corrections-static">
+            <p>{t('static.correctionsIntro')}</p>
+            {env().PUBLIC_ISSUES_URL && (
+              <p>
+                <a href={env().PUBLIC_ISSUES_URL} className="btn" rel="nofollow">
+                  {t('static.correctionsIssue')}
+                </a>
+              </p>
+            )}
+            {legalDetails().email && (
+              <p className="text-sm text-ink-2">
+                <a href={`mailto:${legalDetails().email}`}>{t('static.correctionsEmail', { email: legalDetails().email })}</a>
+              </p>
+            )}
+          </div>
+        ) : (
+          <div className="card mt-6 p-5">
+            <CorrectionForm
+              action={correctionAction}
+              locale={locale}
+              defaultTool={typeof sp.tool === 'string' ? sp.tool : undefined}
+              tools={[...catalog.tools].sort((a, b) => a.name.localeCompare(b.name)).map((x) => ({ slug: x.slug, name: x.name }))}
+              fields={fields.map((f) => ({ value: f, label: t(`corrections.fieldOptions.${f}`) }))}
+              labels={{
+                tool: t('corrections.tool'),
+                field: t('corrections.field'),
+                correct: t('corrections.correct'),
+                source: t('corrections.source'),
+                email: t('corrections.email'),
+                vendor: t('corrections.vendor'),
+                submit: t('corrections.submit'),
+              }}
+            />
+          </div>
+        )}
       </div>
       <aside aria-labelledby="log">
         <h2 id="log" className="eyebrow">

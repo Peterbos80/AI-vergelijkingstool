@@ -15,6 +15,17 @@ Admin lives at `/admin`. Its language is set under Automation → Owner.
 
 P2 items (this week) and P3 items (FYI) wait in the inbox and are summarised in the report. At most 5 P2 items reach you per week by default; lower-priority ones are demoted to P3.
 
+## In the free edition: your inbox is GitHub issues
+
+The free edition (GitHub Pages, see [DEPLOYMENT.md](DEPLOYMENT.md)) has no admin area. Instead:
+
+- every new **P1 or P2** inbox item becomes an issue labelled `ops` and `p1`/`p2`, with the reason, the evidence and "if you do nothing". GitHub e-mails you about new issues in your repository;
+- every **weekly report** becomes an issue labelled `report`, and the previous one is closed;
+- you decide with a comment on the issue: `/approve`, `/reject` (both with an optional note), `/snooze` (7 days) or `/default` (apply the default action now). Only comments by the repository owner count. The workflow replies, and closes the issue once the item is resolved;
+- corrections from visitors arrive as issues labelled `correction` (the site's corrections page links to the form). Check the source and, where needed, fix the data in `data/` or let the next agent run confirm it.
+
+Everything else in this handbook applies. Where it mentions Admin pages, the free edition uses the issue, the Actions log ("Site and agents") or a commit to `data/`.
+
 ## Routine
 
 **Weekly, about 15 minutes, after the report:**
