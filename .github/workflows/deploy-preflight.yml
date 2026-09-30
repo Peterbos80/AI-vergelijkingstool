@@ -127,11 +127,14 @@ jobs:
         env:
           DOMAIN: ${{ vars.DOMAIN || vars.SITE_DOMAIN || 'aitoolswijzer.nl' }}
         run: |
-          for n in "$DOMAIN" "www.$DOMAIN"; do
-            echo "$n  A: $(dig +short A "$n" | tr '\n' ' ')  AAAA: $(dig +short AAAA "$n" | tr '\n' ' ')"
-          done
-          echo "NS: $(dig +short NS "$DOMAIN" | tr '\n' ' ')"
-          for u in "http://$DOMAIN" "https://$DOMAIN"; do
+          # Both spellings: the Pages custom domain and the DNS zone must name the same domain.
+          for d in "$DOMAIN" aitoolswijzer.nl aitoolwijzer.nl; do
+            echo "== $d  (NS: $(dig +short NS "$d" | tr '\n' ' '); status: $(dig "$d" | awk '/status:/ {print $6}' | tr -d ,))"
+            for n in "$d" "www.$d"; do
+              echo "  $n  A: $(dig +short A "$n" | tr '\n' ' ')  CNAME: $(dig +short CNAME "$n" | tr '\n' ' ')"
+            done
+          done | awk '!seen[$0]++'
+          for u in "http://$DOMAIN" "https://$DOMAIN" "http://www.$DOMAIN"; do
             curl -sS -o /dev/null --max-time 15 -w "$u -> %{http_code} %{redirect_url}\n" "$u" || true
           done
 
