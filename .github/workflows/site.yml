@@ -170,5 +170,25 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Custom domain and HTTPS from SITE_URL
+        # Keeps the Pages settings in line with SITE_URL: sets the custom domain,
+        # and enforces HTTPS once GitHub has issued the certificate.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          api="https://api.github.com/repos/$GITHUB_REPOSITORY/pages"
+          auth=(-H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28")
+          want=$(node -e 'console.log(new URL(process.env.SITE_URL).hostname)')
+          info=$(curl -fsS "${auth[@]}" "$api")
+          have=$(printf '%s' "$info" | python3 -c 'import sys,json; print(json.load(sys.stdin).get("cname") or "")')
+          echo "custom domain: ${have:-none} (wanted: $want)"
+          if [ "$have" != "$want" ]; then
+            curl -fsS -X PUT "${auth[@]}" "$api" -d "{\"cname\":\"$want\"}" >/dev/null && echo "custom domain set to $want"
+          else
+            state=$(printf '%s' "$info" | python3 -c 'import sys,json; d=json.load(sys.stdin); print((d.get("https_certificate") or {}).get("state",""), d.get("https_enforced"))')
+            echo "certificate and enforcement: $state"
+            case "$state" in approved\ False) curl -fsS -X PUT "${auth[@]}" "$api" -d '{"https_enforced":true}' >/dev/null && echo "HTTPS enforced";; esac
+          fi
       - id: deployment
         uses: actions/deploy-pages@v4
