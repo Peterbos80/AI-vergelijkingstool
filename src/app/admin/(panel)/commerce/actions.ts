@@ -130,7 +130,12 @@ export async function leadStatusAction(formData: FormData): Promise<void> {
   if (!UUID.test(id) || !LEAD_STATUS.includes(status)) redirect('/admin/commerce?flash=invalid#leads');
   await getDb()
     .update(leads)
-    .set({ status, valueCents: value ? Math.round(Number(value.replace(',', '.')) * 100) : undefined })
+    .set({
+      status,
+      valueCents: value ? Math.round(Number(value.replace(',', '.')) * 100) : undefined,
+      // Any status beyond "new" records contact; retention counts from the last one.
+      lastContactAt: status === 'new' ? undefined : new Date(),
+    })
     .where(eq(leads.id, id));
   await audit(user, 'lead_status', 'lead', id, { status });
   redirect('/admin/commerce?flash=saved#leads');

@@ -898,6 +898,8 @@ export const leads = pgTable('leads', {
   stackId: uuid('stack_id').references(() => stacks.id, { onDelete: 'set null' }),
   consentAt: ts('consent_at').notNull().defaultNow(),
   status: text('status').$type<'new' | 'contacted' | 'qualified' | 'won' | 'lost'>().notNull().default('new'),
+  /** Set when the owner records contact; retention runs 24 months from here (privacy page). */
+  lastContactAt: ts('last_contact_at'),
   valueCents: integer('value_cents'),
   currency: text('currency').default('EUR'),
   notes: text('notes'),

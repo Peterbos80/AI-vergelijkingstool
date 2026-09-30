@@ -3,7 +3,7 @@
  * data-version bump and scheduling. Used by the worker, the CLI and the
  * cron endpoint (docs/strategy/08 §2).
  */
-import { and, asc, eq, isNull, lte, or, sql } from 'drizzle-orm';
+import { and, eq, isNull, lte, or, sql } from 'drizzle-orm';
 import type { Database } from '@/lib/db/client';
 import { getDb } from '@/lib/db/client';
 import { agentConfigs, agentRuns } from '@/lib/db/schema';
@@ -132,11 +132,14 @@ export async function runDueAgents(opts: RunOptions & { budgetMs?: number; maxRu
   const db = opts.db ?? getDb();
   await ensureAgentConfigs(db);
   const now = (opts.now ?? (() => new Date()))();
-  const due = await db
-    .select()
-    .from(agentConfigs)
-    .where(and(eq(agentConfigs.enabled, true), or(isNull(agentConfigs.nextRunAt), lte(agentConfigs.nextRunAt, now))))
-    .orderBy(asc(agentConfigs.nextRunAt));
+  const order = new Map(AGENTS.map((a, i) => [a.name as string, i]));
+  // Never-run agents first, then the longest overdue; ties in registry order (safety agents first).
+  const due = (
+    await db
+      .select()
+      .from(agentConfigs)
+      .where(and(eq(agentConfigs.enabled, true), or(isNull(agentConfigs.nextRunAt), lte(agentConfigs.nextRunAt, now))))
+  ).sort((a, b) => (a.nextRunAt?.getTime() ?? 0) - (b.nextRunAt?.getTime() ?? 0) || (order.get(a.agent) ?? 99) - (order.get(b.agent) ?? 99));
   const out: RunSummary[] = [];
   const deadline = Date.now() + (opts.budgetMs ?? 240_000);
   for (const cfg of due) {

@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { createTestDb } from '../setup/pglite';
@@ -96,5 +96,28 @@ describe('ranking independence (money never changes the order)', () => {
       const src = readFileSync(path.join(dir, f), 'utf8');
       expect(src, f).not.toMatch(/@\/lib\/monetization|\b(affiliateLinks|affiliatePrograms|placements|revenueEntries|conversions|outboundClicks)\b/);
     }
+  });
+
+  it('no engine module reaches monetisation code indirectly', () => {
+    const root = path.resolve(process.cwd(), 'src');
+    const dir = path.join(root, 'lib/engine');
+    const queue = readdirSync(dir)
+      .map((f) => path.join(dir, f))
+      .filter((f) => statSync(f).isFile());
+    const seen = new Set<string>();
+    while (queue.length) {
+      const file = queue.pop()!;
+      if (seen.has(file)) continue;
+      seen.add(file);
+      for (const m of readFileSync(file, 'utf8').matchAll(/(?:from|import)\s*\(?\s*'([^']+)'/g)) {
+        const spec = m[1]!;
+        const base = spec.startsWith('@/') ? path.join(root, spec.slice(2)) : spec.startsWith('.') ? path.resolve(path.dirname(file), spec) : null;
+        const resolved = base && [`${base}.ts`, `${base}.tsx`, path.join(base, 'index.ts')].find((c) => existsSync(c));
+        if (resolved) queue.push(resolved);
+      }
+    }
+    const reached = [...seen].map((f) => path.relative(root, f));
+    expect(reached.length).toBeGreaterThan(10);
+    expect(reached.filter((f) => /lib\/monetization|admin\/commerce|agents\/defs\/(monetization|opportunity)/.test(f))).toEqual([]);
   });
 });

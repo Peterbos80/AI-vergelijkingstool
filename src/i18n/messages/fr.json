@@ -882,7 +882,7 @@
       },
       "email": {
         "title": "E-mail (newsletter et Watch)",
-        "body": "Uniquement après double confirmation. Nous conservons votre adresse e-mail, votre langue, le texte du consentement et le moment du consentement. Vous pouvez vous désinscrire en un clic dans chaque e-mail ; nous supprimons alors vos alertes. Les e-mails sont envoyés via notre prestataire d’e-mail."
+        "body": "Uniquement après double confirmation. Nous conservons votre adresse e-mail, votre langue, le texte du consentement et le moment du consentement. Vous pouvez vous désinscrire en un clic dans chaque e-mail ; nous supprimons alors vos alertes. Les e-mails sont envoyés via notre prestataire d’e-mail. Les inscriptions non confirmées sont supprimées après 30 jours. Les copies des e-mails envoyés sont conservées 90 jours pour résoudre les problèmes de distribution."
       },
       "leads": {
         "title": "Demandes de conseil",

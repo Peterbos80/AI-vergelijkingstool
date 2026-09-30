@@ -2,7 +2,7 @@
  * Affiliate link state for disclosure labels and the /go redirect.
  *
  * RANKING INDEPENDENCE: nothing in src/lib/engine may import this module.
- * The test `ranking-independence` enforces that boundary.
+ * tests/integration/engine.test.ts enforces that boundary, including indirect imports.
  */
 import { and, eq } from 'drizzle-orm';
 import { getDb } from '@/lib/db/client';

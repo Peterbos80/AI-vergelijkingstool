@@ -882,7 +882,7 @@
       },
       "email": {
         "title": "E-Mail (Newsletter und Watch)",
-        "body": "Nur nach Double-Opt-in. Wir speichern deine E-Mail-Adresse, Sprache, den Einwilligungstext und den Zeitpunkt der Einwilligung. Du kannst dich in jeder E-Mail mit einem Klick abmelden; dann löschen wir deine Benachrichtigungen. E-Mails werden über unseren E-Mail-Anbieter versendet."
+        "body": "Nur nach Double-Opt-in. Wir speichern deine E-Mail-Adresse, Sprache, den Einwilligungstext und den Zeitpunkt der Einwilligung. Du kannst dich in jeder E-Mail mit einem Klick abmelden; dann löschen wir deine Benachrichtigungen. E-Mails werden über unseren E-Mail-Anbieter versendet. Nicht bestätigte Anmeldungen löschen wir nach 30 Tagen. Kopien versendeter E-Mails bewahren wir 90 Tage auf, um Zustellprobleme zu klären."
       },
       "leads": {
         "title": "Beratungsanfragen",

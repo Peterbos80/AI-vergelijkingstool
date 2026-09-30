@@ -939,7 +939,7 @@
       },
       "email": {
         "title": "E-mail (newsletter and Watch)",
-        "body": "Only after double opt-in. We store your e-mail address, language, the consent text and the moment of consent. You can unsubscribe with one click in every e-mail; we then delete your alerts. E-mail is sent through our e-mail provider."
+        "body": "Only after double opt-in. We store your e-mail address, language, the consent text and the moment of consent. You can unsubscribe with one click in every e-mail; we then delete your alerts. E-mail is sent through our e-mail provider. Unconfirmed sign-ups are deleted after 30 days. Copies of sent e-mails are kept for 90 days to troubleshoot delivery."
       },
       "leads": {
         "title": "Advice requests",
@@ -1310,6 +1310,12 @@
       "correctionValue": "Proposed correction",
       "correctionFrom": "Reported by",
       "vendor": "vendor"
+    },
+    "alert": {
+      "subject": "Urgent: {kind}",
+      "intro": "AIToolsWijzer needs you today.",
+      "open": "Open in Admin",
+      "footer": "You receive this because OWNER_EMAIL is set. Only P1 items (act today) are e-mailed, at most {max} per day; everything else waits for the weekly report."
     },
     "operations": {
       "title": "Operations",

@@ -939,7 +939,7 @@
       },
       "email": {
         "title": "E-mail (nieuwsbrief en Watch)",
-        "body": "Alleen na dubbele bevestiging. We bewaren je e-mailadres, taal, de toestemmingstekst en het moment van toestemming. Afmelden kan met één klik in elke e-mail; daarna verwijderen we je alerts. E-mail wordt verzonden via onze e-mailleverancier."
+        "body": "Alleen na dubbele bevestiging. We bewaren je e-mailadres, taal, de toestemmingstekst en het moment van toestemming. Afmelden kan met één klik in elke e-mail; daarna verwijderen we je alerts. E-mail wordt verzonden via onze e-mailleverancier. Niet-bevestigde aanmeldingen verwijderen we na 30 dagen. Kopieën van verstuurde e-mails bewaren we 90 dagen om bezorgproblemen op te lossen."
       },
       "leads": {
         "title": "Adviesaanvragen",
@@ -1310,6 +1310,12 @@
       "correctionValue": "Voorgestelde correctie",
       "correctionFrom": "Gemeld door",
       "vendor": "maker"
+    },
+    "alert": {
+      "subject": "Dringend: {kind}",
+      "intro": "AIToolsWijzer heeft je vandaag nodig.",
+      "open": "Openen in Admin",
+      "footer": "Je krijgt dit omdat OWNER_EMAIL is ingesteld. Alleen P1-items (vandaag handelen) worden gemaild, maximaal {max} per dag; al het andere wacht op het weekrapport."
     },
     "operations": {
       "title": "Operatie",

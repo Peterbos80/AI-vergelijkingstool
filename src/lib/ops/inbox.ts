@@ -1,11 +1,13 @@
 /**
  * The owner inbox / escalation helper (docs/strategy/12 §5). Deduplicates by
  * key, bundles by group key, and always records a safe default action and a
- * deadline so "doing nothing" is a defined outcome.
+ * deadline so "doing nothing" is a defined outcome. A new P1 item is also
+ * e-mailed to the owner (./alerts.ts).
  */
 import { and, eq, sql } from 'drizzle-orm';
 import type { Database } from '@/lib/db/client';
 import { reviewItems, type InboxCategory, type InboxKind, type Severity } from '@/lib/db/schema';
+import { alertOwner } from './alerts';
 
 export interface EscalationInput {
   kind: InboxKind;
@@ -75,7 +77,13 @@ export async function escalate(db: Database, input: EscalationInput): Promise<{ 
     })
     .onConflictDoNothing({ target: reviewItems.dedupeKey })
     .returning({ id: reviewItems.id });
-  if (inserted[0]) return { id: inserted[0].id, created: true };
+  if (inserted[0]) {
+    if (input.severity === 'p1') {
+      // Best effort: a failed alert must never block the escalation itself.
+      await alertOwner(db, { id: inserted[0].id, kind: input.kind, title: input.title, reasonCode: input.reasonCode, defaultAction: input.defaultAction ?? null, dueAt }, now).catch(() => false);
+    }
+    return { id: inserted[0].id, created: true };
+  }
   const [existing] = await db.select({ id: reviewItems.id }).from(reviewItems).where(eq(reviewItems.dedupeKey, input.dedupeKey!)).limit(1);
   return { id: existing!.id, created: false };
 }

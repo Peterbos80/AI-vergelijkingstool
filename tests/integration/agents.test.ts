@@ -16,6 +16,8 @@ import {
   changeEvents,
   emailOutbox,
   healthChecks,
+  leads,
+  matchQueries,
   outboundClicks,
   pendingChanges,
   pricingPlans,
@@ -413,5 +415,76 @@ describe('recommendation agent (golden-set regression guard)', () => {
     expect(bad.summary).toContain('regression');
     const [item] = await db.select().from(reviewItems).where(eq(reviewItems.kind, 'regression'));
     expect(JSON.stringify(item?.payload)).toContain('shorts');
+  });
+});
+
+describe('P1 alerts', () => {
+  it('e-mails the owner once per new P1 item, never for P2 or duplicates, capped per day', async () => {
+    const { escalate } = await import('@/lib/ops/inbox');
+    const { MAX_ALERTS_PER_DAY } = await import('@/lib/ops/alerts');
+    process.env.OWNER_EMAIL = 'owner@example.test';
+    try {
+      // Real clock: the daily cap counts outbox rows, which the database timestamps.
+      const base = { kind: 'security' as const, severity: 'p1' as const, category: 'security' as const, title: 'test alert', reasonCode: 'login_failures', payload: {}, createdBy: 'test', now: new Date() };
+      const alerts = () => db.select().from(emailOutbox).where(eq(emailOutbox.kind, 'alert'));
+      const first = await escalate(db, { ...base, dedupeKey: 'alert-test-1', defaultAction: 'keep_open' });
+      expect((await escalate(db, { ...base, dedupeKey: 'alert-test-1' })).created).toBe(false);
+      await escalate(db, { ...base, severity: 'p2', dedupeKey: 'alert-test-p2' });
+      const sent = await alerts();
+      expect(sent).toHaveLength(1);
+      expect(sent[0]!.toEmail).toBe('owner@example.test');
+      expect(sent[0]!.subject).toMatch(/^(Dringend|Urgent): /);
+      expect(sent[0]!.bodyText).toContain(`/admin/inbox/${first.id}`);
+      for (let i = 2; i <= MAX_ALERTS_PER_DAY + 3; i++) await escalate(db, { ...base, dedupeKey: `alert-test-${i}` });
+      expect(await alerts()).toHaveLength(MAX_ALERTS_PER_DAY);
+    } finally {
+      delete process.env.OWNER_EMAIL;
+    }
+  });
+});
+
+// Last in the file: it runs the quality agent far in the future, which ages every snapshot.
+describe('retention (privacy page)', () => {
+  it('deletes exactly what the retention rules cover, on the agent clock', async () => {
+    const at = hours(24 * 900);
+    const ago = (days: number) => new Date(at.getTime() - days * 86_400_000);
+    const [oldLead, contactedLead, newLead] = await db
+      .insert(leads)
+      .values([
+        { kind: 'stack_advice' as const, name: 'A', email: 'a@example.test', locale: 'nl', createdAt: ago(800) },
+        { kind: 'stack_advice' as const, name: 'B', email: 'b@example.test', locale: 'nl', createdAt: ago(800), lastContactAt: ago(30) },
+        { kind: 'stack_advice' as const, name: 'C', email: 'c@example.test', locale: 'nl', createdAt: ago(30) },
+      ])
+      .returning({ id: leads.id });
+    const sub = (email: string, status: 'pending' | 'confirmed', days: number) => ({
+      email,
+      locale: 'nl',
+      status,
+      unsubscribeToken: `retention-${email}`,
+      consentText: 'test',
+      source: 'newsletter' as const,
+      createdAt: ago(days),
+    });
+    await db.insert(subscribers).values([sub('stale-pending@example.test', 'pending', 31), sub('fresh-pending@example.test', 'pending', 5), sub('old-confirmed@example.test', 'confirmed', 400)]);
+    const mail = (subject: string, status: 'sent' | 'queued', days: number) => ({ toEmail: 'x@example.test', subject, bodyText: '-', kind: 'other' as const, status, createdAt: ago(days) });
+    await db.insert(emailOutbox).values([mail('retention-old-sent', 'sent', 91), mail('retention-old-queued', 'queued', 91), mail('retention-new-sent', 'sent', 10)]);
+    const mq = (queryHash: string, days: number) => ({ locale: 'nl', queryHash, engine: 'lexical' as const, confidence: 50, ts: ago(days) });
+    await db.insert(matchQueries).values([mq('retention-old', 91), mq('retention-new', 10)]);
+
+    const r = await run('quality', {}, at);
+    expect(r.status).toBe('success');
+
+    const leadIds = (await db.select({ id: leads.id }).from(leads)).map((x) => x.id);
+    expect(leadIds).not.toContain(oldLead!.id);
+    expect(leadIds).toEqual(expect.arrayContaining([contactedLead!.id, newLead!.id]));
+    const emails = (await db.select({ e: subscribers.email }).from(subscribers)).map((x) => x.e);
+    expect(emails).not.toContain('stale-pending@example.test');
+    expect(emails).toEqual(expect.arrayContaining(['fresh-pending@example.test', 'old-confirmed@example.test']));
+    const subjects = (await db.select({ s: emailOutbox.subject }).from(emailOutbox)).map((x) => x.s);
+    expect(subjects).not.toContain('retention-old-sent');
+    expect(subjects).toEqual(expect.arrayContaining(['retention-old-queued', 'retention-new-sent']));
+    const hashes = (await db.select({ h: matchQueries.queryHash }).from(matchQueries)).map((x) => x.h);
+    expect(hashes).not.toContain('retention-old');
+    expect(hashes).toContain('retention-new');
   });
 });

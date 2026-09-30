@@ -5,7 +5,7 @@
  *   fewest       as few tools as possible (greedy step coverage)
  *
  * RANKING INDEPENDENCE: this module never imports monetisation code; affiliate
- * programmes and sponsoring have no input here (tests/unit/ranking-independence).
+ * programmes and sponsoring have no input here (tests/integration/engine.test.ts).
  */
 import type { Catalog, CatalogPlan, CatalogTask, CatalogTaskStep, CatalogTool } from '@/lib/catalog/types';
 import { toEurCents } from '@/lib/pricing/money';
