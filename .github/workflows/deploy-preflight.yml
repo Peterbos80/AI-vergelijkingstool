@@ -1,0 +1,174 @@
+name: Deploy preflight
+
+# Read-only check before deploying to the server: which deployment secrets and
+# variables exist (names only, never values), where the domain points, and
+# whether the server accepts an SSH login (and roughly what it runs).
+# It changes nothing. This repository is public, so the log shows only
+# yes/no answers and coarse server facts.
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/deploy-preflight.yml']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-preflight
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Which secrets and variables are set (true/false only)
+        env:
+          S_DEPLOY_HOST: ${{ secrets.DEPLOY_HOST != '' }}
+          S_DEPLOY_USER: ${{ secrets.DEPLOY_USER != '' }}
+          S_DEPLOY_PORT: ${{ secrets.DEPLOY_PORT != '' }}
+          S_DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY != '' }}
+          S_DEPLOY_KEY: ${{ secrets.DEPLOY_KEY != '' }}
+          S_DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD != '' }}
+          S_SSH_HOST: ${{ secrets.SSH_HOST != '' }}
+          S_SSH_USER: ${{ secrets.SSH_USER != '' }}
+          S_SSH_USERNAME: ${{ secrets.SSH_USERNAME != '' }}
+          S_SSH_PORT: ${{ secrets.SSH_PORT != '' }}
+          S_SSH_KEY: ${{ secrets.SSH_KEY != '' }}
+          S_SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY != '' }}
+          S_SSH_PASSWORD: ${{ secrets.SSH_PASSWORD != '' }}
+          S_SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS != '' }}
+          S_VPS_HOST: ${{ secrets.VPS_HOST != '' }}
+          S_VPS_IP: ${{ secrets.VPS_IP != '' }}
+          S_VPS_USER: ${{ secrets.VPS_USER != '' }}
+          S_VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY != '' }}
+          S_VPS_PASSWORD: ${{ secrets.VPS_PASSWORD != '' }}
+          S_SERVER_HOST: ${{ secrets.SERVER_HOST != '' }}
+          S_SERVER_IP: ${{ secrets.SERVER_IP != '' }}
+          S_SERVER_USER: ${{ secrets.SERVER_USER != '' }}
+          S_SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY != '' }}
+          S_SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD != '' }}
+          S_HOST: ${{ secrets.HOST != '' }}
+          S_USERNAME: ${{ secrets.USERNAME != '' }}
+          S_PASSWORD: ${{ secrets.PASSWORD != '' }}
+          S_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY != '' }}
+          S_REMOTE_HOST: ${{ secrets.REMOTE_HOST != '' }}
+          S_REMOTE_USER: ${{ secrets.REMOTE_USER != '' }}
+          S_ROOT_PASSWORD: ${{ secrets.ROOT_PASSWORD != '' }}
+          S_TRANSIP_HOST: ${{ secrets.TRANSIP_HOST != '' }}
+          S_TRANSIP_IP: ${{ secrets.TRANSIP_IP != '' }}
+          S_TRANSIP_VPS: ${{ secrets.TRANSIP_VPS != '' }}
+          S_TRANSIP_USER: ${{ secrets.TRANSIP_USER != '' }}
+          S_TRANSIP_LOGIN: ${{ secrets.TRANSIP_LOGIN != '' }}
+          S_TRANSIP_USERNAME: ${{ secrets.TRANSIP_USERNAME != '' }}
+          S_TRANSIP_PASSWORD: ${{ secrets.TRANSIP_PASSWORD != '' }}
+          S_TRANSIP_PRIVATE_KEY: ${{ secrets.TRANSIP_PRIVATE_KEY != '' }}
+          S_TRANSIP_API_KEY: ${{ secrets.TRANSIP_API_KEY != '' }}
+          S_TRANSIP_ACCESS_TOKEN: ${{ secrets.TRANSIP_ACCESS_TOKEN != '' }}
+          S_TRANSIP_TOKEN: ${{ secrets.TRANSIP_TOKEN != '' }}
+          S_TRANSIP_SSH_KEY: ${{ secrets.TRANSIP_SSH_KEY != '' }}
+          S_FTP_HOST: ${{ secrets.FTP_HOST != '' }}
+          S_FTP_SERVER: ${{ secrets.FTP_SERVER != '' }}
+          S_FTP_USER: ${{ secrets.FTP_USER != '' }}
+          S_FTP_USERNAME: ${{ secrets.FTP_USERNAME != '' }}
+          S_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD != '' }}
+          S_SFTP_HOST: ${{ secrets.SFTP_HOST != '' }}
+          S_SFTP_USER: ${{ secrets.SFTP_USER != '' }}
+          S_SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD != '' }}
+          S_DOMAIN: ${{ secrets.DOMAIN != '' }}
+          S_SITE_DOMAIN: ${{ secrets.SITE_DOMAIN != '' }}
+          S_SITE_URL: ${{ secrets.SITE_URL != '' }}
+          S_DATABASE_URL: ${{ secrets.DATABASE_URL != '' }}
+          S_APP_SECRET: ${{ secrets.APP_SECRET != '' }}
+          S_CRON_SECRET: ${{ secrets.CRON_SECRET != '' }}
+          S_OWNER_EMAIL: ${{ secrets.OWNER_EMAIL != '' }}
+          S_ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL != '' }}
+          S_ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD != '' }}
+          S_RESEND_API_KEY: ${{ secrets.RESEND_API_KEY != '' }}
+          S_EMAIL_FROM: ${{ secrets.EMAIL_FROM != '' }}
+          S_ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+          S_YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY != '' }}
+          S_HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL != '' }}
+          S_LEGAL_NAME: ${{ secrets.LEGAL_NAME != '' }}
+          S_LEGAL_KVK: ${{ secrets.LEGAL_KVK != '' }}
+          S_LEGAL_ADDRESS: ${{ secrets.LEGAL_ADDRESS != '' }}
+          S_LEGAL_EMAIL: ${{ secrets.LEGAL_EMAIL != '' }}
+          S_LETSENCRYPT_EMAIL: ${{ secrets.LETSENCRYPT_EMAIL != '' }}
+          V_DEPLOY_HOST: ${{ vars.DEPLOY_HOST != '' }}
+          V_DEPLOY_USER: ${{ vars.DEPLOY_USER != '' }}
+          V_DEPLOY_PORT: ${{ vars.DEPLOY_PORT != '' }}
+          V_SSH_HOST: ${{ vars.SSH_HOST != '' }}
+          V_SSH_USER: ${{ vars.SSH_USER != '' }}
+          V_SSH_PORT: ${{ vars.SSH_PORT != '' }}
+          V_VPS_HOST: ${{ vars.VPS_HOST != '' }}
+          V_VPS_IP: ${{ vars.VPS_IP != '' }}
+          V_VPS_USER: ${{ vars.VPS_USER != '' }}
+          V_SERVER_HOST: ${{ vars.SERVER_HOST != '' }}
+          V_SERVER_IP: ${{ vars.SERVER_IP != '' }}
+          V_SERVER_USER: ${{ vars.SERVER_USER != '' }}
+          V_HOST: ${{ vars.HOST != '' }}
+          V_USERNAME: ${{ vars.USERNAME != '' }}
+          V_DOMAIN: ${{ vars.DOMAIN != '' }}
+          V_SITE_DOMAIN: ${{ vars.SITE_DOMAIN != '' }}
+          V_SITE_URL: ${{ vars.SITE_URL != '' }}
+          V_OWNER_EMAIL: ${{ vars.OWNER_EMAIL != '' }}
+          V_ADMIN_EMAIL: ${{ vars.ADMIN_EMAIL != '' }}
+          V_EMAIL_FROM: ${{ vars.EMAIL_FROM != '' }}
+          V_LETSENCRYPT_EMAIL: ${{ vars.LETSENCRYPT_EMAIL != '' }}
+          V_LEGAL_NAME: ${{ vars.LEGAL_NAME != '' }}
+          V_LEGAL_EMAIL: ${{ vars.LEGAL_EMAIL != '' }}
+          V_TRANSIP_LOGIN: ${{ vars.TRANSIP_LOGIN != '' }}
+          V_TRANSIP_VPS: ${{ vars.TRANSIP_VPS != '' }}
+        run: |
+          echo "Secrets that are set:";   env | grep -E '^S_[A-Z_]+=true$' | sed -E 's/^S_(.*)=true$/  \1/' | sort || true
+          echo "Variables that are set:"; env | grep -E '^V_[A-Z_]+=true$' | sed -E 's/^V_(.*)=true$/  \1/' | sort || true
+
+      - name: Domain DNS and current response
+        env:
+          DOMAIN: ${{ vars.DOMAIN || vars.SITE_DOMAIN || 'aitoolswijzer.nl' }}
+        run: |
+          for n in "$DOMAIN" "www.$DOMAIN"; do
+            echo "$n  A: $(dig +short A "$n" | tr '\n' ' ')  AAAA: $(dig +short AAAA "$n" | tr '\n' ' ')"
+          done
+          echo "NS: $(dig +short NS "$DOMAIN" | tr '\n' ' ')"
+          for u in "http://$DOMAIN" "https://$DOMAIN"; do
+            curl -sS -o /dev/null --max-time 15 -w "$u -> %{http_code} %{redirect_url}\n" "$u" || true
+          done
+
+      - name: SSH login and coarse server facts (read-only)
+        env:
+          DOMAIN: ${{ vars.DOMAIN || vars.SITE_DOMAIN || 'aitoolswijzer.nl' }}
+          HOST: ${{ secrets.DEPLOY_HOST || secrets.SSH_HOST || secrets.VPS_HOST || secrets.VPS_IP || secrets.SERVER_HOST || secrets.SERVER_IP || secrets.HOST || secrets.REMOTE_HOST || secrets.TRANSIP_HOST || secrets.TRANSIP_IP || vars.DEPLOY_HOST || vars.SSH_HOST || vars.VPS_HOST || vars.VPS_IP || vars.SERVER_HOST || vars.SERVER_IP || vars.HOST }}
+          PORT: ${{ secrets.DEPLOY_PORT || secrets.SSH_PORT || vars.DEPLOY_PORT || vars.SSH_PORT || '22' }}
+          LOGIN: ${{ secrets.DEPLOY_USER || secrets.SSH_USER || secrets.SSH_USERNAME || secrets.VPS_USER || secrets.SERVER_USER || secrets.USERNAME || secrets.REMOTE_USER || secrets.TRANSIP_USER || vars.DEPLOY_USER || vars.SSH_USER || vars.VPS_USER || vars.SERVER_USER || vars.USERNAME }}
+          KEY: ${{ secrets.DEPLOY_SSH_KEY || secrets.DEPLOY_KEY || secrets.SSH_PRIVATE_KEY || secrets.SSH_KEY || secrets.VPS_SSH_KEY || secrets.SERVER_SSH_KEY || secrets.PRIVATE_KEY || secrets.TRANSIP_SSH_KEY }}
+          PASSWORD: ${{ secrets.DEPLOY_PASSWORD || secrets.SSH_PASSWORD || secrets.VPS_PASSWORD || secrets.SERVER_PASSWORD || secrets.ROOT_PASSWORD || secrets.PASSWORD }}
+        run: |
+          host="${HOST:-$DOMAIN}"
+          login="${LOGIN:-root}"
+          echo "host from a secret/variable: $([ -n "$HOST" ] && echo yes || echo "no (trying the domain)")"
+          echo "login name from a secret/variable: $([ -n "$LOGIN" ] && echo yes || echo "no (trying root)")"
+          if timeout 10 bash -c "</dev/tcp/$host/$PORT" 2>/dev/null; then echo "ssh port: open"; else echo "ssh port: NOT reachable"; exit 0; fi
+          if [ -z "$KEY" ] && [ -z "$PASSWORD" ]; then echo "no SSH key or password secret: cannot log in"; exit 0; fi
+          facts() {
+            cat <<'EOF'
+          . /etc/os-release 2>/dev/null && echo "os: $PRETTY_NAME"
+          echo "arch: $(uname -m), cpus: $(nproc)"
+          free -m | awk '/Mem:/ {print "memory MB: " $2}'
+          df -BG / | awk 'NR==2 {print "disk free: " $4 " of " $2}'
+          echo "user is root: $([ "$(id -u)" = 0 ] && echo yes || echo no), passwordless sudo: $(sudo -n true 2>/dev/null && echo yes || echo no)"
+          for c in node nginx psql docker certbot git; do printf '%s: %s\n' "$c" "$(command -v "$c" >/dev/null 2>&1 && echo present || echo absent)"; done
+          for p in 80 443 3000 5432; do printf 'port %s in use: %s\n' "$p" "$( (ss -ltn 2>/dev/null || netstat -ltn 2>/dev/null) | grep -qE "[:.]$p[[:space:]]" && echo yes || echo no)"; done
+          echo "nginx sites enabled: $(ls /etc/nginx/sites-enabled 2>/dev/null | wc -l)"
+          EOF
+          }
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          opts="-p $PORT -o StrictHostKeyChecking=accept-new -o ConnectTimeout=20"
+          if [ -n "$KEY" ]; then
+            printf '%s\n' "$KEY" | tr -d '\r' > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+            if facts | ssh $opts -o BatchMode=yes -i ~/.ssh/deploy_key "$login@$host" 'bash -s'; then echo "login with SSH key: OK"; else echo "login with SSH key: FAILED"; fi
+          else
+            sudo apt-get install -y -qq sshpass >/dev/null
+            if facts | SSHPASS="$PASSWORD" sshpass -e ssh $opts -o PreferredAuthentications=password -o PubkeyAuthentication=no "$login@$host" 'bash -s'; then echo "login with password: OK"; else echo "login with password: FAILED"; fi
+          fi
+          rm -f ~/.ssh/deploy_key
