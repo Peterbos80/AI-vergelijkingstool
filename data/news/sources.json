@@ -1,0 +1,17 @@
+{
+  "note": "Feeds the news agent reads every hour. Only the publishers' own RSS/Atom feeds and YouTube channel feeds: headline, outlet and link are shown, never the article text. filter 'all' = an AI-only feed; 'ai' = keep items about AI or a watched person.",
+  "sources": [
+    { "id": "verge-ai", "name": "The Verge", "kind": "article", "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml", "homepage": "https://www.theverge.com/ai-artificial-intelligence", "language": "en", "filter": "all" },
+    { "id": "guardian-ai", "name": "The Guardian", "kind": "article", "url": "https://www.theguardian.com/technology/artificialintelligence/rss", "homepage": "https://www.theguardian.com/technology/artificialintelligence", "language": "en", "filter": "all" },
+    { "id": "techcrunch-ai", "name": "TechCrunch", "kind": "article", "url": "https://techcrunch.com/category/artificial-intelligence/feed/", "homepage": "https://techcrunch.com/category/artificial-intelligence/", "language": "en", "filter": "all" },
+    { "id": "mittr-ai", "name": "MIT Technology Review", "kind": "article", "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed", "homepage": "https://www.technologyreview.com/topic/artificial-intelligence/", "language": "en", "filter": "all" },
+    { "id": "cnbc-tech", "name": "CNBC", "kind": "article", "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910", "homepage": "https://www.cnbc.com/technology/", "language": "en", "filter": "ai" },
+    { "id": "bbc-tech", "name": "BBC News", "kind": "article", "url": "https://feeds.bbci.co.uk/news/technology/rss.xml", "homepage": "https://www.bbc.com/news/technology", "language": "en", "filter": "ai" },
+    { "id": "nos-tech", "name": "NOS", "kind": "article", "url": "https://feeds.nos.nl/nosnieuwstech", "homepage": "https://nos.nl/nieuws/tech", "language": "nl", "filter": "ai" },
+    { "id": "yt-cnbc", "name": "CNBC (YouTube)", "kind": "video", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCvJJ_dzjViJCoLf5uKUTwoA", "homepage": "https://www.youtube.com/channel/UCvJJ_dzjViJCoLf5uKUTwoA", "language": "en", "filter": "ai" },
+    { "id": "yt-bloomberg-tech", "name": "Bloomberg Technology (YouTube)", "kind": "video", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCrM7B7SL_g1edFOnmj-SDKg", "homepage": "https://www.youtube.com/channel/UCrM7B7SL_g1edFOnmj-SDKg", "language": "en", "filter": "ai" },
+    { "id": "yt-60-minutes", "name": "60 Minutes (YouTube)", "kind": "video", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCsN32BtMd0IoByjJRNF12cw", "homepage": "https://www.youtube.com/channel/UCsN32BtMd0IoByjJRNF12cw", "language": "en", "filter": "ai" },
+    { "id": "yt-doac", "name": "The Diary Of A CEO (YouTube)", "kind": "video", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCGq-a57w-aPwyi3pW7XLiHw", "homepage": "https://www.youtube.com/channel/UCGq-a57w-aPwyi3pW7XLiHw", "language": "en", "filter": "ai" },
+    { "id": "yt-lex-fridman", "name": "Lex Fridman (YouTube)", "kind": "video", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCSHZKyawb77ixDdsGog4iWA", "homepage": "https://www.youtube.com/channel/UCSHZKyawb77ixDdsGog4iWA", "language": "en", "filter": "ai" }
+  ]
+}

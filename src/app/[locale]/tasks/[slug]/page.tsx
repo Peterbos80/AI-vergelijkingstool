@@ -17,6 +17,8 @@ import { StackReceipt } from '@/components/stack/StackReceipt';
 import { StepDetails } from '@/components/stack/StepDetails';
 import { ToolRow } from '@/components/data/ToolRow';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
+import { TaskGuideCard } from '@/components/start/TaskGuideCard';
+import { taskGuide } from '@/content/task-guides';
 import type { Catalog, CatalogTask } from '@/lib/catalog/types';
 import type { Money } from '@/lib/engine/compose';
 
@@ -53,6 +55,7 @@ export default async function TaskPage({ params }: PageProps<'/[locale]/tasks/[s
   if (canonical !== decodeURIComponent(slug)) permanentRedirect(href.task(locale, canonical));
   const t = getT(locale);
   const text = taskTextOf(task, locale);
+  const guide = taskGuide(task.id, locale);
   await track({ path: href.task(locale, canonical), pageType: 'task', locale, entityId: task.id });
   const affiliates = await affiliateToolIds();
   const recommended = composeStack(catalog, task, {}, 'recommended');
@@ -101,6 +104,11 @@ export default async function TaskPage({ params }: PageProps<'/[locale]/tasks/[s
       <JsonLd data={ld} />
       <h1 className="mt-6 text-3xl md:text-4xl">{text.title}</h1>
       {text.summary && <p className="mt-2 max-w-2xl text-lg text-ink-2">{text.summary}</p>}
+      {guide && (
+        <div className="mt-6 max-w-3xl">
+          <TaskGuideCard guide={guide} t={t} />
+        </div>
+      )}
 
       <section className="mt-8" aria-labelledby="workflow">
         <h2 id="workflow" className="text-xl">

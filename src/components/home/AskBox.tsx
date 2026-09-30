@@ -52,12 +52,15 @@ export function AskBox({
   prompts,
   panels,
   defaultPanel,
+  afterPrompts,
 }: {
   action: string;
   labels: AskLabels;
   prompts: AskPrompt[];
   panels: MatrixPanel[];
   defaultPanel: string;
+  /** Shown under the prompts (e.g. the step-by-step finder link). */
+  afterPrompts?: ReactNode;
 }) {
   const [panel, setPanel] = useState(defaultPanel);
   const [q, setQ] = useState('');
@@ -134,6 +137,7 @@ export function AskBox({
           </li>
         ))}
       </ul>
+      {afterPrompts}
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-lg">{active?.title}</h2>

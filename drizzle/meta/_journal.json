@@ -36,6 +36,13 @@
       "when": 1790759405475,
       "tag": "0004_lead_last_contact",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790778292890,
+      "tag": "0005_news_items",
+      "breakpoints": true
     }
   ]
 }

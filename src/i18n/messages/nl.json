@@ -25,7 +25,8 @@
     "tasks": "Taken",
     "search": "Zoek een tool",
     "searchLabel": "Zoek in de tooldatabase",
-    "menu": "Menu"
+    "menu": "Menu",
+    "news": "Nieuws"
   },
   "footer": {
     "about": "Over",
@@ -281,7 +282,10 @@
     "annual": "bij jaarbetaling",
     "perMonthAnnual": "{price}/mnd bij jaarbetaling",
     "watermarkWarning": "Gratis plan zet een watermerk",
-    "noCommercialFree": "Gratis plan niet voor commercieel gebruik"
+    "noCommercialFree": "Gratis plan niet voor commercieel gebruik",
+    "metaDescriptionNoFree": "{name}: {tagline}. Prijzen vanaf {price}. Met bronnen, versheid en alternatieven.",
+    "missingFacts": "Mis je iets over {name}? We tonen alleen wat we met een bron hebben vastgelegd.",
+    "missingFactsLink": "Stuur een aanvulling met bron"
   },
   "plans": {
     "title": "Prijzen van {name}",
@@ -452,7 +456,8 @@
       "easier": "een tool zoekt die makkelijk te leren is",
       "capability": "ook {capability} nodig hebt",
       "platform": "op {platform} werkt"
-    }
+    },
+    "noData": "Nog geen gegevens met bron"
   },
   "match": {
     "metaTitle": "Jouw AI-stack: {goal}",
@@ -554,7 +559,7 @@
     "overBudget": "Boven je budget ({amount})",
     "budgetUnknown": "Budget van {amount}: nog niet te controleren (wisselkoers of prijs ontbreekt).",
     "freeAvailable": "gratis plan",
-    "priceUnknown": "prijs onbekend",
+    "priceUnknown": "prijs: zie website",
     "save": "Bewaar dit bonnetje",
     "saved": "Bewaard",
     "share": "Delen",
@@ -585,7 +590,7 @@
     "watermark_free": "Gratis plan zet een watermerk",
     "no_commercial_free": "Gratis plan niet voor commercieel gebruik",
     "no_free_plan": "Geen gratis plan",
-    "unknown_price": "Prijs onbekend",
+    "unknown_price": "Controleer de prijs op de officiële site",
     "stale": "Gegevens mogelijk verouderd",
     "unverified_price": "Prijs nog niet bevestigd",
     "beta": "Nog in bèta",
@@ -745,6 +750,11 @@
         "does": "Leest de changelogs en feeds van tools.",
         "result": "{feeds_read, plural, =0 {geen feeds met nieuws} one {# feed gelezen} other {# feeds gelezen}}"
       },
+      "news": {
+        "name": "Nieuws-agent",
+        "does": "Leest elk uur de feeds van media en YouTube-kanalen over AI.",
+        "result": "{feeds_read, plural, one {# feed gelezen} other {# feeds gelezen}}, {items_new, plural, =0 {geen nieuwe berichten} one {# nieuw bericht} other {# nieuwe berichten}}"
+      },
       "broken-link": {
         "name": "Bereikbaarheids-agent",
         "does": "Controleert of de websites van tools werken.",
@@ -797,13 +807,13 @@
       }
     },
     "radarTitle": "AI-trend- en nieuwsradar",
-    "radarSub": "Automatisch verzameld door onze agents uit officiële bronnen, video's en community's. Bij elk item staat de bron.",
-    "radarAll": "Alle wijzigingen in Pulse",
-    "radarNews": "Wijzigingen en nieuws",
+    "radarSub": "Automatisch verzameld door onze agents: elk uur het AI-nieuws uit de media, video's van nieuwskanalen en wijzigingen bij tools. Bij elk item staat de bron.",
+    "radarAll": "Al het AI-nieuws",
+    "radarNews": "AI-nieuws uit de media",
     "radarVideos": "Video's van officiële kanalen",
     "radarBuzz": "Community-buzz",
-    "radarEmptyNews": "Nog geen wijzigingen met bron. De wijzigingen-agent leest elke 6 uur de changelogs.",
-    "radarEmptyVideos": "Nog geen video's. De video-agent kijkt dagelijks bij de officiële kanalen van tools.",
+    "radarEmptyNews": "Nog geen nieuws. De nieuws-agent leest elk uur de feeds van media.",
+    "radarEmptyVideos": "Nog geen video's. De nieuws-agent kijkt elk uur bij de YouTube-kanalen van media.",
     "radarEmptyBuzz": "Nog geen metingen. De community-agent meet elke 6 uur de vermeldingen op Hacker News en GitHub.",
     "source": "bron: {domain}",
     "buzz": {
@@ -824,7 +834,59 @@
     "startPlan": "Bekijk het stappenplan",
     "startStack": "Stel mijn stack samen",
     "paidFrom": "betaald vanaf {price}",
-    "from": "vanaf {price}"
+    "from": "vanaf {price}",
+    "radarChanges": "Wijzigingen bij tools",
+    "radarEmptyChanges": "Nog geen wijzigingen met bron. De wijzigingen-agent leest elke 6 uur de changelogs."
+  },
+  "start": {
+    "metaTitle": "Stap voor stap de juiste AI-tool kiezen",
+    "metaDescription": "Geen idee welke AI je nodig hebt? Kies in drie eenvoudige stappen wat je wilt doen en krijg een persoonlijk advies, zonder voorkennis.",
+    "metaTitle2": "{area}: kies wat je wilt doen",
+    "metaTitle3": "{task}: zo begin je, in gewone taal",
+    "breadcrumb": "Stap voor stap",
+    "step": "Stap {n} van 3",
+    "title1": "Waar wil je AI voor gebruiken?",
+    "intro1": "Geen idee wat je moet typen? Kies hieronder wat het meest in de buurt komt. Je hoeft niets van AI te weten.",
+    "title2": "Wat wil je precies doen?",
+    "intro2": "Kies wat het best past. Twijfel je? Kies er gewoon een; je kunt altijd terug.",
+    "intro3": "Zo werkt het, in gewone taal. Beantwoord daarna twee korte vragen en je krijgt je persoonlijke advies.",
+    "choose": "Kies dit",
+    "back": "Terug",
+    "fullTask": "Bekijk alle tools en stappen",
+    "orType": "Weet je het al?",
+    "orTypeLink": "Typ je vraag in je eigen woorden",
+    "homeCta": "Weet je niet wat je moet typen? Kies stap voor stap",
+    "guideLabel": "Uitleg in gewone taal",
+    "guideWhat": "Wat is het?",
+    "guideSteps": "Zo begin je",
+    "guideWatch": "Let op",
+    "guideTip": "Tip",
+    "budgetQ": "Wat mag het kosten?",
+    "budget": {
+      "free": "Alleen gratis",
+      "25": "Tot €25 per maand",
+      "any": "Maakt niet uit"
+    },
+    "levelQ": "Hoeveel ervaring heb je met AI?",
+    "level": {
+      "beginner": "Nieuw: ik begin net",
+      "intermediate": "Een beetje: ik heb het weleens gebruikt",
+      "advanced": "Veel: ik ben technisch"
+    },
+    "submit": "Toon mijn advies",
+    "submitNote": "Je krijgt de tools per stap, met prijzen en bronnen. Volgorde nooit op sponsoring.",
+    "cat": {
+      "assistant": "Een slimme hulp voor van alles",
+      "writing": "Teksten schrijven, verbeteren of vertalen",
+      "research": "Leren, onderzoeken en samenvatten",
+      "image": "Foto's, plaatjes en ontwerpen",
+      "video": "Video's maken of bewerken",
+      "audio": "Geluid, stem, podcast en muziek",
+      "code": "Websites, apps en programmeren",
+      "automation": "Werk automatiseren",
+      "marketing": "Marketing en social media",
+      "business": "Klanten helpen"
+    }
   },
   "newsletter": {
     "title": "AI Pulse: de wekelijkse nieuwsbrief",
@@ -903,6 +965,26 @@
     "detected": "gedetecteerd {date}",
     "monthPrecision": "{month}"
   },
+  "news": {
+    "title": "AI-nieuws",
+    "metaTitle": "AI-nieuws: het laatste uit de media, elk uur bijgewerkt",
+    "metaDescription": "Het laatste AI-nieuws en interviews uit de media, zoals CNBC, The Guardian, The Verge en NOS, elk uur automatisch verzameld. Met de bron bij elk bericht.",
+    "intro": "Het laatste AI-nieuws uit de media, elk uur automatisch verzameld door onze nieuws-agent. We tonen de kop, de bron en de datum; het artikel lees je bij de bron.",
+    "voices": "Stemmen in het nieuws",
+    "articles": "Artikelen",
+    "videos": "Video's en interviews",
+    "empty": "Nog geen nieuws verzameld. De nieuws-agent draait elk uur; kijk straks nog eens.",
+    "emptyArticles": "Nog geen artikelen.",
+    "emptyVideos": "Nog geen video's.",
+    "sourcesTitle": "Bronnen",
+    "sourcesBody": "We lezen alleen de openbare feeds die de uitgevers zelf aanbieden (RSS en YouTube). We nemen geen artikelteksten over: je leest het volledige bericht altijd bij de bron.",
+    "opensSource": "opent {source}",
+    "personMetaTitle": "{name}: het laatste AI-nieuws en interviews",
+    "personMetaDescription": "Nieuws en interviews met {name} ({role}), elk uur bijgewerkt, met de bron bij elk bericht.",
+    "personLatest": "Het laatste nieuws en interviews met {name}",
+    "personEmpty": "Nog geen berichten over {name} in de afgelopen 90 dagen. De nieuws-agent kijkt elk uur.",
+    "otherVoices": "Andere stemmen"
+  },
   "doctor": {
     "title": "Stack Doctor",
     "metaTitle": "Stack Doctor: laat je AI-tools doorlichten",
@@ -937,7 +1019,7 @@
       "stale": "Gegevens van {tool} zijn mogelijk verouderd.",
       "trains_on_data": "{tool} kan je data gebruiken voor training.",
       "no_eu": "{tool} biedt geen dataopslag in de EU.",
-      "unknown_price": "De prijs van {tool} is onbekend.",
+      "unknown_price": "Controleer de actuele prijs van {tool} op de officiële site: we hebben die nog niet met een bron vastgelegd.",
       "unverified_price": "De prijs van {tool} is nog niet bevestigd."
     },
     "savingsTitle": "Goedkopere alternatieven",
@@ -1924,7 +2006,8 @@
       "opportunity": "Rangschikt affiliate-, content- en gereedheidskansen op verwachte waarde; stelt de LLM-drempel bij binnen jouw grenzen.",
       "content": "Optioneel (LLM): schrijft tekstconcepten voor nieuwe concepttools en vertaalt toolteksten naar extra talen.",
       "reporter": "Maakt het weekrapport en mailt het naar jou als e-mail is ingesteld.",
-      "audit": "Maandelijkse willekeurige steekproef van automatische beslissingen om te beoordelen; meet de precisie per vertrouwensband."
+      "audit": "Maandelijkse willekeurige steekproef van automatische beslissingen om te beoordelen; meet de precisie per vertrouwensband.",
+      "news": "Leest elk uur de feeds van media (RSS en YouTube) en publiceert AI-nieuws: kop, bron en link, nooit de artikeltekst."
     }
   },
   "og": {

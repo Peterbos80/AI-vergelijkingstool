@@ -18,6 +18,7 @@ import {
   healthChecks,
   leads,
   matchQueries,
+  newsItems,
   outboundClicks,
   pendingChanges,
   pricingPlans,
@@ -39,6 +40,7 @@ import { DEFAULT_SETTINGS, saveSetting } from '@/lib/settings';
 import { buildWeeklyReport, reportPeriod } from '@/lib/reports/weekly';
 import { trend } from '@/lib/reports/metrics';
 import type { AgentName } from '@/agents/types';
+import { NEWS_SOURCES } from '@/lib/news';
 
 const T0 = new Date('2026-09-30T08:00:00Z');
 const hours = (h: number) => new Date(T0.getTime() + h * 3600_000);
@@ -87,7 +89,7 @@ describe('registry and dependency register', () => {
   it('registers every agent once with a valid schedule', () => {
     const names = AGENTS.map((a) => a.name);
     expect(new Set(names).size).toBe(names.length);
-    expect(names.length).toBe(19);
+    expect(names.length).toBe(20);
     for (const a of AGENTS) expect(validSchedule(a.schedule), a.name).toBe(true);
   });
   it('dependencies-registered: every required integration and optional key is in the register', () => {
@@ -412,6 +414,46 @@ describe('video and social agents', () => {
       const r = await run(name, {}, hours(30));
       expect(r.status, `${name}: ${r.summary}`).not.toBe('failed');
     }
+  });
+});
+
+describe('news agent', () => {
+  const feed = (id: string) => NEWS_SOURCES.find((s) => s.id === id)!.url;
+  const rss = (items: { title: string; link: string; date: string }[]) =>
+    `<?xml version="1.0"?><rss version="2.0"><channel><title>News</title>${items
+      .map((i) => `<item><title>${i.title}</title><link>${i.link}</link><guid>${i.link}</guid><pubDate>${i.date}</pubDate></item>`)
+      .join('')}</channel></rss>`;
+  const atom = (entries: { id: string; title: string; date: string }[]) =>
+    `<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:yt="http://www.youtube.com/xml/schemas/2015">${entries
+      .map((e) => `<entry><id>yt:video:${e.id}</id><title>${e.title}</title><link rel="alternate" href="https://www.youtube.com/watch?v=${e.id}"/><published>${e.date}</published></entry>`)
+      .join('')}</feed>`;
+
+  it('publishes AI items with headline, outlet and link, tags watched experts, skips off-topic items and never duplicates', async () => {
+    const at = hours(40);
+    const day = new Date(at.getTime() - 3600_000).toUTCString();
+    const pages = {
+      [feed('bbc-tech')]: {
+        contentType: 'application/rss+xml',
+        body: rss([
+          { title: 'Geoffrey Hinton warns AI could &quot;outsmart&quot; us', link: 'https://www.bbc.com/news/articles/a1?utm_source=rss&amp;at_medium=feed', date: day },
+          { title: 'New folding phone goes on sale', link: 'https://www.bbc.com/news/articles/b2', date: day },
+        ]),
+      },
+      [feed('yt-doac')]: { contentType: 'application/atom+xml', body: atom([{ id: 'abcdefghijk', title: 'Roman Yampolskiy: can we control superintelligence?', date: new Date(at.getTime() - 7200_000).toISOString() }]) },
+      [feed('verge-ai')]: { contentType: 'application/rss+xml', body: rss([{ title: 'A new open model &lt;em&gt;beats&lt;/em&gt; the benchmarks', link: 'https://www.theverge.com/ai/1', date: day }]) },
+    };
+    const first = await run('news', pages, at);
+    expect(first.status).toBe('partial'); // the other feeds answer 404 in this fixture
+    const rows = await db.select().from(newsItems).orderBy(newsItems.url);
+    expect(rows.map((r) => [r.sourceId, r.kind, r.title, r.url, r.people])).toEqual([
+      ['bbc-tech', 'article', 'Geoffrey Hinton warns AI could "outsmart" us', 'https://www.bbc.com/news/articles/a1', ['geoffrey-hinton']],
+      ['verge-ai', 'article', 'A new open model beats the benchmarks', 'https://www.theverge.com/ai/1', []],
+      ['yt-doac', 'video', 'Roman Yampolskiy: can we control superintelligence?', 'https://www.youtube.com/watch?v=abcdefghijk', ['roman-yampolskiy']],
+    ]);
+    // Same feeds an hour later: nothing new, nothing duplicated.
+    const again = await run('news', pages, hours(41));
+    expect(again.stats.items_new ?? 0).toBe(0);
+    expect(await db.select().from(newsItems)).toHaveLength(3);
   });
 });
 

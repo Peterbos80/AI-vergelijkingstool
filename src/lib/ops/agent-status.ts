@@ -13,6 +13,7 @@ import { maxGapMs } from '@/agents/schedule';
 export const PUBLIC_AGENTS = [
   'pricing',
   'change-detection',
+  'news',
   'broken-link',
   'verification',
   'discovery',
@@ -30,6 +31,7 @@ export type PublicAgent = (typeof PUBLIC_AGENTS)[number];
 export const RESULT_KEYS: Record<PublicAgent, string[]> = {
   pricing: ['pages_checked', 'plans_confirmed'],
   'change-detection': ['feeds_read'],
+  news: ['feeds_read', 'items_new'],
   'broken-link': ['checked', 'failing'],
   verification: ['verified'],
   discovery: ['candidates'],

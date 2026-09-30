@@ -473,6 +473,28 @@ export const changeEvents = pgTable(
   ],
 );
 
+/**
+ * AI news from media (news agent): headline, outlet and link only — never the
+ * article text. Sources are the publishers' own RSS/YouTube feeds
+ * (data/news/sources.json); `people` are the watched experts mentioned.
+ */
+export const newsItems = pgTable(
+  'news_items',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    url: text('url').notNull(),
+    sourceId: text('source_id').notNull(),
+    kind: text('kind').$type<'article' | 'video'>().notNull(),
+    title: text('title').notNull(),
+    publishedAt: ts('published_at'),
+    people: text('people').array().notNull().default(sql`'{}'::text[]`),
+    language: text('language'),
+    status: text('status').$type<'active' | 'hidden'>().notNull().default('active'),
+    fetchedAt: ts('fetched_at').notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex('news_items_url').on(t.url), index('news_items_published_idx').on(t.publishedAt)],
+);
+
 export const videos = pgTable(
   'videos',
   {

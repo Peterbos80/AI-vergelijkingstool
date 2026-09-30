@@ -21,7 +21,7 @@ import { FreshnessDial } from '@/components/data/FreshnessDial';
 import { StaleBanner } from '@/components/data/StaleBanner';
 import { VisitLink } from '@/components/data/VisitLink';
 import { ReceiptDrawer } from '@/components/data/ReceiptDrawer';
-import { FactList } from '@/components/data/FactList';
+import { FactList, hasFactValue } from '@/components/data/FactList';
 import { ToolRow } from '@/components/data/ToolRow';
 import { VideoFacade } from '@/components/data/VideoFacade';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
@@ -37,11 +37,11 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[s
   return {
     title: t('tool.metaTitle', { name: tool.name }),
     description: clip(
-      t('tool.metaDescription', {
+      t(tool.hasFreeTier === null ? 'tool.metaDescriptionNoFree' : 'tool.metaDescription', {
         name: tool.name,
         tagline: text?.tagline ?? '',
         price: entryPriceLabel(tool, t, locale),
-        free: tool.hasFreeTier === null ? t('common.unknown') : tool.hasFreeTier ? t('common.yes') : t('common.no'),
+        free: tool.hasFreeTier ? t('common.yes') : t('common.no'),
       }),
     ),
     alternates: alternates(locale, (l) => href.tool(l, tool.slug), Object.keys(tool.text) as Locale[]),
@@ -51,6 +51,8 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[s
 }
 
 const EU_KEYS = ['eu_data_residency', 'gdpr_dpa', 'trains_on_user_data', 'supports_dutch'];
+/** Facts for the Advanced view only. */
+const TECHNICAL_KEYS = ['api_available', 'open_source', 'self_hostable', 'model_dependencies'];
 const OTHER_KEYS = [
   'has_free_tier',
   'has_free_trial',
@@ -88,6 +90,10 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
     watermark_free_tier: tool.watermarkFreeTier,
     model_dependencies: tool.modelDependencies.length ? tool.modelDependencies : null,
   };
+  const known = (keys: string[]) => keys.filter((k) => hasFactValue(detail.facts[k] ? detail.facts[k].value : snapshot[k]));
+  const knownFacts = known(OTHER_KEYS);
+  const knownEu = known(EU_KEYS);
+  const missingFacts = knownFacts.length + knownEu.length < OTHER_KEYS.length + EU_KEYS.length;
   const alternativesList = tool.alternatives
     .map((a) => catalog.toolsById.get(a.id))
     .filter((x): x is NonNullable<typeof x> => Boolean(x) && x!.status !== 'shutdown')
@@ -219,10 +225,12 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
                 <dt className="text-ink-2">{t('tool.skillLevel')}</dt>
                 <dd>{t(`skill.${tool.skillLevel}`)}</dd>
               </div>
-              <div className="flex justify-between gap-3 border-b border-line py-1.5">
-                <dt className="text-ink-2">{t('facts.platforms')}</dt>
-                <dd className="text-right">{tool.platforms.map((p) => t(`platforms.${p}`)).join(', ') || t('common.unknown')}</dd>
-              </div>
+              {tool.platforms.length > 0 && (
+                <div className="flex justify-between gap-3 border-b border-line py-1.5">
+                  <dt className="text-ink-2">{t('facts.platforms')}</dt>
+                  <dd className="text-right">{tool.platforms.map((p) => t(`platforms.${p}`)).join(', ')}</dd>
+                </div>
+              )}
             </dl>
           </section>
 
@@ -261,14 +269,22 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
             )}
           </section>
 
-          <section aria-labelledby="facts">
-            <h2 id="facts" className="text-xl">
-              {t('tool.facts')}
-            </h2>
-            <div className="card mt-3 px-4">
-              <FactList keys={OTHER_KEYS} detail={detail} snapshot={snapshot} t={t} locale={locale} />
-            </div>
-          </section>
+          {knownFacts.length > 0 && (
+            <section aria-labelledby="facts">
+              <h2 id="facts" className="text-xl">
+                {t('tool.facts')}
+              </h2>
+              <div className="card mt-3 px-4">
+                <FactList keys={OTHER_KEYS} detail={detail} snapshot={snapshot} t={t} locale={locale} technical={TECHNICAL_KEYS} />
+              </div>
+              {missingFacts && (
+                <p className="mt-2 text-xs text-ink-3">
+                  {t('tool.missingFacts', { name: tool.name })}{' '}
+                  <Link href={href.page(locale, 'corrections')}>{t('tool.missingFactsLink')}</Link>
+                </p>
+              )}
+            </section>
+          )}
 
           <section aria-labelledby="timeline">
             <h2 id="timeline" className="text-xl">
@@ -380,12 +396,14 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
             </dl>
           </section>
 
-          <section className="card p-4" aria-labelledby="eu-lens">
-            <h2 id="eu-lens" className="eyebrow">
-              {t('tool.euLens')}
-            </h2>
-            <FactList keys={EU_KEYS} detail={detail} snapshot={snapshot} t={t} locale={locale} />
-          </section>
+          {knownEu.length > 0 && (
+            <section className="card p-4" aria-labelledby="eu-lens">
+              <h2 id="eu-lens" className="eyebrow">
+                {t('tool.euLens')}
+              </h2>
+              <FactList keys={EU_KEYS} detail={detail} snapshot={snapshot} t={t} locale={locale} />
+            </section>
+          )}
 
           <section className="card p-4" aria-labelledby="sources">
             <h2 id="sources" className="eyebrow">

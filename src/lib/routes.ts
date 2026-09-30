@@ -40,6 +40,9 @@ export const href = {
   stack: (l: Locale, id: string) => `/${l}/stack/${id}`,
   myStack: (l: Locale) => `/${l}/my-stack`,
   pulse: (l: Locale, q?: Query) => withQuery(`/${l}/pulse`, q),
+  news: (l: Locale) => `/${l}/news`,
+  newsPerson: (l: Locale, person: string) => `/${l}/news/${person}`,
+  start: (l: Locale, category?: string, task?: string) => [`/${l}/start`, category, task].filter(Boolean).join('/'),
   page: (
     l: Locale,
     page: 'methodology' | 'disclosure' | 'corrections' | 'newsletter' | 'about' | 'privacy' | 'api' | 'bot',

@@ -5,11 +5,12 @@
  */
 import { LOCALE_META, type Locale } from '@/i18n/config';
 import { entitySlug, taskSlug } from '@/lib/catalog';
+import { NEWS_PEOPLE } from '@/lib/news';
 import type { Catalog } from '@/lib/catalog/types';
 import { fairFightGate } from '@/lib/engine/compare';
 import { href } from '@/lib/routes';
 
-export type SitemapKind = 'home' | 'hub' | 'static' | 'tool' | 'pricing' | 'alternatives' | 'task' | 'category' | 'capability' | 'fair_fight';
+export type SitemapKind = 'home' | 'hub' | 'static' | 'news' | 'tool' | 'pricing' | 'alternatives' | 'task' | 'category' | 'capability' | 'fair_fight';
 
 export interface SitemapEntry {
   kind: SitemapKind;
@@ -30,7 +31,8 @@ export function sitemapEntries(catalog: Catalog, locales: Locale[], opts: { news
   };
 
   add('home', (l) => `/${l}`, { priority: 1, lastModified: catalog.stats.lastCheckAt });
-  for (const p of ['tools', 'tasks', 'categories', 'pulse', 'compare', 'doctor'] as const) add('hub', (l) => `/${l}/${p}`, { priority: 0.7 });
+  for (const p of ['tools', 'tasks', 'categories', 'pulse', 'news', 'compare', 'doctor'] as const) add('hub', (l) => `/${l}/${p}`, { priority: 0.7 });
+  for (const person of NEWS_PEOPLE) add('news', (l) => href.newsPerson(l, person.id), { priority: 0.5 });
   for (const p of ['methodology', 'disclosure', 'corrections', 'about', 'privacy', 'api'] as const) add('static', (l) => href.page(l, p), { priority: 0.3 });
   if (opts.newsletter) add('static', (l) => href.page(l, 'newsletter'), { priority: 0.3 });
 
@@ -69,7 +71,7 @@ export function sitemapEntries(catalog: Catalog, locales: Locale[], opts: { news
 
 /** Indexable page counts per kind (owner dashboard, weekly report). */
 export function indexableCounts(entries: SitemapEntry[]): Record<SitemapKind, number> & { total: number } {
-  const counts = { home: 0, hub: 0, static: 0, tool: 0, pricing: 0, alternatives: 0, task: 0, category: 0, capability: 0, fair_fight: 0, total: entries.length };
+  const counts = { home: 0, hub: 0, static: 0, news: 0, tool: 0, pricing: 0, alternatives: 0, task: 0, category: 0, capability: 0, fair_fight: 0, total: entries.length };
   for (const e of entries) counts[e.kind]++;
   return counts;
 }

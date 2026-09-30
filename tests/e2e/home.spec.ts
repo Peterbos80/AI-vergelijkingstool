@@ -44,11 +44,11 @@ test('the agent panel and the radar show real records, never invented ones', asy
   const agents = page.locator('section[aria-labelledby="agents-title"]');
   await expect(agents).toBeVisible();
   // One row per public agent, each with a state label from its run log.
-  await expect(agents.locator('.agent-row')).toHaveCount(12);
+  await expect(agents.locator('.agent-row')).toHaveCount(13);
   const radar = page.locator('section[aria-labelledby="radar-title"]');
   await expect(radar).toBeVisible();
-  // Every news item links to its origin.
-  for (const item of await radar.locator('section[aria-labelledby="radar-news"] .radar-item').all()) {
+  // Every news item and every tool change links to its origin.
+  for (const item of await radar.locator('section[aria-labelledby="radar-news"] .news-item, section[aria-labelledby="radar-changes"] .radar-item').all()) {
     await expect(item.locator('a[href^="http"]')).toHaveCount(1);
   }
 });

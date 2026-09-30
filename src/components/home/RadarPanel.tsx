@@ -5,7 +5,9 @@ import { formatDate, formatNumber } from '@/i18n/formatters';
 import { EVENT_ICON, eventDate, eventTitle } from '@/lib/catalog/events';
 import { sourceDomain, type Radar } from '@/lib/catalog/radar';
 import type { Catalog } from '@/lib/catalog/types';
+import { newsPerson } from '@/lib/news';
 import { href } from '@/lib/routes';
+import { NewsList } from '@/components/news/NewsList';
 
 function Column({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
@@ -34,15 +36,58 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
           </h2>
           <p className="mt-1 max-w-2xl text-sm text-ink-2">{t('hub.radarSub')}</p>
         </div>
-        <Link href={href.pulse(locale)} className="link-accent text-sm font-semibold">
+        <Link href={href.news(locale)} className="link-accent text-sm font-semibold">
           {t('hub.radarAll')} →
         </Link>
       </div>
       <div className="mt-5 grid gap-4 md:grid-cols-3">
         <Column id="radar-news" title={t('hub.radarNews')}>
-          {data.news.length ? (
+          {data.news.length ? <NewsList items={data.news} t={t} locale={locale} compact /> : <p className="radar-empty">{t('hub.radarEmptyNews')}</p>}
+        </Column>
+
+        <Column id="radar-videos" title={t('hub.radarVideos')}>
+          {data.videos.length ? (
             <ul className="radar-list">
-              {data.news.map((e) => {
+              {data.videos.map((v) => (
+                <li key={`${v.id}-${v.toolSlug ?? 'media'}`} className="radar-item radar-video">
+                  <a href={v.url} rel="nofollow noopener noreferrer" target="_blank" className="text-sm font-semibold no-underline hover:underline">
+                    <span aria-hidden="true">▶ </span>
+                    {v.title}
+                  </a>
+                  <p className="mono mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3">
+                    {v.channel && <span>{v.channel}</span>}
+                    {v.kind !== 'media' && <span>· {t(`hub.videoKind.${v.kind}`)}</span>}
+                    {v.publishedAt && (
+                      <span>
+                        · <time dateTime={v.publishedAt.toISOString()}>{formatDate(v.publishedAt, locale)}</time>
+                      </span>
+                    )}
+                    {v.toolSlug && v.toolName && (
+                      <Link href={href.tool(locale, v.toolSlug)} className="underline">
+                        {v.toolName}
+                      </Link>
+                    )}
+                    {v.people.map((id) => {
+                      const p = newsPerson(id);
+                      return p ? (
+                        <Link key={id} href={href.newsPerson(locale, id)} className="news-person">
+                          {p.name}
+                        </Link>
+                      ) : null;
+                    })}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="radar-empty">{t('hub.radarEmptyVideos')}</p>
+          )}
+        </Column>
+
+        <Column id="radar-changes" title={t('hub.radarChanges')}>
+          {data.changes.length ? (
+            <ul className="radar-list">
+              {data.changes.map((e) => {
                 const tool = e.toolId ? catalog.toolsById.get(e.toolId) : undefined;
                 const domain = sourceDomain(e.sourceUrl);
                 return (
@@ -73,66 +118,34 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
               })}
             </ul>
           ) : (
-            <p className="radar-empty">{t('hub.radarEmptyNews')}</p>
+            <p className="radar-empty">{t('hub.radarEmptyChanges')}</p>
           )}
         </Column>
+      </div>
 
-        <Column id="radar-videos" title={t('hub.radarVideos')}>
-          {data.videos.length ? (
-            <ul className="radar-list">
-              {data.videos.map((v) => (
-                <li key={`${v.id}-${v.toolSlug}`} className="radar-item radar-video">
-                  <a href={v.url} rel="nofollow noopener noreferrer" target="_blank" className="text-sm font-semibold no-underline hover:underline">
-                    {v.title}
-                  </a>
-                  <p className="mono mt-1 text-xs text-ink-3">
-                    {v.channel ? `${v.channel} · ` : ''}
-                    {t(`hub.videoKind.${v.kind}`)}
-                    {v.publishedAt && (
-                      <>
-                        {' · '}
-                        <time dateTime={v.publishedAt.toISOString()}>{formatDate(v.publishedAt, locale)}</time>
-                      </>
-                    )}
-                    {' · '}
-                    <Link href={href.tool(locale, v.toolSlug)} className="underline">
-                      {v.toolName}
-                    </Link>
-                  </p>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="radar-empty">{t('hub.radarEmptyVideos')}</p>
-          )}
-        </Column>
-
-        <Column id="radar-buzz" title={t('hub.radarBuzz')}>
-          {data.buzz.length ? (
-            <ul className="radar-list">
-              {data.buzz.map((b) => (
-                <li key={`${b.toolSlug}-${b.provider}`} className="radar-item">
-                  <p className="text-sm">
-                    <Link href={href.tool(locale, b.toolSlug)} className="font-semibold no-underline hover:underline">
-                      {b.toolName}
-                    </Link>
-                  </p>
-                  <p className="mono mt-1 text-xs text-ink-3">
-                    {b.url ? (
-                      <a href={b.url} rel="nofollow noopener noreferrer" target="_blank" className="underline">
-                        {t(`hub.buzz.${b.provider}`, { count: b.value, n: formatNumber(b.value, locale) })}
-                      </a>
-                    ) : (
-                      t(`hub.buzz.${b.provider}`, { count: b.value, n: formatNumber(b.value, locale) })
-                    )}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="radar-empty">{t('hub.radarEmptyBuzz')}</p>
-          )}
-        </Column>
+      <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
+        <span className="radar-title">
+          <span className="live-dot" aria-hidden="true" />
+          {t('hub.radarBuzz')}
+        </span>
+        {data.buzz.length ? (
+          data.buzz.map((b) => (
+            <span key={`${b.toolSlug}-${b.provider}`} className="text-ink-2">
+              <Link href={href.tool(locale, b.toolSlug)} className="font-semibold no-underline hover:underline">
+                {b.toolName}
+              </Link>{' '}
+              {b.url ? (
+                <a href={b.url} rel="nofollow noopener noreferrer" target="_blank" className="mono text-xs text-ink-3 underline">
+                  {t(`hub.buzz.${b.provider}`, { count: b.value, n: formatNumber(b.value, locale) })}
+                </a>
+              ) : (
+                <span className="mono text-xs text-ink-3">{t(`hub.buzz.${b.provider}`, { count: b.value, n: formatNumber(b.value, locale) })}</span>
+              )}
+            </span>
+          ))
+        ) : (
+          <span className="text-ink-3">{t('hub.radarEmptyBuzz')}</span>
+        )}
       </div>
     </section>
   );

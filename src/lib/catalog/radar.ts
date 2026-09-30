@@ -1,13 +1,15 @@
 /**
  * The trend and news radar: only what the agents actually collected, each
- * item with its source. Changes and news come from Pulse (sourced events),
- * videos from official channels (video agent), buzz from public community
- * metrics (social agent: Hacker News mentions, GitHub stars). No scraping of
+ * item with its source. AI news and media videos come from the publishers'
+ * feeds (news agent), tool changes from Pulse (sourced events), official
+ * tool videos from the video agent, buzz from public community metrics
+ * (social agent: Hacker News mentions, GitHub stars). No scraping of
  * platforms that do not allow it, no generated summaries, no invented counts.
  */
 import { sql } from 'drizzle-orm';
 import type { Database } from '@/lib/db/client';
 import { queryRows } from '@/lib/db/sql';
+import { latestNews, type NewsItem } from '@/lib/news';
 import type { Catalog, CatalogEvent } from './types';
 
 export interface RadarVideo {
@@ -16,9 +18,12 @@ export interface RadarVideo {
   channel: string | null;
   url: string;
   publishedAt: Date | null;
+  /** official | review | tutorial | comparison | other | media */
   kind: string;
-  toolSlug: string;
-  toolName: string;
+  /** The tool the video is about (official channel videos), or none (media). */
+  toolSlug: string | null;
+  toolName: string | null;
+  people: string[];
 }
 
 export interface RadarBuzz {
@@ -32,8 +37,12 @@ export interface RadarBuzz {
 }
 
 export interface Radar {
-  news: CatalogEvent[];
+  /** AI news articles from media feeds. */
+  news: NewsItem[];
+  /** Media videos and official tool videos, newest first. */
   videos: RadarVideo[];
+  /** Sourced tool changes (Pulse). */
+  changes: CatalogEvent[];
   buzz: RadarBuzz[];
 }
 
@@ -51,8 +60,10 @@ export function sourceDomain(url: string | null): string | null {
 }
 
 export async function radar(db: Database, catalog: Catalog, now: Date = new Date(), limit = 5): Promise<Radar> {
-  const news = catalog.events.filter((e) => e.sourceUrl).slice(0, limit);
-  const [videoRows, buzzRows] = await Promise.all([
+  const changes = catalog.events.filter((e) => e.sourceUrl).slice(0, limit);
+  const [news, mediaVideos, videoRows, buzzRows] = await Promise.all([
+    latestNews(db, { limit, kind: 'article' }),
+    latestNews(db, { limit, kind: 'video' }),
     queryRows<VideoRow>(
       db,
       sql`SELECT v.video_id, v.title, v.channel_title, v.published_at, v.kind, t.slug, t.name
@@ -70,16 +81,22 @@ export async function radar(db: Database, catalog: Catalog, now: Date = new Date
           ORDER BY s.tool_id, s.provider, s.metric, s.observed_at DESC`,
     ),
   ]);
-  const videos: RadarVideo[] = videoRows.map((r) => ({
-    id: r.video_id,
-    title: r.title,
-    channel: r.channel_title,
-    url: `https://www.youtube.com/watch?v=${encodeURIComponent(r.video_id)}`,
-    publishedAt: r.published_at ? new Date(r.published_at) : null,
-    kind: r.kind,
-    toolSlug: r.slug,
-    toolName: r.name,
-  }));
+  const videos: RadarVideo[] = [
+    ...mediaVideos.map((n) => ({ id: n.id, title: n.title, channel: n.sourceName, url: n.url, publishedAt: n.publishedAt, kind: 'media', toolSlug: null, toolName: null, people: n.people })),
+    ...videoRows.map((r) => ({
+      id: r.video_id,
+      title: r.title,
+      channel: r.channel_title,
+      url: `https://www.youtube.com/watch?v=${encodeURIComponent(r.video_id)}`,
+      publishedAt: r.published_at ? new Date(r.published_at) : null,
+      kind: r.kind,
+      toolSlug: r.slug,
+      toolName: r.name,
+      people: [],
+    })),
+  ]
+    .sort((a, b) => (b.publishedAt?.getTime() ?? 0) - (a.publishedAt?.getTime() ?? 0))
+    .slice(0, limit);
   const buzz: RadarBuzz[] = buzzRows
     .map((r) => ({
       toolSlug: r.slug,
@@ -94,5 +111,5 @@ export async function radar(db: Database, catalog: Catalog, now: Date = new Date
     // Hacker News mentions first (what people talk about this week), then GitHub stars.
     .sort((a, b) => (a.provider === b.provider ? b.value - a.value : a.provider === 'hackernews' ? -1 : 1))
     .slice(0, limit);
-  return { news, videos, buzz };
+  return { news, videos, changes, buzz };
 }

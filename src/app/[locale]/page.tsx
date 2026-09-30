@@ -142,6 +142,13 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
               prompts={prompts}
               panels={panels}
               defaultPanel="assistants"
+              afterPrompts={
+                <p className="mt-4 text-sm">
+                  <Link href={href.start(locale)} className="link-accent font-semibold">
+                    {t('start.homeCta')} →
+                  </Link>
+                </p>
+              }
               labels={{
                 label: t('match.inputLabel'),
                 placeholder: t('hub.placeholder'),

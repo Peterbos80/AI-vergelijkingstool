@@ -12,7 +12,7 @@ import { VisitLink } from './VisitLink';
 
 function cellText(row: Row, cell: Cell, t: Translator, locale: Locale, catalog: Catalog): string {
   const v = cell.value;
-  if (v === null || v === undefined) return t('compare.unknown');
+  if (v === null || v === undefined) return '–';
   switch (row.key) {
     case 'entry_price': {
       const p = v as { cents: number; currency: string };
@@ -62,7 +62,8 @@ export function CompareView({
   affiliates: Set<string>;
   src: string;
 }) {
-  const rows = buildMatrix(tools);
+  // A criterion no tool has sourced data for is left out; single gaps show a dash.
+  const rows = buildMatrix(tools).filter((r) => r.cells.some((c) => c.value !== null && c.value !== undefined));
   const v = verdicts(tools, rows);
   return (
     <>
@@ -90,7 +91,13 @@ export function CompareView({
                 </th>
                 {row.cells.map((cell) => (
                   <td key={cell.toolId} className={cell.best ? 'font-semibold text-ink' : ''}>
-                    <span>{cellText(row, cell, t, locale, catalog)}</span>
+                    {cell.value === null || cell.value === undefined ? (
+                      <span className="text-ink-3" aria-label={t('compare.noData')} title={t('compare.noData')}>
+                        –
+                      </span>
+                    ) : (
+                      <span>{cellText(row, cell, t, locale, catalog)}</span>
+                    )}
                     {cell.best && (
                       <span className="ml-1 text-verified" title={t('compare.best')}>
                         ✓<span className="visually-hidden"> ({t('compare.best')})</span>

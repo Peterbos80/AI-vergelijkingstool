@@ -11,6 +11,7 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
     { href: href.tools(locale), label: t('nav.explore'), active: pathname.startsWith(`/${locale}/tools`) },
     { href: href.compare(locale), label: t('nav.compare'), active: pathname.startsWith(`/${locale}/compare`) },
     { href: href.doctor(locale), label: t('nav.doctor'), active: pathname.startsWith(`/${locale}/doctor`) },
+    { href: href.news(locale), label: t('nav.news'), active: pathname.startsWith(`/${locale}/news`) },
     { href: href.pulse(locale), label: t('nav.pulse'), active: pathname.startsWith(`/${locale}/pulse`) },
   ];
   const locales = enabledLocales();
@@ -97,6 +98,11 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
                 <li>
                   <Link href={href.tasks(locale)} className="block rounded-md px-3 py-2 no-underline hover:bg-paper-2">
                     {t('nav.tasks')}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={href.start(locale)} className="block rounded-md px-3 py-2 no-underline hover:bg-paper-2">
+                    {t('start.breadcrumb')}
                   </Link>
                 </li>
               </ul>

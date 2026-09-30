@@ -25,7 +25,8 @@
     "tasks": "Tâches",
     "search": "Chercher un outil",
     "searchLabel": "Chercher dans la base d’outils",
-    "menu": "Menu"
+    "menu": "Menu",
+    "news": "Actus"
   },
   "status": {
     "verified": {
@@ -281,7 +282,10 @@
     "annual": "facturé annuellement",
     "perMonthAnnual": "{price}/mois facturé annuellement",
     "watermarkWarning": "L’offre gratuite ajoute un filigrane",
-    "noCommercialFree": "Offre gratuite non autorisée pour un usage commercial"
+    "noCommercialFree": "Offre gratuite non autorisée pour un usage commercial",
+    "metaDescriptionNoFree": "{name} : {tagline}. Prix à partir de {price}. Avec sources, fraîcheur et alternatives.",
+    "missingFacts": "Il manque quelque chose sur {name} ? Nous n’affichons que ce que nous avons établi avec une source.",
+    "missingFactsLink": "Envoyer un complément avec une source"
   },
   "plans": {
     "title": "Tarifs de {name}",
@@ -430,7 +434,8 @@
       "easier": "voulez un outil facile à prendre en main",
       "capability": "avez aussi besoin de {capability}",
       "platform": "travaillez sur {platform}"
-    }
+    },
+    "noData": "Pas encore de donnée sourcée"
   },
   "match": {
     "metaTitle": "Votre stack d’IA : {goal}",
@@ -533,7 +538,7 @@
     "watermark_free": "L’offre gratuite ajoute un filigrane",
     "no_commercial_free": "Offre gratuite non autorisée pour un usage commercial",
     "no_free_plan": "Pas d’offre gratuite",
-    "unknown_price": "Prix inconnu",
+    "unknown_price": "Vérifiez le prix sur le site officiel",
     "stale": "Données peut-être obsolètes",
     "unverified_price": "Prix pas encore confirmé",
     "beta": "Encore en bêta",
@@ -560,7 +565,7 @@
     "overBudget": "Au-dessus de votre budget ({amount})",
     "budgetUnknown": "Budget de {amount} : impossible à vérifier pour l’instant (taux de change ou prix manquant).",
     "freeAvailable": "offre gratuite",
-    "priceUnknown": "prix inconnu",
+    "priceUnknown": "prix : voir le site",
     "save": "Enregistrer ce justificatif",
     "saved": "Enregistré",
     "share": "Partager",
@@ -603,7 +608,7 @@
       "stale": "Les données sur {tool} sont peut-être obsolètes.",
       "trains_on_data": "{tool} peut utiliser vos données pour l’entraînement.",
       "no_eu": "{tool} ne propose pas d’hébergement des données dans l’UE.",
-      "unknown_price": "Le prix de {tool} est inconnu.",
+      "unknown_price": "Vérifiez le prix actuel de {tool} sur le site officiel : nous ne l’avons pas encore établi avec une source.",
       "unverified_price": "Le prix de {tool} n’est pas encore confirmé."
     },
     "savingsTitle": "Alternatives moins chères",
@@ -766,6 +771,11 @@
         "does": "Lit les changelogs et flux des outils.",
         "result": "{feeds_read, plural, =0 {aucun flux avec du nouveau} one {# flux lu} other {# flux lus}}"
       },
+      "news": {
+        "name": "Agent actualités",
+        "does": "Lit chaque heure les flux des médias et des chaînes YouTube sur l’IA.",
+        "result": "{feeds_read, plural, one {# flux lu} other {# flux lus}}, {items_new, plural, =0 {aucun nouvel article} one {# nouvel article} other {# nouveaux articles}}"
+      },
       "broken-link": {
         "name": "Agent de disponibilité",
         "does": "Vérifie que les sites des outils fonctionnent.",
@@ -818,13 +828,13 @@
       }
     },
     "radarTitle": "Radar des tendances et actualités IA",
-    "radarSub": "Collecté automatiquement par nos agents à partir de sources officielles, de vidéos et de communautés. Chaque élément indique sa source.",
-    "radarAll": "Tous les changements dans Pulse",
-    "radarNews": "Changements et actualités",
+    "radarSub": "Collecté automatiquement par nos agents : chaque heure les actualités IA des médias, les vidéos des chaînes d’info et les changements des outils. Chaque élément indique sa source.",
+    "radarAll": "Toutes les actus IA",
+    "radarNews": "Actualités IA des médias",
     "radarVideos": "Vidéos des chaînes officielles",
     "radarBuzz": "Buzz communautaire",
-    "radarEmptyNews": "Pas encore de changement sourcé. L’agent des changements lit les changelogs toutes les 6 heures.",
-    "radarEmptyVideos": "Pas encore de vidéo. L’agent vidéo consulte chaque jour les chaînes officielles des outils.",
+    "radarEmptyNews": "Pas encore d’actualités. L’agent actualités lit chaque heure les flux des médias.",
+    "radarEmptyVideos": "Pas encore de vidéo. L’agent actualités consulte chaque heure les chaînes YouTube des médias.",
     "radarEmptyBuzz": "Pas encore de mesure. L’agent communauté mesure les mentions sur Hacker News et GitHub toutes les 6 heures.",
     "source": "source : {domain}",
     "buzz": {
@@ -845,7 +855,59 @@
     "startPlan": "Voir le plan pas à pas",
     "startStack": "Composer ma stack",
     "paidFrom": "payant dès {price}",
-    "from": "dès {price}"
+    "from": "dès {price}",
+    "radarChanges": "Changements des outils",
+    "radarEmptyChanges": "Pas encore de changement sourcé. L’agent des changements lit les changelogs toutes les 6 heures."
+  },
+  "start": {
+    "metaTitle": "Choisir le bon outil IA, pas à pas",
+    "metaDescription": "Aucune idée de l’IA qu’il vous faut ? Choisissez en trois étapes simples ce que vous voulez faire et recevez un conseil personnalisé, sans connaissances préalables.",
+    "metaTitle2": "{area} : choisissez ce que vous voulez faire",
+    "metaTitle3": "{task} : comment commencer, en termes simples",
+    "breadcrumb": "Pas à pas",
+    "step": "Étape {n} sur 3",
+    "title1": "Pour quoi voulez-vous utiliser l’IA ?",
+    "intro1": "Aucune idée de ce qu’il faut taper ? Choisissez ci-dessous ce qui s’en rapproche le plus. Inutile de connaître l’IA.",
+    "title2": "Que voulez-vous faire exactement ?",
+    "intro2": "Choisissez ce qui convient le mieux. Un doute ? Choisissez-en un ; vous pouvez toujours revenir.",
+    "intro3": "Comment ça marche, en termes simples. Répondez ensuite à deux questions courtes pour recevoir votre conseil personnalisé.",
+    "choose": "Choisir",
+    "back": "Retour",
+    "fullTask": "Voir tous les outils et étapes",
+    "orType": "Vous savez déjà ?",
+    "orTypeLink": "Posez votre question avec vos mots",
+    "homeCta": "Vous ne savez pas quoi taper ? Choisissez pas à pas",
+    "guideLabel": "Expliqué simplement",
+    "guideWhat": "De quoi s’agit-il ?",
+    "guideSteps": "Pour commencer",
+    "guideWatch": "Attention",
+    "guideTip": "Astuce",
+    "budgetQ": "Quel budget ?",
+    "budget": {
+      "free": "Gratuit uniquement",
+      "25": "Jusqu’à 25 € par mois",
+      "any": "Peu importe"
+    },
+    "levelQ": "Quelle expérience avez-vous de l’IA ?",
+    "level": {
+      "beginner": "Débutant : je commence",
+      "intermediate": "Un peu : je l’ai déjà utilisée",
+      "advanced": "Beaucoup : je suis technique"
+    },
+    "submit": "Voir mon conseil",
+    "submitNote": "Vous recevez les outils par étape, avec prix et sources. Jamais classés par sponsoring.",
+    "cat": {
+      "assistant": "Un assistant malin pour tout",
+      "writing": "Écrire, améliorer ou traduire des textes",
+      "research": "Apprendre, rechercher et résumer",
+      "image": "Photos, images et design",
+      "video": "Créer ou monter des vidéos",
+      "audio": "Son, voix, podcast et musique",
+      "code": "Sites, applis et programmation",
+      "automation": "Automatiser le travail",
+      "marketing": "Marketing et réseaux sociaux",
+      "business": "Aider les clients"
+    }
   },
   "tasks": {
     "title": "Que pouvez-vous faire avec l’IA ?",
@@ -910,6 +972,26 @@
     "source": "Source",
     "detected": "détecté le {date}",
     "monthPrecision": "{month}"
+  },
+  "news": {
+    "title": "Actus IA",
+    "metaTitle": "Actus IA : le plus récent des médias, mis à jour chaque heure",
+    "metaDescription": "Les dernières actualités et interviews sur l’IA dans les médias, comme CNBC, The Guardian, The Verge et la BBC, collectées automatiquement chaque heure. Avec la source de chaque article.",
+    "intro": "Les dernières actualités IA des médias, collectées automatiquement chaque heure par notre agent actualités. Nous affichons le titre, la source et la date ; l’article se lit à la source.",
+    "voices": "Voix dans l’actualité",
+    "articles": "Articles",
+    "videos": "Vidéos et interviews",
+    "empty": "Pas encore d’actualités. L’agent tourne chaque heure ; revenez bientôt.",
+    "emptyArticles": "Pas encore d’articles.",
+    "emptyVideos": "Pas encore de vidéos.",
+    "sourcesTitle": "Sources",
+    "sourcesBody": "Nous lisons uniquement les flux publics proposés par les éditeurs (RSS et YouTube). Nous ne reprenons aucun texte d’article : l’article complet se lit toujours à la source.",
+    "opensSource": "ouvre {source}",
+    "personMetaTitle": "{name} : les dernières actus IA et interviews",
+    "personMetaDescription": "Actualités et interviews avec {name} ({role}), mises à jour chaque heure, avec la source de chaque article.",
+    "personLatest": "Les dernières actus et interviews avec {name}",
+    "personEmpty": "Pas encore d’article sur {name} ces 90 derniers jours. L’agent vérifie chaque heure.",
+    "otherVoices": "Autres voix"
   },
   "lead": {
     "name": "Nom",

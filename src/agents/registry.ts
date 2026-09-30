@@ -13,6 +13,7 @@ import { escalationAgent } from './defs/escalation';
 import { fxAgent } from './defs/fx';
 import { healthAgent } from './defs/health';
 import { monetizationAgent } from './defs/monetization';
+import { newsAgent } from './defs/news';
 import { notifierAgent } from './defs/notifier';
 import { opportunityAgent } from './defs/opportunity';
 import { pricingAgent } from './defs/pricing';
@@ -33,6 +34,7 @@ export const AGENTS: AgentDefinition[] = [
   pricingAgent,
   brokenLinkAgent,
   changeDetectionAgent,
+  newsAgent,
   socialAgent,
   videoAgent,
   discoveryAgent,

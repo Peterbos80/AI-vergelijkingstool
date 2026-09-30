@@ -30,6 +30,8 @@ export type PageType =
   | 'stack'
   | 'my_stack'
   | 'pulse'
+  | 'news'
+  | 'start'
   | 'static';
 
 export interface TrackInput {

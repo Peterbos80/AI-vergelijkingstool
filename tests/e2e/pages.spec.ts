@@ -17,6 +17,11 @@ const PAGES = [
   '/nl/categories',
   '/en/doctor',
   '/nl/pulse',
+  '/nl/news',
+  '/en/news/geoffrey-hinton',
+  '/nl/start',
+  '/nl/start/ai-assistenten',
+  '/nl/start/ai-assistenten/ai-assistent-dagelijks-werk',
   '/en/methodology',
   '/nl/disclosure',
   '/en/corrections',
@@ -75,3 +80,30 @@ test('the corrections form validates input', async ({ page }) => {
   // Native validation or the server message: either way nothing is accepted without a tool and source.
   await expect(page).toHaveURL(/\/en\/corrections/);
 });
+
+test('the step-by-step finder leads a beginner from an area to a personal stack', async ({ page }) => {
+  const watch = watchErrors(page);
+  await page.goto('/nl/start');
+  await page.locator('main a[href="/nl/start/ai-assistenten"]').click();
+  await page.waitForURL(/\/nl\/start\/ai-assistenten$/);
+  await page.locator('main a[href="/nl/start/ai-assistenten/ai-assistent-dagelijks-werk"]').click();
+  await page.waitForURL(/ai-assistent-dagelijks-werk$/);
+  // The plain-language guide, then two questions.
+  await expect(page.getByRole('heading', { name: 'Zo begin je' })).toBeVisible();
+  await page.getByLabel('Alleen gratis').check();
+  await page.getByRole('button', { name: /Toon mijn advies/ }).click();
+  await page.waitForURL(/\/nl\/match\?/);
+  const url = new URL(page.url());
+  expect(url.searchParams.get('task')).toBe('everyday-ai-assistant');
+  expect(url.searchParams.get('b')).toBe('free');
+  await expect(page.getByTestId('match-result')).toHaveAttribute('data-task-id', 'everyday-ai-assistant');
+  expect(watch.errors).toEqual([]);
+});
+
+test('no page shows "unknown" values', async ({ page }) => {
+  for (const path of ['/nl/tools/descript', '/nl/compare?tools=chatgpt,claude', '/nl/tasks/social-media-videos-maken']) {
+    await page.goto(path);
+    await expect(page.locator('main')).not.toContainText(/\bonbekend\b/i);
+  }
+});
+

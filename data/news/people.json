@@ -1,0 +1,18 @@
+{
+  "note": "Experts the news agent watches for: an item that names one of them is tagged and listed on their page. Aliases are matched as whole words (case-sensitive for surnames).",
+  "people": [
+    { "id": "geoffrey-hinton", "name": "Geoffrey Hinton", "aliases": ["Hinton"], "role": { "nl": "AI-pionier, Nobelprijs voor de Natuurkunde 2024; waarschuwt voor de risico's van AI", "en": "AI pioneer, 2024 Nobel Prize in Physics; warns about the risks of AI" } },
+    { "id": "roman-yampolskiy", "name": "Roman Yampolskiy", "aliases": ["Yampolskiy"], "role": { "nl": "AI-veiligheidsonderzoeker aan de University of Louisville", "en": "AI safety researcher at the University of Louisville" } },
+    { "id": "yoshua-bengio", "name": "Yoshua Bengio", "aliases": ["Bengio"], "role": { "nl": "AI-pionier, Turingprijs 2018; zet zich in voor veilige AI", "en": "AI pioneer, 2018 Turing Award; works on AI safety" } },
+    { "id": "yann-lecun", "name": "Yann LeCun", "aliases": ["LeCun"], "role": { "nl": "AI-pionier, Turingprijs 2018", "en": "AI pioneer, 2018 Turing Award" } },
+    { "id": "stuart-russell", "name": "Stuart Russell", "aliases": [], "role": { "nl": "AI-onderzoeker aan UC Berkeley, schrijft over veilige AI", "en": "AI researcher at UC Berkeley, writes about safe AI" } },
+    { "id": "demis-hassabis", "name": "Demis Hassabis", "aliases": ["Hassabis"], "role": { "nl": "Topman van Google DeepMind, Nobelprijs voor de Scheikunde 2024", "en": "CEO of Google DeepMind, 2024 Nobel Prize in Chemistry" } },
+    { "id": "sam-altman", "name": "Sam Altman", "aliases": ["Altman"], "role": { "nl": "Topman van OpenAI", "en": "CEO of OpenAI" } },
+    { "id": "dario-amodei", "name": "Dario Amodei", "aliases": ["Amodei"], "role": { "nl": "Topman van Anthropic", "en": "CEO of Anthropic" } },
+    { "id": "mustafa-suleyman", "name": "Mustafa Suleyman", "aliases": ["Suleyman"], "role": { "nl": "Topman van Microsoft AI", "en": "CEO of Microsoft AI" } },
+    { "id": "fei-fei-li", "name": "Fei-Fei Li", "aliases": [], "role": { "nl": "AI-onderzoeker aan Stanford", "en": "AI researcher at Stanford" } },
+    { "id": "ilya-sutskever", "name": "Ilya Sutskever", "aliases": ["Sutskever"], "role": { "nl": "Medeoprichter van OpenAI en van Safe Superintelligence", "en": "Co-founder of OpenAI and of Safe Superintelligence" } },
+    { "id": "andrej-karpathy", "name": "Andrej Karpathy", "aliases": ["Karpathy"], "role": { "nl": "AI-onderzoeker en docent", "en": "AI researcher and educator" } },
+    { "id": "jensen-huang", "name": "Jensen Huang", "aliases": [], "role": { "nl": "Topman van Nvidia", "en": "CEO of Nvidia" } }
+  ]
+}

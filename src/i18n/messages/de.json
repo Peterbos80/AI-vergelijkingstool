@@ -25,7 +25,8 @@
     "tasks": "Aufgaben",
     "search": "Tool suchen",
     "searchLabel": "Die Tool-Datenbank durchsuchen",
-    "menu": "Menü"
+    "menu": "Menü",
+    "news": "News"
   },
   "status": {
     "verified": {
@@ -281,7 +282,10 @@
     "annual": "jährliche Abrechnung",
     "perMonthAnnual": "{price}/Monat bei jährlicher Abrechnung",
     "watermarkWarning": "Kostenloser Plan fügt ein Wasserzeichen hinzu",
-    "noCommercialFree": "Kostenloser Plan nicht für kommerzielle Nutzung"
+    "noCommercialFree": "Kostenloser Plan nicht für kommerzielle Nutzung",
+    "metaDescriptionNoFree": "{name}: {tagline}. Preise ab {price}. Mit Quellen, Aktualität und Alternativen.",
+    "missingFacts": "Fehlt dir etwas zu {name}? Wir zeigen nur, was wir mit einer Quelle erfasst haben.",
+    "missingFactsLink": "Ergänzung mit Quelle senden"
   },
   "plans": {
     "title": "Preise von {name}",
@@ -430,7 +434,8 @@
       "easier": "ein leicht erlernbares Tool willst",
       "capability": "auch {capability} brauchst",
       "platform": "mit {platform} arbeitest"
-    }
+    },
+    "noData": "Noch keine belegten Daten"
   },
   "match": {
     "metaTitle": "Dein KI-Stack: {goal}",
@@ -533,7 +538,7 @@
     "watermark_free": "Kostenloser Plan fügt ein Wasserzeichen hinzu",
     "no_commercial_free": "Kostenloser Plan nicht für kommerzielle Nutzung",
     "no_free_plan": "Kein kostenloser Plan",
-    "unknown_price": "Preis unbekannt",
+    "unknown_price": "Preis auf der offiziellen Website prüfen",
     "stale": "Daten möglicherweise veraltet",
     "unverified_price": "Preis noch nicht bestätigt",
     "beta": "Noch in der Beta",
@@ -560,7 +565,7 @@
     "overBudget": "Über deinem Budget ({amount})",
     "budgetUnknown": "Budget von {amount}: noch nicht prüfbar (Wechselkurs oder Preis fehlt).",
     "freeAvailable": "kostenloser Plan",
-    "priceUnknown": "Preis unbekannt",
+    "priceUnknown": "Preis: siehe Website",
     "save": "Diesen Beleg speichern",
     "saved": "Gespeichert",
     "share": "Teilen",
@@ -603,7 +608,7 @@
       "stale": "Die Daten zu {tool} sind möglicherweise veraltet.",
       "trains_on_data": "{tool} nutzt deine Daten eventuell zum Training.",
       "no_eu": "{tool} bietet keine Datenspeicherung in der EU.",
-      "unknown_price": "Der Preis von {tool} ist unbekannt.",
+      "unknown_price": "Prüfe den aktuellen Preis von {tool} auf der offiziellen Website: Wir haben ihn noch nicht mit einer Quelle erfasst.",
       "unverified_price": "Der Preis von {tool} ist noch nicht bestätigt."
     },
     "savingsTitle": "Günstigere Alternativen",
@@ -766,6 +771,11 @@
         "does": "Liest Changelogs und Feeds der Tools.",
         "result": "{feeds_read, plural, =0 {keine Feeds mit Neuigkeiten} one {# Feed gelesen} other {# Feeds gelesen}}"
       },
+      "news": {
+        "name": "News-Agent",
+        "does": "Liest stündlich die Feeds von Medien und YouTube-Kanälen über KI.",
+        "result": "{feeds_read, plural, one {# Feed gelesen} other {# Feeds gelesen}}, {items_new, plural, =0 {keine neuen Beiträge} one {# neuer Beitrag} other {# neue Beiträge}}"
+      },
       "broken-link": {
         "name": "Erreichbarkeits-Agent",
         "does": "Prüft, ob die Websites der Tools funktionieren.",
@@ -818,13 +828,13 @@
       }
     },
     "radarTitle": "KI-Trend- und Nachrichtenradar",
-    "radarSub": "Automatisch von unseren Agents aus offiziellen Quellen, Videos und Communities gesammelt. Bei jedem Eintrag steht die Quelle.",
-    "radarAll": "Alle Änderungen in Pulse",
-    "radarNews": "Änderungen und News",
+    "radarSub": "Automatisch von unseren Agents gesammelt: stündlich KI-News aus den Medien, Videos von Nachrichtenkanälen und Änderungen bei Tools. Bei jedem Eintrag steht die Quelle.",
+    "radarAll": "Alle KI-News",
+    "radarNews": "KI-News aus den Medien",
     "radarVideos": "Videos offizieller Kanäle",
     "radarBuzz": "Community-Buzz",
-    "radarEmptyNews": "Noch keine belegten Änderungen. Der Änderungs-Agent liest alle 6 Stunden die Changelogs.",
-    "radarEmptyVideos": "Noch keine Videos. Der Video-Agent prüft täglich die offiziellen Kanäle der Tools.",
+    "radarEmptyNews": "Noch keine News. Der News-Agent liest stündlich die Feeds der Medien.",
+    "radarEmptyVideos": "Noch keine Videos. Der News-Agent prüft stündlich die YouTube-Kanäle der Medien.",
     "radarEmptyBuzz": "Noch keine Messungen. Der Community-Agent misst alle 6 Stunden die Nennungen auf Hacker News und GitHub.",
     "source": "Quelle: {domain}",
     "buzz": {
@@ -845,7 +855,59 @@
     "startPlan": "Zum Schritt-für-Schritt-Plan",
     "startStack": "Meinen Stack zusammenstellen",
     "paidFrom": "bezahlt ab {price}",
-    "from": "ab {price}"
+    "from": "ab {price}",
+    "radarChanges": "Änderungen bei Tools",
+    "radarEmptyChanges": "Noch keine belegten Änderungen. Der Änderungs-Agent liest alle 6 Stunden die Changelogs."
+  },
+  "start": {
+    "metaTitle": "Schritt für Schritt das richtige KI-Tool wählen",
+    "metaDescription": "Keine Ahnung, welche KI du brauchst? Wähle in drei einfachen Schritten, was du tun willst, und erhalte eine persönliche Empfehlung, ohne Vorkenntnisse.",
+    "metaTitle2": "{area}: wähle, was du tun willst",
+    "metaTitle3": "{task}: so fängst du an, verständlich erklärt",
+    "breadcrumb": "Schritt für Schritt",
+    "step": "Schritt {n} von 3",
+    "title1": "Wofür möchtest du KI nutzen?",
+    "intro1": "Keine Idee, was du eintippen sollst? Wähle unten, was am besten passt. Du musst nichts über KI wissen.",
+    "title2": "Was genau möchtest du tun?",
+    "intro2": "Wähle, was am besten passt. Unsicher? Nimm einfach eines; du kannst jederzeit zurück.",
+    "intro3": "So funktioniert es, verständlich erklärt. Beantworte danach zwei kurze Fragen und erhalte deine persönliche Empfehlung.",
+    "choose": "Auswählen",
+    "back": "Zurück",
+    "fullTask": "Alle Tools und Schritte ansehen",
+    "orType": "Weißt du es schon?",
+    "orTypeLink": "Stell deine Frage in deinen eigenen Worten",
+    "homeCta": "Weißt du nicht, was du eintippen sollst? Wähle Schritt für Schritt",
+    "guideLabel": "Verständlich erklärt",
+    "guideWhat": "Was ist das?",
+    "guideSteps": "So fängst du an",
+    "guideWatch": "Achtung",
+    "guideTip": "Tipp",
+    "budgetQ": "Was darf es kosten?",
+    "budget": {
+      "free": "Nur kostenlos",
+      "25": "Bis 25 € pro Monat",
+      "any": "Egal"
+    },
+    "levelQ": "Wie viel Erfahrung hast du mit KI?",
+    "level": {
+      "beginner": "Neu: Ich fange gerade an",
+      "intermediate": "Etwas: Ich habe es schon genutzt",
+      "advanced": "Viel: Ich bin technisch"
+    },
+    "submit": "Meine Empfehlung zeigen",
+    "submitNote": "Du bekommst die Tools pro Schritt, mit Preisen und Quellen. Nie nach Sponsoring sortiert.",
+    "cat": {
+      "assistant": "Ein kluger Helfer für alles",
+      "writing": "Texte schreiben, verbessern oder übersetzen",
+      "research": "Lernen, recherchieren und zusammenfassen",
+      "image": "Fotos, Bilder und Design",
+      "video": "Videos erstellen oder bearbeiten",
+      "audio": "Ton, Stimme, Podcast und Musik",
+      "code": "Websites, Apps und Programmieren",
+      "automation": "Arbeit automatisieren",
+      "marketing": "Marketing und Social Media",
+      "business": "Kunden helfen"
+    }
   },
   "tasks": {
     "title": "Was kannst du mit KI machen?",
@@ -910,6 +972,26 @@
     "source": "Quelle",
     "detected": "erkannt am {date}",
     "monthPrecision": "{month}"
+  },
+  "news": {
+    "title": "KI-News",
+    "metaTitle": "KI-News: das Neueste aus den Medien, stündlich aktualisiert",
+    "metaDescription": "Die neuesten KI-News und Interviews aus den Medien, etwa CNBC, The Guardian, The Verge und BBC, stündlich automatisch gesammelt. Mit Quelle bei jedem Beitrag.",
+    "intro": "Die neuesten KI-News aus den Medien, stündlich automatisch von unserem News-Agent gesammelt. Wir zeigen Titel, Quelle und Datum; den Artikel liest du bei der Quelle.",
+    "voices": "Stimmen in den News",
+    "articles": "Artikel",
+    "videos": "Videos und Interviews",
+    "empty": "Noch keine News gesammelt. Der News-Agent läuft stündlich; schau bald wieder vorbei.",
+    "emptyArticles": "Noch keine Artikel.",
+    "emptyVideos": "Noch keine Videos.",
+    "sourcesTitle": "Quellen",
+    "sourcesBody": "Wir lesen nur die öffentlichen Feeds, die die Verlage selbst anbieten (RSS und YouTube). Wir übernehmen keine Artikeltexte: Den vollständigen Beitrag liest du immer bei der Quelle.",
+    "opensSource": "öffnet {source}",
+    "personMetaTitle": "{name}: die neuesten KI-News und Interviews",
+    "personMetaDescription": "News und Interviews mit {name} ({role}), stündlich aktualisiert, mit Quelle bei jedem Beitrag.",
+    "personLatest": "Die neuesten News und Interviews mit {name}",
+    "personEmpty": "Noch keine Beiträge über {name} in den letzten 90 Tagen. Der News-Agent prüft stündlich.",
+    "otherVoices": "Weitere Stimmen"
   },
   "lead": {
     "name": "Name",

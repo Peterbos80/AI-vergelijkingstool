@@ -25,7 +25,8 @@
     "tasks": "Tasks",
     "search": "Search a tool",
     "searchLabel": "Search the tool database",
-    "menu": "Menu"
+    "menu": "Menu",
+    "news": "News"
   },
   "footer": {
     "about": "About",
@@ -281,7 +282,10 @@
     "annual": "billed annually",
     "perMonthAnnual": "{price}/mo billed annually",
     "watermarkWarning": "Free plan adds a watermark",
-    "noCommercialFree": "Free plan not for commercial use"
+    "noCommercialFree": "Free plan not for commercial use",
+    "metaDescriptionNoFree": "{name}: {tagline}. Pricing from {price}. With sources, freshness and alternatives.",
+    "missingFacts": "Missing something about {name}? We only show what we have recorded with a source.",
+    "missingFactsLink": "Send an addition with a source"
   },
   "plans": {
     "title": "{name} pricing",
@@ -452,7 +456,8 @@
       "easier": "want a tool that's easy to learn",
       "capability": "also need {capability}",
       "platform": "work on {platform}"
-    }
+    },
+    "noData": "No sourced data yet"
   },
   "match": {
     "metaTitle": "Your AI stack: {goal}",
@@ -554,7 +559,7 @@
     "overBudget": "Over your budget ({amount})",
     "budgetUnknown": "Budget of {amount}: can't be checked yet (exchange rate or price missing).",
     "freeAvailable": "free plan",
-    "priceUnknown": "price unknown",
+    "priceUnknown": "price: see website",
     "save": "Save this receipt",
     "saved": "Saved",
     "share": "Share",
@@ -585,7 +590,7 @@
     "watermark_free": "Free plan adds a watermark",
     "no_commercial_free": "Free plan not for commercial use",
     "no_free_plan": "No free plan",
-    "unknown_price": "Price unknown",
+    "unknown_price": "Check the price on the official site",
     "stale": "Data may be outdated",
     "unverified_price": "Price not yet confirmed",
     "beta": "Still in beta",
@@ -745,6 +750,11 @@
         "does": "Reads the changelogs and feeds of tools.",
         "result": "{feeds_read, plural, =0 {no feeds with news} one {# feed read} other {# feeds read}}"
       },
+      "news": {
+        "name": "News agent",
+        "does": "Reads media and YouTube channel feeds about AI every hour.",
+        "result": "{feeds_read, plural, one {# feed read} other {# feeds read}}, {items_new, plural, =0 {no new items} one {# new item} other {# new items}}"
+      },
       "broken-link": {
         "name": "Uptime agent",
         "does": "Checks that tool websites work.",
@@ -797,13 +807,13 @@
       }
     },
     "radarTitle": "AI trend and news radar",
-    "radarSub": "Collected automatically by our agents from official sources, videos and communities. Every item links to its source.",
-    "radarAll": "All changes in Pulse",
-    "radarNews": "Changes and news",
+    "radarSub": "Collected automatically by our agents: AI news from the media every hour, videos from news channels and changes to tools. Every item links to its source.",
+    "radarAll": "All AI news",
+    "radarNews": "AI news from the media",
     "radarVideos": "Videos from official channels",
     "radarBuzz": "Community buzz",
-    "radarEmptyNews": "No sourced changes yet. The change agent reads the changelogs every 6 hours.",
-    "radarEmptyVideos": "No videos yet. The video agent checks the official channels of tools every day.",
+    "radarEmptyNews": "No news yet. The news agent reads the media feeds every hour.",
+    "radarEmptyVideos": "No videos yet. The news agent checks the media YouTube channels every hour.",
     "radarEmptyBuzz": "No measurements yet. The community agent measures mentions on Hacker News and GitHub every 6 hours.",
     "source": "source: {domain}",
     "buzz": {
@@ -824,7 +834,59 @@
     "startPlan": "See the step-by-step plan",
     "startStack": "Build my stack",
     "paidFrom": "paid from {price}",
-    "from": "from {price}"
+    "from": "from {price}",
+    "radarChanges": "Tool changes",
+    "radarEmptyChanges": "No sourced changes yet. The change agent reads the changelogs every 6 hours."
+  },
+  "start": {
+    "metaTitle": "Choose the right AI tool, step by step",
+    "metaDescription": "No idea which AI you need? Pick what you want to do in three simple steps and get personal advice, no prior knowledge needed.",
+    "metaTitle2": "{area}: choose what you want to do",
+    "metaTitle3": "{task}: how to start, in plain language",
+    "breadcrumb": "Step by step",
+    "step": "Step {n} of 3",
+    "title1": "What do you want to use AI for?",
+    "intro1": "No idea what to type? Pick whatever comes closest below. You do not need to know anything about AI.",
+    "title2": "What exactly do you want to do?",
+    "intro2": "Pick what fits best. Not sure? Just pick one; you can always go back.",
+    "intro3": "How it works, in plain language. Then answer two short questions and get your personal advice.",
+    "choose": "Choose this",
+    "back": "Back",
+    "fullTask": "See all tools and steps",
+    "orType": "Already know?",
+    "orTypeLink": "Type your question in your own words",
+    "homeCta": "Not sure what to type? Choose step by step",
+    "guideLabel": "Explained in plain language",
+    "guideWhat": "What is it?",
+    "guideSteps": "How to start",
+    "guideWatch": "Watch out",
+    "guideTip": "Tip",
+    "budgetQ": "What may it cost?",
+    "budget": {
+      "free": "Free only",
+      "25": "Up to €25 a month",
+      "any": "Does not matter"
+    },
+    "levelQ": "How much experience do you have with AI?",
+    "level": {
+      "beginner": "New: I am just starting",
+      "intermediate": "A little: I have used it before",
+      "advanced": "A lot: I am technical"
+    },
+    "submit": "Show my advice",
+    "submitNote": "You get the tools per step, with prices and sources. Never ordered by sponsorship.",
+    "cat": {
+      "assistant": "A smart helper for everything",
+      "writing": "Write, improve or translate texts",
+      "research": "Learn, research and summarise",
+      "image": "Photos, pictures and design",
+      "video": "Make or edit videos",
+      "audio": "Sound, voice, podcasts and music",
+      "code": "Websites, apps and coding",
+      "automation": "Automate work",
+      "marketing": "Marketing and social media",
+      "business": "Help customers"
+    }
   },
   "newsletter": {
     "title": "AI Pulse: the weekly newsletter",
@@ -903,6 +965,26 @@
     "detected": "detected {date}",
     "monthPrecision": "{month}"
   },
+  "news": {
+    "title": "AI news",
+    "metaTitle": "AI news: the latest from the media, updated every hour",
+    "metaDescription": "The latest AI news and interviews from the media, such as CNBC, The Guardian, The Verge and BBC, collected automatically every hour. With the source on every item.",
+    "intro": "The latest AI news from the media, collected automatically every hour by our news agent. We show the headline, the outlet and the date; read the article at the source.",
+    "voices": "Voices in the news",
+    "articles": "Articles",
+    "videos": "Videos and interviews",
+    "empty": "No news collected yet. The news agent runs every hour; check back soon.",
+    "emptyArticles": "No articles yet.",
+    "emptyVideos": "No videos yet.",
+    "sourcesTitle": "Sources",
+    "sourcesBody": "We only read the public feeds the publishers offer themselves (RSS and YouTube). We never copy article text: you always read the full story at the source.",
+    "opensSource": "opens {source}",
+    "personMetaTitle": "{name}: the latest AI news and interviews",
+    "personMetaDescription": "News and interviews with {name} ({role}), updated every hour, with the source on every item.",
+    "personLatest": "The latest news and interviews with {name}",
+    "personEmpty": "No items about {name} in the past 90 days yet. The news agent checks every hour.",
+    "otherVoices": "Other voices"
+  },
   "doctor": {
     "title": "Stack Doctor",
     "metaTitle": "Stack Doctor: get your AI tools checked",
@@ -937,7 +1019,7 @@
       "stale": "Data for {tool} may be outdated.",
       "trains_on_data": "{tool} may use your data for training.",
       "no_eu": "{tool} offers no EU data residency.",
-      "unknown_price": "The price of {tool} is unknown.",
+      "unknown_price": "Check the current price of {tool} on the official site: we have not recorded it with a source yet.",
       "unverified_price": "The price of {tool} isn't confirmed yet."
     },
     "savingsTitle": "Cheaper alternatives",
@@ -1924,7 +2006,8 @@
       "opportunity": "Ranks affiliate, content and readiness opportunities by expected value; tunes the LLM threshold within your limits.",
       "content": "Optional (LLM): drafts texts for new draft tools and translates tool texts into extra languages.",
       "reporter": "Builds the weekly report and e-mails it to you when e-mail is configured.",
-      "audit": "Monthly random sample of automated decisions for you to judge; measures precision per confidence band."
+      "audit": "Monthly random sample of automated decisions for you to judge; measures precision per confidence band.",
+      "news": "Reads media feeds (RSS and YouTube) every hour and publishes AI news: headline, outlet and link, never the article text."
     }
   },
   "og": {

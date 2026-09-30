@@ -35,7 +35,7 @@ export function ToolRow({
           <Link href={href.tool(locale, tool.slug)} className="font-semibold no-underline hover:underline">
             {tool.name}
           </Link>
-          {tool.status !== 'active' && <span className="mono text-xs text-ink-3">{t(`toolStatus.${tool.status}`)}</span>}
+          {tool.status !== 'active' && tool.status !== 'unknown' && <span className="mono text-xs text-ink-3">{t(`toolStatus.${tool.status}`)}</span>}
           <span className="text-sm text-ink-2">{text?.tagline}</span>
         </div>
         <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-3">

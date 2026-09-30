@@ -12,6 +12,7 @@ export type AgentName =
   | 'verification'
   | 'pricing'
   | 'change-detection'
+  | 'news'
   | 'broken-link'
   | 'duplicate'
   | 'quality'
