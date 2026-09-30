@@ -1208,7 +1208,10 @@
       },
       "video": {
         "title": "Video's",
-        "body": "Video's laden pas van YouTube (privacyvriendelijke modus) als je op afspelen klikt."
+        "body": "Video's laden pas van YouTube (privacyvriendelijke modus) als je op afspelen klikt.",
+        "api": "Videolijsten en -titels halen we bij YouTube op, via de openbare kanaalfeeds of via YouTube API Services. Voor YouTube-inhoud gelden de YouTube-servicevoorwaarden en het privacybeleid van Google.",
+        "youtubeTerms": "YouTube-servicevoorwaarden",
+        "googlePrivacy": "Privacybeleid van Google"
       },
       "rights": {
         "title": "Jouw rechten",
@@ -1798,7 +1801,7 @@
       },
       "youtube": {
         "name": "YouTube API (optioneel)",
-        "action": "Zet eventueel YOUTUBE_API_KEY om tutorials en reviews te vinden; officiële kanaalfeeds werken ook zonder."
+        "action": "Zet eventueel YOUTUBE_API_KEY: dan lezen de nieuws- en video-agent YouTube-kanalen via de officiële API en zoekt de video-agent tutorials en reviews. Zonder sleutel alleen kanaalfeeds waar robots.txt dat toestaat."
       },
       "github": {
         "name": "GitHub-token (optioneel)",

@@ -161,8 +161,8 @@ export const DEPENDENCIES: DependencyCheck[] = [
   {
     key: 'youtube',
     escalate: null,
-    ownerAction: 'Optional: YOUTUBE_API_KEY enables video search (official channel RSS works without it).',
-    run: async () => (env().YOUTUBE_API_KEY ? { status: 'ok', message: 'configured' } : { status: 'not_configured', message: 'video search off; official channel feeds only' }),
+    ownerAction: 'Optional: YOUTUBE_API_KEY lets the news and video agents read YouTube channels through the official API and enables video search (without it: channel feeds only where robots.txt allows).',
+    run: async () => (env().YOUTUBE_API_KEY ? { status: 'ok', message: 'configured' } : { status: 'not_configured', message: 'no video search; YouTube channels only where robots.txt allows their feeds' }),
   },
   {
     key: 'github',

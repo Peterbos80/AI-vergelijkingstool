@@ -36,8 +36,9 @@ Tests use `fixtureFetcher()`, which serves canned pages, so no test touches the 
 | Official changelogs, RSS/Atom | `change-detection` | feed XML, every 6 h | item title, link, date | Pulse event with the vendor's own title and link |
 | GitHub REST API | `social`, `discovery` | `api.github.com` (optional `GITHUB_TOKEN` for a higher rate limit) | stars, releases; repository search for candidates | star counts over time, release events with link |
 | Hacker News via Algolia API | `social`, `discovery` | `hn.algolia.com` | mention counts; Show HN posts as candidates | "buzz" event only above a threshold, with link |
-| YouTube channel RSS | `video` | public feed per official channel | video id, title, channel, date | embedded video (privacy-enhanced, loads on click) |
-| YouTube Data API v3 | `video` (optional, `YOUTUBE_API_KEY`) | `www.googleapis.com` | search results for reviews/tutorials | the same; API data is refreshed within 30 days or removed, per the API terms |
+| Media RSS/Atom feeds (`data/news/sources.json`) | `news` | the publishers' own feeds, robots.txt, hourly | headline, link, date | headline as written, outlet, date and a link to the publisher; never article text or summaries |
+| YouTube channel feeds | `video`, `news` | public feed per channel, only where robots.txt allows (else skipped and named in the run summary) | video id, title, channel, date | tool videos: embedded (privacy-enhanced, loads on click); news: title, channel and a link to YouTube |
+| YouTube Data API v3 | `video`, `news` (optional, `YOUTUBE_API_KEY`) | `www.googleapis.com`: channel uploads playlists (1 quota unit per call) and search | the same fields; search results for reviews/tutorials | the same; API data is refreshed within 30 days or removed, per the API terms. The privacy page names the YouTube API Services and links YouTube's terms and Google's privacy policy |
 | ECB reference rates | `fx` | `eurofxref-daily.xml` | daily EUR rates | "≈ €x (ECB rate of <date>)", always labelled indicative |
 | Candidate websites | `verification` | HTML, robots.txt | reachability, AI relevance, pricing and legal page presence, meta description | nothing public: a dossier for the owner, who decides |
 | Affiliate link targets | `monetization` | light GET with a test sub-id | reachability | nothing; a broken link falls back to the direct link |
@@ -51,6 +52,7 @@ The seed dataset in `data/` was compiled from public sources (official pages fir
 - `source_snapshots`: a hash and length per changed fetch (newest five per source), **not** the page text.
 - Evidence snippets on facts, plans and pending changes: at most a short verbatim quote, needed to show why a value is what it is.
 - Videos: id, title, channel and date, never the video itself.
+- News items: headline, outlet, date, link and tagged experts; articles are removed after 90 days, YouTube items 30 days after the channel last listed them.
 - Social signals: counts and links.
 
 ## What we never do

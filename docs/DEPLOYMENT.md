@@ -18,10 +18,10 @@ The free edition leaves server-only features out instead of showing buttons that
 **How it works.** The workflow `.github/workflows/site.yml` ("Site and agents"):
 
 1. restores the database from the `ops-state` branch (a gzipped `pg_dump`) into a Postgres service container;
-2. runs the agents that are due (hourly schedule), or applies an owner command from an issue comment;
+2. runs the agents that are due (hourly schedule; manual runs too), or applies an owner command from an issue comment;
 3. turns new P1/P2 inbox items and each new weekly report into issues, and closes issues whose item is resolved;
 4. saves the database back to `ops-state` (one force-pushed commit, so the branch never grows);
-5. when code changed (green CI on the default branch) or the agents changed published data: builds the app, starts it with `SITE_MODE=static`, exports every page with `scripts/static-export.ts` and deploys the files to GitHub Pages.
+5. when code changed (green CI on the default branch), the agents changed published data, or the last deploy is 6 hours old: builds the app, starts it with `SITE_MODE=static`, exports every page with `scripts/static-export.ts` and deploys the files to GitHub Pages.
 
 CI tests the static edition on every push (`playwright.static.config.ts`).
 
@@ -31,7 +31,8 @@ CI tests the static edition on every push (`playwright.static.config.ts`).
 2. *Custom domain*: `aitoolswijzer.nl` → Save. When the DNS check is green, tick **Enforce HTTPS** (available once GitHub has issued the certificate).
 3. DNS at the registrar (TransIP): `@` A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`; `www` CNAME `peterbos80.github.io.`. GitHub redirects `www` to the bare domain.
 4. Optional repository variables (*Settings → Secrets and variables → Actions → Variables*): `SITE_URL` (if not `https://aitoolswijzer.nl`; it must match the custom domain), `LEGAL_NAME`, `LEGAL_KVK`, `LEGAL_ADDRESS`, `LEGAL_EMAIL` (shown on /about; required for a commercial site in the Netherlands). No secrets are needed.
-5. Run the workflow once (*Actions → Site and agents → Run workflow*) or push to the default branch.
+5. Optional repository secret (*Settings → Secrets and variables → Actions → Secrets*): `YOUTUBE_API_KEY`, a free YouTube Data API key (Google Cloud console → enable "YouTube Data API v3" → Credentials → API key, restricted to that API). With it, the news and video agents read YouTube channels through the API; without it they use the channel feeds only where YouTube's robots.txt allows (the news agent's run summary names every skipped channel). The hourly news run uses about 120 of the 10,000 free daily quota units.
+6. Run the workflow once (*Actions → Site and agents → Run workflow*) or push to the default branch.
 
 **Limits to know.**
 
@@ -67,7 +68,7 @@ Everything else (e-mail, LLM, YouTube, GitHub, heartbeat) is optional and degrad
 | `LLM_DAILY_BUDGET_USD` | no | Hard daily cap (default 5; the lower of this and the owner setting applies) |
 | `LLM_MATCH_ENABLED` | no | `false` disables the LLM in Match |
 | `GITHUB_TOKEN` | no | Higher GitHub API rate limit for the social and discovery agents |
-| `YOUTUBE_API_KEY` | no | YouTube Data API search (without it: official channel RSS only) |
+| `YOUTUBE_API_KEY` | no | YouTube Data API: channel uploads for the news and video agents, and video search. Without it: channel feeds only where robots.txt allows, no search. |
 | `AGENT_USER_AGENT` | no | Bot identity (keep the `+https://…/bot` link pointing at your domain) |
 | `ENABLED_LOCALES` | no | Live locales, comma-separated (default `nl,en`) |
 | `LEGAL_NAME`, `LEGAL_KVK`, `LEGAL_ADDRESS`, `LEGAL_EMAIL` | before launch | Shown on /about. `LEGAL_EMAIL` also enables `security.txt` and the bot contact line. |

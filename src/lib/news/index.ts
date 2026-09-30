@@ -9,6 +9,7 @@ import { z } from 'zod';
 import type { Locale } from '@/i18n/config';
 import type { Database } from '@/lib/db/client';
 import { newsItems } from '@/lib/db/schema';
+import { isYoutubeChannel } from '@/lib/validate';
 import sourcesJson from '../../../data/news/sources.json';
 import peopleJson from '../../../data/news/people.json';
 
@@ -40,6 +41,13 @@ export function newsSource(id: string): NewsSource | undefined {
 
 export function newsPerson(id: string): NewsPerson | undefined {
   return NEWS_PEOPLE.find((p) => p.id === id);
+}
+
+/** The channel id of a YouTube channel feed source, else null. */
+export function youtubeChannelOf(source: NewsSource): string | null {
+  const u = new URL(source.url);
+  const id = u.hostname === 'www.youtube.com' && u.pathname === '/feeds/videos.xml' ? u.searchParams.get('channel_id') : null;
+  return isYoutubeChannel(id) ? id : null;
 }
 
 export function personRole(p: NewsPerson, locale: Locale): string {

@@ -1151,7 +1151,10 @@
       },
       "video": {
         "title": "Vidéos",
-        "body": "Les vidéos ne se chargent depuis YouTube (mode de confidentialité renforcée) que lorsque vous cliquez sur lecture."
+        "body": "Les vidéos ne se chargent depuis YouTube (mode de confidentialité renforcée) que lorsque vous cliquez sur lecture.",
+        "api": "Nous obtenons les listes et titres de vidéos auprès de YouTube, via les flux publics des chaînes ou via les services d’API YouTube. Les contenus YouTube sont soumis aux Conditions d’utilisation de YouTube et aux Règles de confidentialité de Google.",
+        "youtubeTerms": "Conditions d’utilisation de YouTube",
+        "googlePrivacy": "Règles de confidentialité de Google"
       },
       "rights": {
         "title": "Vos droits",

@@ -116,6 +116,8 @@ jobs:
         env:
           # Higher GitHub API rate limit for the social and discovery agents.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional (repository secret): YouTube channels for the news and video agents via the YouTube Data API.
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
 
       - name: Owner inbox and weekly report as issues
         run: npx tsx scripts/ops-github.ts sync

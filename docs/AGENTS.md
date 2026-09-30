@@ -82,8 +82,9 @@ Times are Europe/Amsterdam. "Items" is the per-run work limit.
 | `pricing` | hourly | 12 | Checks official pricing pages, highest-traffic and oldest first. An anchored price → VERIFIED; a different price → confirmation by repetition → policy | plans, Pulse events (R1, within policy) |
 | `broken-link` | every 6 h | 40 | Website reachability; "unreachable since" only after ≥ 3 failures spanning ≥ 24 h, restored automatically | `website_status` |
 | `change-detection` | every 6 h | 30 | Official changelogs and RSS/Atom → Pulse, titles verbatim from the vendor | Pulse events |
+| `news` | hourly | 300 | Media feeds in `data/news/sources.json` (The Verge, The Guardian, TechCrunch, MIT Technology Review, CNBC, BBC, NOS) and media YouTube channels: headline, outlet, date and link, never article text; tags watched experts (`data/news/people.json`). YouTube via the Data API with `YOUTUBE_API_KEY`, else the channel feed where robots.txt allows. The run summary names every source that was skipped (robots.txt) or failed, with the reason | `news_items` (articles kept 90 days; videos 30 days after the channel last listed them) |
 | `social` | every 6 h | 30 | GitHub stars/releases, Hacker News mentions; a "buzz" event needs ≥ 5 mentions and 3× the usual level | `social_signals`, buzz events |
-| `video` | daily 06:15 | 50 | Official uploads via channel RSS; with a key, YouTube API search. API data is refreshed within 30 days or removed | videos |
+| `video` | daily 06:15 | 50 | Official uploads (YouTube Data API with a key, else the channel feed where robots.txt allows); with a key, also API search. API data is refreshed within 30 days or removed | videos |
 | `discovery` | daily 02:40 | 100 | Candidate tools from Show HN (Algolia API) and GitHub search | `tool_candidates` only |
 | `verification` | daily 03:20 | 15 | Checks candidates (reachable, AI-related, blocklist, duplicate, pricing and legal pages) and writes a dossier | candidate status; **never publishes** |
 | `duplicate` | weekly Sun 05:00 | 50 | Flags tools sharing a host or normalised name | inbox only (merging is human) |

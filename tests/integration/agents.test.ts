@@ -423,10 +423,15 @@ describe('news agent', () => {
     `<?xml version="1.0"?><rss version="2.0"><channel><title>News</title>${items
       .map((i) => `<item><title>${i.title}</title><link>${i.link}</link><guid>${i.link}</guid><pubDate>${i.date}</pubDate></item>`)
       .join('')}</channel></rss>`;
+  // The shape of a YouTube channel feed.
   const atom = (entries: { id: string; title: string; date: string }[]) =>
     `<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:yt="http://www.youtube.com/xml/schemas/2015">${entries
-      .map((e) => `<entry><id>yt:video:${e.id}</id><title>${e.title}</title><link rel="alternate" href="https://www.youtube.com/watch?v=${e.id}"/><published>${e.date}</published></entry>`)
+      .map(
+        (e) =>
+          `<entry><id>yt:video:${e.id}</id><yt:videoId>${e.id}</yt:videoId><yt:channelId>UCGq-a57w-aPwyi3pW7XLiHw</yt:channelId><title>${e.title}</title><link rel="alternate" href="https://www.youtube.com/watch?v=${e.id}"/><author><name>The Diary Of A CEO</name></author><published>${e.date}</published></entry>`,
+      )
       .join('')}</feed>`;
+  const emptyRss = { contentType: 'application/rss+xml', body: rss([]) };
 
   it('publishes AI items with headline, outlet and link, tags watched experts, skips off-topic items and never duplicates', async () => {
     const at = hours(40);
@@ -454,6 +459,77 @@ describe('news agent', () => {
     const again = await run('news', pages, hours(41));
     expect(again.stats.items_new ?? 0).toBe(0);
     expect(await db.select().from(newsItems)).toHaveLength(3);
+    // Every source that could not be read is named, with the reason.
+    expect(again.summary).toMatch(/^3\/12 feeds · 0 new items · 0 pruned · failed: guardian-ai \(http 404\), /);
+  });
+
+  it('skips sources whose robots.txt disallows them, names them, and does not count that as a failure', async () => {
+    const articles = Object.fromEntries(NEWS_SOURCES.filter((s) => s.kind === 'article').map((s) => [s.url, emptyRss]));
+    const fixtures = fixtureFetcher(articles);
+    const requested: string[] = [];
+    const fetcher = {
+      async get(url: string, opts?: { api?: boolean }) {
+        requested.push(url);
+        if (url.startsWith('https://www.youtube.com/')) return { ok: false, url, finalUrl: url, status: null, contentType: null, body: '', durationMs: 1, redirects: [], errorKind: 'robots' as const, error: 'disallowed by robots.txt' };
+        return fixtures.get(url, opts);
+      },
+    };
+    const r = await runAgent('news', { db, fetcher, now: () => hours(42), trigger: 'test', force: true });
+    expect(r.status).toBe('success');
+    expect(r.summary).toContain('skipped, robots.txt disallows: yt-cnbc, yt-bloomberg-tech, yt-60-minutes, yt-doac, yt-lex-fridman (YouTube channels: set YOUTUBE_API_KEY)');
+    expect(r.stats.feed_robots).toBe(5);
+    expect(requested.some((u) => u.includes('googleapis.com'))).toBe(false);
+  });
+
+  it('reads YouTube channels through the YouTube Data API when a key is set, refreshes them and removes them 30 days after the last refresh', async () => {
+    process.env.YOUTUBE_API_KEY = 'test-key';
+    try {
+      const at = hours(43);
+      const playlist = (channel: string) =>
+        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=25&playlistId=UU${channel.slice(2)}&key=test-key`;
+      const item = (id: string, title: string, published?: string) => ({
+        snippet: { title, channelTitle: 'The Diary Of A CEO', channelId: 'UCGq-a57w-aPwyi3pW7XLiHw', resourceId: { kind: 'youtube#video', videoId: id } },
+        contentDetails: published ? { videoId: id, videoPublishedAt: published } : { videoId: id },
+      });
+      const pages: Parameters<typeof fixtureFetcher>[0] = {
+        [playlist('UCGq-a57w-aPwyi3pW7XLiHw')]: {
+          contentType: 'application/json; charset=UTF-8',
+          body: JSON.stringify({
+            items: [
+              item('abcdefghijk', 'Roman Yampolskiy: can we control superintelligence? (updated title)', new Date(at.getTime() - 7200_000).toISOString()),
+              item('zzzzzzzzzz1', 'Geoffrey Hinton on the risks of AI', new Date(at.getTime() - 3600_000).toISOString()),
+              item('zzzzzzzzzz2', 'Private video'),
+            ],
+          }),
+        },
+      };
+      const requested: string[] = [];
+      const fixtures = fixtureFetcher(pages);
+      const fetcher = {
+        async get(url: string, opts?: { api?: boolean }) {
+          requested.push(url);
+          return fixtures.get(url, opts);
+        },
+      };
+      const r = await runAgent('news', { db, fetcher, now: () => at, trigger: 'test', force: true });
+      // The channel feeds on youtube.com are not requested at all; the API is.
+      expect(requested.filter((u) => u.startsWith('https://www.youtube.com/'))).toEqual([]);
+      expect(r.summary).toContain('1/12 feeds (1 via YouTube API)');
+      expect(r.summary).not.toContain('test-key');
+      const videos = await db.select().from(newsItems).where(eq(newsItems.kind, 'video')).orderBy(newsItems.url);
+      expect(videos.map((v) => [v.url, v.title, v.people, v.fetchedAt.getTime()])).toEqual([
+        ['https://www.youtube.com/watch?v=abcdefghijk', 'Roman Yampolskiy: can we control superintelligence? (updated title)', ['roman-yampolskiy'], at.getTime()],
+        ['https://www.youtube.com/watch?v=zzzzzzzzzz1', 'Geoffrey Hinton on the risks of AI', ['geoffrey-hinton'], at.getTime()],
+      ]);
+      expect(r.stats.items_new).toBe(1);
+      // No longer listed: gone 30 days after the last refresh; articles stay for 90 days.
+      const later = await runAgent('news', { db, fetcher: fixtureFetcher({}), now: () => new Date(at.getTime() + 31 * 86_400_000), trigger: 'test', force: true });
+      expect(later.stats.items_pruned).toBe(2);
+      expect(await db.select().from(newsItems).where(eq(newsItems.kind, 'video'))).toEqual([]);
+      expect((await db.select().from(newsItems).where(eq(newsItems.kind, 'article'))).length).toBeGreaterThan(0);
+    } finally {
+      delete process.env.YOUTUBE_API_KEY;
+    }
   });
 });
 

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { candidateKey, nameFromTitle, parseGithub, parseHn } from '@/agents/defs/discovery';
-import { classify, decodeEntities, parseChannelFeed } from '@/agents/defs/video';
+import { classify } from '@/agents/defs/video';
+import { decodeEntities, parseChannelFeed } from '@/agents/lib/youtube';
 import { band, precisionByBand, wilsonLower } from '@/agents/defs/audit';
 import { noNewNumbers } from '@/agents/defs/content';
 import { mentions } from '@/agents/defs/social';

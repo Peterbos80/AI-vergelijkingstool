@@ -5,6 +5,7 @@ import { legalDetails, staticSite } from '@/lib/env';
 import { href } from '@/lib/routes';
 import { alternates } from '@/lib/seo';
 import { track } from '@/lib/analytics/track';
+import type { Translator } from '@/i18n/format';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/privacy'>): Promise<Metadata> {
   const { locale } = (await params) as { locale: Locale };
@@ -15,6 +16,28 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/privacy'
 const SECTIONS = ['analytics', 'match', 'cookie', 'email', 'leads', 'video', 'rights'];
 /** Sections that also apply to the static edition. */
 const STATIC_SECTIONS = ['video', 'rights'];
+
+function Section({ s, t }: { s: string; t: Translator }) {
+  return (
+    <section>
+      <h2>{t(`privacy.sections.${s}.title`)}</h2>
+      <p>{t(`privacy.sections.${s}.body`)}</p>
+      {s === 'video' && (
+        // YouTube API Services terms: say that the API is used and link YouTube's terms and Google's privacy policy.
+        <p>
+          {t('privacy.sections.video.api')}{' '}
+          <a href="https://www.youtube.com/t/terms" rel="noopener noreferrer">
+            {t('privacy.sections.video.youtubeTerms')}
+          </a>
+          {' · '}
+          <a href="https://policies.google.com/privacy" rel="noopener noreferrer">
+            {t('privacy.sections.video.googlePrivacy')}
+          </a>
+        </p>
+      )}
+    </section>
+  );
+}
 
 export default async function PrivacyPage({ params }: PageProps<'/[locale]/privacy'>) {
   const { locale } = (await params) as { locale: Locale };
@@ -38,19 +61,11 @@ export default async function PrivacyPage({ params }: PageProps<'/[locale]/priva
               <p>{t('static.privacyBrowser')}</p>
             </section>
             {STATIC_SECTIONS.map((s) => (
-              <section key={s}>
-                <h2>{t(`privacy.sections.${s}.title`)}</h2>
-                <p>{t(`privacy.sections.${s}.body`)}</p>
-              </section>
+              <Section key={s} s={s} t={t} />
             ))}
           </>
         ) : (
-          SECTIONS.map((s) => (
-            <section key={s}>
-              <h2>{t(`privacy.sections.${s}.title`)}</h2>
-              <p>{t(`privacy.sections.${s}.body`)}</p>
-            </section>
-          ))
+          SECTIONS.map((s) => <Section key={s} s={s} t={t} />)
         )}
         {(legal.name || legal.email) && (
           <>

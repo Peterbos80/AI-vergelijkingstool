@@ -1151,7 +1151,10 @@
       },
       "video": {
         "title": "Videos",
-        "body": "Videos werden erst von YouTube (erweiterter Datenschutzmodus) geladen, wenn du auf Abspielen klickst."
+        "body": "Videos werden erst von YouTube (erweiterter Datenschutzmodus) geladen, wenn du auf Abspielen klickst.",
+        "api": "Videolisten und -titel beziehen wir von YouTube, über die öffentlichen Kanal-Feeds oder über die YouTube API Services. Für YouTube-Inhalte gelten die YouTube-Nutzungsbedingungen und die Datenschutzerklärung von Google.",
+        "youtubeTerms": "YouTube-Nutzungsbedingungen",
+        "googlePrivacy": "Datenschutzerklärung von Google"
       },
       "rights": {
         "title": "Deine Rechte",

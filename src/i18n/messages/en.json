@@ -1208,7 +1208,10 @@
       },
       "video": {
         "title": "Videos",
-        "body": "Videos only load from YouTube (privacy-enhanced mode) when you click play."
+        "body": "Videos only load from YouTube (privacy-enhanced mode) when you click play.",
+        "api": "We get video lists and titles from YouTube, through the public channel feeds or through the YouTube API Services. YouTube content is subject to the YouTube Terms of Service and the Google Privacy Policy.",
+        "youtubeTerms": "YouTube Terms of Service",
+        "googlePrivacy": "Google Privacy Policy"
       },
       "rights": {
         "title": "Your rights",
@@ -1798,7 +1801,7 @@
       },
       "youtube": {
         "name": "YouTube API (optional)",
-        "action": "Optionally set YOUTUBE_API_KEY to find tutorials and reviews; official channel feeds work without it."
+        "action": "Optionally set YOUTUBE_API_KEY: the news and video agents then read YouTube channels through the official API, and the video agent finds tutorials and reviews. Without it: channel feeds only where robots.txt allows."
       },
       "github": {
         "name": "GitHub token (optional)",

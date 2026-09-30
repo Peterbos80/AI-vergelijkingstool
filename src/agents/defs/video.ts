@@ -1,6 +1,7 @@
 /**
  * Video agent: official and third-party videos per tool.
- *  - official channel uploads via the public channel RSS feed (no key);
+ *  - official channel uploads: with YOUTUBE_API_KEY via the YouTube Data API,
+ *    otherwise via the public channel feed where robots.txt allows it;
  *  - optional YouTube Data API search (YOUTUBE_API_KEY) for tutorials, reviews
  *    and comparisons that name the tool; auto-added only above a relevance
  *    bar, flagged and reversible;
@@ -9,11 +10,11 @@
  * Videos are embedded via a click-to-load, privacy-enhanced facade.
  */
 import { and, eq, inArray, isNotNull, lt, or, sql } from 'drizzle-orm';
-import { XMLParser } from 'fast-xml-parser';
 import { z } from 'zod';
 import { tools, videos } from '@/lib/db/schema';
 import { env } from '@/lib/env';
 import { isYoutubeChannel } from '@/lib/validate';
+import { channelUploads, decodeEntities } from '../lib/youtube';
 import { mentions } from './social';
 import type { AgentContext, AgentDefinition } from '../types';
 
@@ -24,34 +25,6 @@ export function classify(title: string): Exclude<Kind, 'official'> {
   if (/\b(review|recensie|test(ed)?|honest)\b/i.test(title)) return 'review';
   if (/\b(tutorial|how to|guide|beginners?|course|walkthrough|uitleg|handleiding)\b/i.test(title)) return 'tutorial';
   return 'other';
-}
-
-export function decodeEntities(s: string): string {
-  return s
-    .replace(/&#(\d+);/g, (_, n: string) => String.fromCodePoint(Number(n)))
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;|&#39;/g, "'")
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&');
-}
-
-export function parseChannelFeed(xml: string): { videoId: string; title: string; published: string | null; channelTitle: string | null; channelId: string | null }[] {
-  const doc = new XMLParser({ ignoreAttributes: false }).parse(xml) as { feed?: { entry?: unknown; title?: string } };
-  const entries = doc.feed?.entry ? (Array.isArray(doc.feed.entry) ? doc.feed.entry : [doc.feed.entry]) : [];
-  const out = [];
-  for (const e of entries as Record<string, unknown>[]) {
-    const videoId = String(e['yt:videoId'] ?? '');
-    if (!/^[\w-]{11}$/.test(videoId)) continue;
-    out.push({
-      videoId,
-      title: String(e.title ?? '').slice(0, 300),
-      published: typeof e.published === 'string' ? e.published : null,
-      channelTitle: typeof (e.author as { name?: unknown } | undefined)?.name === 'string' ? String((e.author as { name: string }).name) : null,
-      channelId: typeof e['yt:channelId'] === 'string' ? String(e['yt:channelId']) : null,
-    });
-  }
-  return out;
 }
 
 const SearchResponse = z.object({
@@ -66,7 +39,7 @@ const ListResponse = z.object({ items: z.array(z.object({ id: z.string(), snippe
 
 const MAX_SEARCHES_PER_RUN = 5;
 
-async function officialUploads(ctx: AgentContext, now: Date): Promise<number> {
+async function officialUploads(ctx: AgentContext, key: string | undefined, now: Date): Promise<number> {
   const list = await ctx.db
     .select()
     .from(tools)
@@ -76,23 +49,24 @@ async function officialUploads(ctx: AgentContext, now: Date): Promise<number> {
   let added = 0;
   for (const t of list) {
     if (!isYoutubeChannel(t.youtubeChannelId)) continue;
-    const res = await ctx.fetcher.get(`https://www.youtube.com/feeds/videos.xml?channel_id=${t.youtubeChannelId}`, { accept: 'xml' });
-    if (!res.ok) {
-      ctx.stat(`feed_${res.errorKind ?? 'error'}`);
+    const got = await channelUploads(ctx.fetcher, t.youtubeChannelId, key, 3);
+    if (!got.ok) {
+      ctx.stat(`${got.via === 'api' ? 'api' : 'feed'}_${got.reason.split(' ')[0]}`);
       continue;
     }
-    for (const v of parseChannelFeed(res.body).slice(0, 3)) {
+    for (const v of got.uploads) {
       const [row] = await ctx.db
         .insert(videos)
         .values({
           toolId: t.id,
           videoId: v.videoId,
-          title: decodeEntities(v.title),
+          title: v.title,
           channelTitle: v.channelTitle,
           channelId: v.channelId ?? t.youtubeChannelId,
           kind: 'official',
-          publishedAt: v.published ? new Date(v.published) : null,
-          source: 'rss',
+          publishedAt: v.published,
+          // API data follows the API terms (refreshed or removed within 30 days, below).
+          source: got.via === 'api' ? 'youtube_api' : 'rss',
           sourceUrl: `https://www.youtube.com/channel/${t.youtubeChannelId}`,
           status: 'active',
           relevance: 0.9,
@@ -242,7 +216,7 @@ async function checkAvailability(ctx: AgentContext, now: Date): Promise<number> 
 
 export const videoAgent: AgentDefinition = {
   name: 'video',
-  description: 'Official uploads via channel RSS, optional YouTube API search, 30-day API refresh and availability checks.',
+  description: 'Official uploads (YouTube API with a key, else the channel feed where robots.txt allows), optional API search, 30-day API refresh and availability checks.',
   schedule: 'daily:06:15',
   autonomy: 'auto',
   maxItems: 50,
@@ -250,7 +224,7 @@ export const videoAgent: AgentDefinition = {
   async run(ctx) {
     const now = ctx.now();
     const key = env().YOUTUBE_API_KEY;
-    const official = await officialUploads(ctx, now);
+    const official = await officialUploads(ctx, key, now);
     const searched = key ? await apiSearch(ctx, key, now) : 0;
     const refresh = await refreshApiData(ctx, key, now);
     const gone = await checkAvailability(ctx, now);

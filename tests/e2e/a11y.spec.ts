@@ -14,6 +14,11 @@ const PAGES = [
   '/nl/pulse',
   '/en/methodology',
   '/nl/corrections',
+  '/nl/news',
+  '/nl/start/ai-assistenten/ai-assistent-dagelijks-werk',
+  '/nl/learn/wat-is-ai',
+  '/nl/glossary',
+  '/nl/privacy',
   '/admin/login',
 ];
 
