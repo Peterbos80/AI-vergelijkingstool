@@ -7,7 +7,7 @@
  *    7 days; a clear spike becomes a low-significance "buzz" event.
  * Signals inform freshness and Pulse only — never rankings.
  */
-import { and, asc, desc, eq, sql } from 'drizzle-orm';
+import { and, desc, eq, sql } from 'drizzle-orm';
 import { z } from 'zod';
 import { changeEvents, socialSignals, tools } from '@/lib/db/schema';
 import { env } from '@/lib/env';
@@ -62,7 +62,7 @@ export const socialAgent: AgentDefinition = {
       .select()
       .from(tools)
       .where(and(eq(tools.published, true), sql`(${tools.socialCheckedAt} IS NULL OR ${tools.socialCheckedAt} < ${new Date(now.getTime() - 20 * 3600_000).toISOString()}::timestamptz)`))
-      .orderBy(asc(sql`${tools.socialCheckedAt} NULLS FIRST`))
+      .orderBy(sql`${tools.socialCheckedAt} ASC NULLS FIRST`)
       .limit(ctx.limits.maxItems);
     let events = 0;
     for (const tool of due) {

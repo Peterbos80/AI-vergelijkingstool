@@ -8,7 +8,7 @@
  *    Services policies; removed/private videos are taken down automatically.
  * Videos are embedded via a click-to-load, privacy-enhanced facade.
  */
-import { and, asc, eq, inArray, isNotNull, lt, or, sql } from 'drizzle-orm';
+import { and, eq, inArray, isNotNull, lt, or, sql } from 'drizzle-orm';
 import { XMLParser } from 'fast-xml-parser';
 import { z } from 'zod';
 import { tools, videos } from '@/lib/db/schema';
@@ -71,7 +71,7 @@ async function officialUploads(ctx: AgentContext, now: Date): Promise<number> {
     .select()
     .from(tools)
     .where(and(eq(tools.published, true), isNotNull(tools.youtubeChannelId)))
-    .orderBy(asc(sql`${tools.videoCheckedAt} NULLS FIRST`))
+    .orderBy(sql`${tools.videoCheckedAt} ASC NULLS FIRST`)
     .limit(10);
   let added = 0;
   for (const t of list) {
@@ -116,7 +116,7 @@ async function apiSearch(ctx: AgentContext, key: string, now: Date): Promise<num
     .select()
     .from(tools)
     .where(and(eq(tools.published, true), or(sql`${tools.videoCheckedAt} IS NULL`, lt(tools.videoCheckedAt, new Date(now.getTime() - 30 * 86_400_000)))))
-    .orderBy(asc(sql`${tools.videoCheckedAt} NULLS FIRST`))
+    .orderBy(sql`${tools.videoCheckedAt} ASC NULLS FIRST`)
     .limit(MAX_SEARCHES_PER_RUN);
   let added = 0;
   const after = new Date(now.getTime() - 730 * 86_400_000).toISOString();

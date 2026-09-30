@@ -405,6 +405,16 @@ describe('verification agent', () => {
   });
 });
 
+describe('video and social agents', () => {
+  it('select their due tools and finish without a database error', async () => {
+    // Regression: "ORDER BY col NULLS FIRST ASC" is invalid SQL and failed both agents in production.
+    for (const name of ['video', 'social'] as const) {
+      const r = await run(name, {}, hours(30));
+      expect(r.status, `${name}: ${r.summary}`).not.toBe('failed');
+    }
+  });
+});
+
 describe('recommendation agent (golden-set regression guard)', () => {
   it('passes on the seed and escalates a regression after a data change', async () => {
     const ok = await run('recommendation', {}, T0);
