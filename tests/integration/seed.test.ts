@@ -28,6 +28,30 @@ describe('seed → catalog', () => {
     expect(second.dataVersion).toBe(first.dataVersion + 1);
   });
 
+  it('adds facts the dataset gained later to existing tools, and never overwrites a current fact', async () => {
+    const bundle = loadSeedData();
+    const deepl = bundle.tools.find((t) => t.slug === 'deepl')!;
+    const [tool] = await db.select().from(tools).where(eq(tools.slug, 'deepl'));
+    const current = async (key: string) => db.select().from(facts).where(and(eq(facts.toolId, tool!.id), eq(facts.key, key), isNull(facts.validTo)));
+    const before = await db.select().from(facts).where(and(eq(facts.toolId, tool!.id), isNull(facts.validTo)));
+    const existingKey = before[0]!.key;
+    const researched = { value: true, status: 'supported' as const, sources: [{ url: 'https://www.deepl.com/en/pro-data-security', type: 'official' as const }], observed: '2026-09-30', method: 'web_search' as const };
+    const changed = {
+      ...bundle,
+      tools: bundle.tools.map((t) =>
+        t.slug === 'deepl' ? { ...deepl, facts: { ...deepl.facts, gdpr_dpa: researched, [existingKey]: { ...researched, value: 'changed in the file' } } } : t,
+      ),
+    };
+    const r = await applySeed(db, changed, now);
+    expect(r.factsAdded).toBe(1);
+    expect((await current('gdpr_dpa')).map((f) => f.value)).toEqual([true]);
+    // The fact that already existed keeps its value: agents own it after the first seed.
+    expect((await current(existingKey)).map((f) => f.value)).toEqual(before.filter((f) => f.key === existingKey).map((f) => f.value));
+    // Idempotent.
+    expect((await applySeed(db, changed, now)).factsAdded).toBe(0);
+    expect(await current('gdpr_dpa')).toHaveLength(1);
+  });
+
   it('never stores seed evidence as VERIFIED (not anchored by our fetcher)', async () => {
     const verified = await db.select().from(facts).where(eq(facts.status, 'verified'));
     const verifiedPlans = await db.select().from(pricingPlans).where(eq(pricingPlans.status, 'verified'));

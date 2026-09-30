@@ -5,6 +5,7 @@
  *  - Taxonomy is editorial: categories, capabilities and tasks are upserted.
  *  - Tools are inserted when their slug does not exist yet. Existing tools are
  *    left alone: after the initial seed, agents own the data and its history.
+ *    Only facts the dataset gained later are added to them (never overwritten).
  *  - Events are inserted once (dedupe key).
  *  - Affiliate links from data/affiliates.json are synced (see syncAffiliates).
  *  - Computed alternatives and all tool snapshots are recomputed.
@@ -55,6 +56,8 @@ export interface SeedReport {
   toolsInserted: number;
   toolsSkipped: number;
   facts: number;
+  /** Facts added to tools that already existed (gaps filled, nothing overwritten). */
+  factsAdded: number;
   plans: number;
   historyRows: number;
   sources: number;
@@ -248,6 +251,42 @@ async function syncTaxonomy(db: Tx, bundle: SeedBundle) {
   }
 }
 
+async function insertFact(db: Tx, reg: SourceRegistry, toolId: string, key: string, fact: NonNullable<ResolvedTool['facts'][keyof ResolvedTool['facts']]>, now: Date, report: SeedReport) {
+  const ev = await evidenceFor(reg, fact, toolId, 'reference', now);
+  if (ev.clamped) report.statusClamped++;
+  await db.insert(facts).values({
+    toolId,
+    key,
+    value: fact.value as never,
+    status: ev.status,
+    confidence: ev.confidence,
+    sourceId: ev.sourceId,
+    extraSourceIds: ev.extraSourceIds,
+    evidence: ev.evidence,
+    method: ev.method,
+    observedAt: ev.observedAt,
+    verifiedAt: ev.status === 'verified' ? ev.observedAt : null,
+    validFrom: ev.observedAt,
+    createdBy: 'seed',
+    note: fact.note ?? null,
+  });
+}
+
+/**
+ * Existing tools: facts the dataset gained after the tool was first seeded
+ * (for example researched privacy or Dutch-language facts) are added. A fact
+ * that already has a current row is left alone: agents own it from then on.
+ */
+async function fillMissingFacts(db: Tx, reg: SourceRegistry, tool: ResolvedTool, toolId: string, now: Date, report: SeedReport) {
+  const current = await db.select({ key: facts.key }).from(facts).where(and(eq(facts.toolId, toolId), isNull(facts.validTo)));
+  const have = new Set(current.map((r) => r.key));
+  for (const [key, fact] of Object.entries(tool.facts)) {
+    if (!fact || have.has(key)) continue;
+    await insertFact(db, reg, toolId, key, fact, now, report);
+    report.factsAdded++;
+  }
+}
+
 async function insertTool(db: Tx, reg: SourceRegistry, tool: ResolvedTool, now: Date, report: SeedReport) {
   const [company] = await db
     .insert(companies)
@@ -306,24 +345,7 @@ async function insertTool(db: Tx, reg: SourceRegistry, tool: ResolvedTool, now: 
 
   for (const [key, fact] of Object.entries(tool.facts)) {
     if (!fact) continue;
-    const ev = await evidenceFor(reg, fact, toolId, 'reference', now);
-    if (ev.clamped) report.statusClamped++;
-    await db.insert(facts).values({
-      toolId,
-      key,
-      value: fact.value as never,
-      status: ev.status,
-      confidence: ev.confidence,
-      sourceId: ev.sourceId,
-      extraSourceIds: ev.extraSourceIds,
-      evidence: ev.evidence,
-      method: ev.method,
-      observedAt: ev.observedAt,
-      verifiedAt: ev.status === 'verified' ? ev.observedAt : null,
-      validFrom: ev.observedAt,
-      createdBy: 'seed',
-      note: fact.note ?? null,
-    });
+    await insertFact(db, reg, toolId, key, fact, now, report);
     report.facts++;
   }
 
@@ -470,6 +492,7 @@ export async function applySeed(db: Database, bundle: SeedBundle, now: Date = ne
     toolsInserted: 0,
     toolsSkipped: 0,
     facts: 0,
+    factsAdded: 0,
     plans: 0,
     historyRows: 0,
     sources: 0,
@@ -490,8 +513,10 @@ export async function applySeed(db: Database, bundle: SeedBundle, now: Date = ne
       (await tx.select({ id: tools.id, slug: tools.slug }).from(tools)).map((r) => [r.slug, r.id] as const),
     );
     for (const tool of bundle.tools) {
-      if (existing.has(tool.slug)) {
+      const known = existing.get(tool.slug);
+      if (known) {
         report.toolsSkipped++;
+        await fillMissingFacts(tx, reg, tool, known, now, report);
         continue;
       }
       const id = await insertTool(tx, reg, tool, now, report);
