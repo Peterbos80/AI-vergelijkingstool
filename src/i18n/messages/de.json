@@ -686,6 +686,167 @@
     "pulseAll": "Alle Änderungen",
     "stepsCount": "{count, plural, one {# Schritt} other {# Schritte}}"
   },
+  "hub": {
+    "placeholder": "Frag in deinen eigenen Worten. Zum Beispiel: Ich möchte meine Meetings kostenlos protokollieren lassen",
+    "enterHint": "Enter zum Fragen · Umschalt+Enter für eine neue Zeile",
+    "promptsLabel": "Probiere eine dieser Fragen",
+    "badgeBeginner": "Einsteiger",
+    "badgeAdvanced": "Fortgeschritten",
+    "prompts": {
+      "social": {
+        "label": "Social-Videos erstellen",
+        "query": "Ich möchte Social-Videos für mein Unternehmen erstellen"
+      },
+      "api": {
+        "label": "LLM per API anbinden",
+        "query": "Ich möchte ein Sprachmodell per API in meine eigene App einbinden"
+      },
+      "notes": {
+        "label": "Kostenlos protokollieren",
+        "query": "Ich möchte meine Meetings kostenlos protokollieren lassen"
+      }
+    },
+    "levelGroup": "Ansicht",
+    "levelBasis": "⚡ Basis",
+    "levelAdvanced": "💻 Advanced & Developer",
+    "levelBasisHint": "Verständlich: Gratis-Plan, Kosten, Bedienbarkeit und Plattformen",
+    "levelAdvancedHint": "Technisch: API, Integrationen, Self-Hosting, Preismodell und Niveau",
+    "matrixAssistants": "Beliebte KI-Assistenten im Vergleich",
+    "matrixFor": "{task}: die Tools im Vergleich",
+    "matrixNote": "Sortiert nach Funktionen und Daten, nie nach Sponsoring. Was wir nicht mit Quelle erfasst haben, lassen wir weg (–).",
+    "fullStack": "Deinen kompletten Stack ansehen",
+    "noData": "Keine belegten Daten",
+    "openSource": "Open Source",
+    "col": {
+      "tool": "Tool",
+      "from": "Kosten",
+      "ease": "Bedienbarkeit",
+      "worksOn": "Läuft auf",
+      "api": "API",
+      "integrations": "Integrationen",
+      "selfHost": "Self-Hosting",
+      "pricingModel": "Preismodell",
+      "level": "Niveau",
+      "bestFor": "Gut für"
+    },
+    "ease": {
+      "beginner": "Einfach",
+      "intermediate": "Etwas Übung nötig",
+      "advanced": "Technisch"
+    },
+    "agentsTitle": "Autonome Agents",
+    "agentsSub": "Transparenter Status der Bots, die die offiziellen Seiten automatisch prüfen. Direkt aus ihrem Protokoll, nichts simuliert.",
+    "agentsSummary": "{active} von {total} Agents im Zeitplan",
+    "asOf": "Stand {time}",
+    "lastRun": "letzter Lauf {time}",
+    "lastSuccess": "zuletzt erfolgreich {time}",
+    "state": {
+      "active": "Aktiv",
+      "late": "Verspätet",
+      "failed": "Letzter Lauf fehlgeschlagen",
+      "skipped": "Nichts zu tun",
+      "never": "Noch nicht gelaufen",
+      "paused": "Pausiert"
+    },
+    "every": {
+      "minutes": "{n, plural, one {jede Minute} other {alle # Minuten}}",
+      "hours": "{n, plural, one {stündlich} other {alle # Stunden}}",
+      "daily": "täglich",
+      "weekly": "wöchentlich",
+      "monthly": "monatlich"
+    },
+    "agent": {
+      "pricing": {
+        "name": "Preis-Agent",
+        "does": "Liest die offiziellen Preisseiten und bestätigt Preise.",
+        "result": "{pages_checked, plural, one {# Preisseite} other {# Preisseiten}} gelesen, {plans_confirmed, plural, one {# Preis} other {# Preise}} bestätigt"
+      },
+      "change-detection": {
+        "name": "Änderungs-Agent",
+        "does": "Liest Changelogs und Feeds der Tools.",
+        "result": "{feeds_read, plural, =0 {keine Feeds mit Neuigkeiten} one {# Feed gelesen} other {# Feeds gelesen}}"
+      },
+      "broken-link": {
+        "name": "Erreichbarkeits-Agent",
+        "does": "Prüft, ob die Websites der Tools funktionieren.",
+        "result": "{checked, plural, one {# Website} other {# Websites}} geprüft, {failing} mit Störung"
+      },
+      "verification": {
+        "name": "Prüf-Agent",
+        "does": "Prüft neue Tools, bevor sie aufgenommen werden.",
+        "result": "{verified, plural, =0 {keine neuen Tools freigegeben} one {# neues Tool geprüft} other {# neue Tools geprüft}}"
+      },
+      "discovery": {
+        "name": "Entdeckungs-Agent",
+        "does": "Findet neue KI-Tools auf GitHub und Hacker News.",
+        "result": "{candidates, plural, =0 {keine neuen Kandidaten} one {# neuer Kandidat} other {# neue Kandidaten}}"
+      },
+      "social": {
+        "name": "Community-Agent",
+        "does": "Misst, wie oft Tools auf Hacker News und GitHub genannt werden.",
+        "result": "{hn_checked, plural, one {# Tool} other {# Tools}} auf Hacker News gemessen, {github_repos} auf GitHub"
+      },
+      "video": {
+        "name": "Video-Agent",
+        "does": "Holt neue Videos von offiziellen Kanälen.",
+        "result": "{official_added, plural, =0 {keine neuen Videos} one {# neues Video} other {# neue Videos}}"
+      },
+      "quality": {
+        "name": "Qualitäts-Agent",
+        "does": "Berechnet Aktualität und Verlässlichkeit jedes Tools.",
+        "result": "{snapshots, plural, one {# Tool} other {# Tools}} berechnet, {changed} geändert"
+      },
+      "fx": {
+        "name": "Währungs-Agent",
+        "does": "Holt täglich die Wechselkurse der EZB.",
+        "result": "{rates, plural, =0 {Kurse bereits aktuell} one {# Kurs aktualisiert} other {# Kurse aktualisiert}}"
+      },
+      "recommendation": {
+        "name": "Empfehlungs-Check",
+        "does": "Testet jede Nacht, ob Match echte Fragen gut beantwortet.",
+        "result": "{cases} echte Fragen getestet, {failed} fehlgeschlagen"
+      },
+      "duplicate": {
+        "name": "Duplikat-Agent",
+        "does": "Findet Tools, die doppelt erfasst sind.",
+        "result": "{pairs, plural, =0 {keine Duplikate} one {# mögliches Duplikat} other {# mögliche Duplikate}}"
+      },
+      "audit": {
+        "name": "Audit-Agent",
+        "does": "Prüft monatlich eine Stichprobe automatischer Entscheidungen.",
+        "result": "{sampled} Entscheidungen geprüft"
+      }
+    },
+    "radarTitle": "KI-Trend- und Nachrichtenradar",
+    "radarSub": "Automatisch von unseren Agents aus offiziellen Quellen, Videos und Communities gesammelt. Bei jedem Eintrag steht die Quelle.",
+    "radarAll": "Alle Änderungen in Pulse",
+    "radarNews": "Änderungen und News",
+    "radarVideos": "Videos offizieller Kanäle",
+    "radarBuzz": "Community-Buzz",
+    "radarEmptyNews": "Noch keine belegten Änderungen. Der Änderungs-Agent liest alle 6 Stunden die Changelogs.",
+    "radarEmptyVideos": "Noch keine Videos. Der Video-Agent prüft täglich die offiziellen Kanäle der Tools.",
+    "radarEmptyBuzz": "Noch keine Messungen. Der Community-Agent misst alle 6 Stunden die Nennungen auf Hacker News und GitHub.",
+    "source": "Quelle: {domain}",
+    "buzz": {
+      "hackernews": "{count, plural, one {# Nennung} other {{n} Nennungen}} auf Hacker News (7 Tage)",
+      "github": "{count, plural, one {# GitHub-Stern} other {{n} GitHub-Sterne}}"
+    },
+    "videoKind": {
+      "official": "Offiziell",
+      "review": "Review",
+      "tutorial": "Anleitung",
+      "comparison": "Vergleich",
+      "other": "Video"
+    },
+    "startTitle": "Direkt loslegen",
+    "startSub": "Kostenlose Schritt-für-Schritt-Pläne, von null zum Ergebnis. Was du hier siehst, hängt von deiner Ansicht ab: Basis oder Advanced.",
+    "startBasis": "Basis · kostenloser Plan",
+    "startAdvanced": "Advanced · kostenloser Plan",
+    "startPlan": "Zum Schritt-für-Schritt-Plan",
+    "startStack": "Meinen Stack zusammenstellen",
+    "paidFrom": "bezahlt ab {price}",
+    "from": "ab {price}"
+  },
   "tasks": {
     "title": "Was kannst du mit KI machen?",
     "metaTitle": "KI-Aufgaben: vom Ziel zu den passenden KI-Tools",

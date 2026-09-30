@@ -13,6 +13,7 @@ import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
 import { PulseTicker, type TickerItem } from '@/components/site/PulseTicker';
 import { logError } from '@/lib/ops/errors';
+import { LEVEL_SCRIPT } from '@/lib/levels';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#f7f5f0' },
-    { media: '(prefers-color-scheme: dark)', color: '#0f0f10' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0c' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -47,6 +48,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   const t = getT(locale);
   const h = await headers();
   const pathname = h.get('x-pathname') ?? `/${locale}`;
+  const nonce = h.get('x-nonce') ?? undefined;
 
   let tickerItems: TickerItem[] = [];
   let stats = null;
@@ -70,7 +72,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   }
 
   return (
-    <html lang={locale} className={`${grotesk.variable} ${plexMono.variable}`}>
+    // data-level is set before paint by LEVEL_SCRIPT (the visitor's view level), so React must not complain about it.
+    <html lang={locale} className={`${grotesk.variable} ${plexMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: LEVEL_SCRIPT }} />
+      </head>
       <body className="min-h-screen">
         <a href="#main" className="skip-link">
           {t('a11y.skipToContent')}

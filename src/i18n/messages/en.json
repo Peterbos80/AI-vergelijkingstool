@@ -665,6 +665,167 @@
     "pulseAll": "All changes",
     "stepsCount": "{count, plural, one {# step} other {# steps}}"
   },
+  "hub": {
+    "placeholder": "Ask in your own words. For example: I want my meetings transcribed and summarised for free",
+    "enterHint": "Enter to ask · Shift+Enter for a new line",
+    "promptsLabel": "Try one of these questions",
+    "badgeBeginner": "Beginner",
+    "badgeAdvanced": "Advanced",
+    "prompts": {
+      "social": {
+        "label": "Make social videos",
+        "query": "I want to make social videos for my business"
+      },
+      "api": {
+        "label": "Connect an LLM via API",
+        "query": "I want to connect a language model to my own app via an API"
+      },
+      "notes": {
+        "label": "Meeting notes for free",
+        "query": "I want my meetings transcribed and summarised for free"
+      }
+    },
+    "levelGroup": "View",
+    "levelBasis": "⚡ Basic",
+    "levelAdvanced": "💻 Advanced & Developer",
+    "levelBasisHint": "Plain language: free plan, cost, ease of use and where it runs",
+    "levelAdvancedHint": "Technical: API, integrations, self-hosting, pricing model and level",
+    "matrixAssistants": "Popular AI assistants side by side",
+    "matrixFor": "{task}: the tools side by side",
+    "matrixNote": "Ordered by features and data, never by sponsorship. Anything we have not recorded with a source is left out (–).",
+    "fullStack": "See your complete stack",
+    "noData": "No sourced data",
+    "openSource": "open source",
+    "col": {
+      "tool": "Tool",
+      "from": "Cost",
+      "ease": "Ease of use",
+      "worksOn": "Works on",
+      "api": "API",
+      "integrations": "Integrations",
+      "selfHost": "Self-host",
+      "pricingModel": "Pricing model",
+      "level": "Level",
+      "bestFor": "Good for"
+    },
+    "ease": {
+      "beginner": "Easy",
+      "intermediate": "Takes some getting used to",
+      "advanced": "Technical"
+    },
+    "agentsTitle": "Autonomous agents",
+    "agentsSub": "Transparent status of the bots that check the official pages automatically. Straight from their run log, nothing simulated.",
+    "agentsSummary": "{active} of {total} agents on schedule",
+    "asOf": "as of {time}",
+    "lastRun": "last run {time}",
+    "lastSuccess": "last success {time}",
+    "state": {
+      "active": "Active",
+      "late": "Behind schedule",
+      "failed": "Last run failed",
+      "skipped": "Nothing to do",
+      "never": "Not run yet",
+      "paused": "Paused"
+    },
+    "every": {
+      "minutes": "{n, plural, one {every minute} other {every # minutes}}",
+      "hours": "{n, plural, one {every hour} other {every # hours}}",
+      "daily": "daily",
+      "weekly": "weekly",
+      "monthly": "monthly"
+    },
+    "agent": {
+      "pricing": {
+        "name": "Pricing agent",
+        "does": "Reads the official pricing pages and confirms prices.",
+        "result": "{pages_checked, plural, one {# pricing page} other {# pricing pages}} read, {plans_confirmed, plural, one {# price} other {# prices}} confirmed"
+      },
+      "change-detection": {
+        "name": "Change agent",
+        "does": "Reads the changelogs and feeds of tools.",
+        "result": "{feeds_read, plural, =0 {no feeds with news} one {# feed read} other {# feeds read}}"
+      },
+      "broken-link": {
+        "name": "Uptime agent",
+        "does": "Checks that tool websites work.",
+        "result": "{checked, plural, one {# website} other {# websites}} checked, {failing} failing"
+      },
+      "verification": {
+        "name": "Verification agent",
+        "does": "Checks new tools before they are listed.",
+        "result": "{verified, plural, =0 {no new tools approved} one {# new tool verified} other {# new tools verified}}"
+      },
+      "discovery": {
+        "name": "Discovery agent",
+        "does": "Finds new AI tools on GitHub and Hacker News.",
+        "result": "{candidates, plural, =0 {no new candidates} one {# new candidate} other {# new candidates}}"
+      },
+      "social": {
+        "name": "Community agent",
+        "does": "Measures how often tools are mentioned on Hacker News and GitHub.",
+        "result": "{hn_checked, plural, one {# tool} other {# tools}} measured on Hacker News, {github_repos} on GitHub"
+      },
+      "video": {
+        "name": "Video agent",
+        "does": "Fetches new videos from official channels.",
+        "result": "{official_added, plural, =0 {no new videos} one {# new video} other {# new videos}}"
+      },
+      "quality": {
+        "name": "Quality agent",
+        "does": "Computes the freshness and reliability of every tool.",
+        "result": "{snapshots, plural, one {# tool} other {# tools}} computed, {changed} changed"
+      },
+      "fx": {
+        "name": "Currency agent",
+        "does": "Fetches the ECB exchange rates every day.",
+        "result": "{rates, plural, =0 {rates already current} one {# rate updated} other {# rates updated}}"
+      },
+      "recommendation": {
+        "name": "Recommendation check",
+        "does": "Tests every night whether Match answers real questions well.",
+        "result": "{cases} real questions tested, {failed} failed"
+      },
+      "duplicate": {
+        "name": "Duplicate agent",
+        "does": "Finds tools that are listed twice.",
+        "result": "{pairs, plural, =0 {no duplicates} one {# possible duplicate} other {# possible duplicates}}"
+      },
+      "audit": {
+        "name": "Audit agent",
+        "does": "Reviews a monthly sample of automated decisions.",
+        "result": "{sampled} decisions reviewed"
+      }
+    },
+    "radarTitle": "AI trend and news radar",
+    "radarSub": "Collected automatically by our agents from official sources, videos and communities. Every item links to its source.",
+    "radarAll": "All changes in Pulse",
+    "radarNews": "Changes and news",
+    "radarVideos": "Videos from official channels",
+    "radarBuzz": "Community buzz",
+    "radarEmptyNews": "No sourced changes yet. The change agent reads the changelogs every 6 hours.",
+    "radarEmptyVideos": "No videos yet. The video agent checks the official channels of tools every day.",
+    "radarEmptyBuzz": "No measurements yet. The community agent measures mentions on Hacker News and GitHub every 6 hours.",
+    "source": "source: {domain}",
+    "buzz": {
+      "hackernews": "{count, plural, one {# mention} other {{n} mentions}} on Hacker News (7 days)",
+      "github": "{count, plural, one {# GitHub star} other {{n} GitHub stars}}"
+    },
+    "videoKind": {
+      "official": "Official",
+      "review": "Review",
+      "tutorial": "Tutorial",
+      "comparison": "Comparison",
+      "other": "Video"
+    },
+    "startTitle": "Get started",
+    "startSub": "Free step-by-step plans, from zero to result. What you see here depends on your view: Basic or Advanced.",
+    "startBasis": "Basic · free plan",
+    "startAdvanced": "Advanced · free plan",
+    "startPlan": "See the step-by-step plan",
+    "startStack": "Build my stack",
+    "paidFrom": "paid from {price}",
+    "from": "from {price}"
+  },
   "newsletter": {
     "title": "AI Pulse: the weekly newsletter",
     "metaTitle": "Newsletter: weekly AI price changes and new tools",

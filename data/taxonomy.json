@@ -549,6 +549,15 @@
         { "key": "research", "capabilities": ["research-assistant"], "required": false, "i18n": { "nl": { "label": "Markt en concurrenten" }, "en": { "label": "Market and competitors" } } },
         { "key": "numbers", "capabilities": ["data-analysis"], "required": false, "i18n": { "nl": { "label": "Cijfers en prognose" }, "en": { "label": "Numbers and forecast" } } },
         { "key": "pitch", "capabilities": ["presentation-generation"], "required": false, "i18n": { "nl": { "label": "Pitch" }, "en": { "label": "Pitch" } } }
+      ] },
+    { "id": "connect-llm-api", "category": "code",
+      "i18n": {
+        "nl": { "title": "Een taalmodel (LLM) koppelen via een API", "slug": "llm-api-koppelen", "summary": "Een AI-model in je eigen app of workflow gebruiken: aanbieder kiezen, koppelen en de kosten in de hand houden.", "intentPhrases": ["llm api", "api koppelen", "openai api", "ai-model in mijn app", "taalmodel koppelen", "chatgpt api", "claude api", "gemini api", "mistral api", "api-sleutel", "ai integreren in software", "ai in mijn eigen applicatie", "model via een api gebruiken", "embeddings", "llm integreren", "contextvenster"] },
+        "en": { "title": "Connect a language model (LLM) via an API", "slug": "connect-llm-api", "summary": "Use an AI model in your own app or workflow: pick a provider, connect it and keep costs under control.", "intentPhrases": ["llm api", "openai api", "ai model in my app", "connect an llm", "chatgpt api", "claude api", "gemini api", "mistral api", "api key", "integrate ai into my software", "use a model via an api", "embeddings", "context window"] } },
+      "steps": [
+        { "key": "model", "capabilities": ["chat-assistant"], "required": true, "i18n": { "nl": { "label": "Model en aanbieder kiezen", "hint": "Vergelijk API, prijs per gebruik, dataopslag en of je data voor training wordt gebruikt." }, "en": { "label": "Pick a model and provider", "hint": "Compare API access, usage pricing, data storage and whether your data is used for training." } } },
+        { "key": "local", "capabilities": ["local-llm"], "required": false, "i18n": { "nl": { "label": "Zelf draaien met open modellen" }, "en": { "label": "Run open models yourself" } } },
+        { "key": "automate", "capabilities": ["workflow-automation"], "required": false, "i18n": { "nl": { "label": "Koppelen zonder code" }, "en": { "label": "Connect without code" } } }
       ] }
   ]
 }

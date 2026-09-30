@@ -25,6 +25,8 @@ test('the root picks a language and the home page renders', async ({ page }) => 
 test('the final journey runs entirely in the browser', async ({ page }) => {
   const errors = watchConsole(page);
   await page.goto('/en');
+  // Enter asks once the question box is interactive.
+  await expect(page.locator('.ask[data-hydrated]')).toBeVisible();
   await page.getByRole('textbox').first().fill("I want to create professional social media videos but I don't know which AI tools to use.");
   await page.getByRole('textbox').first().press('Enter');
   await expect(page).toHaveURL(/\/en\/match\?/);

@@ -7,7 +7,8 @@ name: Site and agents
 #  - the owner inbox (P1/P2) and the weekly report become issues, and owner
 #    commands in issue comments (/approve, /reject, /snooze, /default) apply;
 #  - the site is rebuilt and deployed after green CI on the default branch,
-#    and whenever the agents changed published data.
+#    whenever the agents changed published data, and at least every 6 hours
+#    (so the agent status on the home page stays current).
 on:
   workflow_run:
     workflows: [CI]
@@ -130,6 +131,13 @@ jobs:
           BEFORE: ${{ steps.restore.outputs.version }}
         run: |
           after=$(psql "$DATABASE_URL" -tAc "SELECT value #>> '{}' FROM settings WHERE key = 'data_version'")
+          # Deploy on new data, and at least every 6 hours so the agent status on the home page stays current.
+          last=$(psql "$DATABASE_URL" -tAc "SELECT extract(epoch FROM (value #>> '{}')::timestamptz)::bigint FROM settings WHERE key = 'static_deployed_at'")
+          deploy=false
+          if [ "$EVENT" = workflow_run ] || [ "$EVENT" = workflow_dispatch ] || [ "$RESTORED" != true ] || [ "$after" != "$BEFORE" ] || [ -z "$last" ] || [ $(( $(date +%s) - last )) -ge 21600 ]; then deploy=true; fi
+          if [ "$deploy" = true ]; then
+            psql "$DATABASE_URL" -q -v ON_ERROR_STOP=1 -c "INSERT INTO settings (key, value) VALUES ('static_deployed_at', to_jsonb(now()::text)) ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = now()"
+          fi
           pg_dump --no-owner --no-privileges "$DATABASE_URL" | gzip -9 > "$RUNNER_TEMP/state.sql.gz"
           dir=$(mktemp -d)
           cp "$RUNNER_TEMP/state.sql.gz" "$dir/"
@@ -140,8 +148,6 @@ jobs:
           git add .
           git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -q -m "Ops state (data version $after)"
           git push -q -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:$STATE_BRANCH"
-          deploy=false
-          if [ "$EVENT" = workflow_run ] || [ "$EVENT" = workflow_dispatch ] || [ "$RESTORED" != true ] || [ "$after" != "$BEFORE" ]; then deploy=true; fi
           echo "data version: ${BEFORE:-none} → $after, deploy: $deploy"
           echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
 

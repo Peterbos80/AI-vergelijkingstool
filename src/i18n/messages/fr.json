@@ -686,6 +686,167 @@
     "pulseAll": "Tous les changements",
     "stepsCount": "{count, plural, one {# étape} other {# étapes}}"
   },
+  "hub": {
+    "placeholder": "Demandez avec vos propres mots. Par exemple : je veux faire rédiger gratuitement le compte rendu de mes réunions",
+    "enterHint": "Entrée pour demander · Maj+Entrée pour une nouvelle ligne",
+    "promptsLabel": "Essayez une de ces questions",
+    "badgeBeginner": "Débutant",
+    "badgeAdvanced": "Avancé",
+    "prompts": {
+      "social": {
+        "label": "Créer des vidéos sociales",
+        "query": "Je veux créer des vidéos pour les réseaux sociaux de mon entreprise"
+      },
+      "api": {
+        "label": "Connecter un LLM par API",
+        "query": "Je veux connecter un modèle de langage à ma propre application via une API"
+      },
+      "notes": {
+        "label": "Comptes rendus gratuits",
+        "query": "Je veux faire rédiger gratuitement le compte rendu de mes réunions"
+      }
+    },
+    "levelGroup": "Affichage",
+    "levelBasis": "⚡ Essentiel",
+    "levelAdvanced": "💻 Avancé & Développeur",
+    "levelBasisHint": "En langage simple : offre gratuite, coût, facilité d’utilisation et plateformes",
+    "levelAdvancedHint": "Technique : API, intégrations, auto-hébergement, modèle tarifaire et niveau",
+    "matrixAssistants": "Les assistants IA populaires côte à côte",
+    "matrixFor": "{task} : les outils côte à côte",
+    "matrixNote": "Classés par fonctions et données, jamais par sponsoring. Ce que nous n’avons pas établi avec une source est omis (–).",
+    "fullStack": "Voir votre stack complète",
+    "noData": "Pas de donnée sourcée",
+    "openSource": "open source",
+    "col": {
+      "tool": "Outil",
+      "from": "Coût",
+      "ease": "Facilité",
+      "worksOn": "Fonctionne sur",
+      "api": "API",
+      "integrations": "Intégrations",
+      "selfHost": "Auto-hébergement",
+      "pricingModel": "Modèle tarifaire",
+      "level": "Niveau",
+      "bestFor": "Idéal pour"
+    },
+    "ease": {
+      "beginner": "Facile",
+      "intermediate": "Demande un temps d’adaptation",
+      "advanced": "Technique"
+    },
+    "agentsTitle": "Agents autonomes",
+    "agentsSub": "État transparent des robots qui vérifient automatiquement les pages officielles. Directement depuis leur journal, rien de simulé.",
+    "agentsSummary": "{active} agents sur {total} dans les temps",
+    "asOf": "état au {time}",
+    "lastRun": "dernière exécution {time}",
+    "lastSuccess": "dernier succès {time}",
+    "state": {
+      "active": "Actif",
+      "late": "En retard",
+      "failed": "Échec de la dernière exécution",
+      "skipped": "Rien à faire",
+      "never": "Pas encore exécuté",
+      "paused": "En pause"
+    },
+    "every": {
+      "minutes": "{n, plural, one {chaque minute} other {toutes les # minutes}}",
+      "hours": "{n, plural, one {toutes les heures} other {toutes les # heures}}",
+      "daily": "chaque jour",
+      "weekly": "chaque semaine",
+      "monthly": "chaque mois"
+    },
+    "agent": {
+      "pricing": {
+        "name": "Agent des prix",
+        "does": "Lit les pages tarifaires officielles et confirme les prix.",
+        "result": "{pages_checked, plural, one {# page tarifaire lue} other {# pages tarifaires lues}}, {plans_confirmed, plural, one {# prix confirmé} other {# prix confirmés}}"
+      },
+      "change-detection": {
+        "name": "Agent des changements",
+        "does": "Lit les changelogs et flux des outils.",
+        "result": "{feeds_read, plural, =0 {aucun flux avec du nouveau} one {# flux lu} other {# flux lus}}"
+      },
+      "broken-link": {
+        "name": "Agent de disponibilité",
+        "does": "Vérifie que les sites des outils fonctionnent.",
+        "result": "{checked, plural, one {# site vérifié} other {# sites vérifiés}}, {failing} en panne"
+      },
+      "verification": {
+        "name": "Agent de vérification",
+        "does": "Vérifie les nouveaux outils avant leur ajout.",
+        "result": "{verified, plural, =0 {aucun nouvel outil approuvé} one {# nouvel outil vérifié} other {# nouveaux outils vérifiés}}"
+      },
+      "discovery": {
+        "name": "Agent de découverte",
+        "does": "Trouve de nouveaux outils IA sur GitHub et Hacker News.",
+        "result": "{candidates, plural, =0 {aucun nouveau candidat} one {# nouveau candidat} other {# nouveaux candidats}}"
+      },
+      "social": {
+        "name": "Agent communauté",
+        "does": "Mesure la fréquence des mentions sur Hacker News et GitHub.",
+        "result": "{hn_checked, plural, one {# outil mesuré} other {# outils mesurés}} sur Hacker News, {github_repos} sur GitHub"
+      },
+      "video": {
+        "name": "Agent vidéo",
+        "does": "Récupère les nouvelles vidéos des chaînes officielles.",
+        "result": "{official_added, plural, =0 {aucune nouvelle vidéo} one {# nouvelle vidéo} other {# nouvelles vidéos}}"
+      },
+      "quality": {
+        "name": "Agent qualité",
+        "does": "Calcule la fraîcheur et la fiabilité de chaque outil.",
+        "result": "{snapshots, plural, one {# outil calculé} other {# outils calculés}}, {changed} modifiés"
+      },
+      "fx": {
+        "name": "Agent des devises",
+        "does": "Récupère chaque jour les taux de change de la BCE.",
+        "result": "{rates, plural, =0 {taux déjà à jour} one {# taux mis à jour} other {# taux mis à jour}}"
+      },
+      "recommendation": {
+        "name": "Contrôle des recommandations",
+        "does": "Vérifie chaque nuit que Match répond bien à de vraies questions.",
+        "result": "{cases} vraies questions testées, {failed} en échec"
+      },
+      "duplicate": {
+        "name": "Agent des doublons",
+        "does": "Repère les outils présents deux fois.",
+        "result": "{pairs, plural, =0 {aucun doublon} one {# doublon possible} other {# doublons possibles}}"
+      },
+      "audit": {
+        "name": "Agent d’audit",
+        "does": "Contrôle chaque mois un échantillon de décisions automatiques.",
+        "result": "{sampled} décisions contrôlées"
+      }
+    },
+    "radarTitle": "Radar des tendances et actualités IA",
+    "radarSub": "Collecté automatiquement par nos agents à partir de sources officielles, de vidéos et de communautés. Chaque élément indique sa source.",
+    "radarAll": "Tous les changements dans Pulse",
+    "radarNews": "Changements et actualités",
+    "radarVideos": "Vidéos des chaînes officielles",
+    "radarBuzz": "Buzz communautaire",
+    "radarEmptyNews": "Pas encore de changement sourcé. L’agent des changements lit les changelogs toutes les 6 heures.",
+    "radarEmptyVideos": "Pas encore de vidéo. L’agent vidéo consulte chaque jour les chaînes officielles des outils.",
+    "radarEmptyBuzz": "Pas encore de mesure. L’agent communauté mesure les mentions sur Hacker News et GitHub toutes les 6 heures.",
+    "source": "source : {domain}",
+    "buzz": {
+      "hackernews": "{count, plural, one {# mention} other {{n} mentions}} sur Hacker News (7 jours)",
+      "github": "{count, plural, one {# étoile GitHub} other {{n} étoiles GitHub}}"
+    },
+    "videoKind": {
+      "official": "Officielle",
+      "review": "Test",
+      "tutorial": "Tutoriel",
+      "comparison": "Comparatif",
+      "other": "Vidéo"
+    },
+    "startTitle": "Passer à l’action",
+    "startSub": "Des plans gratuits pas à pas, de zéro au résultat. Ce que vous voyez ici dépend de votre affichage : Essentiel ou Avancé.",
+    "startBasis": "Essentiel · plan gratuit",
+    "startAdvanced": "Avancé · plan gratuit",
+    "startPlan": "Voir le plan pas à pas",
+    "startStack": "Composer ma stack",
+    "paidFrom": "payant dès {price}",
+    "from": "dès {price}"
+  },
   "tasks": {
     "title": "Que pouvez-vous faire avec l’IA ?",
     "metaTitle": "Tâches d’IA : de l’objectif aux bons outils d’IA",

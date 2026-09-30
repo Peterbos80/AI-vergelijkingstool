@@ -665,6 +665,167 @@
     "pulseAll": "Alle wijzigingen",
     "stepsCount": "{count, plural, one {# stap} other {# stappen}}"
   },
+  "hub": {
+    "placeholder": "Vraag het in je eigen woorden. Bijvoorbeeld: ik wil gratis mijn vergaderingen laten notuleren",
+    "enterHint": "Enter om te vragen · Shift+Enter voor een nieuwe regel",
+    "promptsLabel": "Probeer een van deze vragen",
+    "badgeBeginner": "Beginner",
+    "badgeAdvanced": "Advanced",
+    "prompts": {
+      "social": {
+        "label": "Social video's maken",
+        "query": "Ik wil social video's maken voor mijn bedrijf"
+      },
+      "api": {
+        "label": "LLM via API koppelen",
+        "query": "Ik wil een taalmodel via een API in mijn eigen app koppelen"
+      },
+      "notes": {
+        "label": "Notuleren zonder kosten",
+        "query": "Ik wil gratis mijn vergaderingen laten notuleren"
+      }
+    },
+    "levelGroup": "Weergave",
+    "levelBasis": "⚡ Basis",
+    "levelAdvanced": "💻 Advanced & Developer",
+    "levelBasisHint": "In gewone taal: gratis plan, kosten, gebruiksgemak en waar het werkt",
+    "levelAdvancedHint": "Technisch: API, integraties, zelf hosten, prijsmodel en niveau",
+    "matrixAssistants": "Populaire AI-assistenten naast elkaar",
+    "matrixFor": "{task}: de tools naast elkaar",
+    "matrixNote": "Volgorde op functies en data, nooit op sponsoring. Wat we niet met een bron hebben vastgelegd, laten we weg (–).",
+    "fullStack": "Bekijk je complete stack",
+    "noData": "Geen gegevens met bron",
+    "openSource": "open source",
+    "col": {
+      "tool": "Tool",
+      "from": "Kosten",
+      "ease": "Gebruiksgemak",
+      "worksOn": "Werkt op",
+      "api": "API",
+      "integrations": "Integraties",
+      "selfHost": "Zelf hosten",
+      "pricingModel": "Prijsmodel",
+      "level": "Niveau",
+      "bestFor": "Handig voor"
+    },
+    "ease": {
+      "beginner": "Makkelijk",
+      "intermediate": "Even wennen",
+      "advanced": "Technisch"
+    },
+    "agentsTitle": "Autonome agents",
+    "agentsSub": "Transparante status van de bots die de officiële pagina's automatisch controleren. Rechtstreeks uit hun logboek, niets gesimuleerd.",
+    "agentsSummary": "{active} van {total} agents op schema",
+    "asOf": "stand van {time}",
+    "lastRun": "laatste run {time}",
+    "lastSuccess": "laatst gelukt {time}",
+    "state": {
+      "active": "Actief",
+      "late": "Loopt achter",
+      "failed": "Fout bij laatste run",
+      "skipped": "Niets te doen",
+      "never": "Nog niet gedraaid",
+      "paused": "Gepauzeerd"
+    },
+    "every": {
+      "minutes": "{n, plural, one {elke minuut} other {elke # minuten}}",
+      "hours": "{n, plural, one {elk uur} other {elke # uur}}",
+      "daily": "dagelijks",
+      "weekly": "wekelijks",
+      "monthly": "maandelijks"
+    },
+    "agent": {
+      "pricing": {
+        "name": "Prijzen-agent",
+        "does": "Leest de officiële prijspagina's en bevestigt prijzen.",
+        "result": "{pages_checked, plural, one {# prijspagina} other {# prijspagina's}} gelezen, {plans_confirmed, plural, one {# prijs} other {# prijzen}} bevestigd"
+      },
+      "change-detection": {
+        "name": "Wijzigingen-agent",
+        "does": "Leest de changelogs en feeds van tools.",
+        "result": "{feeds_read, plural, =0 {geen feeds met nieuws} one {# feed gelezen} other {# feeds gelezen}}"
+      },
+      "broken-link": {
+        "name": "Bereikbaarheids-agent",
+        "does": "Controleert of de websites van tools werken.",
+        "result": "{checked, plural, one {# website} other {# websites}} gecontroleerd, {failing} met storing"
+      },
+      "verification": {
+        "name": "Verificatie-agent",
+        "does": "Controleert nieuwe tools voordat ze worden opgenomen.",
+        "result": "{verified, plural, =0 {geen nieuwe tools goedgekeurd} one {# nieuwe tool geverifieerd} other {# nieuwe tools geverifieerd}}"
+      },
+      "discovery": {
+        "name": "Ontdek-agent",
+        "does": "Zoekt nieuwe AI-tools op GitHub en Hacker News.",
+        "result": "{candidates, plural, =0 {geen nieuwe kandidaten} one {# nieuwe kandidaat} other {# nieuwe kandidaten}}"
+      },
+      "social": {
+        "name": "Community-agent",
+        "does": "Meet hoe vaak tools genoemd worden op Hacker News en GitHub.",
+        "result": "{hn_checked, plural, one {# tool} other {# tools}} gemeten op Hacker News, {github_repos} op GitHub"
+      },
+      "video": {
+        "name": "Video-agent",
+        "does": "Haalt nieuwe video's op van officiële kanalen.",
+        "result": "{official_added, plural, =0 {geen nieuwe video's} one {# nieuwe video} other {# nieuwe video's}}"
+      },
+      "quality": {
+        "name": "Kwaliteits-agent",
+        "does": "Berekent versheid en betrouwbaarheid van elke tool.",
+        "result": "{snapshots, plural, one {# tool} other {# tools}} doorgerekend, {changed} gewijzigd"
+      },
+      "fx": {
+        "name": "Valuta-agent",
+        "does": "Haalt elke dag de wisselkoersen van de ECB op.",
+        "result": "{rates, plural, =0 {koersen al actueel} one {# koers bijgewerkt} other {# koersen bijgewerkt}}"
+      },
+      "recommendation": {
+        "name": "Aanbevelings-check",
+        "does": "Test elke nacht of Match echte vragen goed beantwoordt.",
+        "result": "{cases} praktijkvragen getest, {failed} fout"
+      },
+      "duplicate": {
+        "name": "Dubbelingen-agent",
+        "does": "Spoort tools op die dubbel in de database staan.",
+        "result": "{pairs, plural, =0 {geen dubbelingen} one {# mogelijke dubbeling} other {# mogelijke dubbelingen}}"
+      },
+      "audit": {
+        "name": "Audit-agent",
+        "does": "Controleert elke maand een steekproef van automatische beslissingen.",
+        "result": "{sampled} beslissingen nagekeken"
+      }
+    },
+    "radarTitle": "AI-trend- en nieuwsradar",
+    "radarSub": "Automatisch verzameld door onze agents uit officiële bronnen, video's en community's. Bij elk item staat de bron.",
+    "radarAll": "Alle wijzigingen in Pulse",
+    "radarNews": "Wijzigingen en nieuws",
+    "radarVideos": "Video's van officiële kanalen",
+    "radarBuzz": "Community-buzz",
+    "radarEmptyNews": "Nog geen wijzigingen met bron. De wijzigingen-agent leest elke 6 uur de changelogs.",
+    "radarEmptyVideos": "Nog geen video's. De video-agent kijkt dagelijks bij de officiële kanalen van tools.",
+    "radarEmptyBuzz": "Nog geen metingen. De community-agent meet elke 6 uur de vermeldingen op Hacker News en GitHub.",
+    "source": "bron: {domain}",
+    "buzz": {
+      "hackernews": "{count, plural, one {# vermelding} other {{n} vermeldingen}} op Hacker News (7 dagen)",
+      "github": "{count, plural, one {# GitHub-ster} other {{n} GitHub-sterren}}"
+    },
+    "videoKind": {
+      "official": "Officieel",
+      "review": "Review",
+      "tutorial": "Uitleg",
+      "comparison": "Vergelijking",
+      "other": "Video"
+    },
+    "startTitle": "Direct aan de slag",
+    "startSub": "Gratis stappenplannen, van nul naar resultaat. Wat je hier ziet, hangt af van je weergave: Basis of Advanced.",
+    "startBasis": "Basis · gratis stappenplan",
+    "startAdvanced": "Advanced · gratis stappenplan",
+    "startPlan": "Bekijk het stappenplan",
+    "startStack": "Stel mijn stack samen",
+    "paidFrom": "betaald vanaf {price}",
+    "from": "vanaf {price}"
+  },
   "newsletter": {
     "title": "AI Pulse: de wekelijkse nieuwsbrief",
     "metaTitle": "Nieuwsbrief: wekelijkse AI-prijswijzigingen en nieuwe tools",

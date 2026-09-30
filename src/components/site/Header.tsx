@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { enabledLocales, LOCALE_META, type Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
 import { href, switchLocalePath } from '@/lib/routes';
+import { LevelTabs } from '@/components/level/LevelTabs';
 import { Logo } from './Logo';
 
 export function Header({ locale, t, pathname }: { locale: Locale; t: Translator; pathname: string }) {
@@ -49,6 +50,9 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
               autoComplete="off"
             />
           </form>
+          <div className="hidden sm:block">
+            <LevelTabs compact labels={{ group: t('hub.levelGroup'), basis: t('hub.levelBasis'), advanced: t('hub.levelAdvanced'), basisHint: t('hub.levelBasisHint'), advancedHint: t('hub.levelAdvancedHint') }} />
+          </div>
           {locales.length > 1 && (
             <nav aria-label={t('a11y.languageSwitcher')}>
               <ul className="flex items-center gap-0.5 font-mono text-xs">
@@ -96,6 +100,9 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
                   </Link>
                 </li>
               </ul>
+              <div className="mt-2 border-t border-line pt-2 sm:hidden">
+                <LevelTabs compact labels={{ group: t('hub.levelGroup'), basis: t('hub.levelBasis'), advanced: t('hub.levelAdvanced'), basisHint: t('hub.levelBasisHint'), advancedHint: t('hub.levelAdvancedHint') }} />
+              </div>
               <form action={href.tools(locale)} method="get" role="search" className="mt-2 border-t border-line pt-2">
                 <label htmlFor="mobile-search" className="visually-hidden">
                   {t('nav.searchLabel')}
