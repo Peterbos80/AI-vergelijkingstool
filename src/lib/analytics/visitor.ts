@@ -4,7 +4,7 @@
  * is never stored, so hashes cannot be linked across days or reversed.
  */
 import { createHash, createHmac } from 'node:crypto';
-import { appSecret } from '@/lib/env';
+import { appSecret, env } from '@/lib/env';
 
 const BOT_UA =
   /bot|crawl|spider|slurp|preview|headless|lighthouse|pagespeed|curl|wget|python-requests|httpx|axios|node-fetch|go-http|java\/|facebookexternalhit|embedly|monitor|uptime|healthcheck|playwright|puppeteer/i;
@@ -27,10 +27,20 @@ export function deviceOf(ua: string): 'mobile' | 'tablet' | 'desktop' {
   return 'desktop';
 }
 
-export function clientIp(h: Headers): string {
-  const fwd = h.get('x-forwarded-for');
-  if (fwd) return fwd.split(',')[0]!.trim();
-  return h.get('x-real-ip') ?? '0.0.0.0';
+/**
+ * The client address as seen by our own infrastructure. X-Forwarded-For is a
+ * list a client can prepend anything to, so only entries added by trusted
+ * proxies count: the n-th address from the right, n = TRUSTED_PROXY_HOPS
+ * (default 1: one reverse proxy/load balancer). Without the header, Next.js
+ * fills it with the socket address. Rate limits depend on this.
+ */
+export function clientIp(h: Headers, hops: number = env().TRUSTED_PROXY_HOPS): string {
+  const list = (h.get('x-forwarded-for') ?? '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (list.length) return list[Math.max(0, list.length - Math.max(1, hops))]!;
+  return h.get('x-real-ip')?.trim() || '0.0.0.0';
 }
 
 export function referrerDomain(h: Headers, ownHost: string | null): string | null {

@@ -31,8 +31,9 @@ const schema = z.object({
   HEARTBEAT_URL: optional,
   YOUTUBE_API_KEY: optional,
   GITHUB_TOKEN: optional,
-  GITHUB_ISSUES_REPO: optional,
   AGENT_USER_AGENT: z.string().default('AIToolsWijzerBot/1.0 (+https://aitoolswijzer.nl/bot)'),
+  /** Reverse proxies in front of the app that append to X-Forwarded-For (lib/analytics/visitor.ts). */
+  TRUSTED_PROXY_HOPS: z.coerce.number().int().min(1).max(5).default(1),
   LEGAL_NAME: optional,
   LEGAL_KVK: optional,
   LEGAL_ADDRESS: optional,
