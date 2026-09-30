@@ -31,7 +31,6 @@ const schema = z.object({
   HEARTBEAT_URL: optional,
   YOUTUBE_API_KEY: optional,
   GITHUB_TOKEN: optional,
-  PRODUCTHUNT_TOKEN: optional,
   GITHUB_ISSUES_REPO: optional,
   AGENT_ENABLE_RENDERER: z
     .enum(['true', 'false'])

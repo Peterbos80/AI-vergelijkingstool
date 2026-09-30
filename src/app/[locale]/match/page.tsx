@@ -79,6 +79,8 @@ export default async function MatchPage({ params, searchParams }: PageProps<'/[l
     resultToolIds: result ? result.lines.map((l) => l.toolId) : [],
     clarified: p.answered > 0,
     latencyMs: nowMs() - started,
+    llmEligible: out.llmEligible,
+    llmHoldout: out.llmHoldout,
   });
   const affiliates = await affiliateToolIds();
   const task = out.task && out.task.id !== '__adhoc__' ? out.task : null;

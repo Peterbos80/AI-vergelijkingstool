@@ -4,9 +4,9 @@
  */
 const TZ = 'Europe/Amsterdam';
 
-function tzParts(d: Date): { y: number; mo: number; day: number; h: number; mi: number; wd: number } {
+export function tzParts(d: Date, tz: string = TZ): { y: number; mo: number; day: number; h: number; mi: number; wd: number } {
   const f = new Intl.DateTimeFormat('en-GB', {
-    timeZone: TZ,
+    timeZone: tz,
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -20,17 +20,23 @@ function tzParts(d: Date): { y: number; mo: number; day: number; h: number; mi: 
   return { y: +parts.year!, mo: +parts.month!, day: +parts.day!, h: +parts.hour! % 24, mi: +parts.minute!, wd };
 }
 
-/** Offset (ms) of Europe/Amsterdam from UTC at instant d. */
-function tzOffset(d: Date): number {
-  const p = tzParts(d);
+/** Offset (ms) of the time zone from UTC at instant d. */
+function tzOffset(d: Date, tz: string = TZ): number {
+  const p = tzParts(d, tz);
   const asUtc = Date.UTC(p.y, p.mo - 1, p.day, p.h, p.mi);
   return asUtc - Math.floor(d.getTime() / 60000) * 60000;
 }
 
-/** UTC instant for a wall-clock time in Europe/Amsterdam. */
-function zoned(y: number, mo: number, day: number, h: number, mi: number): Date {
+/** UTC instant for a wall-clock time in Europe/Amsterdam (day/month overflow allowed). */
+export function zoned(y: number, mo: number, day: number, h: number, mi: number, tz: string = TZ): Date {
   const guess = new Date(Date.UTC(y, mo - 1, day, h, mi));
-  return new Date(guess.getTime() - tzOffset(guess));
+  return new Date(guess.getTime() - tzOffset(guess, tz));
+}
+
+/** Local calendar date (YYYY-MM-DD) of an instant in the time zone. */
+export function localDate(d: Date, tz: string = TZ): string {
+  const p = tzParts(d, tz);
+  return `${p.y}-${String(p.mo).padStart(2, '0')}-${String(p.day).padStart(2, '0')}`;
 }
 
 export function validSchedule(s: string): boolean {

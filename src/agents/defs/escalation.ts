@@ -8,11 +8,12 @@
  *  5. enforce the weekly escalation budget (demote low-priority P2 → P3).
  */
 import { and, desc, eq, gte, inArray, isNull, lte, or, sql } from 'drizzle-orm';
-import { agentConfigs, agentRuns, healthChecks, pendingChanges, reviewItems, tools } from '@/lib/db/schema';
+import { agentConfigs, agentRuns, healthChecks, pendingChanges, reviewItems, settings as settingsTable, toolCandidates, tools } from '@/lib/db/schema';
 import { resolveItem } from '@/lib/ops/inbox';
 import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
 import { publishPriceChange, type PriceChange } from '../lib/publish-price';
 import type { AgentContext, AgentDefinition } from '../types';
+import { GOLDEN_STATE_KEY, type GoldenState } from './recommendation';
 
 type Item = typeof reviewItems.$inferSelect;
 type Outcome = 'defaulted' | 'expired' | 'auto_resolved' | 'keep';
@@ -34,7 +35,15 @@ async function autoResolvable(ctx: AgentContext, item: Item): Promise<boolean> {
   }
   if (item.kind === 'dependency' && typeof item.payload.check === 'string') {
     const [h] = await db.select().from(healthChecks).where(eq(healthChecks.key, item.payload.check));
-    return h?.status === 'ok';
+    // Resolved once the check is no longer failing (a warning is not an outage).
+    return Boolean(h) && h!.status !== 'fail' && h!.lastCheckedAt > item.createdAt;
+  }
+  if (item.kind === 'regression') {
+    const [row] = await db.select().from(settingsTable).where(eq(settingsTable.key, GOLDEN_STATE_KEY));
+    const state = row?.value as GoldenState | undefined;
+    if (!state || new Date(state.at) <= item.createdAt) return false;
+    const cases = Array.isArray(item.payload.cases) ? (item.payload.cases as { id: string }[]).map((c) => c.id) : [];
+    return cases.every((id) => state.passed.includes(id));
   }
   if (item.kind === 'dependency' && item.reasonCode === 'network_suspected') {
     const [last] = await db.select().from(agentRuns).where(eq(agentRuns.agent, 'broken-link')).orderBy(desc(agentRuns.startedAt)).limit(1);
@@ -59,13 +68,23 @@ async function applyDefault(ctx: AgentContext, item: Item): Promise<Outcome> {
       if (ids.length) await db.update(pendingChanges).set({ status: 'expired' }).where(inArray(pendingChanges.id, ids));
       return 'expired';
     }
+    case 'reject_after_30d': {
+      const candidateId = typeof item.payload.candidateId === 'string' ? item.payload.candidateId : null;
+      if (item.kind === 'new_tool' && candidateId) {
+        await db.update(toolCandidates).set({ status: 'rejected', notes: 'expired_unreviewed' }).where(eq(toolCandidates.id, candidateId));
+      }
+      return 'defaulted';
+    }
     case 'keep_old_price_flag':
     case 'keep_published':
     case 'keep_current_value':
-    case 'reject_after_30d':
+    case 'keep_direct_link':
       return 'defaulted';
+    case 'expire_p3':
+      return 'expired';
     case 'auto_resolve_when_up':
     case 'auto_resolve_when_checks_pass':
+    case 'auto_resolve_when_golden_passes':
     case 'keep_open':
       return 'keep';
     default:

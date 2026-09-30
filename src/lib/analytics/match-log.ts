@@ -19,6 +19,8 @@ export async function logMatch(input: {
   resultToolIds: string[];
   clarified: boolean;
   latencyMs: number;
+  llmEligible: boolean;
+  llmHoldout: boolean;
 }): Promise<void> {
   const h = await headers();
   if (h.get('next-router-prefetch') || h.get('x-aitw-synthetic')) return;
@@ -35,6 +37,8 @@ export async function logMatch(input: {
     constraints: input.intent.constraints as Record<string, unknown>,
     confidence: Math.round(input.intent.confidence * 100),
     clarified: input.clarified,
+    llmEligible: input.llmEligible,
+    llmHoldout: input.llmHoldout,
     resultToolIds: input.resultToolIds,
     visitorHash: visitorHash(clientIp(h), ua!),
     latencyMs: input.latencyMs,

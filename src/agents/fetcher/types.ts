@@ -28,7 +28,16 @@ export interface FetchOptions {
   light?: boolean;
   timeoutMs?: number;
   headers?: Record<string, string>;
+  /**
+   * Documented public API (API_HOSTS only): governed by the API terms and rate
+   * limits rather than robots.txt, which targets crawlers. SSRF guard, throttle
+   * and size/time limits still apply.
+   */
+  api?: boolean;
 }
+
+/** Hosts of documented APIs the agents may call with `api: true`. */
+export const API_HOSTS = new Set(['api.github.com', 'hn.algolia.com', 'www.googleapis.com']);
 
 export interface Fetcher {
   get: (url: string, opts?: FetchOptions) => Promise<FetchResult>;

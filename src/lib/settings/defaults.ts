@@ -15,8 +15,8 @@ export const settingsSchema = z.object({
     queue: z.number().int().min(0).max(100),
     priceIncreasePct: z.number().positive(),
     priceDecreasePct: z.number().positive(),
-    newToolMode: z.enum(['queue', 'quarantine']),
-    quarantineDays: z.number().int().positive(),
+    /** New tools always go to the owner (quarantine auto-publish is designed in doc 12 but not built). */
+    newToolMode: z.enum(['queue']),
   }),
   freshness: z.object({
     price: days,
@@ -53,12 +53,23 @@ export const settingsSchema = z.object({
   report: z.object({
     weekday: z.number().int().min(0).max(6),
     hour: z.number().int().min(0).max(23),
-    timezone: z.string(),
+    timezone: z.string().refine((tz) => {
+      try {
+        new Intl.DateTimeFormat('en', { timeZone: tz });
+        return true;
+      } catch {
+        return false;
+      }
+    }, 'unknown time zone'),
   }),
   revenue: z.object({
     goalCentsPerMonth: z.number().int().nonnegative(),
     currency: z.string().length(3),
     staleImportDays: z.number().int().positive(),
+  }),
+  owner: z.object({
+    /** Language of Admin, the weekly report and owner alerts. */
+    locale: z.enum(['nl', 'en']),
   }),
 });
 
@@ -73,7 +84,6 @@ export const DEFAULT_SETTINGS: Settings = {
     priceIncreasePct: 50,
     priceDecreasePct: 70,
     newToolMode: 'queue',
-    quarantineDays: 7,
   },
   freshness: {
     price: [14, 45],
@@ -115,6 +125,9 @@ export const DEFAULT_SETTINGS: Settings = {
     goalCentsPerMonth: 50_000,
     currency: 'EUR',
     staleImportDays: 35,
+  },
+  owner: {
+    locale: 'nl',
   },
 };
 

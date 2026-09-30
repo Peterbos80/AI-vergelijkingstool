@@ -47,7 +47,15 @@ export const DEPENDENCIES: DependencyCheck[] = [
     run: async (db, _s, now) => {
       const cfgs = await db.select().from(agentConfigs).where(eq(agentConfigs.enabled, true));
       if (!cfgs.length) return { status: 'unknown', message: 'no agents configured yet' };
-      const stale = cfgs.filter((c) => !c.lastRunAt || now.getTime() - c.lastRunAt.getTime() > maxGapMs(c.schedule)).map((c) => c.agent);
+      const [first] = await queryRows<{ at: string | null }>(db, sql`SELECT min(started_at)::text AS at FROM agent_runs`);
+      const since = first?.at ? new Date(first.at) : null;
+      // Grace period after install: an agent is only "late" once it had the chance to run.
+      const late = (c: (typeof cfgs)[number]) => {
+        const ref = c.lastRunAt ?? since;
+        return ref !== null && now.getTime() - ref.getTime() > maxGapMs(c.schedule);
+      };
+      if (!since) return { status: 'unknown', message: 'agents have not run yet: start the worker or cron' };
+      const stale = cfgs.filter(late).map((c) => c.agent);
       const disabled = (await db.select().from(agentConfigs).where(eq(agentConfigs.enabled, false))).map((c) => c.agent);
       if (stale.length === cfgs.length) return { status: 'fail', message: 'no agent has run on schedule', detail: { stale, disabled } };
       return { status: stale.length || disabled.length ? 'warn' : 'ok', message: stale.length ? `late: ${stale.join(', ')}` : disabled.length ? `disabled: ${disabled.join(', ')}` : 'all on schedule', detail: { stale, disabled } };

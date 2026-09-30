@@ -5,7 +5,9 @@
  */
 import { and, desc, eq, isNull } from 'drizzle-orm';
 import type { Database } from '@/lib/db/client';
-import { agentActions, changeEvents, pricingPlans, tools, type Decision } from '@/lib/db/schema';
+import { affiliateLinks, agentActions, changeEvents, pricingPlans, tools, videos, type Decision } from '@/lib/db/schema';
+import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
+import { bumpDataVersion, loadSettings, saveSetting } from '@/lib/settings';
 
 export interface ActionInput {
   action: string;
@@ -57,12 +59,13 @@ type Reverter = (db: Database, action: typeof agentActions.$inferSelect) => Prom
 const REVERTERS: Record<string, Reverter> = {
   // A published price change: remove the new plan row and reopen the previous one.
   price_published: async (db, a) => {
-    const v = a.newValue as { planRowId?: string; previousRowId?: string } | null;
+    const v = a.newValue as { planRowId?: string; previousRowId?: string; eventId?: string | null } | null;
     if (!v?.planRowId || !v.previousRowId) return false;
     const [current] = await db.select().from(pricingPlans).where(eq(pricingPlans.id, v.planRowId));
     if (!current || current.validTo !== null) return false; // changed since → conflict, no overwrite
     await db.delete(pricingPlans).where(eq(pricingPlans.id, v.planRowId));
     await db.update(pricingPlans).set({ validTo: null }).where(eq(pricingPlans.id, v.previousRowId));
+    if (v.eventId) await db.update(changeEvents).set({ status: 'rejected' }).where(eq(changeEvents.id, v.eventId));
     return true;
   },
   // A plan confirmed on the official page: restore its previous provenance.
@@ -85,6 +88,28 @@ const REVERTERS: Record<string, Reverter> = {
     await db.update(changeEvents).set({ status: 'rejected' }).where(eq(changeEvents.id, a.entityId));
     return true;
   },
+  llm_gating_adjusted: async (db, a) => {
+    const old = a.oldValue as { gatingThreshold?: number } | null;
+    if (typeof old?.gatingThreshold !== 'number') return false;
+    const current = await loadSettings(db);
+    await saveSetting(db, 'llm', { ...current.llm, gatingThreshold: old.gatingThreshold }, 'revert');
+    return true;
+  },
+  affiliate_link_deactivated: async (db, a) => {
+    if (!a.entityId) return false;
+    await db.update(affiliateLinks).set({ active: true }).where(eq(affiliateLinks.id, a.entityId));
+    return true;
+  },
+  tool_published: async (db, a) => {
+    if (!a.toolId) return false;
+    await db.update(tools).set({ published: false, quarantineUntil: null }).where(eq(tools.id, a.toolId));
+    return true;
+  },
+  video_added: async (db, a) => {
+    if (!a.entityId) return false;
+    await db.update(videos).set({ status: 'removed' }).where(eq(videos.id, a.entityId));
+    return true;
+  },
   website_status: async (db, a) => {
     const old = a.oldValue as { websiteStatus: 'up' | 'down' | 'unknown'; unreachableSince: string | null } | null;
     if (!old || !a.toolId) return false;
@@ -105,6 +130,9 @@ export async function revertAction(db: Database, actionId: string, by: string): 
   const ok = await fn(db, a);
   if (!ok) return 'conflict';
   await db.update(agentActions).set({ revertedAt: new Date(), revertedBy: by }).where(eq(agentActions.id, actionId));
+  // Published data changed: refresh the tool snapshot and every cache.
+  if (a.toolId) await recomputeToolSnapshot(db, a.toolId, (await loadSettings(db)).freshness, new Date());
+  await bumpDataVersion(db, `revert:${by}`);
   return 'reverted';
 }
 
@@ -118,7 +146,8 @@ export async function revertRun(db: Database, runId: string, by: string): Promis
       skipped++;
       continue;
     }
-    (await revertAction(db, a.id, by)) === 'reverted' ? reverted++ : skipped++;
+    if ((await revertAction(db, a.id, by)) === 'reverted') reverted++;
+    else skipped++;
   }
   return { reverted, skipped };
 }

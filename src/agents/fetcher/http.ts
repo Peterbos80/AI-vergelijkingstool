@@ -10,7 +10,7 @@
 import { env } from '@/lib/env';
 import { assertPublicHost, checkUrlShape, dnsResolver, type Resolver } from './ssrf';
 import { isAllowed, parseRobots, type RobotsRules } from './robots';
-import type { FetchOptions, FetchResult, Fetcher } from './types';
+import { API_HOSTS, type FetchOptions, type FetchResult, type Fetcher } from './types';
 
 interface FetcherConfig {
   userAgent: string;
@@ -139,8 +139,12 @@ export function createFetcher(partial: Partial<FetcherConfig> = {}): Fetcher {
         } catch (e) {
           return fail('ssrf', e instanceof Error ? e.message : 'blocked host', null, url.toString());
         }
-        const robots = await robotsFor(url);
-        if (!isAllowed(robots, url.pathname + url.search)) return fail('robots', 'disallowed by robots.txt', null, url.toString());
+        if (opts.api) {
+          if (!API_HOSTS.has(url.hostname)) return fail('invalid_url', 'api option only for documented API hosts', null, url.toString());
+        } else {
+          const robots = await robotsFor(url);
+          if (!isAllowed(robots, url.pathname + url.search)) return fail('robots', 'disallowed by robots.txt', null, url.toString());
+        }
         await throttle(url.hostname);
         let res: Awaited<ReturnType<typeof raw>>;
         try {

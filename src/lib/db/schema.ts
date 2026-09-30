@@ -598,6 +598,7 @@ export type InboxKind =
   | 'audit_sample'
   | 'security'
   | 'autonomy_proposal'
+  | 'regression'
   | 'legal';
 export type Severity = 'p1' | 'p2' | 'p3';
 export type InboxCategory = 'data' | 'commercial' | 'legal' | 'security' | 'technical' | 'content';
@@ -945,6 +946,9 @@ export const matchQueries = pgTable(
     constraints: jsonb('constraints').$type<Record<string, unknown>>().notNull().default(sql`'{}'::jsonb`),
     confidence: integer('confidence').notNull(),
     clarified: boolean('clarified').notNull().default(false),
+    /** LLM experiment arms (docs/strategy/12 §9): eligible = low lexical confidence; holdout = answered lexically on purpose. */
+    llmEligible: boolean('llm_eligible').notNull().default(false),
+    llmHoldout: boolean('llm_holdout').notNull().default(false),
     resultToolIds: text('result_tool_ids').array().notNull().default(sql`'{}'::text[]`),
     visitorHash: text('visitor_hash'),
     latencyMs: integer('latency_ms'),

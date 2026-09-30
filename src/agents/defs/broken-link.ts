@@ -9,6 +9,7 @@ import { changeEvents, sources, tools } from '@/lib/db/schema';
 import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
 import { recordFetch } from '../lib/tool-sources';
 import type { AgentDefinition } from '../types';
+import { eventText } from '../lib/event-text';
 
 export const brokenLinkAgent: AgentDefinition = {
   name: 'broken-link',
@@ -74,7 +75,7 @@ export const brokenLinkAgent: AgentDefinition = {
           await db.insert(changeEvents).values({
             toolId: r.tool.id,
             kind: 'website_up',
-            title: { nl: 'Website weer bereikbaar', en: 'Website reachable again' },
+            title: eventText('websiteUp'),
             sourceUrl: r.source.url,
             sourceType: 'official',
             detectedAt: now,
@@ -101,7 +102,7 @@ export const brokenLinkAgent: AgentDefinition = {
         await db.insert(changeEvents).values({
           toolId: r.tool.id,
           kind: 'website_down',
-          title: { nl: 'Website niet bereikbaar', en: 'Website unreachable' },
+          title: eventText('websiteDown'),
           sourceUrl: r.source.url,
           sourceType: 'official',
           detectedAt: now,

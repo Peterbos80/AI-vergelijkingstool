@@ -4,15 +4,15 @@
  * and nothing pretends to be sent.
  */
 import { and, eq, lt, sql } from 'drizzle-orm';
-import { getDb } from '@/lib/db/client';
+import { getDb, type Database } from '@/lib/db/client';
 import { emailOutbox } from '@/lib/db/schema';
 import { env } from '@/lib/env';
 import { logError } from '@/lib/ops/errors';
 
 export type EmailKind = 'confirm' | 'digest' | 'alert' | 'lead_ack' | 'other';
 
-export async function queueEmail(msg: { to: string; subject: string; text: string; html?: string; kind: EmailKind }): Promise<string> {
-  const [row] = await getDb()
+export async function queueEmail(msg: { to: string; subject: string; text: string; html?: string; kind: EmailKind }, db: Database = getDb()): Promise<string> {
+  const [row] = await db
     .insert(emailOutbox)
     .values({ toEmail: msg.to, subject: msg.subject.slice(0, 250), bodyText: msg.text, bodyHtml: msg.html ?? null, kind: msg.kind })
     .returning({ id: emailOutbox.id });
@@ -33,8 +33,7 @@ async function sendViaResend(to: string, subject: string, text: string, html: st
 }
 
 /** Deliver queued messages (used by the Notifier agent and right after queueing). */
-export async function flushOutbox(limit = 20): Promise<{ sent: number; failed: number; logged: number }> {
-  const db = getDb();
+export async function flushOutbox(limit = 20, db: Database = getDb()): Promise<{ sent: number; failed: number; logged: number }> {
   const stats = { sent: 0, failed: 0, logged: 0 };
   const hasProvider = Boolean(env().RESEND_API_KEY);
   const queued = await db

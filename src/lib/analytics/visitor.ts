@@ -49,8 +49,9 @@ export function referrerDomain(h: Headers, ownHost: string | null): string | nul
 export function channelOf(referrer: string | null, utmMedium: string | null): 'organic' | 'ai' | 'social' | 'email' | 'referral' | 'direct' {
   if (utmMedium && /mail/i.test(utmMedium)) return 'email';
   if (!referrer) return 'direct';
-  if (/(^|\.)((google|bing|duckduckgo|ecosia|yahoo|yandex|startpage|qwant|brave|baidu)\.)/i.test(referrer)) return 'organic';
+  // AI assistants first: gemini.google.com must not count as a search engine.
   if (/(chatgpt\.com|openai\.com|perplexity\.ai|claude\.ai|gemini\.google\.com|copilot\.microsoft\.com|you\.com|phind\.com)/i.test(referrer)) return 'ai';
+  if (/(^|\.)((google|bing|duckduckgo|ecosia|yahoo|yandex|startpage|qwant|brave|baidu)\.)/i.test(referrer)) return 'organic';
   if (/(linkedin|facebook|instagram|x\.com|twitter|t\.co|reddit|youtube|tiktok|threads|bsky|mastodon)/i.test(referrer)) return 'social';
   return 'referral';
 }

@@ -6,10 +6,9 @@ import { loadSeedData } from '@/lib/seed/load';
 import { applySeed } from '@/lib/seed/apply';
 import { loadCatalog } from '@/lib/catalog/load';
 import type { Catalog } from '@/lib/catalog/types';
-import { detectIntent } from '@/lib/engine/intent';
-import { nextClarification } from '@/lib/engine/clarify';
-import { composeStack, composeVariants } from '@/lib/engine/compose';
+import { composeStack } from '@/lib/engine/compose';
 import { GOLDEN } from '@/lib/engine/golden';
+import { evaluateCase, evaluateGolden } from '@/lib/engine/golden-eval';
 import { buildMatrix, fairFightGate, verdicts } from '@/lib/engine/compare';
 import { diagnose } from '@/lib/engine/doctor';
 import { searchTools } from '@/lib/engine/search';
@@ -29,49 +28,13 @@ afterAll(async () => close());
 describe('golden set: intent + composer', () => {
   for (const c of GOLDEN) {
     it(`${c.id}: ${c.query}`, () => {
-      const intent = detectIntent(c.query, catalog, c.locale);
-      if (c.expect?.noMatch) {
-        expect(intent.taskId).toBeNull();
-        expect(intent.capabilityIds).toEqual([]);
-        return;
-      }
-      expect(c.tasks).toContain(intent.taskId);
-      if (c.expect?.level) expect(intent.constraints.level).toBe(c.expect.level);
-      if (c.expect?.freeOnly) expect(intent.constraints.freeOnly).toBe(true);
-      if (c.expect?.budgetCents) expect(intent.constraints.budgetMonthlyCents).toBe(c.expect.budgetCents);
-      if (c.expect?.dutch) expect(intent.constraints.dutch).toBe(true);
-      if (c.expect?.local) expect(intent.constraints.local).toBe(true);
-      if (c.expect?.clarifyApproach) {
-        const q = nextClarification(intent, catalog, { answered: 0, budgetAnswered: false, skipAll: false });
-        expect(q?.kind).toBe('approach');
-      }
-      const task = catalog.tasksById.get(intent.taskId!)!;
-      const variants = composeVariants(catalog, task, intent.constraints);
-      for (const [name, r] of Object.entries(variants)) {
-        // Every required step gets a tool, and never a discontinued one.
-        for (const s of r.steps.filter((x) => x.required)) {
-          expect(s.toolId, `${name}.${s.key}`).not.toBeNull();
-        }
-        for (const l of r.lines) {
-          const tool = catalog.toolsById.get(l.toolId)!;
-          expect(['shutdown', 'deprecated', 'waitlist']).not.toContain(tool.status);
-        }
-        if (c.expect?.freeOnly) {
-          for (const l of r.lines.filter((x) => !x.optional)) expect(l.paidCents, `${name} ${tool(l.toolId)}`).toBe(0);
-        }
-      }
-      // The budget variant is never more expensive than the recommended one (same currencies).
-      const rec = variants.recommended.totals.core.paid;
-      const cheap = variants.budget.totals.core.paid;
-      for (const m of cheap) {
-        const r = rec.find((x) => x.currency === m.currency);
-        if (r) expect(m.cents).toBeLessThanOrEqual(r.cents);
-      }
+      const r = evaluateCase(c, catalog);
+      expect(r.failures).toEqual([]);
     });
   }
-  function tool(id: string) {
-    return catalog.toolsById.get(id)?.slug;
-  }
+  it('evaluateGolden reports every case', () => {
+    expect(evaluateGolden(catalog).map((r) => r.id)).toEqual(GOLDEN.map((c) => c.id));
+  });
 });
 
 describe('composer behaviour', () => {

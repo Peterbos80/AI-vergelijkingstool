@@ -8,6 +8,7 @@ import { changeEvents, pricingPlans, type Decision } from '@/lib/db/schema';
 import { formatMoney } from '@/i18n/formatters';
 import { monthlyEquivalentCents } from '@/lib/pricing/money';
 import type { ActionLogger } from '../actions';
+import { eventText } from './event-text';
 
 export interface PriceChange {
   toolId: string;
@@ -67,17 +68,17 @@ export async function publishPriceChange(
     })
     .returning({ id: pricingPlans.id });
   const up = current.priceCents !== null && change.newCents > current.priceCents;
-  const oldLabel = { nl: formatMoney(current.priceCents, current.currency, 'nl'), en: formatMoney(current.priceCents, current.currency, 'en') };
-  const newLabel = { nl: formatMoney(change.newCents, change.currency, 'nl'), en: formatMoney(change.newCents, change.currency, 'en') };
   const [ev] = await db
     .insert(changeEvents)
     .values({
       toolId: change.toolId,
       kind: up ? 'price_increase' : 'price_decrease',
-      title: {
-        nl: `${current.name}: prijs ${up ? 'omhoog' : 'omlaag'} van ${oldLabel.nl} naar ${newLabel.nl}`,
-        en: `${current.name}: price ${up ? 'up' : 'down'} from ${oldLabel.en} to ${newLabel.en}`,
-      },
+      title: eventText('priceChange', (l) => ({
+        plan: current.name,
+        direction: up ? 'up' : 'down',
+        old: formatMoney(current.priceCents, current.currency, l),
+        new: formatMoney(change.newCents, change.currency, l),
+      })),
       summary: null,
       oldValue: { priceCents: current.priceCents, currency: current.currency },
       newValue: { priceCents: change.newCents, currency: change.currency },
