@@ -27,7 +27,8 @@
     "revenue:scenarios": "tsx scripts/revenue-scenarios.ts",
     "e2e:serve": "tsx scripts/e2e-serve.ts",
     "static:export": "tsx scripts/static-export.ts",
-    "static:serve": "tsx scripts/serve-static.ts"
+    "static:serve": "tsx scripts/serve-static.ts",
+    "eval:understanding": "tsx scripts/eval-understanding.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.129.0",

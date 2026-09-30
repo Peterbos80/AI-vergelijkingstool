@@ -6,6 +6,7 @@
  */
 import type { Locale } from '@/i18n/config';
 import type { Catalog } from '@/lib/catalog/types';
+import { taskIndex, scoreTasks } from './lexicon';
 import { containsPhrase, normalize, stems, tokens } from './text';
 
 export type Level = 'beginner' | 'intermediate' | 'advanced';
@@ -178,17 +179,17 @@ export function parseConstraints(query: string): { constraints: Constraints; sig
 
 /* ───────────── Task, capability and tool detection ───────────── */
 
-function phraseScore(queryStems: Set<string>, normQuery: string, phrase: string): number {
-  const ps = new Set(stems(phrase));
-  if (ps.size === 0) return 0;
-  let inter = 0;
-  for (const s of ps) if (queryStems.has(s)) inter++;
-  if (inter === 0) return 0;
-  const coverage = inter / ps.size;
-  const precision = queryStems.size ? inter / queryStems.size : 0;
-  let score = 0.7 * coverage + 0.3 * precision;
-  if (containsPhrase(normQuery, phrase)) score += 0.3;
-  return Math.min(1, score);
+/** Constraint phrases say how, not what: they do not count towards the task ("onder €20 per maand"). */
+const CONSTRAINT_ONLY = new Set(['budget', 'free', 'beginner', 'advanced', 'team', 'commercial', 'no_watermark']);
+
+function withoutConstraintPhrases(query: string, signals: Signal[]): string {
+  let q = query
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[’`]/g, "'")
+    .toLowerCase();
+  for (const s of signals) if (s.kind === 'constraint' && CONSTRAINT_ONLY.has(s.id)) q = q.split(s.phrase.toLowerCase()).join(' ');
+  return q;
 }
 
 export function detectIntent(query: string, catalog: Catalog, locale: Locale): Intent {
@@ -219,32 +220,23 @@ export function detectIntent(query: string, catalog: Catalog, locale: Locale): I
     }
   }
 
-  // Tasks
+  // Tasks: weighted phrase and vocabulary match (lexicon.ts), supported by detected capabilities.
+  const taskScores = new Map(scoreTasks(withoutConstraintPhrases(query, signals), taskIndex(catalog)).map((s) => [s.id, s]));
   const scored = catalog.tasks.map((task) => {
-    let best = 0;
-    let bestPhrase = '';
-    for (const text of Object.values(task.text)) {
-      if (!text) continue;
-      for (const phrase of [text.title, ...text.intentPhrases]) {
-        const s = phraseScore(queryStems, normQuery, phrase);
-        if (s > best) {
-          best = s;
-          bestPhrase = phrase;
-        }
-      }
-    }
-    // Detected capabilities that belong to this task's steps support it.
-    const taskCaps = new Set(task.steps.flatMap((s) => s.capabilityIds));
-    const requiredCaps = new Set(task.steps.filter((s) => s.required).flatMap((s) => s.capabilityIds));
+    const s = taskScores.get(task.id);
+    const taskCaps = new Set(task.steps.flatMap((x) => x.capabilityIds));
+    const requiredCaps = new Set(task.steps.filter((x) => x.required).flatMap((x) => x.capabilityIds));
     const support = capabilityIds.filter((c) => taskCaps.has(c)).length;
     const requiredSupport = capabilityIds.filter((c) => requiredCaps.has(c)).length;
-    const bonus = Math.min(0.3, support * 0.08 + requiredSupport * 0.07);
-    return { task, score: Math.min(1, best + bonus), phrase: bestPhrase };
+    const bonus = s && s.score > 0 ? Math.min(0.15, support * 0.05 + requiredSupport * 0.05) : 0;
+    return { task, score: Math.min(1, (s?.score ?? 0) + bonus), phrase: s?.phrase ?? '' };
   });
   scored.sort((a, b) => b.score - a.score);
   const top = scored[0];
   const runnerUp = scored[1];
-  const taskId = top && top.score >= 0.5 ? top.task.id : null;
+  // A near-tie is a question ("did you mean…"), not a guess.
+  const margin = top && runnerUp ? top.score - runnerUp.score : 1;
+  const taskId = top && top.score >= 0.5 && (margin >= 0.05 || top.score >= 0.8) ? top.task.id : null;
   if (taskId && top) signals.push({ kind: 'task', id: taskId, phrase: top.phrase });
 
   // Tool mentions ("like Canva", "instead of ChatGPT").

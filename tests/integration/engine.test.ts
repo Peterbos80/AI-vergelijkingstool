@@ -13,6 +13,9 @@ import { buildMatrix, fairFightGate, verdicts } from '@/lib/engine/compare';
 import { diagnose } from '@/lib/engine/doctor';
 import { searchTools } from '@/lib/engine/search';
 import { rankForCapability } from '@/lib/engine/rank';
+import { detectIntent } from '@/lib/engine/intent';
+import { UNDERSTANDING, UNDERSTANDING_FRESH } from '@/lib/engine/understanding-eval';
+import { measureUnderstanding } from '@/lib/engine/understanding-measure';
 
 let catalog: Catalog;
 let close: () => Promise<void>;
@@ -34,6 +37,36 @@ describe('golden set: intent + composer', () => {
   }
   it('evaluateGolden reports every case', () => {
     expect(evaluateGolden(catalog).map((r) => r.id)).toEqual(GOLDEN.map((c) => c.id));
+  });
+});
+
+describe('understanding everyday phrasings (held-out sets)', () => {
+  it('keeps its measured quality (regression floor; npm run eval:understanding for details)', () => {
+    const tuning = measureUnderstanding(UNDERSTANDING, catalog);
+    expect(tuning.top1).toBeGreaterThanOrEqual(0.85);
+    expect(tuning.resolved).toBeGreaterThanOrEqual(0.88);
+    expect(tuning.wrong).toBeLessThanOrEqual(0.08);
+    const fresh = measureUnderstanding(UNDERSTANDING_FRESH, catalog);
+    expect(fresh.top3).toBeGreaterThanOrEqual(0.78);
+  });
+  it('reads "can\'t program" as a no-code wish, not a coding one', () => {
+    expect(detectIntent('ik wil een website maar kan niet programmeren', catalog, 'nl').taskId).toBe('build-website-no-code');
+    expect(detectIntent('hulp bij programmeren in python', catalog, 'nl').taskId).toBe('code-with-ai');
+  });
+  it('understands diminutives, compounds and typos', () => {
+    expect(detectIntent('logootje maken voor mijn bedrijfje', catalog, 'nl').taskId).toBe('design-logo-and-brand');
+    expect(detectIntent('vergaderverslagen automatisch', catalog, 'nl').taskId).toBe('automatic-meeting-notes');
+    expect(detectIntent('hoe maak ik een websiet', catalog, 'nl').taskId).toBe('build-website-no-code');
+  });
+  it('keeps the direction of a conversion (speech to text ≠ text to speech)', () => {
+    expect(detectIntent('convert voice memo to text', catalog, 'en').taskId).toBe('transcribe-audio');
+    expect(detectIntent('tekst naar spraak voor mijn video', catalog, 'nl').taskId).toBe('create-ai-voiceovers');
+  });
+  it('composes a stack with a tool for every required step of every task', () => {
+    for (const task of catalog.tasks) {
+      const r = composeStack(catalog, task, {}, 'recommended');
+      for (const s of r.steps.filter((x) => x.required)) expect(s.toolId, `${task.id}.${s.key}`).not.toBeNull();
+    }
   });
 });
 
