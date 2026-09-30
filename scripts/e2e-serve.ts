@@ -18,7 +18,7 @@ async function prepare() {
   const { sql, eq } = await import('drizzle-orm');
   const { migrate } = await import('drizzle-orm/node-postgres/migrator');
   const { closeDb, getDb } = await import('../src/lib/db/client');
-  const { loadSeedData } = await import('../src/lib/seed/load');
+  const { loadSeedData, seedAsOf } = await import('../src/lib/seed/load');
   const { applySeed } = await import('../src/lib/seed/apply');
   const { adminUsers } = await import('../src/lib/db/schema');
   const { hashPassword } = await import('../src/lib/auth/password');
@@ -28,7 +28,10 @@ async function prepare() {
   await db.execute(sql`CREATE SCHEMA public`);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   await migrate(db as any, { migrationsFolder: 'drizzle' });
-  await applySeed(db, loadSeedData());
+  // Seed "as of" the dataset's date, not today: freshness is stored at seed
+  // time, so pages and visual baselines stay the same as the calendar moves on.
+  const bundle = loadSeedData();
+  await applySeed(db, bundle, seedAsOf(bundle));
   const passwordHash = await hashPassword(E2E_ADMIN.password);
   const [existing] = await db.select().from(adminUsers).where(eq(adminUsers.email, E2E_ADMIN.email));
   if (!existing) await db.insert(adminUsers).values({ email: E2E_ADMIN.email, passwordHash, role: 'owner' });

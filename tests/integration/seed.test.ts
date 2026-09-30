@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { eq, isNull, and } from 'drizzle-orm';
 import { createTestDb } from '../setup/pglite';
-import { loadSeedData } from '@/lib/seed/load';
+import { loadSeedData, seedAsOf } from '@/lib/seed/load';
 import { applySeed } from '@/lib/seed/apply';
 import { facts, pricingPlans, tools } from '@/lib/db/schema';
 import { loadCatalog } from '@/lib/catalog/load';
@@ -45,6 +45,14 @@ describe('seed → catalog', () => {
       .from(pricingPlans)
       .where(and(eq(pricingPlans.toolId, gemini!.id), isNull(pricingPlans.validTo)));
     expect(current.length).toBeGreaterThan(0);
+  });
+
+  it('dates the dataset after its newest observation (deterministic test seeding)', () => {
+    const bundle = loadSeedData();
+    const asOf = seedAsOf(bundle).toISOString().slice(0, 10);
+    const observed = bundle.tools.flatMap((t) => [...t.plans.map((p) => p.observed), ...Object.values(t.facts).map((f) => f!.observed)]);
+    expect(observed.length).toBeGreaterThan(0);
+    expect(observed.every((d) => d < asOf)).toBe(true);
   });
 
   it('builds the read model with real counts', async () => {

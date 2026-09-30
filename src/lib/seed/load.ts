@@ -78,6 +78,22 @@ export interface SeedBundle {
   warnings: string[];
 }
 
+/**
+ * The dataset's own "as of" moment: 08:00 UTC on the day after its newest
+ * observation. Test databases are seeded at this moment instead of the wall
+ * clock, so stored freshness (and every page that shows it) does not drift as
+ * the calendar moves on.
+ */
+export function seedAsOf(bundle: SeedBundle): Date {
+  let newest = '';
+  for (const tool of bundle.tools) {
+    for (const plan of tool.plans) if (plan.observed > newest) newest = plan.observed;
+    for (const fact of Object.values(tool.facts)) if (fact && fact.observed > newest) newest = fact.observed;
+  }
+  if (!newest) return new Date();
+  return new Date(Date.parse(`${newest}T08:00:00Z`) + 86_400_000);
+}
+
 export function loadSeedData(dataDir = path.join(process.cwd(), 'data')): SeedBundle {
   const warnings: string[] = [];
   const taxonomy = taxonomySeed.parse(JSON.parse(readFileSync(path.join(dataDir, 'taxonomy.json'), 'utf8')));

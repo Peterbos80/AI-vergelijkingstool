@@ -1,9 +1,10 @@
 name: CI
 
 on:
+  # Every branch: the repository's default branch is not necessarily `main`.
   push:
-    branches: [main]
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
