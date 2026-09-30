@@ -132,7 +132,8 @@ async function sync() {
     const mail = renderReportEmail(r.data as unknown as WeeklyReportData, locale, null, { trafficMeasured: false });
     const previous = await gh<{ number: number }[]>('GET', '/issues?labels=report&state=open&per_page=20');
     const issue = await gh<{ number: number }>('POST', '/issues', {
-      title: t('admin.github.reportTitle', { start: formatDate(r.periodStart, locale), end: formatDate(new Date(new Date(r.periodEnd).getTime() - 86_400_000), locale) }),
+      // period_end is the last day of the week (inclusive).
+      title: t('admin.github.reportTitle', { start: formatDate(r.periodStart, locale), end: formatDate(r.periodEnd, locale) }),
       body: ['```', mail.text, '```'].join('\n'),
       labels: ['ops', 'report'],
     });
