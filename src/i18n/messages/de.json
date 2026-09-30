@@ -26,7 +26,8 @@
     "search": "Tool suchen",
     "searchLabel": "Die Tool-Datenbank durchsuchen",
     "menu": "Menü",
-    "news": "News"
+    "news": "News",
+    "learn": "Lernen"
   },
   "status": {
     "verified": {
@@ -908,6 +909,23 @@
       "marketing": "Marketing und Social Media",
       "business": "Kunden helfen"
     }
+  },
+  "learn": {
+    "title": "KI für Einsteiger",
+    "metaTitle": "KI für Einsteiger: verständlich erklärt",
+    "metaDescription": "Kurze, verständliche Leitfäden: was KI ist, deine erste Woche mit KI, gute Fragen stellen, kostenlos oder bezahlt, Datenschutz und Fehler erkennen.",
+    "intro": "Kurze Leitfäden in verständlicher Sprache. Kein Fachjargon, dafür praktische Tipps.",
+    "minutes": "{n} Min. Lesezeit",
+    "tryIt": "Ausprobieren",
+    "more": "Weitere Leitfäden"
+  },
+  "glossary": {
+    "title": "Glossar",
+    "metaTitle": "KI-Begriffe verständlich erklärt",
+    "metaDescription": "Von Prompt bis Halluzination und von Freemium bis DSGVO: die wichtigsten KI-Begriffe kurz und verständlich erklärt.",
+    "intro": "Die wichtigsten KI-Begriffe, kurz und verständlich erklärt.",
+    "teaser": "Von Prompt bis Halluzination: die wichtigsten Begriffe, kurz erklärt.",
+    "basisNote": "Technische Begriffe wie API und Tokens siehst du in der Ansicht Advanced."
   },
   "tasks": {
     "title": "Was kannst du mit KI machen?",

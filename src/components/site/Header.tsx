@@ -11,6 +11,7 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
     { href: href.tools(locale), label: t('nav.explore'), active: pathname.startsWith(`/${locale}/tools`) },
     { href: href.compare(locale), label: t('nav.compare'), active: pathname.startsWith(`/${locale}/compare`) },
     { href: href.doctor(locale), label: t('nav.doctor'), active: pathname.startsWith(`/${locale}/doctor`) },
+    { href: href.learn(locale), label: t('nav.learn'), active: pathname.startsWith(`/${locale}/learn`) || pathname.startsWith(`/${locale}/glossary`) || pathname.startsWith(`/${locale}/start`) },
     { href: href.news(locale), label: t('nav.news'), active: pathname.startsWith(`/${locale}/news`) },
     { href: href.pulse(locale), label: t('nav.pulse'), active: pathname.startsWith(`/${locale}/pulse`) },
   ];

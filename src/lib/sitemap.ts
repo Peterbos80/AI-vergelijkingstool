@@ -6,6 +6,7 @@
 import { LOCALE_META, type Locale } from '@/i18n/config';
 import { entitySlug, taskSlug } from '@/lib/catalog';
 import { NEWS_PEOPLE } from '@/lib/news';
+import { LEARN, learnText } from '@/content/learn';
 import type { Catalog } from '@/lib/catalog/types';
 import { fairFightGate } from '@/lib/engine/compare';
 import { href } from '@/lib/routes';
@@ -33,6 +34,10 @@ export function sitemapEntries(catalog: Catalog, locales: Locale[], opts: { news
   add('home', (l) => `/${l}`, { priority: 1, lastModified: catalog.stats.lastCheckAt });
   for (const p of ['tools', 'tasks', 'categories', 'pulse', 'news', 'compare', 'doctor'] as const) add('hub', (l) => `/${l}/${p}`, { priority: 0.7 });
   for (const person of NEWS_PEOPLE) add('news', (l) => href.newsPerson(l, person.id), { priority: 0.5 });
+  add('hub', (l) => href.start(l), { priority: 0.7 });
+  add('hub', (l) => href.learn(l), { priority: 0.6 });
+  add('static', (l) => href.glossary(l), { priority: 0.5 });
+  for (const g of LEARN) add('static', (l) => href.learn(l, learnText(g, l)?.slug ?? g.id), { priority: 0.5, locales: (Object.keys(g.text) as Locale[]) });
   for (const p of ['methodology', 'disclosure', 'corrections', 'about', 'privacy', 'api'] as const) add('static', (l) => href.page(l, p), { priority: 0.3 });
   if (opts.newsletter) add('static', (l) => href.page(l, 'newsletter'), { priority: 0.3 });
 

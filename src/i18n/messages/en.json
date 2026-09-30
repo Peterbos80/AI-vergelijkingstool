@@ -26,7 +26,8 @@
     "search": "Search a tool",
     "searchLabel": "Search the tool database",
     "menu": "Menu",
-    "news": "News"
+    "news": "News",
+    "learn": "Learn"
   },
   "footer": {
     "about": "About",
@@ -887,6 +888,23 @@
       "marketing": "Marketing and social media",
       "business": "Help customers"
     }
+  },
+  "learn": {
+    "title": "AI for beginners",
+    "metaTitle": "AI for beginners: explained in plain language",
+    "metaDescription": "Short guides in plain language: what AI is, your first week with AI, asking a good question, free or paid, privacy and spotting mistakes.",
+    "intro": "Short guides in plain language. No jargon, just practical tips. Read one and try it straight away.",
+    "minutes": "{n} min read",
+    "tryIt": "Try it",
+    "more": "More guides"
+  },
+  "glossary": {
+    "title": "Glossary",
+    "metaTitle": "AI terms explained in plain language",
+    "metaDescription": "From prompt to hallucination and from freemium to GDPR: the key AI terms, explained briefly and clearly.",
+    "intro": "The key AI terms, briefly explained in plain language.",
+    "teaser": "From prompt to hallucination: the key terms, briefly explained.",
+    "basisNote": "Technical terms such as API and tokens appear in the Advanced view."
   },
   "newsletter": {
     "title": "AI Pulse: the weekly newsletter",

@@ -26,7 +26,8 @@
     "search": "Zoek een tool",
     "searchLabel": "Zoek in de tooldatabase",
     "menu": "Menu",
-    "news": "Nieuws"
+    "news": "Nieuws",
+    "learn": "Uitleg"
   },
   "footer": {
     "about": "Over",
@@ -887,6 +888,23 @@
       "marketing": "Marketing en social media",
       "business": "Klanten helpen"
     }
+  },
+  "learn": {
+    "title": "AI voor beginners",
+    "metaTitle": "AI voor beginners: uitleg in gewone taal",
+    "metaDescription": "Korte gidsen in gewone taal: wat is AI, je eerste week met AI, een goede vraag stellen, gratis of betalen, privacy en fouten herkennen.",
+    "intro": "Korte gidsen in gewone taal. Geen vakjargon, wel praktische tips. Lees er één en probeer het meteen uit.",
+    "minutes": "{n} min lezen",
+    "tryIt": "Probeer het uit",
+    "more": "Meer uitleg"
+  },
+  "glossary": {
+    "title": "Begrippenlijst",
+    "metaTitle": "AI-begrippen uitgelegd in gewone taal",
+    "metaDescription": "Van prompt tot hallucinatie en van freemium tot AVG: de belangrijkste AI-begrippen, kort en begrijpelijk uitgelegd.",
+    "intro": "De belangrijkste AI-begrippen, kort uitgelegd in gewone taal.",
+    "teaser": "Van prompt tot hallucinatie: de belangrijkste termen, kort uitgelegd.",
+    "basisNote": "Technische begrippen, zoals API en tokens, zie je in de weergave Advanced."
   },
   "newsletter": {
     "title": "AI Pulse: de wekelijkse nieuwsbrief",

@@ -20,6 +20,10 @@ const PAGES = [
   '/nl/news',
   '/en/news/geoffrey-hinton',
   '/nl/start',
+  '/nl/learn',
+  '/nl/learn/wat-is-ai',
+  '/en/learn/privacy-and-ai',
+  '/nl/glossary',
   '/nl/start/ai-assistenten',
   '/nl/start/ai-assistenten/ai-assistent-dagelijks-werk',
   '/en/methodology',
@@ -105,5 +109,19 @@ test('no page shows "unknown" values', async ({ page }) => {
     await page.goto(path);
     await expect(page.locator('main')).not.toContainText(/\bonbekend\b/i);
   }
+});
+
+test('technical glossary terms only show in the Advanced view', async ({ page }) => {
+  await page.goto('/nl/glossary');
+  const api = page.locator('#api');
+  await expect(page.locator('#prompt')).toBeVisible();
+  await expect(api).toBeHidden();
+  // The level tabs work once React has hydrated them.
+  await page.waitForFunction(() => {
+    const b = document.querySelector('[data-level-tab="advanced"]');
+    return !!b && Object.keys(b).some((k) => k.startsWith('__reactProps'));
+  });
+  await page.getByRole('tab', { name: /Advanced/ }).filter({ visible: true }).first().click();
+  await expect(api).toBeVisible();
 });
 

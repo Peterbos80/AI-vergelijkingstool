@@ -14,6 +14,8 @@ export function Footer({ locale, t, stats, newsletter }: { locale: Locale; t: Tr
       { label: t('footer.tasks'), href: href.tasks(locale) },
       { label: t('footer.categories'), href: href.categories(locale) },
       { label: t('start.breadcrumb'), href: href.start(locale) },
+      { label: t('learn.title'), href: href.learn(locale) },
+      { label: t('glossary.title'), href: href.glossary(locale) },
       { label: t('nav.news'), href: href.news(locale) },
       { label: t('footer.pulse'), href: href.pulse(locale) },
     ],

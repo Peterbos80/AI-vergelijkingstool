@@ -26,7 +26,8 @@
     "search": "Chercher un outil",
     "searchLabel": "Chercher dans la base d’outils",
     "menu": "Menu",
-    "news": "Actus"
+    "news": "Actus",
+    "learn": "Apprendre"
   },
   "status": {
     "verified": {
@@ -908,6 +909,23 @@
       "marketing": "Marketing et réseaux sociaux",
       "business": "Aider les clients"
     }
+  },
+  "learn": {
+    "title": "L’IA pour débutants",
+    "metaTitle": "L’IA pour débutants : expliquée simplement",
+    "metaDescription": "De courts guides simples : ce qu’est l’IA, votre première semaine avec l’IA, bien poser une question, gratuit ou payant, vie privée et repérer les erreurs.",
+    "intro": "De courts guides en termes simples. Pas de jargon, des conseils pratiques.",
+    "minutes": "{n} min de lecture",
+    "tryIt": "Essayer",
+    "more": "Autres guides"
+  },
+  "glossary": {
+    "title": "Glossaire",
+    "metaTitle": "Les termes de l’IA expliqués simplement",
+    "metaDescription": "Du prompt à l’hallucination et du freemium au RGPD : les principaux termes de l’IA, expliqués brièvement et clairement.",
+    "intro": "Les principaux termes de l’IA, expliqués brièvement et simplement.",
+    "teaser": "Du prompt à l’hallucination : les termes clés, brièvement expliqués.",
+    "basisNote": "Les termes techniques comme API et tokens apparaissent dans l’affichage Avancé."
   },
   "tasks": {
     "title": "Que pouvez-vous faire avec l’IA ?",

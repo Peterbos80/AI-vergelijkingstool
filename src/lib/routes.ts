@@ -43,6 +43,8 @@ export const href = {
   news: (l: Locale) => `/${l}/news`,
   newsPerson: (l: Locale, person: string) => `/${l}/news/${person}`,
   start: (l: Locale, category?: string, task?: string) => [`/${l}/start`, category, task].filter(Boolean).join('/'),
+  learn: (l: Locale, slug?: string) => (slug ? `/${l}/learn/${slug}` : `/${l}/learn`),
+  glossary: (l: Locale) => `/${l}/glossary`,
   page: (
     l: Locale,
     page: 'methodology' | 'disclosure' | 'corrections' | 'newsletter' | 'about' | 'privacy' | 'api' | 'bot',
