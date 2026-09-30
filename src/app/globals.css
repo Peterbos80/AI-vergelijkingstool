@@ -754,7 +754,7 @@
     white-space: normal;
   }
 
-  /* Panels: agents, radar, starters */
+  /* Panels: radar, starters */
   .hub-panel {
     border: 1px solid var(--line);
     border-radius: 16px;
@@ -766,87 +766,6 @@
       padding: 1.75rem;
     }
   }
-  .agent-feed {
-    display: grid;
-    border-top: 1px solid var(--line);
-  }
-  @media (min-width: 64rem) {
-    .agent-feed {
-      grid-template-columns: 1fr 1fr;
-      column-gap: 2rem;
-    }
-  }
-  .agent-row {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.25rem 0.75rem;
-    align-items: start;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .agent-row > :last-child {
-    grid-column: 2;
-    text-align: left;
-  }
-  @media (min-width: 40rem) {
-    .agent-row {
-      grid-template-columns: auto 1fr auto;
-    }
-    .agent-row > :last-child {
-      grid-column: auto;
-      text-align: right;
-    }
-  }
-  .bulb {
-    width: 0.625rem;
-    height: 0.625rem;
-    margin-top: 0.4rem;
-    border-radius: 999px;
-    background: var(--ink-3);
-  }
-  .bulb[data-state='active'] {
-    background: var(--ok);
-    animation: bulb-pulse 2.4s ease-out infinite;
-  }
-  .bulb[data-state='late'],
-  .bulb[data-state='skipped'] {
-    background: var(--live);
-  }
-  .bulb[data-state='failed'] {
-    background: var(--live-2);
-  }
-  .bulb[data-state='never'],
-  .bulb[data-state='paused'] {
-    background: transparent;
-    box-shadow: inset 0 0 0 1.5px var(--ink-3);
-  }
-  @keyframes bulb-pulse {
-    0% {
-      box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 55%, transparent);
-    }
-    70% {
-      box-shadow: 0 0 0 7px transparent;
-    }
-    100% {
-      box-shadow: 0 0 0 0 transparent;
-    }
-  }
-  .agent-state {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--ink-3);
-  }
-  .agent-state[data-state='active'] {
-    color: var(--ok);
-  }
-  .agent-state[data-state='late'],
-  .agent-state[data-state='skipped'] {
-    color: var(--live);
-  }
-  .agent-state[data-state='failed'] {
-    color: var(--live-2);
-  }
-
   .radar-col {
     border: 1px solid var(--line);
     border-radius: 12px;

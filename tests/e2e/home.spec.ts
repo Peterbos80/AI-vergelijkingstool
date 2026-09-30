@@ -39,12 +39,10 @@ test('a prompt fills the question box and switches the level and the matrix', as
   expect(watch.errors).toEqual([]);
 });
 
-test('the agent panel and the radar show real records, never invented ones', async ({ page }) => {
+test('the radar shows real records, never invented ones', async ({ page }) => {
   await page.goto('/nl');
-  const agents = page.locator('section[aria-labelledby="agents-title"]');
-  await expect(agents).toBeVisible();
-  // One row per public agent, each with a state label from its run log.
-  await expect(agents.locator('.agent-row')).toHaveCount(13);
+  // Agent status is internal (Admin → Operations), not a public panel.
+  await expect(page.locator('section[aria-labelledby="agents-title"]')).toHaveCount(0);
   const radar = page.locator('section[aria-labelledby="radar-title"]');
   await expect(radar).toBeVisible();
   // Every news item and every tool change links to its origin.

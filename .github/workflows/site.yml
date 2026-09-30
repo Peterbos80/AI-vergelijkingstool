@@ -8,7 +8,7 @@ name: Site and agents
 #    commands in issue comments (/approve, /reject, /snooze, /default) apply;
 #  - the site is rebuilt and deployed after green CI on the default branch,
 #    whenever the agents changed published data, and at least every 6 hours
-#    (so the agent status on the home page stays current).
+#    (so dates such as the last check on the home page stay current).
 on:
   workflow_run:
     workflows: [CI]
@@ -134,7 +134,7 @@ jobs:
           BEFORE: ${{ steps.restore.outputs.version }}
         run: |
           after=$(psql "$DATABASE_URL" -tAc "SELECT value #>> '{}' FROM settings WHERE key = 'data_version'")
-          # Deploy on new data, and at least every 6 hours so the agent status on the home page stays current.
+          # Deploy on new data, and at least every 6 hours so dates such as the last check on the home page stay current.
           last=$(psql "$DATABASE_URL" -tAc "SELECT extract(epoch FROM (value #>> '{}')::timestamptz)::bigint FROM settings WHERE key = 'static_deployed_at'")
           deploy=false
           if [ "$EVENT" = workflow_run ] || [ "$EVENT" = workflow_dispatch ] || [ "$RESTORED" != true ] || [ "$after" != "$BEFORE" ] || [ -z "$last" ] || [ $(( $(date +%s) - last )) -ge 21600 ]; then deploy=true; fi

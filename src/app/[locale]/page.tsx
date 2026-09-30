@@ -8,7 +8,6 @@ import { radar, type Radar } from '@/lib/catalog/radar';
 import { getDb } from '@/lib/db/client';
 import { fairFightGate } from '@/lib/engine/compare';
 import { rankForCapability } from '@/lib/engine/rank';
-import { agentStatus, type AgentStatus } from '@/lib/ops/agent-status';
 import { logError } from '@/lib/ops/errors';
 import { href } from '@/lib/routes';
 import { alternates } from '@/lib/seo';
@@ -17,7 +16,6 @@ import { track } from '@/lib/analytics/track';
 import { NewsletterForm } from '@/components/forms/NewsletterForm';
 import { SponsoredCard } from '@/components/data/SponsoredCard';
 import { AskBox, type AskPrompt, type MatrixPanel } from '@/components/home/AskBox';
-import { AgentStatusPanel } from '@/components/home/AgentStatusPanel';
 import { RadarPanel } from '@/components/home/RadarPanel';
 import { StarterWorkflows } from '@/components/home/StarterWorkflows';
 import { ToolMatrix } from '@/components/home/ToolMatrix';
@@ -58,13 +56,12 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
   const s = catalog.stats;
   const now = new Date();
 
-  // Live panels read the agents' own logs; if the database is unavailable the page still renders.
-  let statuses: AgentStatus[] | null = null;
+  // The radar reads what the agents collected; if the database is unavailable the page still renders.
   let radarData: Radar | null = null;
   try {
-    [statuses, radarData] = await Promise.all([agentStatus(getDb(), now), radar(getDb(), catalog, now)]);
+    radarData = await radar(getDb(), catalog, now);
   } catch (err) {
-    await logError('app', 'home: agent status or radar unavailable', err);
+    await logError('app', 'home: radar unavailable', err);
   }
 
   // Fair Fights that pass the gate, from editorial alternative pairs.
@@ -180,14 +177,8 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         </div>
       </section>
 
-      {statuses && (
-        <div className="container-page py-12">
-          <AgentStatusPanel statuses={statuses} asOf={now} t={t} locale={locale} />
-        </div>
-      )}
-
       {radarData && (
-        <div className="container-page pb-12">
+        <div className="container-page py-12">
           <RadarPanel data={radarData} catalog={catalog} t={t} locale={locale} />
         </div>
       )}
