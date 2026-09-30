@@ -71,10 +71,10 @@ export function StackReceipt({
   const fxDate = result.totals.fxDay ? formatDate(result.totals.fxDay, locale) : null;
   const budgetAmount = result.budget ? formatMoney(result.budget.limitCents, result.budget.currency, locale) : null;
   return (
-    <section className="receipt print-in px-5 py-6" aria-label={t('stack.receipt')}>
+    <section className="receipt print-in px-5 py-6" aria-label={t('stack.receipt')} data-testid="stack-receipt">
       <header className="flex flex-wrap items-baseline justify-between gap-2 border-b border-dashed border-line pb-3">
         <h2 className="font-mono text-sm font-semibold uppercase tracking-wider">{t('stack.receipt')}</h2>
-        <p className="text-xs text-ink-3">
+        <p className="text-xs text-ink-3" data-dynamic="">
           {t('stack.number')} {receiptNo} · {formatDate(date, locale)}
         </p>
       </header>
@@ -86,7 +86,7 @@ export function StackReceipt({
           const plan = tool && s.planKey ? tool.plans.find((p) => p.key === s.planKey) : undefined;
           const label = stepName(task, s.key, catalog, locale);
           return (
-            <li key={s.key} className="grid grid-cols-[1.5rem_minmax(6rem,1fr)_minmax(7rem,1.4fr)_auto] items-baseline gap-x-3 gap-y-1 py-2.5 max-sm:grid-cols-[1.5rem_1fr_auto]">
+            <li key={s.key} data-testid="receipt-step" data-step={s.key} data-required={s.required ? '1' : '0'} data-tool={s.toolId ?? ''} className="grid grid-cols-[1.5rem_minmax(6rem,1fr)_minmax(7rem,1.4fr)_auto] items-baseline gap-x-3 gap-y-1 py-2.5 max-sm:grid-cols-[1.5rem_1fr_auto]">
               <span className="text-ink-3">{i + 1}</span>
               <span className="text-ink-2">
                 {label}
@@ -144,25 +144,25 @@ export function StackReceipt({
           <dt>{t('stack.startCost')}</dt>
           <dd className="tabular">{core.start.length ? `${moneyList(core.start, locale)}${t('period.month')}` : t('common.free')}</dd>
         </div>
-        <div className="text-xs text-ink-3">
-          {core.paidEurCents !== null && core.paid.some((m) => m.currency !== 'EUR') && fxDate
-            ? t('stack.approx', { amount: formatMoney(core.paidEurCents, 'EUR', locale), date: fxDate })
-            : core.paid.some((m) => m.currency !== 'EUR')
-              ? t('stack.noFx')
-              : null}
-        </div>
-        {result.budget && budgetAmount && (
-          <p
-            className={`text-sm ${result.budget.paidWithin === true ? 'text-verified' : result.budget.paidWithin === false ? 'text-danger' : 'text-ink-3'}`}
-          >
-            {result.budget.paidWithin === true
-              ? `✓ ${t('stack.withinBudget', { amount: budgetAmount })}`
-              : result.budget.paidWithin === false
-                ? `✗ ${t('stack.overBudget', { amount: budgetAmount })}`
-                : t('stack.budgetUnknown', { amount: budgetAmount })}
-          </p>
-        )}
       </dl>
+      <div className="mt-1.5 text-xs text-ink-3">
+        {core.paidEurCents !== null && core.paid.some((m) => m.currency !== 'EUR') && fxDate
+          ? t('stack.approx', { amount: formatMoney(core.paidEurCents, 'EUR', locale), date: fxDate })
+          : core.paid.some((m) => m.currency !== 'EUR')
+            ? t('stack.noFx')
+            : null}
+      </div>
+      {result.budget && budgetAmount && (
+        <p
+          className={`mt-1.5 text-sm ${result.budget.paidWithin === true ? 'text-verified' : result.budget.paidWithin === false ? 'text-danger' : 'text-ink-3'}`}
+        >
+          {result.budget.paidWithin === true
+            ? `✓ ${t('stack.withinBudget', { amount: budgetAmount })}`
+            : result.budget.paidWithin === false
+              ? `✗ ${t('stack.overBudget', { amount: budgetAmount })}`
+              : t('stack.budgetUnknown', { amount: budgetAmount })}
+        </p>
+      )}
       <p className="mt-3 text-[0.6875rem] text-ink-3">{t('stack.confidence', { value: result.confidence })}</p>
     </section>
   );

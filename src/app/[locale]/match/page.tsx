@@ -109,7 +109,7 @@ export default async function MatchPage({ params, searchParams }: PageProps<'/[l
       <MatchForm locale={locale} t={t} defaultValue={p.q} compact />
 
       {!result ? (
-        <section className="mt-10" aria-live="polite">
+        <section className="mt-10" aria-live="polite" data-testid="match-nomatch">
           <h1 className="text-2xl">{t('match.noMatchTitle')}</h1>
           <p className="mt-2 text-ink-2">{t('match.noMatchBody')}</p>
           {out.suggestions.taskIds.length > 0 && (
@@ -141,7 +141,7 @@ export default async function MatchPage({ params, searchParams }: PageProps<'/[l
           </p>
         </section>
       ) : (
-        <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_20rem]">
+        <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_20rem]" data-testid="match-result" data-task-id={task?.id ?? ''} data-engine={out.intent.engine}>
           <div className="min-w-0 space-y-8">
             <section aria-live="polite">
               <p className="eyebrow">{t('match.understood')}</p>
@@ -168,7 +168,7 @@ export default async function MatchPage({ params, searchParams }: PageProps<'/[l
             </section>
 
             {out.clarification && (
-              <section className="card border-ink p-4" aria-labelledby="clarify-q" aria-live="polite">
+              <section className="card border-ink p-4" aria-labelledby="clarify-q" aria-live="polite" data-testid="clarify" data-kind={out.clarification.kind}>
                 <p className="eyebrow">{t('match.clarifyTitle')}</p>
                 <form method="get" action={href.match(locale)} className="mt-2">
                   {Object.entries(hidden).map(([k, v]) => (

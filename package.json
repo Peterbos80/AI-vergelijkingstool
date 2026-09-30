@@ -24,7 +24,8 @@
     "agents:worker": "tsx scripts/worker.ts",
     "admin:create": "tsx scripts/create-admin.ts",
     "i18n:check": "tsx scripts/i18n-check.ts",
-    "revenue:scenarios": "tsx scripts/revenue-scenarios.ts"
+    "revenue:scenarios": "tsx scripts/revenue-scenarios.ts",
+    "e2e:serve": "tsx scripts/e2e-serve.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.129.0",
