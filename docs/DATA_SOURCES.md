@@ -6,7 +6,7 @@ What AIToolsWijzer reads, under which terms, what it stores and publishes, and w
 
 1. **Official first.** A price is only VERIFIED when our own fetcher finds it verbatim, next to the plan name, on the vendor's official pricing page. Secondary sources can support a value; they never make it VERIFIED.
 2. **Cite, don't copy.** We publish values (a price, a date, a yes/no), each with its source URL and at most a short verbatim quote as evidence. We never republish articles or pages. Page text is used in memory to find a value and then discarded; only a content hash is stored to notice changes.
-3. **Respect the site.** robots.txt is honoured, requests are throttled, and the bot identifies itself and explains itself at [`/bot`](../src/app/[locale]/bot/page.tsx).
+3. **Respect the site.** robots.txt is honoured, requests are throttled, and the bot identifies itself and explains itself on the `/bot` page (`src/app/[locale]/bot/page.tsx`).
 4. **Documented APIs under their terms.** Where a vendor offers an API for the data (GitHub, Hacker News via Algolia, YouTube, ECB), we use that instead of scraping, within its rate limits and terms.
 5. **Untrusted input.** Everything fetched is data, never instructions: bodies are parsed as text, never rendered as HTML or executed. When text goes to the LLM, it is delimited as data and the output must validate against a schema (see [SECURITY.md](SECURITY.md)).
 
