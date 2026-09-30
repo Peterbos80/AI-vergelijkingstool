@@ -49,6 +49,8 @@ export const pricingAgent: AgentDefinition = {
 
     const confirmed: (PriceChange & { oldCents: number | null; pendingId: string })[] = [];
     const touched = new Set<string>();
+    // Pending observations are shown publicly as "may have changed", so they refresh caches too.
+    let pendingChanged = false;
     for (const { s } of queue) {
       if (ctx.signal.aborted) break;
       const tool = all.find((t) => t.id === s.toolId)!;
@@ -93,10 +95,12 @@ export const pricingAgent: AgentDefinition = {
           }
           ctx.stat('plans_confirmed');
           // A confirmed current price supersedes any pending different observation.
-          await db
+          const cleared = await db
             .update(pendingChanges)
             .set({ status: 'superseded' })
-            .where(and(eq(pendingChanges.toolId, tool.id), eq(pendingChanges.key, `plan:${plan.planKey}`), eq(pendingChanges.status, 'pending')));
+            .where(and(eq(pendingChanges.toolId, tool.id), eq(pendingChanges.key, `plan:${plan.planKey}`), eq(pendingChanges.status, 'pending')))
+            .returning({ id: pendingChanges.id });
+          if (cleared.length) pendingChanged = true;
           continue;
         }
         if (check.kind === 'changed') {
@@ -109,7 +113,10 @@ export const pricingAgent: AgentDefinition = {
             .select()
             .from(pendingChanges)
             .where(and(eq(pendingChanges.toolId, tool.id), eq(pendingChanges.key, `plan:${plan.planKey}`), eq(pendingChanges.status, 'pending')));
-          for (const o of open.filter((o) => o.valueHash !== vh)) await db.update(pendingChanges).set({ status: 'superseded' }).where(eq(pendingChanges.id, o.id));
+          for (const o of open.filter((o) => o.valueHash !== vh)) {
+            await db.update(pendingChanges).set({ status: 'superseded' }).where(eq(pendingChanges.id, o.id));
+            pendingChanged = true;
+          }
           let pending = open.find((o) => o.valueHash === vh);
           if (!pending) {
             [pending] = await db
@@ -128,6 +135,7 @@ export const pricingAgent: AgentDefinition = {
               })
               .returning();
             ctx.stat('changes_observed');
+            pendingChanged = true;
             continue;
           }
           const gapH = (now.getTime() - pending.lastObservedAt.getTime()) / 3600_000;
@@ -228,6 +236,6 @@ export const pricingAgent: AgentDefinition = {
     // never merely because a fetch was attempted.
     for (const id of touched) await recomputeToolSnapshot(db, id, settings.freshness, now);
     const summary = `${queue.length} pricing pages · ${published} changes published${verdict.freeze ? ' · run frozen (anomaly)' : ''}`;
-    return { status: 'success', summary, dataChanged: touched.size > 0 || published > 0 };
+    return { status: 'success', summary, dataChanged: touched.size > 0 || published > 0 || pendingChanged };
   },
 };

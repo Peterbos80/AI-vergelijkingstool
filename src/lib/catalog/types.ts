@@ -38,6 +38,8 @@ export interface CatalogPlan {
   confidence: number;
   observedAt: Date;
   verifiedAt: Date | null;
+  /** A different price was measured on the official page and is being confirmed (docs/strategy/12 §4.4). */
+  pendingChange: boolean;
 }
 
 export interface ToolText {

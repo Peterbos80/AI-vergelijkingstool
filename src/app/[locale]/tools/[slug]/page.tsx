@@ -155,6 +155,11 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
 
       <div className="mt-4">
         <StaleBanner freshness={tool.freshness} checkedAt={tool.priceCheckedAt} t={t} locale={locale} />
+        {tool.plans.some((p) => p.pendingChange) && (
+          <p role="status" className="notice notice-warning">
+            {t('plans.pendingNotice')}
+          </p>
+        )}
       </div>
       {isAffiliate && (
         <div className="mt-4">
@@ -247,6 +252,7 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
                         </span>
                       </div>
                       {p.quota && <p className="mt-0.5 text-xs text-ink-3">{p.quota}</p>}
+                      {p.pendingChange && <p className="mt-1 text-xs font-semibold text-warning-ink">{t('plans.pendingBadge')}</p>}
                       <ReceiptDrawer receipt={detail.plans[p.key]} t={t} locale={locale} />
                     </li>
                   );

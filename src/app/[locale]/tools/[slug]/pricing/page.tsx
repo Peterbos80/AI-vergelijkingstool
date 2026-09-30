@@ -69,6 +69,11 @@ export default async function PricingPage({ params }: PageProps<'/[locale]/tools
       </header>
       <div className="mt-4 space-y-3">
         <StaleBanner freshness={tool.freshness} checkedAt={tool.priceCheckedAt} t={t} locale={locale} />
+        {tool.plans.some((p) => p.pendingChange) && (
+          <p role="status" className="notice notice-warning">
+            {t('plans.pendingNotice')}
+          </p>
+        )}
         {isAffiliate && <DisclosureNote t={t} locale={locale} />}
       </div>
 
@@ -107,6 +112,7 @@ export default async function PricingPage({ params }: PageProps<'/[locale]/tools
                     <td className="min-w-[12rem] text-ink-2">{p.quota ?? '—'}</td>
                     <td>
                       <StatusStamp status={p.status} t={t} />
+                      {p.pendingChange && <div className="mt-1 text-xs font-semibold text-warning-ink">{t('plans.pendingBadge')}</div>}
                       <ReceiptDrawer receipt={detail.plans[p.key]} t={t} locale={locale} />
                     </td>
                   </tr>

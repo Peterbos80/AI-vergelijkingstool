@@ -15,6 +15,7 @@ import {
   companies,
   facts,
   fxRates,
+  pendingChanges,
   pricingPlans,
   taskI18n,
   tasks,
@@ -58,7 +59,7 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
   const ids = toolRows.map((r) => r.tool.id);
   const safeIds = ids.length ? ids : ['00000000-0000-0000-0000-000000000000'];
 
-  const [i18nRows, capRows, planRows, factRows, relRows] = await Promise.all([
+  const [i18nRows, capRows, planRows, factRows, relRows, pendingRows] = await Promise.all([
     db.select().from(toolI18n).where(inArray(toolI18n.toolId, safeIds)),
     db.select().from(toolCapabilities).where(inArray(toolCapabilities.toolId, safeIds)),
     db
@@ -72,7 +73,12 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
       .from(facts)
       .where(and(inArray(facts.toolId, safeIds), isNull(facts.validTo), eq(facts.reviewStatus, 'published'))),
     db.select().from(toolRelations).where(inArray(toolRelations.toolId, safeIds)),
+    db
+      .select({ toolId: pendingChanges.toolId, key: pendingChanges.key })
+      .from(pendingChanges)
+      .where(and(inArray(pendingChanges.toolId, safeIds), eq(pendingChanges.status, 'pending'))),
   ]);
+  const pendingPlans = new Set(pendingRows.filter((r) => r.key.startsWith('plan:')).map((r) => `${r.toolId}|${r.key.slice(5)}`));
 
   const i18nBy = groupBy(i18nRows, (r) => r.toolId);
   const capsBy = groupBy(capRows, (r) => r.toolId);
@@ -100,6 +106,7 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
         confidence: p.confidence,
         observedAt: p.observedAt,
         verifiedAt: p.verifiedAt,
+        pendingChange: pendingPlans.has(`${t.id}|${p.planKey}`),
       }))
       .sort((a, b) => a.position - b.position);
     const pricingStatus = plans.reduce<FactStatus | null>(

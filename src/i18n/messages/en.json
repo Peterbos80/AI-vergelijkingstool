@@ -302,7 +302,9 @@
     "vatNote": "Prices as shown by the vendor, usually excluding VAT. Amounts in currencies other than euro are converted indicatively.",
     "currencyNote": "Amounts in {currency}; conversion to euro is indicative (ECB {date}).",
     "noPlans": "No public pricing found. Contact the vendor for a quote.",
-    "watch": "Watch this price"
+    "watch": "Watch this price",
+    "pendingBadge": "may have changed · being checked",
+    "pendingNotice": "One or more prices below may have changed. We measured a different price on the official page and are confirming it; until then the last verified price stays."
   },
   "alternatives": {
     "title": "Alternatives to {name}",
@@ -1251,7 +1253,8 @@
       "same_name": "Two tools share the same name.",
       "precision_below_target": "The monthly audit shows automatic decisions in this band are less accurate than the target.",
       "monthly_audit": "Judge a random sample of automated decisions; this keeps autonomy honest.",
-      "dependency": "An integration the system relies on is failing."
+      "dependency": "An integration the system relies on is failing.",
+      "login_failures": "Many failed admin logins in a short time: possibly a password-guessing attack. Logins are rate-limited; consider changing passwords and checking the audit log."
     },
     "inbox": {
       "title": "Inbox",

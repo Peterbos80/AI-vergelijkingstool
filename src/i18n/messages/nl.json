@@ -302,7 +302,9 @@
     "vatNote": "Prijzen zoals de maker ze toont, meestal exclusief btw. Bedragen in andere valuta dan euro zijn indicatief omgerekend.",
     "currencyNote": "Bedragen in {currency}; omrekening naar euro is indicatief (ECB {date}).",
     "noPlans": "Geen openbare prijzen gevonden. Neem contact op met de maker voor een offerte.",
-    "watch": "Houd prijs in de gaten"
+    "watch": "Houd prijs in de gaten",
+    "pendingBadge": "mogelijk gewijzigd · wordt gecontroleerd",
+    "pendingNotice": "Een of meer prijzen hieronder zijn mogelijk gewijzigd. We zagen een andere prijs op de officiële pagina en bevestigen die nog; tot die tijd blijft de laatst geverifieerde prijs staan."
   },
   "alternatives": {
     "title": "Alternatieven voor {name}",
@@ -1251,7 +1253,8 @@
       "same_name": "Twee tools hebben dezelfde naam.",
       "precision_below_target": "De maandelijkse audit laat zien dat automatische beslissingen in deze band minder nauwkeurig zijn dan het doel.",
       "monthly_audit": "Beoordeel een willekeurige steekproef van automatische beslissingen; zo blijft de autonomie eerlijk.",
-      "dependency": "Een koppeling waar het systeem op leunt, faalt."
+      "dependency": "Een koppeling waar het systeem op leunt, faalt.",
+      "login_failures": "Veel mislukte beheerlogins in korte tijd: mogelijk een poging om wachtwoorden te raden. Logins zijn begrensd; overweeg wachtwoorden te wijzigen en de auditlog te bekijken."
     },
     "inbox": {
       "title": "Inbox",

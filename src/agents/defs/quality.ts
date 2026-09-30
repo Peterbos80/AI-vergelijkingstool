@@ -2,8 +2,8 @@
  * Quality agent: recomputes snapshots (freshness decays with time; quality and
  * indexability gates follow the data) and enforces data retention.
  */
-import { eq, lt, sql } from 'drizzle-orm';
-import { rateLimits, tools } from '@/lib/db/schema';
+import { and, eq, lt, sql } from 'drizzle-orm';
+import { pendingChanges, rateLimits, tools } from '@/lib/db/schema';
 import { queryRows } from '@/lib/db/sql';
 import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
 import type { AgentDefinition } from '../types';
@@ -37,6 +37,13 @@ export const qualityAgent: AgentDefinition = {
         SELECT id FROM (SELECT id, row_number() OVER (PARTITION BY source_id ORDER BY fetched_at DESC) AS rn FROM source_snapshots) x WHERE rn > 5)
         RETURNING 1) SELECT count(*)::text AS n FROM d`));
     await db.delete(rateLimits).where(lt(rateLimits.windowStart, new Date(now.getTime() - 2 * 86_400_000)));
-    return { status: 'success', summary: `${after.length} snapshots · ${changed.length} changed`, dataChanged: changed.length > 0 };
+    // A measured-but-unconfirmed value older than 30 days is no longer evidence (the "may have changed" notice ends).
+    const expired = await db
+      .update(pendingChanges)
+      .set({ status: 'expired' })
+      .where(and(eq(pendingChanges.status, 'pending'), lt(pendingChanges.lastObservedAt, new Date(now.getTime() - 30 * 86_400_000))))
+      .returning({ id: pendingChanges.id });
+    ctx.stat('pending_expired', expired.length);
+    return { status: 'success', summary: `${after.length} snapshots · ${changed.length} changed`, dataChanged: changed.length > 0 || expired.length > 0 };
   },
 };
