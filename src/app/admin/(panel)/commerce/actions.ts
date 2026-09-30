@@ -3,7 +3,7 @@
 import { eq } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 import { getDb } from '@/lib/db/client';
-import { affiliateLinks, affiliatePrograms, leads, revenueEntries, tools } from '@/lib/db/schema';
+import { affiliateLinks, affiliatePrograms, leads, placements, revenueEntries, tools } from '@/lib/db/schema';
 import { audit, requireAdmin } from '@/lib/auth/session';
 import { importConversions, parseConversions } from '@/lib/admin/commerce';
 import { validateTemplate } from '@/agents/defs/monetization';
@@ -133,4 +133,49 @@ export async function leadStatusAction(formData: FormData): Promise<void> {
     .where(eq(leads.id, id));
   await audit(user, 'lead_status', 'lead', id, { status });
   redirect('/admin/commerce?flash=saved#leads');
+}
+
+const SLOTS = ['home_sponsored', 'newsletter', 'task_sponsored'] as const;
+
+export async function addPlacementAction(formData: FormData): Promise<void> {
+  const user = await requireAdmin('owner');
+  const toolId = await toolIdBySlug(str(formData, 'tool', 80));
+  const slot = str(formData, 'slot') as (typeof SLOTS)[number];
+  const nl = str(formData, 'messageNl', 160);
+  const en = str(formData, 'messageEn', 160);
+  const starts = new Date(`${str(formData, 'startsAt', 10)}T00:00:00Z`);
+  const ends = new Date(`${str(formData, 'endsAt', 10)}T23:59:59Z`);
+  const price = str(formData, 'price');
+  if (!toolId || !SLOTS.includes(slot) || (!nl && !en) || Number.isNaN(starts.getTime()) || Number.isNaN(ends.getTime()) || ends <= starts) {
+    redirect('/admin/commerce?flash=invalid#placements');
+  }
+  const db = getDb();
+  const [row] = await db
+    .insert(placements)
+    .values({
+      toolId,
+      slot,
+      message: { ...(nl ? { nl } : {}), ...(en ? { en } : {}) },
+      startsAt: starts,
+      endsAt: ends,
+      priceCents: price ? Math.round(Number(price.replace(',', '.')) * 100) : null,
+      currency: 'EUR',
+      status: 'scheduled',
+      notes: str(formData, 'notes', 300) || null,
+    })
+    .returning({ id: placements.id });
+  await bumpDataVersion(db, `owner:${user.email}`);
+  await audit(user, 'placement_added', 'placement', row?.id, { slot });
+  redirect('/admin/commerce?flash=saved#placements');
+}
+
+export async function cancelPlacementAction(formData: FormData): Promise<void> {
+  const user = await requireAdmin('owner');
+  const id = str(formData, 'placementId');
+  if (!UUID.test(id)) redirect('/admin/commerce#placements');
+  const db = getDb();
+  await db.update(placements).set({ status: 'cancelled' }).where(eq(placements.id, id));
+  await bumpDataVersion(db, `owner:${user.email}`);
+  await audit(user, 'placement_cancelled', 'placement', id);
+  redirect('/admin/commerce?flash=saved#placements');
 }

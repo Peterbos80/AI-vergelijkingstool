@@ -7,7 +7,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { enabledLocales, isLocale, negotiateLocale } from '@/i18n/config';
 
 /** Paths that are never locale-prefixed. */
-const UNLOCALIZED = /^\/(admin|go|api|og|bot|_next|llms\.txt|robots\.txt|sitemap\.xml|favicon\.ico|icon|apple-icon|manifest\.webmanifest)(\/|$)/;
+const UNLOCALIZED = /^\/(admin|go|api|og|bot|_next|\.well-known|llms\.txt|robots\.txt|sitemap\.xml|favicon\.ico|icon|apple-icon|manifest\.webmanifest)(\/|$)/;
 
 function buildCsp(nonce: string, isDev: boolean): string {
   const directives = [

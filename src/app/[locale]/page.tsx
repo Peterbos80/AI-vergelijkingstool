@@ -12,6 +12,8 @@ import { emailEnabled } from '@/lib/env';
 import { track } from '@/lib/analytics/track';
 import { MatchForm } from '@/components/match/MatchForm';
 import { NewsletterForm } from '@/components/forms/NewsletterForm';
+import { SponsoredCard } from '@/components/data/SponsoredCard';
+import { activePlacement } from '@/lib/monetization/placements';
 import type { CatalogTool } from '@/lib/catalog/types';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
@@ -54,6 +56,9 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
     }
   }
   const popular = catalog.tasks.slice(0, 8);
+  // Paid placement: labelled and separate from everything the engine recommends.
+  const sponsored = await activePlacement('home_sponsored');
+  const sponsoredTool = sponsored ? catalog.toolsById.get(sponsored.toolId) : undefined;
 
   return (
     <>
@@ -185,6 +190,12 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
           })}
         </ul>
       </section>
+
+      {sponsoredTool && sponsored && (
+        <section className="container-page pb-12">
+          <SponsoredCard tool={sponsoredTool} message={sponsored.message} t={t} locale={locale} />
+        </section>
+      )}
 
       <section className="border-t border-line bg-paper-2">
         <div className="container-page grid gap-8 py-12 md:grid-cols-3">

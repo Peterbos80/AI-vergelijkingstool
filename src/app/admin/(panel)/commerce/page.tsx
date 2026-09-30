@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { asc, desc, eq, sql } from 'drizzle-orm';
-import { affiliateLinks, affiliatePrograms, leads, revenueEntries, subscribers, tools } from '@/lib/db/schema';
+import { affiliateLinks, affiliatePrograms, leads, placements, revenueEntries, subscribers, tools } from '@/lib/db/schema';
 import { adminContext } from '@/lib/admin/context';
 import { flashMessage } from '@/lib/admin/flash';
 import { formatDate, formatDateTime, formatMoney, formatNumber } from '@/i18n/formatters';
 import { can, getAdmin } from '@/lib/auth/session';
 import { Badge, Card, Empty, Flash, PageHeader, statusTone, Table, TextLink } from '@/components/admin/ui';
 import { SubmitButton } from '@/components/admin/SubmitButton';
-import { addEntryAction, addLinkAction, addProgramAction, importConversionsAction, leadStatusAction, programStatusAction, toggleLinkAction } from './actions';
+import { addEntryAction, addLinkAction, addPlacementAction, addProgramAction, cancelPlacementAction, importConversionsAction, leadStatusAction, programStatusAction, toggleLinkAction } from './actions';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { t } = await adminContext();
@@ -22,7 +22,7 @@ export default async function CommercePage({ searchParams }: { searchParams: Pro
   const user = (await getAdmin())!;
   const owner = can(user, 'owner');
   const flash = flashMessage(await searchParams, t);
-  const [programs, links, entries, leadRows, toolList, [subs]] = await Promise.all([
+  const [programs, links, entries, leadRows, toolList, [subs], placementRows] = await Promise.all([
     db.select({ p: affiliatePrograms, tool: tools.name, slug: tools.slug }).from(affiliatePrograms).innerJoin(tools, eq(tools.id, affiliatePrograms.toolId)).orderBy(asc(tools.name)),
     db.select({ l: affiliateLinks, tool: tools.name }).from(affiliateLinks).innerJoin(tools, eq(tools.id, affiliateLinks.toolId)).orderBy(asc(tools.name)),
     db.select().from(revenueEntries).orderBy(desc(revenueEntries.day)).limit(20),
@@ -35,7 +35,9 @@ export default async function CommercePage({ searchParams }: { searchParams: Pro
         newsletter: sql<number>`count(*) FILTER (WHERE ${subscribers.status} = 'confirmed' AND ${subscribers.newsletter})::int`,
       })
       .from(subscribers),
+    db.select({ p: placements, tool: tools.name }).from(placements).innerJoin(tools, eq(tools.id, placements.toolId)).orderBy(desc(placements.startsAt)).limit(20),
   ]);
+  const now = new Date();
   const toolSelect = (name: string, required = true) => (
     <select name={name} className="input" required={required} defaultValue="" aria-label={t('admin.commerce.tool')}>
       <option value="" disabled={required}>
@@ -291,6 +293,65 @@ export default async function CommercePage({ searchParams }: { searchParams: Pro
             )}
           </Card>
         </div>
+
+        <Card id="placements" title={t('admin.commerce.placements')}>
+          <p className="mb-3 text-sm text-ink-2">{t('admin.commerce.placementsHelp')}</p>
+          {placementRows.length === 0 ? (
+            <Empty>{t('admin.commerce.noPlacements')}</Empty>
+          ) : (
+            <Table head={[t('admin.commerce.tool'), t('admin.commerce.slot'), t('admin.commerce.period'), t('admin.common.status'), '']}>
+              {placementRows.map(({ p, tool }) => {
+                const state = p.status === 'cancelled' ? 'cancelled' : p.endsAt <= now ? 'ended' : p.startsAt <= now ? 'active' : 'scheduled';
+                return (
+                  <tr key={p.id}>
+                    <td className="font-semibold">
+                      {tool}
+                      <div className="text-xs font-normal text-ink-2">{p.message[locale] ?? p.message.en ?? p.message.nl ?? ''}</div>
+                    </td>
+                    <td className="mono text-xs">{p.slot}</td>
+                    <td className="text-xs whitespace-nowrap">
+                      {formatDate(p.startsAt, locale)} – {formatDate(p.endsAt, locale)}
+                    </td>
+                    <td>
+                      <Badge tone={state === 'active' ? 'ok' : state === 'scheduled' ? 'info' : 'neutral'}>{t(`admin.commerce.placementStatus.${state}`)}</Badge>
+                    </td>
+                    <td>
+                      {owner && (state === 'active' || state === 'scheduled') && (
+                        <form action={cancelPlacementAction}>
+                          <input type="hidden" name="placementId" value={p.id} />
+                          <SubmitButton variant="ghost">{t('admin.common.cancel')}</SubmitButton>
+                        </form>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </Table>
+          )}
+          {owner && (
+            <details className="mt-4">
+              <summary className="cursor-pointer text-sm font-semibold">+ {t('admin.commerce.addPlacement')}</summary>
+              <form action={addPlacementAction} className="mt-3 grid gap-3 sm:grid-cols-2">
+                {toolSelect('tool')}
+                <select name="slot" className="input" aria-label={t('admin.commerce.slot')}>
+                  {['home_sponsored', 'newsletter', 'task_sponsored'].map((x) => (
+                    <option key={x} value={x}>
+                      {x}
+                    </option>
+                  ))}
+                </select>
+                <input name="messageNl" maxLength={160} placeholder="NL" className="input" aria-label="NL" />
+                <input name="messageEn" maxLength={160} placeholder="EN" className="input" aria-label="EN" />
+                <input name="startsAt" type="date" required className="input" aria-label={t('admin.commerce.period')} />
+                <input name="endsAt" type="date" required className="input" aria-label={t('admin.commerce.period')} />
+                <input name="price" placeholder="€" inputMode="decimal" className="input" aria-label={t('admin.commerce.amount')} />
+                <div>
+                  <SubmitButton>{t('admin.common.save')}</SubmitButton>
+                </div>
+              </form>
+            </details>
+          )}
+        </Card>
 
         <Card id="subscribers" title={t('admin.commerce.subscribers')}>
           <dl className="grid grid-cols-3 gap-3 text-sm">

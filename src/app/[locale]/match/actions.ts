@@ -35,7 +35,7 @@ export async function saveStackAction(formData: FormData): Promise<void> {
   const catalog = await getCatalog();
   const settings = await loadSettings(getDb());
   const out = await runMatch(
-    { query: p.q, locale, explicit: p.explicit, approach: p.approach, taskOverride: p.taskOverride, budget: p.budget, skip: true, answered: p.answered, gatingThreshold: settings.llm.gatingThreshold, allowLlm: true },
+    { query: p.q, locale, explicit: p.explicit, approach: p.approach, taskOverride: p.taskOverride, budget: p.budget, skip: true, answered: p.answered, gatingThreshold: settings.llm.gatingThreshold, allowLlm: allowed },
     catalog,
   );
   if (!out.variants) return;

@@ -989,7 +989,8 @@
     "more": "Alle wijzigingen: {url}",
     "footerWatch": "Je krijgt deze e-mail omdat je tools volgt op AIToolsWijzer. Afmelden met één klik: {url}",
     "footerNewsletter": "Je krijgt deze e-mail omdat je je hebt aangemeld voor AI Pulse. Afmelden met één klik: {url}",
-    "sign": "AIToolsWijzer — AI-tools, met bonnetje"
+    "sign": "AIToolsWijzer — AI-tools, met bonnetje",
+    "sponsored": "Gesponsord (betaalde plaatsing, geen invloed op onze aanbevelingen): {message} {url}"
   },
   "admin": {
     "meta": {
@@ -1652,7 +1653,19 @@
       "noPrograms": "Nog geen programma's.",
       "noLinks": "Nog geen affiliatelinks.",
       "noEntries": "Nog geen posten.",
-      "noLeads": "Nog geen leads."
+      "noLeads": "Nog geen leads.",
+      "placements": "Gesponsorde plaatsingen",
+      "placementsHelp": "Duidelijk gelabelde plekken, los van alle aanbevelingen en rangschikkingen. Voeg een omzetpost toe zodra de sponsor betaalt.",
+      "noPlacements": "Nog geen plaatsingen.",
+      "addPlacement": "Plaatsing toevoegen",
+      "slot": "Plek",
+      "period": "Periode",
+      "placementStatus": {
+        "scheduled": "gepland",
+        "active": "loopt",
+        "ended": "afgelopen",
+        "cancelled": "geannuleerd"
+      }
     },
     "errors": {
       "title": "Fouten",
@@ -1683,5 +1696,23 @@
       "reporter": "Maakt het weekrapport en mailt het naar jou als e-mail is ingesteld.",
       "audit": "Maandelijkse willekeurige steekproef van automatische beslissingen om te beoordelen; meet de precisie per vertrouwensband."
     }
+  },
+  "og": {
+    "eyebrowSite": "AI-tools, met bonnetje",
+    "siteSub": "Vertel wat je wilt doen en krijg een AI-stack met prijzen, bronnen en datums.",
+    "siteFooter": "{count} tools · elke prijs met bron",
+    "eyebrowTool": "Bonnetje · gecontroleerd {date}",
+    "from": "Vanaf {price}",
+    "sources": "bronnen op de pagina",
+    "eyebrowFight": "Fair Fight",
+    "differences": "{count, plural, one {# echt verschil} other {# echte verschillen}}, elk met bron",
+    "eyebrowStack": "AI-stack",
+    "stackTotal": "Per maand: {total}"
+  },
+  "sponsored": {
+    "label": "Gesponsord",
+    "why": "Waarom zie ik dit?",
+    "cta": "Bekijk {tool}",
+    "note": "Betaalde plaatsing. Heeft geen invloed op onze aanbevelingen of rangschikking."
   }
 }

@@ -173,3 +173,20 @@ describe('conversion import', () => {
     expect(all.every((c) => c.toolId === t.id)).toBe(true);
   });
 });
+
+describe('sponsored placements', () => {
+  it('returns only the placement running now, never a cancelled one', async () => {
+    const { placements } = await import('@/lib/db/schema');
+    const { activePlacementFrom } = await import('@/lib/monetization/placements');
+    const t = await tool('canva');
+    const at = new Date('2026-10-10T12:00:00Z');
+    await db.insert(placements).values([
+      { toolId: t.id, slot: 'home_sponsored', message: { en: 'past' }, startsAt: new Date('2026-09-01'), endsAt: new Date('2026-09-30'), status: 'ended' },
+      { toolId: t.id, slot: 'home_sponsored', message: { en: 'cancelled' }, startsAt: new Date('2026-10-01'), endsAt: new Date('2026-10-31'), status: 'cancelled' },
+      { toolId: t.id, slot: 'home_sponsored', message: { en: 'now' }, startsAt: new Date('2026-10-05'), endsAt: new Date('2026-10-20'), status: 'scheduled' },
+    ]);
+    expect((await activePlacementFrom(db, 'home_sponsored', at))?.message.en).toBe('now');
+    expect(await activePlacementFrom(db, 'newsletter', at)).toBeNull();
+    expect(await activePlacementFrom(db, 'home_sponsored', new Date('2026-11-01'))).toBeNull();
+  });
+});

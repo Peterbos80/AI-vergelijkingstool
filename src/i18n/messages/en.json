@@ -989,7 +989,8 @@
     "more": "All changes: {url}",
     "footerWatch": "You get this e-mail because you follow tools on AIToolsWijzer. Unsubscribe with one click: {url}",
     "footerNewsletter": "You get this e-mail because you subscribed to AI Pulse. Unsubscribe with one click: {url}",
-    "sign": "AIToolsWijzer — AI tools, with receipts"
+    "sign": "AIToolsWijzer — AI tools, with receipts",
+    "sponsored": "Sponsored (paid placement, no influence on our recommendations): {message} {url}"
   },
   "admin": {
     "meta": {
@@ -1652,7 +1653,19 @@
       "noPrograms": "No programmes yet.",
       "noLinks": "No affiliate links yet.",
       "noEntries": "No entries yet.",
-      "noLeads": "No leads yet."
+      "noLeads": "No leads yet.",
+      "placements": "Sponsored placements",
+      "placementsHelp": "Clearly labelled slots, separate from all recommendations and rankings. Add a revenue entry when the sponsor pays.",
+      "noPlacements": "No placements yet.",
+      "addPlacement": "Add placement",
+      "slot": "Slot",
+      "period": "Period",
+      "placementStatus": {
+        "scheduled": "scheduled",
+        "active": "running",
+        "ended": "ended",
+        "cancelled": "cancelled"
+      }
     },
     "errors": {
       "title": "Errors",
@@ -1683,5 +1696,23 @@
       "reporter": "Builds the weekly report and e-mails it to you when e-mail is configured.",
       "audit": "Monthly random sample of automated decisions for you to judge; measures precision per confidence band."
     }
+  },
+  "og": {
+    "eyebrowSite": "AI tools, with receipts",
+    "siteSub": "Tell us what you want to do and get an AI tool stack with prices, sources and dates.",
+    "siteFooter": "{count} tools · every price with its source",
+    "eyebrowTool": "Receipt · checked {date}",
+    "from": "From {price}",
+    "sources": "sources on the page",
+    "eyebrowFight": "Fair Fight",
+    "differences": "{count, plural, one {# real difference} other {# real differences}}, each with a source",
+    "eyebrowStack": "AI stack",
+    "stackTotal": "Per month: {total}"
+  },
+  "sponsored": {
+    "label": "Sponsored",
+    "why": "Why am I seeing this?",
+    "cta": "Visit {tool}",
+    "note": "Paid placement. It has no influence on our recommendations or rankings."
   }
 }

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import type { Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
 import { formatMoney } from '@/i18n/formatters';
@@ -14,12 +15,17 @@ import { uuid } from '@/lib/ids';
 import { nowDate, nowMs } from '@/lib/time';
 import { track } from '@/lib/analytics/track';
 import { logMatch } from '@/lib/analytics/match-log';
+import { clientIp, visitorHash } from '@/lib/analytics/visitor';
+import { rateLimit } from '@/lib/security/rate-limit';
 import { MatchForm } from '@/components/match/MatchForm';
 import { StackReceipt, stepName } from '@/components/stack/StackReceipt';
 import { StepDetails } from '@/components/stack/StepDetails';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
 import { ToolRow } from '@/components/data/ToolRow';
 import { saveStackAction } from './actions';
+
+/** LLM-assisted Matches per visitor per hour; beyond this the (free) lexical engine answers. */
+const LLM_MATCHES_PER_HOUR = 40;
 
 export async function generateMetadata({ params, searchParams }: PageProps<'/[locale]/match'>): Promise<Metadata> {
   const { locale } = (await params) as { locale: Locale };
@@ -55,6 +61,9 @@ export default async function MatchPage({ params, searchParams }: PageProps<'/[l
   const started = nowMs();
   const catalog = await getCatalog();
   const settings = await loadSettings(getDb());
+  // The LLM is a shared, budgeted resource: cap it per visitor so one client cannot exhaust the daily budget.
+  const h = await headers();
+  const llmAllowed = await rateLimit(`llm:${visitorHash(clientIp(h), h.get('user-agent') ?? '')}`, LLM_MATCHES_PER_HOUR, 3600);
   const out = await runMatch(
     {
       query: p.q,
@@ -66,7 +75,7 @@ export default async function MatchPage({ params, searchParams }: PageProps<'/[l
       skip: p.skip,
       answered: p.answered,
       gatingThreshold: settings.llm.gatingThreshold,
-      allowLlm: true,
+      allowLlm: llmAllowed,
     },
     catalog,
   );

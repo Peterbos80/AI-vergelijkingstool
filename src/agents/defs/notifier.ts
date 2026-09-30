@@ -7,7 +7,8 @@
 import { and, eq, inArray, sql } from 'drizzle-orm';
 import { isLocale, type Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
-import { emailOutbox, settings as settingsTable, stackItems, subscribers, watches } from '@/lib/db/schema';
+import { emailOutbox, settings as settingsTable, stackItems, subscribers, tools, watches } from '@/lib/db/schema';
+import { activePlacementFrom } from '@/lib/monetization/placements';
 import { queryRows } from '@/lib/db/sql';
 import { emailEnabled, siteUrl } from '@/lib/env';
 import { flushOutbox } from '@/lib/email/outbox';
@@ -171,6 +172,9 @@ async function newsletter(ctx: AgentContext): Promise<{ status: 'sent' | 'skippe
           AND ts >= ${period.start.toISOString()}::timestamptz AND ts < ${period.end.toISOString()}::timestamptz AND props ? 'pair'
         GROUP BY 1 ORDER BY count(*) DESC LIMIT 1`,
   );
+  // A paid newsletter placement, if one runs now: labelled and after the news, never mixed into it.
+  const placement = await activePlacementFrom(db, 'newsletter', now);
+  const [sponsorTool] = placement ? await db.select({ slug: tools.slug, name: tools.name }).from(tools).where(eq(tools.id, placement.toolId)) : [];
   const rows = recipients.map((r) => {
     const locale: Locale = isLocale(r.locale) ? r.locale : 'en';
     const t = getT(locale);
@@ -183,6 +187,8 @@ async function newsletter(ctx: AgentContext): Promise<{ status: 'sent' | 'skippe
     for (const [title, list] of sections) if (list.length) body.push(`■ ${title}`, ...eventLines(list, locale), '');
     const pair = ff?.pair && /^[a-z0-9-]+-vs-[a-z0-9-]+$/.test(ff.pair) ? ff.pair : null;
     if (pair) body.push(t('digest.fairFight', { url: siteUrl(`/${locale}/compare/${pair}`) }), '');
+    const sponsorText = placement && sponsorTool ? localized(placement.message, locale) : null;
+    if (sponsorText) body.push(t('digest.sponsored', { message: sponsorText, url: siteUrl(href.go(sponsorTool!.slug, { src: 'newsletter', l: locale })) }), '');
     body.push(t('digest.more', { url: siteUrl(href.pulse(locale)) }), '', t('digest.footerNewsletter', { url: unsubscribeUrl(locale, r.token) }), t('digest.sign'));
     return { toEmail: r.email, subject: t('digest.newsletterSubject', { count: events.length }), bodyText: body.join('\n'), kind: 'digest' as const };
   });
