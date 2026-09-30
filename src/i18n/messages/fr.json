@@ -1119,6 +1119,7 @@
     "contactTitle": "Contact et informations sur l’entreprise",
     "legalName": "Nom",
     "legalKvk": "Chambre de commerce (KvK)",
+    "legalVat": "Numéro de TVA",
     "legalAddress": "Adresse",
     "legalEmail": "E-mail",
     "contactFallback": "Pour les corrections, utilisez le formulaire de corrections ; pour les questions professionnelles, le formulaire du Stack Doctor."

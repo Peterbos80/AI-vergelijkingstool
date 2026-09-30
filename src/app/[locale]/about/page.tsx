@@ -21,6 +21,7 @@ export default async function AboutPage({ params }: PageProps<'/[locale]/about'>
   const rows = [
     ['legalName', legal.name],
     ['legalKvk', legal.kvk],
+    ['legalVat', legal.vat],
     ['legalAddress', legal.address],
     ['legalEmail', legal.email],
   ].filter(([, v]) => Boolean(v)) as [string, string][];

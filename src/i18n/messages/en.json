@@ -1176,6 +1176,7 @@
     "contactTitle": "Contact and company details",
     "legalName": "Name",
     "legalKvk": "Chamber of Commerce",
+    "legalVat": "VAT ID",
     "legalAddress": "Address",
     "legalEmail": "E-mail",
     "contactFallback": "For corrections use the corrections form; for business questions the form in the Stack Doctor."

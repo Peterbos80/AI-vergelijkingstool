@@ -36,6 +36,7 @@ env:
   PUBLIC_ISSUES_URL: ${{ github.server_url }}/${{ github.repository }}/issues/new?template=correction.yml
   LEGAL_NAME: ${{ vars.LEGAL_NAME }}
   LEGAL_KVK: ${{ vars.LEGAL_KVK }}
+  LEGAL_VAT: ${{ vars.LEGAL_VAT }}
   LEGAL_ADDRESS: ${{ vars.LEGAL_ADDRESS }}
   LEGAL_EMAIL: ${{ vars.LEGAL_EMAIL }}
 

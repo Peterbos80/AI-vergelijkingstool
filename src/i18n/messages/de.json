@@ -1119,6 +1119,7 @@
     "contactTitle": "Kontakt und Unternehmensdaten",
     "legalName": "Name",
     "legalKvk": "Handelskammer (KvK)",
+    "legalVat": "USt-IdNr.",
     "legalAddress": "Adresse",
     "legalEmail": "E-Mail",
     "contactFallback": "Für Korrekturen nutze das Korrekturformular; für geschäftliche Fragen das Formular im Stack Doctor."

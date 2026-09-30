@@ -42,6 +42,8 @@ const schema = z.object({
   TRUSTED_PROXY_HOPS: z.coerce.number().int().min(1).max(5).default(1),
   LEGAL_NAME: optional,
   LEGAL_KVK: optional,
+  /** Btw-identificatienummer (VAT ID), shown on /about. */
+  LEGAL_VAT: optional,
   LEGAL_ADDRESS: optional,
   LEGAL_EMAIL: optional,
   ENABLED_LOCALES: optional,
@@ -93,6 +95,7 @@ export function legalDetails() {
   return {
     name: e.LEGAL_NAME,
     kvk: e.LEGAL_KVK,
+    vat: e.LEGAL_VAT,
     address: e.LEGAL_ADDRESS,
     email: e.LEGAL_EMAIL,
     complete: Boolean(e.LEGAL_NAME && e.LEGAL_KVK && e.LEGAL_ADDRESS && e.LEGAL_EMAIL),
