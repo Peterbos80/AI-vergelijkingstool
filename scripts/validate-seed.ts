@@ -5,7 +5,7 @@
 import { loadSeedData } from '../src/lib/seed/load';
 
 try {
-  const { taxonomy, tools, events, warnings } = loadSeedData();
+  const { taxonomy, tools, events, affiliates, warnings } = loadSeedData();
   const plans = tools.reduce((n, t) => n + t.plans.length, 0);
   const facts = tools.reduce((n, t) => n + Object.keys(t.facts).length, 0);
   const byStatus: Record<string, number> = {};
@@ -15,7 +15,7 @@ try {
   }
   console.log(
     `OK: ${taxonomy.categories.length} categories, ${taxonomy.capabilities.length} capabilities, ${taxonomy.tasks.length} tasks, ` +
-      `${tools.length} tools, ${plans} plans, ${facts} facts, ${events.length} events`,
+      `${tools.length} tools, ${plans} plans, ${facts} facts, ${events.length} events, ${affiliates.length} affiliate links`,
   );
   console.log('Status distribution:', byStatus);
   if (warnings.length) {

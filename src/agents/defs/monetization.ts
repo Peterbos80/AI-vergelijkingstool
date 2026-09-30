@@ -6,31 +6,15 @@
  *  - a link that fails twice in a row, or lands on another domain than the
  *    tool's website, is deactivated: /go then falls back to the direct link.
  *    Deactivation is logged and reversible; the owner gets a bundled P3 item
- *    (P2 when the tool is among the top-10 by outbound clicks).
+ *    (P2 when the tool is among the top-10 by outbound clicks, or when there
+ *    are no click counts to rank by, as on the free edition).
  * It never changes which tools are recommended or in which order.
  */
 import { and, desc, eq, gte, sql } from 'drizzle-orm';
 import { affiliateLinks, outboundClicks, tools } from '@/lib/db/schema';
-import { buildAffiliateUrl } from '@/lib/monetization/affiliate';
+import { buildAffiliateUrl, LINKCHECK_SUB_ID, validateTemplate } from '@/lib/monetization/template';
 import { sourceDomain } from '@/lib/provenance/confidence';
 import type { AgentDefinition } from '../types';
-
-export const LINKCHECK_SUB_ID = 'linkcheck';
-
-/** Static checks on a link template before any request is made. */
-export function validateTemplate(template: string): string | null {
-  const url = buildAffiliateUrl(template, LINKCHECK_SUB_ID);
-  let u: URL;
-  try {
-    u = new URL(url);
-  } catch {
-    return 'invalid_url';
-  }
-  if (u.protocol !== 'https:') return 'not_https';
-  if (u.username || u.password) return 'credentials_in_url';
-  if (!u.hostname.includes('.')) return 'invalid_host';
-  return null;
-}
 
 export const monetizationAgent: AgentDefinition = {
   name: 'monetization',
@@ -105,14 +89,14 @@ export const monetizationAgent: AgentDefinition = {
         entityType: 'affiliate_link',
         entityId: r.link.id,
         toolId: r.tool.id,
-        oldValue: { active: true },
+        oldValue: { active: true, urlTemplate: r.link.urlTemplate },
         newValue: { active: false, finalUrl: r.finalUrl },
         decision: 'auto_published_flagged',
         reason: r.reason ?? 'failed',
       });
       await ctx.inbox.escalate({
         kind: 'broken_link',
-        severity: topIds.has(r.tool.id) ? 'p2' : 'p3',
+        severity: topIds.has(r.tool.id) || topIds.size === 0 ? 'p2' : 'p3',
         category: 'commercial',
         toolId: r.tool.id,
         title: `Affiliate link for ${r.tool.name} deactivated (${r.reason}); direct link in use`,

@@ -6,7 +6,7 @@ import { band, precisionByBand, wilsonLower } from '@/agents/defs/audit';
 import { noNewNumbers } from '@/agents/defs/content';
 import { mentions } from '@/agents/defs/social';
 import { duplicatePairs } from '@/agents/defs/duplicate';
-import { validateTemplate } from '@/agents/defs/monetization';
+import { validateTemplate } from '@/lib/monetization/template';
 import { gate, score } from '@/agents/defs/verification';
 import { inLlmHoldout, LLM_HOLDOUT_PCT } from '@/lib/engine/match';
 import { bearer, safeEqual } from '@/lib/security/secrets';

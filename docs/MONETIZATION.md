@@ -33,6 +33,20 @@ How AIToolsWijzer earns money without letting money touch the recommendations, a
 4. **Health**: the monetization agent checks active links weekly. A broken link is deactivated, so the direct link takes over, and one inbox item is raised. Revert with one click if it was a false alarm.
 5. **Conversions**: export the network's report monthly and import it (Admin → Commerce → Import). Columns: `external_id, occurred_at, amount, currency, status (pending/approved/reversed/paid), click_id`. The import is idempotent per programme and external id, and re-importing updates statuses (for example pending → approved).
 
+### Free edition: `data/affiliates.json`
+
+The free edition has no admin area, so approved links live in `data/affiliates.json` (edit it on GitHub: open the file, click the pencil, commit):
+
+```json
+{ "links": [ { "tool": "descript", "network": "partnerstack", "url": "https://get.descript.com/your-code", "terms": "https://www.descript.com/affiliates" } ] }
+```
+
+- `tool` is the file name in `data/tools/` without `.json`; `url` must be the full `https://` link from the programme; `{click_id}` may be used where the network accepts a sub-id (the static site fills in one id per export, so conversions cannot be tied to single clicks there).
+- CI rejects an unknown tool, a non-https or credential-bearing link, or two links for one tool, before anything is deployed.
+- On the next deploy the tool's "visit" link (`/go/<tool>`) uses it, and `/disclosure` lists the tool. `"active": false` switches it off; removing the entry switches it off too (the row is kept for attribution).
+- The monetization agent still checks every active link weekly. A link it switches off as broken stays off after later pushes until you change its URL; with no click counts to rank by (the free edition), that report is a P2 inbox item, so it becomes a GitHub issue.
+- Rankings, Match and comparisons never read this file.
+
 ## Measuring revenue honestly
 
 `src/lib/reports/metrics.ts` computes owner metrics with fixed SQL. The rules:

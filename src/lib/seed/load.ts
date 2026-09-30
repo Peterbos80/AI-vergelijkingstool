@@ -4,11 +4,14 @@
  * - data/taxonomy.json   categories, capabilities, tasks (editorial)
  * - data/tools/*.json    one file per tool, with provenance per value
  * - data/events/*.json   sourced Pulse events
+ * - data/affiliates.json  the owner's approved affiliate links (optional)
  */
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import {
+  affiliatesFile,
   eventSeed,
+  type AffiliateSeed,
   type factSeed,
   type planSeed,
   taxonomySeed,
@@ -20,6 +23,7 @@ import {
   type ToolSeed,
 } from './schema';
 import { z } from 'zod';
+import { validateTemplate } from '@/lib/monetization/template';
 
 type Provenanced = {
   status?: string;
@@ -75,6 +79,7 @@ export interface SeedBundle {
   taxonomy: TaxonomySeed;
   tools: ResolvedTool[];
   events: EventSeed[];
+  affiliates: AffiliateSeed[];
   warnings: string[];
 }
 
@@ -92,6 +97,21 @@ export function seedAsOf(bundle: SeedBundle): Date {
   }
   if (!newest) return new Date();
   return new Date(Date.parse(`${newest}T08:00:00Z`) + 86_400_000);
+}
+
+/** The owner's affiliate links: a mistake fails the check (CI) instead of sending visitors to a broken page. */
+export function parseAffiliates(raw: unknown, toolSlugs: Set<string>): AffiliateSeed[] {
+  const parsed = affiliatesFile.safeParse(raw);
+  if (!parsed.success) throw new SeedError(`affiliates.json: ${parsed.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')}`);
+  const out: AffiliateSeed[] = [];
+  for (const a of parsed.data.links) {
+    if (!toolSlugs.has(a.tool)) throw new SeedError(`affiliates.json: unknown tool "${a.tool}" (use the name of a file in data/tools, without .json)`);
+    if (out.some((x) => x.tool === a.tool)) throw new SeedError(`affiliates.json: more than one link for "${a.tool}"`);
+    const invalid = validateTemplate(a.url);
+    if (invalid) throw new SeedError(`affiliates.json: the link for "${a.tool}" is not usable (${invalid}); it must be a full https:// link`);
+    out.push(a);
+  }
+  return out;
 }
 
 export function loadSeedData(dataDir = path.join(process.cwd(), 'data')): SeedBundle {
@@ -151,6 +171,9 @@ export function loadSeedData(dataDir = path.join(process.cwd(), 'data')): SeedBu
     }
   }
 
+  const affiliatesPath = path.join(dataDir, 'affiliates.json');
+  const affiliates = existsSync(affiliatesPath) ? parseAffiliates(JSON.parse(readFileSync(affiliatesPath, 'utf8')), slugs) : [];
+
   // Coverage check: every required task step should have ≥ 2 candidate tools.
   for (const task of taxonomy.tasks) {
     for (const step of task.steps.filter((s) => s.required)) {
@@ -161,5 +184,5 @@ export function loadSeedData(dataDir = path.join(process.cwd(), 'data')): SeedBu
     }
   }
 
-  return { taxonomy, tools, events, warnings };
+  return { taxonomy, tools, events, affiliates, warnings };
 }

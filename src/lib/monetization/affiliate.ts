@@ -42,11 +42,3 @@ export async function getActiveAffiliateLinks(): Promise<Map<string, { id: strin
 export async function affiliateToolIds(): Promise<Set<string>> {
   return new Set((await getActiveAffiliateLinks()).keys());
 }
-
-/**
- * Build the outbound URL. `{click_id}` in the template is replaced by the
- * click id (the affiliate sub-id) so conversions can be attributed to pages.
- */
-export function buildAffiliateUrl(template: string, clickId: string): string {
-  return template.replaceAll('{click_id}', encodeURIComponent(clickId));
-}

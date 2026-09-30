@@ -6,7 +6,7 @@ import { getDb } from '@/lib/db/client';
 import { affiliateLinks, affiliatePrograms, leads, placements, revenueEntries, tools } from '@/lib/db/schema';
 import { audit, requireAdmin } from '@/lib/auth/session';
 import { importConversions, parseConversions } from '@/lib/admin/commerce';
-import { validateTemplate } from '@/agents/defs/monetization';
+import { validateTemplate } from '@/lib/monetization/template';
 import { bumpDataVersion } from '@/lib/settings';
 import { PLACEMENT_SLOTS, type Slot as PlacementSlot } from '@/lib/monetization/placements';
 

@@ -6,16 +6,20 @@
  *  - Tools are inserted when their slug does not exist yet. Existing tools are
  *    left alone: after the initial seed, agents own the data and its history.
  *  - Events are inserted once (dedupe key).
+ *  - Affiliate links from data/affiliates.json are synced (see syncAffiliates).
  *  - Computed alternatives and all tool snapshots are recomputed.
  *
  * Provenance rules: a seed status is clamped to what the evidence allows
  * (never VERIFIED without verbatim anchoring on an official source), and the
  * confidence is computed from the evidence, not taken from the seed.
  */
-import { and, eq, notInArray, sql } from 'drizzle-orm';
+import { and, eq, isNull, notInArray, sql } from 'drizzle-orm';
 import type { Database } from '@/lib/db/client';
 import { queryRows } from '@/lib/db/sql';
 import {
+  affiliateLinks,
+  affiliatePrograms,
+  agentActions,
   capabilities,
   capabilityI18n,
   categories,
@@ -42,7 +46,7 @@ import { monthlyEquivalentCents, toCents } from '@/lib/pricing/money';
 import { computeAlternatives } from '@/lib/engine/alternatives';
 import { bumpDataVersion, loadSettings } from '@/lib/settings';
 import type { ResolvedProvenance, ResolvedTool, SeedBundle } from './load';
-import type { SourceRef } from './schema';
+import type { AffiliateSeed, SourceRef } from './schema';
 
 export interface SeedReport {
   categories: number;
@@ -58,6 +62,7 @@ export interface SeedReport {
   relations: number;
   computedAlternatives: number;
   statusClamped: number;
+  affiliateLinks: number;
   dataVersion: number;
 }
 
@@ -395,6 +400,68 @@ async function insertTool(db: Tx, reg: SourceRegistry, tool: ResolvedTool, now: 
   return toolId;
 }
 
+/** Marks links that come from data/affiliates.json (the owner's file is their source of truth). */
+export const AFFILIATES_FILE = 'data:affiliates.json';
+
+/**
+ * The owner's approved affiliate links (data/affiliates.json), for the free
+ * edition, which has no admin area:
+ *  - the programme is recorded as approved, the link is added or updated;
+ *  - a link removed from the file is switched off (kept for attribution);
+ *  - a link the monetization agent switched off as broken stays off until
+ *    the owner changes its URL; the agent's decision is not undone by a push.
+ * Returns the number of active links from the file.
+ */
+async function syncAffiliates(tx: Tx, list: AffiliateSeed[], toolIds: Map<string, string>): Promise<number> {
+  const kept: string[] = [];
+  let active = 0;
+  for (const a of list) {
+    const toolId = toolIds.get(a.tool);
+    if (!toolId) continue;
+    kept.push(toolId);
+    let [program] = await tx
+      .select({ id: affiliatePrograms.id })
+      .from(affiliatePrograms)
+      .where(and(eq(affiliatePrograms.toolId, toolId), eq(affiliatePrograms.network, a.network)));
+    if (program) {
+      await tx.update(affiliatePrograms).set({ status: 'approved', termsUrl: a.terms ?? null, notes: a.note ?? null }).where(eq(affiliatePrograms.id, program.id));
+    } else {
+      [program] = await tx
+        .insert(affiliatePrograms)
+        .values({ toolId, network: a.network, status: 'approved', termsUrl: a.terms ?? null, infoSourceUrl: a.terms ?? null, notes: a.note ?? null })
+        .returning({ id: affiliatePrograms.id });
+    }
+    const [link] = await tx.select().from(affiliateLinks).where(and(eq(affiliateLinks.toolId, toolId), eq(affiliateLinks.createdBy, AFFILIATES_FILE)));
+    if (!link) {
+      await tx.insert(affiliateLinks).values({ toolId, programId: program!.id, urlTemplate: a.url, active: a.active, createdBy: AFFILIATES_FILE });
+    } else if (link.urlTemplate !== a.url) {
+      // A new URL starts fresh: earlier checks were about the old one.
+      await tx.update(affiliateLinks).set({ urlTemplate: a.url, programId: program!.id, active: a.active, lastCheckedAt: null, lastStatus: null }).where(eq(affiliateLinks.id, link.id));
+    } else if (link.active !== a.active) {
+      const [brokenOff] = await tx
+        .select({ id: agentActions.id })
+        .from(agentActions)
+        .where(
+          and(
+            eq(agentActions.action, 'affiliate_link_deactivated'),
+            eq(agentActions.entityId, link.id),
+            isNull(agentActions.revertedAt),
+            sql`${agentActions.oldValue} ->> 'urlTemplate' = ${link.urlTemplate}`,
+          ),
+        )
+        .limit(1);
+      if (!a.active || !brokenOff) await tx.update(affiliateLinks).set({ active: a.active, programId: program!.id }).where(eq(affiliateLinks.id, link.id));
+    }
+    const [now] = await tx.select({ active: affiliateLinks.active }).from(affiliateLinks).where(and(eq(affiliateLinks.toolId, toolId), eq(affiliateLinks.createdBy, AFFILIATES_FILE)));
+    if (now?.active) active++;
+  }
+  const removed = tx.update(affiliateLinks).set({ active: false });
+  await (kept.length
+    ? removed.where(and(eq(affiliateLinks.createdBy, AFFILIATES_FILE), eq(affiliateLinks.active, true), notInArray(affiliateLinks.toolId, kept)))
+    : removed.where(and(eq(affiliateLinks.createdBy, AFFILIATES_FILE), eq(affiliateLinks.active, true))));
+  return active;
+}
+
 export async function applySeed(db: Database, bundle: SeedBundle, now: Date = new Date()): Promise<SeedReport> {
   const report: SeedReport = {
     categories: bundle.taxonomy.categories.length,
@@ -410,6 +477,7 @@ export async function applySeed(db: Database, bundle: SeedBundle, now: Date = ne
     relations: 0,
     computedAlternatives: 0,
     statusClamped: 0,
+    affiliateLinks: 0,
     dataVersion: 0,
   };
 
@@ -448,6 +516,8 @@ export async function applySeed(db: Database, bundle: SeedBundle, now: Date = ne
         }
       }
     }
+
+    report.affiliateLinks = await syncAffiliates(tx, bundle.affiliates, existing);
 
     // Snapshots first, so computed alternatives see current statuses (e.g. shutdown).
     const settings = await loadSettings(tx);

@@ -1,0 +1,4 @@
+{
+  "note": "Your approved affiliate links (free edition; the full platform manages them in Admin → Commerce). Add a link only after the programme has accepted you. Example entry: { \"tool\": \"descript\", \"network\": \"partnerstack\", \"url\": \"https://get.descript.com/your-code\" }. \"tool\" is the name of a file in data/tools without .json. Optional: \"terms\": \"https://…\" (the programme's terms page), \"active\": false (switch a link off), and {click_id} inside the url where the network accepts a sub-id. The link only changes the 'visit' button (/go/<tool>); rankings and comparisons never see this file. CI checks the file on every commit; the site uses the link from the next deploy.",
+  "links": []
+}

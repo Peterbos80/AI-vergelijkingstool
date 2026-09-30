@@ -256,3 +256,26 @@ export const eventSeed = z.object({
   observed: isoDate,
 });
 export type EventSeed = z.infer<typeof eventSeed>;
+
+/* ───────── Affiliate links (owner, data/affiliates.json) ───────── */
+
+/**
+ * An approved affiliate link, added by the owner after the programme accepted
+ * them. Only the outbound "visit" link changes (/go/<tool>); recommendations
+ * and their order never see this file.
+ */
+export const affiliateSeed = z.object({
+  /** Tool slug, as in data/tools/<slug>.json. */
+  tool: z.string().regex(/^[a-z0-9-]+$/),
+  /** Where the programme runs, e.g. "partnerstack", "impact", "awin", "direct". */
+  network: z.string().regex(/^[a-z0-9-]{2,40}$/),
+  /** The personal link from the programme; may contain {click_id} where the network takes a sub-id. */
+  url: z.string().min(12).max(1000),
+  /** false switches the link off without deleting it. */
+  active: z.boolean().default(true),
+  /** The programme's terms page. */
+  terms: z.string().url().startsWith('https://').optional(),
+  note: z.string().max(300).optional(),
+});
+export type AffiliateSeed = z.infer<typeof affiliateSeed>;
+export const affiliatesFile = z.object({ note: z.string().optional(), links: z.array(affiliateSeed) });

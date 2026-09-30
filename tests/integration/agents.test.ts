@@ -375,6 +375,8 @@ describe('opportunity and monetization agents', () => {
     const [after] = await db.select().from(affiliateLinks).where(eq(affiliateLinks.id, link!.id));
     expect(after?.active).toBe(false);
     const [action] = await db.select().from(agentActions).where(eq(agentActions.action, 'affiliate_link_deactivated'));
+    // The URL it judged, so a push of the same URL in data/affiliates.json does not switch it back on.
+    expect(action?.oldValue).toEqual({ active: true, urlTemplate: 'https://partner.example.net/track?sub={click_id}' });
     expect(await revertAction(db, action!.id, 'test')).toBe('reverted');
     expect((await db.select().from(affiliateLinks).where(eq(affiliateLinks.id, link!.id)))[0]?.active).toBe(true);
   });

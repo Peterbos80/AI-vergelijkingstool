@@ -32,7 +32,8 @@ CI tests the static edition on every push (`playwright.static.config.ts`).
 3. DNS at the registrar (TransIP): `@` A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`; `www` CNAME `peterbos80.github.io.`. GitHub redirects `www` to the bare domain.
 4. Optional repository variables (*Settings → Secrets and variables → Actions → Variables*): `SITE_URL` (if not `https://aitoolswijzer.nl`; it must match the custom domain), `LEGAL_NAME`, `LEGAL_KVK`, `LEGAL_ADDRESS`, `LEGAL_EMAIL` (shown on /about; required for a commercial site in the Netherlands). No secrets are needed.
 5. Optional repository secret (*Settings → Secrets and variables → Actions → Secrets*): `YOUTUBE_API_KEY`, a free YouTube Data API key (Google Cloud console → enable "YouTube Data API v3" → Credentials → API key, restricted to that API). With it, the news and video agents read YouTube channels through the API; without it they use the channel feeds only where YouTube's robots.txt allows (the news agent's run summary names every skipped channel). The hourly news run uses about 120 of the 10,000 free daily quota units.
-6. Run the workflow once (*Actions → Site and agents → Run workflow*) or push to the default branch.
+6. Affiliate links (after a programme has approved you): add them to `data/affiliates.json` and commit; see [MONETIZATION.md](MONETIZATION.md#free-edition-dataaffiliatesjson).
+7. Run the workflow once (*Actions → Site and agents → Run workflow*) or push to the default branch.
 
 **Limits to know.**
 
