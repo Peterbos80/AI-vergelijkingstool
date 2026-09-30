@@ -1665,6 +1665,10 @@
       "noPlacements": "No placements yet.",
       "addPlacement": "Add placement",
       "slot": "Slot",
+      "slots": {
+        "home_sponsored": "Home page (sponsored block)",
+        "newsletter": "Newsletter (sponsored line)"
+      },
       "period": "Period",
       "placementStatus": {
         "scheduled": "scheduled",

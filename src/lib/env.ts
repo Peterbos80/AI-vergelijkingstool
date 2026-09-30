@@ -32,10 +32,6 @@ const schema = z.object({
   YOUTUBE_API_KEY: optional,
   GITHUB_TOKEN: optional,
   GITHUB_ISSUES_REPO: optional,
-  AGENT_ENABLE_RENDERER: z
-    .enum(['true', 'false'])
-    .default('false')
-    .transform((v) => v === 'true'),
   AGENT_USER_AGENT: z.string().default('AIToolsWijzerBot/1.0 (+https://aitoolswijzer.nl/bot)'),
   LEGAL_NAME: optional,
   LEGAL_KVK: optional,

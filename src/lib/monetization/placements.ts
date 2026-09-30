@@ -10,7 +10,9 @@ import { getDb } from '@/lib/db/client';
 import { placements } from '@/lib/db/schema';
 import { readDataVersion } from '@/lib/settings';
 
-export type Slot = 'home_sponsored' | 'newsletter' | 'task_sponsored';
+/** Slots that are actually rendered (home page block, newsletter line). Only these can be sold. */
+export const PLACEMENT_SLOTS = ['home_sponsored', 'newsletter'] as const;
+export type Slot = (typeof PLACEMENT_SLOTS)[number];
 
 export interface ActivePlacement {
   id: string;

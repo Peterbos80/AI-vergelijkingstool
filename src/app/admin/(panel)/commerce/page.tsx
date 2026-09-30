@@ -7,6 +7,7 @@ import { formatDate, formatDateTime, formatMoney, formatNumber } from '@/i18n/fo
 import { can, getAdmin } from '@/lib/auth/session';
 import { Badge, Card, Empty, Flash, PageHeader, statusTone, Table, TextLink } from '@/components/admin/ui';
 import { SubmitButton } from '@/components/admin/SubmitButton';
+import { PLACEMENT_SLOTS } from '@/lib/monetization/placements';
 import { addEntryAction, addLinkAction, addPlacementAction, addProgramAction, cancelPlacementAction, importConversionsAction, leadStatusAction, programStatusAction, toggleLinkAction } from './actions';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -308,7 +309,7 @@ export default async function CommercePage({ searchParams }: { searchParams: Pro
                       {tool}
                       <div className="text-xs font-normal text-ink-2">{p.message[locale] ?? p.message.en ?? p.message.nl ?? ''}</div>
                     </td>
-                    <td className="mono text-xs">{p.slot}</td>
+                    <td className="text-xs">{t(`admin.commerce.slots.${p.slot}`)}</td>
                     <td className="text-xs whitespace-nowrap">
                       {formatDate(p.startsAt, locale)} – {formatDate(p.endsAt, locale)}
                     </td>
@@ -334,9 +335,9 @@ export default async function CommercePage({ searchParams }: { searchParams: Pro
               <form action={addPlacementAction} className="mt-3 grid gap-3 sm:grid-cols-2">
                 {toolSelect('tool')}
                 <select name="slot" className="input" aria-label={t('admin.commerce.slot')}>
-                  {['home_sponsored', 'newsletter', 'task_sponsored'].map((x) => (
+                  {PLACEMENT_SLOTS.map((x) => (
                     <option key={x} value={x}>
-                      {x}
+                      {t(`admin.commerce.slots.${x}`)}
                     </option>
                   ))}
                 </select>

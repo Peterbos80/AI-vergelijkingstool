@@ -1,0 +1,20 @@
+# Local development database only (the app itself runs with `npm run dev`).
+#   docker compose up -d        → PostgreSQL 16 on localhost:5432 (aitw/aitw)
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: aitw
+      POSTGRES_PASSWORD: aitw
+      POSTGRES_DB: aitoolswijzer
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./scripts/sql/create-e2e-db.sql:/docker-entrypoint-initdb.d/create-e2e-db.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U aitw']
+      interval: 5s
+      retries: 10
+volumes:
+  pgdata:

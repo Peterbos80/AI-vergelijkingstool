@@ -30,7 +30,8 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[s
     title: t('plans.metaTitle', { name: tool.name, year }),
     description: clip(t('plans.metaDescription', { name: tool.name, count: tool.plans.length, price: entryPriceLabel(tool, t, locale) })),
     alternates: alternates(locale, (l) => href.toolPricing(l, tool.slug), Object.keys(tool.text) as Locale[]),
-    robots: robots(tool.indexable.pricing),
+    // Same gate as the sitemap: indexable only in locales with the tool's own text.
+    robots: robots(tool.indexable.pricing && toolText(tool, locale)?.locale === locale),
   };
 }
 
@@ -48,7 +49,6 @@ export default async function PricingPage({ params }: PageProps<'/[locale]/tools
   for (const h of detail.history) historyByPlan.set(h.planKey, [...(historyByPlan.get(h.planKey) ?? []), h]);
   const changedPlans = [...historyByPlan.entries()].filter(([, rows]) => rows.some((r) => r.validTo !== null));
   const isAffiliate = affiliates.has(tool.id);
-  void toolText;
 
   return (
     <article className="container-page py-8">

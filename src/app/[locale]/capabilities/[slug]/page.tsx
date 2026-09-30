@@ -25,8 +25,9 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/capabili
   return {
     title: t('capability.metaTitle', { name: n.name.toLowerCase(), year: new Date().getFullYear() }),
     description: clip(t('capability.metaDescription', { name: n.name.toLowerCase(), count: tools.length })),
-    alternates: alternates(locale, (l) => href.capability(l, nameOf(cap, l).slug)),
-    robots: robots(primary >= 4),
+    // Same gates as the sitemap: own text in this locale, and enough tools.
+    alternates: alternates(locale, (l) => href.capability(l, nameOf(cap, l).slug), Object.keys(cap.text) as Locale[]),
+    robots: robots(primary >= 4 && n.locale === locale),
   };
 }
 

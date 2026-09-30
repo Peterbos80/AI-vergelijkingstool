@@ -28,9 +28,9 @@ export const STATUS_COLOR: Record<string, string> = { verified: C.verified, supp
 let fonts: Promise<{ name: string; data: Buffer; weight: 400 | 700; style: 'normal' }[]> | null = null;
 function loadFonts() {
   fonts ??= Promise.all([
-    readFile(new URL('../app/fonts/og/schibsted-grotesk-latin-400-normal.woff', import.meta.url)),
-    readFile(new URL('../app/fonts/og/schibsted-grotesk-latin-700-normal.woff', import.meta.url)),
-    readFile(new URL('../app/fonts/og/ibm-plex-mono-latin-400-normal.woff', import.meta.url)),
+    readFile(new URL('./og/fonts/schibsted-grotesk-latin-400-normal.woff', import.meta.url)),
+    readFile(new URL('./og/fonts/schibsted-grotesk-latin-700-normal.woff', import.meta.url)),
+    readFile(new URL('./og/fonts/ibm-plex-mono-latin-400-normal.woff', import.meta.url)),
   ]).then(([regular, bold, mono]) => [
     { name: 'Grotesk', data: regular, weight: 400 as const, style: 'normal' as const },
     { name: 'Grotesk', data: bold, weight: 700 as const, style: 'normal' as const },

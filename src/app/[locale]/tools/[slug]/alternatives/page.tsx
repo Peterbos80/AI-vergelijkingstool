@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
-import { getCatalog, nameOf } from '@/lib/catalog';
+import { getCatalog, nameOf, toolText } from '@/lib/catalog';
 import { href } from '@/lib/routes';
 import { alternates, clip, robots } from '@/lib/seo';
 import { track } from '@/lib/analytics/track';
@@ -28,7 +28,8 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[s
     title: t('alternatives.metaTitle', { name: tool.name, count }),
     description: clip(t('alternatives.metaDescription', { name: tool.name })),
     alternates: alternates(locale, (l) => href.toolAlternatives(l, tool.slug), Object.keys(tool.text) as Locale[]),
-    robots: robots(tool.indexable.alternatives),
+    // Same gate as the sitemap: indexable only in locales with the tool's own text.
+    robots: robots(tool.indexable.alternatives && toolText(tool, locale)?.locale === locale),
   };
 }
 

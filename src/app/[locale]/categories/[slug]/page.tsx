@@ -6,7 +6,7 @@ import { getT } from '@/i18n/server';
 import { findBySlug, getCatalog, nameOf, taskSlug, taskTextOf } from '@/lib/catalog';
 import { rankForCapability } from '@/lib/engine/rank';
 import { href } from '@/lib/routes';
-import { alternates, clip } from '@/lib/seo';
+import { alternates, clip, robots } from '@/lib/seo';
 import { track } from '@/lib/analytics/track';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ToolRow } from '@/components/data/ToolRow';
@@ -17,7 +17,13 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/categori
   const cat = findBySlug(catalog.categories, slug, locale);
   if (!cat) return {};
   const n = nameOf(cat, locale);
-  return { title: n.name, description: clip(n.description ?? n.name), alternates: alternates(locale, (l) => href.category(l, nameOf(cat, l).slug)) };
+  return {
+    title: n.name,
+    description: clip(n.description ?? n.name),
+    // Same gate as the sitemap: only locales with the category's own text are indexable.
+    alternates: alternates(locale, (l) => href.category(l, nameOf(cat, l).slug), Object.keys(cat.text) as Locale[]),
+    robots: robots(n.locale === locale),
+  };
 }
 
 export default async function CategoryPage({ params }: PageProps<'/[locale]/categories/[slug]'>) {

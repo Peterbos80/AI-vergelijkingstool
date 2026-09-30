@@ -24,9 +24,9 @@ const nextConfig: NextConfig = {
   experimental: {
     globalNotFound: true,
   },
-  // Agents, scripts and tests share code with the web app; keep heavy optional
-  // dependencies (Playwright renderer, PGlite) out of the server bundle.
-  serverExternalPackages: ['@electric-sql/pglite', 'playwright', 'playwright-core'],
+  // Agents, scripts and tests share code with the web app; keep the in-process
+  // test database (PGlite) out of the server bundle.
+  serverExternalPackages: ['@electric-sql/pglite'],
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },

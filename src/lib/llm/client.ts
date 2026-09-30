@@ -1,6 +1,6 @@
 /**
- * Budgeted, guarded access to Claude for structured tasks (intent, extraction,
- * classification, drafts). Rules (docs/strategy/08 §9):
+ * Budgeted, guarded access to Claude for structured tasks (Match intent and
+ * tool-text drafts/translations). Rules (docs/strategy/08 §9):
  *  - external/user content is data, delimited and never treated as instructions;
  *  - output must validate against a Zod schema (structured outputs), else null;
  *  - a hard daily spend cap (min of env and owner setting) → null = fallback;
@@ -19,7 +19,7 @@ import { loadSettings } from '@/lib/settings';
 import { logError } from '@/lib/ops/errors';
 import { estimateCostMicros } from './pricing';
 
-export type LlmPurpose = 'match_intent' | 'price_extraction' | 'change_classification' | 'content_draft' | 'report_summary' | 'candidate_dossier';
+export type LlmPurpose = 'match_intent' | 'content_draft';
 
 let client: Anthropic | null = null;
 

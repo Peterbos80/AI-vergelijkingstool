@@ -1059,7 +1059,7 @@ export const placements = pgTable('placements', {
   toolId: uuid('tool_id')
     .notNull()
     .references(() => tools.id, { onDelete: 'cascade' }),
-  slot: text('slot').$type<'home_sponsored' | 'newsletter' | 'task_sponsored'>().notNull(),
+  slot: text('slot').$type<'home_sponsored' | 'newsletter'>().notNull(),
   message: jsonb('message').$type<LocalizedText>().notNull(),
   startsAt: ts('starts_at').notNull(),
   endsAt: ts('ends_at').notNull(),

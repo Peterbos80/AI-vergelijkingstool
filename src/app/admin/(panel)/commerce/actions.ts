@@ -8,6 +8,7 @@ import { audit, requireAdmin } from '@/lib/auth/session';
 import { importConversions, parseConversions } from '@/lib/admin/commerce';
 import { validateTemplate } from '@/agents/defs/monetization';
 import { bumpDataVersion } from '@/lib/settings';
+import { PLACEMENT_SLOTS, type Slot as PlacementSlot } from '@/lib/monetization/placements';
 
 const UUID = /^[0-9a-f-]{36}$/i;
 const str = (f: FormData, k: string, max = 500) => String(f.get(k) ?? '').trim().slice(0, max);
@@ -135,18 +136,16 @@ export async function leadStatusAction(formData: FormData): Promise<void> {
   redirect('/admin/commerce?flash=saved#leads');
 }
 
-const SLOTS = ['home_sponsored', 'newsletter', 'task_sponsored'] as const;
-
 export async function addPlacementAction(formData: FormData): Promise<void> {
   const user = await requireAdmin('owner');
   const toolId = await toolIdBySlug(str(formData, 'tool', 80));
-  const slot = str(formData, 'slot') as (typeof SLOTS)[number];
+  const slot = str(formData, 'slot') as PlacementSlot;
   const nl = str(formData, 'messageNl', 160);
   const en = str(formData, 'messageEn', 160);
   const starts = new Date(`${str(formData, 'startsAt', 10)}T00:00:00Z`);
   const ends = new Date(`${str(formData, 'endsAt', 10)}T23:59:59Z`);
   const price = str(formData, 'price');
-  if (!toolId || !SLOTS.includes(slot) || (!nl && !en) || Number.isNaN(starts.getTime()) || Number.isNaN(ends.getTime()) || ends <= starts) {
+  if (!toolId || !PLACEMENT_SLOTS.includes(slot) || (!nl && !en) || Number.isNaN(starts.getTime()) || Number.isNaN(ends.getTime()) || ends <= starts) {
     redirect('/admin/commerce?flash=invalid#placements');
   }
   const db = getDb();

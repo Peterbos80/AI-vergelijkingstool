@@ -1665,6 +1665,10 @@
       "noPlacements": "Nog geen plaatsingen.",
       "addPlacement": "Plaatsing toevoegen",
       "slot": "Plek",
+      "slots": {
+        "home_sponsored": "Homepage (gesponsord blok)",
+        "newsletter": "Nieuwsbrief (gesponsorde regel)"
+      },
       "period": "Periode",
       "placementStatus": {
         "scheduled": "gepland",
