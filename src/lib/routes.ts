@@ -42,7 +42,7 @@ export const href = {
   pulse: (l: Locale, q?: Query) => withQuery(`/${l}/pulse`, q),
   page: (
     l: Locale,
-    page: 'methodology' | 'disclosure' | 'corrections' | 'newsletter' | 'about' | 'privacy' | 'api',
+    page: 'methodology' | 'disclosure' | 'corrections' | 'newsletter' | 'about' | 'privacy' | 'api' | 'bot',
   ) => `/${l}/${page}`,
   go: (slug: string, q?: { src?: string; pos?: number; mq?: string; l?: Locale }) => withQuery(`/go/${slug}`, q),
 };

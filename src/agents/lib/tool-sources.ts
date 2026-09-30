@@ -1,4 +1,4 @@
-/** Source bookkeeping shared by fetching agents. */
+/** Source bookkeeping shared by fetching agents: status, failures and a content hash per fetch. */
 import { and, eq } from 'drizzle-orm';
 import type { Database } from '@/lib/db/client';
 import { sources, sourceSnapshots } from '@/lib/db/schema';
@@ -36,8 +36,8 @@ export async function recordFetch(
       fetchedAt: now,
       httpStatus: res.status,
       contentHash: hash,
+      // Only a fingerprint of the page: its text is never stored or republished (docs/DATA_SOURCES.md).
       textLength: text.length,
-      text: text.slice(0, 200_000),
       changed,
     });
   }

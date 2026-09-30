@@ -32,6 +32,15 @@ test('robots.txt and sitemap', async ({ request }) => {
   expect(sitemap).not.toContain('/admin');
 });
 
+test('the crawler page named in our user agent exists and says how to block the bot', async ({ page, request }) => {
+  const res = await request.get('/bot', { maxRedirects: 0, headers: { 'Accept-Language': 'en' } });
+  expect(res.status()).toBe(307);
+  expect(res.headers()['location']).toMatch(/\/en\/bot$/);
+  await page.goto('/nl/bot');
+  await expect(page.locator('h1')).toContainText('AIToolsWijzerBot');
+  await expect(page.getByTestId('bot-robots')).toContainText('User-agent: AIToolsWijzerBot');
+});
+
 test('OG receipts render as images', async ({ request }) => {
   for (const path of ['/nl/opengraph-image', '/en/tools/elevenlabs/opengraph-image', '/en/compare/chatgpt-vs-claude/opengraph-image']) {
     const res = await request.get(path);

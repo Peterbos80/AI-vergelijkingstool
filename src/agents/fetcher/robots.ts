@@ -32,8 +32,10 @@ export function parseRobots(txt: string, agentToken: string): RobotsRules {
       current.rules.push({ allow: key === 'allow', pattern: value });
     }
   }
-  const token = agentToken.toLowerCase();
-  const specific = groups.filter((g) => g.agents.some((a) => a !== '*' && token.includes(a)));
+  // RFC 9309: match the product token ("AIToolsWijzerBot" of "AIToolsWijzerBot/1.0 (+…)"),
+  // case-insensitively and exactly, so a group for e.g. "bot" never applies to us.
+  const token = (agentToken.split('/')[0] ?? agentToken).trim().toLowerCase();
+  const specific = groups.filter((g) => g.agents.some((a) => a !== '*' && a === token));
   const chosen = specific.length ? specific : groups.filter((g) => g.agents.includes('*'));
   return { rules: chosen.flatMap((g) => g.rules) };
 }

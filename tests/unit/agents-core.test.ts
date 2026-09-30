@@ -70,6 +70,13 @@ describe('robots.txt', () => {
     expect(isAllowed(other, '/private/public')).toBe(true);
     expect(isAllowed(other, '/pricing')).toBe(true);
   });
+  it('matches groups on the product token only (RFC 9309), not on parts of the user-agent string', () => {
+    const tricky = 'User-agent: bot\nAllow: /\n\nUser-agent: *\nDisallow: /\n';
+    const ours = parseRobots(tricky, 'AIToolsWijzerBot/1.0 (+https://aitoolswijzer.nl/bot)');
+    expect(isAllowed(ours, '/pricing')).toBe(false);
+    const caseInsensitive = parseRobots('User-agent: aitoolswijzerbot\nDisallow: /\n', 'AIToolsWijzerBot/1.0');
+    expect(isAllowed(caseInsensitive, '/')).toBe(false);
+  });
 });
 
 describe('policy and anomaly guard', () => {

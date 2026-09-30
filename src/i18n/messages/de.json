@@ -898,6 +898,28 @@
       }
     }
   },
+  "bot": {
+    "title": "Über AIToolsWijzerBot",
+    "metaDescription": "Was unser Crawler abruft, wie oft und wie du ihn blockierst.",
+    "intro": "AIToolsWijzerBot hält die Preise und Fakten auf AIToolsWijzer aktuell. Er liest nur öffentliche Seiten der KI-Tools, die wir zeigen, damit wir sie als Quelle angeben können.",
+    "whatTitle": "Was er liest",
+    "what1": "Offizielle Preisseiten, um die angezeigten Preise zu prüfen.",
+    "what2": "Startseiten, um zu prüfen, ob ein Tool noch online ist (eine leichte Anfrage, die höchstens 16 KB liest).",
+    "what3": "Offizielle Changelogs und RSS/Atom-Feeds für Release-Informationen.",
+    "what4": "Öffentliche Seiten neuer Kandidaten-Tools, bevor ein Mensch sie prüft.",
+    "howTitle": "Wie er sich verhält",
+    "how1": "Er beachtet robots.txt für den User-Agent AIToolsWijzerBot (mindestens einmal täglich neu gelesen).",
+    "how2": "Mindestens 5 Sekunden zwischen Anfragen an dieselbe Website und höchstens 2 gleichzeitig.",
+    "how3": "Preisseiten höchstens etwa einmal täglich; Startseiten und Feeds etwa alle 6 Stunden.",
+    "how4": "Keine Logins, keine Formulare, keine Cookies und kein JavaScript. Er liest nur.",
+    "storeTitle": "Was wir speichern",
+    "storeBody": "Einen Fingerabdruck (Hash) der Seite, um Änderungen zu erkennen, und höchstens ein kurzes Zitat mit Link zur Quelle neben dem Fakt, den es belegt. Wir veröffentlichen deine Seiten nie erneut.",
+    "blockTitle": "So blockierst du ihn",
+    "blockBody": "Füge dies in deine robots.txt ein. Wir übernehmen es innerhalb von 24 Stunden:",
+    "contactTitle": "Fragen oder Korrekturen",
+    "contactEmail": "Schreib uns an {email}.",
+    "contactCorrections": "Oder melde einen Fehler über die Korrekturseite."
+  },
   "apiPage": {
     "title": "Öffentliche Daten-API",
     "metaDescription": "Kostenlose, schreibgeschützte JSON-API mit KI-Tools, Preisen, Status und Quellen von AIToolsWijzer.",

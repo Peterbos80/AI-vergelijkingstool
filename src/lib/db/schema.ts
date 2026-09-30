@@ -366,6 +366,7 @@ export const sourceSnapshots = pgTable(
     httpStatus: integer('http_status'),
     contentHash: text('content_hash'),
     textLength: integer('text_length'),
+    /** Unused: page text is not stored (only the hash). Kept nullable for compatibility. */
     text: text('text'),
     changed: boolean('changed').notNull().default(false),
   },

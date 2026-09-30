@@ -955,6 +955,28 @@
       }
     }
   },
+  "bot": {
+    "title": "About AIToolsWijzerBot",
+    "metaDescription": "What our crawler fetches, how often, and how to block it.",
+    "intro": "AIToolsWijzerBot keeps the prices and facts on AIToolsWijzer up to date. It only reads public pages of the AI tools we list, so we can cite them as sources.",
+    "whatTitle": "What it reads",
+    "what1": "Official pricing pages, to check the prices we show.",
+    "what2": "Home pages, to check that a tool is still online (a light request that reads at most 16 KB).",
+    "what3": "Official changelogs and RSS/Atom feeds, for release notes.",
+    "what4": "Public pages of new candidate tools, before a person reviews them.",
+    "howTitle": "How it behaves",
+    "how1": "It follows robots.txt for the user agent AIToolsWijzerBot (re-read at least once a day).",
+    "how2": "At least 5 seconds between requests to the same site, and at most 2 at a time.",
+    "how3": "Pricing pages at most about once a day; home pages and feeds about every 6 hours.",
+    "how4": "No logins, no forms, no cookies and no JavaScript. It only reads.",
+    "storeTitle": "What we keep",
+    "storeBody": "A fingerprint (hash) of the page to notice changes, and at most a short quote with a link to the source, shown next to the fact it supports. We never republish your pages.",
+    "blockTitle": "How to block it",
+    "blockBody": "Add this to your robots.txt. We pick it up within 24 hours:",
+    "contactTitle": "Questions or corrections",
+    "contactEmail": "E-mail us at {email}.",
+    "contactCorrections": "Or report an error on the corrections page."
+  },
   "apiPage": {
     "title": "Public data API",
     "metaDescription": "Free, read-only JSON API with AI tools, pricing, statuses and sources from AIToolsWijzer.",

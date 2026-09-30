@@ -955,6 +955,28 @@
       }
     }
   },
+  "bot": {
+    "title": "Over AIToolsWijzerBot",
+    "metaDescription": "Wat onze crawler ophaalt, hoe vaak, en hoe je hem blokkeert.",
+    "intro": "AIToolsWijzerBot houdt de prijzen en feiten op AIToolsWijzer actueel. Hij leest alleen openbare pagina's van de AI-tools die we tonen, zodat we ze als bron kunnen vermelden.",
+    "whatTitle": "Wat hij leest",
+    "what1": "Officiële prijspagina's, om de prijzen te controleren die we tonen.",
+    "what2": "Homepages, om te controleren of een tool nog online is (een lichte aanvraag die hooguit 16 KB leest).",
+    "what3": "Officiële changelogs en RSS/Atom-feeds, voor release-informatie.",
+    "what4": "Openbare pagina's van nieuwe kandidaat-tools, voordat een mens ze beoordeelt.",
+    "howTitle": "Hoe hij zich gedraagt",
+    "how1": "Hij volgt robots.txt voor de user agent AIToolsWijzerBot (minstens één keer per dag opnieuw gelezen).",
+    "how2": "Minstens 5 seconden tussen aanvragen naar dezelfde site, en hooguit 2 tegelijk.",
+    "how3": "Prijspagina's hooguit ongeveer één keer per dag; homepages en feeds ongeveer elke 6 uur.",
+    "how4": "Geen logins, geen formulieren, geen cookies en geen JavaScript. Hij leest alleen.",
+    "storeTitle": "Wat we bewaren",
+    "storeBody": "Een vingerafdruk (hash) van de pagina om wijzigingen te zien, en hooguit een kort citaat met een link naar de bron, naast het feit dat het onderbouwt. We publiceren je pagina's nooit opnieuw.",
+    "blockTitle": "Hoe je hem blokkeert",
+    "blockBody": "Zet dit in je robots.txt. We pikken het binnen 24 uur op:",
+    "contactTitle": "Vragen of correcties",
+    "contactEmail": "Mail ons op {email}.",
+    "contactCorrections": "Of meld een fout via de correctiepagina."
+  },
   "apiPage": {
     "title": "Publieke data-API",
     "metaDescription": "Gratis, read-only JSON-API met AI-tools, prijzen, statussen en bronnen van AIToolsWijzer.",

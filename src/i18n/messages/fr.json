@@ -898,6 +898,28 @@
       }
     }
   },
+  "bot": {
+    "title": "À propos d’AIToolsWijzerBot",
+    "metaDescription": "Ce que notre robot consulte, à quelle fréquence, et comment le bloquer.",
+    "intro": "AIToolsWijzerBot tient à jour les prix et les faits sur AIToolsWijzer. Il ne lit que les pages publiques des outils d’IA que nous présentons, afin de pouvoir les citer comme sources.",
+    "whatTitle": "Ce qu’il lit",
+    "what1": "Les pages de tarifs officielles, pour vérifier les prix affichés.",
+    "what2": "Les pages d’accueil, pour vérifier qu’un outil est toujours en ligne (une requête légère qui lit au plus 16 Ko).",
+    "what3": "Les journaux des modifications et les flux RSS/Atom officiels, pour les nouvelles versions.",
+    "what4": "Les pages publiques de nouveaux outils candidats, avant qu’une personne ne les examine.",
+    "howTitle": "Comment il se comporte",
+    "how1": "Il respecte robots.txt pour l’agent utilisateur AIToolsWijzerBot (relu au moins une fois par jour).",
+    "how2": "Au moins 5 secondes entre deux requêtes vers le même site, et au plus 2 à la fois.",
+    "how3": "Pages de tarifs au plus environ une fois par jour ; pages d’accueil et flux environ toutes les 6 heures.",
+    "how4": "Pas de connexion, pas de formulaires, pas de cookies et pas de JavaScript. Il ne fait que lire.",
+    "storeTitle": "Ce que nous conservons",
+    "storeBody": "Une empreinte (hash) de la page pour repérer les changements, et au plus une courte citation avec un lien vers la source, à côté du fait qu’elle étaye. Nous ne republions jamais vos pages.",
+    "blockTitle": "Comment le bloquer",
+    "blockBody": "Ajoutez ceci à votre robots.txt. Nous en tenons compte sous 24 heures :",
+    "contactTitle": "Questions ou corrections",
+    "contactEmail": "Écrivez-nous à {email}.",
+    "contactCorrections": "Ou signalez une erreur sur la page des corrections."
+  },
   "apiPage": {
     "title": "API de données publique",
     "metaDescription": "API JSON gratuite en lecture seule avec les outils d’IA, les tarifs, les statuts et les sources d’AIToolsWijzer.",
