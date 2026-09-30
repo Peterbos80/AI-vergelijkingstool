@@ -54,12 +54,12 @@ export const pricingAgent: AgentDefinition = {
       const tool = all.find((t) => t.id === s.toolId)!;
       const res = await ctx.fetcher.get(s.url, { accept: 'html' });
       if (!res.ok) {
-        await recordFetch(db, s.id, res);
+        await recordFetch(db, s.id, res, undefined, now);
         ctx.stat(`fetch_${res.errorKind ?? 'error'}`);
         continue;
       }
       const page = htmlToText(res.body, res.finalUrl);
-      await recordFetch(db, s.id, res, page.text);
+      await recordFetch(db, s.id, res, page.text, now);
       ctx.stat('pages_checked');
       const plans = await db
         .select()
@@ -114,7 +114,18 @@ export const pricingAgent: AgentDefinition = {
           if (!pending) {
             [pending] = await db
               .insert(pendingChanges)
-              .values({ toolId: tool.id, key: `plan:${plan.planKey}`, proposedValue: { cents: check.cents, currency: check.currency }, valueHash: vh, sourceId: s.id, evidence: check.snippet, confidence: 95, agent: 'pricing' })
+              .values({
+                toolId: tool.id,
+                key: `plan:${plan.planKey}`,
+                proposedValue: { cents: check.cents, currency: check.currency },
+                valueHash: vh,
+                sourceId: s.id,
+                evidence: check.snippet,
+                confidence: 95,
+                agent: 'pricing',
+                firstObservedAt: now,
+                lastObservedAt: now,
+              })
               .returning();
             ctx.stat('changes_observed');
             continue;

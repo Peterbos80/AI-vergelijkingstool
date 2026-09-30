@@ -5,8 +5,13 @@ import { sources, sourceSnapshots } from '@/lib/db/schema';
 import type { FetchResult } from '../fetcher/types';
 import { contentHash } from '../fetcher/text';
 
-export async function recordFetch(db: Database, sourceId: string, res: FetchResult, text?: string): Promise<{ changed: boolean; hash: string | null }> {
-  const now = new Date();
+export async function recordFetch(
+  db: Database,
+  sourceId: string,
+  res: FetchResult,
+  text?: string,
+  now: Date = new Date(),
+): Promise<{ changed: boolean; hash: string | null }> {
   if (!res.ok) {
     const [s] = await db.select().from(sources).where(eq(sources.id, sourceId));
     await db
@@ -28,6 +33,7 @@ export async function recordFetch(db: Database, sourceId: string, res: FetchResu
   if (hash && (changed || !s?.lastContentHash) && text !== undefined) {
     await db.insert(sourceSnapshots).values({
       sourceId,
+      fetchedAt: now,
       httpStatus: res.status,
       contentHash: hash,
       textLength: text.length,

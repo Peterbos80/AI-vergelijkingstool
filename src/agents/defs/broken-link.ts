@@ -56,7 +56,7 @@ export const brokenLinkAgent: AgentDefinition = {
     for (const r of results) {
       const before = changed;
       const res = { ok: r.ok, url: r.source.url, finalUrl: r.source.url, status: r.ok ? 200 : null, contentType: null, body: '', durationMs: 0, redirects: [], errorKind: r.kind as never, error: r.kind };
-      await recordFetch(db, r.source.id, res);
+      await recordFetch(db, r.source.id, res, undefined, now);
       const [src] = await db.select().from(sources).where(eq(sources.id, r.source.id));
       await db.update(tools).set({ websiteCheckedAt: now }).where(eq(tools.id, r.tool.id));
       if (r.ok && r.tool.websiteStatus !== 'up') {

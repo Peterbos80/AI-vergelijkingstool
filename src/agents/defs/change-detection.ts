@@ -61,7 +61,7 @@ export const changeDetectionAgent: AgentDefinition = {
     for (const f of feeds) {
       if (ctx.signal.aborted) break;
       const res = await ctx.fetcher.get(f.url, { accept: 'xml' });
-      await recordFetch(db, f.id, res);
+      await recordFetch(db, f.id, res, undefined, ctx.now());
       if (!res.ok) {
         ctx.stat('feed_failed');
         continue;

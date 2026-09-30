@@ -159,6 +159,18 @@ export const DEPENDENCIES: DependencyCheck[] = [
     },
   },
   {
+    key: 'youtube',
+    escalate: null,
+    ownerAction: 'Optional: YOUTUBE_API_KEY enables video search (official channel RSS works without it).',
+    run: async () => (env().YOUTUBE_API_KEY ? { status: 'ok', message: 'configured' } : { status: 'not_configured', message: 'video search off; official channel feeds only' }),
+  },
+  {
+    key: 'github',
+    escalate: null,
+    ownerAction: 'Optional: GITHUB_TOKEN raises GitHub API limits for discovery and release tracking.',
+    run: async () => (env().GITHUB_TOKEN ? { status: 'ok', message: 'configured' } : { status: 'not_configured', message: 'unauthenticated GitHub limits apply (enough for daily runs)' }),
+  },
+  {
     key: 'search_console',
     escalate: null,
     ownerAction: 'Optional: verify the domain in Google Search Console (not connected in this version).',

@@ -24,6 +24,8 @@ export interface EscalationInput {
   confidence?: number | null;
   createdBy: string;
   runId?: string | null;
+  /** Clock for due dates (agents pass their run clock). */
+  now?: Date;
 }
 
 export interface Escalator {
@@ -42,12 +44,13 @@ export async function escalate(db: Database, input: EscalationInput): Promise<{ 
       const next = [...items, input.payload].slice(-50);
       await db
         .update(reviewItems)
-        .set({ groupCount: sql`${reviewItems.groupCount} + 1`, payload: { ...open.payload, items: next }, updatedAt: new Date() })
+        .set({ groupCount: sql`${reviewItems.groupCount} + 1`, payload: { ...open.payload, items: next }, updatedAt: input.now ?? new Date() })
         .where(eq(reviewItems.id, open.id));
       return { id: open.id, created: false };
     }
   }
-  const dueAt = input.dueInHours !== undefined ? new Date(Date.now() + input.dueInHours * 3600_000) : null;
+  const now = input.now ?? new Date();
+  const dueAt = input.dueInHours !== undefined ? new Date(now.getTime() + input.dueInHours * 3600_000) : null;
   const inserted = await db
     .insert(reviewItems)
     .values({
@@ -67,6 +70,8 @@ export async function escalate(db: Database, input: EscalationInput): Promise<{ 
       createdBy: input.createdBy,
       runId: input.runId ?? null,
       dedupeKey: input.dedupeKey ?? null,
+      createdAt: now,
+      updatedAt: now,
     })
     .onConflictDoNothing({ target: reviewItems.dedupeKey })
     .returning({ id: reviewItems.id });
@@ -75,9 +80,10 @@ export async function escalate(db: Database, input: EscalationInput): Promise<{ 
   return { id: existing!.id, created: false };
 }
 
-export function escalator(db: Database, defaults: { createdBy: string; runId?: string | null }): Escalator {
+export function escalator(db: Database, defaults: { createdBy: string; runId?: string | null; now?: () => Date }): Escalator {
   return {
-    escalate: (input) => escalate(db, { ...input, createdBy: input.createdBy ?? defaults.createdBy, runId: input.runId ?? defaults.runId ?? null }),
+    escalate: (input) =>
+      escalate(db, { ...input, createdBy: input.createdBy ?? defaults.createdBy, runId: input.runId ?? defaults.runId ?? null, now: input.now ?? defaults.now?.() }),
   };
 }
 

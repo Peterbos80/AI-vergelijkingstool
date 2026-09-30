@@ -27,12 +27,13 @@ export interface ActionLogger {
   action: (input: ActionInput) => Promise<string>;
 }
 
-export function actionLogger(db: Database, runId: string | null, agent: string): ActionLogger {
+export function actionLogger(db: Database, runId: string | null, agent: string, now: () => Date = () => new Date()): ActionLogger {
   return {
     action: async (a) => {
       const [row] = await db
         .insert(agentActions)
         .values({
+          createdAt: now(),
           runId,
           agent,
           action: a.action,

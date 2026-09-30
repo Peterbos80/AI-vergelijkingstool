@@ -1462,6 +1462,14 @@
       "backups": {
         "name": "Back-ups",
         "action": "Zet dagelijkse back-ups met point-in-time restore aan bij je databasehost en test maandelijks een herstel."
+      },
+      "youtube": {
+        "name": "YouTube API (optioneel)",
+        "action": "Zet eventueel YOUTUBE_API_KEY om tutorials en reviews te vinden; officiële kanaalfeeds werken ook zonder."
+      },
+      "github": {
+        "name": "GitHub-token (optioneel)",
+        "action": "Zet eventueel GITHUB_TOKEN voor hogere GitHub-API-limieten."
       }
     },
     "unmeasured": {

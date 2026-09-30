@@ -1462,6 +1462,14 @@
       "backups": {
         "name": "Backups",
         "action": "Enable daily backups with point-in-time restore at your database host and test a restore monthly."
+      },
+      "youtube": {
+        "name": "YouTube API (optional)",
+        "action": "Optionally set YOUTUBE_API_KEY to find tutorials and reviews; official channel feeds work without it."
+      },
+      "github": {
+        "name": "GitHub token (optional)",
+        "action": "Optionally set GITHUB_TOKEN for higher GitHub API limits."
       }
     },
     "unmeasured": {

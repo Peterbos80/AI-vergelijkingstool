@@ -71,7 +71,7 @@ export async function runAgent(name: AgentName, opts: RunOptions = {}): Promise<
   }
   const [run] = await db
     .insert(agentRuns)
-    .values({ agent: name, trigger: opts.trigger ?? 'manual', status: 'running' })
+    .values({ agent: name, trigger: opts.trigger ?? 'manual', status: 'running', startedAt: now() })
     .returning({ id: agentRuns.id });
   const runId = run!.id;
   const stats: Record<string, number> = {};
@@ -91,8 +91,8 @@ export async function runAgent(name: AgentName, opts: RunOptions = {}): Promise<
       autonomy: cfg.autonomy,
       config: cfg.config ?? {},
       fetcher: opts.fetcher ?? createFetcher(),
-      log: actionLogger(db, runId, name),
-      inbox: escalator(db, { createdBy: `agent:${name}`, runId }),
+      log: actionLogger(db, runId, name, now),
+      inbox: escalator(db, { createdBy: `agent:${name}`, runId, now }),
       signal: controller.signal,
       limits: { maxItems: def.maxItems },
       stat: (key, by = 1) => {
