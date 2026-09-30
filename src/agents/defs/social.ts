@@ -11,6 +11,7 @@ import { and, asc, desc, eq, sql } from 'drizzle-orm';
 import { z } from 'zod';
 import { changeEvents, socialSignals, tools } from '@/lib/db/schema';
 import { env } from '@/lib/env';
+import { isGithubRepo } from '@/lib/validate';
 import { eventText } from '../lib/event-text';
 import type { AgentContext, AgentDefinition } from '../types';
 
@@ -67,7 +68,7 @@ export const socialAgent: AgentDefinition = {
     for (const tool of due) {
       if (ctx.signal.aborted) break;
       // GitHub repository metrics and releases.
-      if (tool.githubRepo && /^[\w.-]+\/[\w.-]+$/.test(tool.githubRepo)) {
+      if (isGithubRepo(tool.githubRepo)) {
         const repo = Repo.safeParse(await getJson(ctx, `https://api.github.com/repos/${tool.githubRepo}`, ghHeaders()));
         if (repo.success) {
           await db.insert(socialSignals).values([

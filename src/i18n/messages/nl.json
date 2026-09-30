@@ -971,7 +971,8 @@
     "websiteDown": "Website niet bereikbaar",
     "websiteUp": "Website weer bereikbaar",
     "release": "Nieuwe release: {version}",
-    "buzz": "{count, plural, one {# Hacker News-verhaal} other {# Hacker News-verhalen}} deze week"
+    "buzz": "{count, plural, one {# Hacker News-verhaal} other {# Hacker News-verhalen}} deze week",
+    "newTool": "Nieuw in de catalogus"
   },
   "digest": {
     "watchSubject": "{count, plural, one {# wijziging} other {# wijzigingen}} in de AI-tools die je volgt",
@@ -1065,7 +1066,8 @@
       "note": "Notitie (optioneel)",
       "open": "Openen",
       "never": "nooit",
-      "readOnly": "Alleen-lezen rol: wijzigen is uitgeschakeld."
+      "readOnly": "Alleen-lezen rol: wijzigen is uitgeschakeld.",
+      "checkInput": "controleer de velden en probeer het opnieuw."
     },
     "overview": {
       "title": "Overzicht",
@@ -1352,7 +1354,8 @@
       },
       "ranNow": "{agent}: {status} — {summary}",
       "noRuns": "Nog geen runs. Start de worker (npm run agents:worker) of een cronjob.",
-      "revertedRun": "{reverted} teruggedraaid, {skipped} overgeslagen."
+      "revertedRun": "{reverted} teruggedraaid, {skipped} overgeslagen.",
+      "started": "Gestart. Het resultaat verschijnt hier binnen een minuut; ververs de pagina."
     },
     "reports": {
       "title": "Rapporten",
@@ -1574,7 +1577,8 @@
         "draft_text": "teksten zijn nog concepten",
         "no_capability": "geen capability"
       },
-      "created": "Concepttool aangemaakt. Vul hem hieronder aan; de content-agent schrijft tekstconcepten als er een LLM is ingesteld."
+      "created": "Concepttool aangemaakt. Vul hem hieronder aan; de content-agent schrijft tekstconcepten als er een LLM is ingesteld.",
+      "gateGeneric": "zie de checklist hierboven"
     },
     "candidates": {
       "title": "Kandidaten",
@@ -1654,6 +1658,27 @@
       "count": "Aantal",
       "last": "Laatst gezien",
       "message": "Melding"
+    },
+    "agentDescription": {
+      "health": "Controleert elke afhankelijkheid (database, agents, e-mail, sleutels, juridische gegevens, back-ups) en escaleert storingen.",
+      "escalation": "Past veilige standaarden toe na deadlines, sluit items waarvan de oorzaak weg is, pauzeert falende agents en houdt je inbox binnen budget.",
+      "quality": "Herberekent versheid, kwaliteitsscores en indexeerbaarheid; past dataretentie toe.",
+      "notifier": "Bezorgt e-mail, Watch-overzichten en de wekelijkse AI Pulse-nieuwsbrief (alleen bevestigde abonnees).",
+      "fx": "Laadt dagelijks de ECB-referentiekoersen voor de euro.",
+      "pricing": "Controleert officiële prijspagina’s; bevestigt prijzen en publiceert bevestigde wijzigingen.",
+      "broken-link": "Controleert toolwebsites; markeert tools als onbereikbaar na herhaalde fouten en herstelt ze automatisch.",
+      "change-detection": "Leest officiële changelogs en feeds en publiceert nieuwe releases in Pulse.",
+      "social": "Volgt GitHub-sterren en -releases en vermeldingen op Hacker News (alleen publieke API’s).",
+      "video": "Voegt uploads van officiële kanalen toe, vindt optioneel tutorials en reviews en verwijdert verdwenen video’s.",
+      "discovery": "Verzamelt kandidaat-AI-tools uit Show HN en GitHub; publiceert niets.",
+      "verification": "Controleert kandidaten (bereikbaarheid, AI-relevantie, blocklist, dubbelen, prijzen, juridische pagina’s) en legt goede aan jou voor.",
+      "duplicate": "Markeert tools die een website of naam delen; samenvoegen blijft jouw beslissing.",
+      "monetization": "Controleert wekelijks affiliatelinks; valt terug op de directe link als er één stuk is.",
+      "recommendation": "Draait elke nacht de golden set van echte use cases en escaleert regressies.",
+      "opportunity": "Rangschikt affiliate-, content- en gereedheidskansen op verwachte waarde; stelt de LLM-drempel bij binnen jouw grenzen.",
+      "content": "Optioneel (LLM): schrijft tekstconcepten voor nieuwe concepttools en vertaalt toolteksten naar extra talen.",
+      "reporter": "Maakt het weekrapport en mailt het naar jou als e-mail is ingesteld.",
+      "audit": "Maandelijkse willekeurige steekproef van automatische beslissingen om te beoordelen; meet de precisie per vertrouwensband."
     }
   }
 }

@@ -39,11 +39,11 @@ export function htmlToText(html: string, baseUrl: string): PageText {
 export function normalizeText(s: string): string {
   return s
     .normalize('NFKC')
-    .replace(/[​-‍﻿]/g, '')
+    .replace(/[\u200b-\u200d\ufeff]/g, '')
     .replace(/[‘’‚‛]/g, "'")
     .replace(/[“”„‟]/g, '"')
     .replace(/[‐‑‒–—―]/g, '-')
-    .replace(/ /g, ' ')
+    .replace(/\u00a0/g, ' ')
     .replace(/([$€£])\s+(\d)/g, '$1$2')
     .replace(/[ \t]+/g, ' ')
     .replace(/\s*\n\s*/g, '\n')

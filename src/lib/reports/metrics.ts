@@ -188,6 +188,9 @@ export interface StreamRevenue {
   reason?: string;
 }
 
+/** Imports that end at most this long before the period end count as complete. */
+export const IMPORT_GRACE_MS = 3 * 86_400_000;
+
 export interface RevenueMetrics {
   streams: StreamRevenue[];
   /** Known revenue in EUR; null when a currency cannot be converted. */
@@ -230,7 +233,8 @@ export async function revenueMetrics(db: Database, p: Period, staleImportDays: n
     if (!through) {
       status = imports.length ? 'partial' : 'unknown';
       reason = imports.length ? 'programme_without_import' : 'no_import_yet';
-    } else if (through < p.end) {
+    } else if (through.getTime() < p.end.getTime() - IMPORT_GRACE_MS) {
+      // Networks report with a delay; a few days of lag is normal, more is "incomplete".
       const staleDays = (p.end.getTime() - through.getTime()) / 86_400_000;
       status = 'partial';
       reason = staleDays > staleImportDays ? 'import_stale' : 'import_before_period_end';

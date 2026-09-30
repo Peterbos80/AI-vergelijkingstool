@@ -971,7 +971,8 @@
     "websiteDown": "Website unreachable",
     "websiteUp": "Website reachable again",
     "release": "New release: {version}",
-    "buzz": "{count, plural, one {# Hacker News story} other {# Hacker News stories}} this week"
+    "buzz": "{count, plural, one {# Hacker News story} other {# Hacker News stories}} this week",
+    "newTool": "New in the catalogue"
   },
   "digest": {
     "watchSubject": "{count, plural, one {# change} other {# changes}} in the AI tools you follow",
@@ -1065,7 +1066,8 @@
       "note": "Note (optional)",
       "open": "Open",
       "never": "never",
-      "readOnly": "Read-only role: changes are disabled."
+      "readOnly": "Read-only role: changes are disabled.",
+      "checkInput": "check the highlighted fields and try again."
     },
     "overview": {
       "title": "Overview",
@@ -1352,7 +1354,8 @@
       },
       "ranNow": "{agent}: {status} — {summary}",
       "noRuns": "No runs yet. Start the worker (npm run agents:worker) or a cron job.",
-      "revertedRun": "{reverted} reverted, {skipped} skipped."
+      "revertedRun": "{reverted} reverted, {skipped} skipped.",
+      "started": "Started. The result appears here within a minute; refresh the page."
     },
     "reports": {
       "title": "Reports",
@@ -1574,7 +1577,8 @@
         "draft_text": "texts are still drafts",
         "no_capability": "no capability"
       },
-      "created": "Draft tool created. Complete it below; the content agent drafts texts when an LLM is configured."
+      "created": "Draft tool created. Complete it below; the content agent drafts texts when an LLM is configured.",
+      "gateGeneric": "see the checklist above"
     },
     "candidates": {
       "title": "Candidates",
@@ -1654,6 +1658,27 @@
       "count": "Count",
       "last": "Last seen",
       "message": "Message"
+    },
+    "agentDescription": {
+      "health": "Checks every dependency (database, agents, e-mail, keys, legal details, backups) and escalates failures.",
+      "escalation": "Applies safe defaults after deadlines, closes items whose cause has cleared, pauses failing agents and keeps your inbox within budget.",
+      "quality": "Recomputes freshness, quality scores and indexability; applies data retention.",
+      "notifier": "Delivers e-mail, Watch digests and the weekly AI Pulse newsletter (confirmed subscribers only).",
+      "fx": "Loads the daily ECB euro reference rates.",
+      "pricing": "Checks official pricing pages; confirms prices and publishes confirmed changes.",
+      "broken-link": "Checks tool websites; marks tools unreachable after repeated failures and restores them automatically.",
+      "change-detection": "Reads official changelogs and feeds and publishes new releases to Pulse.",
+      "social": "Tracks GitHub stars and releases and Hacker News mentions (public APIs only).",
+      "video": "Adds official channel uploads, optionally finds tutorials and reviews, and removes videos that disappeared.",
+      "discovery": "Collects candidate AI tools from Show HN and GitHub; publishes nothing.",
+      "verification": "Checks candidates (reachability, AI relevance, blocklist, duplicates, pricing, legal pages) and hands good ones to you.",
+      "duplicate": "Flags tools that share a website or a name; merging stays your decision.",
+      "monetization": "Checks affiliate links weekly; falls back to the direct link when one breaks.",
+      "recommendation": "Runs the golden set of real use cases every night and escalates regressions.",
+      "opportunity": "Ranks affiliate, content and readiness opportunities by expected value; tunes the LLM threshold within your limits.",
+      "content": "Optional (LLM): drafts texts for new draft tools and translates tool texts into extra languages.",
+      "reporter": "Builds the weekly report and e-mails it to you when e-mail is configured.",
+      "audit": "Monthly random sample of automated decisions for you to judge; measures precision per confidence band."
     }
   }
 }

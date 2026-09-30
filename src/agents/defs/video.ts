@@ -13,6 +13,7 @@ import { XMLParser } from 'fast-xml-parser';
 import { z } from 'zod';
 import { tools, videos } from '@/lib/db/schema';
 import { env } from '@/lib/env';
+import { isYoutubeChannel } from '@/lib/validate';
 import { mentions } from './social';
 import type { AgentContext, AgentDefinition } from '../types';
 
@@ -74,7 +75,7 @@ async function officialUploads(ctx: AgentContext, now: Date): Promise<number> {
     .limit(10);
   let added = 0;
   for (const t of list) {
-    if (!t.youtubeChannelId || !/^UC[\w-]{22}$/.test(t.youtubeChannelId)) continue;
+    if (!isYoutubeChannel(t.youtubeChannelId)) continue;
     const res = await ctx.fetcher.get(`https://www.youtube.com/feeds/videos.xml?channel_id=${t.youtubeChannelId}`, { accept: 'xml' });
     if (!res.ok) {
       ctx.stat(`feed_${res.errorKind ?? 'error'}`);

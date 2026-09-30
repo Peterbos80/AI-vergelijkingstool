@@ -20,7 +20,7 @@ const STOPWORDS = new Set([
 export function normalize(input: string): string {
   return input
     .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .replace(/[’'`]/g, '')
     .replace(/[^a-z0-9€$£.+#\- ]+/g, ' ')
