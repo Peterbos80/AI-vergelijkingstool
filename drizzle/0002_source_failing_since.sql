@@ -1,0 +1,1 @@
+ALTER TABLE "sources" ADD COLUMN "failing_since" timestamp with time zone;

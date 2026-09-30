@@ -348,6 +348,8 @@ export const sources = pgTable(
     fetchMode: text('fetch_mode').$type<'http' | 'render'>().notNull().default('http'),
     checkIntervalHours: integer('check_interval_hours').notNull().default(24),
     failureCount: integer('failure_count').notNull().default(0),
+    /** First failure of the current failure streak (null when healthy). */
+    failingSince: ts('failing_since'),
     notes: text('notes'),
   },
   (t) => [index('sources_tool_idx').on(t.toolId), index('sources_domain_idx').on(t.domain)],
@@ -533,6 +535,9 @@ export const agentConfigs = pgTable('agent_configs', {
   config: jsonb('config').$type<Record<string, unknown>>().notNull().default(sql`'{}'::jsonb`),
   nextRunAt: ts('next_run_at'),
   lastRunAt: ts('last_run_at'),
+  /** Lease lock: works across pooled connections and multiple workers. */
+  lockedUntil: ts('locked_until'),
+  consecutiveFailures: integer('consecutive_failures').notNull().default(0),
   updatedAt: updatedAt(),
 });
 
