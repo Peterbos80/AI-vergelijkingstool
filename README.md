@@ -14,15 +14,17 @@
 | **Compare / Fair Fight** | Side-by-side comparison with no overall winner, only "choose X if you…". |
 | **Stack Doctor** | Finds overlap, unnecessary cost, risks and cheaper or consolidating alternatives in the stack you already use. |
 | **Pulse** | Real changes detected by agents: price moves, plans, shutdowns, releases. |
+| **AI news** | Every hour, headlines about AI from media feeds and YouTube channels (outlet, date, link; never the article text), with pages per expert such as Geoffrey Hinton or Roman Yampolskiy. |
+| **For beginners** | A step-by-step finder (`/start`), a plain-language guide for every task, six "AI for beginners" guides and a glossary. A site-wide Basis / Advanced switch shows beginner steps or technical details. |
 | **My stack / Watch** | Save and share stacks. With e-mail configured, you get notified when something in a stack changes. |
-| **Autonomous operations** | 19 agents verify prices on official pages, detect changes, find new tools, check links and report weekly. The owner only sees exceptions. |
+| **Autonomous operations** | 20 agents verify prices on official pages, detect changes, collect AI news, find new tools, check links and report weekly. The owner only sees exceptions. |
 | **Owner dashboard** | Opens with "Needs your attention" (default: *nothing to do*), what the system did itself, KPIs with their source, and system health. |
 | **Public data API** | Read-only JSON with status, confidence and dates, plus `/llms.txt`. |
 
 **Principles, enforced in code and tests:**
 
 - Money never changes the order. The engine cannot import monetisation code, and a test enforces this.
-- Nothing fake. Unknown data shows as unknown (`—` with a reason), never as 0. There are no dummy reviews, no invented metrics and no "coming soon" features.
+- Nothing fake. A value without a sourced record is left out or shown as a dash, never as 0 or a guess. There are no dummy reviews, no invented metrics and no "coming soon" features.
 - External content is untrusted data. It passes through an SSRF-guarded fetcher that honours robots.txt, and is quoted, never executed.
 
 ## Stack

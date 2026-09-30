@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import type { Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
 import { getDb } from '@/lib/db/client';
-import { latestNews, NEWS_PEOPLE, NEWS_SOURCES, peopleCounts, type NewsItem } from '@/lib/news';
+import { latestNews, NEWS_PEOPLE, NEWS_SOURCES, peopleCounts, sourcesWithItems, type NewsItem } from '@/lib/news';
 import { logError } from '@/lib/ops/errors';
 import { href } from '@/lib/routes';
 import { alternates } from '@/lib/seo';
@@ -22,8 +22,9 @@ export default async function NewsPage({ params }: PageProps<'/[locale]/news'>) 
   await track({ path: href.news(locale), pageType: 'news', locale });
   let items: NewsItem[] = [];
   let counts = new Map<string, number>();
+  let withItems = new Set<string>();
   try {
-    [items, counts] = await Promise.all([latestNews(getDb(), { limit: 60 }), peopleCounts(getDb())]);
+    [items, counts, withItems] = await Promise.all([latestNews(getDb(), { limit: 60 }), peopleCounts(getDb()), sourcesWithItems(getDb())]);
   } catch (err) {
     await logError('app', 'news: unavailable', err);
   }
@@ -75,7 +76,8 @@ export default async function NewsPage({ params }: PageProps<'/[locale]/news'>) 
         </h2>
         <p className="mt-2 max-w-3xl">{t('news.sourcesBody')}</p>
         <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
-          {NEWS_SOURCES.map((s) => (
+          {/* Outlets we actually publish items from; a feed its publisher's robots.txt closes is not listed. */}
+          {NEWS_SOURCES.filter((s) => withItems.has(s.id)).map((s) => (
             <li key={s.id}>
               <a href={s.homepage} rel="nofollow noopener noreferrer" target="_blank">
                 {s.name}

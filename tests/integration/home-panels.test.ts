@@ -7,6 +7,7 @@ import { loadSeedData } from '@/lib/seed/load';
 import { applySeed } from '@/lib/seed/apply';
 import { loadCatalog } from '@/lib/catalog/load';
 import { radar, sourceDomain } from '@/lib/catalog/radar';
+import { sourcesWithItems } from '@/lib/news';
 
 const NOW = new Date('2026-09-30T12:00:00Z');
 let db: Database;
@@ -43,6 +44,8 @@ describe('trend and news radar', () => {
       { url: 'https://www.theguardian.com/ai/1', sourceId: 'guardian-ai', kind: 'article', title: 'Hinton on AI risk', publishedAt: NOW, people: ['geoffrey-hinton'] },
       { url: 'https://www.youtube.com/watch?v=zyxwvutsrqp', sourceId: 'yt-doac', kind: 'video', title: 'Yampolskiy on superintelligence', publishedAt: new Date(NOW.getTime() - 3600_000), people: ['roman-yampolskiy'] },
     ]);
+    // The news page lists only outlets that actually delivered items.
+    expect([...(await sourcesWithItems(db))].sort()).toEqual(['guardian-ai', 'yt-doac']);
     const withNews = await radar(db, catalog, NOW);
     expect(withNews.news).toMatchObject([{ sourceName: 'The Guardian', people: ['geoffrey-hinton'] }]);
     expect(withNews.videos.map((v) => [v.kind, v.channel])).toEqual([

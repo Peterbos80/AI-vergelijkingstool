@@ -139,6 +139,12 @@ export async function latestNews(db: Database, opts: { limit?: number; kind?: 'a
 }
 
 /** How many items name each watched person (for the people index). */
+/** Sources with at least one published item (the news page lists only those). */
+export async function sourcesWithItems(db: Database): Promise<Set<string>> {
+  const rows = await db.selectDistinct({ id: newsItems.sourceId }).from(newsItems).where(eq(newsItems.status, 'active'));
+  return new Set(rows.map((r) => r.id));
+}
+
 export async function peopleCounts(db: Database): Promise<Map<string, number>> {
   const rows = await db.execute(sql`SELECT p AS person, count(*)::int AS n FROM news_items, unnest(people) AS p WHERE status = 'active' GROUP BY p`);
   const out = new Map<string, number>();
