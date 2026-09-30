@@ -28,9 +28,9 @@ CI tests the static edition on every push (`playwright.static.config.ts`).
 **One-time setup** (repository settings):
 
 1. *Settings → Pages → Build and deployment → Source*: **GitHub Actions**.
-2. *Custom domain*: `www.aitoolswijzer.nl` → Save. When the DNS check is green, tick **Enforce HTTPS**.
-3. DNS at the registrar (TransIP): `@` A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`; `www` CNAME `peterbos80.github.io.`. GitHub redirects the bare domain to `www`.
-4. Optional repository variables (*Settings → Secrets and variables → Actions → Variables*): `SITE_URL` (if not `https://www.aitoolswijzer.nl`), `LEGAL_NAME`, `LEGAL_KVK`, `LEGAL_ADDRESS`, `LEGAL_EMAIL` (shown on /about; required for a commercial site in the Netherlands). No secrets are needed.
+2. *Custom domain*: `aitoolswijzer.nl` → Save. When the DNS check is green, tick **Enforce HTTPS** (available once GitHub has issued the certificate).
+3. DNS at the registrar (TransIP): `@` A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`; `www` CNAME `peterbos80.github.io.`. GitHub redirects `www` to the bare domain.
+4. Optional repository variables (*Settings → Secrets and variables → Actions → Variables*): `SITE_URL` (if not `https://aitoolswijzer.nl`; it must match the custom domain), `LEGAL_NAME`, `LEGAL_KVK`, `LEGAL_ADDRESS`, `LEGAL_EMAIL` (shown on /about; required for a commercial site in the Netherlands). No secrets are needed.
 5. Run the workflow once (*Actions → Site and agents → Run workflow*) or push to the default branch.
 
 **Limits to know.**

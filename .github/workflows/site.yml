@@ -29,7 +29,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SITE_URL: ${{ vars.SITE_URL || 'https://www.aitoolswijzer.nl' }}
+  SITE_URL: ${{ vars.SITE_URL || 'https://aitoolswijzer.nl' }}
   DATABASE_URL: postgres://aitw:aitw@localhost:5432/aitoolswijzer
   STATE_BRANCH: ops-state
   PUBLIC_ISSUES_URL: ${{ github.server_url }}/${{ github.repository }}/issues/new?template=correction.yml
