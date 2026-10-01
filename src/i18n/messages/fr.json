@@ -431,7 +431,21 @@
       "capability": "avez aussi besoin de {capability}",
       "platform": "travaillez sur {platform}"
     },
-    "noData": "Pas encore de donnée sourcée"
+    "noData": "Pas encore de donnée sourcée",
+    "pickerPopular": "Comparaisons toutes prêtes",
+    "pickerLegend": "Choisissez 2 à 4 outils",
+    "pickerChange": "Choisir d’autres outils",
+    "pickerSearch": "Chercher un outil",
+    "pickerSearchPlaceholder": "Tapez un nom, par exemple ChatGPT",
+    "pickerWorlds": "Type d’outil",
+    "pickerAll": "Tous",
+    "pickerChosen": "Choisis",
+    "pickerEmpty": "Rien de choisi. Touchez un outil ci-dessous.",
+    "pickerRemove": "Retirer {name}",
+    "pickerSuggest": "Alternatives à {name} :",
+    "pickerFull": "Vous pouvez comparer 4 outils à la fois. Retirez-en un pour en choisir un autre.",
+    "pickerNoResults": "Aucun outil avec ce nom. Essayez un autre mot.",
+    "pickerSubmit": "{count, plural, =0 {Choisissez 2 outils} =1 {Choisissez encore 1 outil} other {Comparer # outils}}"
   },
   "costs": {
     "metaTitle": "Combien coûte l’IA pour votre usage ? Calculateur avec justificatifs",

@@ -453,7 +453,21 @@
       "capability": "ook {capability} nodig hebt",
       "platform": "op {platform} werkt"
     },
-    "noData": "Nog geen gegevens met bron"
+    "noData": "Nog geen gegevens met bron",
+    "pickerPopular": "Kant-en-klare vergelijkingen",
+    "pickerLegend": "Kies 2 tot 4 tools",
+    "pickerChange": "Andere tools kiezen",
+    "pickerSearch": "Zoek een tool",
+    "pickerSearchPlaceholder": "Typ een naam, bijvoorbeeld ChatGPT",
+    "pickerWorlds": "Soort tool",
+    "pickerAll": "Alles",
+    "pickerChosen": "Gekozen",
+    "pickerEmpty": "Nog niets gekozen. Tik op een tool hieronder.",
+    "pickerRemove": "{name} weghalen",
+    "pickerSuggest": "Alternatieven voor {name}:",
+    "pickerFull": "Je kunt 4 tools tegelijk vergelijken. Haal er een weg om een andere te kiezen.",
+    "pickerNoResults": "Geen tool met die naam. Probeer een ander woord.",
+    "pickerSubmit": "{count, plural, =0 {Kies 2 tools} =1 {Kies nog 1 tool} other {Vergelijk # tools}}"
   },
   "costs": {
     "metaTitle": "Wat kost AI voor jouw gebruik? Rekenhulp met bonnetjes",

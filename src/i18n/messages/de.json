@@ -431,7 +431,21 @@
       "capability": "auch {capability} brauchst",
       "platform": "mit {platform} arbeitest"
     },
-    "noData": "Noch keine belegten Daten"
+    "noData": "Noch keine belegten Daten",
+    "pickerPopular": "Fertige Vergleiche",
+    "pickerLegend": "Wähle 2 bis 4 Tools",
+    "pickerChange": "Andere Tools wählen",
+    "pickerSearch": "Tool suchen",
+    "pickerSearchPlaceholder": "Tippe einen Namen, zum Beispiel ChatGPT",
+    "pickerWorlds": "Art von Tool",
+    "pickerAll": "Alle",
+    "pickerChosen": "Gewählt",
+    "pickerEmpty": "Noch nichts gewählt. Tippe unten auf ein Tool.",
+    "pickerRemove": "{name} entfernen",
+    "pickerSuggest": "Alternativen zu {name}:",
+    "pickerFull": "Du kannst 4 Tools gleichzeitig vergleichen. Entferne eins, um ein anderes zu wählen.",
+    "pickerNoResults": "Kein Tool mit diesem Namen. Versuch ein anderes Wort.",
+    "pickerSubmit": "{count, plural, =0 {Wähle 2 Tools} =1 {Wähle noch 1 Tool} other {# Tools vergleichen}}"
   },
   "costs": {
     "metaTitle": "Was kostet KI für deine Nutzung? Rechner mit Belegen",

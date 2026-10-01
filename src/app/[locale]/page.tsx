@@ -6,7 +6,6 @@ import { formatDate, formatNumber } from '@/i18n/formatters';
 import { getCatalog, taskSlug, taskTextOf } from '@/lib/catalog';
 import { radar, type Radar } from '@/lib/catalog/radar';
 import { getDb } from '@/lib/db/client';
-import { fairFightGate } from '@/lib/engine/compare';
 import { rankForCapability } from '@/lib/engine/rank';
 import { logError } from '@/lib/ops/errors';
 import { href } from '@/lib/routes';
@@ -22,6 +21,7 @@ import { ToolMark } from '@/components/data/ToolMark';
 import { WorldCard } from '@/components/worlds/WorldCard';
 import { toolWorld } from '@/lib/catalog/helpers';
 import { worldSummaries } from '@/lib/catalog/worlds';
+import { pickDuels } from '@/lib/catalog/duels';
 import { worldLexicon } from '@/lib/worlds';
 import type { WorldId } from '@/lib/world-ids';
 import { StarterWorkflows } from '@/components/home/StarterWorkflows';
@@ -71,32 +71,8 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
     await logError('app', 'home: radar unavailable', err);
   }
 
-  // Fair Fights that pass the gate, from editorial alternative pairs.
-  const fights: [CatalogTool, CatalogTool][] = [];
-  const seen = new Set<string>();
-  for (const tool of catalog.tools) {
-    for (const alt of tool.alternatives.filter((a) => a.source === 'editorial')) {
-      const other = catalog.toolsById.get(alt.id);
-      if (!other) continue;
-      const key = [tool.slug, other.slug].sort().join('|');
-      if (seen.has(key)) continue;
-      seen.add(key);
-      if (fairFightGate(tool, other).ok) fights.push([tool, other]);
-    }
-  }
-  // Six duels from different worlds, each tool once, the best-documented first.
-  fights.sort((x, y) => y[0].qualityScore + y[1].qualityScore - (x[0].qualityScore + x[1].qualityScore));
-  const duels: [CatalogTool, CatalogTool][] = [];
-  const usedTools = new Set<string>();
-  const usedWorlds = new Set<string>();
-  for (const strict of [true, false]) {
-    for (const [a, b] of fights) {
-      if (duels.length >= 6 || usedTools.has(a.id) || usedTools.has(b.id) || (strict && usedWorlds.has(toolWorld(a, catalog)))) continue;
-      duels.push([a, b]);
-      usedTools.add(a.id).add(b.id);
-      usedWorlds.add(toolWorld(a, catalog));
-    }
-  }
+  // Six duels (Fair Fights) from different worlds, each tool once.
+  const duels = pickDuels(catalog, 6);
   const popular = catalog.tasks.slice(0, 8);
   const worlds = worldSummaries(catalog, t, locale);
   const stageWorlds: Partial<Record<WorldId, StageWorld>> = Object.fromEntries(

@@ -453,7 +453,21 @@
       "capability": "also need {capability}",
       "platform": "work on {platform}"
     },
-    "noData": "No sourced data yet"
+    "noData": "No sourced data yet",
+    "pickerPopular": "Ready-made comparisons",
+    "pickerLegend": "Pick 2 to 4 tools",
+    "pickerChange": "Pick other tools",
+    "pickerSearch": "Search a tool",
+    "pickerSearchPlaceholder": "Type a name, for example ChatGPT",
+    "pickerWorlds": "Kind of tool",
+    "pickerAll": "All",
+    "pickerChosen": "Picked",
+    "pickerEmpty": "Nothing picked yet. Tap a tool below.",
+    "pickerRemove": "Remove {name}",
+    "pickerSuggest": "Alternatives to {name}:",
+    "pickerFull": "You can compare 4 tools at once. Remove one to pick another.",
+    "pickerNoResults": "No tool with that name. Try another word.",
+    "pickerSubmit": "{count, plural, =0 {Pick 2 tools} =1 {Pick 1 more tool} other {Compare # tools}}"
   },
   "costs": {
     "metaTitle": "What does AI cost for your usage? Calculator with receipts",

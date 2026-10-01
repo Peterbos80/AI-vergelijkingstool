@@ -1,10 +1,17 @@
 import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
+import { nameOf, toolWorld } from '@/lib/catalog/helpers';
+import { pickDuels } from '@/lib/catalog/duels';
 import type { Catalog } from '@/lib/catalog/types';
 import { href } from '@/lib/routes';
+import { isWorld, WORLDS } from '@/lib/world-ids';
 import { CompareView } from '@/components/data/CompareView';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
+import { Icon } from '@/components/ui/Icon';
+import { ToolMark } from '@/components/data/ToolMark';
+import { entryPriceLabel } from '@/components/data/format';
+import { ToolChooser, type ChooserTool, type ChooserWorld } from '@/components/compare/ToolChooser';
 
 type SP = Record<string, string | string[] | undefined>;
 
@@ -26,38 +33,79 @@ export function ComparePicker({
   const slugs = [...new Set(raw.map((s) => s.trim()).filter(Boolean))].slice(0, 4);
   const tools = slugs.map((s) => catalog.toolsBySlug.get(s)).filter((x): x is NonNullable<typeof x> => Boolean(x));
   const options = catalog.tools.filter((x) => x.status !== 'shutdown');
-  const slots = [0, 1, 2, 3];
+  const chooserTools: ChooserTool[] = options
+    .map((x) => ({
+      slug: x.slug,
+      name: x.name,
+      world: toolWorld(x, catalog),
+      price: entryPriceLabel(x, t, locale),
+      logo: x.logo,
+      alts: [...x.alternatives]
+        .sort((a, b) => Number(b.source === 'editorial') - Number(a.source === 'editorial') || (b.score ?? 0) - (a.score ?? 0))
+        .map((a) => catalog.toolsById.get(a.id)?.slug)
+        .filter((slug): slug is string => Boolean(slug))
+        .slice(0, 6),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name, locale));
+  const chooserWorlds: ChooserWorld[] = WORLDS.flatMap((id) => {
+    const cat = catalog.categoriesById.get(id);
+    return cat && isWorld(cat.id) && chooserTools.some((x) => x.world === id) ? [{ id, name: nameOf(cat, locale).name }] : [];
+  });
+  const duels = pickDuels(catalog, 6);
 
   return (
     <div className="container-page py-10">
       <h1 className="text-3xl md:text-4xl">{t('compare.title')}</h1>
       <p className="mt-2 max-w-2xl text-ink-2">{t('compare.intro')}</p>
 
-      <form method="get" action={href.compare(locale)} className="card mt-6 p-4">
-        <fieldset>
-          <legend className="eyebrow">{t('compare.pick')}</legend>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {slots.map((i) => (
-              <div key={i}>
-                <label htmlFor={`cmp-${i}`} className="label">
-                  {t('compare.toolN', { n: i + 1 })}
-                </label>
-                <select id={`cmp-${i}`} name="tools" defaultValue={tools[i]?.slug ?? ''} className="input">
-                  <option value="">{t('compare.choose')}</option>
-                  {options.map((o) => (
-                    <option key={o.id} value={o.slug}>
-                      {o.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+      {duels.length > 0 && (
+        <section aria-labelledby="cmp-popular" className="mt-6">
+          <h2 id="cmp-popular" className="eyebrow">
+            {t('compare.pickerPopular')}
+          </h2>
+          <ul className="duel-chips">
+            {duels.map(([a, b]) => (
+              <li key={`${a.slug}-${b.slug}`}>
+                <Link href={href.fairFight(locale, a.slug, b.slug)} className="duel-chip">
+                  <ToolMark tool={a} world={toolWorld(a, catalog)} size={22} />
+                  <ToolMark tool={b} world={toolWorld(b, catalog)} size={22} />
+                  <span>
+                    {a.name} <span className="text-ink-3">vs</span> {b.name}
+                  </span>
+                </Link>
+              </li>
             ))}
-          </div>
-        </fieldset>
-        <button type="submit" className="btn mt-4">
-          {t('compare.submit')}
-        </button>
-      </form>
+          </ul>
+        </section>
+      )}
+
+      <details className="chooser-box" open={tools.length < 2}>
+        <summary className="chooser-summary">
+          <span>{tools.length < 2 ? t('compare.pickerLegend') : t('compare.pickerChange')}</span>
+          <Icon name="chevron-down" size={18} className="chooser-chevron" />
+        </summary>
+        <ToolChooser
+          action={href.compare(locale)}
+          tools={chooserTools}
+          worlds={chooserWorlds}
+          selected={tools.map((x) => x.slug)}
+          labels={{
+            legend: t('compare.pickerLegend'),
+            search: t('compare.pickerSearch'),
+            searchPlaceholder: t('compare.pickerSearchPlaceholder'),
+            worlds: t('compare.pickerWorlds'),
+            all: t('compare.pickerAll'),
+            chosen: t('compare.pickerChosen'),
+            empty: t('compare.pickerEmpty'),
+            remove: t('compare.pickerRemove'),
+            suggest: t('compare.pickerSuggest'),
+            full: t('compare.pickerFull'),
+            noResults: t('compare.pickerNoResults'),
+            submit: [0, 1, 2, 3, 4].map((n) => t('compare.pickerSubmit', { count: n })),
+            submitPlain: t('compare.submit'),
+          }}
+        />
+      </details>
 
       {tools.length < 2 ? (
         <p className="mt-8 text-ink-2">{t('compare.needTwo')}</p>
