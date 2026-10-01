@@ -137,7 +137,7 @@ test('technical glossary terms only show in the Advanced view', async ({ page })
     const b = document.querySelector('[data-level-tab="advanced"]');
     return !!b && Object.keys(b).some((k) => k.startsWith('__reactProps'));
   });
-  await page.getByRole('tab', { name: /Advanced/ }).filter({ visible: true }).first().click();
+  await page.getByRole('tab', { name: /Technisch/ }).filter({ visible: true }).first().click();
   await expect(api).toBeVisible();
 });
 
