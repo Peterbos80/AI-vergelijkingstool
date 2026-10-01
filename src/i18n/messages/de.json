@@ -892,7 +892,20 @@
     "worldTop": "Ganz oben",
     "matrixEyebrow": "Nebeneinander",
     "fightsEyebrow": "Duelle",
-    "tasksEyebrow": "Mit einer Aufgabe starten"
+    "tasksEyebrow": "Mit einer Aufgabe starten",
+    "chooserModes": "Wie möchtest du suchen?",
+    "chooserChoose": "Aus einer Liste wählen",
+    "chooserType": "Frage eintippen",
+    "chooserStepWorld": "Was willst du tun?",
+    "chooserStepTask": "Was genau?",
+    "chooserStepBudget": "Was darf es kosten?",
+    "chooserPickWorld": "Wähle, was du tun willst",
+    "chooserPickTask": "Wähle eine Aufgabe",
+    "chooserBudgetFree": "Nichts, nur kostenlos",
+    "chooserBudget25": "Bis 25 € im Monat",
+    "chooserBudget100": "Bis 100 € im Monat",
+    "chooserBudgetAny": "Egal",
+    "chooserShow": "Zeig mir die Tools"
   },
   "hub": {
     "placeholder": "Frag in deinen eigenen Worten. Zum Beispiel: Ich möchte meine Meetings kostenlos protokollieren lassen",
@@ -1439,6 +1452,18 @@
       "automation": "Kommandozentrale",
       "marketing": "Kampagnenraum",
       "business": "Serviceschalter"
+    },
+    "verbs": {
+      "assistant": "Hilfe von einem KI-Assistenten",
+      "writing": "Etwas schreiben",
+      "research": "Etwas herausfinden oder zusammenfassen",
+      "image": "Ein Bild oder Design machen",
+      "video": "Etwas mit Video",
+      "audio": "Etwas mit Ton oder Stimme",
+      "code": "Eine Website, App oder Code bauen",
+      "automation": "Arbeit automatisch erledigen lassen",
+      "marketing": "Marketing und Social Media",
+      "business": "Kunden helfen"
     }
   }
 }

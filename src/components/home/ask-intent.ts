@@ -10,9 +10,14 @@ export interface AskIntent {
   preview: string | null;
   /** The matrix panel picked with a prompt (null: the default panel). */
   panel: string | null;
+  /** The world and the task picked in the dropdowns ("choose" mode). */
+  chosen: string | null;
+  task: string | null;
+  /** How the visitor asks: pick from lists, or type. */
+  mode: 'choose' | 'type';
 }
 
-const INITIAL: AskIntent = { text: '', preview: null, panel: null };
+const INITIAL: AskIntent = { text: '', preview: null, panel: null, chosen: null, task: null, mode: 'choose' };
 let state = INITIAL;
 const listeners = new Set<() => void>();
 
@@ -25,7 +30,7 @@ export const askIntent = {
   },
   set(patch: Partial<AskIntent>): void {
     const next = { ...state, ...patch };
-    if (next.text === state.text && next.preview === state.preview && next.panel === state.panel) return;
+    if ((Object.keys(next) as (keyof AskIntent)[]).every((k) => next[k] === state[k])) return;
     state = next;
     for (const l of listeners) l();
   },

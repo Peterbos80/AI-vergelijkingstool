@@ -63,7 +63,8 @@ export function HeroStage({
     return () => window.clearTimeout(id);
   }, [intent.text, index]);
 
-  const target: SceneId = isWorld(intent.preview) ? intent.preview : (settled ?? 'home');
+  // A hovered prompt first, then the world picked in the dropdowns, then the typed words.
+  const target: SceneId = isWorld(intent.preview) ? intent.preview : intent.mode === 'choose' && isWorld(intent.chosen) ? intent.chosen : (settled ?? 'home');
   const [shown, setShown] = useState<SceneId>('home');
   const [leaving, setLeaving] = useState<SceneId | null>(null);
   // A new target: the shown room starts leaving (state adjusted while rendering, React's pattern for derived state).

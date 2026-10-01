@@ -32,6 +32,7 @@ test('a prompt fills the question box and switches the level and the matrix', as
   // Asking goes to Match with the level of the chosen view.
   await page.goto('/nl');
   await expect(page.locator('.ask[data-hydrated]')).toBeVisible();
+  await page.getByRole('tab', { name: 'Typ je vraag' }).click();
   await page.locator('#match-q').fill('ik wil gratis mijn vergaderingen laten notuleren');
   await page.locator('#match-q').press('Enter');
   await page.waitForURL(/\/nl\/match\?/);
@@ -67,6 +68,7 @@ test('the stage shows the world of the question', async ({ page }) => {
   await expect(page.locator('.ask[data-hydrated]')).toBeVisible();
   const stage = page.locator('.stage');
   await expect(stage).toHaveAttribute('data-world', 'home');
+  await page.getByRole('tab', { name: 'Typ je vraag' }).click();
   await page.locator('#match-q').fill('ik wil een podcast opnemen');
   await expect(stage).toHaveAttribute('data-world', 'audio');
   await expect(page.locator('.stage-caption a')).toHaveAttribute('href', /^\/nl\/categories\//);
@@ -88,4 +90,26 @@ test('ten worlds, each a link to its category with its tool count', async ({ pag
     await expect(card).toHaveAttribute('href', /^\/nl\/categories\//);
     await expect(card.locator('.world-card-meta')).toHaveText(/^\d+ tools?$/);
   }
+});
+
+test('pick from lists: what you want to do, what exactly, what it may cost', async ({ page }) => {
+  const watch = watchErrors(page);
+  await page.goto('/nl');
+  await expect(page.locator('.ask[data-hydrated]')).toBeVisible();
+  // Picking from lists is the default way to ask.
+  await expect(page.getByRole('tab', { name: 'Kies uit een lijst' })).toHaveAttribute('aria-selected', 'true');
+  const go = page.getByRole('button', { name: 'Laat de tools zien' });
+  await expect(go).toBeDisabled();
+  await page.getByRole('combobox', { name: 'Wat wil je doen?' }).selectOption('video');
+  // The stage follows the world, the second list shows its tasks.
+  await expect(page.locator('.stage')).toHaveAttribute('data-world', 'video');
+  await expect(page.getByRole('combobox', { name: 'Wat precies?' })).toHaveValue('create-social-media-videos');
+  await page.getByRole('combobox', { name: 'Wat mag het kosten?' }).selectOption('free');
+  await go.click();
+  await page.waitForURL(/\/nl\/match\?/);
+  const url = new URL(page.url());
+  expect(url.searchParams.get('task')).toBe('create-social-media-videos');
+  expect(url.searchParams.get('b')).toBe('free');
+  await expect(page.getByTestId('match-result')).toHaveAttribute('data-task-id', 'create-social-media-videos');
+  expect(watch.errors).toEqual([]);
 });

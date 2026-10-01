@@ -871,7 +871,20 @@
     "worldTop": "At the top",
     "matrixEyebrow": "Side by side",
     "fightsEyebrow": "Head to head",
-    "tasksEyebrow": "Start with a task"
+    "tasksEyebrow": "Start with a task",
+    "chooserModes": "How do you want to search?",
+    "chooserChoose": "Pick from a list",
+    "chooserType": "Type your question",
+    "chooserStepWorld": "What do you want to do?",
+    "chooserStepTask": "What exactly?",
+    "chooserStepBudget": "What may it cost?",
+    "chooserPickWorld": "Pick what you want to do",
+    "chooserPickTask": "Pick a task",
+    "chooserBudgetFree": "Nothing, free only",
+    "chooserBudget25": "Up to €25 a month",
+    "chooserBudget100": "Up to €100 a month",
+    "chooserBudgetAny": "Doesn’t matter",
+    "chooserShow": "Show me the tools"
   },
   "hub": {
     "placeholder": "Ask in your own words. For example: I want my meetings transcribed and summarised for free",
@@ -2178,6 +2191,18 @@
       "automation": "Command centre",
       "marketing": "Campaign room",
       "business": "Service desk"
+    },
+    "verbs": {
+      "assistant": "Get help from an AI assistant",
+      "writing": "Write something",
+      "research": "Find out or summarise",
+      "image": "Make an image or design",
+      "video": "Do something with video",
+      "audio": "Do something with sound or voice",
+      "code": "Build a website, app or code",
+      "automation": "Let work run by itself",
+      "marketing": "Marketing and social media",
+      "business": "Help customers"
     }
   }
 }

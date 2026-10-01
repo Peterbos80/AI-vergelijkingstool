@@ -14,7 +14,7 @@ import { emailEnabled } from '@/lib/env';
 import { track } from '@/lib/analytics/track';
 import { NewsletterForm } from '@/components/forms/NewsletterForm';
 import { SponsoredCard } from '@/components/data/SponsoredCard';
-import { AskBox, MatrixPanels, type AskPrompt, type MatrixPanel } from '@/components/home/AskBox';
+import { AskBox, MatrixPanels, type AskChoice, type AskPrompt, type MatrixPanel } from '@/components/home/AskBox';
 import { HeroStage, type StageWorld } from '@/components/home/HeroStage';
 import { RadarPanel } from '@/components/home/RadarPanel';
 import { ToolMark } from '@/components/data/ToolMark';
@@ -23,7 +23,7 @@ import { toolWorld } from '@/lib/catalog/helpers';
 import { worldSummaries } from '@/lib/catalog/worlds';
 import { pickDuels } from '@/lib/catalog/duels';
 import { worldLexicon } from '@/lib/worlds';
-import type { WorldId } from '@/lib/world-ids';
+import { WORLDS, type WorldId } from '@/lib/world-ids';
 import { StarterWorkflows } from '@/components/home/StarterWorkflows';
 import { ToolMatrix } from '@/components/home/ToolMatrix';
 import { activePlacement } from '@/lib/monetization/placements';
@@ -75,6 +75,15 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
   const duels = pickDuels(catalog, 6);
   const popular = catalog.tasks.slice(0, 8);
   const worlds = worldSummaries(catalog, t, locale);
+  // The dropdowns: every world in plain words, with its tasks.
+  const choices: AskChoice[] = WORLDS.map((w) => ({
+    world: w,
+    label: t(`worlds.verbs.${w}`),
+    tasks: catalog.tasks
+      .filter((x) => x.categoryId === w)
+      .sort((a, b) => a.position - b.position)
+      .map((x) => ({ id: x.id, title: taskTextOf(x, locale).title })),
+  })).filter((c) => c.tasks.length > 0);
   const stageWorlds: Partial<Record<WorldId, StageWorld>> = Object.fromEntries(
     worlds.map((w) => [w.id, { place: w.place, name: w.name, count: t('home.toolsCount', { count: w.toolCount }), href: w.href }]),
   );
@@ -149,12 +158,28 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
                     </Link>
                   </p>
                 }
+                choices={choices}
                 labels={{
                   label: t('match.inputLabel'),
                   placeholder: t('hub.placeholder'),
                   submit: t('match.submit'),
                   hint: t('hub.enterHint'),
                   prompts: t('hub.promptsLabel'),
+                  modes: t('home.chooserModes'),
+                  modeChoose: t('home.chooserChoose'),
+                  modeType: t('home.chooserType'),
+                  stepWorld: t('home.chooserStepWorld'),
+                  stepTask: t('home.chooserStepTask'),
+                  stepBudget: t('home.chooserStepBudget'),
+                  chooseWorld: t('home.chooserPickWorld'),
+                  chooseTask: t('home.chooserPickTask'),
+                  budgets: [
+                    { value: 'free', label: t('home.chooserBudgetFree') },
+                    { value: '25', label: t('home.chooserBudget25') },
+                    { value: '100', label: t('home.chooserBudget100') },
+                    { value: 'any', label: t('home.chooserBudgetAny') },
+                  ],
+                  show: t('home.chooserShow'),
                 }}
               />
             </div>

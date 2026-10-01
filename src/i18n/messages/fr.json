@@ -892,7 +892,20 @@
     "worldTop": "En tête",
     "matrixEyebrow": "Côte à côte",
     "fightsEyebrow": "Duels",
-    "tasksEyebrow": "Commencer par une tâche"
+    "tasksEyebrow": "Commencer par une tâche",
+    "chooserModes": "Comment voulez-vous chercher ?",
+    "chooserChoose": "Choisir dans une liste",
+    "chooserType": "Taper votre question",
+    "chooserStepWorld": "Que voulez-vous faire ?",
+    "chooserStepTask": "Quoi exactement ?",
+    "chooserStepBudget": "Combien peut-on payer ?",
+    "chooserPickWorld": "Choisissez ce que vous voulez faire",
+    "chooserPickTask": "Choisissez une tâche",
+    "chooserBudgetFree": "Rien, seulement gratuit",
+    "chooserBudget25": "Jusqu’à 25 € par mois",
+    "chooserBudget100": "Jusqu’à 100 € par mois",
+    "chooserBudgetAny": "Peu importe",
+    "chooserShow": "Voir les outils"
   },
   "hub": {
     "placeholder": "Demandez avec vos propres mots. Par exemple : je veux faire rédiger gratuitement le compte rendu de mes réunions",
@@ -1439,6 +1452,18 @@
       "automation": "Centre de commande",
       "marketing": "Salle de campagne",
       "business": "Guichet de service"
+    },
+    "verbs": {
+      "assistant": "L’aide d’un assistant IA",
+      "writing": "Écrire quelque chose",
+      "research": "Chercher ou résumer",
+      "image": "Faire une image ou un design",
+      "video": "Faire quelque chose avec la vidéo",
+      "audio": "Faire quelque chose avec le son ou la voix",
+      "code": "Créer un site, une appli ou du code",
+      "automation": "Faire travailler en automatique",
+      "marketing": "Marketing et réseaux sociaux",
+      "business": "Aider des clients"
     }
   }
 }

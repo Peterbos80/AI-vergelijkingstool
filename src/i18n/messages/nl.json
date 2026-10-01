@@ -871,7 +871,20 @@
     "worldTop": "Bovenaan",
     "matrixEyebrow": "Naast elkaar",
     "fightsEyebrow": "Duels",
-    "tasksEyebrow": "Begin met een taak"
+    "tasksEyebrow": "Begin met een taak",
+    "chooserModes": "Hoe wil je zoeken?",
+    "chooserChoose": "Kies uit een lijst",
+    "chooserType": "Typ je vraag",
+    "chooserStepWorld": "Wat wil je doen?",
+    "chooserStepTask": "Wat precies?",
+    "chooserStepBudget": "Wat mag het kosten?",
+    "chooserPickWorld": "Kies wat je wilt doen",
+    "chooserPickTask": "Kies een taak",
+    "chooserBudgetFree": "Niets, alleen gratis",
+    "chooserBudget25": "Tot € 25 per maand",
+    "chooserBudget100": "Tot € 100 per maand",
+    "chooserBudgetAny": "Maakt niet uit",
+    "chooserShow": "Laat de tools zien"
   },
   "hub": {
     "placeholder": "Vraag het in je eigen woorden. Bijvoorbeeld: ik wil gratis mijn vergaderingen laten notuleren",
@@ -2178,6 +2191,18 @@
       "automation": "Commandocentrum",
       "marketing": "Campagnekamer",
       "business": "Servicebalie"
+    },
+    "verbs": {
+      "assistant": "Hulp van een AI-assistent",
+      "writing": "Iets schrijven",
+      "research": "Iets uitzoeken of samenvatten",
+      "image": "Een plaatje of ontwerp maken",
+      "video": "Iets met video",
+      "audio": "Iets met geluid of stem",
+      "code": "Een website, app of code maken",
+      "automation": "Werk automatisch laten doen",
+      "marketing": "Marketing en social media",
+      "business": "Klanten helpen"
     }
   }
 }
