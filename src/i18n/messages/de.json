@@ -611,6 +611,17 @@
     "labelsLink": "So berechnen wir Labels",
     "labelTrulyFree": "Wirklich kostenlos nutzbar"
   },
+  "euAlt": {
+    "title": "Europäische Alternative",
+    "intro": "{name} stammt von einem Unternehmen außerhalb Europas ({country}). Diese Tools europäischer Unternehmen haben dieselben Kernfunktionen.",
+    "shared": "Gemeinsame Kernfunktionen: {caps}",
+    "overlap": "{percent} Überschneidung",
+    "entry": "ab {price}{eur} pro Monat",
+    "freePlan": "kostenloser Plan",
+    "priceOnSite": "Preis: siehe Website",
+    "dataNote": "Ein europäisches Unternehmen sagt noch nichts darüber, wo deine Daten liegen: Sieh dir bei jedem Tool den EU-Blick an.",
+    "order": "Reihenfolge: Überschneidung, dann Einstiegspreis in Euro (EZB)."
+  },
   "match": {
     "metaTitle": "Dein KI-Stack: {goal}",
     "metaTitleEmpty": "Match: welche KI-Tools passen zu deinem Ziel?",

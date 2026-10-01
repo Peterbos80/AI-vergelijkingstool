@@ -633,6 +633,17 @@
     "labelsLink": "How we compute labels",
     "labelTrulyFree": "Truly usable for free"
   },
+  "euAlt": {
+    "title": "European alternative",
+    "intro": "{name} is made by a company outside Europe ({country}). These tools from European companies share its core features.",
+    "shared": "Shared core features: {caps}",
+    "overlap": "{percent} overlap",
+    "entry": "from {price}{eur} per month",
+    "freePlan": "free plan",
+    "priceOnSite": "price: see website",
+    "dataNote": "A European company says nothing yet about where your data is stored: check the EU lens of each tool.",
+    "order": "Order: overlap, then entry price in euros (ECB)."
+  },
   "match": {
     "metaTitle": "Your AI stack: {goal}",
     "metaTitleEmpty": "Match: which AI tools fit your goal?",

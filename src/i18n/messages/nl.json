@@ -633,6 +633,17 @@
     "labelsLink": "Zo berekenen we labels",
     "labelTrulyFree": "Echt bruikbaar gratis"
   },
+  "euAlt": {
+    "title": "Europees alternatief",
+    "intro": "{name} komt van een bedrijf buiten Europa ({country}). Deze tools van Europese bedrijven hebben dezelfde kernfuncties.",
+    "shared": "Gedeelde kernfuncties: {caps}",
+    "overlap": "{percent} overlap",
+    "entry": "vanaf {price}{eur} per maand",
+    "freePlan": "gratis plan",
+    "priceOnSite": "prijs: zie website",
+    "dataNote": "Een Europees bedrijf zegt nog niets over waar je data staat: kijk bij elke tool naar de EU-lens.",
+    "order": "Volgorde: overlap, dan instapprijs in euro's (ECB)."
+  },
   "match": {
     "metaTitle": "Jouw AI-stack: {goal}",
     "metaTitleEmpty": "Match: welke AI-tools passen bij jouw doel?",

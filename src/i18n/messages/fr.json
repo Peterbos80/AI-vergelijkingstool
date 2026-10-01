@@ -611,6 +611,17 @@
     "labelsLink": "Comment nous calculons les étiquettes",
     "labelTrulyFree": "Vraiment utilisable gratuitement"
   },
+  "euAlt": {
+    "title": "Alternative européenne",
+    "intro": "{name} est édité par une entreprise hors d’Europe ({country}). Ces outils d’entreprises européennes partagent ses fonctions principales.",
+    "shared": "Fonctions principales communes : {caps}",
+    "overlap": "{percent} de recoupement",
+    "entry": "à partir de {price}{eur} par mois",
+    "freePlan": "forfait gratuit",
+    "priceOnSite": "prix : voir le site",
+    "dataNote": "Une entreprise européenne ne dit encore rien sur l’endroit où sont stockées vos données : consultez l’angle UE de chaque outil.",
+    "order": "Ordre : recoupement, puis prix d’entrée en euros (BCE)."
+  },
   "match": {
     "metaTitle": "Votre stack d’IA : {goal}",
     "metaTitleEmpty": "Match : quels outils d’IA pour votre objectif ?",

@@ -26,6 +26,7 @@ import { ToolRow } from '@/components/data/ToolRow';
 import { VideoFacade } from '@/components/data/VideoFacade';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
 import { approxEur, entryPriceLabel, planPriceLabel } from '@/components/data/format';
+import { EuAlternatives } from '@/components/compare/EuAlternatives';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[slug]'>): Promise<Metadata> {
   const { locale, slug } = (await params) as { locale: Locale; slug: string };
@@ -358,6 +359,8 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
               </div>
             )}
           </section>
+
+          <EuAlternatives tool={tool} catalog={catalog} t={t} locale={locale} />
         </div>
 
         <aside className="space-y-6">
