@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
-import { toolText } from '@/lib/catalog/helpers';
+import { toolText, toolWorld } from '@/lib/catalog/helpers';
 import type { Catalog, CatalogTask } from '@/lib/catalog/types';
 import type { StackResult } from '@/lib/engine/compose';
 import { href } from '@/lib/routes';
 import { VisitLink } from '@/components/data/VisitLink';
-import { ToolMonogram } from '@/components/data/ToolMonogram';
+import { ToolMark } from '@/components/data/ToolMark';
 import { entryPriceLabel } from '@/components/data/format';
 import { Icon } from '@/components/ui/Icon';
 import { limitationText, reasonText, stepName } from './StackReceipt';
@@ -45,7 +45,7 @@ export function StepDetails({
             <li key={s.key} className="card p-4 md:p-5">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="flex items-start gap-3">
-                  <ToolMonogram name={tool.name} size={40} />
+                  <ToolMark tool={tool} world={toolWorld(tool, catalog)} size={40} />
                   <div>
                     <p className="eyebrow">{covered.map((k) => stepName(task, k, catalog, locale)).join(' · ')}</p>
                     <h3 className="text-lg">

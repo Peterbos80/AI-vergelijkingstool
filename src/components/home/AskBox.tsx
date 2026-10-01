@@ -2,14 +2,16 @@
 /**
  * The conversational question box on the home page: type in your own words
  * (Enter asks, Shift+Enter adds a line), or pick a prompt. A prompt fills the
- * box, sets the view level and switches the tool matrix below to its task,
- * so "Advanced" prompts show the developer view. Without JavaScript the box
- * is a plain GET form to Match and the prompts are links to their Match.
+ * box, sets the view level and switches the tool matrix to its task; while a
+ * prompt is hovered or focused the stage previews its world. Without
+ * JavaScript the box is a plain GET form to Match and the prompts are links
+ * to their Match.
  */
-import { useRef, useState, useSyncExternalStore, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
+import { useRef, useSyncExternalStore, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
 import { LevelTabs } from '@/components/level/LevelTabs';
 import { Icon } from '@/components/ui/Icon';
 import { MATCH_LEVEL, readLevel, subscribeLevel, writeLevel, type ViewLevel } from '@/lib/levels';
+import { askIntent } from './ask-intent';
 
 export interface AskPrompt {
   key: string;
@@ -17,6 +19,8 @@ export interface AskPrompt {
   badge: string;
   level: ViewLevel;
   query: string;
+  /** The world of the prompt's task (the stage previews it). */
+  world: string | null;
   /** Match for this prompt (no-JS fallback and "see the full stack"). */
   href: string;
 }
@@ -34,59 +38,29 @@ export interface AskLabels {
   placeholder: string;
   submit: string;
   hint: string;
-  slogan: string;
   prompts: string;
-  levelGroup: string;
-  levelBasis: string;
-  levelAdvanced: string;
-  levelBasisHint: string;
-  levelAdvancedHint: string;
-  fullStack: string;
-  note: string;
 }
 
 const noSubscribe = () => () => undefined;
 
-export function AskBox({
-  action,
-  labels,
-  prompts,
-  panels,
-  defaultPanel,
-  afterPrompts,
-}: {
-  action: string;
-  labels: AskLabels;
-  prompts: AskPrompt[];
-  panels: MatrixPanel[];
-  defaultPanel: string;
-  /** Shown under the prompts (e.g. the step-by-step finder link). */
-  afterPrompts?: ReactNode;
-}) {
-  const [panel, setPanel] = useState(defaultPanel);
-  const [q, setQ] = useState('');
+export function AskBox({ action, labels, prompts, afterPrompts }: { action: string; labels: AskLabels; prompts: AskPrompt[]; afterPrompts?: ReactNode }) {
+  const intent = useSyncExternalStore(askIntent.subscribe, askIntent.get, askIntent.server);
   const level = useSyncExternalStore(subscribeLevel, readLevel, () => 'basis' as ViewLevel);
   // true once hydrated (Enter asks, prompts fill the box); a hook for tests and styling.
   const hydrated = useSyncExternalStore(noSubscribe, () => true, () => false);
   const form = useRef<HTMLFormElement>(null);
   const input = useRef<HTMLTextAreaElement>(null);
-  const active = panels.find((p) => p.key === panel) ?? panels[0];
-  /** The full stack follows the chosen view level. */
-  const withLevel = (h: string) => {
-    const u = new URL(h, 'https://x.invalid');
-    u.searchParams.set('lvl', MATCH_LEVEL[level]);
-    return `${u.pathname}${u.search}`;
-  };
+  const q = intent.text;
 
   const pick = (p: AskPrompt) => (e: MouseEvent<HTMLAnchorElement>) => {
     // New tab, new window: follow the link as usual.
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     e.preventDefault();
-    setQ(p.query);
+    askIntent.set({ text: p.query, panel: p.key, preview: null });
     writeLevel(p.level);
-    if (panels.some((x) => x.key === p.key)) setPanel(p.key);
     input.current?.focus();
   };
+  const preview = (world: string | null) => () => askIntent.set({ preview: world });
 
   const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
@@ -110,7 +84,7 @@ export function AskBox({
           minLength={3}
           maxLength={300}
           value={q}
-          onChange={(e) => setQ(e.target.value)}
+          onChange={(e) => askIntent.set({ text: e.target.value })}
           onKeyDown={onKeyDown}
           placeholder={labels.placeholder}
           className="ask-input"
@@ -119,7 +93,6 @@ export function AskBox({
         />
         <input type="hidden" name="lvl" value={MATCH_LEVEL[level]} />
         <div className="ask-bar">
-          <p className="ask-slogan">{labels.slogan}</p>
           <p className="ask-hint">{labels.hint}</p>
           <button type="submit" className="ask-submit" aria-label={labels.submit} title={labels.submit}>
             <Icon name="arrow-right" size={20} />
@@ -130,16 +103,54 @@ export function AskBox({
       <ul className="ask-prompts" aria-label={labels.prompts}>
         {prompts.map((p) => (
           <li key={p.key}>
-            <a href={p.href} onClick={pick(p)} className="prompt-tag" data-prompt-level={p.level} aria-current={panel === p.key ? 'true' : undefined}>
+            <a
+              href={p.href}
+              onClick={pick(p)}
+              onPointerEnter={preview(p.world)}
+              onPointerLeave={preview(null)}
+              onFocus={preview(p.world)}
+              onBlur={preview(null)}
+              className="prompt-tag"
+              data-world={p.world ?? undefined}
+              data-prompt-level={p.level}
+              aria-current={intent.panel === p.key ? 'true' : undefined}
+            >
+              <span className="prompt-dot" aria-hidden="true" />
               {p.label} <span className="prompt-badge">{p.badge}</span>
             </a>
           </li>
         ))}
       </ul>
       {afterPrompts}
+    </div>
+  );
+}
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-lg">{active?.title}</h2>
+/** The tool matrix under the question box; a prompt picks its panel. */
+export function MatrixPanels({
+  panels,
+  defaultPanel,
+  labels,
+}: {
+  panels: MatrixPanel[];
+  defaultPanel: string;
+  labels: { levelGroup: string; levelBasis: string; levelAdvanced: string; levelBasisHint: string; levelAdvancedHint: string; fullStack: string; note: string };
+}) {
+  const intent = useSyncExternalStore(askIntent.subscribe, askIntent.get, askIntent.server);
+  const level = useSyncExternalStore(subscribeLevel, readLevel, () => 'basis' as ViewLevel);
+  const active = panels.find((p) => p.key === (intent.panel ?? defaultPanel)) ?? panels[0];
+  /** The full stack follows the chosen view level. */
+  const withLevel = (h: string) => {
+    const u = new URL(h, 'https://x.invalid');
+    u.searchParams.set('lvl', MATCH_LEVEL[level]);
+    return `${u.pathname}${u.search}`;
+  };
+  return (
+    <>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 id="matrix-title" className="text-xl">
+          {active?.title}
+        </h2>
         <LevelTabs
           controls="tool-matrix"
           labels={{
@@ -151,7 +162,7 @@ export function AskBox({
           }}
         />
       </div>
-      <div id="tool-matrix" className="mt-3" aria-live="polite">
+      <div id="tool-matrix" className="mt-4" aria-live="polite">
         {panels.map((p) => (
           <div key={p.key} hidden={p.key !== active?.key} className="matrix-panel">
             {p.node}
@@ -166,6 +177,6 @@ export function AskBox({
           </a>
         )}
       </div>
-    </div>
+    </>
   );
 }

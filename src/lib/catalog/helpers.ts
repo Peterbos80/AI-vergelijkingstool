@@ -3,6 +3,7 @@
  * so client components can use them too; `@/lib/catalog` re-exports them.
  */
 import { fallbackChain, type Locale } from '@/i18n/config';
+import { isWorld, type SceneId } from '@/lib/world-ids';
 import type {
   Catalog,
   CatalogCapability,
@@ -71,4 +72,14 @@ export function toolsWithCapability(catalog: Catalog, capabilityId: string): Cat
       const sb = b.capabilities.find((c) => c.id === capabilityId)!.strength === 'primary' ? 0 : 1;
       return sa - sb;
     });
+}
+
+/** A tool's world: the category of its first primary function (else any function), or "home". */
+export function toolWorld(tool: CatalogTool, catalog: Catalog): SceneId {
+  const ordered = [...tool.capabilities].sort((a, b) => Number(b.strength === 'primary') - Number(a.strength === 'primary'));
+  for (const c of ordered) {
+    const category = catalog.capabilitiesById.get(c.id)?.categoryId;
+    if (isWorld(category)) return category;
+  }
+  return 'home';
 }

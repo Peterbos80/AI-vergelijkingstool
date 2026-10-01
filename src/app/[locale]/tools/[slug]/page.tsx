@@ -5,6 +5,7 @@ import type { Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
 import { formatDate, formatMoney } from '@/i18n/formatters';
 import { getCatalog, nameOf, toolText } from '@/lib/catalog';
+import { toolWorld } from '@/lib/catalog/helpers';
 import { getToolDetail } from '@/lib/catalog/detail';
 import { EVENT_ICON, eventDate, eventTitle, eventToneClass, localized } from '@/lib/catalog/events';
 import { fairFightsFor } from '@/lib/engine/compare';
@@ -15,7 +16,7 @@ import { siteUrl } from '@/lib/env';
 import { track } from '@/lib/analytics/track';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { JsonLd } from '@/components/ui/JsonLd';
-import { ToolMonogram } from '@/components/data/ToolMonogram';
+import { ToolMark } from '@/components/data/ToolMark';
 import { StatusStamp } from '@/components/data/StatusStamp';
 import { FreshnessDial } from '@/components/data/FreshnessDial';
 import { StaleBanner } from '@/components/data/StaleBanner';
@@ -142,7 +143,7 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
 
       <header className="mt-6 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
         <div className="flex items-start gap-4">
-          <ToolMonogram name={tool.name} size={56} />
+          <ToolMark tool={tool} world={toolWorld(tool, catalog)} size={56} />
           <div>
             <h1 className="text-3xl md:text-4xl">{tool.name}</h1>
             <p className="mt-1 text-lg text-ink-2">{text?.tagline}</p>

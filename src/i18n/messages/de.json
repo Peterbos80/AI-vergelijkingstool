@@ -864,17 +864,21 @@
     "fightsSub": "Zwei Tools, dieselben Kriterien, kein Gesamtsieger.",
     "tasksTitle": "Beliebte Aufgaben",
     "tasksAll": "Alle Aufgaben",
-    "howTitle": "So funktioniert es",
-    "how1Title": "Du sagst, was du willst",
-    "how1": "In normaler Sprache. Wir machen daraus Schritte und Fähigkeiten und fragen bei Bedarf nach.",
-    "how2Title": "Wir rechnen mit Belegen",
-    "how2": "Jeder Preis und jedes Faktum hat eine Quelle, ein Datum und einen Status. Agenten prüfen die offiziellen Seiten automatisch.",
-    "how3Title": "Geld entscheidet nicht",
-    "how3": "Affiliate-Links und Sponsoring haben keinen Einfluss auf die Reihenfolge. Das testen wir bei jeder Änderung.",
     "newsletterTitle": "AI Pulse in deinem Posteingang",
     "newsletterBody": "Einmal pro Woche: echte Preisänderungen, neue Tools und was eingestellt wird. Kein Hype.",
     "pulseAll": "Alle Änderungen",
-    "stepsCount": "{count, plural, one {# Schritt} other {# Schritte}}"
+    "stepsCount": "{count, plural, one {# Schritt} other {# Schritte}}",
+    "stageHint": "Schreib, was du tun willst. Der Wijzer findet den passenden Ort.",
+    "stageEnter": "Diese Welt ansehen",
+    "stageAnnounce": "Welt: {place}",
+    "toolsCount": "{count, plural, one {# Tool} other {# Tools}}",
+    "worldsEyebrow": "Zehn Welten",
+    "worldsTitle": "Wo legst du los?",
+    "worldsSub": "Jede Kategorie ist ein Ort mit eigenem Werkzeug. Wähle eine Welt und sieh, welche Tools dort die Arbeit machen und was sie kosten.",
+    "worldTop": "Ganz oben",
+    "matrixEyebrow": "Nebeneinander",
+    "fightsEyebrow": "Duelle",
+    "tasksEyebrow": "Mit einer Aufgabe starten"
   },
   "hub": {
     "placeholder": "Frag in deinen eigenen Worten. Zum Beispiel: Ich möchte meine Meetings kostenlos protokollieren lassen",
@@ -932,9 +936,6 @@
     "radarNews": "KI-News aus den Medien",
     "radarVideos": "Videos offizieller Kanäle",
     "radarBuzz": "Community-Buzz",
-    "radarEmptyNews": "Noch keine News. Der News-Agent liest stündlich die Feeds der Medien.",
-    "radarEmptyVideos": "Noch keine Videos. Der News-Agent prüft stündlich die YouTube-Kanäle der Medien.",
-    "radarEmptyBuzz": "Noch keine Messungen. Der Community-Agent misst alle 6 Stunden die Nennungen auf Hacker News und GitHub.",
     "source": "Quelle: {domain}",
     "buzz": {
       "hackernews": "{count, plural, one {# Nennung} other {{n} Nennungen}} auf Hacker News (7 Tage)",
@@ -955,8 +956,7 @@
     "startStack": "Meinen Stack zusammenstellen",
     "paidFrom": "bezahlt ab {price}",
     "from": "ab {price}",
-    "radarChanges": "Änderungen bei Tools",
-    "radarEmptyChanges": "Noch keine belegten Änderungen. Der Änderungs-Agent liest alle 6 Stunden die Changelogs."
+    "radarChanges": "Änderungen bei Tools"
   },
   "start": {
     "metaTitle": "Schritt für Schritt das richtige KI-Tool wählen",
@@ -1220,7 +1220,9 @@
     "legalVat": "USt-IdNr.",
     "legalAddress": "Adresse",
     "legalEmail": "E-Mail",
-    "contactFallback": "Für Korrekturen nutze das Korrekturformular; für geschäftliche Fragen das Formular im Stack Doctor."
+    "contactFallback": "Für Korrekturen nutze das Korrekturformular; für geschäftliche Fragen das Formular im Stack Doctor.",
+    "logosTitle": "Logos",
+    "logosBody": "Bei manchen Tools siehst du ihr Logo. Das Logo gehört der Firma, die das Tool macht. Wir zeigen es nur, damit du das Tool schnell erkennst. Die Logos kommen von Simple Icons und liegen auf unserem eigenen Server. Möchte eine Firma ihr Logo entfernt haben, kann sie uns über Korrekturen schreiben."
   },
   "privacy": {
     "title": "Datenschutz und Cookies",
@@ -1408,5 +1410,21 @@
     "release": "Neues Release: {version}",
     "buzz": "{count, plural, one {# Hacker-News-Beitrag} other {# Hacker-News-Beiträge}} diese Woche",
     "newTool": "Neu im Katalog"
+  },
+  "worlds": {
+    "title": "Welten",
+    "places": {
+      "home": "Das Büro des Wijzers",
+      "assistant": "Gesprächsraum",
+      "writing": "Schreibzimmer",
+      "research": "Labor",
+      "image": "Kreativstudio",
+      "video": "Filmstudio",
+      "audio": "Tonstudio",
+      "code": "Arbeitsplatz der Zukunft",
+      "automation": "Kommandozentrale",
+      "marketing": "Kampagnenraum",
+      "business": "Serviceschalter"
+    }
   }
 }

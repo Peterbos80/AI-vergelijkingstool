@@ -2,12 +2,12 @@ import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
 import { formatMoney } from '@/i18n/formatters';
-import { nameOf } from '@/lib/catalog/helpers';
+import { nameOf, toolWorld } from '@/lib/catalog/helpers';
 import type { Catalog, CatalogTool } from '@/lib/catalog/types';
 import { buildMatrix, verdicts, type Cell, type CriterionKey, type Row, type VerdictReason } from '@/lib/engine/compare';
 import { href } from '@/lib/routes';
 import { ReceiptChip } from './ReceiptChip';
-import { ToolMonogram } from './ToolMonogram';
+import { ToolMark } from './ToolMark';
 import { VisitLink } from './VisitLink';
 import { FxApprox } from './Price';
 import { Icon } from '@/components/ui/Icon';
@@ -102,7 +102,7 @@ export function CompareView({
               {tools.map((tool) => (
                 <th key={tool.id} scope="col" className="min-w-[11rem]">
                   <Link href={href.tool(locale, tool.slug)} className="flex items-center gap-2 normal-case tracking-normal text-ink no-underline">
-                    <ToolMonogram name={tool.name} size={24} />
+                    <ToolMark tool={tool} world={toolWorld(tool, catalog)} size={24} />
                     <span className="font-sans text-sm font-semibold">{tool.name}</span>
                   </Link>
                 </th>

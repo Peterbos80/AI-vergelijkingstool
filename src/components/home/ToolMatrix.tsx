@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
-import { toolText } from '@/lib/catalog/helpers';
-import type { CatalogTool } from '@/lib/catalog/types';
+import { toolText, toolWorld } from '@/lib/catalog/helpers';
+import type { Catalog, CatalogTool } from '@/lib/catalog/types';
 import { href } from '@/lib/routes';
 import { entryPriceLabel } from '@/components/data/format';
-import { ToolMonogram } from '@/components/data/ToolMonogram';
+import { ToolMark } from '@/components/data/ToolMark';
 import { Icon } from '@/components/ui/Icon';
 
 const CONSUMER_PLATFORMS = ['web', 'ios', 'android', 'windows', 'macos'];
@@ -35,7 +35,7 @@ function Yes({ children }: { children: React.ReactNode }) {
  * the switch is instant and works on the static site). Order comes from the
  * engine's capability ranking, which never looks at sponsoring or affiliates.
  */
-export function ToolMatrix({ tools, t, locale, caption }: { tools: CatalogTool[]; t: Translator; locale: Locale; caption: string }) {
+export function ToolMatrix({ tools, t, locale, caption, catalog }: { tools: CatalogTool[]; t: Translator; locale: Locale; caption: string; catalog?: Catalog }) {
   return (
     <div className="table-scroll matrix">
       <table className="table-data">
@@ -82,7 +82,7 @@ export function ToolMatrix({ tools, t, locale, caption }: { tools: CatalogTool[]
               <tr key={tool.id}>
                 <th scope="row" className="font-normal normal-case tracking-normal">
                   <Link href={href.tool(locale, tool.slug)} className="flex items-center gap-2.5 no-underline">
-                    <ToolMonogram name={tool.name} size={28} />
+                    <ToolMark tool={tool} world={catalog ? toolWorld(tool, catalog) : undefined} size={28} />
                     <span className="min-w-0">
                       <span className="block font-semibold text-ink">{tool.name}</span>
                       <span className="block max-w-[16rem] truncate text-xs text-ink-3">{text?.tagline}</span>

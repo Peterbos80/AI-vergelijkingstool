@@ -23,10 +23,13 @@ function Column({ id, title, children }: { id: string; title: string; children: 
 }
 
 /**
- * "AI trend and news radar": three columns of what the agents collected,
- * each item linked to its origin. Empty columns say when data arrives.
+ * "AI trend and news radar": up to three columns of what the agents
+ * collected, each item linked to its origin. A column without items is left
+ * out (an empty state is not content); with nothing at all, no panel.
  */
 export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog: Catalog; t: Translator; locale: Locale }) {
+  const columns = [data.news, data.videos, data.changes].filter((c) => c.length > 0).length;
+  if (!columns && !data.buzz.length) return null;
   return (
     <section aria-labelledby="radar-title" className="hub-panel">
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -41,13 +44,15 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
           {t('hub.radarAll')} →
         </Link>
       </div>
-      <div className="mt-5 grid gap-4 md:grid-cols-3">
-        <Column id="radar-news" title={t('hub.radarNews')}>
-          {data.news.length ? <NewsList items={data.news} t={t} locale={locale} compact /> : <p className="radar-empty">{t('hub.radarEmptyNews')}</p>}
-        </Column>
+      <div className={`mt-5 grid gap-x-8 gap-y-6 ${columns === 3 ? 'md:grid-cols-3' : columns === 2 ? 'md:grid-cols-2' : ''}`}>
+        {data.news.length > 0 && (
+          <Column id="radar-news" title={t('hub.radarNews')}>
+            <NewsList items={data.news} t={t} locale={locale} compact />
+          </Column>
+        )}
 
-        <Column id="radar-videos" title={t('hub.radarVideos')}>
-          {data.videos.length ? (
+        {data.videos.length > 0 && (
+          <Column id="radar-videos" title={t('hub.radarVideos')}>
             <ul className="radar-list">
               {data.videos.map((v) => (
                 <li key={`${v.id}-${v.toolSlug ?? 'media'}`} className="radar-item radar-video">
@@ -80,13 +85,11 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
                 </li>
               ))}
             </ul>
-          ) : (
-            <p className="radar-empty">{t('hub.radarEmptyVideos')}</p>
-          )}
-        </Column>
+          </Column>
+        )}
 
-        <Column id="radar-changes" title={t('hub.radarChanges')}>
-          {data.changes.length ? (
+        {data.changes.length > 0 && (
+          <Column id="radar-changes" title={t('hub.radarChanges')}>
             <ul className="radar-list">
               {data.changes.map((e) => {
                 const tool = e.toolId ? catalog.toolsById.get(e.toolId) : undefined;
@@ -118,19 +121,17 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
                 );
               })}
             </ul>
-          ) : (
-            <p className="radar-empty">{t('hub.radarEmptyChanges')}</p>
-          )}
-        </Column>
+          </Column>
+        )}
       </div>
 
-      <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
-        <span className="radar-title">
-          <span className="live-dot" aria-hidden="true" />
-          {t('hub.radarBuzz')}
-        </span>
-        {data.buzz.length ? (
-          data.buzz.map((b) => (
+      {data.buzz.length > 0 && (
+        <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
+          <span className="radar-title">
+            <span className="live-dot" aria-hidden="true" />
+            {t('hub.radarBuzz')}
+          </span>
+          {data.buzz.map((b) => (
             <span key={`${b.toolSlug}-${b.provider}`} className="text-ink-2">
               <Link href={href.tool(locale, b.toolSlug)} className="font-semibold no-underline hover:underline">
                 {b.toolName}
@@ -143,11 +144,9 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
                 <span className="mono text-xs text-ink-3">{t(`hub.buzz.${b.provider}`, { count: b.value, n: formatNumber(b.value, locale) })}</span>
               )}
             </span>
-          ))
-        ) : (
-          <span className="text-ink-3">{t('hub.radarEmptyBuzz')}</span>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

@@ -1,0 +1,380 @@
+/*
+ * ───────────── Worlds ─────────────
+ * Each category is a world with one colour (docs/strategy/research-2026-10/05).
+ * --world-x is the light of the world: pastel, the same in both themes, used
+ * in scenes, dots and bars (≥ 3:1 as a graphic on the dark page).
+ * --world-x-ink is its text colour (≥ 4.5:1 on paper and card in each theme).
+ * A world colour says "where you are"; it is never an evidence status.
+ */
+:root {
+  --world-home: #c8bca9;
+  --world-assistant: #c4acff;
+  --world-writing: #d0bc86;
+  --world-research: #69d3c6;
+  --world-image: #ed9ee5;
+  --world-video: #ff9b93;
+  --world-audio: #98bcff;
+  --world-code: #86d489;
+  --world-automation: #f7ab5d;
+  --world-marketing: #ff99c2;
+  --world-business: #7bc9f1;
+  --world-home-ink: #645947;
+  --world-assistant-ink: #62479e;
+  --world-writing-ink: #6c5920;
+  --world-research-ink: #006d62;
+  --world-image-ink: #83397f;
+  --world-video-ink: #993331;
+  --world-audio-ink: #3756a1;
+  --world-code-ink: #156d22;
+  --world-automation-ink: #8d4500;
+  --world-marketing-ink: #92325f;
+  --world-business-ink: #006389;
+
+  /* Motion: 70% still, 20% micro-interactions, 10% moments. */
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 420ms;
+  --dur-4: 700ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-std: cubic-bezier(0.2, 0, 0, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Scene surfaces, light theme ("paper"): a maquette of card stock. */
+  --sc-floor: #e6e1d6;
+  --sc-fe: #d2ccbe;
+  --sc-fe2: #c4bdae;
+  --sc-lw: #dad4c7;
+  --sc-rw: #ebe7de;
+  --sc-top: #f9f7f2;
+  --sc-end: #d6d0c3;
+  --sc-base: #d3cdc0;
+  --sc-ot: #ffffff;
+  --sc-ol: #ebe7de;
+  --sc-or: #d9d3c7;
+  --sc-pt: #ffffff;
+  --sc-pl: #f2eee6;
+  --sc-pr: #e1dccf;
+  --sc-panel: #e2ddd1;
+  --sc-panel2: #f4f1ea;
+  --sc-cell: #d5cfc2;
+  --sc-txt: #a8a193;
+  --sc-txt2: #8f897c;
+  --sc-board: #f6f3ec;
+  --sc-axis: #a8a193;
+  --sc-bar: #cfc8b9;
+  --sc-case: #d3cdc0;
+  --sc-shelf: #bdb6a6;
+  --sc-bk1: #b9b19f;
+  --sc-bk2: #a59d8a;
+  --sc-bk3: #cdc6b6;
+  --sc-foam: #cbc4b5;
+  --sc-foam2: #d8d2c5;
+  --sc-peg: #cbc4b5;
+  --sc-mat: #ffffff;
+  --sc-pic: #ddd7cb;
+  --sc-mtn: #a59d8a;
+  --sc-detail: #8a857a;
+  --sc-shadow: rgb(70 58 36 / 0.16);
+  --sc-glass: rgb(255 255 255 / 0.55);
+  --sc-edge: rgb(255 255 255 / 0.7);
+  --sc-spill: rgb(255 255 255 / 0.35);
+  --sc-light-0: 0.34;
+  --sc-light-1: 0.1;
+  --sc-paper-edge: #c9c2b2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --world-home-ink: var(--world-home);
+    --world-assistant-ink: var(--world-assistant);
+    --world-writing-ink: var(--world-writing);
+    --world-research-ink: var(--world-research);
+    --world-image-ink: var(--world-image);
+    --world-video-ink: var(--world-video);
+    --world-audio-ink: var(--world-audio);
+    --world-code-ink: var(--world-code);
+    --world-automation-ink: var(--world-automation);
+    --world-marketing-ink: var(--world-marketing);
+    --world-business-ink: var(--world-business);
+    --sc-floor: #1a1a25;
+    --sc-fe: #111118;
+    --sc-fe2: #0c0c11;
+    --sc-lw: #121219;
+    --sc-rw: #181822;
+    --sc-top: #2b2b3a;
+    --sc-end: #20202c;
+    --sc-base: #1f1f2b;
+    --sc-ot: #383849;
+    --sc-ol: #292937;
+    --sc-or: #20202b;
+    --sc-pt: #f1ece2;
+    --sc-pl: #d9d3c6;
+    --sc-pr: #c4bdaf;
+    --sc-panel: #20202c;
+    --sc-panel2: #1f1f2b;
+    --sc-cell: #2a2a38;
+    --sc-txt: #4a4a5e;
+    --sc-txt2: #5a5a70;
+    --sc-board: #14141c;
+    --sc-axis: #5a5a70;
+    --sc-bar: #3a3a4e;
+    --sc-case: #191922;
+    --sc-shelf: #2e2e3e;
+    --sc-bk1: #34344a;
+    --sc-bk2: #2a2a3c;
+    --sc-bk3: #3e3c50;
+    --sc-foam: #1d1d29;
+    --sc-foam2: #242433;
+    --sc-peg: #2e2e3e;
+    --sc-mat: #e9e4d8;
+    --sc-pic: #23232f;
+    --sc-mtn: #4a4a5e;
+    --sc-detail: #8d8ea0;
+    --sc-shadow: rgb(0 0 0 / 0.28);
+    --sc-glass: rgb(255 255 255 / 0.035);
+    --sc-edge: rgb(255 255 255 / 0.05);
+    --sc-spill: rgb(255 255 255 / 0.025);
+    --sc-light-0: 0.3;
+    --sc-light-1: 0.09;
+    --sc-paper-edge: transparent;
+  }
+}
+
+:root[data-theme='dark'] {
+  --world-home-ink: var(--world-home);
+  --world-assistant-ink: var(--world-assistant);
+  --world-writing-ink: var(--world-writing);
+  --world-research-ink: var(--world-research);
+  --world-image-ink: var(--world-image);
+  --world-video-ink: var(--world-video);
+  --world-audio-ink: var(--world-audio);
+  --world-code-ink: var(--world-code);
+  --world-automation-ink: var(--world-automation);
+  --world-marketing-ink: var(--world-marketing);
+  --world-business-ink: var(--world-business);
+  --sc-floor: #1a1a25;
+  --sc-fe: #111118;
+  --sc-fe2: #0c0c11;
+  --sc-lw: #121219;
+  --sc-rw: #181822;
+  --sc-top: #2b2b3a;
+  --sc-end: #20202c;
+  --sc-base: #1f1f2b;
+  --sc-ot: #383849;
+  --sc-ol: #292937;
+  --sc-or: #20202b;
+  --sc-pt: #f1ece2;
+  --sc-pl: #d9d3c6;
+  --sc-pr: #c4bdaf;
+  --sc-panel: #20202c;
+  --sc-panel2: #1f1f2b;
+  --sc-cell: #2a2a38;
+  --sc-txt: #4a4a5e;
+  --sc-txt2: #5a5a70;
+  --sc-board: #14141c;
+  --sc-axis: #5a5a70;
+  --sc-bar: #3a3a4e;
+  --sc-case: #191922;
+  --sc-shelf: #2e2e3e;
+  --sc-bk1: #34344a;
+  --sc-bk2: #2a2a3c;
+  --sc-bk3: #3e3c50;
+  --sc-foam: #1d1d29;
+  --sc-foam2: #242433;
+  --sc-peg: #2e2e3e;
+  --sc-mat: #e9e4d8;
+  --sc-pic: #23232f;
+  --sc-mtn: #4a4a5e;
+  --sc-detail: #8d8ea0;
+  --sc-shadow: rgb(0 0 0 / 0.28);
+  --sc-glass: rgb(255 255 255 / 0.035);
+  --sc-edge: rgb(255 255 255 / 0.05);
+  --sc-spill: rgb(255 255 255 / 0.025);
+  --sc-light-0: 0.3;
+  --sc-light-1: 0.09;
+  --sc-paper-edge: transparent;
+}
+
+/* Any element can set its world: children get --w (light) and --w-ink (text). */
+[data-world='home'] { --w: var(--world-home); --w-ink: var(--world-home-ink); }
+[data-world='assistant'] { --w: var(--world-assistant); --w-ink: var(--world-assistant-ink); }
+[data-world='writing'] { --w: var(--world-writing); --w-ink: var(--world-writing-ink); }
+[data-world='research'] { --w: var(--world-research); --w-ink: var(--world-research-ink); }
+[data-world='image'] { --w: var(--world-image); --w-ink: var(--world-image-ink); }
+[data-world='video'] { --w: var(--world-video); --w-ink: var(--world-video-ink); }
+[data-world='audio'] { --w: var(--world-audio); --w-ink: var(--world-audio-ink); }
+[data-world='code'] { --w: var(--world-code); --w-ink: var(--world-code-ink); }
+[data-world='automation'] { --w: var(--world-automation); --w-ink: var(--world-automation-ink); }
+[data-world='marketing'] { --w: var(--world-marketing); --w-ink: var(--world-marketing-ink); }
+[data-world='business'] { --w: var(--world-business); --w-ink: var(--world-business-ink); }
+
+/*
+ * ───────────── World scenes (components/worlds) ─────────────
+ * Faces: t top (lightest), l left, r right (darkest). Screens and devices
+ * stay dark in both themes, like real ones.
+ */
+.scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.scene .s-floor { fill: var(--sc-floor); }
+.scene .s-fe { fill: var(--sc-fe); }
+.scene .s-fe2 { fill: var(--sc-fe2); }
+.scene .s-lw { fill: var(--sc-lw); }
+.scene .s-rw { fill: var(--sc-rw); }
+.scene .s-top { fill: var(--sc-top); }
+.scene .s-end { fill: var(--sc-end); }
+.scene .s-base { fill: var(--sc-base); }
+.scene .s-base2 { fill: var(--sc-fe); }
+.scene .s-edge { stroke: var(--sc-edge); stroke-width: 1; }
+.scene .s-l0 { stop-color: var(--w); stop-opacity: var(--sc-light-0); }
+.scene .s-l1 { stop-color: var(--w); stop-opacity: var(--sc-light-1); }
+.scene .s-l2 { stop-color: var(--w); stop-opacity: 0; }
+.scene .s-ot { fill: var(--sc-ot); }
+.scene .s-ol { fill: var(--sc-ol); }
+.scene .s-or { fill: var(--sc-or); }
+.scene .s-dt { fill: #262631; }
+.scene .s-dl { fill: #1a1a22; }
+.scene .s-dr { fill: #131319; }
+.scene .s-pt { fill: var(--sc-pt); }
+.scene .s-pl { fill: var(--sc-pl); }
+.scene .s-pr { fill: var(--sc-pr); }
+.scene .s-wt { fill: color-mix(in srgb, var(--w) 90%, white); }
+.scene .s-wl { fill: color-mix(in srgb, var(--w) 72%, black); }
+.scene .s-wr { fill: color-mix(in srgb, var(--w) 52%, black); }
+.scene .s-qt,
+.scene .s-ql { fill: rgb(255 255 255 / 0.08); stroke: var(--sc-detail); stroke-opacity: 0.45; stroke-width: 0.8; }
+.scene .s-sh { fill: var(--sc-shadow); }
+.scene .s-beam { fill: var(--w); opacity: 0.07; }
+.scene .s-leg { stroke: var(--sc-detail); stroke-width: 1.6; stroke-linecap: round; opacity: 0.8; }
+.scene .s-detail { fill: var(--sc-detail); }
+/* World colour */
+.scene .s-w { fill: var(--w); }
+.scene .s-w8 { fill: var(--w); opacity: 0.8; }
+.scene .s-w5 { fill: var(--w); opacity: 0.45; }
+.scene .s-w3 { fill: var(--w); opacity: 0.3; }
+.scene .s-wtint { fill: color-mix(in srgb, var(--w) 20%, var(--sc-panel)); }
+.scene .s-wline { fill: none; stroke: var(--w); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.scene .s-rug { fill: var(--w); opacity: 0.07; }
+.scene .s-mark { fill: var(--w); opacity: 0.55; }
+.scene .s-grid { stroke: var(--w); stroke-opacity: 0.13; stroke-width: 0.8; }
+/* Screens and devices (dark in both themes) */
+.scene .s-scr { fill: #0b0b10; }
+.scene .s-scr2 { fill: #0e0e15; }
+.scene .s-scrw { fill: color-mix(in srgb, var(--w) 22%, #0b0b10); }
+.scene .s-ui { fill: #2a2a38; }
+.scene .s-ui2 { fill: #3a3a4c; }
+.scene .s-uitxt { fill: #4a4a5e; }
+.scene .s-uitxt2 { fill: #5a5a70; }
+.scene .s-uifrm { fill: #20202c; stroke: #2e2e3e; }
+.scene .s-uifrmw { fill: color-mix(in srgb, var(--w) 30%, #20202c); stroke: var(--w); stroke-width: 0.8; }
+.scene .s-txtw { fill: #0b0b10; opacity: 0.55; }
+.scene .s-key { fill: #3a3a4a; }
+.scene .s-key2 { fill: #2c2c3a; }
+.scene .s-trk { fill: #262632; }
+.scene .s-dot { fill: #5a5a70; }
+.scene .s-slotd { fill: #0b0b10; }
+.scene .s-knob { fill: #8d8ea0; }
+.scene .s-cone { fill: #08080c; stroke: #3a3a4a; }
+.scene .s-mic { fill: #2a2a36; stroke: #45455a; }
+.scene .s-grill { stroke: #5a5a70; stroke-width: 0.8; }
+.scene .s-dev { fill: #2a2a36; }
+.scene .s-phone { fill: #0b0b10; stroke: #45455a; }
+.scene .s-node { fill: #2a2a38; stroke: #3a3a4c; }
+.scene .s-nodew { fill: color-mix(in srgb, var(--w) 25%, #15151f); stroke: var(--w); stroke-width: 1; }
+.scene .s-flowd { fill: none; stroke: #3a3a4c; stroke-width: 1.6; stroke-dasharray: 3 3; }
+.scene .s-chk { fill: none; stroke: #0b0b10; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.scene .s-ringd { fill: none; stroke: var(--w); stroke-opacity: 0.25; stroke-width: 1; }
+.scene .s-sweep { fill: var(--w); opacity: 0.25; }
+.scene .s-rec { fill: #ff5a4d; }
+.scene .s-sign,
+.scene .s-mono,
+.scene .s-big,
+.scene .s-tk { font-family: var(--font-mono); }
+.scene .s-sign { fill: var(--w); font-size: 8px; font-weight: 600; letter-spacing: 0.08em; text-anchor: middle; }
+.scene .s-mono { fill: var(--w); font-size: 9px; font-weight: 600; }
+.scene .s-big { fill: var(--w); font-size: 28px; font-weight: 700; }
+.scene .s-tk { fill: #c5c6d0; font-size: 8px; font-weight: 500; }
+/* Room things (follow the theme) */
+.scene .s-panel { fill: var(--sc-panel); }
+.scene .s-panel2 { fill: var(--sc-panel2); }
+.scene .s-cell { fill: var(--sc-cell); }
+.scene .s-txt { fill: var(--sc-txt); }
+.scene .s-txt2 { fill: var(--sc-txt2); }
+.scene .s-board { fill: var(--sc-board); stroke: var(--sc-cell); }
+.scene .s-axis { fill: none; stroke: var(--sc-axis); stroke-width: 1; }
+.scene .s-bar { fill: var(--sc-bar); }
+.scene .s-case { fill: var(--sc-case); }
+.scene .s-shelf { fill: var(--sc-shelf); }
+.scene .s-bk1 { fill: var(--sc-bk1); }
+.scene .s-bk2 { fill: var(--sc-bk2); }
+.scene .s-bk3 { fill: var(--sc-bk3); }
+.scene .s-foam { fill: var(--sc-foam); }
+.scene .s-foam2 { fill: var(--sc-foam2); }
+.scene .s-peg { fill: var(--sc-peg); }
+.scene .s-mat { fill: var(--sc-mat); }
+.scene .s-pic { fill: var(--sc-pic); }
+.scene .s-mtn { fill: var(--sc-mtn); }
+.scene .s-mtn2 { fill: var(--sc-pic); opacity: 0.8; }
+.scene .s-frm { fill: var(--sc-cell); stroke: var(--sc-panel); }
+.scene .s-sk { fill: none; stroke: var(--sc-detail); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; opacity: 0.7; }
+.scene .s-slot { fill: none; stroke: var(--sc-cell); stroke-width: 1; }
+.scene .s-glass { fill: var(--sc-glass); }
+.scene .s-frame { fill: none; stroke: var(--sc-detail); stroke-opacity: 0.6; stroke-width: 1.5; }
+.scene .s-mull { stroke: var(--sc-detail); stroke-opacity: 0.5; stroke-width: 1.2; }
+.scene .s-spill { fill: var(--sc-spill); }
+.scene .s-hs { fill: none; stroke: var(--sc-detail); stroke-width: 2.4; stroke-linecap: round; }
+.scene .s-bell { fill: #c9c4b8; }
+.scene .s-lens { fill: rgb(255 255 255 / 0.06); stroke: var(--sc-detail); stroke-width: 2; }
+.scene .s-handle { stroke: var(--sc-detail); stroke-width: 3; stroke-linecap: round; }
+.scene .s-globe { fill: color-mix(in srgb, var(--w) 20%, var(--sc-panel)); stroke: var(--w); stroke-width: 1.4; }
+.scene .s-mer { fill: none; stroke: var(--w); stroke-opacity: 0.45; stroke-width: 1; }
+.scene .s-diff { fill: #f4efe6; }
+.scene .s-fresnel { fill: #f4efe6; stroke: #0b0b10; stroke-width: 1.5; }
+.scene .s-stripe { fill: #e8e6e0; }
+.scene .s-ringl { fill: none; stroke: #f4efe6; stroke-width: 5; opacity: 0.9; }
+.scene .s-ringw { fill: none; stroke: var(--w); stroke-width: 9; opacity: 0.14; }
+/* Paper: the receipt, manuscripts, tickets */
+.scene .s-paper { fill: var(--sc-pt); stroke: var(--sc-paper-edge); stroke-width: 0.6; }
+.scene .s-paper2 { fill: var(--sc-pl); stroke: var(--sc-paper-edge); stroke-width: 0.6; }
+.scene .s-note { fill: #e8e3d6; }
+.scene .s-ink { fill: #4c4a43; }
+.scene .s-inkl { fill: #4c4a43; opacity: 0.45; }
+.scene .s-rtxt { fill: #4c4a43; opacity: 0.6; }
+.scene .s-rtot { fill: #4c4a43; }
+/* The wijzer clock (the logo) */
+.scene .s-rim { fill: none; stroke: #e6e6ec; stroke-width: 2.2; }
+.scene .s-tick { stroke: #8d8ea0; stroke-width: 1.4; stroke-linecap: round; }
+.scene .s-arc { fill: none; stroke: #ff6a4d; stroke-width: 3.2; }
+.scene .s-hand { stroke: #f4f4f6; stroke-width: 2.8; stroke-linecap: round; }
+.scene .s-hub { fill: #f4f4f6; }
+
+/* The room comes alive under a pointer: the light warms up, the objects lift. */
+.scene .s-lit {
+  transition: opacity var(--dur-3) var(--ease-std);
+}
+.scene .s-objs {
+  transition: transform var(--dur-3) var(--ease-out);
+}
+.world-live:hover .scene .s-objs,
+.world-live:focus-visible .scene .s-objs,
+.world-live:focus-within .scene .s-objs {
+  transform: translateY(-3px);
+}
+.world-live .scene .s-lit {
+  opacity: 0.8;
+}
+.world-live:hover .scene .s-lit,
+.world-live:focus-visible .scene .s-lit,
+.world-live:focus-within .scene .s-lit {
+  opacity: 1;
+}
+
+/* The stage's light follows its world smoothly (a registered colour animates). */
+@property --stage-light {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: transparent;
+}

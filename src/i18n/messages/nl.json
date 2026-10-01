@@ -843,17 +843,21 @@
     "fightsSub": "Twee tools, dezelfde criteria, geen totaalwinnaar.",
     "tasksTitle": "Populaire taken",
     "tasksAll": "Alle taken",
-    "howTitle": "Zo werkt het",
-    "how1Title": "Jij zegt wat je wilt",
-    "how1": "In gewone taal. Wij vertalen dat naar stappen en functies, en vragen door als het nodig is.",
-    "how2Title": "Wij rekenen met bonnetjes",
-    "how2": "Elke prijs en elk feit heeft een bron, een datum en een status. Agents controleren de officiële pagina's automatisch.",
-    "how3Title": "Geld beslist niet",
-    "how3": "Affiliatelinks en sponsoring hebben geen invloed op de volgorde. Dat testen we bij elke wijziging.",
     "newsletterTitle": "AI Pulse in je inbox",
     "newsletterBody": "Eén keer per week: echte prijswijzigingen, nieuwe tools en wat er stopt. Geen hype.",
     "pulseAll": "Alle wijzigingen",
-    "stepsCount": "{count, plural, one {# stap} other {# stappen}}"
+    "stepsCount": "{count, plural, one {# stap} other {# stappen}}",
+    "stageHint": "Typ wat je wilt doen. De wijzer zoekt de plek die erbij hoort.",
+    "stageEnter": "Bekijk deze wereld",
+    "stageAnnounce": "Wereld: {place}",
+    "toolsCount": "{count, plural, one {# tool} other {# tools}}",
+    "worldsEyebrow": "Tien werelden",
+    "worldsTitle": "Waar ga je aan de slag?",
+    "worldsSub": "Elke categorie is een plek met eigen gereedschap. Kies een wereld en zie welke tools daar het werk doen, en wat ze kosten.",
+    "worldTop": "Bovenaan",
+    "matrixEyebrow": "Naast elkaar",
+    "fightsEyebrow": "Duels",
+    "tasksEyebrow": "Begin met een taak"
   },
   "hub": {
     "placeholder": "Vraag het in je eigen woorden. Bijvoorbeeld: ik wil gratis mijn vergaderingen laten notuleren",
@@ -911,9 +915,6 @@
     "radarNews": "AI-nieuws uit de media",
     "radarVideos": "Video's van officiële kanalen",
     "radarBuzz": "Community-buzz",
-    "radarEmptyNews": "Nog geen nieuws. De nieuws-agent leest elk uur de feeds van media.",
-    "radarEmptyVideos": "Nog geen video's. De nieuws-agent kijkt elk uur bij de YouTube-kanalen van media.",
-    "radarEmptyBuzz": "Nog geen metingen. De community-agent meet elke 6 uur de vermeldingen op Hacker News en GitHub.",
     "source": "bron: {domain}",
     "buzz": {
       "hackernews": "{count, plural, one {# vermelding} other {{n} vermeldingen}} op Hacker News (7 dagen)",
@@ -934,8 +935,7 @@
     "startStack": "Stel mijn stack samen",
     "paidFrom": "betaald vanaf {price}",
     "from": "vanaf {price}",
-    "radarChanges": "Wijzigingen bij tools",
-    "radarEmptyChanges": "Nog geen wijzigingen met bron. De wijzigingen-agent leest elke 6 uur de changelogs."
+    "radarChanges": "Wijzigingen bij tools"
   },
   "start": {
     "metaTitle": "Stap voor stap de juiste AI-tool kiezen",
@@ -1277,7 +1277,9 @@
     "legalVat": "Btw-id",
     "legalAddress": "Adres",
     "legalEmail": "E-mail",
-    "contactFallback": "Voor correcties gebruik je het correctieformulier; voor zakelijke vragen het formulier in de Stack Doctor."
+    "contactFallback": "Voor correcties gebruik je het correctieformulier; voor zakelijke vragen het formulier in de Stack Doctor.",
+    "logosTitle": "Logo’s",
+    "logosBody": "Bij sommige tools zie je hun logo. Dat logo is van de maker van die tool. Wij gebruiken het alleen zodat je de tool snel herkent. De logo’s komen van Simple Icons en staan op onze eigen server. Wil een maker dat we het logo weghalen? Stuur ons een bericht via Correcties."
   },
   "privacy": {
     "title": "Privacy en cookies",
@@ -2147,5 +2149,21 @@
     "why": "Waarom zie ik dit?",
     "cta": "Bekijk {tool}",
     "note": "Betaalde plaatsing. Heeft geen invloed op onze aanbevelingen of rangschikking."
+  },
+  "worlds": {
+    "title": "Werelden",
+    "places": {
+      "home": "Het kantoor van de wijzer",
+      "assistant": "Gesprekskamer",
+      "writing": "Schrijfkamer",
+      "research": "Laboratorium",
+      "image": "Creatieve studio",
+      "video": "Filmstudio",
+      "audio": "Opnamestudio",
+      "code": "Werkplek van de toekomst",
+      "automation": "Commandocentrum",
+      "marketing": "Campagnekamer",
+      "business": "Servicebalie"
+    }
   }
 }

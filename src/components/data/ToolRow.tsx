@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
-import { nameOf, toolText } from '@/lib/catalog/helpers';
+import { nameOf, toolText, toolWorld } from '@/lib/catalog/helpers';
 import type { Catalog, CatalogTool } from '@/lib/catalog/types';
 import { href } from '@/lib/routes';
 import { FreshnessDial } from './FreshnessDial';
 import { FxApprox } from './Price';
 import { ReceiptChip } from './ReceiptChip';
-import { ToolMonogram } from './ToolMonogram';
+import { ToolMark } from './ToolMark';
 import { entryPriceLabel } from './format';
 
 /**
@@ -34,7 +34,7 @@ export function ToolRow({
   const primary = tool.capabilities.filter((c) => c.strength === 'primary').slice(0, 3);
   return (
     <li className="tool-row">
-      <ToolMonogram name={tool.name} size={40} />
+      <ToolMark tool={tool} world={toolWorld(tool, catalog)} size={40} />
       <div className="min-w-0 [overflow-wrap:anywhere]">
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
           <Link href={href.tool(locale, tool.slug)} className="font-semibold no-underline hover:underline">

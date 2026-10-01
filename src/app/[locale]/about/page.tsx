@@ -34,6 +34,8 @@ export default async function AboutPage({ params }: PageProps<'/[locale]/about'>
         <p>
           {t('about.howBody')} <Link href={href.page(locale, 'methodology')}>{t('receipts.methodologyLink')}</Link>
         </p>
+        <h2>{t('about.logosTitle')}</h2>
+        <p>{t('about.logosBody')}</p>
         <h2>{t('about.contactTitle')}</h2>
         {rows.length > 0 && (
           <dl className="grid grid-cols-[max-content_1fr] gap-x-6 gap-y-1">

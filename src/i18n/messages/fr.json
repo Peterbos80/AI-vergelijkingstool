@@ -864,17 +864,21 @@
     "fightsSub": "Deux outils, les mêmes critères, pas de gagnant absolu.",
     "tasksTitle": "Tâches populaires",
     "tasksAll": "Toutes les tâches",
-    "howTitle": "Comment ça marche",
-    "how1Title": "Vous dites ce que vous voulez",
-    "how1": "En langage courant. Nous le transformons en étapes et en capacités, et posons une question si nécessaire.",
-    "how2Title": "Nous comptons avec des justificatifs",
-    "how2": "Chaque prix et chaque fait a une source, une date et un statut. Des agents vérifient automatiquement les pages officielles.",
-    "how3Title": "L’argent ne décide pas",
-    "how3": "Les liens affiliés et le sponsoring n’ont aucune influence sur l’ordre. Nous le testons à chaque modification.",
     "newsletterTitle": "AI Pulse dans votre boîte mail",
     "newsletterBody": "Une fois par semaine : de vrais changements de prix, de nouveaux outils et ce qui s’arrête. Sans battage.",
     "pulseAll": "Tous les changements",
-    "stepsCount": "{count, plural, one {# étape} other {# étapes}}"
+    "stepsCount": "{count, plural, one {# étape} other {# étapes}}",
+    "stageHint": "Écrivez ce que vous voulez faire. Le Wijzer trouve l’endroit qui correspond.",
+    "stageEnter": "Voir ce monde",
+    "stageAnnounce": "Monde : {place}",
+    "toolsCount": "{count, plural, one {# outil} other {# outils}}",
+    "worldsEyebrow": "Dix mondes",
+    "worldsTitle": "Où allez-vous travailler ?",
+    "worldsSub": "Chaque catégorie est un lieu avec ses propres outils. Choisissez un monde et voyez quels outils y font le travail, et ce qu’ils coûtent.",
+    "worldTop": "En tête",
+    "matrixEyebrow": "Côte à côte",
+    "fightsEyebrow": "Duels",
+    "tasksEyebrow": "Commencer par une tâche"
   },
   "hub": {
     "placeholder": "Demandez avec vos propres mots. Par exemple : je veux faire rédiger gratuitement le compte rendu de mes réunions",
@@ -932,9 +936,6 @@
     "radarNews": "Actualités IA des médias",
     "radarVideos": "Vidéos des chaînes officielles",
     "radarBuzz": "Buzz communautaire",
-    "radarEmptyNews": "Pas encore d’actualités. L’agent actualités lit chaque heure les flux des médias.",
-    "radarEmptyVideos": "Pas encore de vidéo. L’agent actualités consulte chaque heure les chaînes YouTube des médias.",
-    "radarEmptyBuzz": "Pas encore de mesure. L’agent communauté mesure les mentions sur Hacker News et GitHub toutes les 6 heures.",
     "source": "source : {domain}",
     "buzz": {
       "hackernews": "{count, plural, one {# mention} other {{n} mentions}} sur Hacker News (7 jours)",
@@ -955,8 +956,7 @@
     "startStack": "Composer ma stack",
     "paidFrom": "payant dès {price}",
     "from": "dès {price}",
-    "radarChanges": "Changements des outils",
-    "radarEmptyChanges": "Pas encore de changement sourcé. L’agent des changements lit les changelogs toutes les 6 heures."
+    "radarChanges": "Changements des outils"
   },
   "start": {
     "metaTitle": "Choisir le bon outil IA, pas à pas",
@@ -1220,7 +1220,9 @@
     "legalVat": "Numéro de TVA",
     "legalAddress": "Adresse",
     "legalEmail": "E-mail",
-    "contactFallback": "Pour les corrections, utilisez le formulaire de corrections ; pour les questions professionnelles, le formulaire du Stack Doctor."
+    "contactFallback": "Pour les corrections, utilisez le formulaire de corrections ; pour les questions professionnelles, le formulaire du Stack Doctor.",
+    "logosTitle": "Logos",
+    "logosBody": "Certains outils affichent leur logo. Ce logo appartient à l’entreprise qui fait l’outil. Nous l’utilisons seulement pour que vous reconnaissiez l’outil rapidement. Les logos viennent de Simple Icons et sont stockés sur notre propre serveur. Une entreprise qui veut que son logo soit retiré peut nous écrire via Corrections."
   },
   "privacy": {
     "title": "Confidentialité et cookies",
@@ -1408,5 +1410,21 @@
     "release": "Nouvelle version : {version}",
     "buzz": "{count, plural, one {# article Hacker News} other {# articles Hacker News}} cette semaine",
     "newTool": "Nouveau dans le catalogue"
+  },
+  "worlds": {
+    "title": "Mondes",
+    "places": {
+      "home": "Le bureau du Wijzer",
+      "assistant": "Salon de conversation",
+      "writing": "Atelier d’écriture",
+      "research": "Laboratoire",
+      "image": "Studio de création",
+      "video": "Studio de cinéma",
+      "audio": "Studio d’enregistrement",
+      "code": "Atelier du futur",
+      "automation": "Centre de commande",
+      "marketing": "Salle de campagne",
+      "business": "Guichet de service"
+    }
   }
 }

@@ -15,8 +15,15 @@ import { emailEnabled } from '@/lib/env';
 import { track } from '@/lib/analytics/track';
 import { NewsletterForm } from '@/components/forms/NewsletterForm';
 import { SponsoredCard } from '@/components/data/SponsoredCard';
-import { AskBox, type AskPrompt, type MatrixPanel } from '@/components/home/AskBox';
+import { AskBox, MatrixPanels, type AskPrompt, type MatrixPanel } from '@/components/home/AskBox';
+import { HeroStage, type StageWorld } from '@/components/home/HeroStage';
 import { RadarPanel } from '@/components/home/RadarPanel';
+import { ToolMark } from '@/components/data/ToolMark';
+import { WorldCard } from '@/components/worlds/WorldCard';
+import { toolWorld } from '@/lib/catalog/helpers';
+import { worldSummaries } from '@/lib/catalog/worlds';
+import { worldLexicon } from '@/lib/worlds';
+import type { WorldId } from '@/lib/world-ids';
 import { StarterWorkflows } from '@/components/home/StarterWorkflows';
 import { ToolMatrix } from '@/components/home/ToolMatrix';
 import { activePlacement } from '@/lib/monetization/placements';
@@ -77,7 +84,24 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
       if (fairFightGate(tool, other).ok) fights.push([tool, other]);
     }
   }
+  // Six duels from different worlds, each tool once, the best-documented first.
+  fights.sort((x, y) => y[0].qualityScore + y[1].qualityScore - (x[0].qualityScore + x[1].qualityScore));
+  const duels: [CatalogTool, CatalogTool][] = [];
+  const usedTools = new Set<string>();
+  const usedWorlds = new Set<string>();
+  for (const strict of [true, false]) {
+    for (const [a, b] of fights) {
+      if (duels.length >= 6 || usedTools.has(a.id) || usedTools.has(b.id) || (strict && usedWorlds.has(toolWorld(a, catalog)))) continue;
+      duels.push([a, b]);
+      usedTools.add(a.id).add(b.id);
+      usedWorlds.add(toolWorld(a, catalog));
+    }
+  }
   const popular = catalog.tasks.slice(0, 8);
+  const worlds = worldSummaries(catalog, t, locale);
+  const stageWorlds: Partial<Record<WorldId, StageWorld>> = Object.fromEntries(
+    worlds.map((w) => [w.id, { place: w.place, name: w.name, count: t('home.toolsCount', { count: w.toolCount }), href: w.href }]),
+  );
   // Paid placement: labelled and separate from everything the engine recommends.
   const sponsored = await activePlacement('home_sponsored');
   const sponsoredTool = sponsored ? catalog.toolsById.get(sponsored.toolId) : undefined;
@@ -94,6 +118,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         badge: p.level === 'basis' ? t('hub.badgeBeginner') : t('hub.badgeAdvanced'),
         level: p.level,
         query,
+        world: task.categoryId,
         href: href.match(locale, { q: query, task: task.id, lvl: matchLevel(p.level), b: p.budget }),
       },
     ];
@@ -104,7 +129,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
     {
       key: 'assistants',
       title: t('hub.matrixAssistants'),
-      node: <ToolMatrix tools={assistants} t={t} locale={locale} caption={t('hub.matrixAssistants')} />,
+      node: <ToolMatrix tools={assistants} t={t} locale={locale} caption={t('hub.matrixAssistants')} catalog={catalog} />,
       matchHref: href.match(locale, { q: taskTextOf(catalog.tasksById.get('everyday-ai-assistant') ?? catalog.tasks[0]!, locale).title, task: 'everyday-ai-assistant' }),
     },
   ];
@@ -124,48 +149,51 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
       tools = tools.slice(0, 6);
     }
     const title = t('hub.matrixFor', { task: taskTextOf(task, locale).title });
-    panels.push({ key: p.key, title, node: <ToolMatrix tools={tools} t={t} locale={locale} caption={title} />, matchHref: prompt.href });
+    panels.push({ key: p.key, title, node: <ToolMatrix tools={tools} t={t} locale={locale} caption={title} catalog={catalog} />, matchHref: prompt.href });
   }
 
   return (
     <>
-      <section className="hero border-b border-line">
-        <div className="container-page py-12 md:py-16">
-          <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.02]">{t('home.heroTitle')}</h1>
-          <p className="mt-3 max-w-2xl text-lg text-ink-2">{t('home.heroSub')}</p>
-          <div className="mt-8 max-w-4xl">
-            <AskBox
-              action={href.match(locale)}
-              prompts={prompts}
-              panels={panels}
-              defaultPanel="assistants"
-              afterPrompts={
-                <p className="mt-4 text-sm">
-                  <Link href={href.start(locale)} className="link-accent font-semibold">
-                    {t('start.homeCta')} →
-                  </Link>
-                </p>
-              }
-              labels={{
-                label: t('match.inputLabel'),
-                placeholder: t('hub.placeholder'),
-                submit: t('match.submit'),
-                hint: t('hub.enterHint'),
-                slogan: t('meta.tagline'),
-                prompts: t('hub.promptsLabel'),
-                levelGroup: t('hub.levelGroup'),
-                levelBasis: t('hub.levelBasis'),
-                levelAdvanced: t('hub.levelAdvanced'),
-                levelBasisHint: t('hub.levelBasisHint'),
-                levelAdvancedHint: t('hub.levelAdvancedHint'),
-                fullStack: t('hub.fullStack'),
-                note: t('hub.matrixNote'),
-              }}
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="container-page hero-grid">
+          <div className="hero-copy">
+            <p className="hero-eyebrow">{t('meta.tagline')}</p>
+            <h1 id="hero-title" className="hero-title">
+              {t('home.heroTitle')}
+            </h1>
+            <p className="hero-sub">{t('home.heroSub')}</p>
+            <div className="mt-7">
+              <AskBox
+                action={href.match(locale)}
+                prompts={prompts}
+                afterPrompts={
+                  <p className="mt-4 text-sm">
+                    <Link href={href.start(locale)} className="link-accent font-semibold">
+                      {t('start.homeCta')} →
+                    </Link>
+                  </p>
+                }
+                labels={{
+                  label: t('match.inputLabel'),
+                  placeholder: t('hub.placeholder'),
+                  submit: t('match.submit'),
+                  hint: t('hub.enterHint'),
+                  prompts: t('hub.promptsLabel'),
+                }}
+              />
+            </div>
+          </div>
+          <div className="hero-visual">
+            <HeroStage
+              lexicon={worldLexicon(catalog, locale)}
+              worlds={stageWorlds}
+              labels={{ homePlace: t('worlds.places.home'), homeHint: t('home.stageHint'), enter: t('home.stageEnter'), announce: t('home.stageAnnounce') }}
             />
           </div>
-          {s.tools > 0 && (
-            <p className="mono mt-8 text-xs text-ink-3">
-              <span className="font-semibold text-ink-2">{t('meta.tagline')}</span>{' '}
+        </div>
+        {s.tools > 0 && (
+          <div className="container-page">
+            <p className="hero-proof mono">
               {t('home.proof', {
                 tools: formatNumber(s.tools, locale),
                 facts: formatNumber(s.facts + s.plans, locale),
@@ -173,26 +201,78 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
                 date: formatDate(s.lastCheckAt, locale),
               })}
             </p>
-          )}
+          </div>
+        )}
+      </section>
+
+      <section className="home-section" aria-labelledby="worlds-title">
+        <div className="container-page">
+          <header className="section-head">
+            <p className="eyebrow">{t('home.worldsEyebrow')}</p>
+            <h2 id="worlds-title" className="section-title">
+              {t('home.worldsTitle')}
+            </h2>
+            <p className="section-sub">{t('home.worldsSub')}</p>
+          </header>
+          <ul className="world-grid">
+            {worlds.map((w) => (
+              <li key={w.id}>
+                <WorldCard world={w} count={t('home.toolsCount', { count: w.toolCount })} topLabel={t('home.worldTop')} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="home-section home-band" aria-labelledby="matrix-title">
+        <div className="container-page">
+          <p className="eyebrow mb-2">{t('home.matrixEyebrow')}</p>
+          <MatrixPanels
+            panels={panels}
+            defaultPanel="assistants"
+            labels={{
+              levelGroup: t('hub.levelGroup'),
+              levelBasis: t('hub.levelBasis'),
+              levelAdvanced: t('hub.levelAdvanced'),
+              levelBasisHint: t('hub.levelBasisHint'),
+              levelAdvancedHint: t('hub.levelAdvancedHint'),
+              fullStack: t('hub.fullStack'),
+              note: t('hub.matrixNote'),
+            }}
+          />
         </div>
       </section>
 
       {radarData && (
-        <div className="container-page py-12">
-          <RadarPanel data={radarData} catalog={catalog} t={t} locale={locale} />
+        <div className="home-section">
+          <div className="container-page">
+            <RadarPanel data={radarData} catalog={catalog} t={t} locale={locale} />
+          </div>
         </div>
       )}
 
-      {fights.length > 0 && (
-        <section className="border-y border-line bg-card">
-          <div className="container-page py-10">
-            <h2 className="eyebrow">{t('home.fightsTitle')}</h2>
-            <p className="mt-1 text-sm text-ink-2">{t('home.fightsSub')}</p>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {fights.slice(0, 8).map(([a, b]) => (
+      {duels.length > 0 && (
+        <section className="home-section pt-0" aria-labelledby="fights-title">
+          <div className="container-page">
+            <header className="section-head">
+              <p className="eyebrow">{t('home.fightsEyebrow')}</p>
+              <h2 id="fights-title" className="section-title">
+                {t('home.fightsTitle')}
+              </h2>
+              <p className="section-sub">{t('home.fightsSub')}</p>
+            </header>
+            <ul className="versus-grid">
+              {duels.map(([a, b]) => (
                 <li key={`${a.slug}-${b.slug}`}>
-                  <Link href={href.fairFight(locale, a.slug, b.slug)} className="chip">
-                    {a.name} vs {b.name}
+                  <Link href={href.fairFight(locale, a.slug, b.slug)} className="versus">
+                    <span className="versus-marks" aria-hidden="true">
+                      <ToolMark tool={a} world={toolWorld(a, catalog)} size={44} />
+                      <span className="versus-vs">vs</span>
+                      <ToolMark tool={b} world={toolWorld(b, catalog)} size={44} />
+                    </span>
+                    <span className="versus-names">
+                      {a.name} <span className="text-ink-3">vs</span> {b.name}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -201,27 +281,34 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         </section>
       )}
 
-      <section className="container-page py-12">
-        <div className="flex items-baseline justify-between gap-3">
-          <h2 className="text-2xl">{t('home.tasksTitle')}</h2>
-          <Link href={href.tasks(locale)} className="text-sm">
-            {t('home.tasksAll')} →
-          </Link>
+      <section className="home-section pt-0" aria-labelledby="tasks-title">
+        <div className="container-page">
+          <header className="section-head section-head-row">
+            <div>
+              <p className="eyebrow">{t('home.tasksEyebrow')}</p>
+              <h2 id="tasks-title" className="section-title">
+                {t('home.tasksTitle')}
+              </h2>
+            </div>
+            <Link href={href.tasks(locale)} className="link-accent text-sm font-semibold">
+              {t('home.tasksAll')} →
+            </Link>
+          </header>
+          <ul className="task-list">
+            {popular.map((task) => {
+              const text = taskTextOf(task, locale);
+              return (
+                <li key={task.id}>
+                  <Link href={href.task(locale, taskSlug(task, locale))} className="task-link" data-world={task.categoryId}>
+                    <span className="task-dot" aria-hidden="true" />
+                    <span className="task-title">{text.title}</span>
+                    <span className="task-steps mono">{t('home.stepsCount', { count: task.steps.length })}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {popular.map((task) => {
-            const text = taskTextOf(task, locale);
-            return (
-              <li key={task.id}>
-                <Link href={href.task(locale, taskSlug(task, locale))} className="card block h-full p-4 no-underline hover:border-ink-3">
-                  <span className="font-semibold">{text.title}</span>
-                  <span className="mt-1 block text-sm text-ink-2">{text.summary}</span>
-                  <span className="mono mt-3 block text-xs text-ink-3">{t('home.stepsCount', { count: task.steps.length })}</span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
       </section>
 
       {sponsoredTool && sponsored && (
@@ -230,20 +317,8 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         </section>
       )}
 
-      <section className="border-t border-line bg-paper-2">
-        <div className="container-page grid gap-8 py-12 md:grid-cols-3">
-          {[1, 2, 3].map((n) => (
-            <div key={n}>
-              <p className="mono text-xs text-ink-3">0{n}</p>
-              <h2 className="mt-1 text-lg">{t(`home.how${n}Title`)}</h2>
-              <p className="mt-1 text-sm text-ink-2">{t(`home.how${n}`)}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {emailEnabled() && (
-        <section className="container-page py-12">
+        <section className="container-page pb-12">
           <div className="card grid gap-6 p-6 md:grid-cols-2">
             <div>
               <h2 className="text-xl">{t('home.newsletterTitle')}</h2>
@@ -254,7 +329,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         </section>
       )}
 
-      <div className="container-page py-12">
+      <div className="container-page pb-16">
         <StarterWorkflows catalog={catalog} basis={STARTERS.basis} advanced={STARTERS.advanced} t={t} locale={locale} />
       </div>
     </>

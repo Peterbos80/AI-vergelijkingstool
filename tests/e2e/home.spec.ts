@@ -61,3 +61,31 @@ test('the starter plans follow the view level', async ({ page }) => {
   await expect(starters.filter({ visible: true })).toHaveCount(3);
   expect(await starters.filter({ visible: true }).first().innerText()).not.toBe(first);
 });
+
+test('the stage shows the world of the question', async ({ page }) => {
+  await page.goto('/nl');
+  await expect(page.locator('.ask[data-hydrated]')).toBeVisible();
+  const stage = page.locator('.stage');
+  await expect(stage).toHaveAttribute('data-world', 'home');
+  await page.locator('#match-q').fill('ik wil een podcast opnemen');
+  await expect(stage).toHaveAttribute('data-world', 'audio');
+  await expect(page.locator('.stage-caption a')).toHaveAttribute('href', /^\/nl\/categories\//);
+  // A prompt previews its world while the pointer is on it.
+  await page.getByRole('link', { name: /Social video/ }).hover();
+  await expect(stage).toHaveAttribute('data-world', 'video');
+  await page.mouse.move(0, 0);
+  await expect(stage).toHaveAttribute('data-world', 'audio');
+  // An empty box goes back to the wijzer's office.
+  await page.locator('#match-q').fill('');
+  await expect(stage).toHaveAttribute('data-world', 'home');
+});
+
+test('ten worlds, each a link to its category with its tool count', async ({ page }) => {
+  await page.goto('/nl');
+  const cards = page.locator('section[aria-labelledby="worlds-title"] .world-card');
+  await expect(cards).toHaveCount(10);
+  for (const card of await cards.all()) {
+    await expect(card).toHaveAttribute('href', /^\/nl\/categories\//);
+    await expect(card.locator('.world-card-meta')).toHaveText(/^\d+ tools?$/);
+  }
+});

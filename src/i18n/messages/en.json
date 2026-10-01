@@ -843,17 +843,21 @@
     "fightsSub": "Two tools, the same criteria, no overall winner.",
     "tasksTitle": "Popular tasks",
     "tasksAll": "All tasks",
-    "howTitle": "How it works",
-    "how1Title": "You say what you want",
-    "how1": "In plain language. We turn it into steps and capabilities, and ask a follow-up when needed.",
-    "how2Title": "We count with receipts",
-    "how2": "Every price and fact has a source, a date and a status. Agents check the official pages automatically.",
-    "how3Title": "Money doesn't decide",
-    "how3": "Affiliate links and sponsoring have no influence on the order. We test that on every change.",
     "newsletterTitle": "AI Pulse in your inbox",
     "newsletterBody": "Once a week: real price changes, new tools and what's shutting down. No hype.",
     "pulseAll": "All changes",
-    "stepsCount": "{count, plural, one {# step} other {# steps}}"
+    "stepsCount": "{count, plural, one {# step} other {# steps}}",
+    "stageHint": "Type what you want to do. The Wijzer finds the place it belongs to.",
+    "stageEnter": "See this world",
+    "stageAnnounce": "World: {place}",
+    "toolsCount": "{count, plural, one {# tool} other {# tools}}",
+    "worldsEyebrow": "Ten worlds",
+    "worldsTitle": "Where will you get to work?",
+    "worldsSub": "Every category is a place with its own tools. Pick a world and see which tools do the work there, and what they cost.",
+    "worldTop": "At the top",
+    "matrixEyebrow": "Side by side",
+    "fightsEyebrow": "Head to head",
+    "tasksEyebrow": "Start with a task"
   },
   "hub": {
     "placeholder": "Ask in your own words. For example: I want my meetings transcribed and summarised for free",
@@ -911,9 +915,6 @@
     "radarNews": "AI news from the media",
     "radarVideos": "Videos from official channels",
     "radarBuzz": "Community buzz",
-    "radarEmptyNews": "No news yet. The news agent reads the media feeds every hour.",
-    "radarEmptyVideos": "No videos yet. The news agent checks the media YouTube channels every hour.",
-    "radarEmptyBuzz": "No measurements yet. The community agent measures mentions on Hacker News and GitHub every 6 hours.",
     "source": "source: {domain}",
     "buzz": {
       "hackernews": "{count, plural, one {# mention} other {{n} mentions}} on Hacker News (7 days)",
@@ -934,8 +935,7 @@
     "startStack": "Build my stack",
     "paidFrom": "paid from {price}",
     "from": "from {price}",
-    "radarChanges": "Tool changes",
-    "radarEmptyChanges": "No sourced changes yet. The change agent reads the changelogs every 6 hours."
+    "radarChanges": "Tool changes"
   },
   "start": {
     "metaTitle": "Choose the right AI tool, step by step",
@@ -1277,7 +1277,9 @@
     "legalVat": "VAT ID",
     "legalAddress": "Address",
     "legalEmail": "E-mail",
-    "contactFallback": "For corrections use the corrections form; for business questions the form in the Stack Doctor."
+    "contactFallback": "For corrections use the corrections form; for business questions the form in the Stack Doctor.",
+    "logosTitle": "Logos",
+    "logosBody": "Some tools show their logo. The logo belongs to the company that makes the tool. We only use it so you can spot the tool quickly. The logos come from Simple Icons and are stored on our own server. If a company wants its logo removed, it can send us a message through Corrections."
   },
   "privacy": {
     "title": "Privacy and cookies",
@@ -2147,5 +2149,21 @@
     "why": "Why am I seeing this?",
     "cta": "Visit {tool}",
     "note": "Paid placement. It has no influence on our recommendations or rankings."
+  },
+  "worlds": {
+    "title": "Worlds",
+    "places": {
+      "home": "The Wijzer’s office",
+      "assistant": "Conversation room",
+      "writing": "Writing room",
+      "research": "Laboratory",
+      "image": "Creative studio",
+      "video": "Film studio",
+      "audio": "Recording studio",
+      "code": "Workspace of the future",
+      "automation": "Command centre",
+      "marketing": "Campaign room",
+      "business": "Service desk"
+    }
   }
 }
