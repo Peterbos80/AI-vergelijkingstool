@@ -4,16 +4,20 @@ import type { Translator } from '@/i18n/format';
 import { nameOf, toolText, toolWorld } from '@/lib/catalog/helpers';
 import type { Catalog, CatalogTool } from '@/lib/catalog/types';
 import { href } from '@/lib/routes';
-import { FreshnessDial } from './FreshnessDial';
+import { Icon } from '@/components/ui/Icon';
 import { FxApprox } from './Price';
-import { ReceiptChip } from './ReceiptChip';
+import { STATUS_GLYPH, receiptChipName } from './ReceiptChip';
 import { ToolMark } from './ToolMark';
 import { entryPriceLabel } from './format';
 
 /**
- * Compact tool row (no card walls; docs/strategy/10 §3). A grid: monogram,
- * text and the price column; below 640px the price column moves under the
- * text, so a row never makes the page wider than the screen.
+ * A tool in a list (no card walls; docs/strategy/10 §3): mark, name with its
+ * tagline and main functions, the price column with its receipt ("Onderbouwd
+ * · 29 sep", a link to the price sources), then the compare toggle. The
+ * whole row opens the tool (the name's link stretches over it); the
+ * functions, the receipt and the toggle sit above that link. Below 640px the
+ * price and the toggle move under the text, so a row never makes the page
+ * wider than the screen.
  */
 export function ToolRow({
   tool,
@@ -31,47 +35,54 @@ export function ToolRow({
   extra?: React.ReactNode;
 }) {
   const text = toolText(tool, locale);
+  const world = toolWorld(tool, catalog);
   const primary = tool.capabilities.filter((c) => c.strength === 'primary').slice(0, 3);
   return (
-    <li className="tool-row">
-      <ToolMark tool={tool} world={toolWorld(tool, catalog)} size={40} />
-      <div className="min-w-0 [overflow-wrap:anywhere]">
-        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-          <Link href={href.tool(locale, tool.slug)} className="font-semibold no-underline hover:underline">
+    <li className="tool-row" data-world={world === 'home' ? undefined : world}>
+      <ToolMark tool={tool} world={world} size={44} />
+      <div className="tool-row-text">
+        <p className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+          <Link href={href.tool(locale, tool.slug)} className="tool-row-link">
             {tool.name}
           </Link>
           {tool.status !== 'active' && tool.status !== 'unknown' && <span className="text-xs font-medium text-ink-3">{t(`toolStatus.${tool.status}`)}</span>}
-          <span className="text-sm text-ink-2">{text?.tagline}</span>
-        </div>
-        <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-3">
-          {primary.map((c) => {
-            const cap = catalog.capabilitiesById.get(c.id);
-            return cap ? (
-              <Link key={c.id} href={href.capability(locale, nameOf(cap, locale).slug)} className="no-underline hover:underline">
-                {nameOf(cap, locale).name}
-              </Link>
-            ) : null;
-          })}
-        </div>
+        </p>
+        {text?.tagline && <p className="tool-row-tagline">{text.tagline}</p>}
+        {primary.length > 0 && (
+          <p className="tool-row-caps">
+            {primary.map((c) => {
+              const cap = catalog.capabilitiesById.get(c.id);
+              return cap ? (
+                <Link key={c.id} href={href.capability(locale, nameOf(cap, locale).slug)} className="tool-row-cap">
+                  {nameOf(cap, locale).name}
+                </Link>
+              ) : null;
+            })}
+          </p>
+        )}
         {extra}
       </div>
-      <div className="tool-row-meta">
-        <span className="num text-sm font-medium">{entryPriceLabel(tool, t, locale)}</span>
+      <div className="tool-row-price">
+        <span className="num tool-row-amount">{entryPriceLabel(tool, t, locale)}</span>
         <FxApprox cents={tool.entryPriceCents} currency={tool.entryPriceCurrency} fx={catalog.fx} t={t} locale={locale} />
-        {tool.hasFreeTier && tool.entryPriceCents !== null && <span className="text-xs text-verified">{t('tool.freePlan')}</span>}
-        <span className="flex items-center gap-1.5">
-          {tool.pricingStatus && (
-            <ReceiptChip status={tool.pricingStatus} t={t} locale={locale} date={tool.priceCheckedAt} href={href.toolPricing(locale, tool.slug)} />
-          )}
-          <FreshnessDial freshness={tool.freshness} t={t} />
-        </span>
-        {compareFormId && (
-          <label className="inline-flex cursor-pointer items-center gap-1.5 text-xs text-ink-2">
-            <input type="checkbox" name="tools" value={tool.slug} form={compareFormId} className="h-4 w-4 accent-[var(--ink)]" />
-            {t('tool.addToCompare')}
-          </label>
+        {tool.hasFreeTier && tool.entryPriceCents !== null && <span className="free-pill">{t('tool.freePlan')}</span>}
+        {tool.pricingStatus && (
+          <Link href={href.toolPricing(locale, tool.slug)} className="price-receipt" data-status={tool.pricingStatus} title={t('receipts.open')} prefetch={false}>
+            <Icon name={STATUS_GLYPH[tool.pricingStatus]} size={14} />
+            {receiptChipName({ status: tool.pricingStatus, t, locale, date: tool.priceCheckedAt })}
+          </Link>
         )}
       </div>
+      {compareFormId && (
+        <div className="tool-row-actions">
+          <label className="compare-toggle">
+            <input type="checkbox" name="tools" value={tool.slug} form={compareFormId} />
+            <Icon name="plus" size={14} className="compare-toggle-off" />
+            <Icon name="check" size={14} className="compare-toggle-on" />
+            {t('tool.addToCompare')}
+          </label>
+        </div>
+      )}
     </li>
   );
 }
