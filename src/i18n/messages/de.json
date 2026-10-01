@@ -34,22 +34,18 @@
   "status": {
     "verified": {
       "label": "Verifiziert",
-      "short": "Verif.",
       "tooltip": "Auf der offiziellen Quelle bestätigt, mit wörtlichem Zitat."
     },
     "supported": {
       "label": "Gestützt",
-      "short": "Gest.",
       "tooltip": "Mehrere unabhängige Quellen stimmen überein, oder die offizielle Quelle erwähnt es, wurde aber noch nicht wörtlich geprüft."
     },
     "community": {
       "label": "Community",
-      "short": "Comm.",
       "tooltip": "Nur auf Community- oder Social-Quellen gestützt."
     },
     "unverified": {
       "label": "Unbestätigt",
-      "short": "Unbest.",
       "tooltip": "Noch nicht auf der offiziellen Website bestätigt."
     }
   },
@@ -220,9 +216,10 @@
     "notVerified": "Noch nicht wörtlich auf der offiziellen Quelle bestätigt",
     "evidence": "Nachweis",
     "sources": "Quellen",
+    "sourceCount": "{count, plural, =0 {keine Quellen} one {# Quelle} other {# Quellen}}",
     "noSources": "Keine Quellen erfasst.",
     "howWeKnow": "Woher wissen wir das?",
-    "explainer": "Jeder Wert hat einen Status, ein Datum und Quellen. Unsere Agenten prüfen offizielle Seiten automatisch; was noch nicht wörtlich bestätigt ist, wird als GESTÜTZT oder UNBESTÄTIGT markiert.",
+    "explainer": "Jeder Wert hat einen Status, ein Datum und Quellen. Unsere Agenten prüfen offizielle Seiten automatisch; was noch nicht wörtlich bestätigt ist, wird als Gestützt oder Unbestätigt markiert.",
     "methodologyLink": "So funktioniert unsere Methodik"
   },
   "tool": {
@@ -972,7 +969,7 @@
     "aiTitle": "Wo wir KI einsetzen",
     "aiBody": "Um deine Frage zu verstehen (wenn die Schlüsselwortanalyse unsicher ist) und um Daten aus offiziellen Seiten zu extrahieren, immer mit einer Prüfung, dass jeder Wert wörtlich in der Quelle steht. Mit KI verfasste Texte sind gekennzeichnet. Die Empfehlungen selbst werden berechnet, nicht generiert.",
     "limitsTitle": "Einschränkungen",
-    "limitsBody": "Preise sind so, wie der Anbieter sie zeigt, meist ohne MwSt. und manchmal je nach Region verschieden. Dollarbeträge werden mit dem EZB-Tageskurs umgerechnet und sind Richtwerte. Ein Teil der Daten stammt aus Webrecherche über mehrere Quellen und ist daher als GESTÜTZT markiert, bis unsere Agenten ihn auf der offiziellen Seite bestätigen.",
+    "limitsBody": "Preise sind so, wie der Anbieter sie zeigt, meist ohne MwSt. und manchmal je nach Region verschieden. Dollarbeträge werden mit dem EZB-Tageskurs umgerechnet und sind Richtwerte. Ein Teil der Daten stammt aus Webrecherche über mehrere Quellen und ist daher als Gestützt markiert, bis unsere Agenten ihn auf der offiziellen Seite bestätigen.",
     "correctionsTitle": "Korrekturen",
     "correctionsBody": "Stimmt etwas nicht? Melde es mit einer Quelle; wir antworten und führen ein öffentliches Korrekturprotokoll."
   },

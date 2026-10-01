@@ -6,7 +6,7 @@ import type { Catalog, CatalogTool } from '@/lib/catalog/types';
 import { href } from '@/lib/routes';
 import { FreshnessDial } from './FreshnessDial';
 import { FxApprox } from './Price';
-import { StatusStamp } from './StatusStamp';
+import { ReceiptChip } from './ReceiptChip';
 import { ToolMonogram } from './ToolMonogram';
 import { entryPriceLabel } from './format';
 
@@ -60,7 +60,9 @@ export function ToolRow({
         <FxApprox cents={tool.entryPriceCents} currency={tool.entryPriceCurrency} fx={catalog.fx} t={t} locale={locale} />
         {tool.hasFreeTier && tool.entryPriceCents !== null && <span className="text-xs text-verified">{t('tool.freePlan')}</span>}
         <span className="flex items-center gap-1.5">
-          {tool.pricingStatus && <StatusStamp status={tool.pricingStatus} t={t} compact />}
+          {tool.pricingStatus && (
+            <ReceiptChip status={tool.pricingStatus} t={t} locale={locale} date={tool.priceCheckedAt} href={href.toolPricing(locale, tool.slug)} />
+          )}
           <FreshnessDial freshness={tool.freshness} t={t} />
         </span>
         {compareFormId && (

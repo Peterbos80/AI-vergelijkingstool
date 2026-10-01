@@ -34,22 +34,18 @@
   "status": {
     "verified": {
       "label": "Vérifié",
-      "short": "Vérif.",
       "tooltip": "Confirmé sur la source officielle, avec une citation mot pour mot."
     },
     "supported": {
       "label": "Étayé",
-      "short": "Étayé",
       "tooltip": "Plusieurs sources indépendantes concordent, ou la source officielle le mentionne sans vérification mot pour mot."
     },
     "community": {
       "label": "Communauté",
-      "short": "Comm.",
       "tooltip": "Basé uniquement sur des sources communautaires ou sociales."
     },
     "unverified": {
       "label": "Non vérifié",
-      "short": "Non vér.",
       "tooltip": "Pas encore confirmé sur le site officiel."
     }
   },
@@ -220,9 +216,10 @@
     "notVerified": "Pas encore confirmé mot pour mot sur la source officielle",
     "evidence": "Preuve",
     "sources": "Sources",
+    "sourceCount": "{count, plural, =0 {aucune source} one {# source} other {# sources}}",
     "noSources": "Aucune source enregistrée.",
     "howWeKnow": "Comment le savons-nous ?",
-    "explainer": "Chaque valeur a un statut, une date et des sources. Nos agents vérifient automatiquement les pages officielles ; ce qui n’est pas encore confirmé mot pour mot est marqué ÉTAYÉ ou NON VÉRIFIÉ.",
+    "explainer": "Chaque valeur a un statut, une date et des sources. Nos agents vérifient automatiquement les pages officielles ; ce qui n’est pas encore confirmé mot pour mot est marqué Étayé ou Non vérifié.",
     "methodologyLink": "Comment fonctionne notre méthodologie"
   },
   "tool": {
@@ -972,7 +969,7 @@
     "aiTitle": "Où nous utilisons l’IA",
     "aiBody": "Pour comprendre votre question (quand l’analyse de mots-clés hésite) et pour extraire des données des pages officielles, toujours avec une vérification que chaque valeur figure mot pour mot dans la source. Les textes rédigés avec l’IA sont signalés. Les recommandations elles-mêmes sont calculées, pas générées.",
     "limitsTitle": "Limites",
-    "limitsBody": "Les prix sont ceux affichés par l’éditeur, généralement hors TVA et parfois différents selon la région. Les montants en dollars sont convertis au taux quotidien de la BCE et sont indicatifs. Une partie des données provient de recherches web sur plusieurs sources et est donc marquée ÉTAYÉ jusqu’à ce que nos agents la confirment sur la page officielle.",
+    "limitsBody": "Les prix sont ceux affichés par l’éditeur, généralement hors TVA et parfois différents selon la région. Les montants en dollars sont convertis au taux quotidien de la BCE et sont indicatifs. Une partie des données provient de recherches web sur plusieurs sources et est donc marquée Étayé jusqu’à ce que nos agents la confirment sur la page officielle.",
     "correctionsTitle": "Corrections",
     "correctionsBody": "Une erreur ? Signalez-la avec une source ; nous répondons et tenons un journal public des corrections."
   },

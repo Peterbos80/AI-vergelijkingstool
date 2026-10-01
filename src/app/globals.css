@@ -607,6 +607,77 @@
       var(--e3);
   }
 
+  /*
+   * Receipt chip (components/data/ReceiptChip.tsx): the status glyph in a
+   * 24px box on its tint; unverified is transparent with a dashed border.
+   */
+  .rchip {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    vertical-align: middle;
+    text-decoration: none;
+  }
+  .rchip-verified {
+    color: var(--verified);
+    background: var(--verified-bg);
+  }
+  .rchip-supported {
+    color: var(--supported);
+    background: var(--supported-bg);
+  }
+  .rchip-community {
+    color: var(--community);
+    background: var(--community-bg);
+  }
+  .rchip-unverified {
+    color: var(--unverified);
+    border: 1px dashed var(--line-strong);
+  }
+  a.rchip:hover {
+    border-color: currentColor;
+  }
+
+  /* Fact rows (components/data/FactList.tsx): a row with a receipt is the <summary> of its drawer. */
+  .fact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    min-height: 2.75rem;
+    padding-block: 0.5rem;
+  }
+  summary.fact-row {
+    cursor: pointer;
+    list-style: none;
+  }
+  summary.fact-row::-webkit-details-marker {
+    display: none;
+  }
+  .fact-label {
+    flex: 1;
+    min-width: 0;
+    color: var(--ink-2);
+  }
+  summary.fact-row:hover .fact-label {
+    color: var(--ink);
+  }
+  .fact-value {
+    font-weight: 500;
+    text-align: right;
+  }
+  .fact-chevron {
+    color: var(--ink-3);
+    transition: transform 150ms ease-out;
+  }
+  .fact[open] .fact-chevron {
+    transform: rotate(180deg);
+  }
+
   /* Tool row (components/data/ToolRow.tsx): price column under the text below 640px. */
   .tool-row {
     display: grid;

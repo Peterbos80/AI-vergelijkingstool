@@ -115,7 +115,7 @@ export function StackReceipt({
                     ) : (
                       `${formatMoney(line.paidCents, line.currency, locale)}${t('period.month')}`
                     )}
-                    {tool.pricingStatus && <StatusStamp status={tool.pricingStatus} t={t} compact />}
+                    {tool.pricingStatus && <StatusStamp status={tool.pricingStatus} t={t} />}
                     <FreshnessDial freshness={tool.freshness} t={t} size={14} />
                   </span>
                   {line && line.freePlanAvailable && (line.paidCents ?? 0) > 0 && (

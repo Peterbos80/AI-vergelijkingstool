@@ -257,7 +257,7 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
                         <span className="num flex flex-wrap items-center justify-end gap-x-2 gap-y-1">
                           {planPriceLabel(p, t, locale)}
                           <FxApprox cents={p.priceCents} currency={p.currency} fx={catalog.fx} t={t} locale={locale} />
-                          <StatusStamp status={p.status} t={t} compact />
+                          <StatusStamp status={p.status} t={t} />
                         </span>
                       </div>
                       {p.quota && <p className="mt-0.5 text-xs text-ink-3">{p.quota}</p>}

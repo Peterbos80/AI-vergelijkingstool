@@ -152,7 +152,7 @@ export default async function PricingPage({ params }: PageProps<'/[locale]/tools
                             ? t('plans.historyUntil', { date: formatDate(r.validTo, locale) })
                             : `${formatDate(r.validFrom, locale)} – ${formatDate(r.validTo, locale)}`}
                       </span>
-                      <StatusStamp status={r.status} t={t} compact />
+                      <StatusStamp status={r.status} t={t} />
                       {r.sourceUrl && (
                         <a href={r.sourceUrl} rel="nofollow noopener noreferrer" className="text-xs text-ink-3">
                           {t('common.source')}
