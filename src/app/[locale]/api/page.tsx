@@ -5,6 +5,7 @@ import { href } from '@/lib/routes';
 import { alternates } from '@/lib/seo';
 import { siteUrl, staticSite } from '@/lib/env';
 import { track } from '@/lib/analytics/track';
+import { Icon } from '@/components/ui/Icon';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/api'>): Promise<Metadata> {
   const { locale } = (await params) as { locale: Locale };
@@ -40,8 +41,9 @@ export default async function ApiDocsPage({ params }: PageProps<'/[locale]/api'>
           {endpoints.map(([path, desc]) => (
             <li key={path}>
               <code className="text-sm">GET {path}</code> — {desc}{' '}
-              <a href={siteUrl(path)} rel="nofollow">
-                ↗
+              <a href={siteUrl(path)} rel="nofollow" className="inline-flex align-middle">
+                <Icon name="arrow-up-right" size={16} />
+                <span className="visually-hidden">{path}</span>
               </a>
             </li>
           ))}

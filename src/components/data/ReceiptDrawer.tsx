@@ -3,6 +3,7 @@ import type { Translator } from '@/i18n/format';
 import { formatDate } from '@/i18n/formatters';
 import type { Receipt } from '@/lib/catalog/detail';
 import { StatusStamp } from './StatusStamp';
+import { Icon } from '@/components/ui/Icon';
 
 /**
  * The receipts drawer: status, confidence, method, dates, verbatim evidence and
@@ -23,9 +24,7 @@ export function ReceiptDrawer({
   return (
     <details className="group mt-1 text-sm">
       <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-xs text-ink-3 hover:text-ink">
-        <span aria-hidden="true" className="transition-transform group-open:rotate-90">
-          ▸
-        </span>
+        <Icon name="chevron-right" size={14} className="transition-transform group-open:rotate-90" />
         {label ?? t('receipts.open')}
       </summary>
       <div className="receipt mt-2 p-4 pt-5 text-xs leading-relaxed">

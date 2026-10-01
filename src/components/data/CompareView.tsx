@@ -9,6 +9,7 @@ import { href } from '@/lib/routes';
 import { StatusStamp } from './StatusStamp';
 import { ToolMonogram } from './ToolMonogram';
 import { VisitLink } from './VisitLink';
+import { Icon } from '@/components/ui/Icon';
 
 function cellText(row: Row, cell: Cell, t: Translator, locale: Locale, catalog: Catalog): string {
   const v = cell.value;
@@ -99,8 +100,9 @@ export function CompareView({
                       <span>{cellText(row, cell, t, locale, catalog)}</span>
                     )}
                     {cell.best && (
-                      <span className="ml-1 text-verified" title={t('compare.best')}>
-                        ✓<span className="visually-hidden"> ({t('compare.best')})</span>
+                      <span className="ml-1 inline-flex align-middle text-verified" title={t('compare.best')}>
+                        <Icon name="check" size={16} />
+                        <span className="visually-hidden"> ({t('compare.best')})</span>
                       </span>
                     )}
                     {cell.status && cell.value !== null && (

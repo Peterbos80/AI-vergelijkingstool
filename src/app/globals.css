@@ -300,6 +300,13 @@
     }
   }
 
+  /* Icons (components/ui/Icon): inline with text, never shrunk by flex. */
+  .icon {
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: -0.15em;
+  }
+
   /* Mono is for facts only: prices, dates, domains, counts. */
   .mono {
     font-family: var(--font-mono);
@@ -989,6 +996,16 @@
   .start-card:focus-visible {
     border-color: var(--accent);
     box-shadow: var(--e1);
+  }
+  .start-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-md);
+    background: var(--paper-2);
+    color: var(--ink-2);
   }
   .guide-card {
     display: grid;

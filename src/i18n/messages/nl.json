@@ -102,7 +102,7 @@
     "aging": "Controle wordt binnenkort herhaald",
     "stale": "Mogelijk verouderd",
     "unknown": "Nog niet gecontroleerd",
-    "staleBanner": "⚠️ Informatie mogelijk verouderd. Laatst gecontroleerd op {date}.",
+    "staleBanner": "Informatie mogelijk verouderd. Laatst gecontroleerd op {date}.",
     "checkedOn": "Gecontroleerd {date}"
   },
   "ticker": {
@@ -692,8 +692,8 @@
       }
     },
     "levelGroup": "Weergave",
-    "levelBasis": "⚡ Basis",
-    "levelAdvanced": "💻 Advanced & Developer",
+    "levelBasis": "Basis",
+    "levelAdvanced": "Advanced & Developer",
     "levelBasisHint": "In gewone taal: gratis plan, kosten, gebruiksgemak en waar het werkt",
     "levelAdvancedHint": "Technisch: API, integraties, zelf hosten, prijsmodel en niveau",
     "matrixAssistants": "Populaire AI-assistenten naast elkaar",

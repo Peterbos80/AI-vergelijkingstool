@@ -4,11 +4,12 @@ import type { Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
 import { formatDate } from '@/i18n/formatters';
 import { getCatalog } from '@/lib/catalog';
-import { EVENT_ICON, eventDate, eventTitle, localized } from '@/lib/catalog/events';
+import { EVENT_ICON, eventDate, eventTitle, eventToneClass, localized } from '@/lib/catalog/events';
 import type { ChangeKind } from '@/lib/db/schema';
 import { href } from '@/lib/routes';
 import { alternates } from '@/lib/seo';
 import { track } from '@/lib/analytics/track';
+import { Icon } from '@/components/ui/Icon';
 
 const GROUPS: Record<string, ChangeKind[]> = {
   price: ['price_increase', 'price_decrease'],
@@ -88,7 +89,7 @@ export default async function PulsePage({ params, searchParams }: PageProps<'/[l
                       </p>
                       <div>
                         <p className="font-medium">
-                          <span aria-hidden="true">{EVENT_ICON[e.kind]}</span>{' '}
+                          <Icon name={EVENT_ICON[e.kind]} size={16} className={`mr-1.5 ${eventToneClass(e.kind)}`} />
                           {tool && (
                             <Link href={href.tool(locale, tool.slug)} className="font-semibold">
                               {tool.name}

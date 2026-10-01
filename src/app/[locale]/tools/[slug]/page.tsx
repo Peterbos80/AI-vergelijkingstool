@@ -6,7 +6,7 @@ import { getT } from '@/i18n/server';
 import { formatDate, formatMoney } from '@/i18n/formatters';
 import { getCatalog, nameOf, toolText } from '@/lib/catalog';
 import { getToolDetail } from '@/lib/catalog/detail';
-import { EVENT_ICON, eventDate, eventTitle, localized } from '@/lib/catalog/events';
+import { EVENT_ICON, eventDate, eventTitle, eventToneClass, localized } from '@/lib/catalog/events';
 import { fairFightsFor } from '@/lib/engine/compare';
 import { affiliateToolIds } from '@/lib/monetization/affiliate';
 import { href } from '@/lib/routes';
@@ -25,6 +25,7 @@ import { FactList, hasFactValue } from '@/components/data/FactList';
 import { ToolRow } from '@/components/data/ToolRow';
 import { VideoFacade } from '@/components/data/VideoFacade';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
+import { Icon } from '@/components/ui/Icon';
 import { approxEur, entryPriceLabel, planPriceLabel } from '@/components/data/format';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[slug]'>): Promise<Metadata> {
@@ -300,7 +301,8 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
                       {formatDate(eventDate(e), locale)} · {t(`eventKind.${e.kind}`)}
                     </p>
                     <p className="font-medium">
-                      <span aria-hidden="true">{EVENT_ICON[e.kind]}</span> {eventTitle(e, locale)}
+                      <Icon name={EVENT_ICON[e.kind]} size={16} className={`mr-1.5 ${eventToneClass(e.kind)}`} />
+                      {eventTitle(e, locale)}
                     </p>
                     {localized(e.summary, locale) && <p className="text-ink-2">{localized(e.summary, locale)}</p>}
                     {e.sourceUrl && (

@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { Icon } from '@/components/ui/Icon';
 
 export function VideoFacadeClient({
   videoId,
@@ -36,7 +37,9 @@ export function VideoFacadeClient({
               className="h-full w-full object-cover"
             />
             <span className="absolute inset-0 flex items-center justify-center">
-              <span className="rounded-full bg-ink/85 px-4 py-2 text-sm font-semibold text-paper group-hover:bg-ink">▶</span>
+              <span className="inline-flex rounded-full bg-ink/85 px-4 py-2 text-paper group-hover:bg-ink">
+                <Icon name="play" size={20} />
+              </span>
             </span>
           </button>
         )}

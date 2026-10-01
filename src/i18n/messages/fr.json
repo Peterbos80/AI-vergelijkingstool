@@ -56,7 +56,7 @@
     "aging": "Vérification bientôt due",
     "stale": "Peut-être obsolète",
     "unknown": "Pas encore vérifié",
-    "staleBanner": "⚠️ Ces informations sont peut-être obsolètes. Dernière vérification le {date}.",
+    "staleBanner": "Ces informations sont peut-être obsolètes. Dernière vérification le {date}.",
     "checkedOn": "Vérifié le {date}"
   },
   "footer": {
@@ -713,8 +713,8 @@
       }
     },
     "levelGroup": "Affichage",
-    "levelBasis": "⚡ Essentiel",
-    "levelAdvanced": "💻 Avancé & Développeur",
+    "levelBasis": "Essentiel",
+    "levelAdvanced": "Avancé & Développeur",
     "levelBasisHint": "En langage simple : offre gratuite, coût, facilité d’utilisation et plateformes",
     "levelAdvancedHint": "Technique : API, intégrations, auto-hébergement, modèle tarifaire et niveau",
     "matrixAssistants": "Les assistants IA populaires côte à côte",

@@ -1,5 +1,6 @@
 import type { Translator } from '@/i18n/format';
 import type { TaskGuide } from '@/content/task-guides';
+import { Icon } from '@/components/ui/Icon';
 
 /**
  * The plain-language guide for a task. What it is and what to watch out for
@@ -31,9 +32,7 @@ export function TaskGuideCard({ guide, t, headingLevel = 2 }: { guide: TaskGuide
         <ul className="mt-2 space-y-1.5 text-sm">
           {guide.watch.map((w, i) => (
             <li key={i} className="flex gap-2">
-              <span aria-hidden="true" className="text-live">
-                !
-              </span>
+              <Icon name="triangle-alert" size={16} className="mt-0.5 text-warning-ink" />
               <span>{w}</span>
             </li>
           ))}

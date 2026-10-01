@@ -6,6 +6,7 @@
  */
 import { useSyncExternalStore, type KeyboardEvent } from 'react';
 import { readLevel, subscribeLevel, writeLevel, type ViewLevel } from '@/lib/levels';
+import { Icon } from '@/components/ui/Icon';
 
 const LEVELS: ViewLevel[] = ['basis', 'advanced'];
 
@@ -43,6 +44,7 @@ export function LevelTabs({
           onKeyDown={onKey}
           className="level-tab"
         >
+          {!compact && <Icon name={l === 'basis' ? 'zap' : 'terminal'} size={16} />}
           {l === 'basis' ? labels.basis : labels.advanced}
         </button>
       ))}

@@ -8,6 +8,7 @@
  */
 import { useRef, useState, useSyncExternalStore, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
 import { LevelTabs } from '@/components/level/LevelTabs';
+import { Icon } from '@/components/ui/Icon';
 import { MATCH_LEVEL, readLevel, subscribeLevel, writeLevel, type ViewLevel } from '@/lib/levels';
 
 export interface AskPrompt {
@@ -121,9 +122,7 @@ export function AskBox({
           <p className="ask-slogan">{labels.slogan}</p>
           <p className="ask-hint">{labels.hint}</p>
           <button type="submit" className="ask-submit" aria-label={labels.submit} title={labels.submit}>
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-              <path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <Icon name="arrow-right" size={20} />
           </button>
         </div>
       </form>

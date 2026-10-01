@@ -2,12 +2,13 @@ import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
 import { formatDate, formatNumber } from '@/i18n/formatters';
-import { EVENT_ICON, eventDate, eventTitle } from '@/lib/catalog/events';
+import { EVENT_ICON, eventDate, eventTitle, eventToneClass } from '@/lib/catalog/events';
 import { sourceDomain, type Radar } from '@/lib/catalog/radar';
 import type { Catalog } from '@/lib/catalog/types';
 import { newsPerson } from '@/lib/news';
 import { href } from '@/lib/routes';
 import { NewsList } from '@/components/news/NewsList';
+import { Icon } from '@/components/ui/Icon';
 
 function Column({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
@@ -30,8 +31,8 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
     <section aria-labelledby="radar-title" className="hub-panel">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 id="radar-title" className="text-2xl">
-            <span aria-hidden="true">🔥 </span>
+          <h2 id="radar-title" className="flex items-center gap-2 text-2xl">
+            <Icon name="radar" size={24} className="text-ink-3" />
             {t('hub.radarTitle')}
           </h2>
           <p className="mt-1 max-w-2xl text-sm text-ink-2">{t('hub.radarSub')}</p>
@@ -51,7 +52,7 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
               {data.videos.map((v) => (
                 <li key={`${v.id}-${v.toolSlug ?? 'media'}`} className="radar-item radar-video">
                   <a href={v.url} rel="nofollow noopener noreferrer" target="_blank" className="text-sm font-semibold no-underline hover:underline">
-                    <span aria-hidden="true">▶ </span>
+                    <Icon name="play" size={14} className="mr-1.5 text-ink-3" />
                     {v.title}
                   </a>
                   <p className="mono mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3">
@@ -93,7 +94,7 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
                 return (
                   <li key={e.id} className="radar-item" data-kind={e.kind}>
                     <p className="text-sm">
-                      <span aria-hidden="true">{EVENT_ICON[e.kind]} </span>
+                      <Icon name={EVENT_ICON[e.kind]} size={16} className={`mr-1.5 ${eventToneClass(e.kind)}`} />
                       {tool && (
                         <Link href={href.tool(locale, tool.slug)} className="font-semibold no-underline hover:underline">
                           {tool.name}

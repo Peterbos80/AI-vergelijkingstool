@@ -102,7 +102,7 @@
     "aging": "Re-check due soon",
     "stale": "May be outdated",
     "unknown": "Not checked yet",
-    "staleBanner": "⚠️ Information may be outdated. Last checked {date}.",
+    "staleBanner": "Information may be outdated. Last checked {date}.",
     "checkedOn": "Checked {date}"
   },
   "ticker": {
@@ -692,8 +692,8 @@
       }
     },
     "levelGroup": "View",
-    "levelBasis": "⚡ Basic",
-    "levelAdvanced": "💻 Advanced & Developer",
+    "levelBasis": "Basic",
+    "levelAdvanced": "Advanced & Developer",
     "levelBasisHint": "Plain language: free plan, cost, ease of use and where it runs",
     "levelAdvancedHint": "Technical: API, integrations, self-hosting, pricing model and level",
     "matrixAssistants": "Popular AI assistants side by side",

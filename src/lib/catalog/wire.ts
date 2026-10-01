@@ -1,5 +1,5 @@
 /**
- * Catalog ↔ JSON for the static edition's browser pages (Match, Stack Doctor,
+ * Catalog to and from JSON for the static edition's browser pages (Match, Stack Doctor,
  * explorer, compare): maps travel as arrays and ISO timestamps are revived as
  * Dates, so the same pure engine and views run in the browser.
  */

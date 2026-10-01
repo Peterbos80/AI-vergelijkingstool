@@ -1,10 +1,11 @@
 'use client';
 import Link from 'next/link';
 import { useState, useSyncExternalStore } from 'react';
+import { Icon, type IconName } from '@/components/ui/Icon';
 
 export interface TickerItem {
   id: string;
-  icon: string;
+  icon: IconName;
   text: string;
   href: string;
 }
@@ -38,7 +39,7 @@ export function PulseTicker({
     <section aria-label={labels.region} className="border-b border-line bg-card">
       <div className="container-page flex h-9 items-center gap-3 text-sm">
         <Link href={allHref} className="eyebrow shrink-0 no-underline hover:text-ink">
-          ▸ Pulse
+          Pulse
         </Link>
         <div className="ticker relative min-w-0 flex-1 overflow-hidden" data-paused={paused ? 'true' : 'false'}>
           <ul className="ticker-track" aria-live="off">
@@ -49,7 +50,7 @@ export function PulseTicker({
                   tabIndex={i >= items.length ? -1 : undefined}
                   className="text-ink-2 no-underline hover:text-ink hover:underline"
                 >
-                  <span aria-hidden="true">{it.icon}</span> {it.text}
+                  <Icon name={it.icon} size={14} className="mr-1 text-ink-3" /> {it.text}
                 </Link>
               </li>
             ))}
@@ -62,7 +63,7 @@ export function PulseTicker({
           aria-pressed={paused}
           aria-label={paused ? labels.play : labels.pause}
         >
-          <span aria-hidden="true">{paused ? '▶' : '❚❚'}</span>
+          <Icon name={paused ? 'play' : 'pause'} size={14} />
         </button>
       </div>
     </section>

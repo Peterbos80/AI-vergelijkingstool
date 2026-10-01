@@ -56,7 +56,7 @@
     "aging": "Prüfung bald fällig",
     "stale": "Möglicherweise veraltet",
     "unknown": "Noch nicht geprüft",
-    "staleBanner": "⚠️ Die Informationen sind möglicherweise veraltet. Zuletzt geprüft am {date}.",
+    "staleBanner": "Die Informationen sind möglicherweise veraltet. Zuletzt geprüft am {date}.",
     "checkedOn": "Geprüft am {date}"
   },
   "footer": {
@@ -713,8 +713,8 @@
       }
     },
     "levelGroup": "Ansicht",
-    "levelBasis": "⚡ Basis",
-    "levelAdvanced": "💻 Advanced & Developer",
+    "levelBasis": "Basis",
+    "levelAdvanced": "Advanced & Developer",
     "levelBasisHint": "Verständlich: Gratis-Plan, Kosten, Bedienbarkeit und Plattformen",
     "levelAdvancedHint": "Technisch: API, Integrationen, Self-Hosting, Preismodell und Niveau",
     "matrixAssistants": "Beliebte KI-Assistenten im Vergleich",
