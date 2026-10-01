@@ -1936,6 +1936,10 @@
       "github": {
         "name": "GitHub-token (optioneel)",
         "action": "Zet eventueel GITHUB_TOKEN voor hogere GitHub-API-limieten."
+      },
+      "producthunt": {
+        "name": "Product Hunt (optioneel)",
+        "action": "Zet PRODUCTHUNT_TOKEN pas als Product Hunt toestemming gaf voor commercieel gebruik (hun API-voorwaarden; vraag het via hello@producthunt.com). Dan leest de tool-scout ook lanceringen op Product Hunt."
       }
     },
     "unmeasured": {

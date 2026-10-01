@@ -36,13 +36,22 @@ export interface RunSummary {
   durationMs: number;
 }
 
-/** Create missing agent_configs rows with defaults (idempotent). */
+/**
+ * Create missing agent_configs rows with defaults (idempotent). The schedule
+ * lives in code: when it changes (e.g. discovery from daily to hourly), an
+ * existing install takes it over and the agent is due right away.
+ */
 export async function ensureAgentConfigs(db: Database): Promise<void> {
+  const have = new Map((await db.select({ agent: agentConfigs.agent, schedule: agentConfigs.schedule }).from(agentConfigs)).map((r) => [r.agent, r.schedule]));
   for (const a of AGENTS) {
-    await db
-      .insert(agentConfigs)
-      .values({ agent: a.name, schedule: a.schedule, autonomy: a.autonomy, enabled: true })
-      .onConflictDoNothing({ target: agentConfigs.agent });
+    if (!have.has(a.name)) {
+      await db
+        .insert(agentConfigs)
+        .values({ agent: a.name, schedule: a.schedule, autonomy: a.autonomy, enabled: true })
+        .onConflictDoNothing({ target: agentConfigs.agent });
+    } else if (have.get(a.name) !== a.schedule) {
+      await db.update(agentConfigs).set({ schedule: a.schedule, nextRunAt: null, updatedAt: new Date() }).where(eq(agentConfigs.agent, a.name));
+    }
   }
 }
 

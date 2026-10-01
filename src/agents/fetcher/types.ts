@@ -37,8 +37,13 @@ export interface FetchOptions {
 }
 
 /** Hosts of documented APIs the agents may call with `api: true`. */
-export const API_HOSTS = new Set(['api.github.com', 'hn.algolia.com', 'www.googleapis.com']);
+export const API_HOSTS = new Set(['api.github.com', 'hn.algolia.com', 'www.googleapis.com', 'api.producthunt.com']);
 
 export interface Fetcher {
   get: (url: string, opts?: FetchOptions) => Promise<FetchResult>;
+  /**
+   * POST a small JSON body to a documented API (API_HOSTS, `api: true` only),
+   * e.g. a read-only GraphQL query. No redirects are followed.
+   */
+  post?: (url: string, body: string, opts?: FetchOptions) => Promise<FetchResult>;
 }

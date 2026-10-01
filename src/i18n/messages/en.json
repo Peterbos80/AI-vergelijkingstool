@@ -1936,6 +1936,10 @@
       "github": {
         "name": "GitHub token (optional)",
         "action": "Optionally set GITHUB_TOKEN for higher GitHub API limits."
+      },
+      "producthunt": {
+        "name": "Product Hunt (optional)",
+        "action": "Set PRODUCTHUNT_TOKEN only once Product Hunt has allowed commercial use (their API terms; ask at hello@producthunt.com). The tool scout then also reads launches on Product Hunt."
       }
     },
     "unmeasured": {

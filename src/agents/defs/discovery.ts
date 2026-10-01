@@ -1,127 +1,52 @@
 /**
- * Discovery agent: finds candidate AI tools from public, documented sources
- * (docs/strategy/08 §3, 12 §3.1). It only fills `tool_candidates`; nothing is
- * published here. Sources:
- *  - Hacker News "Show HN" posts via the public Algolia HN API;
- *  - GitHub repositories (search API) with AI topics, stars and a homepage.
- * External JSON is validated (untrusted input); only names, URLs and counts
- * are kept — no descriptions or article text are copied.
+ * Discovery agent (the tool scout's eyes; docs/strategy/08 §3, 12 §3.1 and
+ * §4.4, docs/DATA_SOURCES.md "Tool scout"). Every hour it looks for popular
+ * new AI tools in allowed, documented sources and records them as candidates
+ * in `tool_candidates`. It publishes nothing; verification and the daily
+ * new-tools agent decide.
+ *
+ *  - Hacker News (Algolia API): Show HN posts about AI, and stories that
+ *    announce an AI product ("Launch HN", "introducing", "open-sources", …);
+ *  - GitHub search API: new repositories of organisations with AI topics and
+ *    fast-growing stars (GITHUB_TOKEN raises the rate limit);
+ *  - makers' own news feeds (data/discovery/sources.json): launch posts and
+ *    the product they link to, read through the robots-aware fetcher;
+ *  - Product Hunt API: only with PRODUCTHUNT_TOKEN, else skipped and named.
+ *
+ * Window: everything since the previous successful run, plus 48 hours so a
+ * post's points can grow (7 days on the first run). Duplicates are merged per
+ * candidate domain; per source the highest count wins. Never stored: texts,
+ * descriptions, or people's user names.
  */
-import { sql } from 'drizzle-orm';
-import { z } from 'zod';
+import { and, eq, inArray, ne, sql } from 'drizzle-orm';
 import { toolCandidates, tools } from '@/lib/db/schema';
+import { queryRows } from '@/lib/db/sql';
 import { env } from '@/lib/env';
 import { sourceDomain } from '@/lib/provenance/confidence';
+import { COLLECT, SCOUT_CONFIG, SCOUT_LIMITS } from '../lib/scout/config';
+import {
+  candidateKey,
+  canonicalPostUrl,
+  hnStoriesByUrl,
+  launchesIn,
+  mergeSignals,
+  parseGithub,
+  parseHn,
+  parseProductHunt,
+  productLinkFromPost,
+  PRODUCT_HUNT_QUERY,
+  type Candidate,
+  type CandidateSignals,
+} from '../lib/scout/sources';
+import { parseFeed } from './change-detection';
 import type { AgentContext, AgentDefinition } from '../types';
 
-/** Domains that host many products; a candidate there is keyed by its path. */
-const PLATFORM_DOMAINS = new Set(['github.com', 'gitlab.com', 'huggingface.co', 'vercel.app', 'netlify.app', 'notion.site', 'substack.com', 'medium.com', 'producthunt.com', 'apps.apple.com', 'play.google.com', 'chromewebstore.google.com', 'chrome.google.com']);
-/** Never candidates: social networks, stores, news, link shorteners. */
-const IGNORED_DOMAINS = new Set(['youtube.com', 'youtu.be', 'twitter.com', 'x.com', 'linkedin.com', 'facebook.com', 'reddit.com', 'news.ycombinator.com', 'bit.ly', 't.co', 'arxiv.org', 'wikipedia.org', 'google.com', 'apple.com', 'microsoft.com', 'amazon.com']);
-const AI_TERMS = /\b(ai|a\.i\.|gpt|llm|llms|genai|generative|agent|agents|copilot|chatbot|machine learning|ml|diffusion|transformer|voice clone|text[- ]to[- ](speech|image|video))\b/i;
+// Re-exported for existing callers and tests.
+export { candidateKey, nameFromTitle, parseGithub, parseHn, type Candidate } from '../lib/scout/sources';
 
-const HnHit = z.object({
-  objectID: z.string(),
-  title: z.string().max(400).nullable().optional(),
-  url: z.string().max(2000).nullable().optional(),
-  points: z.number().int().nullable().optional(),
-  num_comments: z.number().int().nullable().optional(),
-  created_at_i: z.number().int(),
-});
-const HnResponse = z.object({ hits: z.array(z.unknown()) });
-
-const GhRepo = z.object({
-  full_name: z.string().max(200),
-  name: z.string().max(200),
-  html_url: z.string().url(),
-  homepage: z.string().max(2000).nullable().optional(),
-  stargazers_count: z.number().int(),
-  archived: z.boolean().optional(),
-  fork: z.boolean().optional(),
-  created_at: z.string(),
-});
-const GhResponse = z.object({ items: z.array(z.unknown()) });
-
-export interface Candidate {
-  name: string;
-  url: string;
-  domain: string;
-  source: 'hackernews' | 'github';
-  sourceUrl: string;
-  signals: Record<string, number | string>;
-}
-
-/** Normalised candidate key: registrable domain, or domain/path for platforms. */
-export function candidateKey(url: string): { url: string; domain: string } | null {
-  let u: URL;
-  try {
-    u = new URL(url);
-  } catch {
-    return null;
-  }
-  if (u.protocol !== 'https:' && u.protocol !== 'http:') return null;
-  const domain = sourceDomain(u.toString());
-  if (IGNORED_DOMAINS.has(domain)) return null;
-  if (PLATFORM_DOMAINS.has(domain) || [...PLATFORM_DOMAINS].some((p) => u.hostname.endsWith(`.${p}`))) {
-    const parts = u.pathname.split('/').filter(Boolean).slice(0, 2);
-    if (u.hostname.endsWith('.vercel.app') || u.hostname.endsWith('.netlify.app') || u.hostname.endsWith('.notion.site')) return { url: `https://${u.hostname}/`, domain: u.hostname };
-    if (parts.length < 2 && domain === 'github.com') return null;
-    return { url: `https://${u.hostname}/${parts.join('/')}`, domain: `${domain}/${parts.join('/').toLowerCase()}` };
-  }
-  return { url: `${u.protocol}//${u.hostname}/`, domain };
-}
-
-/** "Show HN: Foo – an AI thing" → "Foo". */
-export function nameFromTitle(title: string): string {
-  const t = title.replace(/^show hn:\s*/i, '').trim();
-  const cut = t.split(/\s[–—-]\s|:\s|,\s|\s\(/)[0] ?? t;
-  return cut.slice(0, 80).trim();
-}
-
-export function parseHn(json: unknown): Candidate[] {
-  const parsed = HnResponse.safeParse(json);
-  if (!parsed.success) return [];
-  const out: Candidate[] = [];
-  for (const raw of parsed.data.hits) {
-    const h = HnHit.safeParse(raw);
-    if (!h.success || !h.data.url || !h.data.title) continue;
-    if (!AI_TERMS.test(h.data.title)) continue;
-    const key = candidateKey(h.data.url);
-    if (!key) continue;
-    out.push({
-      name: nameFromTitle(h.data.title),
-      url: key.url,
-      domain: key.domain,
-      source: 'hackernews',
-      sourceUrl: `https://news.ycombinator.com/item?id=${encodeURIComponent(h.data.objectID)}`,
-      signals: { hnPoints: h.data.points ?? 0, hnComments: h.data.num_comments ?? 0, hnAt: h.data.created_at_i },
-    });
-  }
-  return out;
-}
-
-export function parseGithub(json: unknown, minStars: number): Candidate[] {
-  const parsed = GhResponse.safeParse(json);
-  if (!parsed.success) return [];
-  const out: Candidate[] = [];
-  for (const raw of parsed.data.items) {
-    const r = GhRepo.safeParse(raw);
-    if (!r.success || r.data.archived || r.data.fork || r.data.stargazers_count < minStars) continue;
-    // Prefer the product homepage; fall back to the repository itself.
-    const home = r.data.homepage && /^https?:\/\//i.test(r.data.homepage) ? candidateKey(r.data.homepage) : null;
-    const key = home ?? candidateKey(r.data.html_url);
-    if (!key) continue;
-    out.push({
-      name: r.data.name.slice(0, 80),
-      url: key.url,
-      domain: key.domain,
-      source: 'github',
-      sourceUrl: r.data.html_url,
-      signals: { githubStars: r.data.stargazers_count, githubRepo: r.data.full_name, githubCreated: r.data.created_at },
-    });
-  }
-  return out;
-}
+const HOUR = 3600_000;
+const DAY = 24 * HOUR;
+const GITHUB_TOPICS = ['llm', 'generative-ai', 'ai-agents', 'ai'];
 
 async function fetchJson(ctx: AgentContext, url: string, headers: Record<string, string> = {}): Promise<unknown | null> {
   const res = await ctx.fetcher.get(url, { accept: 'json', api: true, headers });
@@ -137,55 +62,242 @@ async function fetchJson(ctx: AgentContext, url: string, headers: Record<string,
   }
 }
 
+/** Start of the window: the previous successful run minus 48 h, at most 7 days back. */
+export async function discoveryWindow(ctx: AgentContext): Promise<{ since: Date; feedsSince: Date }> {
+  const now = ctx.now();
+  const [row] = await queryRows<{ at: string | null }>(
+    ctx.db,
+    sql`SELECT max(started_at)::text AS at FROM agent_runs
+        WHERE agent = 'discovery' AND status IN ('success', 'partial') AND id <> ${ctx.runId}::uuid AND started_at <= ${now.toISOString()}::timestamptz`,
+  );
+  const last = row?.at ? new Date(row.at) : null;
+  const floor = now.getTime() - 7 * DAY;
+  if (!last) return { since: new Date(floor), feedsSince: new Date(floor) };
+  return {
+    since: new Date(Math.max(floor, Math.min(now.getTime() - 48 * HOUR, last.getTime() - 48 * HOUR))),
+    // A launch post does not grow: only posts since the previous run (2 h overlap).
+    feedsSince: new Date(Math.max(floor, last.getTime() - 2 * HOUR)),
+  };
+}
+
+interface SourceReport {
+  hn: number;
+  github: number;
+  feeds: { read: number; total: number; failed: string[]; robots: string[] };
+  launches: number;
+  productHunt: 'skipped_no_token' | number;
+}
+
+async function hackerNews(ctx: AgentContext, since: Date, found: Candidate[], report: SourceReport): Promise<Map<string, CandidateSignals>> {
+  const s = Math.floor(since.getTime() / 1000);
+  const show = await fetchJson(ctx, `https://hn.algolia.com/api/v1/search_by_date?tags=show_hn&numericFilters=created_at_i>${s},points>=${COLLECT.showHnPoints}&hitsPerPage=200`);
+  const stories = await fetchJson(ctx, `https://hn.algolia.com/api/v1/search_by_date?tags=story&numericFilters=created_at_i>${s},points>=${COLLECT.storyPoints}&hitsPerPage=300`);
+  const before = found.length;
+  if (show) found.push(...parseHn(show, 'show'));
+  if (stories) found.push(...parseHn(stories, 'story', COLLECT.storyPoints));
+  report.hn = found.length - before;
+  return stories ? hnStoriesByUrl(stories) : new Map();
+}
+
+async function github(ctx: AgentContext, found: Candidate[], report: SourceReport): Promise<void> {
+  const created = new Date(ctx.now().getTime() - COLLECT.githubMaxAgeDays * DAY).toISOString().slice(0, 10);
+  const headers: Record<string, string> = { Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  const token = env().GITHUB_TOKEN;
+  if (token) headers.Authorization = `Bearer ${token}`;
+  const before = found.length;
+  for (const topic of GITHUB_TOPICS) {
+    if (ctx.signal.aborted) break;
+    const q = encodeURIComponent(`topic:${topic} created:>=${created} stars:>=${COLLECT.githubStars}`);
+    const json = await fetchJson(ctx, `https://api.github.com/search/repositories?q=${q}&sort=stars&order=desc&per_page=30`, headers);
+    if (json) found.push(...parseGithub(json, COLLECT.githubStars));
+  }
+  report.github = found.length - before;
+}
+
+/** Launch posts in makers' own feeds, and the product each one links to. */
+async function makerFeeds(ctx: AgentContext, feedsSince: Date, found: Candidate[], report: SourceReport): Promise<void> {
+  report.feeds.total = SCOUT_CONFIG.officialFeeds.length;
+  let budget: number = SCOUT_LIMITS.launchPostsPerRun;
+  for (const feed of SCOUT_CONFIG.officialFeeds) {
+    if (ctx.signal.aborted) break;
+    const res = await ctx.fetcher.get(feed.url, { accept: 'xml' });
+    if (!res.ok) {
+      if (res.errorKind === 'robots') report.feeds.robots.push(feed.id);
+      else report.feeds.failed.push(`${feed.id} (${res.errorKind === 'http' ? `http ${res.status}` : (res.errorKind ?? 'error')})`);
+      continue;
+    }
+    let items: ReturnType<typeof parseFeed>;
+    try {
+      items = parseFeed(res.body.slice(0, 2_000_000));
+    } catch {
+      report.feeds.failed.push(`${feed.id} (invalid)`);
+      continue;
+    }
+    report.feeds.read++;
+    for (const launch of launchesIn(items.slice(0, 50), feedsSince)) {
+      if (budget <= 0 || ctx.signal.aborted) break;
+      // Only posts on the maker's own site.
+      if (sourceDomain(launch.postUrl) !== sourceDomain(feed.homepage)) continue;
+      budget--;
+      const post = await ctx.fetcher.get(launch.postUrl, { accept: 'html' });
+      if (!post.ok) {
+        ctx.stat(`launch_post_${post.errorKind ?? 'error'}`);
+        continue;
+      }
+      const product = productLinkFromPost(post.body, launch.postUrl, launch.name);
+      if (!product) {
+        ctx.stat('launch_without_product_link');
+        continue;
+      }
+      report.launches++;
+      found.push({
+        name: launch.name,
+        url: product.url,
+        domain: product.domain,
+        source: 'rss',
+        sourceUrl: launch.postUrl,
+        signals: { announcementUrl: launch.postUrl, announcementAt: launch.at.toISOString(), announcementFeed: feed.id },
+      });
+    }
+  }
+}
+
+/** Product Hunt launches (API terms: attribution, rate limits; commercial use needs their permission). */
+async function productHunt(ctx: AgentContext, since: Date, found: Candidate[], report: SourceReport): Promise<void> {
+  const token = env().PRODUCTHUNT_TOKEN;
+  if (!token || !ctx.fetcher.post) {
+    report.productHunt = 'skipped_no_token';
+    return;
+  }
+  const res = await ctx.fetcher.post(
+    'https://api.producthunt.com/v2/api/graphql',
+    JSON.stringify({ query: PRODUCT_HUNT_QUERY, variables: { after: since.toISOString() } }),
+    { accept: 'json', api: true, headers: { Authorization: `Bearer ${token}` } },
+  );
+  if (!res.ok) {
+    ctx.stat(`producthunt_${res.errorKind ?? 'error'}`);
+    report.productHunt = 0;
+    return;
+  }
+  let json: unknown;
+  try {
+    json = JSON.parse(res.body) as unknown;
+  } catch {
+    ctx.stat('invalid_json');
+    report.productHunt = 0;
+    return;
+  }
+  let n = 0;
+  for (const launch of parseProductHunt(json, COLLECT.phVotes).slice(0, SCOUT_LIMITS.productHuntPerRun)) {
+    if (ctx.signal.aborted) break;
+    // Product Hunt links through its own redirect; robots.txt decides whether we may follow it.
+    const hop = await ctx.fetcher.get(launch.website, { accept: 'any', light: true });
+    const key = hop.ok ? candidateKey(hop.finalUrl) : null;
+    if (!key || key.domain.includes('/')) {
+      ctx.stat(hop.ok ? 'producthunt_no_product_site' : `producthunt_link_${hop.errorKind ?? 'error'}`);
+      continue;
+    }
+    found.push({ name: launch.name, url: key.url, domain: key.domain, source: 'producthunt', sourceUrl: launch.signals.phUrl!, signals: launch.signals });
+    n++;
+  }
+  report.productHunt = n;
+}
+
 export const discoveryAgent: AgentDefinition = {
   name: 'discovery',
-  description: 'Collects candidate AI tools from Show HN (Algolia API) and GitHub search into tool_candidates; publishes nothing.',
-  schedule: 'daily:02:40',
+  description:
+    'Every hour: candidate AI tools from Show HN and launch stories (HN Algolia API), new GitHub repositories of organisations, makers’ own news feeds and Product Hunt (only with PRODUCTHUNT_TOKEN) into tool_candidates; publishes nothing.',
+  schedule: 'every:1h',
   autonomy: 'auto',
   maxItems: 100,
-  timeoutMs: 5 * 60_000,
+  timeoutMs: 6 * 60_000,
   async run(ctx) {
     const now = ctx.now();
-    const since = Math.floor(now.getTime() / 1000) - 7 * 86_400;
+    const { since, feedsSince } = await discoveryWindow(ctx);
     const found: Candidate[] = [];
-    const hn = await fetchJson(ctx, `https://hn.algolia.com/api/v1/search_by_date?tags=show_hn&numericFilters=created_at_i>${since},points>=20&hitsPerPage=100`);
-    if (hn) found.push(...parseHn(hn));
-    const created = new Date(now.getTime() - 60 * 86_400_000).toISOString().slice(0, 10);
-    const gh: Record<string, string> = { Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
-    const token = env().GITHUB_TOKEN;
-    if (token) gh.Authorization = `Bearer ${token}`;
-    for (const topic of ['generative-ai', 'llm', 'ai-agents']) {
-      const q = encodeURIComponent(`topic:${topic} created:>${created} stars:>=300`);
-      const json = await fetchJson(ctx, `https://api.github.com/search/repositories?q=${q}&sort=stars&order=desc&per_page=30`, gh);
-      if (json) found.push(...parseGithub(json, 300));
-    }
-    if (!found.length) return { status: hn ? 'success' : 'partial', summary: 'no new candidates found' };
+    const report: SourceReport = { hn: 0, github: 0, feeds: { read: 0, total: 0, failed: [], robots: [] }, launches: 0, productHunt: 0 };
+    const storyPoints = await hackerNews(ctx, since, found, report);
+    await github(ctx, found, report);
+    await makerFeeds(ctx, feedsSince, found, report);
+    await productHunt(ctx, since, found, report);
 
-    // Known tools (by website domain) are not candidates.
-    const known = new Set((await ctx.db.select({ url: tools.websiteUrl }).from(tools)).map((t) => sourceDomain(t.url)));
+    // Never candidates: known tools (by website), domains the owner blocked, and makers' news sites
+    // (a story about a launch post counts for the launched product, joined below).
+    const known = new Set((await ctx.db.select({ url: tools.websiteUrl }).from(tools)).map((t) => candidateKey(t.url)?.domain ?? sourceDomain(t.url)));
+    const blocked = new Set(SCOUT_CONFIG.blockedDomains);
+    const makerSites = new Set(SCOUT_CONFIG.officialFeeds.map((f) => sourceDomain(f.homepage)));
     const unique = new Map<string, Candidate>();
-    for (const c of found) if (!known.has(c.domain) && !unique.has(c.domain)) unique.set(c.domain, c);
-    let upserted = 0;
-    for (const c of [...unique.values()].slice(0, ctx.limits.maxItems)) {
-      await ctx.db
-        .insert(toolCandidates)
-        .values({ name: c.name, url: c.url, domain: c.domain, source: c.source, sourceUrl: c.sourceUrl, signals: c.signals, lastSeenAt: now })
-        .onConflictDoUpdate({
-          target: toolCandidates.domain,
-          set: {
+    for (const c of found) {
+      if (known.has(c.domain) || blocked.has(c.domain.split('/')[0]!) || (c.source === 'hackernews' && makerSites.has(c.domain))) {
+        ctx.stat('known_or_blocked_skipped');
+        continue;
+      }
+      const prev = unique.get(c.domain);
+      unique.set(c.domain, prev ? { ...prev, signals: mergeSignals(prev.signals as Record<string, unknown>, c.signals) as CandidateSignals } : c);
+    }
+
+    // A Hacker News story about a launch post counts for the launched product.
+    const announced = await ctx.db
+      .select({ domain: toolCandidates.domain, url: sql<string>`${toolCandidates.signals}->>'announcementUrl'` })
+      .from(toolCandidates)
+      .where(and(sql`${toolCandidates.signals} ? 'announcementUrl'`, ne(toolCandidates.status, 'duplicate')));
+    const byPost = new Map<string, string>();
+    for (const a of announced) if (a.url) byPost.set(canonicalPostUrl(a.url) ?? a.url, a.domain);
+    for (const c of unique.values()) if (c.signals.announcementUrl) byPost.set(c.signals.announcementUrl, c.domain);
+    const joined = new Map<string, CandidateSignals>();
+    for (const [url, hn] of storyPoints) {
+      const domain = byPost.get(url);
+      if (domain) joined.set(domain, hn);
+    }
+
+    const domains = [...new Set([...unique.keys(), ...joined.keys()])].slice(0, ctx.limits.maxItems);
+    if (!domains.length) return { status: 'success', summary: summarize(report, 0, 0) };
+    const existing = new Map((await ctx.db.select().from(toolCandidates).where(inArray(toolCandidates.domain, domains))).map((r) => [r.domain, r]));
+    let created = 0;
+    let updated = 0;
+    for (const domain of domains) {
+      const c = unique.get(domain);
+      const row = existing.get(domain);
+      const hn = joined.get(domain);
+      let signals: Record<string, unknown> = { ...(row?.signals ?? {}) };
+      if (c) signals = mergeSignals(signals, c.signals);
+      if (hn) signals = mergeSignals(signals, hn);
+      if (row) {
+        await ctx.db
+          .update(toolCandidates)
+          .set({
             lastSeenAt: now,
-            signals: sql`${toolCandidates.signals} || ${JSON.stringify(c.signals)}::jsonb`,
-            // Unreviewed candidates expire after 30 days and are re-assessed when they show up again later.
-            status: sql`CASE WHEN ${toolCandidates.status} = 'rejected' AND ${toolCandidates.notes} = 'expired_unreviewed'
+            signals,
+            // Unreviewed or unpublished candidates expire after 30 days and are re-assessed when they show up again later.
+            status: sql`CASE WHEN ${toolCandidates.status} = 'rejected' AND ${toolCandidates.notes} IN ('expired_unreviewed', 'expired_unpublished')
                               AND ${toolCandidates.lastSeenAt} < ${now.toISOString()}::timestamptz - interval '30 days'
                              THEN 'new' ELSE ${toolCandidates.status} END`,
-          },
-        });
-      upserted++;
+          })
+          .where(eq(toolCandidates.id, row.id));
+        updated++;
+      } else if (c) {
+        await ctx.db
+          .insert(toolCandidates)
+          .values({ name: c.name, url: c.url, domain: c.domain, source: c.source, sourceUrl: c.sourceUrl, signals, firstSeenAt: now, lastSeenAt: now })
+          .onConflictDoNothing({ target: toolCandidates.domain });
+        created++;
+      }
     }
-    ctx.stat('found', found.length);
-    ctx.stat('candidates', upserted);
-    ctx.stat('known_skipped', found.length - unique.size);
-    return { status: 'success', summary: `${upserted} candidates recorded (${found.length} signals)` };
+    ctx.stat('signals', found.length);
+    ctx.stat('candidates_new', created);
+    ctx.stat('candidates_updated', updated);
+    const sourcesFailed = report.feeds.failed.length > 0 || (report.hn === 0 && report.github === 0 && report.feeds.read === 0);
+    return { status: sourcesFailed ? 'partial' : 'success', summary: summarize(report, created, updated) };
   },
 };
+
+function summarize(r: SourceReport, created: number, updated: number): string {
+  return [
+    `HN ${r.hn} · GitHub ${r.github} · maker feeds ${r.feeds.read}/${r.feeds.total} (${r.launches} launches)`,
+    r.productHunt === 'skipped_no_token' ? 'Product Hunt skipped (no PRODUCTHUNT_TOKEN)' : `Product Hunt ${r.productHunt}`,
+    `${created} new candidates · ${updated} updated`,
+    ...(r.feeds.robots.length ? [`skipped, robots.txt disallows: ${r.feeds.robots.join(', ')}`] : []),
+    ...(r.feeds.failed.length ? [`failed: ${r.feeds.failed.join(', ')}`] : []),
+  ].join(' · ');
+}
+

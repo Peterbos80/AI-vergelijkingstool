@@ -115,10 +115,13 @@ jobs:
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: npm run agents -- due
         env:
-          # Higher GitHub API rate limit for the social and discovery agents.
+          # Higher GitHub API rate limit for the social and discovery agents (the tool scout).
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Optional (repository secret): YouTube channels for the news and video agents via the YouTube Data API.
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          # Optional (repository secret): Product Hunt launches for the tool scout. Set it only once Product Hunt
+          # has allowed commercial use (their API terms); without it Product Hunt is skipped and the report says so.
+          PRODUCTHUNT_TOKEN: ${{ secrets.PRODUCTHUNT_TOKEN }}
 
       - name: Owner inbox and weekly report as issues
         run: npx tsx scripts/ops-github.ts sync
