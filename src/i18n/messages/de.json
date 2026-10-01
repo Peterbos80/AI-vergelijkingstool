@@ -581,6 +581,36 @@
       "noteExtras": "Erforderliche Zusatzlizenzen (etwa Microsoft 365 bei Copilot) stehen im Limittext und sind nicht eingerechnet."
     }
   },
+  "freeCheck": {
+    "title": "Was bekommst du wirklich kostenlos?",
+    "intro": "Pro Tool der kostenlose Plan, wie der Anbieter ihn beschreibt, und was wir mit Quelle über Wasserzeichen und kommerzielle Nutzung wissen.",
+    "caption": "Kostenlose Pläne der Tools für diese Aufgabe",
+    "colTool": "Tool",
+    "colPlan": "Kostenloser Plan und Limit",
+    "colWatermark": "Wasserzeichen beim Export",
+    "colCommercial": "Kommerzielle Nutzung",
+    "colCard": "Kreditkarte nötig",
+    "yes": "ja",
+    "no": "nein",
+    "unknown": "unbekannt",
+    "notApplicable": "entfällt",
+    "noFreePlan": "Kein kostenloser Plan",
+    "freePlan": "Kostenloser Plan",
+    "limit": "Limit",
+    "per": {
+      "month": "pro Monat",
+      "year": "pro Jahr",
+      "week": "Wochenlimit",
+      "day": "Tageslimit",
+      "total": "einmaliges Guthaben"
+    },
+    "legend": "– bedeutet unbekannt: Wir haben noch keine Quelle dafür. Unbekannt ist nicht dasselbe wie nein.",
+    "cardNotRecorded": "Ob du eine Kreditkarte angeben musst, haben wir für diese Tools noch nicht mit Quelle erfasst.",
+    "trulyFreeExplained": "Wirklich kostenlos nutzbar: kein Wasserzeichen und kommerzielle Nutzung erlaubt, beides mit Quelle.",
+    "trulyFreeNone": "Kein Tool hier trägt das Label Wirklich kostenlos nutzbar: Dafür müssen Wasserzeichen und kommerzielle Nutzung beide mit Quelle bekannt sein.",
+    "labelsLink": "So berechnen wir Labels",
+    "labelTrulyFree": "Wirklich kostenlos nutzbar"
+  },
   "match": {
     "metaTitle": "Dein KI-Stack: {goal}",
     "metaTitleEmpty": "Match: welche KI-Tools passen zu deinem Ziel?",

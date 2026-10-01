@@ -19,6 +19,7 @@ import { ToolRow } from '@/components/data/ToolRow';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
 import { TaskGuideCard } from '@/components/start/TaskGuideCard';
 import { TaskCosts } from '@/components/compare/TaskCosts';
+import { FreeCheck } from '@/components/compare/FreeCheck';
 import { taskGuide } from '@/content/task-guides';
 import type { Catalog, CatalogTask } from '@/lib/catalog/types';
 import type { Money } from '@/lib/engine/compose';
@@ -181,6 +182,7 @@ export default async function TaskPage({ params }: PageProps<'/[locale]/tasks/[s
       </section>
 
       <TaskCosts task={task} catalog={catalog} t={t} locale={locale} />
+      <FreeCheck task={task} catalog={catalog} t={t} locale={locale} />
 
       <section className="mt-12" aria-labelledby="per-step">
         <h2 id="per-step" className="text-xl">

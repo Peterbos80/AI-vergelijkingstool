@@ -107,7 +107,14 @@ test('the step-by-step finder leads a beginner from an area to a personal stack'
 test('no page shows "unknown" values', async ({ page }) => {
   for (const path of ['/nl/tools/descript', '/nl/compare?tools=chatgpt,claude', '/nl/tasks/social-media-videos-maken']) {
     await page.goto(path);
-    await expect(page.locator('main')).not.toContainText(/\bonbekend\b/i);
+    // The free check ("Wat krijg je echt gratis?") shows unknown facts as "– onbekend" on purpose
+    // (unknown is not "no"); it is marked [data-unknown-ok]. Nothing else may show "onbekend".
+    const text = await page.locator('main').evaluate((main) => {
+      const copy = main.cloneNode(true) as HTMLElement;
+      copy.querySelectorAll('[data-unknown-ok]').forEach((n) => n.remove());
+      return copy.textContent ?? '';
+    });
+    expect(text, path).not.toMatch(/\bonbekend\b/i);
   }
 });
 

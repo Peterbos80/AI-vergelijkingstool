@@ -603,6 +603,36 @@
       "noteExtras": "Verplichte extra licenties (zoals Microsoft 365 bij Copilot) staan in de limiettekst en zijn niet meegerekend."
     }
   },
+  "freeCheck": {
+    "title": "Wat krijg je echt gratis?",
+    "intro": "Per tool het gratis plan zoals de maker het beschrijft, en wat we met een bron weten over watermerk en commercieel gebruik.",
+    "caption": "Gratis plannen van de tools voor deze taak",
+    "colTool": "Tool",
+    "colPlan": "Gratis plan en limiet",
+    "colWatermark": "Watermerk op export",
+    "colCommercial": "Commercieel gebruik",
+    "colCard": "Creditcard nodig",
+    "yes": "ja",
+    "no": "nee",
+    "unknown": "onbekend",
+    "notApplicable": "n.v.t.",
+    "noFreePlan": "Geen gratis plan",
+    "freePlan": "Gratis plan",
+    "limit": "Limiet",
+    "per": {
+      "month": "per maand",
+      "year": "per jaar",
+      "week": "weeklimiet",
+      "day": "daglimiet",
+      "total": "eenmalig tegoed"
+    },
+    "legend": "– betekent onbekend: we hebben er nog geen bron voor. Onbekend is niet hetzelfde als nee.",
+    "cardNotRecorded": "Of je een creditcard moet opgeven, hebben we voor deze tools nog niet met een bron vastgelegd.",
+    "trulyFreeExplained": "Echt bruikbaar gratis: geen watermerk en commercieel gebruik toegestaan, allebei met een bron.",
+    "trulyFreeNone": "Geen tool hier heeft het label Echt bruikbaar gratis: daarvoor moeten watermerk en commercieel gebruik allebei met een bron bekend zijn.",
+    "labelsLink": "Zo berekenen we labels",
+    "labelTrulyFree": "Echt bruikbaar gratis"
+  },
   "match": {
     "metaTitle": "Jouw AI-stack: {goal}",
     "metaTitleEmpty": "Match: welke AI-tools passen bij jouw doel?",

@@ -603,6 +603,36 @@
       "noteExtras": "Required extra licences (such as Microsoft 365 for Copilot) are in the limit text and are not included."
     }
   },
+  "freeCheck": {
+    "title": "What do you really get for free?",
+    "intro": "For each tool, the free plan as the vendor describes it, and what we know with a source about watermarks and commercial use.",
+    "caption": "Free plans of the tools for this task",
+    "colTool": "Tool",
+    "colPlan": "Free plan and limit",
+    "colWatermark": "Watermark on exports",
+    "colCommercial": "Commercial use",
+    "colCard": "Credit card needed",
+    "yes": "yes",
+    "no": "no",
+    "unknown": "unknown",
+    "notApplicable": "n/a",
+    "noFreePlan": "No free plan",
+    "freePlan": "Free plan",
+    "limit": "Limit",
+    "per": {
+      "month": "per month",
+      "year": "per year",
+      "week": "weekly limit",
+      "day": "daily limit",
+      "total": "one-off allowance"
+    },
+    "legend": "– means unknown: we have no source for it yet. Unknown is not the same as no.",
+    "cardNotRecorded": "Whether you need to enter a credit card is not yet recorded with a source for these tools.",
+    "trulyFreeExplained": "Truly usable for free: no watermark and commercial use allowed, both with a source.",
+    "trulyFreeNone": "No tool here has the label Truly usable for free: both the watermark and commercial use must be known with a source.",
+    "labelsLink": "How we compute labels",
+    "labelTrulyFree": "Truly usable for free"
+  },
   "match": {
     "metaTitle": "Your AI stack: {goal}",
     "metaTitleEmpty": "Match: which AI tools fit your goal?",

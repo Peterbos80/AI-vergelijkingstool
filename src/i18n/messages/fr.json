@@ -581,6 +581,36 @@
       "noteExtras": "Les licences supplémentaires obligatoires (comme Microsoft 365 pour Copilot) figurent dans le texte de la limite et ne sont pas incluses."
     }
   },
+  "freeCheck": {
+    "title": "Qu’obtenez-vous vraiment gratuitement ?",
+    "intro": "Pour chaque outil, le forfait gratuit tel que l’éditeur le décrit, et ce que nous savons, avec une source, du filigrane et de l’usage commercial.",
+    "caption": "Forfaits gratuits des outils pour cette tâche",
+    "colTool": "Outil",
+    "colPlan": "Forfait gratuit et limite",
+    "colWatermark": "Filigrane à l’export",
+    "colCommercial": "Usage commercial",
+    "colCard": "Carte bancaire requise",
+    "yes": "oui",
+    "no": "non",
+    "unknown": "inconnu",
+    "notApplicable": "s.o.",
+    "noFreePlan": "Pas de forfait gratuit",
+    "freePlan": "Forfait gratuit",
+    "limit": "Limite",
+    "per": {
+      "month": "par mois",
+      "year": "par an",
+      "week": "limite hebdomadaire",
+      "day": "limite quotidienne",
+      "total": "crédit unique"
+    },
+    "legend": "– signifie inconnu : nous n’avons pas encore de source. Inconnu ne veut pas dire non.",
+    "cardNotRecorded": "La nécessité d’une carte bancaire n’est pas encore établie avec une source pour ces outils.",
+    "trulyFreeExplained": "Vraiment utilisable gratuitement : sans filigrane et usage commercial autorisé, les deux avec une source.",
+    "trulyFreeNone": "Aucun outil ici n’a l’étiquette Vraiment utilisable gratuitement : le filigrane et l’usage commercial doivent tous deux être connus avec une source.",
+    "labelsLink": "Comment nous calculons les étiquettes",
+    "labelTrulyFree": "Vraiment utilisable gratuitement"
+  },
   "match": {
     "metaTitle": "Votre stack d’IA : {goal}",
     "metaTitleEmpty": "Match : quels outils d’IA pour votre objectif ?",
