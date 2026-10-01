@@ -1,0 +1,232 @@
+# Limit texts in data/tools: 230; with at least one parsed limit: 143; not parsed: 87; with minutes per month: 23.
+# plan | limit text | what the parser reads
+adobe-express/premium | 250 Firefly generative credits, brand kits, 100 GB | — (not parsed: unknown stays unknown)
+adobe-firefly/free | 25 generative credits per month | 25 credit per month [generative]
+adobe-firefly/standard | 2,000 credits per month | 2000 credit per month
+adobe-firefly/pro | 4,000 credits per month | 4000 credit per month
+adobe-firefly/pro-plus | 10,000 credits per month | 10000 credit per month
+adobe-firefly/premium | 50,000 credits per month | 50000 credit per month
+adobe-podcast/free | Enhance Speech 1 hour per day, files up to 30 minutes | 1 hour per day [enhance speech] → 60 min per day, not a monthly budget
+adobe-podcast/premium | Enhance Speech 4 hours per day, files up to 2 hours, batch and video | 4 hour per day [enhance speech] → 240 min per day, not a monthly budget
+amberscript/pay-as-you-go | €10 per audio hour | usage price 10 EUR per hour [audio]
+amberscript/starter | 300 minutes per month | 300 minute per month → 300 min/month
+amberscript/pro | 600 minutes per month | 600 minute per month → 600 min/month
+amberscript/power | 1,500 minutes per month | 1500 minute per month → 1500 min/month
+auphonic/free | 2 hours of processed audio per month | 2 hour per month [processed audio] → 120 min/month
+auphonic/s | 9 hours per month | 9 hour per month → 540 min/month
+auphonic/m | 21 hours per month | 21 hour per month → 1260 min/month
+auphonic/l | 45 hours per month | 45 hour per month → 2700 min/month
+auphonic/xl | 100 hours per month | 100 hour per month → 6000 min/month
+beautiful-ai/team | 2–20 seats | — (not parsed: unknown stays unknown)
+bolt/free | 1M tokens per month with a daily limit | 1000000 token per month (daily_limit)
+bolt/pro | 10M tokens per month | 10000000 token per month
+bolt/teams | 10M tokens per member | — (not parsed: unknown stays unknown)
+brevo/free | 300 emails per day | 300 email per day
+brevo/starter | From 5,000 emails per month; no marketing automation | 5000 email per month (from)
+brevo/standard | From 5,000 emails per month; marketing automation | 5000 email per month (from)
+buffer/free | Up to 3 channels, 10 scheduled posts per channel | — (not parsed: unknown stays unknown)
+buffer/team | Unlimited team members | unlimited [team members]
+canva/free | 50 Magic Studio AI credits per month, 5 GB storage | 50 credit per month [magic studio ai]
+canva/pro | 500 AI credits per month, background remover, brand kit | 500 credit per month [ai]
+canva/business | Formerly Teams | — (not parsed: unknown stays unknown)
+capcut/free | Basic editing and 1080p export; some templates and effects require a paid plan | — (not parsed: unknown stays unknown)
+chatbase/free | 50 message credits per month | 50 credit per month [message]
+chatbase/hobby | 500–700 message credits per month | ≈500–700 credit per month [message]
+chatbase/standard | 4,000 message credits per month | 4000 credit per month [message]
+chatbase/pro | 15,000 message credits per month | 15000 credit per month [message]
+chatgpt/free | Limited messages per time window | — (not parsed: unknown stays unknown)
+chatgpt/go | Higher limits than Free | — (not parsed: unknown stays unknown)
+chatgpt/plus | Higher limits, deep research, agent mode, voice | — (not parsed: unknown stays unknown)
+chatgpt/pro | 5× Plus limits; a $200 tier offers 20× Plus limits | — (not parsed: unknown stays unknown)
+chatgpt/business | Two-seat minimum | — (not parsed: unknown stays unknown)
+claude/max | 5× Pro usage; a 20× tier costs more | — (not parsed: unknown stays unknown)
+claude/team | 2–150 seats | — (not parsed: unknown stays unknown)
+colossyan/business | Priced per editor | — (not parsed: unknown stays unknown)
+consensus/free | 15 Pro messages and 3 Deep reviews per month | — (not parsed: unknown stays unknown)
+consensus/pro | Unlimited Pro messages, 15 Deep reviews | unlimited [pro messages]
+consensus/deep | 200 Deep reviews | — (not parsed: unknown stays unknown)
+copy-ai/chat | 5 seats, unlimited chat | unlimited [chat]
+copy-ai/agents | Workflow credits for go-to-market automation | — (not parsed: unknown stays unknown)
+crisp/free | 2 seats | — (not parsed: unknown stays unknown)
+crisp/mini | 4 seats, $5 AI credits | — (not parsed: unknown stays unknown)
+crisp/essentials | 10 seats, $25 AI credits, knowledge base and chatbot builder | — (not parsed: unknown stays unknown)
+crisp/plus | 20 seats, $75 AI credits | — (not parsed: unknown stays unknown)
+cursor/pro | Credit pool equal to the plan price for manually selected models | — (not parsed: unknown stays unknown)
+cursor/ultra | About 20× Pro usage | — (not parsed: unknown stays unknown)
+descript/hobbyist | About 10 hours of media per user per month | ≈10 hour per month [media] (per user) → 600 min/month
+descript/creator | Adds Studio Sound, full Underlord AI assistant and 4K export | — (not parsed: unknown stays unknown)
+durable/starter | Custom domain, CRM, invoices | — (not parsed: unknown stays unknown)
+elevenlabs/starter | 30,000 credits per month; instant voice cloning | 30000 credit per month
+elevenlabs/creator | 121,000 credits per month; professional voice cloning | 121000 credit per month
+elicit/basic | Unlimited search, 2 automated reports per month | unlimited [search] ; 2 report per month [automated]
+elicit/pro | Research agent, systematic reviews (screen 5,000 papers), 144 reports per year | 144 report per year
+elicit/scale | 5× Pro usage for teams | — (not parsed: unknown stays unknown)
+fathom/free | Unlimited recordings and transcription, 5 AI summaries per month | unlimited [recordings and transcription] ; 5 summary per month [ai]
+fireflies/enterprise | Annual billing only | — (not parsed: unknown stays unknown)
+flux/klein | From $0.014 per image (first megapixel) | usage price 0.014 USD per image (from)
+framer/free | framer.website subdomain with Framer branding | — (not parsed: unknown stays unknown)
+framer/basic | Custom domain; 50 GB bandwidth and 2 CMS collections | — (not parsed: unknown stays unknown)
+frase/professional | Extra seats $29/month | — (not parsed: unknown stays unknown)
+gamma/free | 400 one-time AI credits, Gamma branding | 400 credit in total [ai]
+gamma/plus | Up to 1,000 AI credits per month | 1000 credit per month [ai] (up to)
+gamma/pro | 4,000 AI credits per month, API, custom domains | 4000 credit per month [ai]
+gemini-notebook/free | 100 notebooks, 50 sources per notebook, 50 chats and 3 Audio Overviews per day | — (not parsed: unknown stays unknown)
+gemini-notebook/plus | 200 notebooks, 100 sources per notebook, 200 chats per day | 200 chat per day
+gemini-notebook/pro | 500 notebooks, 300 sources per notebook, 500 chats per day | 500 chat per day
+gemini/ai-plus | Includes 400 GB storage (since June 2026) | — (not parsed: unknown stays unknown)
+gemini/ai-pro | Deep Research, Veo video, 1,000 AI credits | — (not parsed: unknown stays unknown)
+google-veo/free | 50 Flow credits per day | 50 credit per day [flow]
+google-veo/ai-plus | 200 extra Flow credits per month | 200 credit per month [extra flow]
+google-veo/ai-pro | 1,000 extra Flow credits per month (≈ 100 Veo Lite or 10 Veo Quality videos) | 1000 credit per month [extra flow]
+google-veo/ai-ultra | 10,000 extra Flow credits per month | 10000 credit per month [extra flow]
+granola/basic | Limited meeting history | — (not parsed: unknown stays unknown)
+granola/business | Unlimited notes and history, integrations, API | unlimited [notes and history]
+granola/enterprise | SSO, team-wide training opt-out | — (not parsed: unknown stays unknown)
+happy-scribe/basic | 120 AI minutes per month | 120 minute per month [ai] → 120 min/month
+happy-scribe/pro | 600 AI minutes per month | 600 minute per month [ai] → 600 min/month
+happy-scribe/business | 6,000 AI minutes per month | 6000 minute per month [ai] → 6000 min/month
+heygen/free | 3 videos per month, max 1 minute, 720p, watermark | 3 video per month
+heygen/creator | 600 credits, videos up to 30 minutes, voice cloning, no watermark | — (not parsed: unknown stays unknown)
+hootsuite/advanced | Approval workflows, team permissions, bulk scheduling, custom reports | — (not parsed: unknown stays unknown)
+hostinger-website-builder/premium | Introductory price on a multi-year term | — (not parsed: unknown stays unknown)
+hostinger-website-builder/business | E-commerce; renews at $16.99/month | — (not parsed: unknown stays unknown)
+ideogram/free | 10 slow credits per week | 10 credit per week [slow]
+ideogram/plus | 1,000 priority credits per month | 1000 credit per month [priority]
+ideogram/pro | 3,500 priority credits per month | 3500 credit per month [priority]
+intercom/fin | Per successful resolution (on top of seats) | — (not parsed: unknown stays unknown)
+invideo-ai/free | 2 AI minutes per week, watermarked exports | 2 minute per week [ai] → 2 min per week, not a monthly budget
+invideo-ai/plus | 2,000 base credits per seat per month | 2000 credit per month [base] (per user)
+invideo-ai/max | 5,000 base credits per seat per month | 5000 credit per month [base] (per user)
+julius/free | 15 messages per month | 15 message per month
+julius/plus | 2,000 credits per month | 2000 credit per month
+julius/pro | 5,000 credits per month | 5000 credit per month
+kapwing/free | 720p watermarked exports up to 4 minutes; 10 lifetime AI credits | 10 credit in total [ai]
+klaviyo/free | 250 active profiles, 500 sends per month | 500 email per month
+klaviyo/email | 251–500 active profiles; $30/month up to 1,000 | — (not parsed: unknown stays unknown)
+kling/basic | Free credits vary by account or campaign | — (not parsed: unknown stays unknown)
+kling/standard | 660 credits per month | 660 credit per month
+kling/pro | 3,000 credits per month | 3000 credit per month
+kling/premier | 8,000 credits per month | 8000 credit per month
+krea/free | 100 compute units per day | 100 unit per day [compute]
+languagetool/premium | Annual: €59.89 per year | — (not parsed: unknown stays unknown)
+later/starter | 1 user, 1 social set, 30 posts per month per platform | — (not parsed: unknown stays unknown)
+later/growth | 2 users, 2 social sets, 180 posts per month per platform | — (not parsed: unknown stays unknown)
+later/scale | 4 users, 6 social sets, unlimited posts | unlimited [posts]
+le-chat/pro | Includes API credits according to the sources | — (not parsed: unknown stays unknown)
+leonardo/free | 150 tokens per day | 150 token per day
+leonardo/apprentice | 8,500 tokens per month | 8500 token per month
+leonardo/artisan | 25,000 tokens per month | 25000 token per month
+leonardo/maestro | 60,000 tokens per month | 60000 token per month
+lindy/plus | 3,000 credits per month | 3000 credit per month
+lindy/pro | 15,000 credits per month | 15000 credit per month
+lindy/max | 35,000 credits per month | 35000 credit per month
+lm-studio/free | Free for personal and commercial use | — (not parsed: unknown stays unknown)
+lm-studio/enterprise | SSO, model gating, private collaboration | — (not parsed: unknown stays unknown)
+looka/basic-logo | Low-resolution PNG | — (not parsed: unknown stays unknown)
+looka/premium-logo | High-resolution files, unlimited changes, full ownership | unlimited [changes]
+looka/brand-kit-web | Includes an AI-generated website | — (not parsed: unknown stays unknown)
+lovable/free | 5 credits per day, max 30 per month | 5 credit per day
+lovable/pro | 100 monthly credits plus daily credits | 100 credit per month (from, plus_more)
+lovable/business | 100 credits, SSO and governance | — (not parsed: unknown stays unknown)
+magnific/business | 2–100 seats | — (not parsed: unknown stays unknown)
+mailchimp/free | 250 contacts, 500 sends per month | 500 email per month
+mailchimp/essentials | From 500 contacts | — (not parsed: unknown stays unknown)
+mailchimp/standard | From 500 contacts; advanced automations | — (not parsed: unknown stays unknown)
+mailchimp/premium | From 10,000 contacts | — (not parsed: unknown stays unknown)
+mailerlite/free | 250 subscribers, 2,500 emails per month | 2500 email per month
+mailerlite/comfort | From 500 subscribers; formerly Growing Business | — (not parsed: unknown stays unknown)
+mailerlite/power | From 500 subscribers; formerly Advanced | — (not parsed: unknown stays unknown)
+make/free | 1,000 credits per month | 1000 credit per month
+make/core | 10,000 credits per month | 10000 credit per month
+make/pro | 10,000 credits per month | 10000 credit per month
+make/teams | 10,000 credits per month | 10000 credit per month
+metricool/free | 1 brand | — (not parsed: unknown stays unknown)
+metricool/starter | Up to 5 brands | — (not parsed: unknown stays unknown)
+metricool/advanced | Up to 15 brands | — (not parsed: unknown stays unknown)
+microsoft-copilot/m365-premium | Office apps + Copilot + 1 TB storage (replaced Copilot Pro) | — (not parsed: unknown stays unknown)
+microsoft-copilot/m365-copilot-business | Requires an eligible Microsoft 365 business licence | — (not parsed: unknown stays unknown)
+midjourney/basic | About 3.3 fast GPU hours per month | ≈3.3 hour per month [fast gpu] → 198 min/month
+midjourney/standard | About 15 fast GPU hours, unlimited relaxed mode | unlimited [relaxed mode]
+midjourney/pro | About 30 fast GPU hours, stealth mode | — (not parsed: unknown stays unknown)
+midjourney/mega | About 60 fast GPU hours, stealth mode | — (not parsed: unknown stays unknown)
+murf/free | 10 minutes of voice generation in total, no downloads, no commercial rights | 10 minute in total [voice generation] → 10 min one-off, not a monthly budget
+murf/creator | 24 hours of voice generation per year, commercial rights | 24 hour per year [voice generation] → 120 min/month
+murf/business | 96 hours of voice generation per year (annual plan) | 96 hour per year [voice generation] (annual_plan) → 480 min/month
+n8n/community | Unlimited executions on your own server | unlimited [executions on your own server]
+n8n/starter | 2,500 executions per month | 2500 execution per month
+n8n/pro | 10,000 executions per month | 10000 execution per month
+notion/free | Limited AI trial | — (not parsed: unknown stays unknown)
+notion/plus | Limited AI trial | — (not parsed: unknown stays unknown)
+notion/business | Full Notion AI incl. Notion Agent | — (not parsed: unknown stays unknown)
+ollama/local | Unlimited on your own machine | unlimited [on your own machine]
+ollama/cloud-pro | Full open-weight catalog in the cloud, higher limits | — (not parsed: unknown stays unknown)
+openai-codex/free | Limited trial access | — (not parsed: unknown stays unknown)
+openai-codex/plus | 10–60 cloud tasks per 5-hour window | — (not parsed: unknown stays unknown)
+openai-codex/pro-5x | 5× Plus usage | — (not parsed: unknown stays unknown)
+openai-codex/pro-20x | 20× Plus usage | — (not parsed: unknown stays unknown)
+opus-clip/free | 60 credits (≈ minutes of source video) per month, watermarked exports | 60 credit per month
+opus-clip/starter | 150 credits per month, no watermark | 150 credit per month
+opus-clip/pro | 300 credits per month | 300 credit per month
+otter/basic | 300 minutes per month | 300 minute per month → 300 min/month
+pebblely/free | 40 images per month (reported) | ≈40 image per month (reported)
+pebblely/lite | 30 images per month | 30 image per month
+pebblely/basic | 200 images per month | 200 image per month
+pebblely/pro | 500 images per month | 500 image per month
+photoroom/free | 250 exports per month, watermark | 250 export per month
+photoroom/max | 3× Pro AI credits, 1,500 batch exports per month, Shopify listings | 1500 export per month [batch]
+pitch/free | Up to 5 members, 100 one-time AI credits, Pitch-branded links | 100 credit in total [ai]
+pitch/plus | 500 AI credits per month, PowerPoint export | 500 credit per month [ai]
+quillbot/free | 125 words per paraphrase | — (not parsed: unknown stays unknown)
+rask-ai/creator | 25 minutes per month | 25 minute per month → 25 min/month
+rask-ai/creator-pro | 100 minutes per month | 100 minute per month → 100 min/month
+rask-ai/business | 500 minutes per month | 500 minute per month → 500 min/month
+remove-bg/free | Preview resolution | — (not parsed: unknown stays unknown)
+remove-bg/lite | 40 credits per month | 40 credit per month
+remove-bg/pro | 200 credits per month | 200 credit per month
+remove-bg/volume-plus | 500 credits per month | 500 credit per month
+replit/core | $20 in monthly AI credits, up to 5 collaborators | — (not parsed: unknown stays unknown)
+riverside/free | 2 one-off hours | 2 hour in total → 120 min one-off, not a monthly budget
+rows/free | 5 AI tasks per month | 5 task per month [ai]
+rows/plus | 200 AI tasks per month | 200 task per month [ai]
+rows/pro | 1,000 AI tasks per month, plus $8 per user | 1000 task per month [ai]
+runway/free | 125 one-time credits | 125 credit in total
+runway/standard | 625 credits per month | 625 credit per month
+runway/pro | 2,250 credits per month | 2250 credit per month
+submagic/starter | 15 videos per month, up to 2 minutes, 1080p, no watermark | 15 video per month
+submagic/pro | 40 videos per month, up to 5 minutes, premium templates, brand kit | 40 video per month
+submagic/business | Up to 100 videos, 30-minute videos, 4K/60fps | — (not parsed: unknown stays unknown)
+suno/free | About 50 credits per day (≈ 10 songs), non-commercial use | ≈50 credit per day
+suno/pro | 2,500 credits per month (≈ 500 songs), commercial rights | 2500 credit per month
+suno/premier | 10,000 credits per month (≈ 2,000 songs), Suno Studio | 10000 credit per month
+surfer-seo/discovery | 120 documents per month, 10 tracked pages, 1 seat | 120 document per month
+surfer-seo/standard | 360 documents per month, 50 tracked pages | 360 document per month
+surfer-seo/pro | 200 tracked pages, 5 seats | — (not parsed: unknown stays unknown)
+surfer-seo/peace-of-mind | Unlimited documents, 500 tracked pages, 10 seats | unlimited [documents]
+synthesia/free | 10 minutes of video per month, 9 avatars, watermark | 10 minute per month [video] → 10 min/month
+synthesia/starter | 10 minutes per month, 125+ avatars, 3 personal avatars | 10 minute per month → 10 min/month
+synthesia/creator | 30 minutes per month, 180+ avatars, API access | 30 minute per month → 30 min/month
+tidio/free | 50 conversations per month, one-time 50 Lyro AI conversations | 50 conversation per month ; 50 conversation in total [lyro ai]
+tidio/starter | 100 billable conversations | — (not parsed: unknown stays unknown)
+tidio/growth | From 250 billable conversations | — (not parsed: unknown stays unknown)
+tidio/lyro | 50 Lyro AI conversations per month | 50 conversation per month [lyro ai]
+tldv/free | Unlimited recordings, 10 AI summaries per month | unlimited [recordings] ; 10 summary per month [ai]
+turboscribe/free | 3 files per day, up to about 30 minutes each | 3 file per day
+turboscribe/unlimited | Unlimited transcription | unlimited [transcription]
+udio/free | 10 credits per day, 100 per month | 10 credit per day
+udio/standard | 2,400 credits per month | 2400 credit per month
+udio/pro | 6,000 credits per month | 6000 credit per month
+v0/free | $5 credits per month, 7 messages per day, watermarked deployments | 7 message per day
+veed/free | 720p export, watermark, 10-minute cap | — (not parsed: unknown stays unknown)
+veed/lite | 1080p, no watermark, auto subtitles (144 hours/year) | 144 hour per year [auto subtitles] → 720 min/month
+veed/pro | Full AI toolkit incl. Clean Audio, Magic Cut, AI Clips, subtitle translation | — (not parsed: unknown stays unknown)
+vizard/free | 60 credits per month | 60 credit per month
+vizard/creator | 600 upload minutes, 4K export, no watermark | — (not parsed: unknown stays unknown)
+webflow/basic | 300 static pages, 10 GB bandwidth, no CMS | — (not parsed: unknown stays unknown)
+webflow/premium | 20,000 CMS items, 40 collections, 50 GB bandwidth | — (not parsed: unknown stays unknown)
+windsurf/free | Limited daily quota | — (not parsed: unknown stays unknown)
+wix/core | E-commerce tools, 50 GB storage | — (not parsed: unknown stays unknown)
+writesonic/free | Limited features | — (not parsed: unknown stays unknown)
+writesonic/starter | 15 articles per month | 15 article per month
+zapier/free | 100 tasks per month, two-step Zaps | 100 task per month
+zapier/professional | 750 tasks per month, multi-step Zaps | 750 task per month
+zapier/team | 2,000 tasks per month, up to 25 users | 2000 task per month
