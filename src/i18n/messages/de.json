@@ -836,7 +836,9 @@
     "nothing": "Keine Probleme gefunden. Dein Stack ist gesund.",
     "saveCta": "In Match einen neuen Stack daraus machen",
     "leadTitle": "Sollen wir uns den Stack deines Teams ansehen?",
-    "leadBody": "Für Teams und KMU: Wir prüfen mit dir deinen KI-Stack, die Kosten und DSGVO-Risiken."
+    "leadBody": "Für Teams und KMU: Wir prüfen mit dir deinen KI-Stack, die Kosten und DSGVO-Risiken.",
+    "pickerEmpty": "Tippe auf die Tools, die du jetzt nutzt.",
+    "pickerFull": "Du kannst 8 Tools auf einmal prüfen lassen."
   },
   "stackPage": {
     "metaTitle": "Stack-Beleg: {title}",

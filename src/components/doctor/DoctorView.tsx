@@ -8,9 +8,10 @@ import type { Catalog } from '@/lib/catalog/types';
 import { diagnose, PAINS, type Pain } from '@/lib/engine/doctor';
 import { href } from '@/lib/routes';
 import { LeadForm } from '@/components/forms/LeadForm';
+import { ToolChooser } from '@/components/compare/ToolChooser';
+import { chooserData } from '@/components/compare/chooser-data';
 
 type SP = Record<string, string | string[] | undefined>;
-const SLOTS = [0, 1, 2, 3, 4, 5, 6, 7];
 
 /**
  * The Stack Doctor page body, shared by the server page and the static
@@ -38,7 +39,7 @@ export function DoctorView({
   const d = tools.length ? diagnose(catalog, tools.map((x) => x.id), pains, task) : null;
   const name = (id: string) => catalog.toolsById.get(id)?.name ?? id;
   const money = (list: { cents: number; currency: string }[]) => list.map((m) => formatMoney(m.cents, m.currency, locale)).join(' + ');
-  const options = [...catalog.tools].sort((a, b) => a.name.localeCompare(b.name));
+  const chooser = chooserData(catalog, t, locale);
 
   return (
     <div className="container-page py-10">
@@ -49,22 +50,29 @@ export function DoctorView({
         <input type="hidden" name="submitted" value="1" />
         <fieldset>
           <legend className="eyebrow">{t('doctor.yourTools')}</legend>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {SLOTS.map((i) => (
-              <div key={i}>
-                <label htmlFor={`doc-${i}`} className="label">
-                  {t('doctor.toolN', { n: i + 1 })}
-                </label>
-                <select id={`doc-${i}`} name="t" defaultValue={tools[i]?.slug ?? ''} className="input">
-                  <option value="">{t('doctor.choose')}</option>
-                  {options.map((o) => (
-                    <option key={o.id} value={o.slug}>
-                      {o.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ))}
+          <div className="mt-3">
+            <ToolChooser
+              name="t"
+              max={8}
+              min={1}
+              suggest={false}
+              tools={chooser.tools}
+              worlds={chooser.worlds}
+              selected={tools.map((x) => x.slug)}
+              labels={{
+                legend: t('doctor.yourTools'),
+                search: t('compare.pickerSearch'),
+                searchPlaceholder: t('compare.pickerSearchPlaceholder'),
+                worlds: t('compare.pickerWorlds'),
+                all: t('compare.pickerAll'),
+                chosen: t('compare.pickerChosen'),
+                empty: t('doctor.pickerEmpty'),
+                remove: t('compare.pickerRemove'),
+                suggest: t('compare.pickerSuggest'),
+                full: t('doctor.pickerFull'),
+                noResults: t('compare.pickerNoResults'),
+              }}
+            />
           </div>
         </fieldset>
         <fieldset>

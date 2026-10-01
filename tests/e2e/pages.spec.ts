@@ -78,10 +78,11 @@ test('explorer filters narrow the list and compare selected tools', async ({ pag
 
 test('Stack Doctor diagnoses an overlapping stack', async ({ page }) => {
   await page.goto('/en/doctor');
-  const selects = page.locator('main form select').filter({ has: page.locator('option[value="chatgpt"]') });
-  await selects.nth(0).selectOption('chatgpt');
-  await selects.nth(1).selectOption('claude');
-  await selects.nth(2).selectOption('gemini');
+  // The tools you use: tap them in the tile chooser.
+  await expect(page.locator('.chooser[data-hydrated]')).toBeVisible();
+  for (const name of ['ChatGPT', 'Claude', 'Gemini']) {
+    await page.locator('label.pick').filter({ has: page.locator('.pick-name', { hasText: new RegExp(`^${name}$`) }) }).click();
+  }
   await page.locator('main form button[type=submit]').first().click();
   await expect(page.getByText(/Overlap/).first()).toBeVisible();
 });

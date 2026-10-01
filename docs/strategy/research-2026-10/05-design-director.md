@@ -129,4 +129,51 @@ Spelregels voor beweging:
 Na elke ronde staat de uitkomst onder "Beoordelingslog".
 
 ## Beoordelingslog
-*(wordt per ronde bijgewerkt)*
+
+### Ronde 1: home-hero, werelden en toolmerken (1 okt)
+Bekeken op 1440, 1024, 768 en 390 px, in dark en licht, met reduced motion.
+
+**Wat werkte**
+- Het podium geeft het eerste scherm een beeld. Typen naar een wereld werkt: "podcast opnemen" geeft de opnamestudio, "vid" de filmstudio.
+- In het lichte thema leest de maquette als een papieren architectuurmodel.
+- De wereldkaarten geven de site een visuele index.
+
+**Verbeterd**
+- Het onderschrift van het podium was een pil over twee regels en werd één regel.
+- De radar had kader-in-kader en lege kolommen. Nu is er één kader, alleen met echte items.
+- Duels: alfabetisch met dubbele tools werd zes duels uit verschillende werelden, elke tool één keer.
+- Het bonnetje op een licht bureau verdween in het wit. Papier krijgt nu een rand in het lichte thema.
+- Op mobiel staat het podium als venster boven de vraag en verdwijnt de hint.
+
+### Ronde 2: feedback van de eigenaar (1 okt)
+**"Vergelijken is lastig"** (vier lijsten met 100 tools)
+- Nu tegels met logo, naam en vanaf-prijs, gegroepeerd per wereld.
+- Zoeken op naam, en een wereldfilter (knoppen op desktop, een gewone dropdown op mobiel).
+- Een tray die meeloopt, met "Alternatieven voor …".
+- Een knop die zegt wat er gebeurt ("Kies nog 1 tool").
+- Bovenaan staan kant-en-klare vergelijkingen. Het werkt ook zonder JavaScript.
+
+**"Liever kiezen dan typen"**
+- Op de home is "Kies uit een lijst" nu de standaard, met drie genummerde stappen. Het podium volgt de gekozen wereld. Typen blijft één tab verder.
+
+**"Mooie logo's"**
+- 32 echte logo's, in merkkleur waar die ≥ 3:1 haalt per thema, anders in inkt.
+- Elk logo is gecontroleerd op het juiste merk: geen moederbedrijf, geen naamgenoot.
+
+**Eerlijkheid**
+- "Vaak vergeleken met" suggereerde gebruikscijfers die we niet hebben. Dat werd "Alternatieven voor …".
+- "Veel vergeleken" werd "Kant-en-klare vergelijkingen".
+
+### Ronde 3: uitbreiding (1 okt)
+- **Categorieën**: het overzicht is een rooster van werelden met een functie-index. Een categoriepagina is een wereld: de plek, de naam, tellingen en taken, met de kamer ernaast.
+- **Toolpagina's** openen als een titelpagina:
+  - groot merk, wereld, naam en acties;
+  - een strook kerncijfers met bonnetje-chips, waarbij een onbekende waarde een streepje is;
+  - de kamer als vervaagde achtergrond.
+- Op mobiel staat het merk boven de titel.
+
+### Nog te doen
+- De Stack Doctor heeft nog acht lange lijsten. Die moeten naar dezelfde tegelkiezer als Vergelijken.
+- Verkennen moet toolkaarten 2.0 krijgen in plaats van rijen.
+- De Pulse-tijdlijn moet oud→nieuw met delta tonen.
+- De eenvoud van alle teksten loopt via agent B5.

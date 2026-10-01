@@ -1193,7 +1193,9 @@
     "nothing": "No problems found. Your stack is healthy.",
     "saveCta": "Turn it into a new stack in Match",
     "leadTitle": "Want us to look at your team's stack?",
-    "leadBody": "For teams and SMBs: we review your AI stack, costs and GDPR risks with you."
+    "leadBody": "For teams and SMBs: we review your AI stack, costs and GDPR risks with you.",
+    "pickerEmpty": "Tap the tools you use now.",
+    "pickerFull": "You can check 8 tools at once."
   },
   "lead": {
     "name": "Name",

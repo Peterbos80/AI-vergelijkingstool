@@ -1956,10 +1956,11 @@
   }
   .tool-facts {
     position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     border-top: 1px solid var(--line);
-    background: color-mix(in srgb, var(--paper) 55%, transparent);
+    background: var(--paper-2);
   }
   @media (min-width: 48rem) {
     .tool-facts {

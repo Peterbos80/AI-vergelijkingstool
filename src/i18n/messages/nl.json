@@ -1193,7 +1193,9 @@
     "nothing": "Geen problemen gevonden. Je stack is gezond.",
     "saveCta": "Maak er een nieuwe stack van in Match",
     "leadTitle": "Meekijken met je team?",
-    "leadBody": "Voor teams en mkb: we kijken met je mee naar je AI-stack, kosten en AVG-risico's."
+    "leadBody": "Voor teams en mkb: we kijken met je mee naar je AI-stack, kosten en AVG-risico's.",
+    "pickerEmpty": "Tik op de tools die je nu gebruikt.",
+    "pickerFull": "Je kunt 8 tools tegelijk laten checken."
   },
   "lead": {
     "name": "Naam",

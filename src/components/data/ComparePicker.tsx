@@ -1,17 +1,16 @@
 import Link from 'next/link';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
-import { nameOf, toolWorld } from '@/lib/catalog/helpers';
+import { toolWorld } from '@/lib/catalog/helpers';
 import { pickDuels } from '@/lib/catalog/duels';
 import type { Catalog } from '@/lib/catalog/types';
 import { href } from '@/lib/routes';
-import { isWorld, WORLDS } from '@/lib/world-ids';
 import { CompareView } from '@/components/data/CompareView';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
 import { Icon } from '@/components/ui/Icon';
 import { ToolMark } from '@/components/data/ToolMark';
-import { entryPriceLabel } from '@/components/data/format';
-import { ToolChooser, type ChooserTool, type ChooserWorld } from '@/components/compare/ToolChooser';
+import { ToolChooser } from '@/components/compare/ToolChooser';
+import { chooserData } from '@/components/compare/chooser-data';
 
 type SP = Record<string, string | string[] | undefined>;
 
@@ -32,25 +31,7 @@ export function ComparePicker({
   const raw = ([] as string[]).concat(sp.tools ?? []).flatMap((x) => x.split(','));
   const slugs = [...new Set(raw.map((s) => s.trim()).filter(Boolean))].slice(0, 4);
   const tools = slugs.map((s) => catalog.toolsBySlug.get(s)).filter((x): x is NonNullable<typeof x> => Boolean(x));
-  const options = catalog.tools.filter((x) => x.status !== 'shutdown');
-  const chooserTools: ChooserTool[] = options
-    .map((x) => ({
-      slug: x.slug,
-      name: x.name,
-      world: toolWorld(x, catalog),
-      price: entryPriceLabel(x, t, locale),
-      logo: x.logo,
-      alts: [...x.alternatives]
-        .sort((a, b) => Number(b.source === 'editorial') - Number(a.source === 'editorial') || (b.score ?? 0) - (a.score ?? 0))
-        .map((a) => catalog.toolsById.get(a.id)?.slug)
-        .filter((slug): slug is string => Boolean(slug))
-        .slice(0, 6),
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name, locale));
-  const chooserWorlds: ChooserWorld[] = WORLDS.flatMap((id) => {
-    const cat = catalog.categoriesById.get(id);
-    return cat && isWorld(cat.id) && chooserTools.some((x) => x.world === id) ? [{ id, name: nameOf(cat, locale).name }] : [];
-  });
+  const { tools: chooserTools, worlds: chooserWorlds } = chooserData(catalog, t, locale);
   const duels = pickDuels(catalog, 6);
 
   return (

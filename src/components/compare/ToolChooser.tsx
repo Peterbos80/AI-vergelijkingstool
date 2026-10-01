@@ -40,33 +40,44 @@ export interface ChooserLabels {
   suggest: string;
   full: string;
   noResults: string;
-  /** The button per number chosen (0–4): "Kies 2 tools", "Kies nog 1 tool", "Vergelijk 2 tools", … */
-  submit: string[];
+  /** The button per number chosen (0–max), for a chooser with its own form. */
+  submit?: string[];
   /** The button without JavaScript. */
-  submitPlain: string;
+  submitPlain?: string;
 }
 
-const MAX = 4;
 const noSubscribe = () => () => undefined;
 const fold = (s: string) =>
   s
     .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
 
 export function ToolChooser({
   action,
+  name = 'tools',
+  max = 4,
+  min = 2,
+  suggest = true,
   tools,
   worlds,
   selected,
   labels,
 }: {
-  action: string;
+  /** Compare: the chooser is its own GET form to this URL. Without it, the chooser lives inside the caller's form. */
+  action?: string;
+  /** The checkboxes' name (Compare "tools", Stack Doctor "t"). */
+  name?: string;
+  max?: number;
+  min?: number;
+  /** Offer the alternatives of the last pick. */
+  suggest?: boolean;
   tools: ChooserTool[];
   worlds: ChooserWorld[];
   selected: string[];
   labels: ChooserLabels;
 }) {
+  const MAX = max;
   const hydrated = useSyncExternalStore(noSubscribe, () => true, () => false);
   const [chosen, setChosen] = useState<string[]>(selected.slice(0, MAX));
   const [world, setWorld] = useState<WorldId | null>(null);
@@ -82,20 +93,20 @@ export function ToolChooser({
 
   const toggle = (slug: string) => setChosen((cur) => (cur.includes(slug) ? cur.filter((s) => s !== slug) : cur.length >= MAX ? cur : [...cur, slug]));
   const last = chosen.length ? bySlug.get(chosen[chosen.length - 1]!) : undefined;
-  const suggestions = last && !full ? last.alts.filter((s) => !chosen.includes(s) && bySlug.has(s)).slice(0, 3) : [];
+  const suggestions = suggest && last && !full ? last.alts.filter((s) => !chosen.includes(s) && bySlug.has(s)).slice(0, 3) : [];
 
   // With JavaScript the URL gets the short form (?tools=a,b); a full page load, also on the static site.
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    if (!hydrated) return;
+    if (!hydrated || !action) return;
     e.preventDefault();
-    if (chosen.length < 2) return;
+    if (chosen.length < min) return;
     // A full page load on purpose: the static site computes query pages from the URL on load.
     // eslint-disable-next-line @next/next/no-location-assign-relative-destination
     window.location.assign(`${action}?tools=${chosen.map(encodeURIComponent).join(',')}`);
   };
 
-  return (
-    <form method="get" action={action} className="chooser" onSubmit={onSubmit} data-hydrated={hydrated ? '1' : undefined}>
+  const body = (
+    <>
       {hydrated && (
         <div className="chooser-filters">
           <div className="chooser-search">
@@ -160,7 +171,7 @@ export function ToolChooser({
                     <label className="pick" data-world={tool.world === 'home' ? undefined : tool.world}>
                       <input
                         type="checkbox"
-                        name="tools"
+                        name={name}
                         value={tool.slug}
                         className="pick-input"
                         checked={on}
@@ -223,10 +234,22 @@ export function ToolChooser({
             {full && <p className="chooser-full">{labels.full}</p>}
           </div>
         )}
-        <button type="submit" className="btn" disabled={hydrated && chosen.length < 2}>
-          {hydrated ? labels.submit[Math.min(chosen.length, MAX)] : labels.submitPlain}
-        </button>
+        {action && labels.submit && (
+          <button type="submit" className="btn" disabled={hydrated && chosen.length < min}>
+            {hydrated ? labels.submit[Math.min(chosen.length, labels.submit.length - 1)] : labels.submitPlain}
+          </button>
+        )}
       </div>
+    </>
+  );
+
+  return action ? (
+    <form method="get" action={action} className="chooser" onSubmit={onSubmit} data-hydrated={hydrated ? '1' : undefined}>
+      {body}
     </form>
+  ) : (
+    <div className="chooser chooser-embedded" data-hydrated={hydrated ? '1' : undefined}>
+      {body}
+    </div>
   );
 }
