@@ -46,12 +46,12 @@ const schema = z.object({
    * New tools: 'queue' (every candidate is an owner decision) or 'quarantine'
    * (the tool scout publishes the best candidates that pass every hard gate,
    * labelled "new, being checked", noindex and outside the recommendations).
-   * Overrides the `policy.newToolMode` setting; the free edition sets 'quarantine'.
+   * Overrides the `policy.newToolMode` setting; the free edition sets
+   * 'quarantine'. Read leniently: an unknown value is ignored.
    */
-  NEW_TOOL_MODE: z
-    .enum(['queue', 'quarantine', ''])
-    .optional()
-    .transform((v) => (v ? v : undefined)),
+  NEW_TOOL_MODE: optional,
+  /** Overrides `policy.newToolsPerDay` (0–25); an invalid value is ignored. */
+  NEW_TOOLS_PER_DAY: optional,
   AGENT_USER_AGENT: z.string().default('AIToolsWijzerBot/1.0 (+https://aitoolswijzer.nl/bot)'),
   /** Reverse proxies in front of the app that append to X-Forwarded-For (lib/analytics/visitor.ts). */
   TRUSTED_PROXY_HOPS: z.coerce.number().int().min(1).max(5).default(1),

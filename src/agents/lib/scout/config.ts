@@ -5,6 +5,8 @@
  * settings: they are never lowered to reach a number of new tools.
  */
 import { z } from 'zod';
+import { env } from '@/lib/env';
+import type { Settings } from '@/lib/settings/defaults';
 import json from '../../../../data/discovery/sources.json';
 
 const feedSchema = z.object({
@@ -43,15 +45,37 @@ export const COLLECT = {
 } as const;
 
 export const SCOUT_LIMITS = {
-  /** New tools published per day (the best ones; fewer when fewer pass the gates). */
-  perDay: 5,
-  /** More publications than this in 24 hours is impossible by design: freeze and escalate. */
-  anomalyPerDay: 10,
-  /** More candidates passing every gate on one day than this looks like a parser fault: freeze. */
-  anomalyPassing: 30,
+  /** More publications than this in 24 hours is an anomaly: publish nothing and escalate. */
+  anomalyPerDay: 25,
+  /** More candidates passing every gate at once than this looks like a parser fault: publish nothing and escalate. */
+  anomalyPassing: 75,
   quarantineDays: 7,
   /** Launch posts from makers' feeds whose product link is looked up per run. */
   launchPostsPerRun: 6,
   /** Product Hunt posts whose website link is resolved per run. */
   productHuntPerRun: 10,
 } as const;
+
+export interface NewToolPolicy {
+  mode: 'queue' | 'quarantine';
+  /** New tools per day in quarantine mode (0–25). */
+  perDay: number;
+  /** Where the values came from (shown in run summaries and the report). */
+  from: { mode: 'env' | 'setting'; perDay: 'env' | 'setting' };
+}
+
+/**
+ * The effective new-tool policy: NEW_TOOL_MODE / NEW_TOOLS_PER_DAY in the
+ * environment (the free edition has no admin area) over the settings.
+ */
+export function newToolPolicy(settings: Settings): NewToolPolicy {
+  const e = env();
+  const envMode = e.NEW_TOOL_MODE === 'queue' || e.NEW_TOOL_MODE === 'quarantine' ? e.NEW_TOOL_MODE : undefined;
+  const n = e.NEW_TOOLS_PER_DAY !== undefined ? Number(e.NEW_TOOLS_PER_DAY) : NaN;
+  const envPerDay = Number.isInteger(n) && n >= 0 ? Math.min(SCOUT_LIMITS.anomalyPerDay, n) : undefined;
+  return {
+    mode: envMode ?? settings.policy.newToolMode,
+    perDay: envPerDay ?? Math.min(SCOUT_LIMITS.anomalyPerDay, settings.policy.newToolsPerDay),
+    from: { mode: envMode ? 'env' : 'setting', perDay: envPerDay !== undefined ? 'env' : 'setting' },
+  };
+}

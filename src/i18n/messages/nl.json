@@ -1812,7 +1812,9 @@
         "video_removed": "Video verwijderd",
         "draft_created": "Tekstconcept gemaakt",
         "draft_rejected": "Tekstconcept verworpen",
-        "tool_published": "Tool gepubliceerd"
+        "tool_published": "Tool gepubliceerd",
+        "pricing_url_found": "Prijzenpagina gevonden op de eigen site",
+        "pricing_page_search": "Prijzenpagina gezocht (niet gevonden)"
       },
       "ranNow": "{agent}: {status} — {summary}",
       "noRuns": "Nog geen runs. Start de worker (npm run agents:worker) of een cronjob.",
@@ -2007,10 +2009,12 @@
         "goalCentsPerMonth": "Omzetdoel (cent/mnd)",
         "currency": "Valuta",
         "staleImportDays": "Import is verouderd na (dagen)",
-        "locale": "Taal van beheer en rapport"
+        "locale": "Taal van beheer en rapport",
+        "newToolsPerDay": "Nieuwe tools per dag (quarantaine, max 25)"
       },
       "newToolMode": {
-        "queue": "Altijd aan mij vragen"
+        "queue": "Altijd aan mij vragen",
+        "quarantine": "Zelf publiceren in quarantaine (beste kandidaten die alle poorten halen)"
       }
     },
     "tools": {

@@ -32,7 +32,7 @@ Tests use `fixtureFetcher()`, which serves canned pages, so no test touches the 
 | Source | Used by | Access | What we take | What we publish |
 | --- | --- | --- | --- | --- |
 | Official pricing pages | `pricing` | HTML, robots.txt, at most daily per page | plan prices found next to the plan name | price, currency, period, date, source URL, ≤ 600-char quote |
-| Official home pages | `broken-link` | light GET (≤ 16 KB), about every 6 h | reachability only | "unreachable since <date>" after ≥ 3 failures over ≥ 24 h |
+| Official home pages | `broken-link`, `pricing` | light GET (≤ 16 KB), hourly in small batches, a site at most every 5.5 h; `pricing` reads a home page once to find the link to the official pricing page (tools whose plans have none) | reachability; the pricing link | "unreachable since <date>" after ≥ 3 failures over ≥ 24 h; the pricing page becomes a monitored source |
 | Official changelogs, RSS/Atom | `change-detection` | feed XML, every 6 h | item title, link, date | Pulse event with the vendor's own title and link |
 | GitHub REST API | `social`, `discovery` | `api.github.com` (optional `GITHUB_TOKEN` for a higher rate limit) | stars, releases; repository search for candidates | star counts over time, release events with link |
 | Hacker News via Algolia API | `social`, `discovery` | `hn.algolia.com` | mention counts; Show HN posts as candidates | "buzz" event only above a threshold, with link |

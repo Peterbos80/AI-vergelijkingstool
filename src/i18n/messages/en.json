@@ -1812,7 +1812,9 @@
         "video_removed": "Video removed",
         "draft_created": "Text draft created",
         "draft_rejected": "Text draft discarded",
-        "tool_published": "Tool published"
+        "tool_published": "Tool published",
+        "pricing_url_found": "Pricing page found on the tool's own site",
+        "pricing_page_search": "Pricing page searched (not found)"
       },
       "ranNow": "{agent}: {status} — {summary}",
       "noRuns": "No runs yet. Start the worker (npm run agents:worker) or a cron job.",
@@ -2007,10 +2009,12 @@
         "goalCentsPerMonth": "Revenue goal (cents/month)",
         "currency": "Currency",
         "staleImportDays": "Import is stale after (days)",
-        "locale": "Admin and report language"
+        "locale": "Admin and report language",
+        "newToolsPerDay": "New tools per day (quarantine, max 25)"
       },
       "newToolMode": {
-        "queue": "Always ask me"
+        "queue": "Always ask me",
+        "quarantine": "Publish in quarantine (the best candidates that pass every gate)"
       }
     },
     "tools": {

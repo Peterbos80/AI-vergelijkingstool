@@ -3,6 +3,8 @@
  * <date>" only after ≥ 3 failed checks spanning ≥ 24 h (R1, reversible). If a
  * large share of sites fails in one run, the problem is probably ours (network)
  * → nothing is marked and a dependency item is raised instead.
+ * Runs every hour with a small batch (the sites checked longest ago), so the
+ * whole catalogue is checked continuously; one site at most every 5.5 hours.
  */
 import { and, eq } from 'drizzle-orm';
 import { changeEvents, sources, tools } from '@/lib/db/schema';
@@ -14,9 +16,9 @@ import { eventText } from '../lib/event-text';
 export const brokenLinkAgent: AgentDefinition = {
   name: 'broken-link',
   description: 'Checks tool websites; marks tools unreachable after repeated failures and restores them automatically.',
-  schedule: 'every:6h',
+  schedule: 'every:1h',
   autonomy: 'auto',
-  maxItems: 40,
+  maxItems: 15,
   timeoutMs: 10 * 60_000,
   async run(ctx) {
     const { db } = ctx;

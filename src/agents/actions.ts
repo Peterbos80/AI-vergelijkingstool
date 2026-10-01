@@ -5,7 +5,7 @@
  */
 import { and, desc, eq, isNull } from 'drizzle-orm';
 import type { Database } from '@/lib/db/client';
-import { affiliateLinks, agentActions, changeEvents, pricingPlans, tools, videos, type Decision } from '@/lib/db/schema';
+import { affiliateLinks, agentActions, changeEvents, pricingPlans, sources, tools, videos, type Decision } from '@/lib/db/schema';
 import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
 import { bumpDataVersion, loadSettings, saveSetting } from '@/lib/settings';
 
@@ -104,6 +104,14 @@ const REVERTERS: Record<string, Reverter> = {
   tool_published: async (db, a) => {
     if (!a.toolId) return false;
     await db.update(tools).set({ published: false, quarantineUntil: null }).where(eq(tools.id, a.toolId));
+    return true;
+  },
+  // A pricing page found on the official home page: the tool goes back to having none; the source is no longer checked.
+  pricing_url_found: async (db, a) => {
+    const v = a.newValue as { pricingUrl?: string; sourceId?: string } | null;
+    if (!a.toolId || !v?.pricingUrl) return false;
+    await db.update(tools).set({ pricingUrl: null }).where(and(eq(tools.id, a.toolId), eq(tools.pricingUrl, v.pricingUrl)));
+    if (v.sourceId) await db.update(sources).set({ role: 'other' }).where(eq(sources.id, v.sourceId));
     return true;
   },
   video_added: async (db, a) => {
