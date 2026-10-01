@@ -1,32 +1,63 @@
 @import 'tailwindcss';
 
-/* ───────────── Design tokens (docs/strategy/10 §2) ───────────── */
+/*
+ * ───────────── Design tokens ─────────────
+ * Colour is data: the interface itself is paper and ink; colour appears only
+ * where it means something (evidence status, price direction, live changes,
+ * the interaction accent). No glow, no decorative gradients.
+ *   light "paper": petrol accent      dark "luxury": cyan accent
+ * The two dark blocks below must stay identical (tests/unit/tokens.test.ts).
+ */
 :root {
   --paper: #f7f5f0;
   --paper-2: #efece4;
   --card: #ffffff;
+  --surface-2: #faf8f4;
   --ink: #121212;
   --ink-2: #3d3d3a;
   --ink-3: #66655f;
+  /* Hairline (decorative) vs. the border of inputs, selects and secondary buttons (≥ 3:1, WCAG 1.4.11). */
   --line: #dedad0;
+  --line-strong: #8a867d;
+  /* The one accent for interaction: links that lead somewhere, focus, the ask button. */
+  --accent: #00707c;
+  --accent-ink: #ffffff;
+  --focus: var(--accent);
+  /* The hand of the logo. Not an accent. */
   --signal: #d9401f;
   --signal-ink: #b3321a;
-  --verified: #1e7f4f;
+  /* Evidence status: text colour and its tint. */
+  --verified: #047857;
+  --verified-bg: #e3f2ea;
   --supported: #2456c8;
-  --community: #9a5b00;
+  --supported-bg: #e7edfa;
+  --community: #8c5300;
+  --community-bg: #f6ecdc;
   --unverified: #66655f;
+  /* Price direction: a price decrease is never red. */
+  --price-up: #be123c;
+  --price-up-bg: #fce8ec;
+  --price-down: #047857;
+  --price-down-bg: #e3f2ea;
+  /* Live changes (Pulse) and success. */
+  --live: #c2410c;
+  --live-bg: #ffedd5;
+  --live-ink: #9a3412;
+  --ok: #047857;
   --danger: #b3261e;
   --warning-bg: #fff4e0;
   --warning-ink: #6b4200;
   --sponsored-bg: #f3efe2;
-  /* New interactive paths (cyan), successful steps (emerald), live changes (orange/crimson). */
-  --accent: #00707c;
-  --accent-ink: #ffffff;
-  --ok: #047857;
-  --live: #c2410c;
-  --live-2: #be123c;
-  --focus: var(--signal);
-  --glow: transparent;
+  /* The receipt is paper in both themes: a light island on the dark page. */
+  --receipt: #fffefb;
+  --receipt-ink: #1c1b18;
+  --receipt-ink-2: #3d3c37;
+  --receipt-ink-3: #66655f;
+  --receipt-line: #d9d3c4;
+  /* Depth: flat by default; e1 hover, e2 popovers and drawers, e3 dialogs. */
+  --e1: 0 1px 2px rgb(21 21 19 / 0.06), 0 4px 12px -4px rgb(21 21 19 / 0.1);
+  --e2: 0 12px 32px -12px rgb(21 21 19 / 0.22);
+  --e3: 0 24px 64px -16px rgb(21 21 19 / 0.32);
   color-scheme: light;
 }
 
@@ -36,27 +67,44 @@
     --paper: #0a0a0c;
     --paper-2: #101016;
     --card: #15151f;
+    --surface-2: #1c1c29;
     --ink: #f4f4f6;
     --ink-2: #c5c6d0;
-    --ink-3: #8e8fa0;
+    --ink-3: #9293a5;
     --line: #262633;
+    --line-strong: #6c6c82;
+    --accent: #00f0ff;
+    --accent-ink: #00181b;
+    --focus: var(--accent);
     --signal: #ff6a4d;
     --signal-ink: #ff8a70;
     --verified: #34d399;
+    --verified-bg: #0d2a1f;
     --supported: #7aa2ff;
+    --supported-bg: #151d3a;
     --community: #e8a64a;
+    --community-bg: #2a2113;
     --unverified: #9a9aa8;
+    --price-up: #ff6b85;
+    --price-up-bg: #34141d;
+    --price-down: #34d399;
+    --price-down-bg: #0d2a1f;
+    --live: #ff8a3d;
+    --live-bg: #2e1a0c;
+    --live-ink: #ffb27a;
+    --ok: #34d399;
     --danger: #ff8a80;
     --warning-bg: #2b2210;
     --warning-ink: #f3c77a;
     --sponsored-bg: #1c1b24;
-    --accent: #00f0ff;
-    --accent-ink: #00181b;
-    --ok: #34d399;
-    --live: #ff8a3d;
-    --live-2: #ff3b5c;
-    --focus: #00f0ff;
-    --glow: color-mix(in srgb, #00f0ff 13%, transparent);
+    --receipt: #ebe6db;
+    --receipt-ink: #1c1b18;
+    --receipt-ink-2: #34332e;
+    --receipt-ink-3: #57554d;
+    --receipt-line: #c9c2b2;
+    --e1: inset 0 1px 0 rgb(255 255 255 / 0.04);
+    --e2: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 16px 40px -16px rgb(0 0 0 / 0.7);
+    --e3: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 24px 64px -16px rgb(0 0 0 / 0.8);
     color-scheme: dark;
   }
 }
@@ -66,27 +114,44 @@
   --paper: #0a0a0c;
   --paper-2: #101016;
   --card: #15151f;
+  --surface-2: #1c1c29;
   --ink: #f4f4f6;
   --ink-2: #c5c6d0;
-  --ink-3: #8e8fa0;
+  --ink-3: #9293a5;
   --line: #262633;
+  --line-strong: #6c6c82;
+  --accent: #00f0ff;
+  --accent-ink: #00181b;
+  --focus: var(--accent);
   --signal: #ff6a4d;
   --signal-ink: #ff8a70;
   --verified: #34d399;
+  --verified-bg: #0d2a1f;
   --supported: #7aa2ff;
+  --supported-bg: #151d3a;
   --community: #e8a64a;
+  --community-bg: #2a2113;
   --unverified: #9a9aa8;
+  --price-up: #ff6b85;
+  --price-up-bg: #34141d;
+  --price-down: #34d399;
+  --price-down-bg: #0d2a1f;
+  --live: #ff8a3d;
+  --live-bg: #2e1a0c;
+  --live-ink: #ffb27a;
+  --ok: #34d399;
   --danger: #ff8a80;
   --warning-bg: #2b2210;
   --warning-ink: #f3c77a;
   --sponsored-bg: #1c1b24;
-  --accent: #00f0ff;
-  --accent-ink: #00181b;
-  --ok: #34d399;
-  --live: #ff8a3d;
-  --live-2: #ff3b5c;
-  --focus: #00f0ff;
-  --glow: color-mix(in srgb, #00f0ff 13%, transparent);
+  --receipt: #ebe6db;
+  --receipt-ink: #1c1b18;
+  --receipt-ink-2: #34332e;
+  --receipt-ink-3: #57554d;
+  --receipt-line: #c9c2b2;
+  --e1: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  --e2: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 16px 40px -16px rgb(0 0 0 / 0.7);
+  --e3: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 24px 64px -16px rgb(0 0 0 / 0.8);
   color-scheme: dark;
 }
 
@@ -94,16 +159,25 @@
   --color-paper: var(--paper);
   --color-paper-2: var(--paper-2);
   --color-card: var(--card);
+  --color-surface-2: var(--surface-2);
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-signal: var(--signal);
   --color-signal-ink: var(--signal-ink);
   --color-verified: var(--verified);
+  --color-verified-bg: var(--verified-bg);
   --color-supported: var(--supported);
+  --color-supported-bg: var(--supported-bg);
   --color-community: var(--community);
+  --color-community-bg: var(--community-bg);
   --color-unverified: var(--unverified);
+  --color-price-up: var(--price-up);
+  --color-price-up-bg: var(--price-up-bg);
+  --color-price-down: var(--price-down);
+  --color-price-down-bg: var(--price-down-bg);
   --color-danger: var(--danger);
   --color-warning-bg: var(--warning-bg);
   --color-warning-ink: var(--warning-ink);
@@ -111,11 +185,21 @@
   --color-accent: var(--accent);
   --color-ok: var(--ok);
   --color-live: var(--live);
-  --color-live-2: var(--live-2);
+  --color-receipt: var(--receipt);
+  --color-receipt-ink: var(--receipt-ink);
   --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  --radius-sm: 6px;
-  --radius-card: 10px;
+  /* Four radii: 4 (tags, stamps), 8 (buttons, inputs), 12 (cards, tables, panels), 999 (chips, pills). */
+  --radius-xs: 4px;
+  --radius-sm: 4px;
+  --radius: 4px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+  --radius-3xl: 12px;
+  --radius-card: 12px;
+  --radius-pill: 999px;
   --breakpoint-sm: 40rem;
   --breakpoint-md: 48rem;
   --breakpoint-lg: 64rem;
@@ -133,9 +217,10 @@
     color: var(--ink);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.55;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+  /* Type scale: H1 750, H2 700, H3/H4 650; sizes come from the page. */
   h1,
   h2,
   h3,
@@ -143,6 +228,25 @@
     line-height: 1.15;
     letter-spacing: -0.015em;
     font-weight: 700;
+    text-wrap: balance;
+  }
+  h1 {
+    font-weight: 750;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+  h2 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  h3,
+  h4 {
+    font-weight: 650;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  p {
+    text-wrap: pretty;
   }
   a {
     color: inherit;
@@ -155,7 +259,7 @@
     border-radius: 2px;
   }
   ::selection {
-    background: color-mix(in srgb, var(--signal) 25%, transparent);
+    background: color-mix(in srgb, var(--accent) 25%, transparent);
   }
   table {
     border-collapse: collapse;
@@ -177,7 +281,7 @@
     background: var(--ink);
     color: var(--paper);
     padding: 0.5rem 0.875rem;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-weight: 600;
   }
   .skip-link:focus {
@@ -196,18 +300,25 @@
     }
   }
 
+  /* Mono is for facts only: prices, dates, domains, counts. */
   .mono {
     font-family: var(--font-mono);
   }
+  /* Amounts: always Plex Mono (already tabular). Never tabular-nums on Schibsted:
+     it widens the decimal comma ("18 ,33"). `.tabular` is kept as an alias. */
+  .num,
   .tabular {
-    font-variant-numeric: tabular-nums;
-  }
-  .eyebrow {
     font-family: var(--font-mono);
+  }
+  /* Label: small caps-style heading for groups and table heads (replaces the mono eyebrow). */
+  .eyebrow {
+    font-family: var(--font-sans);
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
+    font-weight: 650;
+    line-height: 1.4;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: var(--ink-3);
+    color: var(--ink-2);
   }
 
   .btn {
@@ -217,7 +328,7 @@
     gap: 0.5rem;
     min-height: 2.5rem;
     padding: 0.5rem 1rem;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-weight: 600;
     font-size: 0.9375rem;
     line-height: 1.2;
@@ -231,7 +342,7 @@
       background 120ms ease-out;
   }
   .btn:hover {
-    background: color-mix(in srgb, var(--ink) 88%, var(--signal));
+    background: color-mix(in srgb, var(--ink) 86%, var(--paper));
   }
   .btn:active {
     transform: translateY(1px);
@@ -239,7 +350,7 @@
   .btn-ghost {
     background: transparent;
     color: var(--ink);
-    border-color: var(--line);
+    border-color: var(--line-strong);
   }
   .btn-ghost:hover {
     background: var(--paper-2);
@@ -269,7 +380,7 @@
     gap: 0.375rem;
     min-height: 2rem;
     padding: 0.25rem 0.75rem;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: 1px solid var(--line);
     background: var(--card);
     color: var(--ink-2);
@@ -278,7 +389,7 @@
     cursor: pointer;
   }
   .chip:hover {
-    border-color: var(--ink-3);
+    border-color: var(--line-strong);
     color: var(--ink);
   }
   .chip[aria-pressed='true'],
@@ -290,6 +401,7 @@
   }
 
   .card {
+    --receipt-edge: var(--card);
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
@@ -299,8 +411,8 @@
     width: 100%;
     min-height: 2.75rem;
     padding: 0.625rem 0.875rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line-strong);
     background: var(--card);
     color: var(--ink);
     font: inherit;
@@ -309,7 +421,7 @@
     color: var(--ink-3);
   }
   .input:focus-visible {
-    outline: 2px solid var(--signal);
+    outline: 2px solid var(--focus);
     outline-offset: 0;
     border-color: transparent;
   }
@@ -320,12 +432,40 @@
     margin-bottom: 0.375rem;
   }
 
-  /* Receipt: perforated top/bottom edge (docs/strategy/10 §2 "Bonnetjes") */
+  /*
+   * Receipt: thermal paper in both themes (a light island in dark mode) with a
+   * torn zigzag edge. The teeth are painted in the colour behind the receipt
+   * (--receipt-edge: the page, or the card it sits in).
+   */
   .receipt {
+    color-scheme: light;
+    --ink: var(--receipt-ink);
+    --ink-2: var(--receipt-ink-2);
+    --ink-3: var(--receipt-ink-3);
+    --line: var(--receipt-line);
+    --line-strong: #8a867d;
+    --accent: #00707c;
+    --accent-ink: #ffffff;
+    --focus: #00707c;
+    --verified: #15643c;
+    --verified-bg: #e3f2ea;
+    --supported: #2148ae;
+    --supported-bg: #e7edfa;
+    --community: #7a4700;
+    --community-bg: #f6ecdc;
+    --unverified: var(--receipt-ink-3);
+    --price-up: #9f1239;
+    --price-up-bg: #fce8ec;
+    --price-down: #15643c;
+    --price-down-bg: #e3f2ea;
+    --ok: #15643c;
+    --danger: #9f1f17;
+    --warning-ink: #5c3900;
     position: relative;
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 2px;
+    background: var(--receipt);
+    color: var(--receipt-ink);
+    border: 1px solid var(--receipt-line);
+    border-radius: 0;
     font-family: var(--font-mono);
     font-size: 0.875rem;
   }
@@ -335,10 +475,9 @@
     position: absolute;
     left: -1px;
     right: -1px;
-    height: 8px;
-    background-image: radial-gradient(circle at 5px 0, var(--paper) 4px, transparent 4.5px);
-    background-size: 10px 8px;
-    background-repeat: repeat-x;
+    height: 6px;
+    background: conic-gradient(from -45deg at 50% 100%, var(--receipt-edge, var(--paper)) 90deg, transparent 0) 0 0 / 12px 6px repeat-x;
+    pointer-events: none;
   }
   .receipt::before {
     top: -1px;
@@ -358,7 +497,7 @@
     gap: 0.25rem;
     padding: 0.0625rem 0.375rem;
     border: 1.5px solid currentColor;
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     font-weight: 600;
@@ -387,12 +526,12 @@
   }
   .table-data th {
     text-align: left;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    font-weight: 650;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: var(--ink-3);
+    color: var(--ink-2);
     background: var(--paper-2);
     padding: 0.5rem 0.75rem;
     border-bottom: 1px solid var(--line);
@@ -404,6 +543,7 @@
     vertical-align: top;
   }
   .table-scroll {
+    --receipt-edge: var(--card);
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     border: 1px solid var(--line);
@@ -444,7 +584,7 @@
   }
 
   .notice {
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     border: 1px solid var(--line);
     background: var(--paper-2);
     padding: 0.75rem 1rem;
@@ -545,10 +685,7 @@
 
 @layer components {
   .hero {
-    background:
-      radial-gradient(60rem 22rem at 12% -8%, var(--glow), transparent 70%),
-      radial-gradient(40rem 18rem at 95% 0%, color-mix(in srgb, var(--glow) 60%, transparent), transparent 70%),
-      var(--paper);
+    background: var(--paper);
   }
   .link-accent {
     color: var(--accent);
@@ -561,11 +698,11 @@
   /* Conversational question box */
   .ask-box {
     position: relative;
-    border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+    border: 1px solid var(--line-strong);
     background: var(--card);
-    border-radius: 18px;
+    border-radius: var(--radius-card);
     padding: 0.875rem 1rem 0.625rem;
-    box-shadow: 0 18px 50px -30px color-mix(in srgb, var(--accent) 55%, transparent);
+    box-shadow: var(--e1);
     transition:
       border-color 180ms ease-out,
       box-shadow 180ms ease-out;
@@ -573,8 +710,8 @@
   .ask-box:focus-within {
     border-color: var(--accent);
     box-shadow:
-      0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent),
-      0 22px 60px -28px color-mix(in srgb, var(--accent) 70%, transparent);
+      0 0 0 1px var(--accent),
+      var(--e1);
   }
   .ask-input {
     display: block;
@@ -603,9 +740,9 @@
     margin-top: 0.375rem;
   }
   .ask-slogan {
-    font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 650;
+    letter-spacing: 0.02em;
     color: var(--ink-3);
   }
   .ask-hint {
@@ -628,11 +765,10 @@
     height: 2.75rem;
     margin-left: auto;
     border: 0;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--accent);
     color: var(--accent-ink);
     cursor: pointer;
-    box-shadow: 0 0 26px -6px color-mix(in srgb, var(--accent) 75%, transparent);
     transition: transform 120ms ease-out;
   }
   @media (min-width: 48rem) {
@@ -655,9 +791,9 @@
     gap: 0.5rem;
     min-height: 2.25rem;
     padding: 0.375rem 0.875rem;
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--accent) 6%, var(--card));
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--card);
     color: var(--ink);
     font-size: 0.875rem;
     text-decoration: none;
@@ -665,25 +801,22 @@
       border-color 150ms ease-out,
       box-shadow 150ms ease-out;
   }
-  .prompt-tag:hover,
+  .prompt-tag:hover {
+    border-color: var(--line-strong);
+  }
   .prompt-tag[aria-current='true'] {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+    box-shadow: inset 0 0 0 1px var(--accent);
   }
   .prompt-badge {
     padding: 0.0625rem 0.375rem;
-    border-radius: 4px;
-    background: color-mix(in srgb, var(--ok) 15%, transparent);
-    /* Mixed towards the ink colour: readable (≥ 4.5:1) at this small size in both themes. */
-    color: color-mix(in srgb, var(--ok) 70%, var(--ink));
-    font-family: var(--font-mono);
+    border-radius: var(--radius-sm);
+    background: var(--paper-2);
+    color: var(--ink-2);
     font-size: 0.6875rem;
-    letter-spacing: 0.04em;
+    font-weight: 650;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-  }
-  .prompt-tag[data-prompt-level='advanced'] .prompt-badge {
-    background: color-mix(in srgb, var(--accent) 15%, transparent);
-    color: color-mix(in srgb, var(--accent) 70%, var(--ink));
   }
 
   /* Level tabs: the selected state follows <html data-level> before hydration. */
@@ -692,14 +825,17 @@
     gap: 2px;
     padding: 3px;
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--paper-2);
   }
   .level-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
     min-height: 2.25rem;
     padding: 0.375rem 0.875rem;
     border: 0;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: transparent;
     color: var(--ink-2);
     font-size: 0.875rem;
@@ -710,20 +846,19 @@
       background 200ms ease-out,
       color 200ms ease-out;
   }
+  .level-tab:hover {
+    color: var(--ink);
+  }
   .level-tabs-compact .level-tab {
     min-height: 1.75rem;
     padding: 0.125rem 0.625rem;
     font-size: 0.75rem;
   }
-  :root:not([data-level='advanced']) .level-tab[data-level-tab='basis'] {
+  :root:not([data-level='advanced']) .level-tab[data-level-tab='basis'],
+  :root[data-level='advanced'] .level-tab[data-level-tab='advanced'] {
     background: var(--card);
     color: var(--ink);
-    box-shadow: inset 0 0 0 1px var(--line);
-  }
-  :root[data-level='advanced'] .level-tab[data-level-tab='advanced'] {
-    background: var(--accent);
-    color: var(--accent-ink);
-    box-shadow: 0 0 18px -6px color-mix(in srgb, var(--accent) 80%, transparent);
+    box-shadow: inset 0 0 0 1px var(--line-strong);
   }
 
   .matrix-panel:not([hidden]) {
@@ -740,7 +875,7 @@
     }
   }
   .matrix tbody tr:hover {
-    background: color-mix(in srgb, var(--accent) 5%, transparent);
+    background: var(--surface-2);
   }
   .matrix tbody th {
     padding: 0.625rem 0.75rem;
@@ -756,8 +891,9 @@
 
   /* Panels: radar, starters */
   .hub-panel {
+    --receipt-edge: var(--card);
     border: 1px solid var(--line);
-    border-radius: 16px;
+    border-radius: var(--radius-card);
     background: var(--card);
     padding: 1.25rem;
   }
@@ -768,7 +904,7 @@
   }
   .radar-col {
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     background: var(--paper-2);
     padding: 1rem;
   }
@@ -777,23 +913,16 @@
     align-items: center;
     gap: 0.5rem;
     color: var(--ink-2);
-    font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    font-weight: 650;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
   }
   .live-dot {
     width: 0.5rem;
     height: 0.5rem;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--live);
-    box-shadow: 0 0 10px color-mix(in srgb, var(--live) 80%, transparent);
-  }
-  #radar-videos .live-dot,
-  .radar-col:nth-child(2) .live-dot {
-    background: var(--live-2);
-    box-shadow: 0 0 10px color-mix(in srgb, var(--live-2) 80%, transparent);
   }
   .radar-list {
     margin-top: 0.5rem;
@@ -807,12 +936,12 @@
   .radar-item[data-kind='price_increase'],
   .radar-item[data-kind='shutdown'],
   .radar-item[data-kind='free_tier_removed'] {
-    box-shadow: inset 2px 0 0 var(--live-2);
+    box-shadow: inset 2px 0 0 var(--price-up);
     padding-left: 0.625rem;
   }
   .radar-item[data-kind='price_decrease'],
   .radar-item[data-kind='free_tier_added'] {
-    box-shadow: inset 2px 0 0 var(--ok);
+    box-shadow: inset 2px 0 0 var(--price-down);
     padding-left: 0.625rem;
   }
   .radar-empty {
@@ -833,55 +962,51 @@
   .news-person {
     display: inline-flex;
     padding: 0 0.375rem;
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
-    border-radius: 999px;
-    color: color-mix(in srgb, var(--accent) 70%, var(--ink));
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    color: var(--ink-2);
     font-family: var(--font-sans);
     text-decoration: none;
   }
   .news-person:hover {
-    border-color: var(--accent);
+    border-color: var(--line-strong);
+    color: var(--ink);
   }
   .start-card {
     display: block;
     height: 100%;
     padding: 1.125rem;
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: var(--radius-card);
     background: var(--card);
     color: var(--ink-2);
     text-decoration: none;
     transition:
       border-color 200ms ease-out,
-      transform 200ms ease-out,
       box-shadow 200ms ease-out;
   }
   .start-card:hover,
   .start-card:focus-visible {
     border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px -20px color-mix(in srgb, var(--accent) 70%, transparent);
+    box-shadow: var(--e1);
   }
   .guide-card {
     display: grid;
     gap: 1.25rem;
     padding: 1.25rem;
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
-    border-radius: 16px;
-    background: color-mix(in srgb, var(--accent) 4%, var(--card));
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--card);
   }
   .starter-card {
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: var(--radius-card);
     background: var(--paper-2);
     padding: 1.125rem;
-    transition:
-      border-color 200ms ease-out,
-      transform 200ms ease-out;
+    transition: border-color 200ms ease-out;
   }
   .starter-card:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
   }
   .step-check {
     display: inline-flex;
@@ -890,9 +1015,9 @@
     justify-content: center;
     width: 1.375rem;
     height: 1.375rem;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--ok) 16%, transparent);
-    color: var(--ok);
+    border-radius: var(--radius-pill);
+    background: var(--verified-bg);
+    color: var(--verified);
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     font-weight: 700;
