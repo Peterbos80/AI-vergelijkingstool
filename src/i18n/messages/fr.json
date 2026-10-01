@@ -22,6 +22,7 @@
     "compare": "Comparer",
     "doctor": "Stack Doctor",
     "pulse": "Pulse",
+    "pulseCount": "{count, plural, one {# changement} other {# changements}} ces 30 derniers jours",
     "tasks": "Tâches",
     "search": "Chercher un outil",
     "searchLabel": "Chercher dans la base d’outils",
@@ -105,12 +106,6 @@
     "approxEur": "≈ {amount}",
     "fxNote": "Converti au taux de référence de la BCE du {date}.",
     "updated": "Mis à jour le {date}"
-  },
-  "ticker": {
-    "label": "AI Pulse : changements récents",
-    "pause": "Mettre le défilement en pause",
-    "play": "Reprendre le défilement",
-    "all": "Tous les changements"
   },
   "errors": {
     "notFoundTitle": "Cette page n’a pas de justificatif.",

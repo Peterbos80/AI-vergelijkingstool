@@ -22,6 +22,7 @@
     "compare": "Vergelijken",
     "doctor": "Stack Doctor",
     "pulse": "Pulse",
+    "pulseCount": "{count, plural, one {# wijziging} other {# wijzigingen}} in de laatste 30 dagen",
     "tasks": "Taken",
     "search": "Zoek een tool",
     "searchLabel": "Zoek in de tooldatabase",
@@ -105,12 +106,6 @@
     "unknown": "Nog niet gecontroleerd",
     "staleBanner": "Informatie mogelijk verouderd. Laatst gecontroleerd op {date}.",
     "checkedOn": "Gecontroleerd {date}"
-  },
-  "ticker": {
-    "label": "AI Pulse: recente wijzigingen",
-    "pause": "Ticker pauzeren",
-    "play": "Ticker afspelen",
-    "all": "Alle wijzigingen"
   },
   "errors": {
     "notFoundTitle": "Deze pagina heeft geen bonnetje.",

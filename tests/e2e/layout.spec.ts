@@ -24,6 +24,9 @@ test('desktop header: five navigation items, search, view level and language', a
   await expect(page.getByRole('navigation', { name: 'Taal kiezen' })).toBeVisible();
   await expect(page.getByRole('button', { name: /Menu/ })).toBeHidden();
   expect((await page.getByRole('banner').boundingBox())!.height).toBeLessThanOrEqual(65);
+  // No ticker: Pulse carries the number of changes of the last 30 days (hidden at 0).
+  await expect(nav.getByRole('link', { name: /^Pulse( \d+ wijziging(en)? in de laatste 30 dagen)?$/ })).toBeVisible();
+  await expect(page.locator('[class*="ticker"]')).toHaveCount(0);
 });
 
 test('below 1024px: logo, search and a full-screen menu that closes with Esc', async ({ page }) => {

@@ -22,6 +22,7 @@
     "compare": "Vergleichen",
     "doctor": "Stack Doctor",
     "pulse": "Pulse",
+    "pulseCount": "{count, plural, one {# Änderung} other {# Änderungen}} in den letzten 30 Tagen",
     "tasks": "Aufgaben",
     "search": "Tool suchen",
     "searchLabel": "Die Tool-Datenbank durchsuchen",
@@ -105,12 +106,6 @@
     "approxEur": "≈ {amount}",
     "fxNote": "Umgerechnet mit dem EZB-Referenzkurs vom {date}.",
     "updated": "Aktualisiert am {date}"
-  },
-  "ticker": {
-    "label": "AI Pulse: aktuelle Änderungen",
-    "pause": "Ticker anhalten",
-    "play": "Ticker abspielen",
-    "all": "Alle Änderungen"
   },
   "errors": {
     "notFoundTitle": "Für diese Seite gibt es keinen Beleg.",

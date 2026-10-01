@@ -392,6 +392,22 @@
     height: 2px;
     background: var(--accent);
   }
+  /* Pulse: number of changes in the last 30 days (a live signal, so orange). */
+  .nav-count {
+    display: inline-flex;
+    min-width: 1.25rem;
+    height: 1.125rem;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.3125rem;
+    border-radius: var(--radius-pill);
+    background: var(--live-bg);
+    color: var(--live-ink);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1;
+  }
   .site-lang ul {
     display: flex;
     gap: 2px;
@@ -894,25 +910,6 @@
     border-color: color-mix(in srgb, var(--warning-ink) 30%, transparent);
   }
 
-  .ticker-track {
-    display: inline-flex;
-    gap: 2.5rem;
-    white-space: nowrap;
-    animation: ticker 60s linear infinite;
-  }
-  .ticker:hover .ticker-track,
-  .ticker[data-paused='true'] .ticker-track {
-    animation-play-state: paused;
-  }
-  @keyframes ticker {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
   .print-in {
     animation: print-in 400ms ease-out both;
   }
@@ -1340,8 +1337,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  .ticker-track {
-    animation: none !important;
   }
 }

@@ -12,13 +12,13 @@ import { SiteMenu } from './SiteMenu';
  * language. Below 1024px: logo, search and a full-screen menu. Nothing in it
  * may make the page wider than the viewport (tests/e2e/layout.spec.ts).
  */
-export function Header({ locale, t, pathname }: { locale: Locale; t: Translator; pathname: string }) {
+export function Header({ locale, t, pathname, pulseCount = 0 }: { locale: Locale; t: Translator; pathname: string; pulseCount?: number }) {
   const under = (...paths: string[]) => paths.some((p) => pathname === `/${locale}/${p}` || pathname.startsWith(`/${locale}/${p}/`));
   const links = [
     { key: 'explore', href: href.tools(locale), label: t('nav.explore'), active: under('tools', 'categories', 'capabilities', 'tasks') },
     { key: 'compare', href: href.compare(locale), label: t('nav.compare'), active: under('compare') },
     { key: 'doctor', href: href.doctor(locale), label: t('nav.doctor'), active: under('doctor') },
-    { key: 'pulse', href: href.pulse(locale), label: t('nav.pulse'), active: under('pulse', 'news') },
+    { key: 'pulse', href: href.pulse(locale), label: t('nav.pulse'), active: under('pulse', 'news'), count: pulseCount },
     { key: 'learn', href: href.learn(locale), label: t('nav.learn'), active: under('learn', 'glossary', 'start') },
   ];
   const more = [
@@ -28,6 +28,14 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
     { href: href.news(locale), label: t('nav.news') },
     { href: href.glossary(locale), label: t('glossary.title') },
   ];
+  // Changes of the last 30 days next to Pulse (hidden at 0); the number changes daily, so it is marked dynamic.
+  const count = (n: number | undefined) =>
+    n ? (
+      <span className="nav-count" data-dynamic="" title={t('nav.pulseCount', { count: n })}>
+        <span aria-hidden="true">{n}</span>
+        <span className="visually-hidden">{t('nav.pulseCount', { count: n })}</span>
+      </span>
+    ) : null;
   const locales = enabledLocales();
   const levelLabels = { group: t('hub.levelGroup'), basisHint: t('hub.levelBasisHint'), advancedHint: t('hub.levelAdvancedHint') };
 
@@ -45,6 +53,7 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
               <li key={l.key}>
                 <Link href={l.href} aria-current={l.active ? 'page' : undefined} className="site-nav-link">
                   {l.label}
+                  {count(l.count)}
                 </Link>
               </li>
             ))}
@@ -94,6 +103,7 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
                   <li key={l.key}>
                     <Link href={l.href} aria-current={l.active ? 'page' : undefined} className="site-menu-link">
                       {l.label}
+                      {count(l.count)}
                     </Link>
                   </li>
                 ))}

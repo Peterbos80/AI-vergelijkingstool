@@ -22,6 +22,7 @@
     "compare": "Compare",
     "doctor": "Stack Doctor",
     "pulse": "Pulse",
+    "pulseCount": "{count, plural, one {# change} other {# changes}} in the last 30 days",
     "tasks": "Tasks",
     "search": "Search a tool",
     "searchLabel": "Search the tool database",
@@ -105,12 +106,6 @@
     "unknown": "Not checked yet",
     "staleBanner": "Information may be outdated. Last checked {date}.",
     "checkedOn": "Checked {date}"
-  },
-  "ticker": {
-    "label": "AI Pulse: recent changes",
-    "pause": "Pause ticker",
-    "play": "Play ticker",
-    "all": "All changes"
   },
   "errors": {
     "notFoundTitle": "This page has no receipt.",
