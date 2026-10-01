@@ -37,6 +37,7 @@ export function sitemapEntries(catalog: Catalog, locales: Locale[], opts: { news
   add('hub', (l) => href.start(l), { priority: 0.7 });
   add('hub', (l) => href.learn(l), { priority: 0.6 });
   add('static', (l) => href.glossary(l), { priority: 0.5 });
+  add('hub', (l) => href.costs(l), { priority: 0.7 });
   for (const g of LEARN) add('static', (l) => href.learn(l, learnText(g, l)?.slug ?? g.id), { priority: 0.5, locales: (Object.keys(g.text) as Locale[]) });
   for (const p of ['methodology', 'disclosure', 'corrections', 'about', 'privacy', 'api'] as const) add('static', (l) => href.page(l, p), { priority: 0.3 });
   if (opts.newsletter) add('static', (l) => href.page(l, 'newsletter'), { priority: 0.3 });

@@ -45,6 +45,7 @@ export const href = {
   start: (l: Locale, category?: string, task?: string) => [`/${l}/start`, category, task].filter(Boolean).join('/'),
   learn: (l: Locale, slug?: string) => (slug ? `/${l}/learn/${slug}` : `/${l}/learn`),
   glossary: (l: Locale) => `/${l}/glossary`,
+  costs: (l: Locale) => `/${l}/costs`,
   page: (
     l: Locale,
     page: 'methodology' | 'disclosure' | 'corrections' | 'newsletter' | 'about' | 'privacy' | 'api' | 'bot',

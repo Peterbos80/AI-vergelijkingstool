@@ -33,6 +33,7 @@ export type PageType =
   | 'news'
   | 'start'
   | 'learn'
+  | 'costs'
   | 'static';
 
 export interface TrackInput {
