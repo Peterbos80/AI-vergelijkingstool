@@ -89,6 +89,8 @@ export function ToolChooser({
     if (!hydrated) return;
     e.preventDefault();
     if (chosen.length < 2) return;
+    // A full page load on purpose: the static site computes query pages from the URL on load.
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination
     window.location.assign(`${action}?tools=${chosen.map(encodeURIComponent).join(',')}`);
   };
 
