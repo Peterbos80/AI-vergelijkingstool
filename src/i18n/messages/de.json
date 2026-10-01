@@ -570,16 +570,21 @@
       "colAnnual": "Pro Jahr, jährliche Zahlung",
       "colSaving": "Unterschied pro Jahr",
       "unknown": "unbekannt",
-      "minSeats": "mindestens {min} Plätze: du zahlst für {seats}",
+      "minSeats": "mindestens {min} Plätze",
       "maxSeats": "bis zu {max} Plätze",
       "annualOnly": "nur jährliche Zahlung",
       "annualPerUser": "{price} pro Monat bei jährlicher Zahlung",
-      "unrankedNote": "Unten stehen Pläne ohne Preis für diese Zahlweise oder ohne EZB-Kurs.",
       "tooMany": "Passt nicht für {users} Nutzer: {list}.",
       "tooManyItem": "{tool} ({plan}), höchstens {max} Plätze",
       "noteOrder": "Die Reihenfolge ist nur der berechnete Jahrespreis für die gewählte Zahlweise. Geld ändert die Reihenfolge nicht.",
-      "noteExtras": "Erforderliche Zusatzlizenzen (etwa Microsoft 365 bei Copilot) stehen im Limittext und sind nicht eingerechnet."
-    }
+      "noteExtras": "Erforderliche Zusatzlizenzen (etwa Microsoft 365 bei Copilot) stehen im Limittext und sind nicht eingerechnet.",
+      "summaryEuroOnly": "{users, plural, one {# Nutzer} other {# Nutzer}}, {billing}: am günstigsten in Euro ist {tool} ({plan}) mit {price} pro Jahr. {count, plural, one {# Plan ist} other {# Pläne sind}} in der Währung des Anbieters angegeben und {count, plural, one {wird} other {werden}} nicht verglichen.",
+      "summaryUnconverted": "{users, plural, one {# Nutzer} other {# Nutzer}}, {billing}: ohne EZB-Kurs rechnen wir in der Währung des Anbieters. Am günstigsten ist {tool} ({plan}) mit {price} pro Jahr.",
+      "unconvertedNote": "Pläne ohne EZB-Kurs stehen in der Währung des Anbieters und zählen beim Vergleich in Euro nicht mit.",
+      "unknownNote": "Unten stehen Pläne ohne Preis für diese Zahlweise: nicht angeboten oder nicht veröffentlicht.",
+      "minSeatsApplied": "mindestens {min} Plätze: du zahlst für {seats}"
+    },
+    "summaryEuroOnly": "Bei {usage} pro Monat ist {tool} ({plan}) unter den Tools in Euro am günstigsten: {price} pro Monat. {count, plural, one {# Tool ist} other {# Tools sind}} in der Währung des Anbieters angegeben und {count, plural, one {wird} other {werden}} nicht verglichen."
   },
   "freeCheck": {
     "title": "Was bekommst du wirklich kostenlos?",

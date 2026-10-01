@@ -119,8 +119,10 @@ export interface TeamResult {
   billing: Billing;
   /** Rows with a euro total for the chosen billing, cheapest first. */
   ranked: TeamRow[];
-  /** Price for the chosen billing unknown, or no ECB rate: listed after the ranked rows. */
-  unranked: TeamRow[];
+  /** A total for the chosen billing, but no ECB rate: in the vendor's currency, cheapest first per currency. */
+  unconverted: TeamRow[];
+  /** No price for the chosen billing (not offered or not published). */
+  unknown: TeamRow[];
   /** More users than the plan allows. */
   tooMany: TeamPlan[];
 }
@@ -128,7 +130,8 @@ export interface TeamResult {
 export function computeTeam(group: TeamGroup, fx: FxData, users: number, billing: Billing): TeamResult {
   const n = Math.max(1, Math.floor(users));
   const ranked: TeamRow[] = [];
-  const unranked: TeamRow[] = [];
+  const unconverted: TeamRow[] = [];
+  const unknown: TeamRow[] = [];
   const tooMany: TeamPlan[] = [];
   for (const plan of group.plans) {
     if (plan.maxSeats !== null && n > plan.maxSeats) {
@@ -143,11 +146,13 @@ export function computeTeam(group: TeamGroup, fx: FxData, users: number, billing
     const total = billing === 'monthly' ? monthlyPerYear : annualPerYear;
     const eurPerYear = total === null ? null : eurFor(total, plan.currency, fx);
     const row = { plan, seats, monthlyPerMonth, monthlyPerYear, annualPerYear, savingPerYear, eurPerYear };
-    (eurPerYear === null ? unranked : ranked).push(row);
+    (total === null ? unknown : eurPerYear === null ? unconverted : ranked).push(row);
   }
   const name = (a: TeamRow, b: TeamRow) =>
     a.plan.toolName.localeCompare(b.plan.toolName, 'en', { sensitivity: 'base' }) || a.plan.name.localeCompare(b.plan.name, 'en');
+  const native = (r: TeamRow) => (billing === 'monthly' ? r.monthlyPerYear! : r.annualPerYear!);
   ranked.sort((a, b) => a.eurPerYear! - b.eurPerYear! || name(a, b));
-  unranked.sort(name);
-  return { users: n, billing, ranked, unranked, tooMany };
+  unconverted.sort((a, b) => a.plan.currency.localeCompare(b.plan.currency) || native(a) - native(b) || name(a, b));
+  unknown.sort(name);
+  return { users: n, billing, ranked, unconverted, unknown, tooMany };
 }

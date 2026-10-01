@@ -26,6 +26,7 @@ function region(code: string | null, locale: Locale): string {
 export function EuAlternatives({ tool, catalog, t, locale }: { tool: CatalogTool; catalog: Catalog; t: Translator; locale: Locale }) {
   const alts = euAlternatives(catalog, tool);
   if (!alts || !alts.length) return null;
+  const total = tool.capabilities.filter((c) => c.strength === 'primary').length;
   return (
     <section aria-labelledby="eu-alt" data-testid="eu-alternatives">
       <h2 id="eu-alt" className="text-xl">
@@ -57,8 +58,8 @@ export function EuAlternatives({ tool, catalog, t, locale }: { tool: CatalogTool
                 </p>
                 <p className="mt-1 text-sm text-ink-2">{t('euAlt.shared', { caps: caps.join(', ') })}</p>
               </div>
-              <div className="text-right text-sm">
-                <p className="tabular font-semibold">{t('euAlt.overlap', { percent: formatPercent(a.overlap, locale) })}</p>
+              <div className="text-sm sm:text-right">
+                <p className="tabular font-semibold">{t('euAlt.overlap', { shared: a.shared.length, total, percent: formatPercent(a.overlap, locale) })}</p>
                 <p className="text-ink-2">
                   {[entry, a.tool.hasFreeTier ? t('euAlt.freePlan') : null].filter(Boolean).join(' · ') || t('euAlt.priceOnSite')}
                 </p>

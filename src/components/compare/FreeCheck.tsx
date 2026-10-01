@@ -47,11 +47,32 @@ function FreePlan({ row, t }: { row: FreeCheckRow; t: Translator }) {
   );
 }
 
+function ToolHead({ row, t, locale }: { row: FreeCheckRow; t: Translator; locale: Locale }) {
+  return (
+    <>
+      <Link href={href.tool(locale, row.tool.slug)} className="font-semibold">
+        {row.tool.name}
+      </Link>
+      {(row.trulyFree || row.european) && (
+        <span className="mt-1 flex flex-wrap gap-1.5">
+          {row.trulyFree && <LabelChip label="truly_free" text={t('freeCheck.labelTrulyFree')} href={`${href.tool(locale, row.tool.slug)}#facts`} />}
+          {row.european && <LabelChip label="european" text={t('costs.labelEuropean')} href={`${href.costs(locale)}#label-european`} />}
+        </span>
+      )}
+    </>
+  );
+}
+
 export function FreeCheck({ task, catalog, t, locale }: { task: CatalogTask; catalog: Catalog; t: Translator; locale: Locale }) {
   const rows = freeCheck(catalog, task);
   if (!rows.length) return null;
   const showCard = rows.some((r) => r.creditCard !== null);
   const anyTrulyFree = rows.some((r) => r.trulyFree);
+  const facts = (row: FreeCheckRow) => [
+    { key: 'watermark', label: t('freeCheck.colWatermark'), value: row.watermark },
+    { key: 'commercial', label: t('freeCheck.colCommercial'), value: row.commercialUse },
+    ...(showCard ? [{ key: 'card', label: t('freeCheck.colCard'), value: row.creditCard }] : []),
+  ];
   return (
     // "onbekend" is intended here (the e2e check for stray "unknown" values skips [data-unknown-ok]).
     <section className="mt-12" aria-labelledby="free-check" data-unknown-ok="1">
@@ -59,7 +80,30 @@ export function FreeCheck({ task, catalog, t, locale }: { task: CatalogTask; cat
         {t('freeCheck.title')}
       </h2>
       <p className="mt-1 max-w-2xl text-sm text-ink-2">{t('freeCheck.intro')}</p>
-      <div className="table-scroll mt-4">
+      {/* Phones: one card per tool. */}
+      <ul className="mt-4 space-y-2 sm:hidden" aria-label={t('freeCheck.caption')}>
+        {rows.map((row) => (
+          <li key={row.tool.id} className="card p-3" data-tool={row.tool.slug}>
+            <p>
+              <ToolHead row={row} t={t} locale={locale} />
+            </p>
+            <p className="mt-2 text-sm">
+              <FreePlan row={row} t={t} />
+            </p>
+            <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
+              {facts(row).map((f) => (
+                <div key={f.key}>
+                  <dt className="text-xs text-ink-3">{f.label}</dt>
+                  <dd>
+                    <Fact value={f.value} applies={row.free !== 'no'} t={t} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </li>
+        ))}
+      </ul>
+      <div className="table-scroll mt-4 hidden sm:block">
         <table className="table-data">
           <caption className="visually-hidden">{t('freeCheck.caption')}</caption>
           <thead>
@@ -74,31 +118,17 @@ export function FreeCheck({ task, catalog, t, locale }: { task: CatalogTask; cat
           <tbody>
             {rows.map((row) => (
               <tr key={row.tool.id} data-tool={row.tool.slug}>
-                <th scope="row" className="min-w-40 whitespace-normal bg-transparent text-left font-sans text-sm font-normal normal-case tracking-normal text-ink">
-                  <Link href={href.tool(locale, row.tool.slug)} className="font-semibold">
-                    {row.tool.name}
-                  </Link>
-                  {(row.trulyFree || row.european) && (
-                    <span className="mt-1 flex flex-wrap gap-1.5">
-                      {row.trulyFree && <LabelChip label="truly_free" text={t('freeCheck.labelTrulyFree')} href={`${href.tool(locale, row.tool.slug)}#facts`} />}
-                      {row.european && <LabelChip label="european" text={t('costs.labelEuropean')} href={`${href.costs(locale)}#label-european`} />}
-                    </span>
-                  )}
+                <th scope="row" className="min-w-40 whitespace-normal bg-transparent align-top text-left font-sans text-sm font-normal normal-case tracking-normal text-ink">
+                  <ToolHead row={row} t={t} locale={locale} />
                 </th>
                 <td className="min-w-48">
                   <FreePlan row={row} t={t} />
                 </td>
-                <td>
-                  <Fact value={row.watermark} applies={row.free !== 'no'} t={t} />
-                </td>
-                <td>
-                  <Fact value={row.commercialUse} applies={row.free !== 'no'} t={t} />
-                </td>
-                {showCard && (
-                  <td>
-                    <Fact value={row.creditCard} applies={row.free !== 'no'} t={t} />
+                {facts(row).map((f) => (
+                  <td key={f.key}>
+                    <Fact value={f.value} applies={row.free !== 'no'} t={t} />
                   </td>
-                )}
+                ))}
               </tr>
             ))}
           </tbody>

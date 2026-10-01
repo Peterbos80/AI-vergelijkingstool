@@ -570,16 +570,21 @@
       "colAnnual": "Par an, paiement annuel",
       "colSaving": "Différence par an",
       "unknown": "inconnu",
-      "minSeats": "au moins {min} sièges : vous payez pour {seats}",
+      "minSeats": "au moins {min} places",
       "maxSeats": "jusqu’à {max} sièges",
       "annualOnly": "paiement annuel uniquement",
       "annualPerUser": "{price} par mois en paiement annuel",
-      "unrankedNote": "En bas : les forfaits sans prix pour ce mode de paiement ou sans taux BCE.",
       "tooMany": "Ne convient pas à {users} utilisateurs : {list}.",
       "tooManyItem": "{tool} ({plan}), au maximum {max} sièges",
       "noteOrder": "L’ordre ne dépend que du prix annuel calculé pour le mode de paiement choisi. L’argent ne change pas l’ordre.",
-      "noteExtras": "Les licences supplémentaires obligatoires (comme Microsoft 365 pour Copilot) figurent dans le texte de la limite et ne sont pas incluses."
-    }
+      "noteExtras": "Les licences supplémentaires obligatoires (comme Microsoft 365 pour Copilot) figurent dans le texte de la limite et ne sont pas incluses.",
+      "summaryEuroOnly": "{users, plural, one {# utilisateur} other {# utilisateurs}}, {billing} : le moins cher en euros est {tool} ({plan}) à {price} par an. {count, plural, one {# forfait est} other {# forfaits sont}} dans la devise de l’éditeur et {count, plural, one {n’est pas comparé} other {ne sont pas comparés}}.",
+      "summaryUnconverted": "{users, plural, one {# utilisateur} other {# utilisateurs}}, {billing} : sans taux BCE, nous calculons dans la devise de l’éditeur. Le moins cher est {tool} ({plan}) à {price} par an.",
+      "unconvertedNote": "Les forfaits sans taux BCE sont affichés dans la devise de l’éditeur et ne comptent pas dans la comparaison en euros.",
+      "unknownNote": "En bas : les forfaits sans prix pour ce mode de paiement (non proposé ou non publié).",
+      "minSeatsApplied": "au moins {min} places : vous payez pour {seats}"
+    },
+    "summaryEuroOnly": "Pour {usage} par mois, {tool} ({plan}) est le moins cher des outils en euros : {price} par mois. {count, plural, one {# outil est} other {# outils sont}} dans la devise de l’éditeur et {count, plural, one {n’est pas comparé} other {ne sont pas comparés}}."
   },
   "freeCheck": {
     "title": "Qu’obtenez-vous vraiment gratuitement ?",

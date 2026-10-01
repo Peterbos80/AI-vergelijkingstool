@@ -592,16 +592,21 @@
       "colAnnual": "Per jaar, jaarbetaling",
       "colSaving": "Verschil per jaar",
       "unknown": "onbekend",
-      "minSeats": "minimaal {min} plekken: je betaalt voor {seats}",
+      "minSeats": "minimaal {min} plekken",
       "maxSeats": "tot {max} plekken",
       "annualOnly": "alleen jaarbetaling",
       "annualPerUser": "{price} per maand bij jaarbetaling",
-      "unrankedNote": "Onderaan staan plannen zonder prijs voor deze betaalwijze of zonder ECB-koers.",
       "tooMany": "Past niet bij {users} gebruikers: {list}.",
       "tooManyItem": "{tool} ({plan}), maximaal {max} plekken",
       "noteOrder": "De volgorde is alleen de berekende jaarprijs voor de gekozen betaalwijze. Geld verandert de volgorde niet.",
-      "noteExtras": "Verplichte extra licenties (zoals Microsoft 365 bij Copilot) staan in de limiettekst en zijn niet meegerekend."
-    }
+      "noteExtras": "Verplichte extra licenties (zoals Microsoft 365 bij Copilot) staan in de limiettekst en zijn niet meegerekend.",
+      "summaryEuroOnly": "{users, plural, one {# gebruiker} other {# gebruikers}}, {billing}: het goedkoopst in euro's is {tool} ({plan}) met {price} per jaar. {count, plural, one {# plan staat} other {# plannen staan}} in de valuta van de maker en {count, plural, one {telt} other {tellen}} niet mee.",
+      "summaryUnconverted": "{users, plural, one {# gebruiker} other {# gebruikers}}, {billing}: zonder ECB-koers rekenen we in de valuta van de maker. Het goedkoopst is {tool} ({plan}) met {price} per jaar.",
+      "unconvertedNote": "Plannen zonder ECB-koers staan in de valuta van de maker en tellen niet mee in de vergelijking in euro's.",
+      "unknownNote": "Onderaan staan plannen zonder prijs voor deze betaalwijze: niet aangeboden of niet gepubliceerd.",
+      "minSeatsApplied": "minimaal {min} plekken: je betaalt voor {seats}"
+    },
+    "summaryEuroOnly": "Bij {usage} per maand is {tool} ({plan}) het goedkoopst van de tools in euro's: {price} per maand. {count, plural, one {# tool staat} other {# tools staan}} in de valuta van de maker en {count, plural, one {telt} other {tellen}} niet mee."
   },
   "freeCheck": {
     "title": "Wat krijg je echt gratis?",

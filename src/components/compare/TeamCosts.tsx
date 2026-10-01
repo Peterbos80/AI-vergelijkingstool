@@ -3,6 +3,7 @@
  * Team costs: N users × the per-user or per-seat price, monthly billing
  * against annual billing. Data from lib/compare/team (build time); the order
  * is the computed yearly total in euros for the chosen billing, nothing else.
+ * Phones get one card per plan; wider screens a table.
  */
 import { useId, useMemo, useState } from 'react';
 import type { Locale } from '@/i18n/config';
@@ -12,7 +13,7 @@ import { href } from '@/lib/routes';
 import { computeTeam, type Billing, type TeamData, type TeamRow } from '@/lib/compare/team';
 import { eurFor, type FxData } from '@/lib/compare/usage';
 import { LabelChip } from './LabelChip';
-import { Money, Stamp, useCostsT, useHydrated } from './CostCalculator';
+import { ACTIVE_CHIP, CHIP_FOCUS, Money, Stamp, useCostsT, useHydrated } from './CostCalculator';
 
 function Cell({ cents, currency, fx, locale, t }: { cents: number | null; currency: string; fx: FxData; locale: Locale; t: Translator }) {
   if (cents === null) {
@@ -26,21 +27,43 @@ function Cell({ cents, currency, fx, locale, t }: { cents: number | null; curren
   return <Money cents={cents} eurCents={eurFor(cents, currency, fx)} currency={currency} fxDay={fx.day} locale={locale} t={t} />;
 }
 
-function PlanNotes({ row, t, locale }: { row: TeamRow; t: Translator; locale: Locale }) {
+function PlanHead({ row, users, cheapest, t, locale }: { row: TeamRow; users: number; cheapest: boolean; t: Translator; locale: Locale }) {
   const p = row.plan;
   const notes: string[] = [];
-  if (p.minSeats !== null && row.seats > 0 && p.minSeats > 1) notes.push(t('costs.team.minSeats', { min: p.minSeats, seats: row.seats }));
+  if (p.minSeats !== null && p.minSeats > 1)
+    notes.push(row.seats > users ? t('costs.team.minSeatsApplied', { min: p.minSeats, seats: row.seats }) : t('costs.team.minSeats', { min: p.minSeats }));
   if (p.maxSeats !== null) notes.push(t('costs.team.maxSeats', { max: p.maxSeats }));
   if (p.annualOnly) notes.push(t('costs.team.annualOnly'));
   return (
     <>
-      {notes.length > 0 && <span className="block text-xs text-ink-2">{notes.join(' · ')}</span>}
+      <a href={href.tool(locale, p.tool)} className="font-semibold text-ink">
+        {p.toolName}
+      </a>
+      <span className="text-ink-2"> · {p.name}</span>
+      {(cheapest || p.european) && (
+        <span className="mt-1 flex flex-wrap gap-1.5">
+          {cheapest && <LabelChip label="cheapest" text={t('costs.labelCheapest')} href={`${href.costs(locale)}#label-cheapest`} />}
+          {p.european && <LabelChip label="european" text={t('costs.labelEuropean')} href={`${href.costs(locale)}#label-european`} />}
+        </span>
+      )}
+      {notes.length > 0 && <span className="mt-0.5 block text-xs text-ink-2">{notes.join(' · ')}</span>}
       <span className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3">
         {p.quota && <span className="mono">“{p.quota}”</span>}
         <Stamp status={p.status} t={t} />
         <span>{t('costs.observed', { date: formatDate(p.observedAt, locale) })}</span>
         <a href={href.toolPricing(locale, p.tool)}>{t('costs.receipt')}</a>
       </span>
+    </>
+  );
+}
+
+function PerUser({ row, fx, locale, t }: { row: TeamRow; fx: FxData; locale: Locale; t: Translator }) {
+  return (
+    <>
+      <Cell cents={row.plan.monthlyCents} currency={row.plan.currency} fx={fx} locale={locale} t={t} />
+      {row.plan.annualMonthlyCents !== null && (
+        <span className="block text-xs text-ink-3">{t('costs.team.annualPerUser', { price: formatMoney(row.plan.annualMonthlyCents, row.plan.currency, locale) })}</span>
+      )}
     </>
   );
 }
@@ -61,19 +84,33 @@ export function TeamCosts({ data, locale, messages }: { data: TeamData; locale: 
     setUsers(v);
     setRaw(String(v));
   };
-  const first = result.ranked[0];
   const billingText = t(billing === 'monthly' ? 'costs.team.billingMonthly' : 'costs.team.billingAnnual');
+  const yearly = (r: TeamRow) => (billing === 'monthly' ? r.monthlyPerYear : r.annualPerYear)!;
+  const first = result.ranked[0];
+  const firstNative = result.unconverted[0];
+  const oneCurrency = new Set(result.unconverted.map((r) => r.plan.currency)).size === 1;
+  const vars = { users: result.users, billing: billingText };
   const summary = first
-    ? t('costs.team.summary', {
-        users: result.users,
-        billing: billingText,
+    ? t(result.unconverted.length ? 'costs.team.summaryEuroOnly' : 'costs.team.summary', {
+        ...vars,
         tool: first.plan.toolName,
         plan: first.plan.name,
         price: formatMoney(first.eurPerYear!, 'EUR', locale),
+        count: result.unconverted.length,
       })
-    : t('costs.team.summaryNone', { users: result.users, billing: billingText });
-  const rows = [...result.ranked, ...result.unranked];
-  const cheapest = result.ranked.length >= 2 ? result.ranked[0]!.eurPerYear : null;
+    : firstNative && oneCurrency
+      ? t('costs.team.summaryUnconverted', {
+          ...vars,
+          tool: firstNative.plan.toolName,
+          plan: firstNative.plan.name,
+          price: formatMoney(yearly(firstNative), firstNative.plan.currency, locale),
+        })
+      : t('costs.team.summaryNone', vars);
+  const rows = [...result.ranked, ...result.unconverted, ...result.unknown];
+  // "Cheapest for your usage" only when every row with a price is in euros: no claim across currencies.
+  const cheapest = result.ranked.length >= 2 && !result.unconverted.length ? result.ranked[0]!.eurPerYear : null;
+  const isCheapest = (r: TeamRow) => cheapest !== null && r.eurPerYear === cheapest;
+  const key = (r: TeamRow) => `${r.plan.tool}/${r.plan.key}`;
 
   return (
     <div className="space-y-4" data-testid="team-costs" data-hydrated={hydrated ? '1' : undefined}>
@@ -82,10 +119,7 @@ export function TeamCosts({ data, locale, messages }: { data: TeamData; locale: 
           <legend className="label">{t('costs.team.pickGroup')}</legend>
           <div className="flex flex-wrap gap-2">
             {data.groups.map((g) => (
-              <label
-                key={g.id}
-                className={`chip has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--focus)] ${g.id === group.id ? 'chip-active' : ''}`}
-              >
+              <label key={g.id} className={`chip ${CHIP_FOCUS} ${g.id === group.id ? ACTIVE_CHIP : ''}`}>
                 <input type="radio" name={`${id}-group`} value={g.id} checked={g.id === group.id} onChange={() => setGroupId(g.id)} className="visually-hidden" />
                 {t(`costs.team.groups.${g.id}`)}
               </label>
@@ -129,10 +163,7 @@ export function TeamCosts({ data, locale, messages }: { data: TeamData; locale: 
             <legend className="label">{t('costs.team.billing')}</legend>
             <div className="flex flex-wrap gap-2">
               {(['monthly', 'annual'] as const).map((b) => (
-                <label
-                  key={b}
-                  className={`chip has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--focus)] ${b === billing ? 'chip-active' : ''}`}
-                >
+                <label key={b} className={`chip ${CHIP_FOCUS} ${b === billing ? ACTIVE_CHIP : ''}`}>
                   <input type="radio" name={`${id}-billing`} value={b} checked={b === billing} onChange={() => setBilling(b)} className="visually-hidden" />
                   {t(b === 'monthly' ? 'costs.team.billingMonthly' : 'costs.team.billingAnnual')}
                 </label>
@@ -145,9 +176,46 @@ export function TeamCosts({ data, locale, messages }: { data: TeamData; locale: 
         </p>
       </div>
 
-      <div className="table-scroll">
+      {/* Phones: one card per plan. */}
+      <ol className="space-y-2 sm:hidden" aria-label={t('costs.team.caption', vars)}>
+        {rows.map((row) => (
+          <li key={key(row)} className="card p-3" data-plan={key(row)}>
+            <p>
+              <PlanHead row={row} users={result.users} cheapest={isCheapest(row)} t={t} locale={locale} />
+            </p>
+            <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
+              <div>
+                <dt className="text-xs text-ink-3">{t('costs.team.colPerUser')}</dt>
+                <dd>
+                  <PerUser row={row} fx={data.fx} locale={locale} t={t} />
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs text-ink-3">{t('costs.team.colMonthly')}</dt>
+                <dd>
+                  <Cell cents={row.monthlyPerYear} currency={row.plan.currency} fx={data.fx} locale={locale} t={t} />
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs text-ink-3">{t('costs.team.colAnnual')}</dt>
+                <dd>
+                  <Cell cents={row.annualPerYear} currency={row.plan.currency} fx={data.fx} locale={locale} t={t} />
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs text-ink-3">{t('costs.team.colSaving')}</dt>
+                <dd>
+                  <Cell cents={row.savingPerYear} currency={row.plan.currency} fx={data.fx} locale={locale} t={t} />
+                </dd>
+              </div>
+            </dl>
+          </li>
+        ))}
+      </ol>
+
+      <div className="table-scroll hidden sm:block">
         <table className="table-data">
-          <caption className="visually-hidden">{t('costs.team.caption', { users: result.users, billing: billingText })}</caption>
+          <caption className="visually-hidden">{t('costs.team.caption', vars)}</caption>
           <thead>
             <tr>
               <th scope="col">{t('costs.team.colTool')}</th>
@@ -159,29 +227,12 @@ export function TeamCosts({ data, locale, messages }: { data: TeamData; locale: 
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={`${row.plan.tool}/${row.plan.key}`} data-plan={`${row.plan.tool}/${row.plan.key}`}>
-                <th scope="row" className="min-w-56 whitespace-normal bg-transparent text-left font-sans text-sm font-normal normal-case tracking-normal text-ink">
-                  <a href={href.tool(locale, row.plan.tool)} className="font-semibold text-ink">
-                    {row.plan.toolName}
-                  </a>
-                  <span className="text-ink-2"> · {row.plan.name}</span>
-                  {(row.plan.european || (cheapest !== null && row.eurPerYear === cheapest)) && (
-                    <span className="mt-1 flex flex-wrap gap-1.5">
-                      {cheapest !== null && row.eurPerYear === cheapest && (
-                        <LabelChip label="cheapest" text={t('costs.labelCheapest')} href={`${href.costs(locale)}#label-cheapest`} />
-                      )}
-                      {row.plan.european && <LabelChip label="european" text={t('costs.labelEuropean')} href={`${href.costs(locale)}#label-european`} />}
-                    </span>
-                  )}
-                  <PlanNotes row={row} t={t} locale={locale} />
+              <tr key={key(row)} data-plan={key(row)}>
+                <th scope="row" className="min-w-56 whitespace-normal bg-transparent align-top text-left font-sans text-sm font-normal normal-case tracking-normal text-ink">
+                  <PlanHead row={row} users={result.users} cheapest={isCheapest(row)} t={t} locale={locale} />
                 </th>
                 <td>
-                  <Cell cents={row.plan.monthlyCents} currency={row.plan.currency} fx={data.fx} locale={locale} t={t} />
-                  {row.plan.annualMonthlyCents !== null && (
-                    <span className="block text-xs text-ink-3">
-                      {t('costs.team.annualPerUser', { price: formatMoney(row.plan.annualMonthlyCents, row.plan.currency, locale) })}
-                    </span>
-                  )}
+                  <PerUser row={row} fx={data.fx} locale={locale} t={t} />
                 </td>
                 <td>
                   <Cell cents={row.monthlyPerYear} currency={row.plan.currency} fx={data.fx} locale={locale} t={t} />
@@ -197,16 +248,17 @@ export function TeamCosts({ data, locale, messages }: { data: TeamData; locale: 
           </tbody>
         </table>
       </div>
-      {result.unranked.length > 0 && <p className="text-xs text-ink-3">{t('costs.team.unrankedNote')}</p>}
-      {result.tooMany.length > 0 && (
-        <p className="text-sm text-ink-2">
-          {t('costs.team.tooMany', {
-            users: result.users,
-            list: result.tooMany.map((p) => t('costs.team.tooManyItem', { tool: p.toolName, plan: p.name, max: p.maxSeats ?? 0 })).join('; '),
-          })}
-        </p>
-      )}
       <ul className="space-y-1 text-xs text-ink-3">
+        {result.unconverted.length > 0 && <li>{t('costs.team.unconvertedNote')}</li>}
+        {result.unknown.length > 0 && <li>{t('costs.team.unknownNote')}</li>}
+        {result.tooMany.length > 0 && (
+          <li className="text-sm text-ink-2">
+            {t('costs.team.tooMany', {
+              users: result.users,
+              list: result.tooMany.map((p) => t('costs.team.tooManyItem', { tool: p.toolName, plan: p.name, max: p.maxSeats ?? 0 })).join('; '),
+            })}
+          </li>
+        )}
         <li>{t('costs.team.noteOrder')}</li>
         <li>{t('costs.team.noteExtras')}</li>
         <li>{data.fx.day ? t('costs.noteFx', { date: formatDate(data.fx.day, locale) }) : t('costs.noteNoFx')}</li>

@@ -592,16 +592,21 @@
       "colAnnual": "Per year, annual billing",
       "colSaving": "Difference per year",
       "unknown": "unknown",
-      "minSeats": "at least {min} seats: you pay for {seats}",
+      "minSeats": "at least {min} seats",
       "maxSeats": "up to {max} seats",
       "annualOnly": "annual billing only",
       "annualPerUser": "{price} per month billed annually",
-      "unrankedNote": "Plans without a price for this billing or without an ECB rate are listed at the bottom.",
       "tooMany": "Does not fit {users} users: {list}.",
       "tooManyItem": "{tool} ({plan}), at most {max} seats",
       "noteOrder": "The order is the computed yearly price for the chosen billing only. Money never changes the order.",
-      "noteExtras": "Required extra licences (such as Microsoft 365 for Copilot) are in the limit text and are not included."
-    }
+      "noteExtras": "Required extra licences (such as Microsoft 365 for Copilot) are in the limit text and are not included.",
+      "summaryEuroOnly": "{users, plural, one {# user} other {# users}}, {billing}: the cheapest in euros is {tool} ({plan}) at {price} per year. {count, plural, one {# plan is} other {# plans are}} in the vendor's currency and not compared.",
+      "summaryUnconverted": "{users, plural, one {# user} other {# users}}, {billing}: without an ECB rate we compute in the vendor's currency. The cheapest is {tool} ({plan}) at {price} per year.",
+      "unconvertedNote": "Plans without an ECB rate are shown in the vendor's currency and are not part of the comparison in euros.",
+      "unknownNote": "Plans without a price for this billing (not offered or not published) are listed at the bottom.",
+      "minSeatsApplied": "at least {min} seats: you pay for {seats}"
+    },
+    "summaryEuroOnly": "At {usage} per month, {tool} ({plan}) is the cheapest of the tools priced in euros: {price} per month. {count, plural, one {# tool is} other {# tools are}} in the vendor's currency and not compared."
   },
   "freeCheck": {
     "title": "What do you really get for free?",

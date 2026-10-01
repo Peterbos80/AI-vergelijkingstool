@@ -9,7 +9,7 @@ import type { Locale } from '@/i18n/config';
 import type { MessageTree } from '@/i18n/format';
 import type { MeterData } from '@/lib/compare/usage';
 import type { TeamData } from '@/lib/compare/team';
-import { CostCalculator, useCostsT } from './CostCalculator';
+import { ACTIVE_CHIP, CHIP_FOCUS, CostCalculator, useCostsT } from './CostCalculator';
 import { TeamCosts } from './TeamCosts';
 
 type Tab = 'usage' | 'team';
@@ -55,7 +55,7 @@ export function CostsHub({ meters, team, locale, messages }: { meters: MeterData
             tabIndex={tab === x ? 0 : -1}
             onClick={() => setTab(x)}
             onKeyDown={onTabKey}
-            className={`chip font-semibold ${tab === x ? 'chip-active' : ''}`}
+            className={`chip font-semibold ${tab === x ? ACTIVE_CHIP : ''}`}
             data-testid={`costs-tab-${x}`}
           >
             {t(x === 'usage' ? 'costs.tabUsage' : 'costs.tabTeam')}
@@ -70,10 +70,7 @@ export function CostsHub({ meters, team, locale, messages }: { meters: MeterData
               <legend className="label">{t('costs.pickMeter')}</legend>
               <div className="flex flex-wrap gap-2">
                 {meters.map((m) => (
-                  <label
-                    key={m.id}
-                    className={`chip has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--focus)] ${m.id === meter.id ? 'chip-active' : ''}`}
-                  >
+                  <label key={m.id} className={`chip ${CHIP_FOCUS} ${m.id === meter.id ? ACTIVE_CHIP : ''}`}>
                     <input
                       type="radio"
                       name={`${id}-meter`}

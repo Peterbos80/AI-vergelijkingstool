@@ -233,14 +233,15 @@ describe('team costs', () => {
       ['beta-chat', 2, 72000, null, null],
     ]);
     // Annual billing only: no monthly price, listed after the ranked rows.
-    expect(one.unranked.map((r) => r.plan.key)).toEqual(['enterprise']);
+    expect(one.unknown.map((r) => r.plan.key)).toEqual(['enterprise']);
+    expect(one.unconverted).toEqual([]);
 
     const annual = computeTeam(group, data.fx, 5, 'annual');
     expect(annual.ranked.map((r) => [r.plan.tool, r.plan.key, r.eurPerYear])).toEqual([
       ['alpha-chat', 'team', 120000],
       ['beta-chat', 'enterprise', 234000],
     ]);
-    expect(annual.unranked.map((r) => r.plan.key)).toEqual(['team']);
+    expect(annual.unknown.map((r) => r.plan.key)).toEqual(['team']);
 
     const many = computeTeam(group, data.fx, 12, 'monthly');
     expect(many.tooMany.map((p) => `${p.tool}/${p.key}`)).toEqual(['beta-chat/team']);

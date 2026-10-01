@@ -17,6 +17,11 @@ export function useCostsT(locale: Locale, messages: MessageTree): Translator {
   return useMemo(() => createTranslator(locale, LOCALE_META[locale].intl, messages), [locale, messages]);
 }
 
+/** Selected chip; keeps its contrast on hover (the base .chip:hover colour would otherwise win). */
+export const ACTIVE_CHIP = 'chip-active hover:border-ink hover:text-paper';
+/** Visible focus ring on chips that wrap a visually hidden radio. */
+export const CHIP_FOCUS = 'has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--focus)]';
+
 const noSubscribe = () => () => undefined;
 /** true once React has hydrated (a hook for tests; the server render is the same list). */
 export function useHydrated(): boolean {
@@ -74,7 +79,7 @@ function capacity(minutes: number, unit: 'hour' | 'minute', t: Translator): stri
 
 function planFacts(plan: MeterPlan, unit: 'hour' | 'minute', t: Translator, locale: Locale): string[] {
   const out: string[] = [];
-  if (plan.kind === 'allowance' && plan.minutes !== null) out.push(`${plan.approximate ? '≈ ' : ''}${t('costs.covers', { capacity: capacity(plan.minutes, unit, t) })}`);
+  if (plan.kind === 'allowance' && plan.minutes !== null) out.push(t('costs.covers', { capacity: capacity(plan.minutes, unit, t) }));
   if (plan.kind === 'unlimited') out.push(t('costs.unlimited'));
   if (plan.kind === 'usage' && plan.usageMinutes) {
     const price = formatMoney(plan.priceCents, plan.currency, locale);
@@ -143,7 +148,7 @@ function Row({
             </p>
           )}
         </div>
-        <p className="text-right">
+        <p className="sm:text-right">
           <Money cents={cost.cents} eurCents={cost.eurCents} currency={cost.plan.currency} fxDay={data.fx.day} locale={locale} t={t} strong />
           <span className="block text-xs text-ink-2">
             {t('costs.perMonth')} · {t(data.unit === 'hour' ? 'costs.perHour' : 'costs.perMinute', { price: unitPrice })}
@@ -187,16 +192,18 @@ export function CostCalculator({
   };
   const first = result.ranked[0];
   const summary = first
-    ? t('costs.summary', {
+    ? t(result.unconverted.length ? 'costs.summaryEuroOnly' : 'costs.summary', {
         usage,
         tool: first.tool.name,
         plan: first.best!.plan.name,
         price: formatMoney(first.best!.eurCents!, 'EUR', locale),
+        count: result.unconverted.length,
       })
     : result.unconverted.length
       ? t('costs.summaryUnconverted', { usage, count: result.unconverted.length })
       : t('costs.summaryNone', { usage });
-  const showCheapest = result.ranked.length >= 2;
+  // "Cheapest for your usage" only when every covering plan could be put in euros: no claim across currencies.
+  const showCheapest = result.ranked.length >= 2 && !result.unconverted.length;
 
   return (
     <div className="space-y-4" data-meter={meter.id} data-hydrated={hydrated ? '1' : undefined}>
