@@ -104,6 +104,7 @@
     "copyLink": "Link kopieren",
     "tools": "{count, plural, =0 {keine Tools} one {# Tool} other {# Tools}}",
     "approxEur": "≈ {amount}",
+    "approxEurEcb": "≈ {amount} · EZB {date}",
     "fxNote": "Umgerechnet mit dem EZB-Referenzkurs vom {date}.",
     "updated": "Aktualisiert am {date}"
   },

@@ -115,7 +115,7 @@ export function DoctorView({
           <div className="card p-4">
             {d.monthly.length ? (
               <p>
-                {t('doctor.monthly')} <strong className="tabular">{money(d.monthly)}{t('period.month')}</strong>
+                {t('doctor.monthly')} <strong className="num">{money(d.monthly)}{t('period.month')}</strong>
               </p>
             ) : (
               <p>{t('doctor.monthlyFree')}</p>

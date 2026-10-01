@@ -26,7 +26,8 @@ import { ToolRow } from '@/components/data/ToolRow';
 import { VideoFacade } from '@/components/data/VideoFacade';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
 import { Icon } from '@/components/ui/Icon';
-import { approxEur, entryPriceLabel, planPriceLabel } from '@/components/data/format';
+import { entryPriceLabel, planPriceLabel } from '@/components/data/format';
+import { FxApprox } from '@/components/data/Price';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[slug]'>): Promise<Metadata> {
   const { locale, slug } = (await params) as { locale: Locale; slug: string };
@@ -249,14 +250,13 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
             ) : (
               <ul className="receipt mt-4 divide-y divide-dashed divide-line px-4 py-3">
                 {tool.plans.map((p) => {
-                  const eur = approxEur(p.priceCents, p.currency, catalog.fx.rates, locale);
                   return (
                     <li key={p.key} className="py-2.5">
                       <div className="flex flex-wrap items-baseline justify-between gap-2">
                         <span className="font-semibold">{p.name}</span>
-                        <span className="tabular flex items-center gap-2">
+                        <span className="num flex flex-wrap items-center justify-end gap-x-2 gap-y-1">
                           {planPriceLabel(p, t, locale)}
-                          {eur && <span className="text-xs text-ink-3">{t('common.approxEur', { amount: eur })}</span>}
+                          <FxApprox cents={p.priceCents} currency={p.currency} fx={catalog.fx} t={t} locale={locale} />
                           <StatusStamp status={p.status} t={t} compact />
                         </span>
                       </div>

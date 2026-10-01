@@ -17,7 +17,8 @@ import { ReceiptDrawer } from '@/components/data/ReceiptDrawer';
 import { VisitLink } from '@/components/data/VisitLink';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
 import { PriceHistoryChart } from '@/components/data/PriceHistoryChart';
-import { approxEur, entryPriceLabel, planPriceLabel } from '@/components/data/format';
+import { entryPriceLabel, planPriceLabel } from '@/components/data/format';
+import { FxApprox } from '@/components/data/Price';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[slug]/pricing'>): Promise<Metadata> {
   const { locale, slug } = (await params) as { locale: Locale; slug: string };
@@ -94,17 +95,16 @@ export default async function PricingPage({ params }: PageProps<'/[locale]/tools
             </thead>
             <tbody>
               {tool.plans.map((p) => {
-                const eur = approxEur(p.priceCents, p.currency, catalog.fx.rates, locale);
                 return (
                   <tr key={p.key}>
                     <th scope="row" className="font-semibold">
                       {p.name}
                     </th>
-                    <td className="tabular whitespace-nowrap">
+                    <td className="num whitespace-nowrap">
                       {planPriceLabel(p, t, locale)}
-                      {eur && <div className="text-xs text-ink-3">{t('common.approxEur', { amount: eur })}</div>}
+                      <FxApprox cents={p.priceCents} currency={p.currency} fx={catalog.fx} t={t} locale={locale} className="block" />
                     </td>
-                    <td className="tabular whitespace-nowrap">
+                    <td className="num whitespace-nowrap">
                       {p.annualMonthlyCents !== null && p.currency
                         ? `${formatMoney(p.annualMonthlyCents, p.currency, locale)}${t('period.month')}`
                         : '—'}
@@ -144,7 +144,7 @@ export default async function PricingPage({ params }: PageProps<'/[locale]/tools
                   .sort((a, b) => b.validFrom.getTime() - a.validFrom.getTime())
                   .map((r, i) => (
                     <li key={i} className="flex flex-wrap items-center gap-2">
-                      <span className="tabular font-medium">{planPriceLabel({ ...r, period: r.period as never, unit: 'flat' }, t, locale)}</span>
+                      <span className="num font-medium">{planPriceLabel({ ...r, period: r.period as never, unit: 'flat' }, t, locale)}</span>
                       <span className="text-ink-3">
                         {r.validTo === null
                           ? `${t('plans.historyFrom', { date: formatDate(r.validFrom, locale) })} · ${t('plans.historyCurrent')}`

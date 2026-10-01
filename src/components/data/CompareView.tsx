@@ -9,6 +9,7 @@ import { href } from '@/lib/routes';
 import { StatusStamp } from './StatusStamp';
 import { ToolMonogram } from './ToolMonogram';
 import { VisitLink } from './VisitLink';
+import { FxApprox } from './Price';
 import { Icon } from '@/components/ui/Icon';
 
 function cellText(row: Row, cell: Cell, t: Translator, locale: Locale, catalog: Catalog): string {
@@ -97,7 +98,7 @@ export function CompareView({
                         –
                       </span>
                     ) : (
-                      <span>{cellText(row, cell, t, locale, catalog)}</span>
+                      <span className={row.key === 'entry_price' ? 'num' : undefined}>{cellText(row, cell, t, locale, catalog)}</span>
                     )}
                     {cell.best && (
                       <span className="ml-1 inline-flex align-middle text-verified" title={t('compare.best')}>
@@ -109,6 +110,16 @@ export function CompareView({
                       <span className="ml-1.5 align-middle">
                         <StatusStamp status={cell.status} t={t} compact />
                       </span>
+                    )}
+                    {row.key === 'entry_price' && cell.value !== null && (
+                      <FxApprox
+                        cents={(cell.value as { cents: number }).cents}
+                        currency={(cell.value as { currency: string }).currency}
+                        fx={catalog.fx}
+                        t={t}
+                        locale={locale}
+                        className="block"
+                      />
                     )}
                   </td>
                 ))}

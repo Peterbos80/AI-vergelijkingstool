@@ -74,6 +74,7 @@
     "copyLink": "Kopieer link",
     "tools": "{count, plural, =0 {geen tools} one {# tool} other {# tools}}",
     "approxEur": "≈ {amount}",
+    "approxEurEcb": "≈ {amount} · ECB {date}",
     "fxNote": "Omgerekend met ECB-referentiekoers van {date}.",
     "updated": "Bijgewerkt {date}"
   },

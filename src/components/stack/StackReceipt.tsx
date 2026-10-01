@@ -107,7 +107,7 @@ export function StackReceipt({
                     </Link>
                     {plan && <span className="ml-1.5 text-ink-3">{plan.name}</span>}
                   </span>
-                  <span className="flex items-center justify-end gap-2 text-right tabular max-sm:col-start-3 max-sm:row-start-1">
+                  <span className="flex items-center justify-end gap-2 text-right num max-sm:col-start-3 max-sm:row-start-1">
                     {line?.paidCents === null || line === undefined ? (
                       <span className="text-ink-3">{t('stack.priceUnknown')}</span>
                     ) : line.paidCents === 0 ? (
@@ -131,19 +131,19 @@ export function StackReceipt({
       <dl className="space-y-1.5 text-sm">
         <div className="flex flex-wrap justify-between gap-2">
           <dt className="font-semibold uppercase">{t('stack.totalCore')}</dt>
-          <dd className="tabular font-semibold">
+          <dd className="num font-semibold">
             {core.paid.length ? `${moneyList(core.paid, locale)}${t('period.month')}` : t('common.free')}
           </dd>
         </div>
         {hasOptionalCost && (
           <div className="flex flex-wrap justify-between gap-2 text-ink-2">
             <dt>{t('stack.totalAll')}</dt>
-            <dd className="tabular">{`${moneyList(all.paid, locale)}${t('period.month')}`}</dd>
+            <dd className="num">{`${moneyList(all.paid, locale)}${t('period.month')}`}</dd>
           </div>
         )}
         <div className="flex flex-wrap justify-between gap-2 text-ink-2">
           <dt>{t('stack.startCost')}</dt>
-          <dd className="tabular">{core.start.length ? `${moneyList(core.start, locale)}${t('period.month')}` : t('common.free')}</dd>
+          <dd className="num">{core.start.length ? `${moneyList(core.start, locale)}${t('period.month')}` : t('common.free')}</dd>
         </div>
       </dl>
       <div className="mt-1.5 text-xs text-ink-3">

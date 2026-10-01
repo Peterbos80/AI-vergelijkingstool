@@ -74,6 +74,7 @@
     "copyLink": "Copy link",
     "tools": "{count, plural, =0 {no tools} one {# tool} other {# tools}}",
     "approxEur": "≈ {amount}",
+    "approxEurEcb": "≈ {amount} · ECB {date}",
     "fxNote": "Converted with the ECB reference rate of {date}.",
     "updated": "Updated {date}"
   },

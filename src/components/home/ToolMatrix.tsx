@@ -94,11 +94,11 @@ export function ToolMatrix({ tools, t, locale, caption }: { tools: CatalogTool[]
                     <>
                       <span className="font-medium text-ok">{t('common.free')}</span>
                       {tool.entryPriceCents !== null && (
-                        <span className="mono tabular block text-xs text-ink-3">{t('hub.paidFrom', { price: entryPriceLabel(tool, t, locale) })}</span>
+                        <span className="num block text-xs text-ink-3">{t('hub.paidFrom', { price: entryPriceLabel(tool, t, locale) })}</span>
                       )}
                     </>
                   ) : tool.entryPriceCents !== null ? (
-                    <span className="mono tabular">{t('hub.from', { price: entryPriceLabel(tool, t, locale) })}</span>
+                    <span className="num">{t('hub.from', { price: entryPriceLabel(tool, t, locale) })}</span>
                   ) : (
                     <Missing t={t} />
                   )}

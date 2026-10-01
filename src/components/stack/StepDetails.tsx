@@ -97,7 +97,7 @@ export function StepDetails({
                         <li key={a.toolId}>
                           <Link href={href.tool(locale, alt.slug)}>{alt.name}</Link>{' '}
                           <span className="text-ink-3">
-                            · {entryPriceLabel(alt, t, locale)}
+                            · <span className="num">{entryPriceLabel(alt, t, locale)}</span>
                             {a.reason && ` · ${reasonText(a.reason, t, locale, catalog, task)}`}
                           </span>
                         </li>

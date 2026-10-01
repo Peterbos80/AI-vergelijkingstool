@@ -607,6 +607,39 @@
       var(--e3);
   }
 
+  /* Tool row (components/data/ToolRow.tsx): price column under the text below 640px. */
+  .tool-row {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.5rem 0.75rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .tool-row:last-child {
+    border-bottom: 0;
+  }
+  .tool-row-meta {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+  }
+  @media (min-width: 40rem) {
+    .tool-row {
+      grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+    }
+    .tool-row-meta {
+      grid-column: 3;
+      grid-row: 1;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.25rem;
+      text-align: right;
+    }
+  }
+
   /* Icons (components/ui/Icon): inline with text, never shrunk by flex. */
   .icon {
     display: inline-block;
