@@ -63,6 +63,9 @@ Dit document bundelt de uitkomst. De volledige rapporten, met bronnen, staan in 
 | B2 Vergelijkingsbouwer | Unieke vergelijkingen met echte data | code | `agents/B2-vergelijkingen.md` |
 | B3 Content-redacteur | Doelgroepen, prompts, AI-geletterdheid | content | `agents/B3-content.md` |
 | Q1 QA/integratie (productlead) | Samenvoegen, review, testen, deploy, rapport | release | `agents/Q1-qa.md` |
+| D1 Design Director | Visuele kwaliteit, interactie, UX: werelden, podium, toolmerken | code + `research-2026-10/05-design-director.md` | (brief van de eigenaar, 1 okt) |
+| B5 Eenvoud-redacteur | Alle teksten en menu's begrijpelijk voor een 14-jarige; bewaker in de tests | teksten + `research-2026-10/06-taal-en-eenvoud.md` | `agents/B5-eenvoud.md` |
+| B6 Tool-scout | Elk uur populaire nieuwe AI-tools zoeken, dagelijks publiceren via quarantaine, logo's op domein | code | `agents/B6-tool-scout.md` |
 
 **Samenwerking:**
 1. Teambriefing.
