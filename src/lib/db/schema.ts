@@ -209,6 +209,40 @@ export const companies = pgTable('companies', {
   createdAt: createdAt(),
 });
 
+/**
+ * A tool's own logo from simple-icons (CC0), matched only on the tool's own
+ * registrable domain (tool scout). Stored so the site serves it itself.
+ */
+export interface StoredLogo {
+  title: string;
+  /** simple-icons slug and package version the path came from. */
+  slug: string;
+  version: string;
+  /** Brand colour, six hex digits without "#". */
+  hex: string;
+  /** SVG path in a 24×24 box. */
+  path: string;
+  /** The icon's source URL in simple-icons (on the tool's own domain). */
+  source: string;
+  license: 'CC0-1.0';
+}
+
+export type DiscoverySignalKind = 'hackernews' | 'github' | 'producthunt' | 'announcement';
+
+/** How the tool scout found a tool and how its quarantine checks went (null for editorial tools). */
+export interface StoredDiscovery {
+  candidateId: string;
+  /** When the tool went live in quarantine (ISO). */
+  addedAt: string;
+  /** Ranking value at publication (from the signals, never invented). */
+  popularity: number;
+  /** The independent popularity signals, each with its source link and date. */
+  signals: { kind: DiscoverySignalKind; value: number | null; url: string; at: string | null; label: string | null }[];
+  /** Quarantine checks: green runs, the last check, consecutive failures. */
+  checks: { green: number; lastAt: string | null; lastOk: boolean | null; failures: number; lastFailureAt: string | null; lastReason: string | null };
+  promotedAt: string | null;
+}
+
 export const tools = pgTable(
   'tools',
   {
@@ -261,6 +295,8 @@ export const tools = pgTable(
     websiteStatus: text('website_status').$type<'up' | 'down' | 'unknown'>().notNull().default('unknown'),
     unreachableSince: ts('unreachable_since'),
     quarantineUntil: ts('quarantine_until'),
+    logo: jsonb('logo').$type<StoredLogo>(),
+    discovery: jsonb('discovery').$type<StoredDiscovery>(),
     qualityScore: integer('quality_score').notNull().default(0),
     qualityIssues: jsonb('quality_issues').$type<string[]>().notNull().default(sql`'[]'::jsonb`),
     indexable: jsonb('indexable')

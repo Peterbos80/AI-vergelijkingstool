@@ -28,12 +28,13 @@ describe('new-tool policy', () => {
     delete process.env.NEW_TOOL_MODE;
     delete process.env.NEW_TOOLS_PER_DAY;
   });
-  it('defaults to 10 tools a day; the setting allows at most 25', () => {
+  it('defaults to 10 tools a day; the setting allows at most 12, so two batches stay under the anomaly limit of 25 in 24 h', () => {
     expect(DEFAULT_SETTINGS.policy.newToolsPerDay).toBe(10);
-    expect(mergeSetting('policy', { newToolsPerDay: 25 }).newToolsPerDay).toBe(25);
-    expect(mergeSetting('policy', { newToolsPerDay: 26 }).newToolsPerDay).toBe(10); // invalid → default
+    expect(mergeSetting('policy', { newToolsPerDay: 12 }).newToolsPerDay).toBe(12);
+    expect(mergeSetting('policy', { newToolsPerDay: 13 }).newToolsPerDay).toBe(10); // invalid → default
     expect(mergeSetting('policy', { newToolMode: 'quarantine' }).newToolMode).toBe('quarantine');
     expect(SCOUT_LIMITS.anomalyPerDay).toBe(25);
+    expect(2 * SCOUT_LIMITS.maxPerDay).toBeLessThanOrEqual(SCOUT_LIMITS.anomalyPerDay);
   });
   it('lets the environment override the setting, and ignores invalid values', () => {
     expect(newToolPolicy(DEFAULT_SETTINGS)).toEqual({ mode: 'queue', perDay: 10, from: { mode: 'setting', perDay: 'setting' } });
@@ -41,7 +42,7 @@ describe('new-tool policy', () => {
     process.env.NEW_TOOLS_PER_DAY = '12';
     expect(newToolPolicy(DEFAULT_SETTINGS)).toEqual({ mode: 'quarantine', perDay: 12, from: { mode: 'env', perDay: 'env' } });
     process.env.NEW_TOOLS_PER_DAY = '400';
-    expect(newToolPolicy(DEFAULT_SETTINGS).perDay).toBe(25);
+    expect(newToolPolicy(DEFAULT_SETTINGS).perDay).toBe(12);
     process.env.NEW_TOOL_MODE = 'publish-everything';
     process.env.NEW_TOOLS_PER_DAY = 'many';
     expect(newToolPolicy(DEFAULT_SETTINGS)).toMatchObject({ mode: 'queue', perDay: 10 });

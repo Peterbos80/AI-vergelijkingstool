@@ -2010,7 +2010,7 @@
         "currency": "Currency",
         "staleImportDays": "Import is stale after (days)",
         "locale": "Admin and report language",
-        "newToolsPerDay": "New tools per day (quarantine, max 25)"
+        "newToolsPerDay": "New tools per day (quarantine, max 12)"
       },
       "newToolMode": {
         "queue": "Always ask me",

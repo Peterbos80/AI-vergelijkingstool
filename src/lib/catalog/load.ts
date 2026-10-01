@@ -4,6 +4,7 @@
  * (provenance drawers, history, videos) is loaded per page in lib/catalog/detail.
  */
 import { and, desc, eq, gte, inArray, isNull, sql } from 'drizzle-orm';
+import { z } from 'zod';
 import type { Database } from '@/lib/db/client';
 import { queryRows } from '@/lib/db/sql';
 import {
@@ -38,7 +39,38 @@ import type {
   CatalogPlan,
   CatalogTask,
   CatalogTool,
+  ToolDiscovery,
 } from './types';
+
+const storedDiscovery = z.object({
+  addedAt: z.string().max(40),
+  promotedAt: z.string().max(40).nullable().optional(),
+  signals: z
+    .array(
+      z.object({
+        kind: z.enum(['hackernews', 'github', 'producthunt', 'announcement']),
+        value: z.number().nullable(),
+        url: z.string().url().max(500).startsWith('https://'),
+        at: z.string().max(40).nullable(),
+        label: z.string().max(80).nullable(),
+      }),
+    )
+    .max(8),
+});
+
+/** The tool scout's record of a tool, validated (the column is ours, but never trusted blindly). */
+function discoveryOf(raw: unknown): ToolDiscovery | null {
+  const p = storedDiscovery.safeParse(raw);
+  if (!p.success) return null;
+  const date = (v: string | null | undefined) => {
+    if (!v) return null;
+    const d = new Date(v);
+    return Number.isNaN(d.getTime()) ? null : d;
+  };
+  const addedAt = date(p.data.addedAt);
+  if (!addedAt) return null;
+  return { addedAt, promotedAt: date(p.data.promotedAt), signals: p.data.signals.map((x) => ({ ...x, at: date(x.at) })) };
+}
 
 function groupBy<T, K>(rows: T[], key: (r: T) => K): Map<K, T[]> {
   const m = new Map<K, T[]>();
@@ -87,6 +119,8 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
   const factsBy = groupBy(factRows, (r) => r.toolId);
   const relBy = groupBy(relRows, (r) => r.toolId);
   const published = new Set(ids);
+  // Tools in quarantine (tool scout) are live on their own page only: never an alternative or relation of another tool.
+  const liveIds = new Set(toolRows.filter((r) => r.tool.quarantineUntil === null).map((r) => r.tool.id));
 
   const catalogTools: CatalogTool[] = toolRows.map(({ tool: t, companyName, companyCountry }) => {
     const plans: CatalogPlan[] = (plansBy.get(t.id) ?? [])
@@ -136,7 +170,7 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
         verifiedAt: f.verifiedAt,
       };
     }
-    const rels = (relBy.get(t.id) ?? []).filter((r) => published.has(r.relatedToolId));
+    const rels = (relBy.get(t.id) ?? []).filter((r) => liveIds.has(r.relatedToolId));
     const altMap = new Map<string, CatalogTool['alternatives'][number]>();
     for (const r of rels.filter((x) => x.kind === 'alternative')) {
       const prev = altMap.get(r.relatedToolId);
@@ -184,6 +218,7 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
       unreachableSince: t.unreachableSince,
       quarantineUntil: t.quarantineUntil,
       logo: LOGOS[t.slug] ?? null,
+      discovery: discoveryOf(t.discovery),
       qualityScore: t.qualityScore,
       indexable: t.indexable,
       text,
@@ -203,6 +238,11 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
     };
   });
   catalogTools.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+  // Rankings, recommendations and Match only ever see `tools`; quarantined tools are reachable by slug and id.
+  const liveTools = catalogTools.filter((t) => t.quarantineUntil === null);
+  const quarantined = catalogTools
+    .filter((t) => t.quarantineUntil !== null)
+    .sort((a, b) => (b.discovery?.addedAt.getTime() ?? 0) - (a.discovery?.addedAt.getTime() ?? 0) || a.name.localeCompare(b.name));
 
   // Taxonomy
   const [catRows, catI18nRows, capabilityRows, capI18nRows, taskRows, taskI18nRows, stepRows, stepI18nRows] =
@@ -293,8 +333,8 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
       newValue: e.newValue,
     }));
 
-  // Stats (real counts for the home "proof line")
-  const all = [...planRows, ...factRows];
+  // Stats (real counts for the home "proof line"), over the tools outside quarantine
+  const all = [...planRows, ...factRows].filter((x) => liveIds.has(x.toolId));
   const supported = all.filter((x) => statusRank(x.status) >= statusRank('supported')).length;
   const cutoff = now.getTime() - 30 * 86_400_000;
   const checked = all.filter((x) => (x.verifiedAt ?? x.observedAt).getTime() >= cutoff).length;
@@ -309,7 +349,8 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
   return {
     version,
     loadedAt: now,
-    tools: catalogTools,
+    tools: liveTools,
+    quarantined,
     toolsBySlug,
     toolsById,
     categories: cats,
@@ -321,9 +362,9 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
     fx: { day: fxDay, rates },
     events,
     stats: {
-      tools: catalogTools.length,
-      facts: factRows.length,
-      plans: planRows.length,
+      tools: liveTools.length,
+      facts: factRows.filter((f) => liveIds.has(f.toolId)).length,
+      plans: planRows.filter((p) => liveIds.has(p.toolId)).length,
       sources: Number(srcCount[0]?.n ?? 0),
       supportedShare: all.length ? supported / all.length : 0,
       checked30dShare: all.length ? checked / all.length : 0,

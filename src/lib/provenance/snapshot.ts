@@ -56,6 +56,8 @@ export interface SnapshotInput {
   currentStatus: ToolStatus;
   websiteCheckedAt: Date | null;
   published: boolean;
+  /** In quarantine (tool scout): never indexable until promoted. */
+  quarantined?: boolean;
   locales: string[];
   primaryCapabilities: number;
   alternatives: number;
@@ -136,6 +138,7 @@ export function computeSnapshot(
 
   const quality = computeQuality({
     published: input.published,
+    quarantined: input.quarantined,
     status,
     locales: input.locales,
     planCount: plans.length,
@@ -215,6 +218,7 @@ export async function recomputeToolSnapshot(
       currentStatus: tool.status,
       websiteCheckedAt: tool.websiteCheckedAt,
       published: tool.published,
+      quarantined: tool.quarantineUntil !== null,
       locales,
       primaryCapabilities: caps?.n ?? 0,
       alternatives: alts?.n ?? 0,

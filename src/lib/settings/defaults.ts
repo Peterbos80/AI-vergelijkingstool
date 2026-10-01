@@ -28,9 +28,10 @@ export const settingsSchema = z.object({
      * popular that pass every gate (fewer when fewer pass; the gates are never
      * lowered to reach the number). NEW_TOOLS_PER_DAY overrides. More than 25
      * publications in 24 hours is an anomaly: nothing is published and the
-     * owner gets one escalation.
+     * owner gets one escalation. Hence at most 12: two daily batches can fall
+     * within 24 hours (the hourly job runs late at times) without tripping it.
      */
-    newToolsPerDay: z.number().int().min(0).max(25),
+    newToolsPerDay: z.number().int().min(0).max(12),
   }),
   freshness: z.object({
     price: days,

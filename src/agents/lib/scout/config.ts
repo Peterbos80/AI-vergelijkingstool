@@ -45,6 +45,8 @@ export const COLLECT = {
 } as const;
 
 export const SCOUT_LIMITS = {
+  /** Highest daily number the setting allows: two batches within 24 hours stay under the anomaly limit. */
+  maxPerDay: 12,
   /** More publications than this in 24 hours is an anomaly: publish nothing and escalate. */
   anomalyPerDay: 25,
   /** More candidates passing every gate at once than this looks like a parser fault: publish nothing and escalate. */
@@ -58,7 +60,7 @@ export const SCOUT_LIMITS = {
 
 export interface NewToolPolicy {
   mode: 'queue' | 'quarantine';
-  /** New tools per day in quarantine mode (0–25). */
+  /** New tools per day in quarantine mode (0–12). */
   perDay: number;
   /** Where the values came from (shown in run summaries and the report). */
   from: { mode: 'env' | 'setting'; perDay: 'env' | 'setting' };
@@ -72,10 +74,10 @@ export function newToolPolicy(settings: Settings): NewToolPolicy {
   const e = env();
   const envMode = e.NEW_TOOL_MODE === 'queue' || e.NEW_TOOL_MODE === 'quarantine' ? e.NEW_TOOL_MODE : undefined;
   const n = e.NEW_TOOLS_PER_DAY !== undefined ? Number(e.NEW_TOOLS_PER_DAY) : NaN;
-  const envPerDay = Number.isInteger(n) && n >= 0 ? Math.min(SCOUT_LIMITS.anomalyPerDay, n) : undefined;
+  const envPerDay = Number.isInteger(n) && n >= 0 ? Math.min(SCOUT_LIMITS.maxPerDay, n) : undefined;
   return {
     mode: envMode ?? settings.policy.newToolMode,
-    perDay: envPerDay ?? Math.min(SCOUT_LIMITS.anomalyPerDay, settings.policy.newToolsPerDay),
+    perDay: envPerDay ?? Math.min(SCOUT_LIMITS.maxPerDay, settings.policy.newToolsPerDay),
     from: { mode: envMode ? 'env' : 'setting', perDay: envPerDay !== undefined ? 'env' : 'setting' },
   };
 }

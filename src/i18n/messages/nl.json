@@ -2010,7 +2010,7 @@
         "currency": "Valuta",
         "staleImportDays": "Import is verouderd na (dagen)",
         "locale": "Taal van beheer en rapport",
-        "newToolsPerDay": "Nieuwe tools per dag (quarantaine, max 25)"
+        "newToolsPerDay": "Nieuwe tools per dag (quarantaine, max 12)"
       },
       "newToolMode": {
         "queue": "Altijd aan mij vragen",

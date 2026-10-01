@@ -7,6 +7,8 @@ import type { FactStatus, Freshness, ToolStatus } from '@/lib/db/schema';
 
 export interface QualityInput {
   published: boolean;
+  /** New tool in quarantine (tool scout): live, but never indexable until promoted. */
+  quarantined?: boolean;
   status: ToolStatus;
   locales: string[];
   planCount: number;
@@ -67,7 +69,7 @@ export function computeQuality(q: QualityInput): QualityResult {
   if (q.status === 'shutdown' || q.status === 'deprecated') issues.push('discontinued');
 
   const score = Math.max(0, 100 - issues.reduce((sum, i) => sum + WEIGHTS[i], 0));
-  const live = q.published && q.status !== 'shutdown';
+  const live = q.published && q.status !== 'shutdown' && !q.quarantined;
   const hasText = q.locales.includes('nl') || q.locales.includes('en');
   const tool = live && hasText && q.primaryCapabilities > 0 && score >= 60;
   const pricing =

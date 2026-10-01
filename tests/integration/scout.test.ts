@@ -9,7 +9,13 @@ import { createTestDb } from '../setup/pglite';
 import type { Database } from '@/lib/db/client';
 import { loadSeedData } from '@/lib/seed/load';
 import { applySeed } from '@/lib/seed/apply';
-import { toolCandidates } from '@/lib/db/schema';
+import { toolCandidates, toolCapabilities, tools, type StoredDiscovery } from '@/lib/db/schema';
+import { loadCatalog } from '@/lib/catalog/load';
+import { rankForCapability } from '@/lib/engine/rank';
+import { lexicalMatch } from '@/lib/engine/match-core';
+import { fairFightsFor } from '@/lib/engine/compare';
+import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
+import { DEFAULT_SETTINGS } from '@/lib/settings';
 import { runAgent } from '@/agents/runner';
 import type { Fetcher, FetchResult } from '@/agents/fetcher/types';
 import type { AgentName } from '@/agents/types';
@@ -169,5 +175,62 @@ describe('hourly discovery', () => {
     } finally {
       delete process.env.PRODUCTHUNT_TOKEN;
     }
+  });
+});
+
+describe('quarantine keeps a new tool out of rankings, recommendations and Match', () => {
+  const discovery: StoredDiscovery = {
+    candidateId: '00000000-0000-0000-0000-000000000001',
+    addedAt: T0.toISOString(),
+    popularity: 4,
+    signals: [
+      { kind: 'hackernews', value: 231, url: 'https://news.ycombinator.com/item?id=1', at: T0.toISOString(), label: null },
+      { kind: 'github', value: 4200, url: 'https://github.com/echo-labs/echoscribe', at: T0.toISOString(), label: null },
+    ],
+    checks: { green: 1, lastAt: T0.toISOString(), lastOk: true, failures: 0, lastFailureAt: null, lastReason: null },
+    promotedAt: null,
+  };
+  let toolId: string;
+
+  beforeAll(async () => {
+    // As attractive as possible for transcription, so only the quarantine keeps it out.
+    const [row] = await db
+      .insert(tools)
+      .values({ slug: 'echoscribe', name: 'EchoScribe', websiteUrl: 'https://echoscribe.example/', published: true, quarantineUntil: hours(24 * 7), discovery, hasFreeTier: true, confidence: 99, freshness: 'fresh', skillLevel: 'beginner' })
+      .returning({ id: tools.id });
+    toolId = row!.id;
+    await db.insert(toolCapabilities).values({ toolId, capabilityId: 'transcription', strength: 'primary' });
+    await recomputeToolSnapshot(db, toolId, DEFAULT_SETTINGS.freshness, T0);
+  });
+
+  it('keeps the tool reachable by slug, out of `tools`, and never indexable', async () => {
+    const catalog = await loadCatalog(db, 1, T0);
+    expect(catalog.toolsBySlug.get('echoscribe')?.id).toBe(toolId);
+    expect(catalog.tools.some((t) => t.id === toolId)).toBe(false);
+    expect(catalog.quarantined?.map((t) => t.slug)).toEqual(['echoscribe']);
+    expect(catalog.toolsBySlug.get('echoscribe')?.discovery?.signals.map((x) => x.kind)).toEqual(['hackernews', 'github']);
+    expect(catalog.stats.tools).toBe(catalog.tools.length);
+    const [row] = await db.select().from(tools).where(eq(tools.id, toolId));
+    expect(row?.indexable).toEqual({ tool: false, pricing: false, alternatives: false });
+  });
+
+  it('is never ranked, matched or put in a Fair Fight', async () => {
+    const catalog = await loadCatalog(db, 1, T0);
+    expect(rankForCapability(catalog, 'transcription').some((t) => t.id === toolId)).toBe(false);
+    for (const query of ['ik wil podcasts transcriberen, gratis', 'transcribe my interviews for free', 'meeting transcription']) {
+      const out = lexicalMatch({ query, locale: 'nl', explicit: {}, approach: {}, skip: true, answered: 0 }, catalog);
+      const chosen = Object.values(out.variants ?? {}).flatMap((v) => v.steps.flatMap((s) => [s.toolId, ...s.alternatives.map((a) => a.toolId)]));
+      expect(chosen, query).not.toContain(toolId);
+      expect(out.suggestions.toolIds, query).not.toContain(toolId);
+    }
+    expect(fairFightsFor(catalog, catalog.toolsBySlug.get('echoscribe')!)).toEqual([]);
+    for (const t of catalog.tools) expect(fairFightsFor(catalog, t).some((o) => o.id === toolId)).toBe(false);
+  });
+
+  it('is ranked once promoted (so the checks above are meaningful)', async () => {
+    await db.update(tools).set({ quarantineUntil: null }).where(eq(tools.id, toolId));
+    const catalog = await loadCatalog(db, 2, T0);
+    expect(rankForCapability(catalog, 'transcription').some((t) => t.id === toolId)).toBe(true);
+    await db.delete(tools).where(eq(tools.id, toolId));
   });
 });
