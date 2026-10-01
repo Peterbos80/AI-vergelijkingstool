@@ -20,14 +20,15 @@
     "match": "Match",
     "explore": "Verkennen",
     "compare": "Vergelijken",
-    "doctor": "Doctor",
+    "doctor": "Stack Doctor",
     "pulse": "Pulse",
     "tasks": "Taken",
     "search": "Zoek een tool",
     "searchLabel": "Zoek in de tooldatabase",
+    "searchSubmit": "Zoeken",
     "menu": "Menu",
     "news": "Nieuws",
-    "learn": "Uitleg"
+    "learn": "Leren"
   },
   "footer": {
     "about": "Over",
@@ -694,6 +695,8 @@
     "levelGroup": "Weergave",
     "levelBasis": "Basis",
     "levelAdvanced": "Advanced & Developer",
+    "levelBasisShort": "Basis",
+    "levelAdvancedShort": "Advanced",
     "levelBasisHint": "In gewone taal: gratis plan, kosten, gebruiksgemak en waar het werkt",
     "levelAdvancedHint": "Technisch: API, integraties, zelf hosten, prijsmodel en niveau",
     "matrixAssistants": "Populaire AI-assistenten naast elkaar",
