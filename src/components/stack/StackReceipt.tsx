@@ -8,6 +8,7 @@ import type { LimitationCode, Money, ReasonCode, StackResult } from '@/lib/engin
 import { href } from '@/lib/routes';
 import { StatusStamp } from '@/components/data/StatusStamp';
 import { FreshnessDial } from '@/components/data/FreshnessDial';
+import { Icon } from '@/components/ui/Icon';
 
 export function stepName(task: CatalogTask | null, key: string, catalog: Catalog, locale: Locale): string {
   const step = task?.steps.find((s) => s.key === key);
@@ -106,7 +107,7 @@ export function StackReceipt({
                     </Link>
                     {plan && <span className="ml-1.5 text-ink-3">{plan.name}</span>}
                   </span>
-                  <span className="flex items-center justify-end gap-2 text-right tabular max-sm:col-start-3 max-sm:row-start-1">
+                  <span className="flex items-center justify-end gap-2 text-right num max-sm:col-start-3 max-sm:row-start-1">
                     {line?.paidCents === null || line === undefined ? (
                       <span className="text-ink-3">{t('stack.priceUnknown')}</span>
                     ) : line.paidCents === 0 ? (
@@ -114,7 +115,7 @@ export function StackReceipt({
                     ) : (
                       `${formatMoney(line.paidCents, line.currency, locale)}${t('period.month')}`
                     )}
-                    {tool.pricingStatus && <StatusStamp status={tool.pricingStatus} t={t} compact />}
+                    {tool.pricingStatus && <StatusStamp status={tool.pricingStatus} t={t} />}
                     <FreshnessDial freshness={tool.freshness} t={t} size={14} />
                   </span>
                   {line && line.freePlanAvailable && (line.paidCents ?? 0) > 0 && (
@@ -130,19 +131,19 @@ export function StackReceipt({
       <dl className="space-y-1.5 text-sm">
         <div className="flex flex-wrap justify-between gap-2">
           <dt className="font-semibold uppercase">{t('stack.totalCore')}</dt>
-          <dd className="tabular font-semibold">
+          <dd className="num font-semibold">
             {core.paid.length ? `${moneyList(core.paid, locale)}${t('period.month')}` : t('common.free')}
           </dd>
         </div>
         {hasOptionalCost && (
           <div className="flex flex-wrap justify-between gap-2 text-ink-2">
             <dt>{t('stack.totalAll')}</dt>
-            <dd className="tabular">{`${moneyList(all.paid, locale)}${t('period.month')}`}</dd>
+            <dd className="num">{`${moneyList(all.paid, locale)}${t('period.month')}`}</dd>
           </div>
         )}
         <div className="flex flex-wrap justify-between gap-2 text-ink-2">
           <dt>{t('stack.startCost')}</dt>
-          <dd className="tabular">{core.start.length ? `${moneyList(core.start, locale)}${t('period.month')}` : t('common.free')}</dd>
+          <dd className="num">{core.start.length ? `${moneyList(core.start, locale)}${t('period.month')}` : t('common.free')}</dd>
         </div>
       </dl>
       <div className="mt-1.5 text-xs text-ink-3">
@@ -154,13 +155,16 @@ export function StackReceipt({
       </div>
       {result.budget && budgetAmount && (
         <p
-          className={`mt-1.5 text-sm ${result.budget.paidWithin === true ? 'text-verified' : result.budget.paidWithin === false ? 'text-danger' : 'text-ink-3'}`}
+          className={`mt-1.5 flex items-start gap-1.5 text-sm ${result.budget.paidWithin === true ? 'text-verified' : result.budget.paidWithin === false ? 'text-danger' : 'text-ink-3'}`}
         >
-          {result.budget.paidWithin === true
-            ? `✓ ${t('stack.withinBudget', { amount: budgetAmount })}`
-            : result.budget.paidWithin === false
-              ? `✗ ${t('stack.overBudget', { amount: budgetAmount })}`
-              : t('stack.budgetUnknown', { amount: budgetAmount })}
+          {result.budget.paidWithin !== null && <Icon name={result.budget.paidWithin ? 'check' : 'x'} size={16} className="mt-0.5" />}
+          <span>
+            {result.budget.paidWithin === true
+              ? t('stack.withinBudget', { amount: budgetAmount })
+              : result.budget.paidWithin === false
+                ? t('stack.overBudget', { amount: budgetAmount })
+                : t('stack.budgetUnknown', { amount: budgetAmount })}
+          </span>
         </p>
       )}
       <p className="mt-3 text-[0.6875rem] text-ink-3">{t('stack.confidence', { value: result.confidence })}</p>

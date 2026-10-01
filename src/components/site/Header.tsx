@@ -4,60 +4,74 @@ import type { Translator } from '@/i18n/format';
 import { href, switchLocalePath } from '@/lib/routes';
 import { LevelTabs } from '@/components/level/LevelTabs';
 import { Logo } from './Logo';
+import { SearchDialog } from './SearchDialog';
+import { SiteMenu } from './SiteMenu';
 
-export function Header({ locale, t, pathname }: { locale: Locale; t: Translator; pathname: string }) {
+/**
+ * Site header: logo, five navigation items, search, the view level and the
+ * language. Below 1024px: logo, search and a full-screen menu. Nothing in it
+ * may make the page wider than the viewport (tests/e2e/layout.spec.ts).
+ */
+export function Header({ locale, t, pathname, pulseCount = 0 }: { locale: Locale; t: Translator; pathname: string; pulseCount?: number }) {
+  const under = (...paths: string[]) => paths.some((p) => pathname === `/${locale}/${p}` || pathname.startsWith(`/${locale}/${p}/`));
   const links = [
-    { href: href.home(locale), label: t('nav.match'), active: pathname === `/${locale}` || pathname.startsWith(`/${locale}/match`) },
-    { href: href.tools(locale), label: t('nav.explore'), active: pathname.startsWith(`/${locale}/tools`) },
-    { href: href.compare(locale), label: t('nav.compare'), active: pathname.startsWith(`/${locale}/compare`) },
-    { href: href.doctor(locale), label: t('nav.doctor'), active: pathname.startsWith(`/${locale}/doctor`) },
-    { href: href.learn(locale), label: t('nav.learn'), active: pathname.startsWith(`/${locale}/learn`) || pathname.startsWith(`/${locale}/glossary`) || pathname.startsWith(`/${locale}/start`) },
-    { href: href.news(locale), label: t('nav.news'), active: pathname.startsWith(`/${locale}/news`) },
-    { href: href.pulse(locale), label: t('nav.pulse'), active: pathname.startsWith(`/${locale}/pulse`) },
+    { key: 'explore', href: href.tools(locale), label: t('nav.explore'), active: under('tools', 'categories', 'capabilities', 'tasks') },
+    { key: 'compare', href: href.compare(locale), label: t('nav.compare'), active: under('compare', 'costs') },
+    { key: 'doctor', href: href.doctor(locale), label: t('nav.doctor'), active: under('doctor') },
+    { key: 'pulse', href: href.pulse(locale), label: t('nav.pulse'), active: under('pulse', 'news'), count: pulseCount },
+    { key: 'learn', href: href.learn(locale), label: t('nav.learn'), active: under('learn', 'glossary', 'start') },
   ];
+  const more = [
+    { href: href.home(locale), label: t('nav.match') },
+    { href: href.tasks(locale), label: t('nav.tasks') },
+    { href: href.costs(locale), label: t('nav.costs') },
+    { href: href.start(locale), label: t('start.breadcrumb') },
+    { href: href.news(locale), label: t('nav.news') },
+    { href: href.glossary(locale), label: t('glossary.title') },
+  ];
+  // Changes of the last 30 days next to Pulse (hidden at 0); the number changes daily, so it is marked dynamic.
+  const count = (n: number | undefined) =>
+    n ? (
+      <span className="nav-count" data-dynamic="" title={t('nav.pulseCount', { count: n })}>
+        <span aria-hidden="true">{n}</span>
+        <span className="visually-hidden">{t('nav.pulseCount', { count: n })}</span>
+      </span>
+    ) : null;
   const locales = enabledLocales();
+  const levelLabels = { group: t('hub.levelGroup'), basisHint: t('hub.levelBasisHint'), advancedHint: t('hub.levelAdvancedHint') };
+
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/80">
-      <div className="container-page flex h-14 items-center gap-4">
-        <Link href={href.home(locale)} className="flex items-center gap-2 no-underline" aria-label={t('meta.siteName')}>
+    <header className="site-header">
+      <div className="container-page site-header-bar">
+        <Link href={href.home(locale)} className="site-logo" aria-label={t('meta.siteName')}>
           <Logo />
-          <span className="font-bold tracking-tight">{t('meta.siteName')}</span>
+          <span>{t('meta.siteName')}</span>
         </Link>
-        <nav aria-label={t('a11y.mainNav')} className="ml-2 hidden md:block">
-          <ul className="flex items-center gap-1 text-[0.9375rem]">
+
+        <nav aria-label={t('a11y.mainNav')} className="site-nav">
+          <ul>
             {links.map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  aria-current={l.active ? 'page' : undefined}
-                  className={`rounded-md px-2.5 py-1.5 no-underline hover:bg-paper-2 ${l.active ? 'font-semibold text-ink' : 'text-ink-2'}`}
-                >
+              <li key={l.key}>
+                <Link href={l.href} aria-current={l.active ? 'page' : undefined} className="site-nav-link">
                   {l.label}
+                  {count(l.count)}
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-        <div className="ml-auto flex items-center gap-2">
-          <form action={href.tools(locale)} method="get" role="search" className="hidden lg:block">
-            <label htmlFor="header-search" className="visually-hidden">
-              {t('nav.searchLabel')}
-            </label>
-            <input
-              id="header-search"
-              name="q"
-              type="search"
-              placeholder={t('nav.search')}
-              className="input h-9 min-h-0 w-56 py-1 text-sm"
-              autoComplete="off"
-            />
-          </form>
-          <div className="hidden sm:block">
-            <LevelTabs compact labels={{ group: t('hub.levelGroup'), basis: t('hub.levelBasis'), advanced: t('hub.levelAdvanced'), basisHint: t('hub.levelBasisHint'), advancedHint: t('hub.levelAdvancedHint') }} />
+
+        <div className="site-tools">
+          <SearchDialog
+            action={href.tools(locale)}
+            labels={{ button: t('nav.search'), label: t('nav.searchLabel'), placeholder: t('nav.search'), submit: t('nav.searchSubmit'), close: t('common.close') }}
+          />
+          <div className="site-level">
+            <LevelTabs compact labels={{ ...levelLabels, basis: t('hub.levelBasisShort'), advanced: t('hub.levelAdvancedShort') }} />
           </div>
           {locales.length > 1 && (
-            <nav aria-label={t('a11y.languageSwitcher')}>
-              <ul className="flex items-center gap-0.5 font-mono text-xs">
+            <nav aria-label={t('a11y.languageSwitcher')} className="site-lang">
+              <ul>
                 {locales.map((l) => (
                   <li key={l}>
                     <Link
@@ -66,7 +80,6 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
                       lang={l}
                       aria-current={l === locale ? 'true' : undefined}
                       title={LOCALE_META[l].label}
-                      className={`rounded px-1.5 py-1 uppercase no-underline ${l === locale ? 'bg-ink text-paper' : 'text-ink-2 hover:bg-paper-2'}`}
                       prefetch={false}
                     >
                       {l}
@@ -76,48 +89,78 @@ export function Header({ locale, t, pathname }: { locale: Locale; t: Translator;
               </ul>
             </nav>
           )}
-          <details className="relative md:hidden">
-            <summary className="btn btn-ghost btn-sm list-none" aria-label={t('a11y.openMenu')}>
-              {t('nav.menu')}
-            </summary>
-            <nav
-              aria-label={t('a11y.mainNav')}
-              className="card absolute right-0 top-11 z-50 w-56 p-2 shadow-lg"
-            >
-              <ul className="flex flex-col">
+          <SiteMenu
+            labels={{ menu: t('nav.menu'), open: t('a11y.openMenu'), close: t('a11y.closeMenu') }}
+            brand={
+              <Link href={href.home(locale)} className="site-logo" aria-label={t('meta.siteName')}>
+                <Logo />
+                <span>{t('meta.siteName')}</span>
+              </Link>
+            }
+          >
+            <nav aria-label={t('a11y.mainNav')}>
+              <ul className="site-menu-list">
                 {links.map((l) => (
+                  <li key={l.key}>
+                    <Link href={l.href} aria-current={l.active ? 'page' : undefined} className="site-menu-link">
+                      {l.label}
+                      {count(l.count)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="eyebrow mt-8">{t('common.more')}</p>
+              <ul className="site-menu-list site-menu-list-more">
+                {more.map((l) => (
                   <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      aria-current={l.active ? 'page' : undefined}
-                      className="block rounded-md px-3 py-2 no-underline hover:bg-paper-2"
-                    >
+                    <Link href={l.href} aria-current={pathname === l.href ? 'page' : undefined} className="site-menu-link">
                       {l.label}
                     </Link>
                   </li>
                 ))}
-                <li>
-                  <Link href={href.tasks(locale)} className="block rounded-md px-3 py-2 no-underline hover:bg-paper-2">
-                    {t('nav.tasks')}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={href.start(locale)} className="block rounded-md px-3 py-2 no-underline hover:bg-paper-2">
-                    {t('start.breadcrumb')}
-                  </Link>
-                </li>
               </ul>
-              <div className="mt-2 border-t border-line pt-2 sm:hidden">
-                <LevelTabs compact labels={{ group: t('hub.levelGroup'), basis: t('hub.levelBasis'), advanced: t('hub.levelAdvanced'), basisHint: t('hub.levelBasisHint'), advancedHint: t('hub.levelAdvancedHint') }} />
+            </nav>
+            <div className="site-menu-section">
+              <p className="eyebrow">{t('hub.levelGroup')}</p>
+              <div className="mt-2">
+                <LevelTabs labels={{ ...levelLabels, basis: t('hub.levelBasis'), advanced: t('hub.levelAdvanced') }} />
               </div>
-              <form action={href.tools(locale)} method="get" role="search" className="mt-2 border-t border-line pt-2">
-                <label htmlFor="mobile-search" className="visually-hidden">
+            </div>
+            {locales.length > 1 && (
+              <nav aria-label={t('a11y.languageSwitcher')} className="site-menu-section">
+                <p className="eyebrow">{t('a11y.languageSwitcher')}</p>
+                <ul className="mt-2 flex flex-wrap gap-2">
+                  {locales.map((l) => (
+                    <li key={l}>
+                      <Link
+                        href={switchLocalePath(pathname, l)}
+                        hrefLang={LOCALE_META[l].hreflang}
+                        lang={l}
+                        aria-current={l === locale ? 'true' : undefined}
+                        className={`chip ${l === locale ? 'chip-active' : ''}`}
+                        prefetch={false}
+                      >
+                        {LOCALE_META[l].label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+            <search className="site-menu-section">
+              <form action={href.tools(locale)} method="get">
+                <label htmlFor="menu-search" className="eyebrow block">
                   {t('nav.searchLabel')}
                 </label>
-                <input id="mobile-search" name="q" type="search" placeholder={t('nav.search')} className="input text-sm" />
+                <div className="mt-2 flex gap-2">
+                  <input id="menu-search" name="q" type="search" placeholder={t('nav.search')} autoComplete="off" enterKeyHint="search" className="input" />
+                  <button type="submit" className="btn">
+                    {t('nav.searchSubmit')}
+                  </button>
+                </div>
               </form>
-            </nav>
-          </details>
+            </search>
+          </SiteMenu>
         </div>
       </div>
     </header>

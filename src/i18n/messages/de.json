@@ -20,34 +20,33 @@
     "match": "Match",
     "explore": "Entdecken",
     "compare": "Vergleichen",
-    "doctor": "Doctor",
+    "doctor": "Stack Doctor",
     "pulse": "Pulse",
+    "pulseCount": "{count, plural, one {# Änderung} other {# Änderungen}} in den letzten 30 Tagen",
     "tasks": "Aufgaben",
     "search": "Tool suchen",
     "searchLabel": "Die Tool-Datenbank durchsuchen",
+    "searchSubmit": "Suchen",
     "menu": "Menü",
     "news": "News",
-    "learn": "Lernen"
+    "learn": "Lernen",
+    "costs": "Was kostet KI?"
   },
   "status": {
     "verified": {
       "label": "Verifiziert",
-      "short": "Verif.",
       "tooltip": "Auf der offiziellen Quelle bestätigt, mit wörtlichem Zitat."
     },
     "supported": {
       "label": "Gestützt",
-      "short": "Gest.",
       "tooltip": "Mehrere unabhängige Quellen stimmen überein, oder die offizielle Quelle erwähnt es, wurde aber noch nicht wörtlich geprüft."
     },
     "community": {
       "label": "Community",
-      "short": "Comm.",
       "tooltip": "Nur auf Community- oder Social-Quellen gestützt."
     },
     "unverified": {
       "label": "Unbestätigt",
-      "short": "Unbest.",
       "tooltip": "Noch nicht auf der offiziellen Website bestätigt."
     }
   },
@@ -56,7 +55,7 @@
     "aging": "Prüfung bald fällig",
     "stale": "Möglicherweise veraltet",
     "unknown": "Noch nicht geprüft",
-    "staleBanner": "⚠️ Die Informationen sind möglicherweise veraltet. Zuletzt geprüft am {date}.",
+    "staleBanner": "Die Informationen sind möglicherweise veraltet. Zuletzt geprüft am {date}.",
     "checkedOn": "Geprüft am {date}"
   },
   "footer": {
@@ -102,14 +101,9 @@
     "copyLink": "Link kopieren",
     "tools": "{count, plural, =0 {keine Tools} one {# Tool} other {# Tools}}",
     "approxEur": "≈ {amount}",
+    "approxEurEcb": "≈ {amount} · EZB {date}",
     "fxNote": "Umgerechnet mit dem EZB-Referenzkurs vom {date}.",
     "updated": "Aktualisiert am {date}"
-  },
-  "ticker": {
-    "label": "AI Pulse: aktuelle Änderungen",
-    "pause": "Ticker anhalten",
-    "play": "Ticker abspielen",
-    "all": "Alle Änderungen"
   },
   "errors": {
     "notFoundTitle": "Für diese Seite gibt es keinen Beleg.",
@@ -223,9 +217,10 @@
     "notVerified": "Noch nicht wörtlich auf der offiziellen Quelle bestätigt",
     "evidence": "Nachweis",
     "sources": "Quellen",
+    "sourceCount": "{count, plural, =0 {keine Quellen} one {# Quelle} other {# Quellen}}",
     "noSources": "Keine Quellen erfasst.",
     "howWeKnow": "Woher wissen wir das?",
-    "explainer": "Jeder Wert hat einen Status, ein Datum und Quellen. Unsere Agenten prüfen offizielle Seiten automatisch; was noch nicht wörtlich bestätigt ist, wird als GESTÜTZT oder UNBESTÄTIGT markiert.",
+    "explainer": "Jeder Wert hat einen Status, ein Datum und Quellen. Unsere Agenten prüfen offizielle Seiten automatisch; was noch nicht wörtlich bestätigt ist, wird als Gestützt oder Unbestätigt markiert.",
     "methodologyLink": "So funktioniert unsere Methodik"
   },
   "tool": {
@@ -902,8 +897,10 @@
       }
     },
     "levelGroup": "Ansicht",
-    "levelBasis": "⚡ Basis",
-    "levelAdvanced": "💻 Advanced & Developer",
+    "levelBasis": "Basis",
+    "levelAdvanced": "Advanced & Developer",
+    "levelBasisShort": "Basis",
+    "levelAdvancedShort": "Advanced",
     "levelBasisHint": "Verständlich: Gratis-Plan, Kosten, Bedienbarkeit und Plattformen",
     "levelAdvancedHint": "Technisch: API, Integrationen, Self-Hosting, Preismodell und Niveau",
     "matrixAssistants": "Beliebte KI-Assistenten im Vergleich",
@@ -1162,7 +1159,7 @@
     "aiTitle": "Wo wir KI einsetzen",
     "aiBody": "Um deine Frage zu verstehen (wenn die Schlüsselwortanalyse unsicher ist) und um Daten aus offiziellen Seiten zu extrahieren, immer mit einer Prüfung, dass jeder Wert wörtlich in der Quelle steht. Mit KI verfasste Texte sind gekennzeichnet. Die Empfehlungen selbst werden berechnet, nicht generiert.",
     "limitsTitle": "Einschränkungen",
-    "limitsBody": "Preise sind so, wie der Anbieter sie zeigt, meist ohne MwSt. und manchmal je nach Region verschieden. Dollarbeträge werden mit dem EZB-Tageskurs umgerechnet und sind Richtwerte. Ein Teil der Daten stammt aus Webrecherche über mehrere Quellen und ist daher als GESTÜTZT markiert, bis unsere Agenten ihn auf der offiziellen Seite bestätigen.",
+    "limitsBody": "Preise sind so, wie der Anbieter sie zeigt, meist ohne MwSt. und manchmal je nach Region verschieden. Dollarbeträge werden mit dem EZB-Tageskurs umgerechnet und sind Richtwerte. Ein Teil der Daten stammt aus Webrecherche über mehrere Quellen und ist daher als Gestützt markiert, bis unsere Agenten ihn auf der offiziellen Seite bestätigen.",
     "correctionsTitle": "Korrekturen",
     "correctionsBody": "Stimmt etwas nicht? Melde es mit einer Quelle; wir antworten und führen ein öffentliches Korrekturprotokoll."
   },

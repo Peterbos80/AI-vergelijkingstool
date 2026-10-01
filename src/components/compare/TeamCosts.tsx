@@ -49,7 +49,7 @@ function PlanHead({ row, users, cheapest, t, locale }: { row: TeamRow; users: nu
       {notes.length > 0 && <span className="mt-0.5 block text-xs text-ink-2">{notes.join(' · ')}</span>}
       <span className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3">
         {p.quota && <span className="mono">“{p.quota}”</span>}
-        <Stamp status={p.status} t={t} />
+        <Stamp status={p.status} t={t} locale={locale} />
         <span>{t('costs.observed', { date: formatDate(p.observedAt, locale) })}</span>
         <a href={href.toolPricing(locale, p.tool)}>{t('costs.receipt')}</a>
       </span>

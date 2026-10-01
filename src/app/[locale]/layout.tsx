@@ -6,14 +6,16 @@ import { grotesk, plexMono } from '../fonts';
 import { isEnabledLocale, LOCALE_META, type Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
 import { getCatalog } from '@/lib/catalog';
-import { EVENT_ICON, eventTitle } from '@/lib/catalog/events';
-import { href } from '@/lib/routes';
+import { eventDate } from '@/lib/catalog/events';
 import { emailEnabled, siteUrl } from '@/lib/env';
 import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
-import { PulseTicker, type TickerItem } from '@/components/site/PulseTicker';
 import { logError } from '@/lib/ops/errors';
 import { LEVEL_SCRIPT } from '@/lib/levels';
+import { nowMs } from '@/lib/time';
+
+/** The Pulse item in the navigation counts the changes of the last 30 days. */
+const PULSE_WINDOW_MS = 30 * 86_400_000;
 
 export const dynamic = 'force-dynamic';
 
@@ -50,23 +52,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   const pathname = h.get('x-pathname') ?? `/${locale}`;
   const nonce = h.get('x-nonce') ?? undefined;
 
-  let tickerItems: TickerItem[] = [];
+  let pulseCount = 0;
   let stats = null;
   try {
     const catalog = await getCatalog();
     stats = catalog.stats;
-    tickerItems = catalog.events
-      .filter((e) => e.significance >= 50)
-      .slice(0, 12)
-      .map((e) => {
-        const tool = e.toolId ? catalog.toolsById.get(e.toolId) : undefined;
-        return {
-          id: e.id,
-          icon: EVENT_ICON[e.kind],
-          text: tool ? `${tool.name} — ${eventTitle(e, locale)}` : eventTitle(e, locale),
-          href: tool ? href.tool(locale, tool.slug) : href.pulse(locale),
-        };
-      });
+    const since = nowMs() - PULSE_WINDOW_MS;
+    pulseCount = catalog.events.filter((e) => eventDate(e).getTime() >= since).length;
   } catch (err) {
     await logError('app', 'layout: catalog unavailable', err);
   }
@@ -81,12 +73,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
         <a href="#main" className="skip-link">
           {t('a11y.skipToContent')}
         </a>
-        <Header locale={locale} t={t} pathname={pathname} />
-        <PulseTicker
-          items={tickerItems}
-          allHref={href.pulse(locale)}
-          labels={{ region: t('ticker.label'), pause: t('ticker.pause'), play: t('ticker.play'), all: t('ticker.all') }}
-        />
+        <Header locale={locale} t={t} pathname={pathname} pulseCount={pulseCount} />
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
         </main>

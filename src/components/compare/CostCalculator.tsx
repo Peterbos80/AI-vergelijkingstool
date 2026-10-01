@@ -12,6 +12,8 @@ import { formatDate, formatMoney } from '@/i18n/formatters';
 import { href } from '@/lib/routes';
 import { computeMeter, type MeterData, type MeterPlan, type MeterTool, type PlanCost, type SkippedPlan } from '@/lib/compare/usage';
 import { LabelChip } from './LabelChip';
+import { ReceiptChip } from '@/components/data/ReceiptChip';
+import type { FactStatus } from '@/lib/db/schema';
 
 export function useCostsT(locale: Locale, messages: MessageTree): Translator {
   return useMemo(() => createTranslator(locale, LOCALE_META[locale].intl, messages), [locale, messages]);
@@ -32,12 +34,9 @@ export function useHydrated(): boolean {
   );
 }
 
-export function Stamp({ status, t }: { status: string; t: Translator }) {
-  return (
-    <span className={`stamp stamp-${status}`} title={t(`status.${status}.tooltip`)}>
-      {t(`status.${status}.short`)}
-    </span>
-  );
+/** The evidence status of a plan: the compact receipt chip (full status name, never abbreviated). */
+export function Stamp({ status, t, locale }: { status: FactStatus; t: Translator; locale: Locale }) {
+  return <ReceiptChip status={status} t={t} locale={locale} />;
 }
 
 /** "€ 29", with the vendor's amount and the ECB day when it was converted. */
@@ -106,7 +105,7 @@ function Receipt({ plan, slug, locale, t }: { plan: MeterPlan; slug: string; loc
   return (
     <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-3">
       {plan.quota && <span className="mono">“{plan.quota}”</span>}
-      <Stamp status={plan.status} t={t} />
+      <Stamp status={plan.status} t={t} locale={locale} />
       <span>{t('costs.observed', { date: formatDate(plan.observedAt, locale) })}</span>
       <a href={href.toolPricing(locale, slug)}>{t('costs.receipt')}</a>
     </p>

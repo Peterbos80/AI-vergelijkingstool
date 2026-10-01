@@ -1,7 +1,7 @@
 /**
  * Freshness engine (docs/strategy/08 §6). Every datapoint type has a
  * "fresh" and an "aging" limit in days; beyond that it is stale and the UI
- * shows "⚠️ Information may be outdated".
+ * shows a warning: "Information may be outdated".
  */
 import type { Freshness } from '@/lib/db/schema';
 import type { Settings } from '@/lib/settings/defaults';

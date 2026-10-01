@@ -20,14 +20,17 @@
     "match": "Match",
     "explore": "Verkennen",
     "compare": "Vergelijken",
-    "doctor": "Doctor",
+    "doctor": "Stack Doctor",
     "pulse": "Pulse",
+    "pulseCount": "{count, plural, one {# wijziging} other {# wijzigingen}} in de laatste 30 dagen",
     "tasks": "Taken",
     "search": "Zoek een tool",
     "searchLabel": "Zoek in de tooldatabase",
+    "searchSubmit": "Zoeken",
     "menu": "Menu",
     "news": "Nieuws",
-    "learn": "Uitleg"
+    "learn": "Leren",
+    "costs": "Wat kost AI?"
   },
   "footer": {
     "about": "Over",
@@ -72,28 +75,25 @@
     "copyLink": "Kopieer link",
     "tools": "{count, plural, =0 {geen tools} one {# tool} other {# tools}}",
     "approxEur": "≈ {amount}",
+    "approxEurEcb": "≈ {amount} · ECB {date}",
     "fxNote": "Omgerekend met ECB-referentiekoers van {date}.",
     "updated": "Bijgewerkt {date}"
   },
   "status": {
     "verified": {
       "label": "Gecontroleerd",
-      "short": "Gecontr.",
       "tooltip": "Bevestigd op de officiële bron, met letterlijke bronzin."
     },
     "supported": {
-      "label": "Ondersteund",
-      "short": "Onderst.",
+      "label": "Onderbouwd",
       "tooltip": "Meerdere onafhankelijke bronnen komen overeen, of de officiële bron noemt het maar het is nog niet letterlijk gecontroleerd."
     },
     "community": {
       "label": "Community",
-      "short": "Comm.",
       "tooltip": "Alleen gebaseerd op community- of socialebronnen."
     },
     "unverified": {
       "label": "Onbevestigd",
-      "short": "Onbev.",
       "tooltip": "Nog niet bevestigd op de officiële site."
     }
   },
@@ -102,14 +102,8 @@
     "aging": "Controle wordt binnenkort herhaald",
     "stale": "Mogelijk verouderd",
     "unknown": "Nog niet gecontroleerd",
-    "staleBanner": "⚠️ Informatie mogelijk verouderd. Laatst gecontroleerd op {date}.",
+    "staleBanner": "Informatie mogelijk verouderd. Laatst gecontroleerd op {date}.",
     "checkedOn": "Gecontroleerd {date}"
-  },
-  "ticker": {
-    "label": "AI Pulse: recente wijzigingen",
-    "pause": "Ticker pauzeren",
-    "play": "Ticker afspelen",
-    "all": "Alle wijzigingen"
   },
   "errors": {
     "notFoundTitle": "Deze pagina heeft geen bonnetje.",
@@ -223,9 +217,10 @@
     "notVerified": "Nog niet letterlijk bevestigd op de officiële bron",
     "evidence": "Bewijs",
     "sources": "Bronnen",
+    "sourceCount": "{count, plural, =0 {geen bronnen} one {# bron} other {# bronnen}}",
     "noSources": "Geen bronnen vastgelegd.",
     "howWeKnow": "Hoe weten we dit?",
-    "explainer": "Elke waarde heeft een status, een datum en bronnen. Onze agents controleren de officiële pagina's automatisch; wat nog niet letterlijk is bevestigd, staat als ONDERSTEUND of ONBEVESTIGD.",
+    "explainer": "Elke waarde heeft een status, een datum en bronnen. Onze agents controleren de officiële pagina's automatisch; wat nog niet letterlijk is bevestigd, staat als Onderbouwd of Onbevestigd.",
     "methodologyLink": "Zo werkt onze methodologie"
   },
   "tool": {
@@ -881,8 +876,10 @@
       }
     },
     "levelGroup": "Weergave",
-    "levelBasis": "⚡ Basis",
-    "levelAdvanced": "💻 Advanced & Developer",
+    "levelBasis": "Basis",
+    "levelAdvanced": "Advanced & Developer",
+    "levelBasisShort": "Basis",
+    "levelAdvancedShort": "Advanced",
     "levelBasisHint": "In gewone taal: gratis plan, kosten, gebruiksgemak en waar het werkt",
     "levelAdvancedHint": "Technisch: API, integraties, zelf hosten, prijsmodel en niveau",
     "matrixAssistants": "Populaire AI-assistenten naast elkaar",
@@ -1219,7 +1216,7 @@
     "aiTitle": "Waar we AI gebruiken",
     "aiBody": "Om je vraag te begrijpen (als de trefwoordanalyse twijfelt) en om gegevens uit officiële pagina's te halen, altijd met een controle dat elke waarde letterlijk in de bron staat. Teksten die met AI zijn samengesteld, labelen we. De aanbevelingen zelf worden berekend, niet gegenereerd.",
     "limitsTitle": "Beperkingen",
-    "limitsBody": "Prijzen zijn zoals de maker ze toont, meestal exclusief btw en soms per regio anders. Bedragen in dollars rekenen we om met de dagkoers van de ECB en dat is indicatief. Een deel van de gegevens komt uit webonderzoek met meerdere bronnen en heeft daarom de status ONDERSTEUND, totdat onze agents het op de officiële pagina hebben bevestigd.",
+    "limitsBody": "Prijzen zijn zoals de maker ze toont, meestal exclusief btw en soms per regio anders. Bedragen in dollars rekenen we om met de dagkoers van de ECB en dat is indicatief. Een deel van de gegevens komt uit webonderzoek met meerdere bronnen en heeft daarom de status Onderbouwd, totdat onze agents het op de officiële pagina hebben bevestigd.",
     "correctionsTitle": "Correcties",
     "correctionsBody": "Klopt er iets niet? Meld het met een bron; we reageren en houden een openbaar correctielog bij."
   },

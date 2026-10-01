@@ -8,6 +8,7 @@ import { href } from '@/lib/routes';
 import { VisitLink } from '@/components/data/VisitLink';
 import { ToolMonogram } from '@/components/data/ToolMonogram';
 import { entryPriceLabel } from '@/components/data/format';
+import { Icon } from '@/components/ui/Icon';
 import { limitationText, reasonText, stepName } from './StackReceipt';
 
 /** Per step: why this tool, what to watch out for, and 2–3 alternatives. */
@@ -62,7 +63,10 @@ export function StepDetails({
                   <h4 className="eyebrow">{t('match.why')}</h4>
                   <ul className="mt-1.5 space-y-1">
                     {s.reasons.map((r, i) => (
-                      <li key={i}>✓ {reasonText(r, t, locale, catalog, task)}</li>
+                      <li key={i} className="flex gap-1.5">
+                        <Icon name="check" size={16} className="mt-0.5 text-ok" />
+                        <span>{reasonText(r, t, locale, catalog, task)}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -70,10 +74,16 @@ export function StepDetails({
                   <h4 className="eyebrow">{t('match.limitations')}</h4>
                   <ul className="mt-1.5 space-y-1 text-ink-2">
                     {s.limitations.map((l, i) => (
-                      <li key={`l${i}`}>! {limitationText(l, t)}</li>
+                      <li key={`l${i}`} className="flex gap-1.5">
+                        <Icon name="triangle-alert" size={16} className="mt-0.5 text-ink-3" />
+                        <span>{limitationText(l, t)}</span>
+                      </li>
                     ))}
                     {(text?.limitations ?? []).slice(0, 2).map((x) => (
-                      <li key={x}>! {x}</li>
+                      <li key={x} className="flex gap-1.5">
+                        <Icon name="triangle-alert" size={16} className="mt-0.5 text-ink-3" />
+                        <span>{x}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -87,7 +97,7 @@ export function StepDetails({
                         <li key={a.toolId}>
                           <Link href={href.tool(locale, alt.slug)}>{alt.name}</Link>{' '}
                           <span className="text-ink-3">
-                            · {entryPriceLabel(alt, t, locale)}
+                            · <span className="num">{entryPriceLabel(alt, t, locale)}</span>
                             {a.reason && ` · ${reasonText(a.reason, t, locale, catalog, task)}`}
                           </span>
                         </li>

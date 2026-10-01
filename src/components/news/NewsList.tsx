@@ -4,6 +4,7 @@ import type { Translator } from '@/i18n/format';
 import { formatDate } from '@/i18n/formatters';
 import { newsPerson, type NewsItem } from '@/lib/news';
 import { href } from '@/lib/routes';
+import { Icon } from '@/components/ui/Icon';
 
 /**
  * News items as headline, outlet, date and the experts they name. The link
@@ -15,7 +16,7 @@ export function NewsList({ items, t, locale, compact = false }: { items: NewsIte
       {items.map((n) => (
         <li key={n.id} className="news-item" data-kind={n.kind}>
           <a href={n.url} rel="nofollow noopener noreferrer" target="_blank" className={`${compact ? 'text-sm' : 'text-base'} font-semibold no-underline hover:underline`}>
-            <span aria-hidden="true">{n.kind === 'video' ? '▶ ' : ''}</span>
+            {n.kind === 'video' && <Icon name="play" size={14} className="mr-1.5 text-ink-3" />}
             {n.title}
             <span className="visually-hidden"> ({t('news.opensSource', { source: n.sourceName })})</span>
           </a>

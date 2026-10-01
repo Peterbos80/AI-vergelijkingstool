@@ -11,6 +11,7 @@ export function Footer({ locale, t, stats, newsletter }: { locale: Locale; t: Tr
     [
       { label: t('nav.match'), href: href.home(locale) },
       { label: t('nav.explore'), href: href.tools(locale) },
+      { label: t('nav.costs'), href: href.costs(locale) },
       { label: t('footer.tasks'), href: href.tasks(locale) },
       { label: t('footer.categories'), href: href.categories(locale) },
       { label: t('start.breadcrumb'), href: href.start(locale) },

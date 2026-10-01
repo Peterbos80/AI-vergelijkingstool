@@ -33,7 +33,7 @@ export function PriceHistoryChart({ rows, locale, label }: { rows: PlanHistoryRo
         <line x1={pad} y1={H - pad} x2={W - pad} y2={H - pad} stroke="var(--line)" />
         {segs.map((s, i) => (
           <g key={i}>
-            <line x1={s.x1} y1={s.y} x2={Math.max(s.x2, s.x1 + 2)} y2={s.y} stroke={s.p.validTo ? 'var(--ink-3)' : 'var(--signal)'} strokeWidth="2.5" />
+            <line x1={s.x1} y1={s.y} x2={Math.max(s.x2, s.x1 + 2)} y2={s.y} stroke={s.p.validTo ? 'var(--ink-3)' : 'var(--ink)'} strokeWidth="2.5" />
             {i > 0 && <line x1={s.x1} y1={segs[i - 1]!.y} x2={s.x1} y2={s.y} stroke="var(--ink-3)" strokeDasharray="3 3" />}
             <text x={s.x1} y={s.y - 6} fontSize="10" fill="var(--ink-2)" fontFamily="var(--font-mono)">
               {formatMoney(s.p.priceCents, s.p.currency, locale)}

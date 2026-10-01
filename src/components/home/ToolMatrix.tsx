@@ -6,6 +6,7 @@ import type { CatalogTool } from '@/lib/catalog/types';
 import { href } from '@/lib/routes';
 import { entryPriceLabel } from '@/components/data/format';
 import { ToolMonogram } from '@/components/data/ToolMonogram';
+import { Icon } from '@/components/ui/Icon';
 
 const CONSUMER_PLATFORMS = ['web', 'ios', 'android', 'windows', 'macos'];
 const DEVELOPER_PLATFORMS = ['api', 'cli', 'vscode', 'jetbrains', 'chrome_extension', 'linux', 'self_hosted'];
@@ -20,7 +21,12 @@ function Missing({ t }: { t: Translator }) {
 }
 
 function Yes({ children }: { children: React.ReactNode }) {
-  return <span className="font-medium text-ok">✓ {children}</span>;
+  return (
+    <span className="inline-flex items-center gap-1 font-medium text-ok">
+      <Icon name="check" size={16} />
+      {children}
+    </span>
+  );
 }
 
 /**
@@ -88,11 +94,11 @@ export function ToolMatrix({ tools, t, locale, caption }: { tools: CatalogTool[]
                     <>
                       <span className="font-medium text-ok">{t('common.free')}</span>
                       {tool.entryPriceCents !== null && (
-                        <span className="mono tabular block text-xs text-ink-3">{t('hub.paidFrom', { price: entryPriceLabel(tool, t, locale) })}</span>
+                        <span className="num block text-xs text-ink-3">{t('hub.paidFrom', { price: entryPriceLabel(tool, t, locale) })}</span>
                       )}
                     </>
                   ) : tool.entryPriceCents !== null ? (
-                    <span className="mono tabular">{t('hub.from', { price: entryPriceLabel(tool, t, locale) })}</span>
+                    <span className="num">{t('hub.from', { price: entryPriceLabel(tool, t, locale) })}</span>
                   ) : (
                     <Missing t={t} />
                   )}

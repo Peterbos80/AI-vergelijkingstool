@@ -55,7 +55,15 @@ test('unknown pages return a real 404', async ({ page }) => {
 
 test('the language switcher keeps the page', async ({ page }) => {
   await page.goto('/nl/tools/descript');
-  await page.locator('a[hreflang="en"], a[href="/en/tools/descript"]').first().click();
+  // Below 1024px the language choice sits in the full-screen menu.
+  const menu = page.getByRole('button', { name: 'Menu openen' });
+  if (await menu.isVisible()) {
+    await expect(async () => {
+      await menu.click();
+      await expect(page.getByRole('dialog')).toBeVisible({ timeout: 1_000 });
+    }).toPass();
+  }
+  await page.locator('a[hreflang="en"]:visible').first().click();
   await expect(page).toHaveURL(/\/en\/tools\/descript$/);
 });
 

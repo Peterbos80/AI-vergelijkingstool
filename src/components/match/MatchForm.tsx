@@ -1,6 +1,7 @@
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
 import { href } from '@/lib/routes';
+import { Icon } from '@/components/ui/Icon';
 
 /** The one question: "What are you trying to do?" (GET form, works without JS). */
 export function MatchForm({
@@ -37,7 +38,7 @@ export function MatchForm({
           enterKeyHint="go"
         />
         <button type="submit" className={`btn ${compact ? '' : 'min-h-14 px-6 text-base'}`}>
-          {t('match.submit')} <span aria-hidden="true">⏎</span>
+          {t('match.submit')} <Icon name="corner-down-left" size={16} />
         </button>
       </div>
     </form>

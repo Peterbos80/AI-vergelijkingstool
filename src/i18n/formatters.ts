@@ -40,6 +40,14 @@ export function formatDate(date: Date | string | null | undefined, locale: Local
   }).format(d);
 }
 
+/** Day and month only ("29 sep"), for dense rows where the year is evident. */
+export function formatDayMonth(date: Date | string | null | undefined, locale: Locale): string {
+  if (!date) return '—';
+  const d = typeof date === 'string' ? new Date(date) : date;
+  if (Number.isNaN(d.getTime())) return '—';
+  return new Intl.DateTimeFormat(intl(locale), { day: 'numeric', month: 'short', timeZone: 'Europe/Amsterdam' }).format(d);
+}
+
 export function formatDateTime(date: Date | string | null | undefined, locale: Locale): string {
   if (!date) return '—';
   const d = typeof date === 'string' ? new Date(date) : date;

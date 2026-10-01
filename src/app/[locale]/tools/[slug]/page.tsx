@@ -6,7 +6,7 @@ import { getT } from '@/i18n/server';
 import { formatDate, formatMoney } from '@/i18n/formatters';
 import { getCatalog, nameOf, toolText } from '@/lib/catalog';
 import { getToolDetail } from '@/lib/catalog/detail';
-import { EVENT_ICON, eventDate, eventTitle, localized } from '@/lib/catalog/events';
+import { EVENT_ICON, eventDate, eventTitle, eventToneClass, localized } from '@/lib/catalog/events';
 import { fairFightsFor } from '@/lib/engine/compare';
 import { affiliateToolIds } from '@/lib/monetization/affiliate';
 import { href } from '@/lib/routes';
@@ -25,7 +25,9 @@ import { FactList, hasFactValue } from '@/components/data/FactList';
 import { ToolRow } from '@/components/data/ToolRow';
 import { VideoFacade } from '@/components/data/VideoFacade';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
-import { approxEur, entryPriceLabel, planPriceLabel } from '@/components/data/format';
+import { Icon } from '@/components/ui/Icon';
+import { entryPriceLabel, planPriceLabel } from '@/components/data/format';
+import { FxApprox } from '@/components/data/Price';
 import { EuAlternatives } from '@/components/compare/EuAlternatives';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[slug]'>): Promise<Metadata> {
@@ -249,15 +251,14 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
             ) : (
               <ul className="receipt mt-4 divide-y divide-dashed divide-line px-4 py-3">
                 {tool.plans.map((p) => {
-                  const eur = approxEur(p.priceCents, p.currency, catalog.fx.rates, locale);
                   return (
                     <li key={p.key} className="py-2.5">
                       <div className="flex flex-wrap items-baseline justify-between gap-2">
                         <span className="font-semibold">{p.name}</span>
-                        <span className="tabular flex items-center gap-2">
+                        <span className="num flex flex-wrap items-center justify-end gap-x-2 gap-y-1">
                           {planPriceLabel(p, t, locale)}
-                          {eur && <span className="text-xs text-ink-3">{t('common.approxEur', { amount: eur })}</span>}
-                          <StatusStamp status={p.status} t={t} compact />
+                          <FxApprox cents={p.priceCents} currency={p.currency} fx={catalog.fx} t={t} locale={locale} />
+                          <StatusStamp status={p.status} t={t} />
                         </span>
                       </div>
                       {p.quota && <p className="mt-0.5 text-xs text-ink-3">{p.quota}</p>}
@@ -301,7 +302,8 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
                       {formatDate(eventDate(e), locale)} · {t(`eventKind.${e.kind}`)}
                     </p>
                     <p className="font-medium">
-                      <span aria-hidden="true">{EVENT_ICON[e.kind]}</span> {eventTitle(e, locale)}
+                      <Icon name={EVENT_ICON[e.kind]} size={16} className={`mr-1.5 ${eventToneClass(e.kind)}`} />
+                      {eventTitle(e, locale)}
                     </p>
                     {localized(e.summary, locale) && <p className="text-ink-2">{localized(e.summary, locale)}</p>}
                     {e.sourceUrl && (

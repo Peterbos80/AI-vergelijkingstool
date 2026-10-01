@@ -20,14 +20,17 @@
     "match": "Match",
     "explore": "Explore",
     "compare": "Compare",
-    "doctor": "Doctor",
+    "doctor": "Stack Doctor",
     "pulse": "Pulse",
+    "pulseCount": "{count, plural, one {# change} other {# changes}} in the last 30 days",
     "tasks": "Tasks",
     "search": "Search a tool",
     "searchLabel": "Search the tool database",
+    "searchSubmit": "Search",
     "menu": "Menu",
     "news": "News",
-    "learn": "Learn"
+    "learn": "Learn",
+    "costs": "What does AI cost?"
   },
   "footer": {
     "about": "About",
@@ -72,28 +75,25 @@
     "copyLink": "Copy link",
     "tools": "{count, plural, =0 {no tools} one {# tool} other {# tools}}",
     "approxEur": "≈ {amount}",
+    "approxEurEcb": "≈ {amount} · ECB {date}",
     "fxNote": "Converted with the ECB reference rate of {date}.",
     "updated": "Updated {date}"
   },
   "status": {
     "verified": {
       "label": "Verified",
-      "short": "Verif.",
       "tooltip": "Confirmed on the official source, with a verbatim quote."
     },
     "supported": {
       "label": "Supported",
-      "short": "Supp.",
       "tooltip": "Several independent sources agree, or the official source mentions it but it has not been checked verbatim yet."
     },
     "community": {
       "label": "Community",
-      "short": "Comm.",
       "tooltip": "Based on community or social sources only."
     },
     "unverified": {
       "label": "Unverified",
-      "short": "Unver.",
       "tooltip": "Not yet confirmed on the official site."
     }
   },
@@ -102,14 +102,8 @@
     "aging": "Re-check due soon",
     "stale": "May be outdated",
     "unknown": "Not checked yet",
-    "staleBanner": "⚠️ Information may be outdated. Last checked {date}.",
+    "staleBanner": "Information may be outdated. Last checked {date}.",
     "checkedOn": "Checked {date}"
-  },
-  "ticker": {
-    "label": "AI Pulse: recent changes",
-    "pause": "Pause ticker",
-    "play": "Play ticker",
-    "all": "All changes"
   },
   "errors": {
     "notFoundTitle": "This page has no receipt.",
@@ -223,9 +217,10 @@
     "notVerified": "Not yet confirmed verbatim on the official source",
     "evidence": "Evidence",
     "sources": "Sources",
+    "sourceCount": "{count, plural, =0 {no sources} one {# source} other {# sources}}",
     "noSources": "No sources recorded.",
     "howWeKnow": "How do we know?",
-    "explainer": "Every value has a status, a date and sources. Our agents check official pages automatically; anything not yet confirmed verbatim is marked SUPPORTED or UNVERIFIED.",
+    "explainer": "Every value has a status, a date and sources. Our agents check official pages automatically; anything not yet confirmed verbatim is marked Supported or Unverified.",
     "methodologyLink": "How our methodology works"
   },
   "tool": {
@@ -881,8 +876,10 @@
       }
     },
     "levelGroup": "View",
-    "levelBasis": "⚡ Basic",
-    "levelAdvanced": "💻 Advanced & Developer",
+    "levelBasis": "Basic",
+    "levelAdvanced": "Advanced & Developer",
+    "levelBasisShort": "Basic",
+    "levelAdvancedShort": "Advanced",
     "levelBasisHint": "Plain language: free plan, cost, ease of use and where it runs",
     "levelAdvancedHint": "Technical: API, integrations, self-hosting, pricing model and level",
     "matrixAssistants": "Popular AI assistants side by side",
@@ -1219,7 +1216,7 @@
     "aiTitle": "Where we use AI",
     "aiBody": "To understand your question (when keyword analysis is unsure) and to extract data from official pages, always with a check that every value appears verbatim in the source. Text composed with AI is labelled. The recommendations themselves are computed, not generated.",
     "limitsTitle": "Limitations",
-    "limitsBody": "Prices are as shown by the vendor, usually excluding VAT and sometimes different per region. Dollar amounts are converted with the ECB daily rate and are indicative. Part of the data comes from web research across several sources and is therefore marked SUPPORTED until our agents confirm it on the official page.",
+    "limitsBody": "Prices are as shown by the vendor, usually excluding VAT and sometimes different per region. Dollar amounts are converted with the ECB daily rate and are indicative. Part of the data comes from web research across several sources and is therefore marked Supported until our agents confirm it on the official page.",
     "correctionsTitle": "Corrections",
     "correctionsBody": "Something wrong? Report it with a source; we respond and keep a public corrections log."
   },
