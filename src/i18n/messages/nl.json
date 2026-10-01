@@ -471,33 +471,33 @@
   },
   "costs": {
     "metaTitle": "Wat kost AI voor jouw gebruik? Rekenhulp met bonnetjes",
-    "metaDescription": "Reken uit wat transcriberen, voice-overs, avatarvideo's, audio opschonen en nasynchroniseren per maand kosten bij jouw gebruik, en wat een team betaalt. Elk bedrag met bron, datum en ECB-koers.",
+    "metaDescription": "Reken uit wat het per maand kost om audio uit te schrijven, voice-overs en video's met een AI-presentator te maken, audio op te schonen of video's te vertalen. En wat een team betaalt. Elk bedrag met bron en datum.",
     "title": "Wat kost AI voor jouw gebruik?",
-    "intro": "Vul in hoeveel je per maand gebruikt. Je ziet per tool het goedkoopste plan dat dat dekt, met bron en datum. De volgorde is alleen de berekende prijs.",
+    "intro": "Vul in hoeveel je per maand gebruikt. Je ziet per tool het goedkoopste plan dat genoeg is, met bron en datum. De volgorde gaat alleen op prijs.",
     "tabsLabel": "Soort berekening",
     "tabUsage": "Per gebruik",
     "tabTeam": "Teamkosten",
     "pickMeter": "Wat wil je doen?",
     "taskHeading": "Wat kost het voor mij?",
-    "taskIntro": "Schuif naar jouw gebruik per maand. Je ziet per tool het goedkoopste plan dat het dekt.",
+    "taskIntro": "Schuif naar hoeveel je per maand gebruikt. Je ziet per tool het goedkoopste plan dat genoeg is.",
     "hubLink": "Alle rekenhulpen en teamkosten",
     "taskNotes": {
-      "automatic-meeting-notes": "Deze rekenhulp telt alleen uitgeschreven minuten audio. Samenvattingen en een meetingbot zitten er niet in."
+      "automatic-meeting-notes": "Deze rekenhulp telt alleen de minuten audio die worden uitgeschreven. Samenvattingen en een bot die meedoet in je vergadering tellen niet mee."
     },
     "meters": {
       "transcribe": {
-        "title": "Audio transcriberen",
+        "title": "Audio uitschrijven",
         "question": "Hoeveel uur audio wil je per maand laten uitschrijven?",
         "intro": "Interviews, podcasts of opnames omzetten in tekst. We tellen de minuten audio die een plan per maand uitschrijft."
       },
       "voiceover": {
         "title": "Voice-over maken",
         "question": "Hoeveel minuten spraak wil je per maand maken?",
-        "intro": "Tekst laten inspreken door een AI-stem. We tellen de minuten spraak die een plan per maand maakt; een jaarlimiet delen we door 12."
+        "intro": "Tekst laten inspreken door een AI-stem. We tellen de minuten spraak die een plan per maand maakt. Een limiet per jaar delen we door 12."
       },
       "avatar": {
-        "title": "Avatarvideo",
-        "question": "Hoeveel minuten avatarvideo wil je per maand maken?",
+        "title": "Video met AI-presentator",
+        "question": "Hoeveel minuten video met een AI-presentator wil je per maand maken?",
         "intro": "Video's met een AI-presentator. We tellen de minuten video die een plan per maand maakt."
       },
       "audio-cleanup": {
@@ -506,8 +506,8 @@
         "intro": "Ruis en galm weghalen en het volume gelijk trekken. We tellen de uren audio die een plan per maand verwerkt."
       },
       "dubbing": {
-        "title": "Video nasynchroniseren",
-        "question": "Hoeveel minuten video wil je per maand laten nasynchroniseren?",
+        "title": "Video vertalen met AI-stem",
+        "question": "Hoeveel minuten video wil je per maand laten vertalen?",
         "intro": "Video's vertalen met een AI-stem. We tellen de minuten video die een plan per maand vertaalt."
       }
     },
@@ -518,18 +518,18 @@
     "unitHours": "uur/mnd",
     "unitMinutes": "min/mnd",
     "summary": "Bij {usage} per maand is {tool} ({plan}) het goedkoopst: {price} per maand.",
-    "summaryUnconverted": "Bij {usage} per maand: {count, plural, one {# tool} other {# tools}} berekend in de valuta van de maker (geen ECB-koers geladen).",
+    "summaryUnconverted": "Bij {usage} per maand: {count, plural, one {# tool} other {# tools}} berekend in de valuta van de maker, want we hebben nog geen wisselkoers.",
     "summaryNone": "Bij {usage} per maand kunnen we voor geen enkele tool een plan berekenen dat dit dekt.",
     "rankedLabel": "Goedkoopste plan per tool bij {usage} per maand",
     "original": "{amount} bij de maker, ECB-koers van {date}",
     "perMonth": "per maand",
     "perHour": "{price} per uur",
     "perMinute": "{price} per minuut",
-    "covers": "dekt {capacity} per maand",
+    "covers": "genoeg voor {capacity} per maand",
     "unlimited": "onbeperkt, zo noemt de maker het",
-    "usageHour": "{price} per uur, naar rato van je gebruik",
-    "usageMinutes": "{price} per {n} minuten, naar rato van je gebruik",
-    "approx": "limiet bij benadering",
+    "usageHour": "{price} per uur, je betaalt wat je gebruikt",
+    "usageMinutes": "{price} per {n} minuten, je betaalt wat je gebruikt",
+    "approx": "limiet is een schatting",
     "perUser": "prijs per gebruiker",
     "annualPlan": "limiet en prijs bij jaarbetaling",
     "annualPrice": "bij jaarbetaling {price} per maand",
@@ -548,14 +548,14 @@
       "not_time": "geen limiet in minuten of uren"
     },
     "unconvertedTitle": "Niet omgerekend naar euro",
-    "unconvertedNote": "Voor deze valuta is geen ECB-koers geladen. Je ziet het bedrag van de maker; we zetten het niet tussen de euro-bedragen.",
-    "notCoveredTitle": "Dekt jouw gebruik niet",
+    "unconvertedNote": "Voor deze munt hebben we geen wisselkoers. Je ziet het bedrag van de maker. Het staat niet tussen de bedragen in euro.",
+    "notCoveredTitle": "Niet genoeg voor jouw gebruik",
     "notCoveredMax": "grootste plan dat we kunnen berekenen: {capacity} per maand",
     "notComputableTitle": "Niet te berekenen",
-    "noteOrder": "De volgorde is alleen de berekende prijs. Affiliatelinks en sponsoring veranderen niets aan de volgorde.",
-    "noteOverage": "Extra kosten boven een bundel (overage) rekenen we niet mee. Gebruik je meer, dan schuif je door naar een groter plan.",
-    "noteFx": "Euro's omgerekend met de ECB-referentiekoers van {date}. Prijzen zoals de maker ze toont, meestal exclusief btw.",
-    "noteNoFx": "Er zijn geen ECB-koersen geladen: bedragen staan in de valuta van de maker. Prijzen zoals de maker ze toont, meestal exclusief btw.",
+    "noteOrder": "De volgorde gaat alleen op de berekende prijs. Partnerlinks en betaalde plekken veranderen daar niets aan.",
+    "noteOverage": "Kosten voor extra gebruik boven je bundel rekenen we niet mee. Gebruik je meer? Dan kies je een groter plan.",
+    "noteFx": "Omgerekend naar euro met de ECB-koers van {date}. Prijzen zoals de maker ze toont, meestal zonder btw.",
+    "noteNoFx": "We hebben geen wisselkoersen, dus bedragen staan in de valuta van de maker. Prijzen zoals de maker ze toont, meestal zonder btw.",
     "labelCheapest": "Goedkoopst voor jouw gebruik",
     "labelEuropean": "Europees bedrijf",
     "how": {
@@ -563,25 +563,25 @@
       "limits": "We gebruiken alleen limieten die de maker zelf noemt, in minuten of uren per maand of per jaar. Een jaarlimiet delen we door 12. Daglimieten en eenmalig tegoed tellen we nooit om naar een maand.",
       "cheapest": "Per tool kiezen we het goedkoopste plan dat jouw gebruik dekt. Kunnen we een plan niet berekenen, dan staat het apart met de reden.",
       "overage": "Extra kosten boven een bundel rekenen we niet mee, en credits rekenen we nooit zelf om naar minuten.",
-      "fx": "Euro's zijn omgerekend met de ECB-referentiekoers; het bedrag van de maker en de datum van de koers staan erbij.",
+      "fx": "Bedragen in euro zijn omgerekend met de ECB-koers. Het bedrag van de maker en de datum van de koers staan erbij.",
       "receipts": "Bij elk bedrag staan het plan, de limiettekst, de status en de datum van de bron. Geld verandert de volgorde nooit."
     },
     "labels": {
       "title": "Labels: berekend, geen winnaars",
       "cheapestName": "Goedkoopst voor jouw gebruik",
-      "cheapest": "De laagste berekende maandprijs voor wat jij invult, onder de tools die we konden berekenen. Verandert met je invoer; geen oordeel over kwaliteit.",
+      "cheapest": "De laagste maandprijs voor wat jij invult, van de tools die we konden uitrekenen. Dit verandert als jij iets anders invult. Het zegt niets over kwaliteit.",
       "trulyFreeName": "Echt bruikbaar gratis",
-      "trulyFree": "Een gratis plan zonder watermerk dat je ook commercieel mag gebruiken. Alleen als beide feiten met een bron bekend zijn; onbekend telt nooit als ja.",
+      "trulyFree": "Een gratis plan zonder watermerk dat je ook zakelijk mag gebruiken. Alleen als we van allebei een bron hebben. Weten we het niet, dan telt het nooit als ja.",
       "europeanName": "Europees bedrijf",
-      "european": "Het bedrijf achter de tool zit in de EU of de EER, het Verenigd Koninkrijk of Zwitserland. Dat zegt nog niets over waar je data staat."
+      "european": "Het bedrijf achter de tool zit in Europa: in de EU, Noorwegen, IJsland, Liechtenstein, het Verenigd Koninkrijk of Zwitserland. Dat zegt nog niets over waar je data staat."
     },
     "team": {
       "title": "Teamkosten",
-      "intro": "Voor plannen die per gebruiker of per plek rekenen: het aantal gebruikers keer de prijs, bij maandbetaling en bij jaarbetaling.",
+      "intro": "Voor plannen met een prijs per persoon: het aantal mensen keer de prijs, als je per maand of per jaar betaalt.",
       "pickGroup": "Soort tool",
       "groups": {
         "assistants": "AI-assistenten",
-        "meetings": "Notulen",
+        "meetings": "Vergaderverslagen",
         "coding": "Programmeren",
         "presentations": "Presentaties",
         "video": "Video bewerken"
@@ -601,19 +601,19 @@
       "colAnnual": "Per jaar, jaarbetaling",
       "colSaving": "Verschil per jaar",
       "unknown": "onbekend",
-      "minSeats": "minimaal {min} plekken",
-      "maxSeats": "tot {max} plekken",
+      "minSeats": "minimaal {min} personen",
+      "maxSeats": "tot {max} personen",
       "annualOnly": "alleen jaarbetaling",
       "annualPerUser": "{price} per maand bij jaarbetaling",
       "tooMany": "Past niet bij {users} gebruikers: {list}.",
-      "tooManyItem": "{tool} ({plan}), maximaal {max} plekken",
-      "noteOrder": "De volgorde is alleen de berekende jaarprijs voor de gekozen betaalwijze. Geld verandert de volgorde niet.",
-      "noteExtras": "Verplichte extra licenties (zoals Microsoft 365 bij Copilot) staan in de limiettekst en zijn niet meegerekend.",
+      "tooManyItem": "{tool} ({plan}), maximaal {max} personen",
+      "noteOrder": "De volgorde gaat alleen op de jaarprijs bij de gekozen manier van betalen. Niemand kan betalen voor een betere plek.",
+      "noteExtras": "Soms moet je er een ander abonnement bij nemen, zoals Microsoft 365 bij Copilot. Dat staat bij de limiet, maar we rekenen het niet mee.",
       "summaryEuroOnly": "{users, plural, one {# gebruiker} other {# gebruikers}}, {billing}: het goedkoopst in euro's is {tool} ({plan}) met {price} per jaar. {count, plural, one {# plan staat} other {# plannen staan}} in de valuta van de maker en {count, plural, one {telt} other {tellen}} niet mee.",
-      "summaryUnconverted": "{users, plural, one {# gebruiker} other {# gebruikers}}, {billing}: zonder ECB-koers rekenen we in de valuta van de maker. Het goedkoopst is {tool} ({plan}) met {price} per jaar.",
-      "unconvertedNote": "Plannen zonder ECB-koers staan in de valuta van de maker en tellen niet mee in de vergelijking in euro's.",
+      "summaryUnconverted": "{users, plural, one {# gebruiker} other {# gebruikers}}, {billing}: zonder wisselkoers rekenen we in de valuta van de maker. Het goedkoopst is {tool} ({plan}) met {price} per jaar.",
+      "unconvertedNote": "Plannen zonder wisselkoers staan in de valuta van de maker. Ze tellen niet mee in de vergelijking in euro.",
       "unknownNote": "Onderaan staan plannen zonder prijs voor deze betaalwijze: niet aangeboden of niet gepubliceerd.",
-      "minSeatsApplied": "minimaal {min} plekken: je betaalt voor {seats}"
+      "minSeatsApplied": "minimaal {min} personen: je betaalt voor {seats}"
     },
     "summaryEuroOnly": "Bij {usage} per maand is {tool} ({plan}) het goedkoopst van de tools in euro's: {price} per maand. {count, plural, one {# tool staat} other {# tools staan}} in de valuta van de maker en {count, plural, one {telt} other {tellen}} niet mee."
   },

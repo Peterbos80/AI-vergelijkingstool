@@ -449,33 +449,33 @@
   },
   "costs": {
     "metaTitle": "Combien coûte l’IA pour votre usage ? Calculateur avec justificatifs",
-    "metaDescription": "Calculez ce que coûtent par mois la transcription, les voix off, les vidéos avec avatar, le nettoyage audio et le doublage selon votre usage, et ce que paie une équipe. Chaque montant avec source, date et taux BCE.",
+    "metaDescription": "Calculez ce que coûte par mois la transformation d’audio en texte, les voix off et les vidéos avec présentateur IA, le nettoyage audio ou la traduction de vidéos. Et ce que paie une équipe. Chaque montant avec source et date.",
     "title": "Combien coûte l’IA pour votre usage ?",
-    "intro": "Indiquez votre usage mensuel. Pour chaque outil, vous voyez le forfait le moins cher qui le couvre, avec sa source et sa date. L’ordre ne dépend que du prix calculé.",
+    "intro": "Indiquez votre usage mensuel. Pour chaque outil, vous voyez le forfait le moins cher qui suffit, avec sa source et sa date. L’ordre ne dépend que du prix.",
     "tabsLabel": "Type de calcul",
     "tabUsage": "Selon l’usage",
     "tabTeam": "Coûts d’équipe",
     "pickMeter": "Que voulez-vous faire ?",
     "taskHeading": "Combien ça me coûte ?",
-    "taskIntro": "Faites glisser jusqu’à votre usage mensuel. Pour chaque outil, vous voyez le forfait le moins cher qui le couvre.",
+    "taskIntro": "Faites glisser jusqu’à votre usage mensuel. Pour chaque outil, vous voyez le forfait le moins cher qui suffit.",
     "hubLink": "Tous les calculateurs et les coûts d’équipe",
     "taskNotes": {
-      "automatic-meeting-notes": "Ce calculateur ne compte que les minutes d’audio transcrites. Les résumés et un bot de réunion ne sont pas inclus."
+      "automatic-meeting-notes": "Ce calculateur ne compte que les minutes d’audio transformées en texte. Les résumés et un bot qui participe à votre réunion ne sont pas comptés."
     },
     "meters": {
       "transcribe": {
-        "title": "Transcrire de l’audio",
+        "title": "Transformer l’audio en texte",
         "question": "Combien d’heures d’audio voulez-vous faire transcrire par mois ?",
         "intro": "Transformer des interviews, des podcasts ou des enregistrements en texte. Nous comptons les minutes d’audio qu’un forfait transcrit par mois."
       },
       "voiceover": {
         "title": "Créer une voix off",
         "question": "Combien de minutes de voix voulez-vous générer par mois ?",
-        "intro": "Faire lire un texte par une voix IA. Nous comptons les minutes de voix qu’un forfait génère par mois ; une limite annuelle est divisée par 12."
+        "intro": "Faire lire un texte par une voix IA. Nous comptons les minutes de voix qu’un forfait crée par mois. Une limite annuelle est divisée par 12."
       },
       "avatar": {
-        "title": "Vidéo avec avatar",
-        "question": "Combien de minutes de vidéo avec avatar voulez-vous créer par mois ?",
+        "title": "Vidéo avec présentateur IA",
+        "question": "Combien de minutes de vidéo avec présentateur IA voulez-vous créer par mois ?",
         "intro": "Des vidéos avec un présentateur IA. Nous comptons les minutes de vidéo qu’un forfait crée par mois."
       },
       "audio-cleanup": {
@@ -484,8 +484,8 @@
         "intro": "Supprimer le bruit et la réverbération et égaliser le volume. Nous comptons les heures d’audio qu’un forfait traite par mois."
       },
       "dubbing": {
-        "title": "Doubler des vidéos",
-        "question": "Combien de minutes de vidéo voulez-vous faire doubler par mois ?",
+        "title": "Traduire une vidéo avec une voix IA",
+        "question": "Combien de minutes de vidéo voulez-vous faire traduire par mois ?",
         "intro": "Traduire des vidéos avec une voix IA. Nous comptons les minutes de vidéo qu’un forfait traduit par mois."
       }
     },
@@ -496,18 +496,18 @@
     "unitHours": "h/mois",
     "unitMinutes": "min/mois",
     "summary": "Pour {usage} par mois, {tool} ({plan}) est le moins cher : {price} par mois.",
-    "summaryUnconverted": "Pour {usage} par mois : {count, plural, one {# outil calculé} other {# outils calculés}} dans la devise de l’éditeur (aucun taux BCE chargé).",
+    "summaryUnconverted": "Pour {usage} par mois : {count, plural, one {# outil calculé} other {# outils calculés}} dans la devise de l’éditeur, car nous n’avons pas encore de taux de change.",
     "summaryNone": "Pour {usage} par mois, nous ne pouvons calculer aucun forfait qui le couvre.",
     "rankedLabel": "Forfait le moins cher par outil pour {usage} par mois",
     "original": "{amount} chez l’éditeur, taux BCE du {date}",
     "perMonth": "par mois",
     "perHour": "{price} par heure",
     "perMinute": "{price} par minute",
-    "covers": "couvre {capacity} par mois",
+    "covers": "suffit pour {capacity} par mois",
     "unlimited": "illimité, selon l’éditeur",
-    "usageHour": "{price} par heure, au prorata de votre usage",
-    "usageMinutes": "{price} par {n} minutes, au prorata de votre usage",
-    "approx": "limite approximative",
+    "usageHour": "{price} par heure, vous payez ce que vous utilisez",
+    "usageMinutes": "{price} par {n} minutes, vous payez ce que vous utilisez",
+    "approx": "la limite est une estimation",
     "perUser": "prix par utilisateur",
     "annualPlan": "limite et prix en paiement annuel",
     "annualPrice": "{price} par mois en paiement annuel",
@@ -526,14 +526,14 @@
       "not_time": "aucune limite en minutes ou en heures"
     },
     "unconvertedTitle": "Non converti en euros",
-    "unconvertedNote": "Aucun taux BCE n’est chargé pour cette devise. Vous voyez le montant de l’éditeur ; nous ne le classons pas parmi les montants en euros.",
-    "notCoveredTitle": "Ne couvre pas votre usage",
+    "unconvertedNote": "Nous n’avons pas de taux de change pour cette devise. Vous voyez le montant de l’éditeur. Il n’est pas classé parmi les montants en euros.",
+    "notCoveredTitle": "Ne suffit pas pour votre usage",
     "notCoveredMax": "plus grand forfait calculable : {capacity} par mois",
     "notComputableTitle": "Non calculable",
-    "noteOrder": "L’ordre ne dépend que du prix calculé. Les liens affiliés et le sponsoring n’y changent rien.",
-    "noteOverage": "Nous ne comptons pas les frais au-delà d’un forfait (dépassement). Si vous utilisez plus, vous passez à un forfait plus grand.",
-    "noteFx": "Euros convertis au taux de référence BCE du {date}. Prix tels qu’affichés par l’éditeur, généralement hors TVA.",
-    "noteNoFx": "Aucun taux BCE n’est chargé : montants dans la devise de l’éditeur. Prix tels qu’affichés par l’éditeur, généralement hors TVA.",
+    "noteOrder": "L’ordre ne dépend que du prix calculé. Les liens partenaires et les places payées n’y changent rien.",
+    "noteOverage": "Nous ne comptons pas les frais d’usage au-delà de votre forfait. Vous utilisez plus ? Choisissez alors un forfait plus grand.",
+    "noteFx": "Converti en euros au taux BCE du {date}. Prix tels qu’affichés par l’éditeur, généralement hors TVA.",
+    "noteNoFx": "Nous n’avons pas de taux de change, les montants sont donc dans la devise de l’éditeur. Prix tels qu’affichés par l’éditeur, généralement hors TVA.",
     "labelCheapest": "Le moins cher pour votre usage",
     "labelEuropean": "Entreprise européenne",
     "how": {
@@ -541,21 +541,21 @@
       "limits": "Nous n’utilisons que les limites indiquées par l’éditeur, en minutes ou en heures par mois ou par an. Une limite annuelle est divisée par 12. Les limites quotidiennes et les crédits uniques ne sont jamais convertis en budget mensuel.",
       "cheapest": "Pour chaque outil, nous choisissons le forfait le moins cher qui couvre votre usage. Les forfaits non calculables sont listés à part, avec la raison.",
       "overage": "Nous ne comptons pas les frais au-delà d’un forfait et ne convertissons jamais nous-mêmes des crédits en minutes.",
-      "fx": "Les euros sont convertis au taux de référence BCE ; le montant de l’éditeur et la date du taux sont indiqués.",
+      "fx": "Les montants en euros sont convertis au taux BCE. Le montant de l’éditeur et la date du taux sont indiqués.",
       "receipts": "Chaque montant indique le forfait, le texte de la limite, le statut et la date de la source. L’argent ne change jamais l’ordre."
     },
     "labels": {
       "title": "Étiquettes : calculées, pas de gagnants",
       "cheapestName": "Le moins cher pour votre usage",
-      "cheapest": "Le prix mensuel calculé le plus bas pour votre saisie, parmi les outils que nous avons pu calculer. Change avec votre saisie ; aucun jugement sur la qualité.",
+      "cheapest": "Le prix mensuel le plus bas pour votre saisie, parmi les outils que nous avons pu calculer. Il change si vous saisissez autre chose. Il ne dit rien de la qualité.",
       "trulyFreeName": "Vraiment utilisable gratuitement",
-      "trulyFree": "Un forfait gratuit sans filigrane que vous pouvez aussi utiliser commercialement. Uniquement si les deux faits sont connus avec une source ; inconnu ne compte jamais comme oui.",
+      "trulyFree": "Un forfait gratuit sans filigrane que vous pouvez aussi utiliser pour votre entreprise. Seulement si nous avons une source pour les deux. Si nous ne savons pas, cela ne compte jamais comme oui.",
       "europeanName": "Entreprise européenne",
-      "european": "L’entreprise derrière l’outil est établie dans l’UE ou l’EEE, au Royaume-Uni ou en Suisse. Cela ne dit encore rien sur l’endroit où sont stockées vos données."
+      "european": "L’entreprise derrière l’outil est établie en Europe : dans l’UE, en Norvège, en Islande, au Liechtenstein, au Royaume-Uni ou en Suisse. Cela ne dit encore rien sur l’endroit où sont stockées vos données."
     },
     "team": {
       "title": "Coûts d’équipe",
-      "intro": "Pour les forfaits par utilisateur ou par siège : le nombre d’utilisateurs multiplié par le prix, en paiement mensuel et en paiement annuel.",
+      "intro": "Pour les forfaits avec un prix par personne : le nombre de personnes multiplié par le prix, si vous payez au mois ou à l’année.",
       "pickGroup": "Type d’outil",
       "groups": {
         "assistants": "Assistants IA",
@@ -579,19 +579,19 @@
       "colAnnual": "Par an, paiement annuel",
       "colSaving": "Différence par an",
       "unknown": "inconnu",
-      "minSeats": "au moins {min} places",
-      "maxSeats": "jusqu’à {max} sièges",
+      "minSeats": "au moins {min} personnes",
+      "maxSeats": "jusqu’à {max} personnes",
       "annualOnly": "paiement annuel uniquement",
       "annualPerUser": "{price} par mois en paiement annuel",
       "tooMany": "Ne convient pas à {users} utilisateurs : {list}.",
-      "tooManyItem": "{tool} ({plan}), au maximum {max} sièges",
-      "noteOrder": "L’ordre ne dépend que du prix annuel calculé pour le mode de paiement choisi. L’argent ne change pas l’ordre.",
-      "noteExtras": "Les licences supplémentaires obligatoires (comme Microsoft 365 pour Copilot) figurent dans le texte de la limite et ne sont pas incluses.",
+      "tooManyItem": "{tool} ({plan}), au maximum {max} personnes",
+      "noteOrder": "L’ordre ne dépend que du prix annuel pour le mode de paiement choisi. Personne ne peut payer pour une meilleure place.",
+      "noteExtras": "Parfois, il faut prendre un autre abonnement en plus, comme Microsoft 365 pour Copilot. C’est indiqué avec la limite, mais nous ne le comptons pas.",
       "summaryEuroOnly": "{users, plural, one {# utilisateur} other {# utilisateurs}}, {billing} : le moins cher en euros est {tool} ({plan}) à {price} par an. {count, plural, one {# forfait est} other {# forfaits sont}} dans la devise de l’éditeur et {count, plural, one {n’est pas comparé} other {ne sont pas comparés}}.",
-      "summaryUnconverted": "{users, plural, one {# utilisateur} other {# utilisateurs}}, {billing} : sans taux BCE, nous calculons dans la devise de l’éditeur. Le moins cher est {tool} ({plan}) à {price} par an.",
-      "unconvertedNote": "Les forfaits sans taux BCE sont affichés dans la devise de l’éditeur et ne comptent pas dans la comparaison en euros.",
+      "summaryUnconverted": "{users, plural, one {# utilisateur} other {# utilisateurs}}, {billing} : sans taux de change, nous calculons dans la devise de l’éditeur. Le moins cher est {tool} ({plan}) à {price} par an.",
+      "unconvertedNote": "Les forfaits sans taux de change sont affichés dans la devise de l’éditeur. Ils ne comptent pas dans la comparaison en euros.",
       "unknownNote": "En bas : les forfaits sans prix pour ce mode de paiement (non proposé ou non publié).",
-      "minSeatsApplied": "au moins {min} places : vous payez pour {seats}"
+      "minSeatsApplied": "au moins {min} personnes : vous payez pour {seats}"
     },
     "summaryEuroOnly": "Pour {usage} par mois, {tool} ({plan}) est le moins cher des outils en euros : {price} par mois. {count, plural, one {# outil est} other {# outils sont}} dans la devise de l’éditeur et {count, plural, one {n’est pas comparé} other {ne sont pas comparés}}."
   },

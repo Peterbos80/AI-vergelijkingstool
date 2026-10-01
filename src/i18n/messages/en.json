@@ -471,33 +471,33 @@
   },
   "costs": {
     "metaTitle": "What does AI cost for your usage? Calculator with receipts",
-    "metaDescription": "Work out what transcription, voice-overs, avatar videos, audio clean-up and dubbing cost per month for your usage, and what a team pays. Every amount with a source, a date and the ECB rate.",
+    "metaDescription": "Work out what it costs per month to turn audio into text, make voice-overs and videos with an AI presenter, clean up audio or translate videos. And what a team pays. Every amount with a source and a date.",
     "title": "What does AI cost for your usage?",
-    "intro": "Enter how much you use per month. For each tool you see the cheapest plan that covers it, with its source and date. The order is the computed price only.",
+    "intro": "Enter how much you use per month. For each tool you see the cheapest plan that is enough, with its source and date. The order is by price only.",
     "tabsLabel": "Kind of calculation",
     "tabUsage": "By usage",
     "tabTeam": "Team costs",
     "pickMeter": "What do you want to do?",
     "taskHeading": "What does it cost me?",
-    "taskIntro": "Slide to your monthly usage. For each tool you see the cheapest plan that covers it.",
+    "taskIntro": "Slide to how much you use per month. For each tool you see the cheapest plan that is enough.",
     "hubLink": "All calculators and team costs",
     "taskNotes": {
-      "automatic-meeting-notes": "This calculator only counts transcribed minutes of audio. Summaries and a meeting bot are not included."
+      "automatic-meeting-notes": "This calculator only counts the minutes of audio that are turned into text. Summaries and a bot that joins your meeting are not counted."
     },
     "meters": {
       "transcribe": {
-        "title": "Transcribe audio",
+        "title": "Turn audio into text",
         "question": "How many hours of audio do you want transcribed per month?",
         "intro": "Turn interviews, podcasts or recordings into text. We count the minutes of audio a plan transcribes per month."
       },
       "voiceover": {
         "title": "Create voice-overs",
         "question": "How many minutes of speech do you want to generate per month?",
-        "intro": "Have text read out by an AI voice. We count the minutes of speech a plan generates per month; a yearly limit is divided by 12."
+        "intro": "Have text read out by an AI voice. We count the minutes of speech a plan makes per month. A yearly limit is divided by 12."
       },
       "avatar": {
-        "title": "Avatar video",
-        "question": "How many minutes of avatar video do you want to make per month?",
+        "title": "Video with an AI presenter",
+        "question": "How many minutes of video with an AI presenter do you want to make per month?",
         "intro": "Videos with an AI presenter. We count the minutes of video a plan makes per month."
       },
       "audio-cleanup": {
@@ -506,8 +506,8 @@
         "intro": "Remove noise and echo and level the volume. We count the hours of audio a plan processes per month."
       },
       "dubbing": {
-        "title": "Dub videos",
-        "question": "How many minutes of video do you want dubbed per month?",
+        "title": "Translate video with an AI voice",
+        "question": "How many minutes of video do you want translated per month?",
         "intro": "Translate videos with an AI voice. We count the minutes of video a plan translates per month."
       }
     },
@@ -518,18 +518,18 @@
     "unitHours": "h/mo",
     "unitMinutes": "min/mo",
     "summary": "At {usage} per month, {tool} ({plan}) is the cheapest: {price} per month.",
-    "summaryUnconverted": "At {usage} per month: {count, plural, one {# tool} other {# tools}} computed in the vendor's currency (no ECB rate loaded).",
+    "summaryUnconverted": "At {usage} per month: {count, plural, one {# tool} other {# tools}} worked out in the maker's currency, because we have no exchange rate yet.",
     "summaryNone": "At {usage} per month we cannot compute a plan that covers it for any tool.",
     "rankedLabel": "Cheapest plan per tool at {usage} per month",
     "original": "{amount} from the vendor, ECB rate of {date}",
     "perMonth": "per month",
     "perHour": "{price} per hour",
     "perMinute": "{price} per minute",
-    "covers": "covers {capacity} per month",
+    "covers": "enough for {capacity} per month",
     "unlimited": "unlimited, as the vendor calls it",
-    "usageHour": "{price} per hour, pro rata for your usage",
-    "usageMinutes": "{price} per {n} minutes, pro rata for your usage",
-    "approx": "approximate limit",
+    "usageHour": "{price} per hour, you pay for what you use",
+    "usageMinutes": "{price} per {n} minutes, you pay for what you use",
+    "approx": "limit is an estimate",
     "perUser": "price per user",
     "annualPlan": "limit and price with annual billing",
     "annualPrice": "{price} per month billed annually",
@@ -548,14 +548,14 @@
       "not_time": "no limit in minutes or hours"
     },
     "unconvertedTitle": "Not converted to euros",
-    "unconvertedNote": "No ECB rate is loaded for this currency. You see the vendor's amount; we do not rank it among the euro amounts.",
-    "notCoveredTitle": "Does not cover your usage",
+    "unconvertedNote": "We have no exchange rate for this currency. You see the maker's amount. It is not ranked among the amounts in euros.",
+    "notCoveredTitle": "Not enough for your usage",
     "notCoveredMax": "largest plan we can compute: {capacity} per month",
     "notComputableTitle": "Not computable",
-    "noteOrder": "The order is the computed price only. Affiliate links and sponsorship never change it.",
-    "noteOverage": "We do not include charges above a bundle (overage). If you use more, you move to a bigger plan.",
-    "noteFx": "Euros converted at the ECB reference rate of {date}. Prices as the vendor shows them, usually excluding VAT.",
-    "noteNoFx": "No ECB rates are loaded: amounts are in the vendor's currency. Prices as the vendor shows them, usually excluding VAT.",
+    "noteOrder": "The order is by the worked-out price only. Partner links and paid spots never change it.",
+    "noteOverage": "We don't count charges for extra use above your bundle. Use more? Then you pick a bigger plan.",
+    "noteFx": "Converted to euros at the ECB rate of {date}. Prices as the maker shows them, usually without VAT.",
+    "noteNoFx": "We have no exchange rates, so amounts are in the maker's currency. Prices as the maker shows them, usually without VAT.",
     "labelCheapest": "Cheapest for your usage",
     "labelEuropean": "European company",
     "how": {
@@ -563,21 +563,21 @@
       "limits": "We only use limits the vendor states, in minutes or hours per month or per year. A yearly limit is divided by 12. Daily limits and one-off allowances are never turned into a monthly budget.",
       "cheapest": "For each tool we pick the cheapest plan that covers your usage. Plans we cannot compute are listed separately with the reason.",
       "overage": "We do not include charges above a bundle, and we never convert credits into minutes ourselves.",
-      "fx": "Euros are converted at the ECB reference rate; the vendor's amount and the date of the rate are shown with it.",
+      "fx": "Amounts in euros are converted at the ECB rate. The maker's amount and the date of the rate are shown with it.",
       "receipts": "Every amount shows the plan, the limit text, the status and the date of the source. Money never changes the order."
     },
     "labels": {
       "title": "Labels: computed, not winners",
       "cheapestName": "Cheapest for your usage",
-      "cheapest": "The lowest computed monthly price for what you entered, among the tools we could compute. Changes with your input; no judgement of quality.",
+      "cheapest": "The lowest monthly price for what you entered, among the tools we could work out. It changes when you enter something else. It says nothing about quality.",
       "trulyFreeName": "Truly usable for free",
-      "trulyFree": "A free plan without a watermark that you may also use commercially. Only when both facts are known with a source; unknown never counts as yes.",
+      "trulyFree": "A free plan without a watermark that you may also use for business. Only when we have a source for both. If we don't know, it never counts as yes.",
       "europeanName": "European company",
-      "european": "The company behind the tool is based in the EU or EEA, the United Kingdom or Switzerland. That says nothing yet about where your data is stored."
+      "european": "The company behind the tool is based in Europe: in the EU, Norway, Iceland, Liechtenstein, the United Kingdom or Switzerland. That says nothing yet about where your data is stored."
     },
     "team": {
       "title": "Team costs",
-      "intro": "For plans priced per user or per seat: the number of users times the price, with monthly and with annual billing.",
+      "intro": "For plans with a price per person: the number of people times the price, if you pay monthly or yearly.",
       "pickGroup": "Kind of tool",
       "groups": {
         "assistants": "AI assistants",
@@ -601,19 +601,19 @@
       "colAnnual": "Per year, annual billing",
       "colSaving": "Difference per year",
       "unknown": "unknown",
-      "minSeats": "at least {min} seats",
-      "maxSeats": "up to {max} seats",
+      "minSeats": "at least {min} people",
+      "maxSeats": "up to {max} people",
       "annualOnly": "annual billing only",
       "annualPerUser": "{price} per month billed annually",
       "tooMany": "Does not fit {users} users: {list}.",
-      "tooManyItem": "{tool} ({plan}), at most {max} seats",
-      "noteOrder": "The order is the computed yearly price for the chosen billing only. Money never changes the order.",
-      "noteExtras": "Required extra licences (such as Microsoft 365 for Copilot) are in the limit text and are not included.",
+      "tooManyItem": "{tool} ({plan}), at most {max} people",
+      "noteOrder": "The order is by the yearly price for the way of paying you chose. Nobody can pay for a better spot.",
+      "noteExtras": "Sometimes you need another subscription too, such as Microsoft 365 for Copilot. That is in the limit text, but we don't count it.",
       "summaryEuroOnly": "{users, plural, one {# user} other {# users}}, {billing}: the cheapest in euros is {tool} ({plan}) at {price} per year. {count, plural, one {# plan is} other {# plans are}} in the vendor's currency and not compared.",
-      "summaryUnconverted": "{users, plural, one {# user} other {# users}}, {billing}: without an ECB rate we compute in the vendor's currency. The cheapest is {tool} ({plan}) at {price} per year.",
-      "unconvertedNote": "Plans without an ECB rate are shown in the vendor's currency and are not part of the comparison in euros.",
+      "summaryUnconverted": "{users, plural, one {# user} other {# users}}, {billing}: without an exchange rate we work in the maker's currency. The cheapest is {tool} ({plan}) at {price} per year.",
+      "unconvertedNote": "Plans without an exchange rate are shown in the maker's currency. They are not part of the comparison in euros.",
       "unknownNote": "Plans without a price for this billing (not offered or not published) are listed at the bottom.",
-      "minSeatsApplied": "at least {min} seats: you pay for {seats}"
+      "minSeatsApplied": "at least {min} people: you pay for {seats}"
     },
     "summaryEuroOnly": "At {usage} per month, {tool} ({plan}) is the cheapest of the tools priced in euros: {price} per month. {count, plural, one {# tool is} other {# tools are}} in the vendor's currency and not compared."
   },
