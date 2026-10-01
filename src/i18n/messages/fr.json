@@ -3,7 +3,7 @@
     "siteName": "AIToolsWijzer",
     "tagline": "Outils d’IA, preuves à l’appui.",
     "defaultTitle": "AIToolsWijzer — quel outil d’IA correspond à ce que vous voulez faire ?",
-    "defaultDescription": "Dites-nous ce que vous voulez faire et obtenez une stack d’IA argumentée : quels outils, pourquoi, combien — avec sources, fraîcheur et alternatives.",
+    "defaultDescription": "Dites-nous ce que vous voulez faire. Vous voyez quels outils d’IA conviennent, combien ils coûtent et d’où vient l’info.",
     "titleTemplate": "{title} · AIToolsWijzer"
   },
   "a11y": {
@@ -642,7 +642,7 @@
     "heading": "Que voulez-vous faire ?",
     "inputLabel": "Décrivez ce que vous voulez faire",
     "placeholder": "P. ex. Je veux faire des vidéos professionnelles pour les réseaux sociaux, mais je ne sais pas avec quels outils",
-    "submit": "Match",
+    "submit": "Trouver des outils",
     "understood": "Compris",
     "engineLlm": "modèle de langage",
     "engineLexical": "analyse de mots-clés",
@@ -871,26 +871,26 @@
   "home": {
     "metaTitle": "AIToolsWijzer : quel outil d’IA correspond à ce que vous voulez faire ?",
     "heroTitle": "Que voulez-vous faire ?",
-    "heroSub": "Décrivez votre objectif. Vous obtenez une stack argumentée : quels outils, pourquoi, combien — avec sources et alternatives.",
+    "heroSub": "Choisissez dans une liste ou tapez votre question. Vous voyez quels outils d’IA conviennent, combien ils coûtent et pourquoi. Chaque fait indique où nous l’avons trouvé.",
     "examples": "Par exemple",
-    "proof": "{tools} outils · {facts} prix et faits · {supported} % étayés par plusieurs sources · dernière vérification le {date}",
+    "proof": "{tools} outils · {facts} prix et faits · {supported} % avec une source officielle ou plusieurs sources · dernière vérification le {date}",
     "changedTitle": "Vient de changer",
     "cheaperTitle": "Devenu moins cher",
-    "fightsTitle": "Fair Fights",
-    "fightsSub": "Deux outils, les mêmes critères, pas de gagnant absolu.",
+    "fightsTitle": "Comparés équitablement",
+    "fightsSub": "Deux outils côte à côte, sur les mêmes points. Pas de gagnant : le meilleur dépend de ce dont vous avez besoin.",
     "tasksTitle": "Tâches populaires",
     "tasksAll": "Toutes les tâches",
-    "newsletterTitle": "AI Pulse dans votre boîte mail",
-    "newsletterBody": "Une fois par semaine : de vrais changements de prix, de nouveaux outils et ce qui s’arrête. Sans battage.",
+    "newsletterTitle": "Les nouveautés, chaque semaine par e-mail",
+    "newsletterBody": "Une fois par semaine : de vrais changements de prix, de nouveaux outils et les outils qui s’arrêtent. Sans battage.",
     "pulseAll": "Tous les changements",
     "stepsCount": "{count, plural, one {# étape} other {# étapes}}",
-    "stageHint": "Écrivez ce que vous voulez faire. Le Wijzer trouve l’endroit qui correspond.",
-    "stageEnter": "Voir ce monde",
-    "stageAnnounce": "Monde : {place}",
+    "stageHint": "Choisissez ou tapez ce que vous voulez faire. Le lieu qui correspond apparaît ici.",
+    "stageEnter": "Voir les outils",
+    "stageAnnounce": "Vous voyez : {place}",
     "toolsCount": "{count, plural, one {# outil} other {# outils}}",
     "worldsEyebrow": "Dix mondes",
     "worldsTitle": "Où allez-vous travailler ?",
-    "worldsSub": "Chaque catégorie est un lieu avec ses propres outils. Choisissez un monde et voyez quels outils y font le travail, et ce qu’ils coûtent.",
+    "worldsSub": "Chaque type de travail a son propre lieu ici. Choisissez-en un et voyez quels outils y conviennent et ce qu’ils coûtent.",
     "worldTop": "En tête",
     "matrixEyebrow": "Côte à côte",
     "fightsEyebrow": "Duels",
@@ -910,7 +910,7 @@
     "chooserShow": "Voir les outils"
   },
   "hub": {
-    "placeholder": "Demandez avec vos propres mots. Par exemple : je veux faire rédiger gratuitement le compte rendu de mes réunions",
+    "placeholder": "Écrivez avec vos mots ce que vous voulez faire. Par exemple : je veux faire une vidéo pour TikTok",
     "enterHint": "Entrée pour demander · Maj+Entrée pour une nouvelle ligne",
     "promptsLabel": "Essayez une de ces questions",
     "badgeBeginner": "Facile",
@@ -921,11 +921,11 @@
         "query": "Je veux créer des vidéos pour les réseaux sociaux de mon entreprise"
       },
       "api": {
-        "label": "Connecter un LLM par API",
+        "label": "Relier l’IA à votre application",
         "query": "Je veux connecter un modèle de langage à ma propre application via une API"
       },
       "notes": {
-        "label": "Comptes rendus gratuits",
+        "label": "Comptes rendus de réunion gratuits",
         "query": "Je veux faire rédiger gratuitement le compte rendu de mes réunions"
       }
     },
@@ -938,9 +938,9 @@
     "levelAdvancedHint": "Pour qui construit soi-même : API, intégrations, auto-hébergement, modèle tarifaire et niveau",
     "matrixAssistants": "Les assistants IA populaires côte à côte",
     "matrixFor": "{task} : les outils côte à côte",
-    "matrixNote": "Classés par fonctions et données, jamais par sponsoring. Ce que nous n’avons pas établi avec une source est omis (–).",
-    "fullStack": "Voir votre stack complète",
-    "noData": "Pas de donnée sourcée",
+    "matrixNote": "Nous classons les outils selon ce qu’ils savent faire, jamais parce que quelqu’un paie. Sans source, vous voyez un tiret (–).",
+    "fullStack": "Voir tout le conseil",
+    "noData": "Pas encore connu : nous n’avons pas de source",
     "openSource": "open source",
     "col": {
       "tool": "Outil",
@@ -959,15 +959,15 @@
       "intermediate": "Demande un temps d’adaptation",
       "advanced": "Technique"
     },
-    "radarTitle": "Radar des tendances et actualités IA",
-    "radarSub": "Collecté automatiquement par nos agents : chaque heure les actualités IA des médias, les vidéos des chaînes d’info et les changements des outils. Chaque élément indique sa source.",
+    "radarTitle": "Ce qui se passe dans l’IA",
+    "radarSub": "Notre logiciel collecte cela chaque heure : actualités des médias, vidéos et changements des outils. Chaque élément indique sa source.",
     "radarAll": "Toutes les actus IA",
     "radarNews": "Actualités IA des médias",
     "radarVideos": "Vidéos des chaînes officielles",
-    "radarBuzz": "Buzz communautaire",
+    "radarBuzz": "Ce dont les gens parlent",
     "source": "source : {domain}",
     "buzz": {
-      "hackernews": "{count, plural, one {# mention} other {{n} mentions}} sur Hacker News (7 jours)",
+      "hackernews": "{count, plural, one {# mention} other {{n} mentions}} sur Hacker News en 7 jours",
       "github": "{count, plural, one {# étoile GitHub} other {{n} étoiles GitHub}}"
     },
     "videoKind": {
@@ -978,11 +978,11 @@
       "other": "Vidéo"
     },
     "startTitle": "Passer à l’action",
-    "startSub": "Des plans gratuits pas à pas, de zéro au résultat. Ce que vous voyez ici dépend de votre affichage : Essentiel ou Avancé.",
-    "startBasis": "Essentiel · plan gratuit",
-    "startAdvanced": "Avancé · plan gratuit",
+    "startSub": "Des plans gratuits pas à pas pour bien démarrer. Ce que vous voyez dépend de votre choix : Essentiel ou Avancé.",
+    "startBasis": "Essentiel · plan pas à pas gratuit",
+    "startAdvanced": "Avancé · plan pas à pas gratuit",
     "startPlan": "Voir le plan pas à pas",
-    "startStack": "Composer ma stack",
+    "startStack": "Voir mon conseil",
     "paidFrom": "payant dès {price}",
     "from": "dès {price}",
     "radarChanges": "Changements des outils"
@@ -1418,7 +1418,7 @@
   },
   "og": {
     "eyebrowSite": "Outils d’IA, preuves à l’appui",
-    "siteSub": "Dites-nous ce que vous voulez faire et obtenez une stack d’outils d’IA avec prix, sources et dates.",
+    "siteSub": "Dites-nous ce que vous voulez faire et voyez quels outils d’IA conviennent. Avec prix, sources et dates.",
     "siteFooter": "{count} outils · chaque prix avec sa source",
     "eyebrowTool": "Justificatif · vérifié le {date}",
     "from": "À partir de {price}",
@@ -1466,7 +1466,7 @@
       "audio": "Faire quelque chose avec le son ou la voix",
       "code": "Créer un site, une appli ou du code",
       "automation": "Faire travailler en automatique",
-      "marketing": "Marketing et réseaux sociaux",
+      "marketing": "Publicité et réseaux sociaux",
       "business": "Aider des clients"
     }
   }

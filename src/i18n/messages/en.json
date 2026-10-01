@@ -3,7 +3,7 @@
     "siteName": "AIToolsWijzer",
     "tagline": "AI tools, with receipts.",
     "defaultTitle": "AIToolsWijzer — which AI tool fits what you want to do?",
-    "defaultDescription": "Tell us what you want to do and get a reasoned AI stack: which tools, why, what it costs — with sources, freshness and alternatives.",
+    "defaultDescription": "Tell us what you want to do. You see which AI tools fit, what they cost and where that comes from.",
     "titleTemplate": "{title} · AIToolsWijzer"
   },
   "a11y": {
@@ -664,7 +664,7 @@
     "heading": "What are you trying to do?",
     "inputLabel": "Describe what you want to do",
     "placeholder": "E.g. I want to make professional social media videos, but don't know which tools",
-    "submit": "Match",
+    "submit": "Find tools",
     "understood": "Understood",
     "engineLlm": "language model",
     "engineLexical": "keyword analysis",
@@ -847,27 +847,27 @@
   },
   "home": {
     "metaTitle": "AIToolsWijzer: which AI tool fits what you want to do?",
-    "heroTitle": "What are you trying to do?",
-    "heroSub": "Describe your goal. You get a reasoned stack: which tools, why, what it costs — with sources and alternatives.",
+    "heroTitle": "What do you want to do?",
+    "heroSub": "Pick from a list or type your question. You see which AI tools fit, what they cost and why. Every fact shows where we found it.",
     "examples": "For example",
-    "proof": "{tools} tools · {facts} prices and facts · {supported}% backed by several sources · last checked {date}",
+    "proof": "{tools} tools · {facts} prices and facts · {supported}% from an official source or several sources · last checked {date}",
     "changedTitle": "Just changed",
     "cheaperTitle": "Got cheaper",
-    "fightsTitle": "Fair Fights",
-    "fightsSub": "Two tools, the same criteria, no overall winner.",
+    "fightsTitle": "Fair comparisons",
+    "fightsSub": "Two tools side by side, on the same points. There is no winner: which is better depends on what you need.",
     "tasksTitle": "Popular tasks",
     "tasksAll": "All tasks",
-    "newsletterTitle": "AI Pulse in your inbox",
-    "newsletterBody": "Once a week: real price changes, new tools and what's shutting down. No hype.",
+    "newsletterTitle": "What's new, every week in your inbox",
+    "newsletterBody": "Once a week: real price changes, new tools and tools that stop. No hype.",
     "pulseAll": "All changes",
     "stepsCount": "{count, plural, one {# step} other {# steps}}",
-    "stageHint": "Type what you want to do. The Wijzer finds the place it belongs to.",
-    "stageEnter": "See this world",
-    "stageAnnounce": "World: {place}",
+    "stageHint": "Pick or type what you want to do. The place that fits shows up here.",
+    "stageEnter": "See the tools",
+    "stageAnnounce": "Now showing: {place}",
     "toolsCount": "{count, plural, one {# tool} other {# tools}}",
     "worldsEyebrow": "Ten worlds",
     "worldsTitle": "Where will you get to work?",
-    "worldsSub": "Every category is a place with its own tools. Pick a world and see which tools do the work there, and what they cost.",
+    "worldsSub": "Every kind of work has its own place here. Pick one and see which tools fit there and what they cost.",
     "worldTop": "At the top",
     "matrixEyebrow": "Side by side",
     "fightsEyebrow": "Head to head",
@@ -877,7 +877,7 @@
     "chooserType": "Type your question",
     "chooserStepWorld": "What do you want to do?",
     "chooserStepTask": "What exactly?",
-    "chooserStepBudget": "What may it cost?",
+    "chooserStepBudget": "How much can you spend?",
     "chooserPickWorld": "Pick what you want to do",
     "chooserPickTask": "Pick a task",
     "chooserBudgetFree": "Nothing, free only",
@@ -887,7 +887,7 @@
     "chooserShow": "Show me the tools"
   },
   "hub": {
-    "placeholder": "Ask in your own words. For example: I want my meetings transcribed and summarised for free",
+    "placeholder": "Type what you want to do, in your own words. For example: I want to make a video for TikTok",
     "enterHint": "Enter to ask · Shift+Enter for a new line",
     "promptsLabel": "Try one of these questions",
     "badgeBeginner": "Easy",
@@ -898,11 +898,11 @@
         "query": "I want to make social videos for my business"
       },
       "api": {
-        "label": "Connect an LLM via API",
+        "label": "Connect AI to your own app",
         "query": "I want to connect a language model to my own app via an API"
       },
       "notes": {
-        "label": "Meeting notes for free",
+        "label": "Free meeting notes",
         "query": "I want my meetings transcribed and summarised for free"
       }
     },
@@ -915,9 +915,9 @@
     "levelAdvancedHint": "For people who build: API, integrations, self-hosting, pricing model and level",
     "matrixAssistants": "Popular AI assistants side by side",
     "matrixFor": "{task}: the tools side by side",
-    "matrixNote": "Ordered by features and data, never by sponsorship. Anything we have not recorded with a source is left out (–).",
-    "fullStack": "See your complete stack",
-    "noData": "No sourced data",
+    "matrixNote": "We order tools by what they can do, never because someone pays. If we have no source, you see a dash (–).",
+    "fullStack": "See the full advice",
+    "noData": "Not known yet: we have no source for it",
     "openSource": "open source",
     "col": {
       "tool": "Tool",
@@ -936,15 +936,15 @@
       "intermediate": "Takes some getting used to",
       "advanced": "Technical"
     },
-    "radarTitle": "AI trend and news radar",
-    "radarSub": "Collected automatically by our agents: AI news from the media every hour, videos from news channels and changes to tools. Every item links to its source.",
+    "radarTitle": "What's happening in AI",
+    "radarSub": "Our software collects this every hour: news from the media, videos and changes to tools. Every item shows its source.",
     "radarAll": "All AI news",
     "radarNews": "AI news from the media",
     "radarVideos": "Videos from official channels",
-    "radarBuzz": "Community buzz",
+    "radarBuzz": "What people talk about",
     "source": "source: {domain}",
     "buzz": {
-      "hackernews": "{count, plural, one {# mention} other {{n} mentions}} on Hacker News (7 days)",
+      "hackernews": "{count, plural, one {# mention} other {{n} mentions}} on Hacker News in 7 days",
       "github": "{count, plural, one {# GitHub star} other {{n} GitHub stars}}"
     },
     "videoKind": {
@@ -955,11 +955,11 @@
       "other": "Video"
     },
     "startTitle": "Get started",
-    "startSub": "Free step-by-step plans, from zero to result. What you see here depends on your view: Basic or Advanced.",
-    "startBasis": "Basic · free plan",
-    "startAdvanced": "Advanced · free plan",
+    "startSub": "Free step-by-step plans to get you going. What you see depends on your choice: Basic or Advanced.",
+    "startBasis": "Basic · free step-by-step plan",
+    "startAdvanced": "Advanced · free step-by-step plan",
     "startPlan": "See the step-by-step plan",
-    "startStack": "Build my stack",
+    "startStack": "Show my advice",
     "paidFrom": "paid from {price}",
     "from": "from {price}",
     "radarChanges": "Tool changes"
@@ -2165,7 +2165,7 @@
   },
   "og": {
     "eyebrowSite": "AI tools, with receipts",
-    "siteSub": "Tell us what you want to do and get an AI tool stack with prices, sources and dates.",
+    "siteSub": "Tell us what you want to do and see which AI tools fit. With prices, sources and dates.",
     "siteFooter": "{count} tools · every price with its source",
     "eyebrowTool": "Receipt · checked {date}",
     "from": "From {price}",
@@ -2205,7 +2205,7 @@
       "audio": "Do something with sound or voice",
       "code": "Build a website, app or code",
       "automation": "Let work run by itself",
-      "marketing": "Marketing and social media",
+      "marketing": "Ads and social media",
       "business": "Help customers"
     }
   }

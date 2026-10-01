@@ -3,7 +3,7 @@
     "siteName": "AIToolsWijzer",
     "tagline": "AI-tools, met bonnetje.",
     "defaultTitle": "AIToolsWijzer — welke AI-tool past bij wat je wilt doen?",
-    "defaultDescription": "Vertel wat je wilt doen en krijg een onderbouwde AI-stack: welke tools, waarom, wat het kost, met bronnen, versheid en alternatieven.",
+    "defaultDescription": "Vertel wat je wilt doen. Je ziet welke AI-tools passen, wat ze kosten en waar dat staat.",
     "titleTemplate": "{title} · AIToolsWijzer"
   },
   "a11y": {
@@ -664,7 +664,7 @@
     "heading": "Wat wil je doen?",
     "inputLabel": "Beschrijf wat je wilt doen",
     "placeholder": "Bijv. ik wil professionele video's voor social media maken, maar weet niet welke tools",
-    "submit": "Match",
+    "submit": "Zoek tools",
     "understood": "Begrepen",
     "engineLlm": "taalmodel",
     "engineLexical": "trefwoordanalyse",
@@ -848,26 +848,26 @@
   "home": {
     "metaTitle": "AIToolsWijzer: welke AI-tool past bij wat je wilt doen?",
     "heroTitle": "Wat wil je doen?",
-    "heroSub": "Beschrijf je doel. Je krijgt een onderbouwde stack: welke tools, waarom, wat het kost, met bronnen en alternatieven.",
+    "heroSub": "Kies uit een lijst of typ je vraag. Je ziet welke AI-tools passen, wat ze kosten en waarom. Bij elk feit staat waar we het vonden.",
     "examples": "Bijvoorbeeld",
-    "proof": "{tools} tools · {facts} prijzen en feiten · {supported}% onderbouwd met meerdere bronnen · laatst gecontroleerd {date}",
+    "proof": "{tools} tools · {facts} prijzen en feiten · {supported}% met een officiële bron of meer bronnen · laatst gecontroleerd {date}",
     "changedTitle": "Net veranderd",
     "cheaperTitle": "Goedkoper geworden",
-    "fightsTitle": "Fair Fights",
-    "fightsSub": "Twee tools, dezelfde criteria, geen totaalwinnaar.",
+    "fightsTitle": "Eerlijk vergeleken",
+    "fightsSub": "Twee tools naast elkaar, op dezelfde punten. Er is geen winnaar: wat beter is, hangt af van wat jij nodig hebt.",
     "tasksTitle": "Populaire taken",
     "tasksAll": "Alle taken",
-    "newsletterTitle": "AI Pulse in je inbox",
-    "newsletterBody": "Eén keer per week: echte prijswijzigingen, nieuwe tools en wat er stopt. Geen hype.",
+    "newsletterTitle": "Wat is nieuw, elke week in je mail",
+    "newsletterBody": "Eén keer per week: echte prijswijzigingen, nieuwe tools en tools die stoppen. Geen hype.",
     "pulseAll": "Alle wijzigingen",
     "stepsCount": "{count, plural, one {# stap} other {# stappen}}",
-    "stageHint": "Typ wat je wilt doen. De wijzer zoekt de plek die erbij hoort.",
-    "stageEnter": "Bekijk deze wereld",
-    "stageAnnounce": "Wereld: {place}",
+    "stageHint": "Kies of typ wat je wilt doen. Dan zie je hier de plek die erbij past.",
+    "stageEnter": "Bekijk de tools",
+    "stageAnnounce": "Je ziet nu: {place}",
     "toolsCount": "{count, plural, one {# tool} other {# tools}}",
     "worldsEyebrow": "Tien werelden",
     "worldsTitle": "Waar ga je aan de slag?",
-    "worldsSub": "Elke categorie is een plek met eigen gereedschap. Kies een wereld en zie welke tools daar het werk doen, en wat ze kosten.",
+    "worldsSub": "Elke soort werk heeft hier een eigen plek. Kies er een en zie welke tools daar passen en wat ze kosten.",
     "worldTop": "Bovenaan",
     "matrixEyebrow": "Naast elkaar",
     "fightsEyebrow": "Duels",
@@ -887,7 +887,7 @@
     "chooserShow": "Laat de tools zien"
   },
   "hub": {
-    "placeholder": "Vraag het in je eigen woorden. Bijvoorbeeld: ik wil gratis mijn vergaderingen laten notuleren",
+    "placeholder": "Typ in je eigen woorden wat je wilt doen. Bijvoorbeeld: ik wil een filmpje maken voor TikTok",
     "enterHint": "Enter om te vragen · Shift+Enter voor een nieuwe regel",
     "promptsLabel": "Probeer een van deze vragen",
     "badgeBeginner": "Makkelijk",
@@ -898,11 +898,11 @@
         "query": "Ik wil social video's maken voor mijn bedrijf"
       },
       "api": {
-        "label": "LLM via API koppelen",
+        "label": "AI koppelen aan je eigen app",
         "query": "Ik wil een taalmodel via een API in mijn eigen app koppelen"
       },
       "notes": {
-        "label": "Notuleren zonder kosten",
+        "label": "Gratis verslag van vergaderingen",
         "query": "Ik wil gratis mijn vergaderingen laten notuleren"
       }
     },
@@ -915,9 +915,9 @@
     "levelAdvancedHint": "Voor wie zelf bouwt: API, koppelingen, zelf hosten, prijsmodel en niveau",
     "matrixAssistants": "Populaire AI-assistenten naast elkaar",
     "matrixFor": "{task}: de tools naast elkaar",
-    "matrixNote": "Volgorde op functies en data, nooit op sponsoring. Wat we niet met een bron hebben vastgelegd, laten we weg (–).",
-    "fullStack": "Bekijk je complete stack",
-    "noData": "Geen gegevens met bron",
+    "matrixNote": "We zetten tools op volgorde van wat ze kunnen, nooit omdat iemand betaalt. Hebben we geen bron, dan zie je een streepje (–).",
+    "fullStack": "Bekijk het hele advies",
+    "noData": "Nog niet bekend: we hebben er geen bron voor",
     "openSource": "open source",
     "col": {
       "tool": "Tool",
@@ -936,15 +936,15 @@
       "intermediate": "Even wennen",
       "advanced": "Technisch"
     },
-    "radarTitle": "AI-trend- en nieuwsradar",
-    "radarSub": "Automatisch verzameld door onze agents: elk uur het AI-nieuws uit de media, video's van nieuwskanalen en wijzigingen bij tools. Bij elk item staat de bron.",
+    "radarTitle": "Wat er speelt in AI",
+    "radarSub": "Onze software haalt dit elk uur op: nieuws uit de media, video's en wijzigingen bij tools. Bij elk bericht staat de bron.",
     "radarAll": "Al het AI-nieuws",
     "radarNews": "AI-nieuws uit de media",
     "radarVideos": "Video's van officiële kanalen",
-    "radarBuzz": "Community-buzz",
+    "radarBuzz": "Waar mensen over praten",
     "source": "bron: {domain}",
     "buzz": {
-      "hackernews": "{count, plural, one {# vermelding} other {{n} vermeldingen}} op Hacker News (7 dagen)",
+      "hackernews": "{count, plural, one {# keer} other {{n} keer}} genoemd op Hacker News in 7 dagen",
       "github": "{count, plural, one {# GitHub-ster} other {{n} GitHub-sterren}}"
     },
     "videoKind": {
@@ -955,11 +955,11 @@
       "other": "Video"
     },
     "startTitle": "Direct aan de slag",
-    "startSub": "Gratis stappenplannen, van nul naar resultaat. Wat je hier ziet, hangt af van je weergave: Basis of Advanced.",
+    "startSub": "Gratis stappenplannen: zo begin je, stap voor stap. Wat je ziet, hangt af van je keuze: Basis of Technisch.",
     "startBasis": "Basis · gratis stappenplan",
-    "startAdvanced": "Advanced · gratis stappenplan",
+    "startAdvanced": "Technisch · gratis stappenplan",
     "startPlan": "Bekijk het stappenplan",
-    "startStack": "Stel mijn stack samen",
+    "startStack": "Toon mijn advies",
     "paidFrom": "betaald vanaf {price}",
     "from": "vanaf {price}",
     "radarChanges": "Wijzigingen bij tools"
@@ -2165,7 +2165,7 @@
   },
   "og": {
     "eyebrowSite": "AI-tools, met bonnetje",
-    "siteSub": "Vertel wat je wilt doen en krijg een AI-stack met prijzen, bronnen en datums.",
+    "siteSub": "Vertel wat je wilt doen en zie welke AI-tools passen. Met prijzen, bronnen en datums.",
     "siteFooter": "{count} tools · elke prijs met bron",
     "eyebrowTool": "Bonnetje · gecontroleerd {date}",
     "from": "Vanaf {price}",
@@ -2205,7 +2205,7 @@
       "audio": "Iets met geluid of stem",
       "code": "Een website, app of code maken",
       "automation": "Werk automatisch laten doen",
-      "marketing": "Marketing en social media",
+      "marketing": "Reclame en social media",
       "business": "Klanten helpen"
     }
   }

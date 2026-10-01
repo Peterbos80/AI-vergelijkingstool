@@ -3,7 +3,7 @@
     "siteName": "AIToolsWijzer",
     "tagline": "KI-Tools, mit Beleg.",
     "defaultTitle": "AIToolsWijzer — welches KI-Tool passt zu deinem Vorhaben?",
-    "defaultDescription": "Sag uns, was du vorhast, und erhalte einen begründeten KI-Stack: welche Tools, warum, was es kostet — mit Quellen, Aktualität und Alternativen.",
+    "defaultDescription": "Sag uns, was du vorhast. Du siehst, welche KI-Tools passen, was sie kosten und woher wir das wissen.",
     "titleTemplate": "{title} · AIToolsWijzer"
   },
   "a11y": {
@@ -642,7 +642,7 @@
     "heading": "Was möchtest du erreichen?",
     "inputLabel": "Beschreibe, was du tun möchtest",
     "placeholder": "Z. B. Ich möchte professionelle Social-Media-Videos machen, weiß aber nicht, mit welchen Tools",
-    "submit": "Match",
+    "submit": "Tools finden",
     "understood": "Verstanden",
     "engineLlm": "Sprachmodell",
     "engineLexical": "Schlüsselwortanalyse",
@@ -870,27 +870,27 @@
   },
   "home": {
     "metaTitle": "AIToolsWijzer: welches KI-Tool passt zu deinem Vorhaben?",
-    "heroTitle": "Was möchtest du erreichen?",
-    "heroSub": "Beschreibe dein Ziel. Du bekommst einen begründeten Stack: welche Tools, warum, was es kostet — mit Quellen und Alternativen.",
+    "heroTitle": "Was willst du tun?",
+    "heroSub": "Wähle aus einer Liste oder tippe deine Frage. Du siehst, welche KI-Tools passen, was sie kosten und warum. Bei jeder Angabe steht, wo wir sie gefunden haben.",
     "examples": "Zum Beispiel",
-    "proof": "{tools} Tools · {facts} Preise und Fakten · {supported} % durch mehrere Quellen gestützt · zuletzt geprüft am {date}",
+    "proof": "{tools} Tools · {facts} Preise und Fakten · {supported} % mit offizieller Quelle oder mehreren Quellen · zuletzt geprüft am {date}",
     "changedTitle": "Gerade geändert",
     "cheaperTitle": "Günstiger geworden",
-    "fightsTitle": "Fair Fights",
-    "fightsSub": "Zwei Tools, dieselben Kriterien, kein Gesamtsieger.",
+    "fightsTitle": "Fair verglichen",
+    "fightsSub": "Zwei Tools nebeneinander, nach denselben Punkten. Es gibt keinen Sieger: Was besser ist, hängt davon ab, was du brauchst.",
     "tasksTitle": "Beliebte Aufgaben",
     "tasksAll": "Alle Aufgaben",
-    "newsletterTitle": "AI Pulse in deinem Posteingang",
-    "newsletterBody": "Einmal pro Woche: echte Preisänderungen, neue Tools und was eingestellt wird. Kein Hype.",
+    "newsletterTitle": "Was ist neu, jede Woche per E-Mail",
+    "newsletterBody": "Einmal pro Woche: echte Preisänderungen, neue Tools und Tools, die aufhören. Kein Hype.",
     "pulseAll": "Alle Änderungen",
     "stepsCount": "{count, plural, one {# Schritt} other {# Schritte}}",
-    "stageHint": "Schreib, was du tun willst. Der Wijzer findet den passenden Ort.",
-    "stageEnter": "Diese Welt ansehen",
-    "stageAnnounce": "Welt: {place}",
+    "stageHint": "Wähle oder tippe, was du tun willst. Dann siehst du hier den passenden Ort.",
+    "stageEnter": "Tools ansehen",
+    "stageAnnounce": "Du siehst jetzt: {place}",
     "toolsCount": "{count, plural, one {# Tool} other {# Tools}}",
     "worldsEyebrow": "Zehn Welten",
     "worldsTitle": "Wo legst du los?",
-    "worldsSub": "Jede Kategorie ist ein Ort mit eigenem Werkzeug. Wähle eine Welt und sieh, welche Tools dort die Arbeit machen und was sie kosten.",
+    "worldsSub": "Jede Art von Arbeit hat hier ihren eigenen Ort. Wähle einen und sieh, welche Tools dort passen und was sie kosten.",
     "worldTop": "Ganz oben",
     "matrixEyebrow": "Nebeneinander",
     "fightsEyebrow": "Duelle",
@@ -910,7 +910,7 @@
     "chooserShow": "Zeig mir die Tools"
   },
   "hub": {
-    "placeholder": "Frag in deinen eigenen Worten. Zum Beispiel: Ich möchte meine Meetings kostenlos protokollieren lassen",
+    "placeholder": "Schreib in deinen eigenen Worten, was du tun willst. Zum Beispiel: Ich will ein Video für TikTok machen",
     "enterHint": "Enter zum Fragen · Umschalt+Enter für eine neue Zeile",
     "promptsLabel": "Probiere eine dieser Fragen",
     "badgeBeginner": "Einfach",
@@ -921,11 +921,11 @@
         "query": "Ich möchte Social-Videos für mein Unternehmen erstellen"
       },
       "api": {
-        "label": "LLM per API anbinden",
+        "label": "KI mit deiner eigenen App verbinden",
         "query": "Ich möchte ein Sprachmodell per API in meine eigene App einbinden"
       },
       "notes": {
-        "label": "Kostenlos protokollieren",
+        "label": "Kostenlose Protokolle von Meetings",
         "query": "Ich möchte meine Meetings kostenlos protokollieren lassen"
       }
     },
@@ -938,9 +938,9 @@
     "levelAdvancedHint": "Für alle, die selbst bauen: API, Integrationen, Self-Hosting, Preismodell und Niveau",
     "matrixAssistants": "Beliebte KI-Assistenten im Vergleich",
     "matrixFor": "{task}: die Tools im Vergleich",
-    "matrixNote": "Sortiert nach Funktionen und Daten, nie nach Sponsoring. Was wir nicht mit Quelle erfasst haben, lassen wir weg (–).",
-    "fullStack": "Deinen kompletten Stack ansehen",
-    "noData": "Keine belegten Daten",
+    "matrixNote": "Wir sortieren Tools nach dem, was sie können, nie weil jemand zahlt. Haben wir keine Quelle, siehst du einen Strich (–).",
+    "fullStack": "Den ganzen Rat ansehen",
+    "noData": "Noch nicht bekannt: Wir haben keine Quelle dafür",
     "openSource": "Open Source",
     "col": {
       "tool": "Tool",
@@ -959,15 +959,15 @@
       "intermediate": "Etwas Übung nötig",
       "advanced": "Technisch"
     },
-    "radarTitle": "KI-Trend- und Nachrichtenradar",
-    "radarSub": "Automatisch von unseren Agents gesammelt: stündlich KI-News aus den Medien, Videos von Nachrichtenkanälen und Änderungen bei Tools. Bei jedem Eintrag steht die Quelle.",
+    "radarTitle": "Was in der KI passiert",
+    "radarSub": "Unsere Software sammelt das jede Stunde: Nachrichten aus den Medien, Videos und Änderungen bei Tools. Bei jedem Eintrag steht die Quelle.",
     "radarAll": "Alle KI-News",
     "radarNews": "KI-News aus den Medien",
     "radarVideos": "Videos offizieller Kanäle",
-    "radarBuzz": "Community-Buzz",
+    "radarBuzz": "Worüber Leute reden",
     "source": "Quelle: {domain}",
     "buzz": {
-      "hackernews": "{count, plural, one {# Nennung} other {{n} Nennungen}} auf Hacker News (7 Tage)",
+      "hackernews": "{count, plural, one {# Nennung} other {{n} Nennungen}} auf Hacker News in 7 Tagen",
       "github": "{count, plural, one {# GitHub-Stern} other {{n} GitHub-Sterne}}"
     },
     "videoKind": {
@@ -978,11 +978,11 @@
       "other": "Video"
     },
     "startTitle": "Direkt loslegen",
-    "startSub": "Kostenlose Schritt-für-Schritt-Pläne, von null zum Ergebnis. Was du hier siehst, hängt von deiner Ansicht ab: Basis oder Advanced.",
-    "startBasis": "Basis · kostenloser Plan",
-    "startAdvanced": "Advanced · kostenloser Plan",
+    "startSub": "Kostenlose Schritt-für-Schritt-Pläne für den Start. Was du siehst, hängt von deiner Wahl ab: Basis oder Technisch.",
+    "startBasis": "Basis · kostenloser Schritt-für-Schritt-Plan",
+    "startAdvanced": "Technisch · kostenloser Schritt-für-Schritt-Plan",
     "startPlan": "Zum Schritt-für-Schritt-Plan",
-    "startStack": "Meinen Stack zusammenstellen",
+    "startStack": "Meinen Rat zeigen",
     "paidFrom": "bezahlt ab {price}",
     "from": "ab {price}",
     "radarChanges": "Änderungen bei Tools"
@@ -1418,7 +1418,7 @@
   },
   "og": {
     "eyebrowSite": "KI-Tools, mit Beleg",
-    "siteSub": "Sag uns, was du vorhast, und erhalte einen KI-Stack mit Preisen, Quellen und Daten.",
+    "siteSub": "Sag uns, was du vorhast, und sieh, welche KI-Tools passen. Mit Preisen, Quellen und Daten.",
     "siteFooter": "{count} Tools · jeder Preis mit Quelle",
     "eyebrowTool": "Beleg · geprüft am {date}",
     "from": "Ab {price}",
@@ -1466,7 +1466,7 @@
       "audio": "Etwas mit Ton oder Stimme",
       "code": "Eine Website, App oder Code bauen",
       "automation": "Arbeit automatisch erledigen lassen",
-      "marketing": "Marketing und Social Media",
+      "marketing": "Werbung und Social Media",
       "business": "Kunden helfen"
     }
   }
