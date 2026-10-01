@@ -349,7 +349,7 @@ describe('notifier', () => {
     await run('notifier', {}, wed('2026-11-18')); // week of 9 Nov: 3 events
     const after = await db.select().from(emailOutbox);
     expect(after.length).toBe(before + 1);
-    expect(after.find((m) => m.subject.startsWith('AI Pulse'))?.toEmail).toBe('watcher@example.test');
+    expect(after.find((m) => m.subject.startsWith('Wat is nieuw'))?.toEmail).toBe('watcher@example.test');
     // Idempotent within the week.
     await run('notifier', {}, wed('2026-11-18'));
     expect((await db.select().from(emailOutbox)).length).toBe(before + 1);
