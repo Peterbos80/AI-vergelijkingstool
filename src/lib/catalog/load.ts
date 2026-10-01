@@ -28,6 +28,7 @@ import {
   type FactStatus,
 } from '@/lib/db/schema';
 import { isLocale, type Locale } from '@/i18n/config';
+import { LOGOS } from '@/generated/logos';
 import { statusRank } from '@/lib/provenance/confidence';
 import type {
   Catalog,
@@ -182,6 +183,7 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
       websiteStatus: t.websiteStatus,
       unreachableSince: t.unreachableSince,
       quarantineUntil: t.quarantineUntil,
+      logo: LOGOS[t.slug] ?? null,
       qualityScore: t.qualityScore,
       indexable: t.indexable,
       text,

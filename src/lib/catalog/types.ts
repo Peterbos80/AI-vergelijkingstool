@@ -12,6 +12,7 @@ import type {
   ToolStatus,
 } from '@/lib/db/schema';
 import type { Locale } from '@/i18n/config';
+import type { ToolLogo } from '@/generated/logos';
 
 export interface CatalogFact {
   value: unknown;
@@ -89,6 +90,8 @@ export interface CatalogTool {
   websiteStatus: 'up' | 'down' | 'unknown';
   unreachableSince: Date | null;
   quarantineUntil: Date | null;
+  /** The tool's own logo where we may show it (data/logos.json), else null: a two-letter mark. */
+  logo: ToolLogo | null;
   qualityScore: number;
   indexable: { tool: boolean; pricing: boolean; alternatives: boolean };
   text: Partial<Record<Locale, ToolText>>;

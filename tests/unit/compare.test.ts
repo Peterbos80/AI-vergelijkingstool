@@ -75,6 +75,7 @@ function tool(slug: string, extra: Partial<CatalogTool> = {}): CatalogTool {
     websiteStatus: 'up',
     unreachableSince: null,
     quarantineUntil: null,
+    logo: null,
     qualityScore: 80,
     indexable: { tool: true, pricing: true, alternatives: true },
     text: {},

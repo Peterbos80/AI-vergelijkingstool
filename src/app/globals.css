@@ -1047,7 +1047,15 @@
   .mark-logo {
     width: 52%;
     height: 52%;
-    fill: currentColor;
+    fill: var(--logo-light, currentColor);
+  }
+  :root[data-theme='dark'] .mark-logo {
+    fill: var(--logo-dark, currentColor);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .mark-logo {
+      fill: var(--logo-dark, currentColor);
+    }
   }
   .mark-letters {
     font-family: var(--font-sans);

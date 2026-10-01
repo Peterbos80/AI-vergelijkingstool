@@ -1,18 +1,23 @@
 import type { CatalogTool } from '@/lib/catalog/types';
 import type { SceneId } from '@/lib/world-ids';
-import { LOGOS } from '@/generated/logos';
 
 /**
  * A tool's identity mark: its logo where we may show it (data/logos.json,
- * served from this site), otherwise two letters. The tile takes the tint of
- * the tool's world. Decorative: the name is always next to it.
+ * served from this site), in its brand colour where that keeps 3:1 against
+ * the tile in the current theme; otherwise two letters. The tile takes the
+ * tint of the tool's world. Decorative: the name is always next to it.
  */
-export function ToolMark({ tool, world, size = 40, className }: { tool: Pick<CatalogTool, 'slug' | 'name'>; world?: SceneId; size?: number; className?: string }) {
-  const logo = LOGOS[tool.slug];
+export function ToolMark({ tool, world, size = 40, className }: { tool: Pick<CatalogTool, 'name' | 'logo'>; world?: SceneId; size?: number; className?: string }) {
+  const logo = tool.logo;
   return (
     <span aria-hidden="true" className={className ? `mark ${className}` : 'mark'} data-world={world === 'home' ? undefined : world} style={{ ['--mark' as string]: `${size}px` }}>
       {logo ? (
-        <svg viewBox="0 0 24 24" className="mark-logo" focusable="false">
+        <svg
+          viewBox="0 0 24 24"
+          className="mark-logo"
+          focusable="false"
+          style={{ ...(logo.light ? { ['--logo-light' as string]: logo.light } : {}), ...(logo.dark ? { ['--logo-dark' as string]: logo.dark } : {}) }}
+        >
           <path d={logo.path} />
         </svg>
       ) : (
