@@ -24,10 +24,11 @@ export function FxApprox({
   locale: Locale;
   className?: string;
 }) {
-  const eur = approxEur(cents, currency, fx.rates, locale);
+  // Nothing to convert for a free plan (0) or a price on request (null).
+  const eur = cents !== null && cents > 0 ? approxEur(cents, currency, fx.rates, locale) : null;
   if (!eur || !fx.day) return null;
   return (
-    <span className={`num text-xs text-ink-3 ${className}`} title={t('common.fxNote', { date: formatDate(fx.day, locale) })}>
+    <span className={`num text-xs font-normal text-ink-3 ${className}`} title={t('common.fxNote', { date: formatDate(fx.day, locale) })}>
       {t('common.approxEurEcb', { amount: eur, date: formatDayMonth(fx.day, locale) })}
     </span>
   );
