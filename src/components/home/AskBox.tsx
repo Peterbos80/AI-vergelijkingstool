@@ -153,113 +153,102 @@ export function AskBox({
         </div>
       )}
 
-      <form
-        method="get"
-        action={action}
-        className="ask-box ask-choose"
-        id="ask-panel-choose"
-        role={hydrated ? 'tabpanel' : undefined}
-        aria-labelledby={hydrated ? 'ask-tab-choose' : undefined}
-      >
-        <div className="choose-row">
-          <label htmlFor="ask-world" className="choose-label">
-            <span className="choose-n">1</span>
-            {labels.stepWorld}
-          </label>
-          <select id="ask-world" className="input" value={intent.chosen ?? ''} onChange={(e) => pickWorld(e.target.value)}>
-            <option value="">{labels.chooseWorld}</option>
-            {choices.map((c) => (
-              <option key={c.world} value={c.world}>
-                {c.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="choose-row">
-          <label htmlFor="ask-task" className="choose-label">
-            <span className="choose-n">2</span>
-            {labels.stepTask}
-          </label>
-          <select id="ask-task" name="task" className="input" required value={intent.task ?? ''} onChange={(e) => pickTask(e.target.value)}>
-            <option value="">{labels.chooseTask}</option>
-            {(choice ? [choice] : choices).map((c) =>
-              choice ? (
-                c.tasks.map((x) => (
-                  <option key={x.id} value={x.id}>
-                    {x.title}
-                  </option>
-                ))
-              ) : (
-                <optgroup key={c.world} label={c.label}>
-                  {c.tasks.map((x) => (
+      <div className="ask-panel ask-panel-choose" id="ask-panel-choose" role={hydrated ? 'tabpanel' : undefined} aria-labelledby={hydrated ? 'ask-tab-choose' : undefined}>
+        <form method="get" action={action} className="ask-box ask-choose">
+          <div className="choose-row">
+            <label htmlFor="ask-world" className="choose-label">
+              <span className="choose-n">1</span>
+              {labels.stepWorld}
+            </label>
+            <select id="ask-world" className="input" value={intent.chosen ?? ''} onChange={(e) => pickWorld(e.target.value)}>
+              <option value="">{labels.chooseWorld}</option>
+              {choices.map((c) => (
+                <option key={c.world} value={c.world}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="choose-row">
+            <label htmlFor="ask-task" className="choose-label">
+              <span className="choose-n">2</span>
+              {labels.stepTask}
+            </label>
+            <select id="ask-task" name="task" className="input" required value={intent.task ?? ''} onChange={(e) => pickTask(e.target.value)}>
+              <option value="">{labels.chooseTask}</option>
+              {(choice ? [choice] : choices).map((c) =>
+                choice ? (
+                  c.tasks.map((x) => (
                     <option key={x.id} value={x.id}>
                       {x.title}
                     </option>
-                  ))}
-                </optgroup>
-              ),
-            )}
-          </select>
-        </div>
-        <div className="choose-row">
-          <label htmlFor="ask-budget" className="choose-label">
-            <span className="choose-n">3</span>
-            {labels.stepBudget}
-          </label>
-          <select id="ask-budget" name="b" className="input" defaultValue={labels.budgets[0]?.value}>
-            {labels.budgets.map((b) => (
-              <option key={b.value} value={b.value}>
-                {b.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        {taskTitle && <input type="hidden" name="q" value={taskTitle} />}
-        <input type="hidden" name="lvl" value={MATCH_LEVEL[level]} />
-        <div className="choose-go">
-          <button type="submit" className="btn btn-go" disabled={hydrated && !intent.task}>
-            {labels.show}
-            <Icon name="arrow-right" size={18} />
-          </button>
-        </div>
-      </form>
+                  ))
+                ) : (
+                  <optgroup key={c.world} label={c.label}>
+                    {c.tasks.map((x) => (
+                      <option key={x.id} value={x.id}>
+                        {x.title}
+                      </option>
+                    ))}
+                  </optgroup>
+                ),
+              )}
+            </select>
+          </div>
+          <div className="choose-row">
+            <label htmlFor="ask-budget" className="choose-label">
+              <span className="choose-n">3</span>
+              {labels.stepBudget}
+            </label>
+            <select id="ask-budget" name="b" className="input" defaultValue={labels.budgets[0]?.value}>
+              {labels.budgets.map((b) => (
+                <option key={b.value} value={b.value}>
+                  {b.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          {taskTitle && <input type="hidden" name="q" value={taskTitle} />}
+          <input type="hidden" name="lvl" value={MATCH_LEVEL[level]} />
+          <div className="choose-go">
+            <button type="submit" className="btn btn-go" disabled={hydrated && !intent.task}>
+              {labels.show}
+              <Icon name="arrow-right" size={18} />
+            </button>
+          </div>
+        </form>
+      </div>
 
-      <form
-        ref={form}
-        method="get"
-        action={action}
-        role={hydrated ? 'tabpanel' : 'search'}
-        aria-labelledby={hydrated ? 'ask-tab-type' : undefined}
-        id="ask-panel-type"
-        className="ask-box ask-type"
-      >
-        <label htmlFor="match-q" className="visually-hidden">
-          {labels.label}
-        </label>
-        <textarea
-          id="match-q"
-          ref={input}
-          name="q"
-          rows={2}
-          required
-          minLength={3}
-          maxLength={300}
-          value={q}
-          onChange={(e) => askIntent.set({ text: e.target.value })}
-          onKeyDown={onKeyDown}
-          placeholder={labels.placeholder}
-          className="ask-input"
-          autoComplete="off"
-          enterKeyHint="search"
-        />
-        <input type="hidden" name="lvl" value={MATCH_LEVEL[level]} />
-        <div className="ask-bar">
-          <p className="ask-hint">{labels.hint}</p>
-          <button type="submit" className="ask-submit" aria-label={labels.submit} title={labels.submit}>
-            <Icon name="arrow-right" size={20} />
-          </button>
-        </div>
-      </form>
+      <div className="ask-panel ask-panel-type" id="ask-panel-type" role={hydrated ? 'tabpanel' : undefined} aria-labelledby={hydrated ? 'ask-tab-type' : undefined}>
+        <form ref={form} method="get" action={action} role="search" className="ask-box ask-type">
+          <label htmlFor="match-q" className="visually-hidden">
+            {labels.label}
+          </label>
+          <textarea
+            id="match-q"
+            ref={input}
+            name="q"
+            rows={2}
+            required
+            minLength={3}
+            maxLength={300}
+            value={q}
+            onChange={(e) => askIntent.set({ text: e.target.value })}
+            onKeyDown={onKeyDown}
+            placeholder={labels.placeholder}
+            className="ask-input"
+            autoComplete="off"
+            enterKeyHint="search"
+          />
+          <input type="hidden" name="lvl" value={MATCH_LEVEL[level]} />
+          <div className="ask-bar">
+            <p className="ask-hint">{labels.hint}</p>
+            <button type="submit" className="ask-submit" aria-label={labels.submit} title={labels.submit}>
+              <Icon name="arrow-right" size={20} />
+            </button>
+          </div>
+        </form>
+      </div>
 
       <ul className="ask-prompts" aria-label={labels.prompts}>
         {prompts.map((p) => (

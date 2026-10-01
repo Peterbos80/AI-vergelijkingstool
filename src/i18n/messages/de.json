@@ -1085,7 +1085,9 @@
     "capabilities": "Fähigkeiten",
     "tasks": "Aufgaben in dieser Kategorie",
     "toolsCount": "{count, plural, =0 {noch keine Tools} one {# Tool} other {# Tools}}",
-    "breadcrumb": "Kategorien"
+    "breadcrumb": "Kategorien",
+    "worldStats": "{tools, plural, one {# Tool} other {# Tools}} · {functions, plural, one {# Funktion} other {# Funktionen}} · {tasks, plural, one {# Aufgabe} other {# Aufgaben}}",
+    "worldFunctions": "Alle Funktionen auf einen Blick"
   },
   "capability": {
     "title": "KI-Tools für {name}",

@@ -1085,7 +1085,9 @@
     "capabilities": "Capacités",
     "tasks": "Tâches de cette catégorie",
     "toolsCount": "{count, plural, =0 {pas encore d’outils} one {# outil} other {# outils}}",
-    "breadcrumb": "Catégories"
+    "breadcrumb": "Catégories",
+    "worldStats": "{tools, plural, one {# outil} other {# outils}} · {functions, plural, one {# fonction} other {# fonctions}} · {tasks, plural, one {# tâche} other {# tâches}}",
+    "worldFunctions": "Toutes les fonctions en un coup d’œil"
   },
   "capability": {
     "title": "Outils d’IA pour {name}",

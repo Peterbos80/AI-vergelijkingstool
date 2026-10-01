@@ -10,6 +10,8 @@ import { alternates, clip, robots } from '@/lib/seo';
 import { track } from '@/lib/analytics/track';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ToolRow } from '@/components/data/ToolRow';
+import { WorldScene } from '@/components/worlds/WorldScene';
+import { isWorld } from '@/lib/world-ids';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/categories/[slug]'>): Promise<Metadata> {
   const { locale, slug } = (await params) as { locale: Locale; slug: string };
@@ -37,35 +39,55 @@ export default async function CategoryPage({ params }: PageProps<'/[locale]/cate
   await track({ path: href.category(locale, n.slug), pageType: 'category', locale, entityId: cat.id });
   const caps = catalog.capabilities.filter((c) => c.categoryId === cat.id);
   const tasks = catalog.tasks.filter((x) => x.categoryId === cat.id);
+  const capIds = new Set(caps.map((c) => c.id));
+  const toolCount = catalog.tools.filter((x) => x.status !== 'shutdown' && x.capabilities.some((c) => capIds.has(c.id))).length;
+  const world = isWorld(cat.id) ? cat.id : null;
   return (
-    <div className="container-page py-8">
-      <Breadcrumbs t={t} items={[{ label: t('categories.breadcrumb'), href: href.categories(locale) }, { label: n.name }]} />
-      <h1 className="mt-6 text-3xl md:text-4xl">{n.name}</h1>
-      {n.description && <p className="mt-2 max-w-2xl text-ink-2">{n.description}</p>}
-      {tasks.length > 0 && (
-        <section className="mt-8" aria-labelledby="tasks">
-          <h2 id="tasks" className="eyebrow">
-            {t('categories.tasks')}
-          </h2>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {tasks.map((x) => (
-              <li key={x.id}>
-                <Link href={href.task(locale, taskSlug(x, locale))} className="chip">
-                  {taskTextOf(x, locale).title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-      <div className="mt-10 space-y-10">
+    <div data-world={world ?? undefined}>
+      <section className="world-hero" aria-labelledby="world-title">
+        <div className="container-page world-hero-grid">
+          <div>
+            <Breadcrumbs t={t} items={[{ label: t('categories.breadcrumb'), href: href.categories(locale) }, { label: n.name }]} />
+            {world && <p className="world-hero-place">{t(`worlds.places.${world}`)}</p>}
+            <h1 id="world-title" className="world-hero-title">
+              {n.name}
+            </h1>
+            {n.description && <p className="hero-sub">{n.description}</p>}
+            <p className="world-hero-stats mono">{t('categories.worldStats', { tools: toolCount, functions: caps.length, tasks: tasks.length })}</p>
+            {tasks.length > 0 && (
+              <div className="mt-6">
+                <h2 id="tasks" className="eyebrow">
+                  {t('categories.tasks')}
+                </h2>
+                <ul className="world-task-chips">
+                  {tasks.map((x) => (
+                    <li key={x.id}>
+                      <Link href={href.task(locale, taskSlug(x, locale))} className="chip">
+                        <span className="prompt-dot" aria-hidden="true" />
+                        {taskTextOf(x, locale).title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+          {world && (
+            <div className="world-hero-visual">
+              <WorldScene world={world} uid={`world-${world}`} />
+            </div>
+          )}
+        </div>
+      </section>
+
+      <div className="container-page space-y-12 py-12">
         {caps.map((c) => {
           const tools = rankForCapability(catalog, c.id).slice(0, 5);
           const cn = nameOf(c, locale);
           return (
             <section key={c.id} aria-labelledby={`cap-${c.id}`}>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h2 id={`cap-${c.id}`} className="text-xl">
+                <h2 id={`cap-${c.id}`} className="world-section-title text-xl">
                   {cn.name}
                 </h2>
                 <Link href={href.capability(locale, cn.slug)} className="text-sm">

@@ -1077,7 +1077,9 @@
     "capabilities": "Functies",
     "tasks": "Taken in deze categorie",
     "toolsCount": "{count, plural, =0 {nog geen tools} one {# tool} other {# tools}}",
-    "breadcrumb": "Categorieën"
+    "breadcrumb": "Categorieën",
+    "worldStats": "{tools, plural, one {# tool} other {# tools}} · {functions, plural, one {# functie} other {# functies}} · {tasks, plural, one {# taak} other {# taken}}",
+    "worldFunctions": "Alle functies op een rij"
   },
   "capability": {
     "title": "AI-tools voor {name}",

@@ -27,7 +27,9 @@ import { ToolRow } from '@/components/data/ToolRow';
 import { VideoFacade } from '@/components/data/VideoFacade';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
 import { Icon } from '@/components/ui/Icon';
-import { entryPriceLabel, planPriceLabel } from '@/components/data/format';
+import { entryPriceLabel, factValueLabel, planPriceLabel } from '@/components/data/format';
+import { ReceiptChip } from '@/components/data/ReceiptChip';
+import { WorldScene } from '@/components/worlds/WorldScene';
 import { FxApprox } from '@/components/data/Price';
 import { EuAlternatives } from '@/components/compare/EuAlternatives';
 
@@ -55,6 +57,8 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/tools/[s
 }
 
 const EU_KEYS = ['eu_data_residency', 'gdpr_dpa', 'trains_on_user_data', 'supports_dutch'];
+/** The title's key facts, after the entry price (an unknown value shows as a dash, never guessed). */
+const HERO_FACTS = ['has_free_tier', 'platforms', 'supports_dutch', 'eu_data_residency', 'trains_on_user_data'];
 /** Facts for the Advanced view only. */
 const TECHNICAL_KEYS = ['api_available', 'open_source', 'self_hostable', 'model_dependencies'];
 const OTHER_KEYS = [
@@ -110,6 +114,9 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
     ? detail.history.filter((h) => h.validTo === null).reduce<Date | null>((acc, h) => (!acc || h.validFrom > acc ? h.validFrom : acc), null)
     : null;
 
+  const world = toolWorld(tool, catalog);
+  const mainCategory = world === 'home' ? undefined : catalog.categoriesById.get(world);
+
   const offers = tool.plans
     .filter((p) => !p.isCustom && p.priceCents !== null && p.currency && p.status !== 'unverified')
     .map((p) => ({
@@ -141,26 +148,68 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
       {tool.status === 'deprecated' && <p className="notice notice-warning mt-4">{t('tool.deprecatedNotice', { name: tool.name })}</p>}
       {tool.quarantineUntil && tool.quarantineUntil > new Date() && <p className="notice mt-4">{t('tool.quarantineNotice')}</p>}
 
-      <header className="mt-6 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-        <div className="flex items-start gap-4">
-          <ToolMark tool={tool} world={toolWorld(tool, catalog)} size={56} />
-          <div>
-            <h1 className="text-3xl md:text-4xl">{tool.name}</h1>
-            <p className="mt-1 text-lg text-ink-2">{text?.tagline}</p>
-            <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-ink-3">
+      <header className="tool-hero" data-world={world === 'home' ? undefined : world}>
+        {world !== 'home' && (
+          <div className="tool-hero-scene" aria-hidden="true">
+            <WorldScene world={world} uid={`tool-${tool.slug}`} />
+          </div>
+        )}
+        <div className="tool-hero-main">
+          <ToolMark tool={tool} world={world} size={88} />
+          <div className="min-w-0 flex-1">
+            {mainCategory && world !== 'home' && (
+              <Link href={href.category(locale, nameOf(mainCategory, locale).slug)} className="tool-hero-world">
+                <span className="prompt-dot" aria-hidden="true" />
+                {t(`worlds.places.${world}`)} · {nameOf(mainCategory, locale).name}
+              </Link>
+            )}
+            <h1 className="tool-hero-title">{tool.name}</h1>
+            <p className="mt-2 text-lg text-ink-2">{text?.tagline}</p>
+            <p className="mt-3 flex flex-wrap items-center gap-2 text-sm text-ink-3">
               {tool.companyName && <span>{t('tool.by', { company: tool.companyName })}</span>}
               {tool.pricingStatus && <StatusStamp status={tool.pricingStatus} t={t} />}
               <FreshnessDial freshness={tool.freshness} t={t} />
               <span>{t('freshness.checkedOn', { date: formatDate(tool.lastCheckedAt ?? tool.priceCheckedAt, locale) })}</span>
             </p>
+            <div className="mt-5 flex flex-wrap items-start gap-3">
+              <VisitLink slug={tool.slug} name={tool.name} t={t} locale={locale} src="tool" affiliate={isAffiliate} />
+              <Link href={href.compare(locale, [tool.slug, ...alternativesList.slice(0, 1).map((a) => a.slug)])} className="btn btn-ghost">
+                {t('common.compare')}
+              </Link>
+            </div>
           </div>
         </div>
-        <div className="flex flex-wrap items-start gap-3">
-          <VisitLink slug={tool.slug} name={tool.name} t={t} locale={locale} src="tool" affiliate={isAffiliate} />
-          <Link href={href.compare(locale, [tool.slug, ...alternativesList.slice(0, 1).map((a) => a.slug)])} className="btn btn-ghost">
-            {t('common.compare')}
-          </Link>
-        </div>
+        <dl className="tool-facts">
+          <div className="tool-fact">
+            <dt>{t('compare.criteria.entry_price')}</dt>
+            <dd>
+              <span className="num">{entryPriceLabel(tool, t, locale)}</span>
+              <FxApprox cents={tool.entryPriceCents} currency={tool.entryPriceCurrency} fx={catalog.fx} t={t} locale={locale} />
+            </dd>
+          </div>
+          {HERO_FACTS.map((key) => {
+            const receipt = detail.facts[key];
+            const value = receipt ? receipt.value : snapshot[key];
+            const shown = key === 'platforms' && Array.isArray(value) && value.length > 3 ? [...value.slice(0, 3), `+${value.length - 3}`] : value;
+            return (
+              <div key={key} className="tool-fact">
+                <dt>{t(`facts.${key}`)}</dt>
+                <dd>
+                  {hasFactValue(value) ? (
+                    <>
+                      <span>{factValueLabel(key, shown, t)}</span>
+                      {receipt && <ReceiptChip status={receipt.status} t={t} locale={locale} sources={receipt.sources.length} date={receipt.verifiedAt ?? receipt.observedAt} />}
+                    </>
+                  ) : (
+                    <span className="text-ink-3" aria-label={t('hub.noData')} title={t('hub.noData')}>
+                      –
+                    </span>
+                  )}
+                </dd>
+              </div>
+            );
+          })}
+        </dl>
       </header>
 
       <div className="mt-4">

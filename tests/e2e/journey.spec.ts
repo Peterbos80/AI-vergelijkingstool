@@ -15,6 +15,8 @@ for (const j of JOURNEYS) {
   test(`journey (${j.locale}): goal → clarification → stack → variants → saved receipt`, async ({ page }) => {
     const watch = watchErrors(page);
     await page.goto(`/${j.locale}`);
+    // Typing is the second way to ask (picking from lists is the first).
+    await page.locator('.ask[data-hydrated] #ask-tab-type').click();
     await page.locator('#match-q').fill(j.query);
     await page.locator('form[role=search] button[type=submit]').first().click();
     await page.waitForURL(/\/match\?/);

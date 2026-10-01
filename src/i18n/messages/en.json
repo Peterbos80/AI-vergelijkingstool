@@ -1077,7 +1077,9 @@
     "capabilities": "Capabilities",
     "tasks": "Tasks in this category",
     "toolsCount": "{count, plural, =0 {no tools yet} one {# tool} other {# tools}}",
-    "breadcrumb": "Categories"
+    "breadcrumb": "Categories",
+    "worldStats": "{tools, plural, one {# tool} other {# tools}} · {functions, plural, one {# function} other {# functions}} · {tasks, plural, one {# task} other {# tasks}}",
+    "worldFunctions": "Every function at a glance"
   },
   "capability": {
     "title": "AI tools for {name}",
