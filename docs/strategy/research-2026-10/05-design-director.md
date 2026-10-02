@@ -172,8 +172,18 @@ Bekeken op 1440, 1024, 768 en 390 px, in dark en licht, met reduced motion.
   - de kamer als vervaagde achtergrond.
 - Op mobiel staat het merk boven de titel.
 
+### Ronde 4: lijsten, catalogus en samenvoegen (1–2 okt)
+- **Check je tools** (Stack Doctor) kiest met dezelfde tegelkiezer als Vergelijken, zonder acht lange lijsten.
+- **Toolrijen** zijn één klikbare rij:
+  - merk, naam, korte zin en functies;
+  - een vaste prijskolom met het bonnetje als woorden ("Onderbouwd · 29 sep") in plaats van twee kleine icoontjes;
+  - "+ Vergelijk", dat na aanvinken een vinkje wordt.
+- **Catalogus**: 232 tools. De 131 nieuwe zijn redactioneel en heten "Nog niet gecontroleerd" tot de agents ze hebben gecontroleerd. Verkennen toont eerst 48 tools en dan "Toon alle".
+- **Wat is nieuw** toont een prijswijziging als oud → nieuw: de oude prijs doorgestreept, de nieuwe prijs en het percentage, gekleurd naar richting.
+- **Nieuw binnen**: de nieuwe tools van de tool-scout (B6) staan op de home, op Alle tools en op Wat is nieuw. Zolang er nog geen zijn, is het blok leeg.
+- **Eenvoudige taal** (B5) is samengevoegd: menu, titels en knoppen zonder vakjargon, bewaakt door een test.
+
 ### Nog te doen
-- De Stack Doctor heeft nog acht lange lijsten. Die moeten naar dezelfde tegelkiezer als Vergelijken.
-- Verkennen moet toolkaarten 2.0 krijgen in plaats van rijen.
-- De Pulse-tijdlijn moet oud→nieuw met delta tonen.
-- De eenvoud van alle teksten loopt via agent B5.
+- Een ontwerpronde op basis van voorbeelden van de eigenaar: welke sites vindt de eigenaar mooi? Eerst een klikbaar ontwerp ter goedkeuring, daarna bouwen.
+- Toolkaarten 2.0 als alternatieve weergave op Alle tools, naast de rijen.
+- Beeldmateriaal per tool: schermafbeeldingen van de eigen site, mits de voorwaarden van de maker dat toestaan.
