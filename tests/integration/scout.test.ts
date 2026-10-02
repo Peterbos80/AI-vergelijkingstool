@@ -3,13 +3,13 @@
  * hourly discovery, hourly verification, daily quarantine publication,
  * promotion and depublication. Fixture pages only, simulated time.
  */
-import { eq } from 'drizzle-orm';
+import { and, eq, inArray, sql } from 'drizzle-orm';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { createTestDb } from '../setup/pglite';
 import type { Database } from '@/lib/db/client';
 import { loadSeedData } from '@/lib/seed/load';
 import { applySeed } from '@/lib/seed/apply';
-import { toolCandidates, toolCapabilities, tools, type StoredDiscovery } from '@/lib/db/schema';
+import { agentActions, changeEvents, facts, reviewItems, toolCandidates, toolCapabilities, tools, type StoredDiscovery } from '@/lib/db/schema';
 import { loadCatalog } from '@/lib/catalog/load';
 import { rankForCapability } from '@/lib/engine/rank';
 import { lexicalMatch } from '@/lib/engine/match-core';
@@ -17,6 +17,8 @@ import { fairFightsFor } from '@/lib/engine/compare';
 import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
 import { DEFAULT_SETTINGS } from '@/lib/settings';
 import { runAgent } from '@/agents/runner';
+import { revertAction } from '@/agents/actions';
+import { SCOUT_CONFIG } from '@/agents/lib/scout/config';
 import type { Fetcher, FetchResult } from '@/agents/fetcher/types';
 import type { AgentName } from '@/agents/types';
 
@@ -25,7 +27,7 @@ const hours = (h: number) => new Date(T0.getTime() + h * 3600_000);
 let db: Database;
 let close: () => Promise<void>;
 
-type Fixture = { status?: number; body: string; contentType?: string; finalUrl?: string };
+type Fixture = { status?: number; body: string; contentType?: string; finalUrl?: string } | Error;
 type Route = [RegExp | string, Fixture];
 
 /** Fixture fetcher with patterns (API URLs carry a time window) and a request log. */
@@ -33,6 +35,7 @@ function routes(list: Route[]): Fetcher & { requested: string[] } {
   const requested: string[] = [];
   const find = (url: string) => list.find(([k]) => (typeof k === 'string' ? k === url : k.test(url)))?.[1];
   const answer = (url: string, f: Fixture | undefined): FetchResult => {
+    if (f instanceof Error) return { url, finalUrl: url, durationMs: 1, redirects: [], ok: false, status: null, contentType: null, body: '', errorKind: 'network', error: f.message };
     const base = { url, finalUrl: f?.finalUrl ?? url, durationMs: 1, redirects: [] as string[] };
     if (!f) return { ...base, ok: false, status: 404, contentType: null, body: '', errorKind: 'http', error: 'HTTP 404' };
     const status = f.status ?? 200;
@@ -71,6 +74,8 @@ beforeAll(async () => {
 });
 afterAll(async () => {
   delete process.env.PRODUCTHUNT_TOKEN;
+  delete process.env.NEW_TOOL_MODE;
+  delete process.env.NEW_TOOLS_PER_DAY;
   await close();
 });
 
@@ -205,14 +210,15 @@ describe('quarantine keeps a new tool out of rankings, recommendations and Match
   });
 
   it('keeps the tool reachable by slug, out of `tools`, and never indexable', async () => {
+    // Even if its stored snapshot said "indexable", the site serves it with noindex while in quarantine.
+    await db.update(tools).set({ indexable: { tool: true, pricing: true, alternatives: true } }).where(eq(tools.id, toolId));
     const catalog = await loadCatalog(db, 1, T0);
     expect(catalog.toolsBySlug.get('echoscribe')?.id).toBe(toolId);
     expect(catalog.tools.some((t) => t.id === toolId)).toBe(false);
     expect(catalog.quarantined?.map((t) => t.slug)).toEqual(['echoscribe']);
     expect(catalog.toolsBySlug.get('echoscribe')?.discovery?.signals.map((x) => x.kind)).toEqual(['hackernews', 'github']);
+    expect(catalog.toolsBySlug.get('echoscribe')?.indexable).toEqual({ tool: false, pricing: false, alternatives: false });
     expect(catalog.stats.tools).toBe(catalog.tools.length);
-    const [row] = await db.select().from(tools).where(eq(tools.id, toolId));
-    expect(row?.indexable).toEqual({ tool: false, pricing: false, alternatives: false });
   });
 
   it('is never ranked, matched or put in a Fair Fight', async () => {
@@ -233,5 +239,187 @@ describe('quarantine keeps a new tool out of rankings, recommendations and Match
     const catalog = await loadCatalog(db, 2, T0);
     expect(rankForCapability(catalog, 'transcription').some((t) => t.id === toolId)).toBe(true);
     await db.delete(tools).where(eq(tools.id, toolId));
+  });
+});
+
+describe('hourly verification, daily publication in quarantine, promotion and depublication', () => {
+  const home = (title: string, description: string, extra = '') => ({ body: `<html><head><title>${title}</title><meta name="description" content="${description}">${extra}</head><body><a href="/pricing">Pricing</a><a href="/privacy">Privacy</a><p>${description}</p></body></html>` });
+  const pricing = (text: string) => ({ body: `<html><body>${text}</body></html>` });
+  const sites: Route[] = [
+    ['https://voxnova.example/', home('VoxNova — AI voice generator', 'Turn text into natural speech with AI voices.')],
+    ['https://voxnova.example/pricing', pricing('<h3>Free</h3><p>$0</p><p>for hobby projects</p><h3>Pro</h3><p>$10/month</p>')],
+    ['https://tessa.example/', home('Tessa — AI bookkeeping for small firms', 'Automate your books with AI.')],
+    ['https://tessa.example/pricing', pricing('<h3>Starter</h3><p>$29/month</p>')],
+    ['https://sora.example/', home('Sora — AI image generator', 'Create stunning images from text.')],
+    ['https://nimbus.example/', home('Nimbus — AI image generator', 'Create stunning images from text.', '<link rel="alternate" type="application/rss+xml" href="/blog/rss.xml">')],
+    ['https://nimbus.example/pricing', pricing('<h2>Free plan</h2><p>25 images a day</p><h2>Plus</h2><p>€8/month</p>')],
+    ['https://nimbus.example/blog/rss.xml', rss([{ title: 'Introducing Nimbus', link: 'https://nimbus.example/blog/introducing-nimbus', date: hours(-30) }])],
+  ];
+  const at = (h: number) => hours(h); // T0 = 07:30 in Amsterdam
+
+  beforeAll(async () => {
+    process.env.NEW_TOOL_MODE = 'quarantine';
+    // A candidate found on Hacker News whose own site announces its launch: two independent signals.
+    await db.insert(toolCandidates).values({
+      name: 'Nimbus',
+      url: 'https://nimbus.example/',
+      domain: 'nimbus.example',
+      source: 'hackernews',
+      sourceUrl: 'https://news.ycombinator.com/item?id=42000',
+      signals: { hnId: '42000', hnPoints: 90, hnComments: 31, hnAt: Math.floor(hours(-20).getTime() / 1000) },
+      firstSeenAt: hours(-20),
+      lastSeenAt: hours(0),
+    });
+  });
+
+  it('verifies the most popular candidates every hour and rejects the ones that fail a gate, with the reason', async () => {
+    const r = await run('verification', routes(sites), at(2.5));
+    expect(r.status, r.summary).toBe('success');
+    const by = new Map((await db.select().from(toolCandidates)).map((c) => [c.domain, c]));
+    expect(by.get('voxnova.example')?.status).toBe('verified');
+    expect(by.get('nimbus.example')?.status).toBe('verified');
+    // Its own feed announced the launch: a second signal, from the tool's own site.
+    expect(by.get('nimbus.example')?.signals).toMatchObject({ announcementUrl: 'https://nimbus.example/blog/introducing-nimbus', announcementFeed: 'own-site' });
+    expect(by.get('tessa.example')).toMatchObject({ status: 'rejected', notes: 'function_uncertain' }); // "bookkeeping" is no function we know
+    expect(by.get('sora.example')).toMatchObject({ status: 'duplicate', notes: 'duplicate_name' }); // Sora is in the catalogue
+    expect(by.get('pagewise.example')?.status).toBe('rejected'); // no page in this fixture: gone
+    const dossier = by.get('voxnova.example')!.signals.dossier as { quote: { text: string; url: string }; functions: { primary: string; certain: boolean }; facts: { key: string }[] };
+    expect(dossier.quote).toEqual({ text: 'Turn text into natural speech with AI voices.', url: 'https://voxnova.example/' });
+    expect(dossier.functions).toMatchObject({ primary: 'text-to-speech', certain: true });
+    expect(dossier.facts.map((f) => f.key)).toEqual(['has_free_tier', 'pricing_public', 'open_source']);
+    expect(r.stats.rejected_function_uncertain).toBe(1);
+    // Quarantine mode: nothing goes to the owner's inbox, nothing is published yet.
+    expect(await db.select().from(reviewItems).where(eq(reviewItems.kind, 'new_tool'))).toEqual([]);
+    expect((await db.select().from(tools).where(inArray(tools.slug, ['voxnova', 'nimbus']))).length).toBe(0);
+  });
+
+  it('publishes only within the daily window', async () => {
+    const r = await run('new-tools', routes(sites), at(5)); // 12:30 in Amsterdam
+    expect(r.summary).toContain('outside the publication window');
+    expect((await db.select().from(tools).where(eq(tools.slug, 'voxnova'))).length).toBe(0);
+  });
+
+  it('publishes the most popular passing candidates, at most the daily number, in quarantine', async () => {
+    process.env.NEW_TOOLS_PER_DAY = '1';
+    const r = await run('new-tools', routes(sites), at(3)); // 08:30 in Amsterdam
+    expect(r.summary, r.summary).toMatch(/^1 new tools added, 1 in quarantine, 0 rejected/);
+    const [vox] = await db.select().from(tools).where(eq(tools.slug, 'voxnova'));
+    expect(vox).toMatchObject({ name: 'VoxNova', websiteUrl: 'https://voxnova.example/', pricingUrl: 'https://voxnova.example/pricing', published: true, skillLevel: 'intermediate' });
+    expect(vox!.quarantineUntil?.toISOString()).toBe(new Date(at(3).getTime() + 7 * 86_400_000).toISOString());
+    expect(vox!.discovery?.signals.map((s) => [s.kind, s.value])).toEqual([
+      ['hackernews', 151],
+      ['github', 1800],
+    ]);
+    // Every fact is UNVERIFIED, with its source; the quote is literal.
+    const f = await db.select().from(facts).where(eq(facts.toolId, vox!.id));
+    expect(Object.fromEntries(f.map((x) => [x.key, x.status]))).toEqual({ site_description: 'unverified', functions: 'unverified', has_free_tier: 'unverified', pricing_public: 'unverified', open_source: 'unverified' });
+    expect(f.find((x) => x.key === 'site_description')).toMatchObject({ value: 'Turn text into natural speech with AI voices.', evidence: 'Turn text into natural speech with AI voices.' });
+    expect(f.every((x) => x.sourceId !== null && x.method === 'agent')).toBe(true);
+    // Functions stay secondary until promotion; a Pulse event names the sources.
+    expect((await db.select().from(toolCapabilities).where(eq(toolCapabilities.toolId, vox!.id))).map((c) => [c.capabilityId, c.strength])).toEqual([['text-to-speech', 'secondary']]);
+    const [event] = await db.select().from(changeEvents).where(and(eq(changeEvents.toolId, vox!.id), eq(changeEvents.kind, 'new_tool')));
+    expect(event?.sourceUrl).toBe('https://news.ycombinator.com/item?id=41001');
+    expect(event?.summary?.nl).toContain('Hacker News (151 punten), GitHub (1.800 sterren)');
+    const [action] = await db.select().from(agentActions).where(and(eq(agentActions.action, 'tool_quarantined'), eq(agentActions.toolId, vox!.id)));
+    expect(action?.decision).toBe('auto_published_flagged');
+    // Nimbus passed too, but today's number is reached: it waits for tomorrow.
+    expect((await db.select().from(toolCandidates).where(eq(toolCandidates.domain, 'nimbus.example')))[0]?.status).toBe('verified');
+    // In the catalogue: reachable by slug, noindex, out of rankings.
+    const catalog = await loadCatalog(db, 10, at(3));
+    expect(catalog.toolsBySlug.get('voxnova')?.discovery?.addedAt.toISOString()).toBe(at(3).toISOString());
+    expect(catalog.toolsBySlug.get('voxnova')?.indexable).toEqual({ tool: false, pricing: false, alternatives: false });
+    expect(rankForCapability(catalog, 'text-to-speech').some((t) => t.slug === 'voxnova')).toBe(false);
+  });
+
+  it('checks again, fresh, before publishing: a candidate that now fails a gate is rejected with the reason', async () => {
+    delete process.env.NEW_TOOLS_PER_DAY;
+    const moved: Route[] = [['https://nimbus.example/', { body: '<html><head><title>Nimbus</title></head></html>', finalUrl: 'https://other-brand.example/' }], ...sites];
+    const r = await run('new-tools', routes(moved), at(26)); // the next day, 08:30
+    expect(r.summary).toMatch(/^0 new tools added, 1 in quarantine, 1 rejected \(foreign_redirect 1\)/);
+    expect((await db.select().from(toolCandidates).where(eq(toolCandidates.domain, 'nimbus.example')))[0]).toMatchObject({ status: 'rejected', notes: 'foreign_redirect' });
+  });
+
+  it('promotes a tool after 7 days with every check green: out of quarantine, its function primary', async () => {
+    for (let h = 23; h <= 163; h += 20) {
+      const r = await run('verification', routes(sites), at(h));
+      expect(r.summary).toContain('quarantine: 1 checked, 0 taken offline');
+    }
+    const [before] = await db.select().from(tools).where(eq(tools.slug, 'voxnova'));
+    expect(before!.discovery?.checks).toMatchObject({ green: 9, failures: 0, lastOk: true });
+    const r = await run('new-tools', routes(sites), at(171)); // day 7, 10:30
+    expect(r.summary).toContain('1 promoted');
+    const [after] = await db.select().from(tools).where(eq(tools.slug, 'voxnova'));
+    expect(after!.quarantineUntil).toBeNull();
+    expect(after!.discovery?.promotedAt).toBe(at(171).toISOString());
+    expect((await db.select().from(toolCapabilities).where(eq(toolCapabilities.toolId, after!.id)))[0]?.strength).toBe('primary');
+    const catalog = await loadCatalog(db, 11, at(171));
+    expect(rankForCapability(catalog, 'text-to-speech').some((t) => t.slug === 'voxnova')).toBe(true);
+  });
+
+  describe('depublication as soon as a gate fails (logged, reversible)', () => {
+    let toolId: string;
+    beforeAll(async () => {
+      // Back in quarantine for these checks.
+      const [promotion] = await db.select().from(agentActions).where(eq(agentActions.action, 'tool_promoted'));
+      expect(await revertAction(db, promotion!.id, 'test')).toBe('reverted');
+      const [vox] = await db.select().from(tools).where(eq(tools.slug, 'voxnova'));
+      toolId = vox!.id;
+      expect(vox!.quarantineUntil).not.toBeNull();
+      expect((await db.select().from(toolCapabilities).where(eq(toolCapabilities.toolId, toolId)))[0]?.strength).toBe('secondary');
+    });
+
+    it('a site that is gone: offline at once, with what it was, what it became and why', async () => {
+      const r = await run('verification', routes([]), at(200)); // every page answers 404
+      expect(r.summary).toContain('1 taken offline');
+      const [vox] = await db.select().from(tools).where(eq(tools.id, toolId));
+      expect(vox?.published).toBe(false);
+      const [action] = await db.select().from(agentActions).where(and(eq(agentActions.action, 'tool_depublished'), eq(agentActions.toolId, toolId)));
+      expect(action).toMatchObject({ oldValue: { published: true }, newValue: { published: false }, reason: 'unreachable' });
+      expect((await db.select().from(changeEvents).where(and(eq(changeEvents.toolId, toolId), eq(changeEvents.kind, 'new_tool'))))[0]?.status).toBe('rejected');
+      const catalog = await loadCatalog(db, 12, at(200));
+      expect(catalog.toolsBySlug.has('voxnova')).toBe(false);
+      // Reversible.
+      expect(await revertAction(db, action!.id, 'test')).toBe('reverted');
+      expect((await db.select().from(tools).where(eq(tools.id, toolId)))[0]?.published).toBe(true);
+    });
+
+    it('a domain the owner blocked: offline at the next run, without fetching', async () => {
+      SCOUT_CONFIG.blockedDomains.push('voxnova.example');
+      try {
+        const f = routes(sites);
+        const r = await run('verification', f, at(201));
+        expect(r.stats.depublished_blocked_domain).toBe(1);
+        expect(f.requested).not.toContain('https://voxnova.example/');
+      } finally {
+        SCOUT_CONFIG.blockedDomains.pop();
+      }
+      const [action] = await db.select().from(agentActions).where(and(eq(agentActions.action, 'tool_depublished'), eq(agentActions.reason, 'blocked_domain')));
+      expect(await revertAction(db, action!.id, 'test')).toBe('reverted');
+    });
+
+    it('an unreachable site: one failure restarts the 7 days, two in a row take it offline', async () => {
+      const down: Route[] = [['https://voxnova.example/', new Error('connection reset')]];
+      await db.update(tools).set({ discovery: sql`jsonb_set(${tools.discovery}, '{checks,lastAt}', to_jsonb(${at(180).toISOString()}::text))` }).where(eq(tools.id, toolId));
+      await run('verification', routes(down), at(202));
+      const [once] = await db.select().from(tools).where(eq(tools.id, toolId));
+      expect(once).toMatchObject({ published: true });
+      expect(once!.discovery?.checks).toMatchObject({ failures: 1, lastOk: false, lastReason: 'unreachable' });
+      expect(once!.quarantineUntil!.getTime()).toBeGreaterThanOrEqual(at(202).getTime() + 7 * 86_400_000);
+      await run('verification', routes(down), at(202.5)); // not due yet (an hour after a failure)
+      expect((await db.select().from(tools).where(eq(tools.id, toolId)))[0]?.published).toBe(true);
+      await run('verification', routes(down), at(203.5));
+      expect((await db.select().from(tools).where(eq(tools.id, toolId)))[0]?.published).toBe(false);
+    });
+  });
+
+  it('anomaly guard: more than 25 publications in 24 hours → nothing published, one escalation', async () => {
+    await db.update(toolCandidates).set({ status: 'verified' }).where(eq(toolCandidates.domain, 'nimbus.example'));
+    const fake = Array.from({ length: 25 }, () => ({ agent: 'new-tools', action: 'tool_quarantined', decision: 'auto_published_flagged' as const, createdAt: at(205) })); // yesterday 20:30, within 24 h
+    await db.insert(agentActions).values(fake);
+    const r = await run('new-tools', routes(sites), at(219)); // 08:30, day 10
+    expect(r.summary).toContain('anomaly: nothing published');
+    expect((await db.select().from(tools).where(eq(tools.slug, 'nimbus'))).length).toBe(0);
+    const [item] = await db.select().from(reviewItems).where(eq(reviewItems.kind, 'anomaly_freeze'));
+    expect(item).toMatchObject({ severity: 'p2', reasonCode: 'new_tools_over_daily_limit', defaultAction: 'discard_after_7d' });
   });
 });

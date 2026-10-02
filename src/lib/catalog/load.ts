@@ -220,7 +220,8 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
       logo: LOGOS[t.slug] ?? null,
       discovery: discoveryOf(t.discovery),
       qualityScore: t.qualityScore,
-      indexable: t.indexable,
+      // A tool in quarantine (tool scout) is never indexable, whatever its data: noindex until promoted.
+      indexable: t.quarantineUntil === null ? t.indexable : { tool: false, pricing: false, alternatives: false },
       text,
       capabilities: (capsBy.get(t.id) ?? [])
         .map((c) => ({ id: c.capabilityId, strength: c.strength }))

@@ -39,6 +39,11 @@ env:
   LEGAL_VAT: ${{ vars.LEGAL_VAT }}
   LEGAL_ADDRESS: ${{ vars.LEGAL_ADDRESS }}
   LEGAL_EMAIL: ${{ vars.LEGAL_EMAIL }}
+  # The free edition has no admin area: the tool scout publishes new tools itself, in quarantine
+  # (docs/AGENTS.md, "Tool scout"). Repository variables change it without code: NEW_TOOL_MODE=queue
+  # stops publishing (candidates then only wait for an owner decision), NEW_TOOLS_PER_DAY sets 0–12 (default 10).
+  NEW_TOOL_MODE: ${{ vars.NEW_TOOL_MODE || 'quarantine' }}
+  NEW_TOOLS_PER_DAY: ${{ vars.NEW_TOOLS_PER_DAY }}
 
 jobs:
   run:
