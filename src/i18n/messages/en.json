@@ -577,7 +577,7 @@
     },
     "team": {
       "title": "Team costs",
-      "intro": "For plans with a price per person: the number of people times the price, if you pay monthly or yearly.",
+      "intro": "For plans with a price per person. You see the number of people times the price, if you pay monthly or yearly.",
       "pickGroup": "Kind of tool",
       "groups": {
         "assistants": "AI assistants",
@@ -1102,7 +1102,7 @@
       "price": "Prices",
       "plans": "Subscriptions",
       "product": "New features",
-      "status": "Down or shut down",
+      "status": "Down or stopped",
       "news": "News"
     },
     "empty": "No changes of this kind yet. Pick something else above.",

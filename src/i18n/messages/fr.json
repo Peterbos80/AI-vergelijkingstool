@@ -555,7 +555,7 @@
     },
     "team": {
       "title": "Coûts d’équipe",
-      "intro": "Pour les forfaits avec un prix par personne : le nombre de personnes multiplié par le prix, si vous payez au mois ou à l’année.",
+      "intro": "Pour les forfaits avec un prix par personne. Vous voyez le nombre de personnes multiplié par le prix, si vous payez au mois ou à l’année.",
       "pickGroup": "Type d’outil",
       "groups": {
         "assistants": "Assistants IA",

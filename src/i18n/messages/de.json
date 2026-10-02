@@ -555,7 +555,7 @@
     },
     "team": {
       "title": "Teamkosten",
-      "intro": "Für Pläne mit einem Preis pro Person: Anzahl der Leute mal Preis, wenn du monatlich oder jährlich zahlst.",
+      "intro": "Für Pläne mit einem Preis pro Person. Du siehst die Anzahl der Leute mal den Preis, wenn du monatlich oder jährlich zahlst.",
       "pickGroup": "Art des Tools",
       "groups": {
         "assistants": "KI-Assistenten",

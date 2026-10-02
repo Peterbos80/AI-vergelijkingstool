@@ -577,7 +577,7 @@
     },
     "team": {
       "title": "Teamkosten",
-      "intro": "Voor plannen met een prijs per persoon: het aantal mensen keer de prijs, als je per maand of per jaar betaalt.",
+      "intro": "Voor plannen met een prijs per persoon. Je ziet het aantal mensen keer de prijs, als je per maand of per jaar betaalt.",
       "pickGroup": "Soort tool",
       "groups": {
         "assistants": "AI-assistenten",
