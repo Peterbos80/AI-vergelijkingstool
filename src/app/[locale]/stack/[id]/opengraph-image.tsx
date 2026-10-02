@@ -7,7 +7,7 @@ import { clipText, Frame, OG_SIZE, og, renderOg } from '@/lib/og';
 
 export const size = OG_SIZE;
 export const contentType = 'image/png';
-export const alt = 'AIToolsWijzer stack';
+export const alt = 'AIToolsWijzer: AI tools advice';
 
 /** A saved stack as a receipt: the tools and the monthly total per currency. */
 export default async function Image({ params }: { params: Promise<{ locale: string; id: string }> }) {

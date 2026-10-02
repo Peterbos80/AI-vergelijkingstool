@@ -167,7 +167,7 @@ export const LEARN: LearnGuide[] = [
           { heading: 'Waar zit het verschil?', bullets: ['Limieten: aantal berichten, credits of minuten per maand', 'Kwaliteit: betaalde versies geven vaak toegang tot de nieuwste modellen', 'Watermerk op afbeeldingen of video', 'Of je het resultaat commercieel mag gebruiken', 'Privacy-instellingen en afspraken voor zakelijk gebruik', 'Samenwerken met een team'] },
           { heading: 'Een simpele rekensom', paragraphs: ['Bespaart een tool je per maand meer tijd dan hij kost? Voorbeeld: twee uur per maand keer wat jouw uur waard is. Is dat meer dan de maandprijs, dan loont het.'] },
           { heading: 'Let op bij abonnementen', bullets: ['Maandprijs of jaarprijs (per maand omgerekend)', 'Prijs per gebruiker bij teams', 'Btw: prijzen zijn vaak exclusief', 'Automatisch verlengen en opzegtermijn'] },
-          { heading: 'Tip', paragraphs: ['Neem één betaald abonnement op de tool die je het meest gebruikt en stapel geen abonnementen die hetzelfde doen. Onze Stack Doctor laat zien waar je dubbel betaalt.'] },
+          { heading: 'Tip', paragraphs: ['Neem één betaald abonnement op de tool die je het meest gebruikt. Neem geen abonnementen die hetzelfde doen. Met Check je tools zie je waar je dubbel betaalt.'] },
         ],
       },
       en: {
@@ -179,7 +179,7 @@ export const LEARN: LearnGuide[] = [
           { heading: 'What is the difference?', bullets: ['Limits: number of messages, credits or minutes per month', 'Quality: paid plans often give access to the newest models', 'A watermark on images or video', 'Whether you may use the result commercially', 'Privacy settings and terms for business use', 'Working together as a team'] },
           { heading: 'A simple sum', paragraphs: ['Does a tool save you more time per month than it costs? Example: two hours a month times what your hour is worth. If that is more than the monthly price, it pays off.'] },
           { heading: 'Watch out with subscriptions', bullets: ['Monthly or annual price (converted per month)', 'Price per user for teams', 'VAT: prices are often excluding VAT', 'Automatic renewal and notice period'] },
-          { heading: 'Tip', paragraphs: ['Take one paid plan for the tool you use most and do not stack plans that do the same thing. Our Stack Doctor shows where you pay twice.'] },
+          { heading: 'Tip', paragraphs: ['Take one paid plan for the tool you use most. Do not pay for several plans that do the same thing. Check your tools shows where you pay twice.'] },
         ],
       },
     },
