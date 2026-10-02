@@ -1887,7 +1887,31 @@
         "minutes": "~{n} min",
         "unmeasured": "Not measured this week",
         "footer": "Full report: {url}",
-        "trafficUnmeasured": "Visits, Matches and clicks: not measured (static edition, no analytics)."
+        "trafficUnmeasured": "Visits, Matches and clicks: not measured (static edition, no analytics).",
+        "scout": "New tools (tool scout)",
+        "scoutNow": "Now {live} tools live, {quarantine} in quarantine, {today} added today.",
+        "scoutDay": "{added} new tools added, {quarantine} in quarantine, {rejected} rejected",
+        "scoutQueue": "The tool scout does not publish by itself (mode: ask). Set NEW_TOOL_MODE=quarantine to add new tools every day.",
+        "scoutMoves": "This week {promoted} out of quarantine (7 green days), {depublished} taken offline (a gate failed).",
+        "scoutProductHunt": "Product Hunt: skipped. Set PRODUCTHUNT_TOKEN once Product Hunt allows commercial use (their API terms)."
+      },
+      "scoutReason": {
+        "unreachable": "unreachable",
+        "robots": "robots.txt says no",
+        "not_https": "no https",
+        "foreign_redirect": "redirects to another domain",
+        "no_own_domain": "no domain of its own",
+        "blocked_domain": "blocked domain",
+        "blocklist": "blocklist",
+        "parked": "parked domain",
+        "not_ai": "not AI",
+        "waitlist": "waitlist",
+        "name_not_on_site": "name not on the site",
+        "duplicate_domain": "duplicate (domain)",
+        "duplicate_name": "duplicate (name)",
+        "function_uncertain": "function not certain",
+        "no_anchored_fact": "no fact with a source",
+        "too_few_signals": "too few signals"
       }
     },
     "dependency": {

@@ -1887,7 +1887,31 @@
         "minutes": "~{n} min",
         "unmeasured": "Niet gemeten deze week",
         "footer": "Volledig rapport: {url}",
-        "trafficUnmeasured": "Bezoeken, Matches en kliks: niet gemeten (statische editie, zonder analytics)."
+        "trafficUnmeasured": "Bezoeken, Matches en kliks: niet gemeten (statische editie, zonder analytics).",
+        "scout": "Nieuwe tools (tool-scout)",
+        "scoutNow": "Nu {live} tools live, {quarantine} in controle, vandaag {today} toegevoegd.",
+        "scoutDay": "{added} nieuwe tools toegevoegd, {quarantine} in controle, {rejected} afgewezen",
+        "scoutQueue": "De tool-scout publiceert niet zelf (modus: vragen). Zet NEW_TOOL_MODE=quarantine om dagelijks nieuwe tools toe te voegen.",
+        "scoutMoves": "Deze week {promoted} uit quarantaine (7 groene dagen), {depublished} offline gehaald (een poort faalde).",
+        "scoutProductHunt": "Product Hunt: overgeslagen. Zet PRODUCTHUNT_TOKEN zodra Product Hunt commercieel gebruik toestaat (hun API-voorwaarden)."
+      },
+      "scoutReason": {
+        "unreachable": "onbereikbaar",
+        "robots": "robots.txt zegt nee",
+        "not_https": "geen https",
+        "foreign_redirect": "doorverwezen naar ander domein",
+        "no_own_domain": "geen eigen domein",
+        "blocked_domain": "domein geblokkeerd",
+        "blocklist": "blokkadelijst",
+        "parked": "geparkeerd domein",
+        "not_ai": "geen AI",
+        "waitlist": "wachtlijst",
+        "name_not_on_site": "naam niet op de site",
+        "duplicate_domain": "dubbel (domein)",
+        "duplicate_name": "dubbel (naam)",
+        "function_uncertain": "functie niet zeker",
+        "no_anchored_fact": "geen feit met bron",
+        "too_few_signals": "te weinig signalen"
       }
     },
     "dependency": {

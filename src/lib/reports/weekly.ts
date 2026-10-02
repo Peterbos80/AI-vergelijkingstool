@@ -14,6 +14,7 @@ import { readDataVersion } from '@/lib/settings';
 import type { Settings } from '@/lib/settings/defaults';
 import { indexableCounts, sitemapEntries } from '@/lib/sitemap';
 import { tzParts, zoned } from '@/agents/schedule';
+import { scoutReport, type ScoutReport } from './scout';
 import {
   audienceMetrics,
   automationMetrics,
@@ -68,6 +69,8 @@ export interface WeeklyReportData {
   opportunities: InboxItemView[];
   recommendations: Recommendation[];
   unmeasured: Unmeasured[];
+  /** The tool scout (absent in reports made before it existed). */
+  scout?: ScoutReport;
 }
 
 /** Estimated owner minutes per dependency action (docs/strategy/12 §10). */
@@ -162,6 +165,7 @@ export async function buildWeeklyReport(db: Database, period: Period, settings: 
   const automation = await automationMetrics(db, period);
   const health = await healthMetrics(db, period, settings.llm.dailyBudgetUsd);
   const inbox = await inboxMetrics(db, now, settings.autonomy.escalationBudgetPerWeek);
+  const scout = await scoutReport(db, period, settings, now);
   let seo: WeeklyReportData['seo'] = null;
   try {
     const cat = await loadCatalog(db, await readDataVersion(db), now);
@@ -192,6 +196,7 @@ export async function buildWeeklyReport(db: Database, period: Period, settings: 
     opportunities: inbox.opportunities.slice(0, 5),
     recommendations: recommend(now, inbox.attention, inbox.opportunities, health.checks, settings.autonomy.opportunityMinEvCents),
     unmeasured: unmeasured(health.checks, traffic, revenue),
+    scout,
   };
 }
 
@@ -284,6 +289,27 @@ export function renderReportEmail(
   lines.push(`  ${t('admin.metric.leads')}: ${nf.format(d.revenue.leads.created.value)} · ${t('admin.metric.subscribers')}: ${nf.format(d.audience.subscribers.confirmed)}`);
   if (d.seo) lines.push(`  ${t('admin.metric.indexable')}: ${nf.format(d.seo.total)}`);
   lines.push('');
+
+  if (d.scout) {
+    const sc = d.scout;
+    const reasonText = (r: Record<string, number>) =>
+      Object.entries(r)
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .map(([k, v]) => `${t.has(`admin.report.scoutReason.${k}`) ? t(`admin.report.scoutReason.${k}`) : k.replace(/_/g, ' ')} ${nf.format(v)}`)
+        .join(', ');
+    lines.push(`■ ${t('admin.report.email.scout')}`);
+    lines.push(`  ${t('admin.report.email.scoutNow', { live: nf.format(sc.live), quarantine: nf.format(sc.inQuarantine), today: nf.format(sc.addedToday) })}`);
+    if (sc.mode !== 'quarantine') lines.push(`  ${t('admin.report.email.scoutQueue')}`);
+    for (const day of sc.days) {
+      const reasons = reasonText(day.reasons);
+      lines.push(
+        `  ${formatDay(day.date, locale)}: ${t('admin.report.email.scoutDay', { added: nf.format(day.added), quarantine: day.inQuarantine === null ? '—' : nf.format(day.inQuarantine), rejected: nf.format(day.rejected) })}${reasons ? ` (${reasons})` : ''}`,
+      );
+    }
+    if (sc.promoted || sc.depublished) lines.push(`  ${t('admin.report.email.scoutMoves', { promoted: nf.format(sc.promoted), depublished: nf.format(sc.depublished) })}`);
+    if (sc.productHunt === 'not_configured') lines.push(`  ${t('admin.report.email.scoutProductHunt')}`);
+    lines.push('');
+  }
 
   lines.push(`■ ${t('admin.report.email.handled')}`);
   lines.push(`  ${t('admin.report.email.handledLine', { actions: d.automation.totalActions, resolved: d.automation.inbox.autoResolved, defaulted: d.automation.inbox.defaulted, reverted: d.automation.reverted })}`);

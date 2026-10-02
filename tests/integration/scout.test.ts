@@ -430,3 +430,23 @@ describe('hourly verification, daily publication in quarantine, promotion and de
     expect(item).toMatchObject({ severity: 'p2', reasonCode: 'new_tools_over_daily_limit', defaultAction: 'discard_after_7d' });
   });
 });
+
+describe('weekly owner report', () => {
+  it('has the catalogue now, one line per day with reasons, and a line for Product Hunt when it is skipped', async () => {
+    const { buildWeeklyReport, renderReportEmail } = await import('@/lib/reports/weekly');
+    const period = { start: new Date('2026-09-30T22:00:00Z'), end: new Date('2026-10-07T22:00:00Z') }; // Thu 1 – Wed 7 Oct, Amsterdam
+    const data = await buildWeeklyReport(db, period, DEFAULT_SETTINGS, hours(220));
+    expect(data.scout?.days).toHaveLength(7);
+    // 1 Oct: VoxNova published; Tessa (no certain function) and Pagewise (gone) rejected; Sora is a duplicate, not a rejection.
+    expect(data.scout!.days[0]).toMatchObject({ added: 1, rejected: 2, reasons: { function_uncertain: 1, unreachable: 1 } });
+    // 2 Oct: the fresh check before publishing rejected Nimbus (now redirecting to another domain).
+    expect(data.scout!.days[1]).toMatchObject({ added: 0, reasons: { foreign_redirect: 1 } });
+    expect(data.scout).toMatchObject({ mode: 'quarantine', addedToday: 0, productHunt: 'not_configured' });
+    const text = renderReportEmail(data, 'nl', null).text;
+    expect(text).toContain('■ Nieuwe tools (tool-scout)');
+    expect(text).toMatch(/Nu \d+ tools live, \d+ in controle, vandaag 0 toegevoegd\./);
+    expect(text).toMatch(/1 okt 2026: 1 nieuwe tools toegevoegd, \d+ in controle, 2 afgewezen \(functie niet zeker 1, onbereikbaar 1\)/);
+    expect(text).toContain('2 okt 2026: 0 nieuwe tools toegevoegd, 1 in controle, 1 afgewezen (doorverwezen naar ander domein 1)');
+    expect(text).toContain('Product Hunt: overgeslagen');
+  });
+});
