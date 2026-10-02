@@ -1,0 +1,44 @@
+{
+  "slug": "lets-enhance",
+  "name": "Let's Enhance",
+  "website": "https://letsenhance.io",
+  "company": { "name": "Let's Enhance", "slug": "letsenhance" },
+  "skillLevel": "beginner",
+  "audience": ["ecommerce", "designers"],
+  "capabilities": [{ "id": "upscaling", "strength": "primary" }, { "id": "image-editing", "strength": "secondary" }],
+  "facts": {
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://letsenhance.io", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://letsenhance.io", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt kleine of wazige foto's groter en scherper",
+      "description": "Let's Enhance vergroot foto's met AI. De foto wordt scherper en krijgt meer details. Dat is handig voor drukwerk of productfoto's. Je krijgt een paar gratis credits om het te proberen.",
+      "bestFor": ["Foto's klaarmaken voor print", "Oude of kleine afbeeldingen verbeteren"],
+      "notFor": [],
+      "limitations": ["AI kan details toevoegen die er in het echt niet waren"]
+    },
+    "en": {
+      "tagline": "Makes small or blurry photos bigger and sharper",
+      "description": "Let's Enhance enlarges photos with AI. The photo gets sharper and gains detail. That helps for print or product photos. You get a few free credits to try it.",
+      "bestFor": ["Getting photos ready for print", "Improving old or small images"],
+      "notFor": [],
+      "limitations": ["AI can add details that were not really there"]
+    }
+  }
+}

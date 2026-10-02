@@ -1,0 +1,56 @@
+{
+  "slug": "hubspot",
+  "name": "HubSpot",
+  "website": "https://www.hubspot.com",
+  "pricingUrl": "https://www.hubspot.com/pricing",
+  "company": { "name": "HubSpot", "slug": "hubspot", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["smb", "marketers", "sales"],
+  "capabilities": [
+    { "id": "email-marketing", "strength": "primary" },
+    { "id": "support-chatbot", "strength": "secondary" },
+    { "id": "social-scheduling", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.hubspot.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.hubspot.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.hubspot.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Klantenbeheer en marketing op één platform, met AI van Breeze",
+      "description": "HubSpot is een platform voor marketing, sales en klantenservice. Je beheert klanten, stuurt e-mails en maakt landingspagina's. De AI heet Breeze. Er zijn gratis tools om mee te beginnen.",
+      "bestFor": ["Groeiende bedrijven die alles op één plek willen", "Marketing en sales die samenwerken"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "CRM and marketing on one platform, with AI from Breeze",
+      "description": "HubSpot is a platform for marketing, sales and customer service. You manage customers, send emails and build landing pages. The AI is called Breeze. There are free tools to start with.",
+      "bestFor": ["Growing businesses that want everything in one place", "Marketing and sales working together"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

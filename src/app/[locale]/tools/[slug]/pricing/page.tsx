@@ -64,7 +64,9 @@ export default async function PricingPage({ params }: PageProps<'/[locale]/tools
       <header className="mt-6 flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-3xl md:text-4xl">{t('plans.title', { name: tool.name })}</h1>
-          <p className="mt-2 text-sm text-ink-3">{t('freshness.checkedOn', { date: formatDate(tool.priceCheckedAt, locale) })}</p>
+          <p className="mt-2 text-sm text-ink-3">
+            {tool.priceCheckedAt ? t('freshness.checkedOn', { date: formatDate(tool.priceCheckedAt, locale) }) : t('freshness.unknown')}
+          </p>
         </div>
         <VisitLink slug={tool.slug} name={tool.name} t={t} locale={locale} src="pricing" affiliate={isAffiliate} />
       </header>

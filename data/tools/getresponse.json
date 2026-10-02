@@ -1,0 +1,52 @@
+{
+  "slug": "getresponse",
+  "name": "GetResponse",
+  "website": "https://www.getresponse.com",
+  "pricingUrl": "https://www.getresponse.com/pricing",
+  "company": { "name": "GetResponse", "slug": "getresponse", "country": "PL" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "creators", "marketers"],
+  "capabilities": [{ "id": "email-marketing", "strength": "primary" }, { "id": "email-writing", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.getresponse.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.getresponse.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.getresponse.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Poolse e-mailmarketingtool met AI-hulp en webinars",
+      "description": "GetResponse komt uit Polen. Je verstuurt nieuwsbrieven en maakt automatische reeksen e-mails. AI schrijft e-mails en maakt complete campagnes. Er zijn ook landingspagina's en webinars.",
+      "bestFor": ["Kleine bedrijven en makers", "Nieuwsbrieven met automatisering"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Polish email marketing tool with AI help and webinars",
+      "description": "GetResponse is based in Poland. You send newsletters and build automatic email series. AI writes emails and creates whole campaigns. There are also landing pages and webinars.",
+      "bestFor": ["Small businesses and creators", "Newsletters with automation"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

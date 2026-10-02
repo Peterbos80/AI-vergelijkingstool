@@ -1,0 +1,64 @@
+{
+  "slug": "dify",
+  "name": "Dify",
+  "website": "https://dify.ai",
+  "githubRepo": "langgenius/dify",
+  "company": { "name": "LangGenius", "slug": "langgenius" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "smb"],
+  "capabilities": [
+    { "id": "ai-agents", "strength": "primary" },
+    { "id": "workflow-automation", "strength": "primary" },
+    { "id": "support-chatbot", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://dify.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://dify.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "self_hosted"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://dify.ai", "type": "official" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/langgenius/dify", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Platform om AI-apps en agents te bouwen, ook zelf te hosten",
+      "description": "Dify is een platform om AI-apps te bouwen met blokken. Je maakt chatbots, agents en workflows met je eigen documenten. Je gebruikt het in de cloud of host het zelf. De broncode is openbaar.",
+      "bestFor": ["Teams die AI-apps bouwen zonder veel code", "Zelf hosten voor privacy"],
+      "notFor": [],
+      "limitations": ["Zelf hosten vraagt technische kennis"]
+    },
+    "en": {
+      "tagline": "Platform for building AI apps and agents, also self-hosted",
+      "description": "Dify is a platform for building AI apps with blocks. You make chatbots, agents and workflows with your own documents. You use it in the cloud or host it yourself. The source code is public.",
+      "bestFor": ["Teams building AI apps without much code", "Self-hosting for privacy"],
+      "notFor": [],
+      "limitations": ["Self-hosting needs technical skills"]
+    }
+  }
+}

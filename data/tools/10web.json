@@ -1,0 +1,36 @@
+{
+  "slug": "10web",
+  "name": "10Web",
+  "website": "https://10web.io",
+  "company": { "name": "10Web", "slug": "10web" },
+  "skillLevel": "beginner",
+  "audience": ["smb"],
+  "capabilities": [{ "id": "website-builder", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://10web.io", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Bouwt een WordPress-website met AI",
+      "description": "10Web maakt met AI een WordPress-website voor je bedrijf. Je beschrijft je bedrijf en krijgt een site met teksten en plaatjes. Daarna pas je alles aan met een editor. 10Web regelt ook de hosting.",
+      "bestFor": ["Wie WordPress wil zonder technische kennis", "Kleine bedrijven"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Builds a WordPress website with AI",
+      "description": "10Web uses AI to make a WordPress website for your business. You describe your business and get a site with texts and images. Then you change everything in an editor. 10Web also takes care of hosting.",
+      "bestFor": ["People who want WordPress without technical skills", "Small businesses"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

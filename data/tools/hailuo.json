@@ -1,0 +1,51 @@
+{
+  "slug": "hailuo",
+  "name": "Hailuo AI",
+  "website": "https://hailuoai.video",
+  "company": { "name": "MiniMax", "slug": "minimax", "country": "CN" },
+  "skillLevel": "beginner",
+  "audience": ["creators"],
+  "capabilities": [{ "id": "video-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://hailuoai.video", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://hailuoai.video", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://hailuoai.video", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Video's maken met het videomodel van het Chinese MiniMax",
+      "description": "Hailuo AI is de videotool van MiniMax uit China. Je maakt korte video's van tekst of een plaatje. Je krijgt gratis credits om het te proberen.",
+      "bestFor": ["Korte, filmische clips", "Een foto laten bewegen"],
+      "notFor": ["Gevoelige of vertrouwelijke beelden"],
+      "limitations": ["Clips zijn kort"]
+    },
+    "en": {
+      "tagline": "Video generation with the video model from China's MiniMax",
+      "description": "Hailuo AI is the video tool from MiniMax in China. You make short videos from text or a picture. You get free credits to try it.",
+      "bestFor": ["Short, cinematic clips", "Making a photo move"],
+      "notFor": ["Sensitive or confidential images"],
+      "limitations": ["Clips are short"]
+    }
+  }
+}

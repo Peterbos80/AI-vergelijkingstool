@@ -1,0 +1,45 @@
+{
+  "slug": "trint",
+  "name": "Trint",
+  "website": "https://trint.com",
+  "pricingUrl": "https://trint.com/pricing",
+  "company": { "name": "Trint", "slug": "trint", "country": "GB" },
+  "skillLevel": "beginner",
+  "audience": ["journalists"],
+  "capabilities": [{ "id": "transcription", "strength": "primary" }],
+  "facts": {
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://trint.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://trint.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Uitschrijven en verhalen maken, gemaakt voor redacties",
+      "description": "Trint komt uit Londen en is gemaakt voor journalisten. Het zet audio en video om in tekst. Teams werken samen in de tekst en maken er citaten en verhalen van.",
+      "bestFor": ["Redacties en nieuwsteams", "Samen werken aan transcripties"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Transcription and story building, made for newsrooms",
+      "description": "Trint is based in London and made for journalists. It turns audio and video into text. Teams work together in the text and turn it into quotes and stories.",
+      "bestFor": ["Newsrooms and news teams", "Working on transcripts together"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

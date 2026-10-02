@@ -1,0 +1,52 @@
+{
+  "slug": "hex",
+  "name": "Hex",
+  "website": "https://hex.tech",
+  "pricingUrl": "https://hex.tech/pricing",
+  "company": { "name": "Hex Technologies", "slug": "hex", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["analysts", "developers"],
+  "capabilities": [{ "id": "data-analysis", "strength": "primary" }, { "id": "code-assistant", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://hex.tech/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://hex.tech/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://hex.tech", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Data-analyse in notebooks, met een AI-assistent",
+      "description": "Hex is een werkplek voor data-analyse. Je werkt met SQL, Python en grafieken in één notebook. Een AI-assistent schrijft code en beantwoordt vragen over je data. Je deelt resultaten als interactieve app.",
+      "bestFor": ["Datateams die samen analyseren", "Dashboards en rapporten delen"],
+      "notFor": ["Beginners zonder ervaring met data"],
+      "limitations": ["Vraagt basiskennis van data"]
+    },
+    "en": {
+      "tagline": "Data analysis in notebooks, with an AI assistant",
+      "description": "Hex is a workspace for data analysis. You work with SQL, Python and charts in one notebook. An AI assistant writes code and answers questions about your data. You share results as an interactive app.",
+      "bestFor": ["Data teams that analyse together", "Sharing dashboards and reports"],
+      "notFor": ["Beginners with no data experience"],
+      "limitations": ["Needs basic data skills"]
+    }
+  }
+}

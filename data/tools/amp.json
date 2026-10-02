@@ -1,0 +1,36 @@
+{
+  "slug": "amp",
+  "name": "Amp",
+  "website": "https://ampcode.com",
+  "company": { "name": "Sourcegraph", "slug": "sourcegraph", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "agentic-coding", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["vscode", "cli"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://ampcode.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Codeeragent van Sourcegraph voor in je editor en terminal",
+      "description": "Amp is een AI-agent voor programmeurs, gemaakt door Sourcegraph. Hij werkt in VS Code en in de terminal. Je geeft een taak en Amp past je code aan. Je deelt gesprekken met je team.",
+      "bestFor": ["Grote taken in bestaande code", "Teams die AI-werk willen delen"],
+      "notFor": ["Beginners"],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Coding agent from Sourcegraph for your editor and terminal",
+      "description": "Amp is an AI agent for programmers, made by Sourcegraph. It works in VS Code and in the terminal. You give it a task and Amp changes your code. You share threads with your team.",
+      "bestFor": ["Big tasks in existing code", "Teams that want to share AI work"],
+      "notFor": ["Beginners"],
+      "limitations": []
+    }
+  }
+}

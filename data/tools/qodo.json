@@ -1,0 +1,52 @@
+{
+  "slug": "qodo",
+  "name": "Qodo",
+  "aliases": ["CodiumAI"],
+  "website": "https://www.qodo.ai",
+  "company": { "name": "Qodo", "slug": "qodo", "country": "IL" },
+  "skillLevel": "intermediate",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "code-assistant", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.qodo.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.qodo.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["vscode", "jetbrains"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.qodo.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI voor code-reviews en tests",
+      "description": "Qodo, vroeger CodiumAI, komt uit Tel Aviv. Het helpt ontwikkelaars met code-reviews en het schrijven van tests. Het werkt in je editor en bij pull requests op GitHub.",
+      "bestFor": ["Teams die betere code-reviews willen", "Tests laten voorstellen"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "AI for code reviews and tests",
+      "description": "Qodo, formerly CodiumAI, is based in Tel Aviv. It helps developers with code reviews and writing tests. It works in your editor and on pull requests on GitHub.",
+      "bestFor": ["Teams that want better code reviews", "Getting tests suggested"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

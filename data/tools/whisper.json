@@ -1,0 +1,76 @@
+{
+  "slug": "whisper",
+  "name": "Whisper",
+  "website": "https://github.com/openai/whisper",
+  "githubRepo": "openai/whisper",
+  "company": { "name": "OpenAI", "slug": "openai", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers", "researchers", "privacy-conscious"],
+  "capabilities": [{ "id": "transcription", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://github.com/openai/whisper", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/openai/whisper", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["self_hosted", "cli", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/openai/whisper", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/openai/whisper", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/openai/whisper", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/openai/whisper", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis open-source spraakherkenning van OpenAI",
+      "description": "Whisper is een open-source model van OpenAI dat spraak omzet in tekst. Het kent veel talen, ook Nederlands. Je draait het op je eigen computer, dus je audio blijft bij jou. Veel apps voor transcriptie gebruiken Whisper.",
+      "bestFor": ["Privé interviews uitschrijven", "Ontwikkelaars die spraak naar tekst inbouwen"],
+      "notFor": ["Wie een app zonder installatie zoekt"],
+      "limitations": ["Zonder extra app moet je het zelf installeren"]
+    },
+    "en": {
+      "tagline": "Free open-source speech recognition from OpenAI",
+      "description": "Whisper is an open-source model from OpenAI that turns speech into text. It knows many languages, including Dutch. You run it on your own computer, so your audio stays with you. Many transcription apps use Whisper.",
+      "bestFor": ["Transcribing interviews privately", "Developers who build in speech-to-text"],
+      "notFor": ["People who want an app without installing anything"],
+      "limitations": ["Without an extra app you install it yourself"]
+    }
+  }
+}

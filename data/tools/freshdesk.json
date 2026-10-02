@@ -1,0 +1,37 @@
+{
+  "slug": "freshdesk",
+  "name": "Freshdesk",
+  "website": "https://www.freshworks.com/freshdesk/",
+  "pricingUrl": "https://www.freshworks.com/freshdesk/pricing/",
+  "company": { "name": "Freshworks", "slug": "freshworks", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["support-teams", "smb"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.freshworks.com/freshdesk/", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Helpdesk van Freshworks met de AI-assistent Freddy",
+      "description": "Freshdesk is helpdesksoftware van Freshworks. Vragen van klanten worden tickets in één overzicht. De AI Freddy beantwoordt vragen en helpt medewerkers. Je koppelt het aan veel andere apps.",
+      "bestFor": ["Kleine en middelgrote supportteams", "Vragen bijhouden als tickets"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Help desk from Freshworks with the AI assistant Freddy",
+      "description": "Freshdesk is help desk software from Freshworks. Customer questions become tickets in one overview. The AI Freddy answers questions and helps staff. It connects to many other apps.",
+      "bestFor": ["Small and medium support teams", "Tracking questions as tickets"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

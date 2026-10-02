@@ -1,0 +1,53 @@
+{
+  "slug": "d-id",
+  "name": "D-ID",
+  "website": "https://www.d-id.com",
+  "pricingUrl": "https://www.d-id.com/pricing/",
+  "company": { "name": "D-ID", "slug": "d-id", "country": "IL" },
+  "skillLevel": "beginner",
+  "audience": ["educators", "marketers", "enterprise"],
+  "capabilities": [{ "id": "avatar-video", "strength": "primary" }],
+  "facts": {
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.d-id.com/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.d-id.com", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.d-id.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Video's met een pratend digitaal gezicht, ook van een foto",
+      "description": "D-ID maakt video's waarin een gezicht praat. Je kiest een avatar of uploadt een foto. Daarna typ je de tekst of upload je audio. Bedrijven gebruiken het voor uitleg- en trainingsvideo's.",
+      "bestFor": ["Korte uitlegvideo's met een presentator", "Pratende avatars op een website"],
+      "notFor": ["Iemands gezicht gebruiken zonder toestemming"],
+      "limitations": ["De gratis proefperiode is kort"]
+    },
+    "en": {
+      "tagline": "Videos with a talking digital face, even from a photo",
+      "description": "D-ID makes videos in which a face talks. You choose an avatar or upload a photo. Then you type the text or upload audio. Companies use it for explainer and training videos.",
+      "bestFor": ["Short explainers with a presenter", "Talking avatars on a website"],
+      "notFor": ["Using someone's face without consent"],
+      "limitations": ["The free trial is short"]
+    }
+  }
+}

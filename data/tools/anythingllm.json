@@ -1,0 +1,68 @@
+{
+  "slug": "anythingllm",
+  "name": "AnythingLLM",
+  "website": "https://anythingllm.com",
+  "githubRepo": "Mintplex-Labs/anything-llm",
+  "company": { "name": "Mintplex Labs", "slug": "mintplex-labs", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "smb", "privacy-conscious"],
+  "capabilities": [{ "id": "document-chat", "strength": "primary" }, { "id": "local-llm", "strength": "primary" }, { "id": "ai-agents", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://anythingllm.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://anythingllm.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["windows", "macos", "linux", "self_hosted"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://anythingllm.com", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/Mintplex-Labs/anything-llm", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/Mintplex-Labs/anything-llm", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Alles-in-één app om met je documenten te chatten, lokaal of online",
+      "description": "AnythingLLM is een open-source app van Mintplex Labs. Je zet er documenten in en stelt er vragen over. Je kiest zelf welk AI-model je gebruikt, ook een lokaal model. Er is een desktop-app en een versie voor je eigen server.",
+      "bestFor": ["Een eigen kennisbank met AI", "Teams die zelf willen hosten"],
+      "notFor": ["Wie zonder installatie wil beginnen"],
+      "limitations": ["Instellen vraagt wat technische kennis"]
+    },
+    "en": {
+      "tagline": "All-in-one app to chat with your documents, locally or online",
+      "description": "AnythingLLM is an open-source app from Mintplex Labs. You add documents and ask questions about them. You choose which AI model to use, including a local one. There is a desktop app and a version for your own server.",
+      "bestFor": ["Your own knowledge base with AI", "Teams that want to self-host"],
+      "notFor": ["People who want to start without installing anything"],
+      "limitations": ["Setting it up takes some technical knowledge"]
+    }
+  }
+}

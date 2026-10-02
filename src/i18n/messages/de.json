@@ -301,7 +301,7 @@
     "historyCurrent": "aktuell",
     "vatNote": "Preise wie vom Anbieter angegeben, meist ohne MwSt. Beträge in anderen Währungen als Euro werden zur Orientierung umgerechnet.",
     "currencyNote": "Beträge in {currency}; die Umrechnung in Euro ist ein Richtwert (EZB {date}).",
-    "noPlans": "Keine öffentlichen Preise gefunden. Frag den Anbieter nach einem Angebot.",
+    "noPlans": "Noch keine Preise geprüft. Schau vorerst auf der Website des Anbieters nach.",
     "watch": "Diesen Preis beobachten",
     "pendingBadge": "möglicherweise geändert · wird geprüft",
     "pendingNotice": "Einer oder mehrere Preise unten haben sich möglicherweise geändert. Wir haben auf der offiziellen Seite einen anderen Preis gemessen und bestätigen ihn; bis dahin bleibt der zuletzt verifizierte Preis stehen."
@@ -330,6 +330,8 @@
     "metaDescription": "Durchsuche {count} KI-Tools nach Fähigkeit, Preis, kostenlosem Plan, Plattform, API, Open Source, EU-Datenspeicherung und niederländischer Sprache. Jeder Preis mit Quelle und Datum.",
     "intro": "Filtere nach dem, was du brauchst. Jeder Preis hat eine Quelle, ein Datum und einen Status.",
     "results": "{count, plural, =0 {Keine Tools gefunden} one {# Tool} other {# Tools}}",
+    "showing": "Du siehst {shown} von {count} Tools.",
+    "showAll": "Alle {count} Tools zeigen",
     "search": "Suchen",
     "searchPlaceholder": "Name oder Vorhaben, z. B. Voice-over",
     "category": "Kategorie",

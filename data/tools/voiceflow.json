@@ -1,0 +1,60 @@
+{
+  "slug": "voiceflow",
+  "name": "Voiceflow",
+  "website": "https://www.voiceflow.com",
+  "pricingUrl": "https://www.voiceflow.com/pricing",
+  "company": { "name": "Voiceflow", "slug": "voiceflow", "country": "CA" },
+  "skillLevel": "intermediate",
+  "audience": ["product", "enterprise"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }, { "id": "ai-agents", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.voiceflow.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.voiceflow.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.voiceflow.com", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.voiceflow.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Platform om AI-agents voor klantcontact te ontwerpen",
+      "description": "Voiceflow komt uit Toronto. Teams ontwerpen er chat- en spraakagents mee voor klantenservice. Je bouwt gesprekken met blokken en test ze meteen. De agents gebruiken je eigen kennisbank.",
+      "bestFor": ["Productteams die samen agents ontwerpen", "Agents voor chat en spraak"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Platform for designing AI agents for customer contact",
+      "description": "Voiceflow is based in Toronto. Teams use it to design chat and voice agents for customer service. You build conversations with blocks and test them right away. The agents use your own knowledge base.",
+      "bestFor": ["Product teams designing agents together", "Chat and voice agents"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "slug": "devin",
+  "name": "Devin",
+  "website": "https://devin.ai",
+  "pricingUrl": "https://devin.ai/pricing",
+  "company": { "name": "Cognition", "slug": "cognition", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers", "enterprise"],
+  "capabilities": [{ "id": "agentic-coding", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://devin.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-programmeur van Cognition die zelf taken uitvoert",
+      "description": "Devin is een AI-agent die zelf programmeertaken uitvoert. Je geeft een opdracht via een chat of Slack. Devin maakt een plan, schrijft code, test en maakt een pull request. Je volgt alles in een eigen werkomgeving.",
+      "bestFor": ["Teams met veel kleine taken", "Onderhoud aan bestaande code"],
+      "notFor": ["Beginners", "Grote ontwerpkeuzes"],
+      "limitations": ["Controleer elke pull request zelf"]
+    },
+    "en": {
+      "tagline": "AI software engineer from Cognition that carries out tasks itself",
+      "description": "Devin is an AI agent that does programming tasks on its own. You give it a task in a chat or in Slack. Devin plans, writes code, tests and opens a pull request. You follow everything in its own workspace.",
+      "bestFor": ["Teams with many small tasks", "Maintaining existing code"],
+      "notFor": ["Beginners", "Big design decisions"],
+      "limitations": ["Review every pull request yourself"]
+    }
+  }
+}

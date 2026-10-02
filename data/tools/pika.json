@@ -1,0 +1,51 @@
+{
+  "slug": "pika",
+  "name": "Pika",
+  "website": "https://pika.art",
+  "company": { "name": "Pika", "slug": "pika", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["creators"],
+  "capabilities": [{ "id": "video-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://pika.art", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://pika.art", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://pika.art", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Korte video's maken van tekst of een foto, met speelse effecten",
+      "description": "Pika maakt korte video's met AI. Je begint met een tekst of een plaatje. Met effecten laat je dingen smelten, ontploffen of veranderen. Veel mensen gebruiken het voor social media.",
+      "bestFor": ["Speelse clips voor social media", "Een foto tot leven brengen"],
+      "notFor": ["Lange of zakelijke video's"],
+      "limitations": ["Clips zijn kort"]
+    },
+    "en": {
+      "tagline": "Short videos from text or a photo, with playful effects",
+      "description": "Pika makes short videos with AI. You start with text or a picture. Effects make things melt, explode or transform. Many people use it for social media.",
+      "bestFor": ["Playful clips for social media", "Bringing a photo to life"],
+      "notFor": ["Long or business videos"],
+      "limitations": ["Clips are short"]
+    }
+  }
+}

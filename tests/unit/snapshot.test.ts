@@ -76,6 +76,22 @@ describe('snapshot', () => {
     expect(snap.freshness).toBe('fresh');
     expect(snap.indexable).toEqual({ tool: true, pricing: true, alternatives: true });
   });
+  it('does not date a check from editorial knowledge that no source confirmed yet', () => {
+    const input = (p: SnapshotPlan[]) =>
+      computeSnapshot(
+        { facts: [], plans: p, currentStatus: 'active', websiteCheckedAt: null, published: true, locales: ['nl', 'en'], primaryCapabilities: 1, alternatives: 0, websiteStatus: 'unknown' },
+        DEFAULT_SETTINGS.freshness,
+        now,
+      );
+    const editorial = plan({ planKey: 'free', isFree: true, priceCents: 0, status: 'unverified', method: 'editorial' });
+    const blind = input([editorial]);
+    expect(blind.priceCheckedAt).toBeNull();
+    expect(blind.freshness).toBe('unknown');
+    expect(blind.hasFreeTier).toBe(true);
+    const anchored = input([{ ...editorial, status: 'verified', verifiedAt: now }]);
+    expect(anchored.priceCheckedAt).toEqual(now);
+    expect(input([{ ...editorial, method: 'web_search' }]).priceCheckedAt).toEqual(now);
+  });
 });
 
 describe('quality gates', () => {

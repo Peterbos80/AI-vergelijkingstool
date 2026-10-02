@@ -1,0 +1,57 @@
+{
+  "slug": "sonix",
+  "name": "Sonix",
+  "website": "https://sonix.ai",
+  "pricingUrl": "https://sonix.ai/pricing",
+  "company": { "name": "Sonix", "slug": "sonix", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["journalists", "researchers"],
+  "capabilities": [
+    { "id": "transcription", "strength": "primary" },
+    { "id": "translation", "strength": "secondary" },
+    { "id": "auto-subtitles", "strength": "secondary" }
+  ],
+  "facts": {
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://sonix.ai/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://sonix.ai", "type": "official" }]
+    },
+    "supports_dutch": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://sonix.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Automatisch uitschrijven en vertalen van audio en video",
+      "description": "Sonix zet audio en video om in tekst. Het werkt in veel talen, ook in het Nederlands. Je bewerkt de tekst in een editor die meespeelt met de audio. Je kunt de tekst ook vertalen.",
+      "bestFor": ["Journalisten en onderzoekers", "Ondertitels maken bij video's"],
+      "notFor": [],
+      "limitations": ["Je betaalt per uur audio"]
+    },
+    "en": {
+      "tagline": "Automatic transcription and translation of audio and video",
+      "description": "Sonix turns audio and video into text. It works in many languages, including Dutch. You edit the text in an editor that plays along with the audio. You can also translate the text.",
+      "bestFor": ["Journalists and researchers", "Making subtitles for videos"],
+      "notFor": [],
+      "limitations": ["You pay per hour of audio"]
+    }
+  }
+}

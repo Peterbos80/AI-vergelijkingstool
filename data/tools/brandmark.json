@@ -1,0 +1,36 @@
+{
+  "slug": "brandmark",
+  "name": "Brandmark",
+  "website": "https://brandmark.io",
+  "company": { "name": "Brandmark", "slug": "brandmark" },
+  "skillLevel": "beginner",
+  "audience": ["founders", "smb", "startups"],
+  "capabilities": [{ "id": "logo-design", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://brandmark.io", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt een logo en huisstijl op basis van je bedrijfsnaam",
+      "description": "Brandmark maakt logo's met AI. Je geeft je naam, een paar trefwoorden en kleuren. Je ziet meteen veel ontwerpen. Na betaling download je het logo met extra bestanden voor je huisstijl.",
+      "bestFor": ["Starters die snel een logo nodig hebben", "Een eerste idee voor je merk"],
+      "notFor": ["Een uniek merk met een eigen verhaal"],
+      "limitations": ["Ontwerpen kunnen lijken op die van anderen"]
+    },
+    "en": {
+      "tagline": "Makes a logo and brand kit from your company name",
+      "description": "Brandmark makes logos with AI. You give your name, a few keywords and colours. You see many designs right away. After paying, you download the logo with extra files for your brand.",
+      "bestFor": ["Starters who need a logo fast", "A first idea for your brand"],
+      "notFor": ["A unique brand with its own story"],
+      "limitations": ["Designs can look like other people's"]
+    }
+  }
+}

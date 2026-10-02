@@ -1,0 +1,59 @@
+{
+  "slug": "stable-audio",
+  "name": "Stable Audio",
+  "website": "https://stableaudio.com",
+  "company": { "name": "Stability AI", "slug": "stability-ai", "country": "GB" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "game-developers"],
+  "capabilities": [{ "id": "music-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://stableaudio.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://stableaudio.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://stableaudio.com", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://stableaudio.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Muziek en geluidseffecten maken met AI, van Stability AI",
+      "description": "Stable Audio is van Stability AI. Je beschrijft muziek of een geluid en krijgt een audiobestand. Volgens Stability AI is het getraind op muziek met licentie. Er is ook een open versie van het model.",
+      "bestFor": ["Geluidseffecten voor video's en games", "Korte muziekstukken"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik is beperkt"]
+    },
+    "en": {
+      "tagline": "Make music and sound effects with AI, from Stability AI",
+      "description": "Stable Audio is made by Stability AI. You describe music or a sound and get an audio file. According to Stability AI, it is trained on licensed music. There is also an open version of the model.",
+      "bestFor": ["Sound effects for videos and games", "Short music pieces"],
+      "notFor": [],
+      "limitations": ["Free use is limited"]
+    }
+  }
+}

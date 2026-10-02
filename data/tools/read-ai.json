@@ -1,0 +1,55 @@
+{
+  "slug": "read-ai",
+  "name": "Read AI",
+  "website": "https://www.read.ai",
+  "company": { "name": "Read AI", "slug": "read-ai", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["teams", "sales", "professionals"],
+  "capabilities": [
+    { "id": "meeting-notes", "strength": "primary" },
+    { "id": "transcription", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.read.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.read.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.read.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt verslagen van online vergaderingen en zet de taken op een rij",
+      "description": "Read AI doet mee in je online vergaderingen. Daarna krijg je een samenvatting, de belangrijkste punten en de taken. Het werkt met Zoom, Teams en Google Meet. Het kan ook e-mails en chats samenvatten.",
+      "bestFor": ["Teams met veel online vergaderingen", "Afspraken na een gesprek niet vergeten"],
+      "notFor": ["Gesprekken waarbij niet iedereen toestemming geeft"],
+      "limitations": ["Vraag deelnemers altijd om toestemming voor opnemen"]
+    },
+    "en": {
+      "tagline": "Writes up online meetings and lists the to-dos",
+      "description": "Read AI joins your online meetings. Afterwards you get a summary, the key points and the to-dos. It works with Zoom, Teams and Google Meet. It can also summarise emails and chats.",
+      "bestFor": ["Teams with many online meetings", "Not forgetting what was agreed"],
+      "notFor": ["Calls where not everyone agrees to be recorded"],
+      "limitations": ["Always ask participants for consent to record"]
+    }
+  }
+}

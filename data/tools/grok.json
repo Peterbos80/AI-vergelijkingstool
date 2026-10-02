@@ -1,0 +1,55 @@
+{
+  "slug": "grok",
+  "name": "Grok",
+  "website": "https://grok.com",
+  "company": { "name": "xAI", "slug": "xai", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone"],
+  "capabilities": [
+    { "id": "chat-assistant", "strength": "primary" },
+    { "id": "image-generation", "strength": "secondary" },
+    { "id": "research-assistant", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://grok.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://grok.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://grok.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-assistent van xAI, ook ingebouwd in X",
+      "description": "Grok is de AI-assistent van xAI, het AI-bedrijf van Elon Musk. Je gebruikt hem op grok.com, in de app of op X. Hij kan zoeken op het web en op X. Hij maakt ook plaatjes.",
+      "bestFor": ["Vragen over nieuws en trends op X", "Chatten met een assistent die op het web zoekt"],
+      "notFor": ["Schoolwerk zonder dat je de bronnen controleert"],
+      "limitations": ["Gratis gebruik heeft een limiet"]
+    },
+    "en": {
+      "tagline": "AI assistant from xAI, also built into X",
+      "description": "Grok is the AI assistant from xAI, the AI company of Elon Musk. You use it on grok.com, in the app or on X. It can search the web and X. It also makes pictures.",
+      "bestFor": ["Questions about news and trends on X", "Chatting with an assistant that searches the web"],
+      "notFor": ["Schoolwork where you do not check the sources"],
+      "limitations": ["Free use has a limit"]
+    }
+  }
+}

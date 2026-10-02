@@ -1,0 +1,37 @@
+{
+  "slug": "scite",
+  "name": "scite",
+  "website": "https://scite.ai",
+  "pricingUrl": "https://scite.ai/pricing",
+  "company": { "name": "Research Solutions", "slug": "research-solutions", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["researchers", "students"],
+  "capabilities": [{ "id": "academic-research", "strength": "primary" }, { "id": "research-assistant", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://scite.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Laat zien of andere onderzoeken een artikel steunen of tegenspreken",
+      "description": "scite toont hoe een artikel wordt geciteerd. Je ziet of latere studies het steunen, tegenspreken of alleen noemen. Een AI-assistent beantwoordt vragen met bronnen uit de wetenschap.",
+      "bestFor": ["Controleren hoe sterk een bron is", "Literatuuronderzoek"],
+      "notFor": ["Algemene vragen buiten de wetenschap"],
+      "limitations": ["De meeste functies zijn betaald"]
+    },
+    "en": {
+      "tagline": "Shows whether other studies support or contradict a paper",
+      "description": "scite shows how a paper is cited. You see whether later studies support it, contradict it or just mention it. An AI assistant answers questions with sources from science.",
+      "bestFor": ["Checking how strong a source is", "Literature reviews"],
+      "notFor": ["General questions outside science"],
+      "limitations": ["Most features are paid"]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "scispace",
+  "name": "SciSpace",
+  "website": "https://scispace.com",
+  "company": { "name": "SciSpace", "slug": "scispace" },
+  "skillLevel": "beginner",
+  "audience": ["students", "researchers"],
+  "capabilities": [{ "id": "academic-research", "strength": "primary" }, { "id": "document-chat", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://scispace.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://scispace.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://scispace.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-hulp om wetenschappelijke artikelen te vinden en te begrijpen",
+      "description": "SciSpace helpt je wetenschappelijke artikelen te zoeken en te lezen. Je stelt vragen over een pdf en krijgt uitleg in gewone taal. Er is ook een tool voor literatuuroverzichten.",
+      "bestFor": ["Moeilijke artikelen begrijpen", "Een eerste literatuuroverzicht maken"],
+      "notFor": [],
+      "limitations": ["Controleer samenvattingen altijd in het artikel zelf"]
+    },
+    "en": {
+      "tagline": "AI help to find and understand scientific papers",
+      "description": "SciSpace helps you find and read scientific papers. You ask questions about a PDF and get an explanation in plain language. There is also a tool for literature reviews.",
+      "bestFor": ["Understanding difficult papers", "A first literature review"],
+      "notFor": [],
+      "limitations": ["Always check summaries against the paper itself"]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "publer",
+  "name": "Publer",
+  "website": "https://publer.com",
+  "company": { "name": "Publer", "slug": "publer" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "freelancers", "marketers"],
+  "capabilities": [{ "id": "social-scheduling", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://publer.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://publer.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://publer.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Planner voor social media, met een AI-assistent",
+      "description": "Publer plant posts voor veel sociale netwerken. Je ziet alles in een kalender. Een AI-assistent helpt met teksten en plaatjes. Er is een gratis plan voor een paar accounts.",
+      "bestFor": ["Zzp'ers en kleine bedrijven", "Posts plannen voor meerdere kanalen"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Social media planner with an AI assistant",
+      "description": "Publer schedules posts for many social networks. You see everything in a calendar. An AI assistant helps with texts and images. There is a free plan for a few accounts.",
+      "bestFor": ["Freelancers and small businesses", "Scheduling posts across channels"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

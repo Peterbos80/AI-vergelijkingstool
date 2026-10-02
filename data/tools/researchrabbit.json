@@ -1,0 +1,51 @@
+{
+  "slug": "researchrabbit",
+  "name": "ResearchRabbit",
+  "website": "https://www.researchrabbit.ai",
+  "company": { "name": "ResearchRabbit", "slug": "researchrabbit" },
+  "skillLevel": "beginner",
+  "audience": ["students", "researchers"],
+  "capabilities": [{ "id": "academic-research", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.researchrabbit.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.researchrabbit.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.researchrabbit.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Ontdek verwante wetenschappelijke artikelen in een netwerk",
+      "description": "ResearchRabbit helpt je verwante artikelen te vinden. Je begint met een paar artikelen. Daarna toont het een netwerk van artikelen en auteurs die erbij horen. Je bewaart alles in collecties.",
+      "bestFor": ["Literatuuronderzoek voor een scriptie", "Zien hoe een onderzoeksveld samenhangt"],
+      "notFor": [],
+      "limitations": ["Je moet zelf beoordelen welke artikelen relevant zijn"]
+    },
+    "en": {
+      "tagline": "Discover related scientific papers in a network",
+      "description": "ResearchRabbit helps you find related papers. You start with a few papers. Then it shows a network of papers and authors that belong with them. You keep everything in collections.",
+      "bestFor": ["Literature research for a thesis", "Seeing how a research field fits together"],
+      "notFor": [],
+      "limitations": ["You decide yourself which papers are relevant"]
+    }
+  }
+}

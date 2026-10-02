@@ -1,0 +1,56 @@
+{
+  "slug": "clipchamp",
+  "name": "Microsoft Clipchamp",
+  "aliases": ["Clipchamp"],
+  "website": "https://clipchamp.com",
+  "company": { "name": "Microsoft", "slug": "microsoft", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "students", "smb"],
+  "capabilities": [
+    { "id": "video-editing", "strength": "primary" },
+    { "id": "auto-subtitles", "strength": "secondary" },
+    { "id": "text-to-speech", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://clipchamp.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://clipchamp.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "windows"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://clipchamp.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis videobewerker van Microsoft, ingebouwd in Windows",
+      "description": "Clipchamp is de videobewerker van Microsoft. Hij zit in Windows en werkt ook in je browser. Je maakt video's met sjablonen, ondertitels en AI-stemmen. Je exporteert gratis in hoge kwaliteit.",
+      "bestFor": ["Schoolprojecten en simpele video's", "Windows-gebruikers"],
+      "notFor": ["Ingewikkelde filmprojecten"],
+      "limitations": ["Sommige sjablonen en effecten zijn betaald"]
+    },
+    "en": {
+      "tagline": "Free video editor from Microsoft, built into Windows",
+      "description": "Clipchamp is Microsoft's video editor. It is built into Windows and also works in your browser. You make videos with templates, subtitles and AI voices. You export in high quality for free.",
+      "bestFor": ["School projects and simple videos", "Windows users"],
+      "notFor": ["Complex film projects"],
+      "limitations": ["Some templates and effects are paid"]
+    }
+  }
+}

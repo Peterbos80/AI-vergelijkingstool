@@ -1,0 +1,55 @@
+{
+  "slug": "predis-ai",
+  "name": "Predis.ai",
+  "website": "https://predis.ai",
+  "company": { "name": "Predis.ai", "slug": "predis" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "ecommerce", "marketers"],
+  "capabilities": [
+    { "id": "social-scheduling", "strength": "primary" },
+    { "id": "graphic-design", "strength": "secondary" },
+    { "id": "copywriting", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://predis.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://predis.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://predis.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt posts en advertenties voor social media met AI",
+      "description": "Predis.ai maakt complete posts voor social media. Je geeft een korte beschrijving en krijgt een ontwerp met tekst en hashtags. Het kan ook carrousels en korte video's maken. Je plant de posts er direct in.",
+      "bestFor": ["Webwinkels met veel producten", "Snel posts voor Instagram"],
+      "notFor": [],
+      "limitations": ["Ontwerpen lijken soms op elkaar"]
+    },
+    "en": {
+      "tagline": "Makes social media posts and ads with AI",
+      "description": "Predis.ai makes complete social media posts. You give a short description and get a design with text and hashtags. It can also make carousels and short videos. You schedule the posts right there.",
+      "bestFor": ["Online shops with many products", "Quick posts for Instagram"],
+      "notFor": [],
+      "limitations": ["Designs sometimes look alike"]
+    }
+  }
+}

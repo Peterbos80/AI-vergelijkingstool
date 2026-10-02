@@ -1,0 +1,37 @@
+{
+  "slug": "tabnine",
+  "name": "Tabnine",
+  "website": "https://www.tabnine.com",
+  "pricingUrl": "https://www.tabnine.com/pricing",
+  "company": { "name": "Tabnine", "slug": "tabnine", "country": "IL" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "enterprise"],
+  "capabilities": [{ "id": "code-assistant", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["vscode", "jetbrains"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.tabnine.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Code-assistent die privacy en eigen hosting voorop zet",
+      "description": "Tabnine komt uit Israël. Het vult code aan en beantwoordt vragen in je editor. Bedrijven kunnen het in hun eigen omgeving draaien. Volgens Tabnine wordt je code niet gebruikt voor training.",
+      "bestFor": ["Bedrijven met strenge regels over code", "Ontwikkelaars in VS Code en JetBrains"],
+      "notFor": ["Mensen die nog niet programmeren"],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Code assistant that puts privacy and self-hosting first",
+      "description": "Tabnine is based in Israel. It completes code and answers questions in your editor. Companies can run it in their own environment. According to Tabnine, your code is not used for training.",
+      "bestFor": ["Companies with strict rules about code", "Developers in VS Code and JetBrains"],
+      "notFor": ["People who do not code yet"],
+      "limitations": []
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "pictory",
+  "name": "Pictory",
+  "website": "https://pictory.ai",
+  "pricingUrl": "https://pictory.ai/pricing",
+  "company": { "name": "Pictory", "slug": "pictory", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["marketers", "educators"],
+  "capabilities": [
+    { "id": "video-generation", "strength": "primary" },
+    { "id": "clip-generation", "strength": "secondary" },
+    { "id": "auto-subtitles", "strength": "secondary" }
+  ],
+  "facts": {
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://pictory.ai/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://pictory.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt video's van een blog, script of lange opname",
+      "description": "Pictory zet tekst om in video. Je plakt een blog of script en krijgt een video met beelden, tekst en muziek. Je kunt ook lange video's inkorten tot clips.",
+      "bestFor": ["Een blog omzetten naar video", "Trainers die snel video's willen maken"],
+      "notFor": [],
+      "limitations": ["Beeldbankbeelden passen niet altijd bij je tekst"]
+    },
+    "en": {
+      "tagline": "Makes videos from a blog, script or long recording",
+      "description": "Pictory turns text into video. You paste a blog or script and get a video with footage, text and music. You can also cut long videos into clips.",
+      "bestFor": ["Turning a blog into a video", "Trainers who want videos fast"],
+      "notFor": [],
+      "limitations": ["Stock footage does not always match your text"]
+    }
+  }
+}

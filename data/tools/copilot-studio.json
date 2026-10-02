@@ -1,0 +1,37 @@
+{
+  "slug": "copilot-studio",
+  "name": "Microsoft Copilot Studio",
+  "aliases": ["Copilot Studio"],
+  "website": "https://www.microsoft.com/microsoft-copilot/microsoft-copilot-studio",
+  "company": { "name": "Microsoft", "slug": "microsoft", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["enterprise"],
+  "capabilities": [{ "id": "ai-agents", "strength": "primary" }, { "id": "support-chatbot", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.microsoft.com/microsoft-copilot/microsoft-copilot-studio", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Bouw eigen AI-agents voor je organisatie in Microsoft 365",
+      "description": "Copilot Studio is een tool van Microsoft om eigen agents te maken. Je bouwt ze met gewone taal en blokken. Agents gebruiken kennis uit je bedrijf en werken in Teams of op je website. Het is bedoeld voor organisaties.",
+      "bestFor": ["Organisaties met Microsoft 365", "Interne helpdesk-agents"],
+      "notFor": ["Particulieren"],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Build your own AI agents for your organisation in Microsoft 365",
+      "description": "Copilot Studio is a Microsoft tool for making your own agents. You build them with plain language and blocks. Agents use company knowledge and work in Teams or on your website. It is meant for organisations.",
+      "bestFor": ["Organisations with Microsoft 365", "Internal help desk agents"],
+      "notFor": ["Private individuals"],
+      "limitations": []
+    }
+  }
+}

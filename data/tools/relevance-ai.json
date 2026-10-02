@@ -1,0 +1,52 @@
+{
+  "slug": "relevance-ai",
+  "name": "Relevance AI",
+  "website": "https://relevanceai.com",
+  "pricingUrl": "https://relevanceai.com/pricing",
+  "company": { "name": "Relevance AI", "slug": "relevance-ai", "country": "AU" },
+  "skillLevel": "intermediate",
+  "audience": ["sales", "operations"],
+  "capabilities": [{ "id": "ai-agents", "strength": "primary" }, { "id": "workflow-automation", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://relevanceai.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://relevanceai.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://relevanceai.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Bouw een team van AI-agents, bijvoorbeeld voor sales en support",
+      "description": "Relevance AI komt uit Sydney. Je bouwt er AI-agents mee zonder code. Een agent zoekt bijvoorbeeld informatie over klanten of beantwoordt vragen. Je koppelt de agents aan je eigen apps.",
+      "bestFor": ["Sales- en supportteams", "Terugkerend werk uitbesteden aan agents"],
+      "notFor": [],
+      "limitations": ["Goede agents opzetten kost tijd"]
+    },
+    "en": {
+      "tagline": "Build a team of AI agents, for example for sales and support",
+      "description": "Relevance AI is based in Sydney. You build AI agents with it without code. An agent can, for example, research customers or answer questions. You connect the agents to your own apps.",
+      "bestFor": ["Sales and support teams", "Handing repetitive work to agents"],
+      "notFor": [],
+      "limitations": ["Setting up good agents takes time"]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "neuronwriter",
+  "name": "NeuronWriter",
+  "website": "https://neuronwriter.com",
+  "company": { "name": "Contadu", "slug": "contadu", "country": "PL" },
+  "skillLevel": "intermediate",
+  "audience": ["marketers", "agencies", "freelancers"],
+  "capabilities": [{ "id": "seo-optimization", "strength": "primary" }, { "id": "long-form-writing", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://neuronwriter.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "SEO-schrijftool die laat zien welke woorden je tekst mist",
+      "description": "NeuronWriter bekijkt de pagina's die hoog in Google staan. Daarna zie je welke onderwerpen en woorden je eigen tekst mist. Een AI-functie helpt met schrijven.",
+      "bestFor": ["Blogs die beter willen scoren in Google", "SEO-specialisten met een klein budget"],
+      "notFor": ["Teksten zonder doel in zoekmachines"],
+      "limitations": ["Een SEO-score is geen garantie op een hogere positie"]
+    },
+    "en": {
+      "tagline": "SEO writing tool that shows which words your text is missing",
+      "description": "NeuronWriter looks at the pages that rank high in Google. Then you see which topics and words your own text is missing. An AI feature helps you write.",
+      "bestFor": ["Blogs that want to rank better in Google", "SEO specialists on a small budget"],
+      "notFor": ["Texts with no search goal"],
+      "limitations": ["An SEO score does not guarantee a higher ranking"]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "gemini-code-assist",
+  "name": "Gemini Code Assist",
+  "website": "https://codeassist.google",
+  "company": { "name": "Google", "slug": "google", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "students"],
+  "capabilities": [{ "id": "code-assistant", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://codeassist.google", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://codeassist.google", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["vscode", "jetbrains"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://codeassist.google", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Code-assistent van Google voor in je editor, gratis voor individuen",
+      "description": "Gemini Code Assist is de code-assistent van Google. Hij werkt in VS Code en JetBrains. Hij vult code aan, legt code uit en kijkt pull requests na op GitHub. Voor individuen is er een gratis versie.",
+      "bestFor": ["Studenten en hobbyprogrammeurs", "Code laten nakijken op GitHub"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Google's code assistant for your editor, free for individuals",
+      "description": "Gemini Code Assist is Google's code assistant. It works in VS Code and JetBrains. It completes code, explains code and reviews pull requests on GitHub. There is a free version for individuals.",
+      "bestFor": ["Students and hobby programmers", "Code reviews on GitHub"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

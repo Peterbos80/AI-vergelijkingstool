@@ -1,0 +1,51 @@
+{
+  "slug": "manus",
+  "name": "Manus",
+  "website": "https://manus.im",
+  "company": { "name": "Manus", "slug": "manus" },
+  "skillLevel": "beginner",
+  "audience": ["professionals"],
+  "capabilities": [{ "id": "ai-agents", "strength": "primary" }, { "id": "research-assistant", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://manus.im", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://manus.im", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://manus.im", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-agent die taken van begin tot eind uitvoert",
+      "description": "Manus is een AI-agent die zelf werk uitvoert. Je geeft een opdracht, zoals een onderzoek of een website. Manus maakt een plan, gebruikt een browser en levert het resultaat. Je kunt meekijken terwijl hij werkt.",
+      "bestFor": ["Onderzoek en rapporten laten maken", "Taken met veel stappen"],
+      "notFor": ["Werk met gevoelige gegevens"],
+      "limitations": ["Taken kosten credits"]
+    },
+    "en": {
+      "tagline": "AI agent that carries out tasks from start to finish",
+      "description": "Manus is an AI agent that does the work itself. You give it a task, such as research or a website. Manus makes a plan, uses a browser and delivers the result. You can watch while it works.",
+      "bestFor": ["Getting research and reports made", "Tasks with many steps"],
+      "notFor": ["Work with sensitive data"],
+      "limitations": ["Tasks cost credits"]
+    }
+  }
+}

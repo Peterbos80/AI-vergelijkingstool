@@ -1,0 +1,56 @@
+{
+  "slug": "krisp",
+  "name": "Krisp",
+  "website": "https://krisp.ai",
+  "pricingUrl": "https://krisp.ai/pricing",
+  "company": { "name": "Krisp", "slug": "krisp", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["professionals", "teams", "sales"],
+  "capabilities": [
+    { "id": "audio-enhancement", "strength": "primary" },
+    { "id": "meeting-notes", "strength": "primary" },
+    { "id": "transcription", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://krisp.ai/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://krisp.ai/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["windows", "macos", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://krisp.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Haalt achtergrondgeluid weg uit gesprekken en maakt notulen",
+      "description": "Krisp filtert ruis, zoals typen of verkeer, uit je microfoon. Dat werkt in elke belapp. Krisp kan ook vergaderingen uitschrijven en samenvatten, zonder bot in het gesprek. Er is een gratis plan.",
+      "bestFor": ["Bellen vanuit een drukke ruimte", "Notulen zonder extra deelnemer in de call"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik heeft een limiet per dag"]
+    },
+    "en": {
+      "tagline": "Removes background noise from calls and takes meeting notes",
+      "description": "Krisp filters noise, such as typing or traffic, out of your microphone. That works in any calling app. Krisp can also transcribe and summarise meetings, without a bot in the call. There is a free plan.",
+      "bestFor": ["Calling from a noisy room", "Meeting notes without an extra participant"],
+      "notFor": [],
+      "limitations": ["Free use has a daily limit"]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "slug": "landbot",
+  "name": "Landbot",
+  "website": "https://landbot.io",
+  "pricingUrl": "https://landbot.io/pricing",
+  "company": { "name": "Landbot", "slug": "landbot", "country": "ES" },
+  "skillLevel": "beginner",
+  "audience": ["marketers", "smb"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://landbot.io", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Chatbots bouwen zonder code, ook voor WhatsApp",
+      "description": "Landbot komt uit Barcelona. Je bouwt chatbots met blokken, zonder code. Ze werken op je website en in WhatsApp. AI helpt om vragen te beantwoorden en contactgegevens te verzamelen.",
+      "bestFor": ["Contacten verzamelen via WhatsApp", "Marketeers die niet programmeren"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Build chatbots without code, also for WhatsApp",
+      "description": "Landbot is based in Barcelona. You build chatbots with blocks, without code. They work on your website and in WhatsApp. AI helps answer questions and collect contact details.",
+      "bestFor": ["Collecting leads through WhatsApp", "Marketers who do not code"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

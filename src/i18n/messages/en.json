@@ -301,7 +301,7 @@
     "historyCurrent": "current",
     "vatNote": "Prices as shown by the vendor, usually excluding VAT. Amounts in currencies other than euro are converted indicatively.",
     "currencyNote": "Amounts in {currency}; conversion to euro is indicative (ECB {date}).",
-    "noPlans": "No public pricing found. Contact the vendor for a quote.",
+    "noPlans": "No prices checked yet. For now, check the maker's website.",
     "watch": "Watch this price",
     "pendingBadge": "may have changed · being checked",
     "pendingNotice": "One or more prices below may have changed. We measured a different price on the official page and are confirming it; until then the last verified price stays."
@@ -352,6 +352,8 @@
     "metaDescription": "Search {count} AI tools by capability, price, free plan, platform, API, open source, EU data residency and Dutch language. Every price with source and date.",
     "intro": "Filter on what you need. Every price has a source, a date and a status.",
     "results": "{count, plural, =0 {No tools found} one {# tool} other {# tools}}",
+    "showing": "Showing {shown} of {count} tools.",
+    "showAll": "Show all {count} tools",
     "search": "Search",
     "searchPlaceholder": "Name or what you want to do, e.g. voice-over",
     "category": "Category",

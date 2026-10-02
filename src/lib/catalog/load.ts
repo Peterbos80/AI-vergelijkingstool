@@ -30,6 +30,7 @@ import {
 import { isLocale, type Locale } from '@/i18n/config';
 import { LOGOS } from '@/generated/logos';
 import { statusRank } from '@/lib/provenance/confidence';
+import { countsAsCheck } from '@/lib/provenance/snapshot';
 import type {
   Catalog,
   CatalogCapability,
@@ -297,9 +298,10 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
   const all = [...planRows, ...factRows];
   const supported = all.filter((x) => statusRank(x.status) >= statusRank('supported')).length;
   const cutoff = now.getTime() - 30 * 86_400_000;
-  const checked = all.filter((x) => (x.verifiedAt ?? x.observedAt).getTime() >= cutoff).length;
+  const checks = all.filter(countsAsCheck);
+  const checked = checks.filter((x) => (x.verifiedAt ?? x.observedAt).getTime() >= cutoff).length;
   const srcCount = await queryRows<{ n: string }>(db, sql`SELECT count(*)::text AS n FROM sources`);
-  const lastCheck = all.reduce<Date | null>((acc, x) => {
+  const lastCheck = checks.reduce<Date | null>((acc, x) => {
     const d = x.verifiedAt ?? x.observedAt;
     return !acc || d > acc ? d : acc;
   }, null);

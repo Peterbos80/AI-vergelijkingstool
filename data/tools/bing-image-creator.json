@@ -1,0 +1,51 @@
+{
+  "slug": "bing-image-creator",
+  "name": "Bing Image Creator",
+  "website": "https://www.bing.com/images/create",
+  "company": { "name": "Microsoft", "slug": "microsoft", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone"],
+  "capabilities": [{ "id": "image-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.bing.com/images/create", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.bing.com/images/create", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.bing.com/images/create", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis plaatjes maken met AI via Bing",
+      "description": "Bing Image Creator is een gratis tool van Microsoft. Je typt wat je wilt zien en krijgt een paar plaatjes. Het gebruikt beeldmodellen van OpenAI. Je hebt een Microsoft-account nodig.",
+      "bestFor": ["Gratis plaatjes maken", "Ideeën voor een ontwerp"],
+      "notFor": ["Zakelijk gebruik zonder de voorwaarden te lezen"],
+      "limitations": ["Snel maken kan maar een paar keer per dag"]
+    },
+    "en": {
+      "tagline": "Free AI pictures through Bing",
+      "description": "Bing Image Creator is a free tool from Microsoft. You type what you want to see and get a few pictures. It uses image models from OpenAI. You need a Microsoft account.",
+      "bestFor": ["Making pictures for free", "Ideas for a design"],
+      "notFor": ["Business use without reading the terms"],
+      "limitations": ["Fast generations are limited per day"]
+    }
+  }
+}

@@ -9,11 +9,22 @@ import { ToolRow } from '@/components/data/ToolRow';
 
 type SP = Record<string, string | string[] | undefined>;
 const PLATFORMS = ['web', 'ios', 'android', 'windows', 'macos', 'linux', 'api', 'chrome_extension'];
+/** Results shown before "Show all": a list of 230+ rows is a long scroll, most visitors filter first. */
+const FIRST = 48;
+
+/** The same search with every result: the current query plus all=1. */
+function allHref(base: string, sp: SP): string {
+  const q = new URLSearchParams();
+  for (const [k, v] of Object.entries(sp)) for (const x of Array.isArray(v) ? v : v === undefined ? [] : [v]) if (k !== 'all') q.append(k, x);
+  q.set('all', '1');
+  return `${base}?${q.toString()}`;
+}
 
 /** The explorer page body (filters + results), shared by the server page and the static edition. */
 export function ExplorerView({ locale, t, catalog, sp }: { locale: Locale; t: Translator; catalog: Catalog; sp: SP }) {
   const filters = parseFilters(sp, catalog, locale);
   const hits = searchTools(catalog, filters, locale);
+  const shown = sp.all === '1' ? hits : hits.slice(0, FIRST);
 
   const selectedCategory = filters.category ? catalog.categoriesById.get(filters.category) : undefined;
   return (
@@ -168,10 +179,18 @@ export function ExplorerView({ locale, t, catalog, sp }: { locale: Locale; t: Tr
                 <span className="text-xs text-ink-3">{t('explorer.compareHint')}</span>
               </form>
               <ul className="card mt-3 px-4">
-                {hits.map((h) => (
+                {shown.map((h) => (
                   <ToolRow key={h.tool.id} tool={h.tool} catalog={catalog} t={t} locale={locale} compareFormId="compare-form" />
                 ))}
               </ul>
+              {shown.length < hits.length && (
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                  <p className="text-sm text-ink-3">{t('explorer.showing', { shown: shown.length, count: hits.length })}</p>
+                  <Link href={allHref(href.tools(locale), sp)} className="btn btn-ghost" scroll={false}>
+                    {t('explorer.showAll', { count: hits.length })}
+                  </Link>
+                </div>
+              )}
             </>
           )}
         </section>

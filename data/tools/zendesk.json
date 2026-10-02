@@ -1,0 +1,45 @@
+{
+  "slug": "zendesk",
+  "name": "Zendesk",
+  "website": "https://www.zendesk.com",
+  "pricingUrl": "https://www.zendesk.com/pricing/",
+  "company": { "name": "Zendesk", "slug": "zendesk", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["support-teams", "enterprise", "smb"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }],
+  "facts": {
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.zendesk.com/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.zendesk.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Software voor klantenservice, met AI-agents en een gedeelde inbox",
+      "description": "Zendesk is software voor klantenservice. Vragen via e-mail, chat en telefoon komen in één systeem. AI-agents beantwoorden veelgestelde vragen. Medewerkers krijgen AI-hulp bij hun antwoorden.",
+      "bestFor": ["Klantenservice-teams", "Bedrijven met veel vragen via veel kanalen"],
+      "notFor": ["Eenmanszaken"],
+      "limitations": ["AI-functies kosten vaak extra"]
+    },
+    "en": {
+      "tagline": "Customer service software with AI agents and a shared inbox",
+      "description": "Zendesk is software for customer service. Questions by email, chat and phone land in one system. AI agents answer common questions. Staff get AI help with their replies.",
+      "bestFor": ["Customer service teams", "Companies with many questions on many channels"],
+      "notFor": ["One-person businesses"],
+      "limitations": ["AI features often cost extra"]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "slug": "langdock",
+  "name": "Langdock",
+  "website": "https://www.langdock.com",
+  "pricingUrl": "https://www.langdock.com/pricing",
+  "company": { "name": "Langdock", "slug": "langdock", "country": "DE" },
+  "skillLevel": "intermediate",
+  "audience": ["enterprise", "smb"],
+  "capabilities": [
+    { "id": "chat-assistant", "strength": "primary" },
+    { "id": "ai-agents", "strength": "secondary" },
+    { "id": "document-chat", "strength": "secondary" }
+  ],
+  "facts": {
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.langdock.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Duits AI-platform voor bedrijven, met chat en eigen assistenten",
+      "description": "Langdock is een Duits AI-platform voor bedrijven. Medewerkers chatten met verschillende AI-modellen op één plek. Je maakt ook eigen assistenten met kennis van je bedrijf. Langdock legt de nadruk op de AVG en hosting in de EU.",
+      "bestFor": ["Bedrijven die AI veilig willen invoeren", "Teams die modellen van meerdere makers willen"],
+      "notFor": ["Particulieren"],
+      "limitations": ["Gemaakt voor organisaties, niet voor losse gebruikers"]
+    },
+    "en": {
+      "tagline": "German AI platform for companies, with chat and custom assistants",
+      "description": "Langdock is a German AI platform for companies. Staff chat with different AI models in one place. You can also build your own assistants with company knowledge. Langdock focuses on the GDPR and hosting in the EU.",
+      "bestFor": ["Companies that want to roll out AI safely", "Teams that want models from several makers"],
+      "notFor": ["Private individuals"],
+      "limitations": ["Made for organisations, not for individual users"]
+    }
+  }
+}

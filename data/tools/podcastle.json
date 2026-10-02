@@ -1,0 +1,56 @@
+{
+  "slug": "podcastle",
+  "name": "Podcastle",
+  "website": "https://podcastle.ai",
+  "company": { "name": "Podcastle", "slug": "podcastle", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["podcasters", "creators"],
+  "capabilities": [
+    { "id": "podcast-recording", "strength": "primary" },
+    { "id": "audio-enhancement", "strength": "secondary" },
+    { "id": "audio-editing", "strength": "secondary" },
+    { "id": "text-to-speech", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://podcastle.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://podcastle.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://podcastle.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Podcasts opnemen, bewerken en verbeteren in je browser",
+      "description": "Podcastle is een opnamestudio in je browser. Je neemt een podcast op met gasten op afstand. AI verbetert het geluid en haalt stiltes weg. Je bewerkt de opname door de tekst aan te passen.",
+      "bestFor": ["Podcasters die op afstand opnemen", "Beginners zonder studio"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik is beperkt"]
+    },
+    "en": {
+      "tagline": "Record, edit and improve podcasts in your browser",
+      "description": "Podcastle is a recording studio in your browser. You record a podcast with remote guests. AI improves the sound and removes silences. You edit the recording by changing the text.",
+      "bestFor": ["Podcasters who record remotely", "Beginners without a studio"],
+      "notFor": [],
+      "limitations": ["Free use is limited"]
+    }
+  }
+}

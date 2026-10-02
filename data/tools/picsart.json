@@ -1,0 +1,56 @@
+{
+  "slug": "picsart",
+  "name": "Picsart",
+  "website": "https://picsart.com",
+  "company": { "name": "Picsart", "slug": "picsart", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "everyone"],
+  "capabilities": [
+    { "id": "image-editing", "strength": "primary" },
+    { "id": "background-removal", "strength": "secondary" },
+    { "id": "image-generation", "strength": "secondary" },
+    { "id": "graphic-design", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://picsart.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://picsart.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://picsart.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Foto- en video-editor met veel AI-functies",
+      "description": "Picsart is een app om foto's en video's te bewerken. Je haalt achtergronden weg, maakt plaatjes met AI en voegt tekst en stickers toe. Er zijn sjablonen voor social media.",
+      "bestFor": ["Posts voor social media op je telefoon", "Snelle bewerkingen met sjablonen"],
+      "notFor": ["Professioneel drukwerk"],
+      "limitations": ["Veel functies zitten in het betaalde plan"]
+    },
+    "en": {
+      "tagline": "Photo and video editor with many AI features",
+      "description": "Picsart is an app for editing photos and videos. You remove backgrounds, make pictures with AI and add text and stickers. There are templates for social media.",
+      "bestFor": ["Social media posts on your phone", "Quick edits with templates"],
+      "notFor": ["Professional print work"],
+      "limitations": ["Many features are in the paid plan"]
+    }
+  }
+}

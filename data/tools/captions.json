@@ -1,0 +1,40 @@
+{
+  "slug": "captions",
+  "name": "Captions",
+  "website": "https://www.captions.ai",
+  "company": { "name": "Captions", "slug": "captions", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["creators"],
+  "capabilities": [
+    { "id": "auto-subtitles", "strength": "primary" },
+    { "id": "video-editing", "strength": "primary" },
+    { "id": "ai-dubbing", "strength": "secondary" }
+  ],
+  "facts": {
+    "platforms": {
+      "value": ["ios", "android", "web", "macos"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.captions.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "App die je video's bewerkt en automatisch ondertitelt",
+      "description": "Captions is een app voor makers van korte video's. Hij zet automatisch ondertitels in je video. AI haalt stiltes weg, verbetert oogcontact en vertaalt je stem. Er is een app voor telefoon en computer.",
+      "bestFor": ["Video's waarin je praat, voor TikTok en Reels", "Snel bewerken op je telefoon"],
+      "notFor": ["Lange films"],
+      "limitations": ["Veel functies zitten in het betaalde plan"]
+    },
+    "en": {
+      "tagline": "App that edits your videos and adds subtitles automatically",
+      "description": "Captions is an app for makers of short videos. It adds subtitles to your video automatically. AI cuts silences, fixes eye contact and translates your voice. There is an app for phone and computer.",
+      "bestFor": ["Talking-head videos for TikTok and Reels", "Quick edits on your phone"],
+      "notFor": ["Long films"],
+      "limitations": ["Many features are in the paid plan"]
+    }
+  }
+}

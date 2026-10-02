@@ -1,0 +1,36 @@
+{
+  "slug": "klap",
+  "name": "Klap",
+  "website": "https://klap.app",
+  "company": { "name": "Klap", "slug": "klap" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "podcasters"],
+  "capabilities": [{ "id": "clip-generation", "strength": "primary" }, { "id": "auto-subtitles", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://klap.app", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt korte clips voor TikTok en Reels van je lange video's",
+      "description": "Klap knipt lange video's op in korte clips. AI zoekt geschikte momenten, zet ze rechtop en voegt ondertitels toe. Zo maak je snel video's voor TikTok, Reels en Shorts.",
+      "bestFor": ["Podcasters en YouTubers", "Meer korte video's uit één opname"],
+      "notFor": [],
+      "limitations": ["Controleer of de gekozen momenten kloppen"]
+    },
+    "en": {
+      "tagline": "Turns your long videos into short clips for TikTok and Reels",
+      "description": "Klap cuts long videos into short clips. AI finds suitable moments, makes them vertical and adds subtitles. That way you quickly make videos for TikTok, Reels and Shorts.",
+      "bestFor": ["Podcasters and YouTubers", "More short videos from one recording"],
+      "notFor": [],
+      "limitations": ["Check whether the chosen moments make sense"]
+    }
+  }
+}

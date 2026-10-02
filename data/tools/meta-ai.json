@@ -1,0 +1,51 @@
+{
+  "slug": "meta-ai",
+  "name": "Meta AI",
+  "website": "https://www.meta.ai",
+  "company": { "name": "Meta", "slug": "meta", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone"],
+  "capabilities": [{ "id": "chat-assistant", "strength": "primary" }, { "id": "image-generation", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.meta.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.meta.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.meta.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis AI-assistent van Meta, ook in WhatsApp en Instagram",
+      "description": "Meta AI is de AI-assistent van Meta, het bedrijf achter Facebook, Instagram en WhatsApp. Je chat ermee op de website, in de app of in WhatsApp. Hij beantwoordt vragen, schrijft teksten en maakt plaatjes.",
+      "bestFor": ["Snelle vragen in apps die je al gebruikt", "Een plaatje maken vanuit een chat"],
+      "notFor": ["Vertrouwelijke of gevoelige informatie"],
+      "limitations": ["Welke functies je krijgt, verschilt per land"]
+    },
+    "en": {
+      "tagline": "Free AI assistant from Meta, also inside WhatsApp and Instagram",
+      "description": "Meta AI is the AI assistant from Meta, the company behind Facebook, Instagram and WhatsApp. You chat with it on the website, in the app or in WhatsApp. It answers questions, writes texts and makes pictures.",
+      "bestFor": ["Quick questions in apps you already use", "Making a picture from a chat"],
+      "notFor": ["Confidential or sensitive information"],
+      "limitations": ["Which features you get depends on your country"]
+    }
+  }
+}

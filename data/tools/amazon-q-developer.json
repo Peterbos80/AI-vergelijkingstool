@@ -1,0 +1,55 @@
+{
+  "slug": "amazon-q-developer",
+  "name": "Amazon Q Developer",
+  "website": "https://aws.amazon.com/q/developer/",
+  "pricingUrl": "https://aws.amazon.com/q/developer/pricing/",
+  "company": { "name": "Amazon Web Services", "slug": "aws", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "enterprise"],
+  "capabilities": [{ "id": "code-assistant", "strength": "primary" }, { "id": "agentic-coding", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://aws.amazon.com/q/developer/pricing/", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://aws.amazon.com/q/developer/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["vscode", "jetbrains", "cli"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://aws.amazon.com/q/developer/", "type": "official" }]
+    }
+  },
+  "plans": [
+    { "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true },
+    { "key": "pro", "name": "Pro", "price": 19, "currency": "USD", "period": "month", "unit": "per_user" }
+  ],
+  "i18n": {
+    "nl": {
+      "tagline": "Code-assistent van AWS, ook voor werken in de cloud",
+      "description": "Amazon Q Developer is de AI-assistent van Amazon Web Services. Hij helpt met code schrijven, uitleggen en testen. Hij beantwoordt ook vragen over je AWS-omgeving. Er is een gratis versie voor individuen.",
+      "bestFor": ["Ontwikkelaars die met AWS werken", "Code laten uitleggen en testen"],
+      "notFor": ["Mensen die nog niet programmeren"],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Code assistant from AWS, also for working in the cloud",
+      "description": "Amazon Q Developer is the AI assistant from Amazon Web Services. It helps you write, explain and test code. It also answers questions about your AWS setup. There is a free version for individuals.",
+      "bestFor": ["Developers who work with AWS", "Having code explained and tested"],
+      "notFor": ["People who do not code yet"],
+      "limitations": []
+    }
+  }
+}

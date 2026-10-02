@@ -1,0 +1,72 @@
+{
+  "slug": "open-webui",
+  "name": "Open WebUI",
+  "website": "https://openwebui.com",
+  "githubRepo": "open-webui/open-webui",
+  "company": { "name": "Open WebUI", "slug": "open-webui" },
+  "skillLevel": "advanced",
+  "audience": ["developers", "privacy-conscious", "enterprise"],
+  "capabilities": [
+    { "id": "local-llm", "strength": "primary" },
+    { "id": "chat-assistant", "strength": "secondary" },
+    { "id": "document-chat", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://openwebui.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://openwebui.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["self_hosted", "web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://openwebui.com", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/open-webui/open-webui", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/open-webui/open-webui", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Open-source chatomgeving die je zelf host, voor lokale en online modellen",
+      "description": "Open WebUI is een open-source webapp om met AI-modellen te chatten. Je installeert het op je eigen computer of server. Het werkt samen met Ollama en met online modellen. Het lijkt op ChatGPT, maar je houdt zelf de controle.",
+      "bestFor": ["Teams die een eigen, privé AI-chat willen", "Ollama-gebruikers die een fijne interface zoeken"],
+      "notFor": ["Beginners zonder technische hulp"],
+      "limitations": ["Je moet het zelf installeren en bijhouden"]
+    },
+    "en": {
+      "tagline": "Open-source chat interface you host yourself, for local and online models",
+      "description": "Open WebUI is an open-source web app for chatting with AI models. You install it on your own computer or server. It works with Ollama and with online models. It looks like ChatGPT, but you stay in control.",
+      "bestFor": ["Teams that want their own private AI chat", "Ollama users who want a nice interface"],
+      "notFor": ["Beginners without technical help"],
+      "limitations": ["You have to install and maintain it yourself"]
+    }
+  }
+}

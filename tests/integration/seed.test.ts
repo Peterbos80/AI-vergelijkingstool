@@ -10,6 +10,8 @@ import type { Database } from '@/lib/db/client';
 let db: Database;
 let close: () => Promise<void>;
 const now = new Date('2026-09-30T08:00:00Z');
+/** Applying the full seed (230+ tools) in PGlite takes a while. */
+const SEED_MS = 180_000;
 
 beforeAll(async () => {
   ({ db, close } = await createTestDb());
@@ -26,7 +28,7 @@ describe('seed → catalog', () => {
     expect(second.toolsInserted).toBe(0);
     expect(second.events).toBe(0);
     expect(second.dataVersion).toBe(first.dataVersion + 1);
-  });
+  }, SEED_MS);
 
   it('adds facts the dataset gained later to existing tools, and never overwrites a current fact', async () => {
     const bundle = loadSeedData();
@@ -50,7 +52,7 @@ describe('seed → catalog', () => {
     // Idempotent.
     expect((await applySeed(db, changed, now)).factsAdded).toBe(0);
     expect(await current('gdpr_dpa')).toHaveLength(1);
-  });
+  }, SEED_MS);
 
   it('never stores seed evidence as VERIFIED (not anchored by our fetcher)', async () => {
     const verified = await db.select().from(facts).where(eq(facts.status, 'verified'));
@@ -86,7 +88,9 @@ describe('seed → catalog', () => {
     expect(catalog.events.length).toBeGreaterThan(0);
     const sora = catalog.tools.find((t) => t.slug === 'sora');
     if (sora) expect(sora.status).toBe('shutdown');
-    expect(catalog.stats.supportedShare).toBeGreaterThan(0.5);
+    // The editorial additions of 2026-10-01 are unverified until the hourly agents check them on the official pages.
+    expect(catalog.stats.supportedShare).toBeGreaterThan(0.4);
+    expect(catalog.stats.supportedShare).toBeLessThan(1);
   });
 });
 
@@ -141,5 +145,5 @@ describe('affiliate links from data/affiliates.json (free edition)', () => {
     await applySeed(db, withLinks([]), now);
     expect((await link())?.active).toBe(false);
     expect(await db.select().from(affiliateLinks).where(eq(affiliateLinks.createdBy, AFFILIATES_FILE))).toHaveLength(1);
-  });
+  }, SEED_MS);
 });

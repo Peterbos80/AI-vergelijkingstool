@@ -301,7 +301,7 @@
     "historyCurrent": "huidig",
     "vatNote": "Prijzen zoals de maker ze toont, meestal exclusief btw. Bedragen in andere valuta dan euro zijn indicatief omgerekend.",
     "currencyNote": "Bedragen in {currency}; omrekening naar euro is indicatief (ECB {date}).",
-    "noPlans": "Geen openbare prijzen gevonden. Neem contact op met de maker voor een offerte.",
+    "noPlans": "Nog geen prijzen gecontroleerd. Kijk voorlopig op de website van de maker.",
     "watch": "Houd prijs in de gaten",
     "pendingBadge": "mogelijk gewijzigd · wordt gecontroleerd",
     "pendingNotice": "Een of meer prijzen hieronder zijn mogelijk gewijzigd. We zagen een andere prijs op de officiële pagina en bevestigen die nog; tot die tijd blijft de laatst geverifieerde prijs staan."
@@ -352,6 +352,8 @@
     "metaDescription": "Doorzoek {count} AI-tools op functie, prijs, gratis plan, platform, API, open source, EU-opslag en Nederlandse taal. Elke prijs met bron en datum.",
     "intro": "Filter op wat je nodig hebt. Elke prijs heeft een bron, een datum en een status.",
     "results": "{count, plural, =0 {Geen tools gevonden} one {# tool} other {# tools}}",
+    "showing": "Je ziet {shown} van {count} tools.",
+    "showAll": "Toon alle {count} tools",
     "search": "Zoeken",
     "searchPlaceholder": "Naam of wat je wilt doen, bijv. voice-over",
     "category": "Categorie",

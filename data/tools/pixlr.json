@@ -1,0 +1,55 @@
+{
+  "slug": "pixlr",
+  "name": "Pixlr",
+  "website": "https://pixlr.com",
+  "company": { "name": "Pixlr", "slug": "pixlr" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "students", "creators"],
+  "capabilities": [
+    { "id": "image-editing", "strength": "primary" },
+    { "id": "background-removal", "strength": "secondary" },
+    { "id": "image-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://pixlr.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://pixlr.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://pixlr.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Online foto-editor met AI-hulp, gratis te gebruiken",
+      "description": "Pixlr is een foto-editor in je browser. Er is een simpele versie en een uitgebreide versie die op Photoshop lijkt. AI-tools halen achtergronden weg en maken plaatjes.",
+      "bestFor": ["Foto's bewerken zonder iets te installeren", "Beginners met een klein budget"],
+      "notFor": [],
+      "limitations": ["De gratis versie toont advertenties"]
+    },
+    "en": {
+      "tagline": "Online photo editor with AI help, free to use",
+      "description": "Pixlr is a photo editor in your browser. There is a simple version and an advanced version that looks like Photoshop. AI tools remove backgrounds and make pictures.",
+      "bestFor": ["Editing photos without installing anything", "Beginners on a small budget"],
+      "notFor": [],
+      "limitations": ["The free version shows ads"]
+    }
+  }
+}

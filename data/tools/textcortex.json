@@ -1,0 +1,57 @@
+{
+  "slug": "textcortex",
+  "name": "TextCortex",
+  "website": "https://textcortex.com",
+  "pricingUrl": "https://textcortex.com/pricing",
+  "company": { "name": "TextCortex", "slug": "textcortex" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "enterprise"],
+  "capabilities": [
+    { "id": "copywriting", "strength": "primary" },
+    { "id": "translation", "strength": "secondary" },
+    { "id": "document-chat", "strength": "secondary" },
+    { "id": "email-writing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://textcortex.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://textcortex.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://textcortex.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-assistent voor schrijven en bedrijfskennis, met de nadruk op de AVG",
+      "description": "TextCortex helpt je met schrijven, herschrijven en vertalen. Het werkt op de website en via een extensie in je browser. Bedrijven koppelen hun eigen kennis eraan. TextCortex legt de nadruk op de AVG.",
+      "bestFor": ["Teams in Europa die veilig AI willen inzetten", "Schrijven en vertalen in je browser"],
+      "notFor": [],
+      "limitations": ["Alle functies krijg je alleen met een betaald plan"]
+    },
+    "en": {
+      "tagline": "AI assistant for writing and company knowledge, with a focus on the GDPR",
+      "description": "TextCortex helps you write, rewrite and translate. It works on the website and as a browser extension. Companies connect their own knowledge to it. TextCortex focuses on the GDPR.",
+      "bestFor": ["Teams in Europe that want to use AI safely", "Writing and translating in your browser"],
+      "notFor": [],
+      "limitations": ["You only get all features on a paid plan"]
+    }
+  }
+}

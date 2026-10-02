@@ -1,0 +1,37 @@
+{
+  "slug": "anyword",
+  "name": "Anyword",
+  "website": "https://www.anyword.com",
+  "pricingUrl": "https://www.anyword.com/pricing",
+  "company": { "name": "Anyword", "slug": "anyword" },
+  "skillLevel": "intermediate",
+  "audience": ["marketers", "agencies", "ecommerce"],
+  "capabilities": [{ "id": "copywriting", "strength": "primary" }, { "id": "email-writing", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.anyword.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Marketingteksten met een voorspelde score per versie",
+      "description": "Anyword schrijft advertenties, e-mails en posts. Elke versie krijgt een score die voorspelt hoe goed hij werkt. Zo kies je sneller. Je kunt ook de regels van je merk instellen.",
+      "bestFor": ["Advertenties en A/B-tests", "Marketingteams met veel kanalen"],
+      "notFor": ["Lange verhalen"],
+      "limitations": ["De score is een voorspelling, geen garantie"]
+    },
+    "en": {
+      "tagline": "Marketing copy with a predicted score for each version",
+      "description": "Anyword writes ads, emails and posts. Each version gets a score that predicts how well it will work. That helps you choose faster. You can also set your brand rules.",
+      "bestFor": ["Ads and A/B tests", "Marketing teams with many channels"],
+      "notFor": ["Long stories"],
+      "limitations": ["The score is a prediction, not a guarantee"]
+    }
+  }
+}

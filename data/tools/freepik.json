@@ -1,0 +1,57 @@
+{
+  "slug": "freepik",
+  "name": "Freepik",
+  "website": "https://www.freepik.com",
+  "pricingUrl": "https://www.freepik.com/pricing",
+  "company": { "name": "Freepik", "slug": "freepik", "country": "ES" },
+  "skillLevel": "beginner",
+  "audience": ["designers", "creators", "marketers"],
+  "capabilities": [
+    { "id": "image-generation", "strength": "primary" },
+    { "id": "image-editing", "strength": "secondary" },
+    { "id": "video-generation", "strength": "secondary" },
+    { "id": "upscaling", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.freepik.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.freepik.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.freepik.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Spaanse beeldbank met een complete set AI-beeldtools",
+      "description": "Freepik komt uit Málaga en is bekend als beeldbank. Er is nu ook een AI-suite. Je maakt er plaatjes, video's en ontwerpen mee. Je kiest uit verschillende AI-modellen.",
+      "bestFor": ["Beeldbank en AI op één plek", "Snel beeld voor social media"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik is beperkt"]
+    },
+    "en": {
+      "tagline": "Spanish stock site with a full set of AI image tools",
+      "description": "Freepik is based in Málaga and known as a stock image site. It now also has an AI suite. You make images, videos and designs with it. You choose from different AI models.",
+      "bestFor": ["Stock images and AI in one place", "Quick visuals for social media"],
+      "notFor": [],
+      "limitations": ["Free use is limited"]
+    }
+  }
+}

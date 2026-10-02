@@ -1,0 +1,51 @@
+{
+  "slug": "hedra",
+  "name": "Hedra",
+  "website": "https://www.hedra.com",
+  "company": { "name": "Hedra", "slug": "hedra", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["creators"],
+  "capabilities": [{ "id": "avatar-video", "strength": "primary" }, { "id": "video-generation", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.hedra.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.hedra.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.hedra.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt pratende personages van een plaatje en audio",
+      "description": "Hedra maakt video's waarin een personage praat of zingt. Je uploadt een plaatje en een geluidsfragment. Hedra laat het gezicht bewegen op de audio. Het werkt ook met getekende figuren.",
+      "bestFor": ["Pratende personages voor verhalen en social media", "Een podcast een gezicht geven"],
+      "notFor": ["Iemands gezicht gebruiken zonder toestemming"],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Makes talking characters from a picture and audio",
+      "description": "Hedra makes videos in which a character talks or sings. You upload a picture and an audio clip. Hedra makes the face move with the audio. It also works with drawn characters.",
+      "bestFor": ["Talking characters for stories and social media", "Giving a podcast a face"],
+      "notFor": ["Using someone's face without consent"],
+      "limitations": []
+    }
+  }
+}

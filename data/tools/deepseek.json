@@ -1,0 +1,59 @@
+{
+  "slug": "deepseek",
+  "name": "DeepSeek",
+  "website": "https://www.deepseek.com",
+  "company": { "name": "DeepSeek", "slug": "deepseek", "country": "CN" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "developers"],
+  "capabilities": [{ "id": "chat-assistant", "strength": "primary" }, { "id": "code-assistant", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.deepseek.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.deepseek.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.deepseek.com", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.deepseek.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis chat-assistent van het Chinese AI-bedrijf DeepSeek",
+      "description": "DeepSeek is een Chinees AI-bedrijf. Je chat gratis met zijn modellen via de website of de app. Ontwikkelaars kunnen de modellen ook downloaden en zelf draaien.",
+      "bestFor": ["Gratis chatten, rekenen en programmeervragen", "Ontwikkelaars die het model zelf willen draaien"],
+      "notFor": ["Vertrouwelijke bedrijfsinformatie"],
+      "limitations": ["Volgens het privacybeleid staan gegevens op servers in China"]
+    },
+    "en": {
+      "tagline": "Free chat assistant from the Chinese AI company DeepSeek",
+      "description": "DeepSeek is a Chinese AI company. You chat with its models for free on the website or in the app. Developers can also download the models and run them themselves.",
+      "bestFor": ["Free chat, maths and coding questions", "Developers who want to run the model themselves"],
+      "notFor": ["Confidential business information"],
+      "limitations": ["According to its privacy policy, data is stored on servers in China"]
+    }
+  }
+}

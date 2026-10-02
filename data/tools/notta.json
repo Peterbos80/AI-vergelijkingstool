@@ -1,0 +1,55 @@
+{
+  "slug": "notta",
+  "name": "Notta",
+  "website": "https://www.notta.ai",
+  "company": { "name": "Notta", "slug": "notta" },
+  "skillLevel": "beginner",
+  "audience": ["professionals", "students"],
+  "capabilities": [
+    { "id": "transcription", "strength": "primary" },
+    { "id": "meeting-notes", "strength": "primary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.notta.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.notta.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.notta.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Zet gesprekken en vergaderingen om in tekst en samenvattingen",
+      "description": "Notta schrijft audio en vergaderingen uit, in veel talen. Je neemt live op of uploadt een bestand. Daarna maakt AI een samenvatting. Er zijn apps voor web en telefoon, en een extensie voor Chrome.",
+      "bestFor": ["Interviews en colleges uitschrijven", "Vergaderingen in meerdere talen"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik heeft een limiet per maand"]
+    },
+    "en": {
+      "tagline": "Turns calls and meetings into text and summaries",
+      "description": "Notta transcribes audio and meetings in many languages. You record live or upload a file. Then AI writes a summary. There are apps for web and phone, and a Chrome extension.",
+      "bestFor": ["Transcribing interviews and lectures", "Meetings in several languages"],
+      "notFor": [],
+      "limitations": ["Free use has a monthly limit"]
+    }
+  }
+}

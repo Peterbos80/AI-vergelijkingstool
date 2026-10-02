@@ -1,0 +1,51 @@
+{
+  "slug": "trae",
+  "name": "Trae",
+  "website": "https://www.trae.ai",
+  "company": { "name": "ByteDance", "slug": "bytedance" },
+  "skillLevel": "intermediate",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "agentic-coding", "strength": "primary" }, { "id": "code-assistant", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.trae.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.trae.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["windows", "macos"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.trae.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-code-editor van ByteDance",
+      "description": "Trae is een code-editor met AI, gemaakt door ByteDance. Dat is het bedrijf achter TikTok. Trae lijkt op VS Code. Je chat over je code en laat een agent taken uitvoeren.",
+      "bestFor": ["Ontwikkelaars die een andere AI-editor willen proberen"],
+      "notFor": [],
+      "limitations": ["Lees de privacyvoorwaarden goed voordat je bedrijfscode gebruikt"]
+    },
+    "en": {
+      "tagline": "AI code editor from ByteDance",
+      "description": "Trae is a code editor with AI, made by ByteDance. That is the company behind TikTok. Trae looks like VS Code. You chat about your code and let an agent carry out tasks.",
+      "bestFor": ["Developers who want to try another AI editor"],
+      "notFor": [],
+      "limitations": ["Read the privacy terms carefully before using company code"]
+    }
+  }
+}

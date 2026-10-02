@@ -1,0 +1,37 @@
+{
+  "slug": "lumen5",
+  "name": "Lumen5",
+  "website": "https://lumen5.com",
+  "pricingUrl": "https://lumen5.com/pricing/",
+  "company": { "name": "Lumen5", "slug": "lumen5", "country": "CA" },
+  "skillLevel": "beginner",
+  "audience": ["marketers"],
+  "capabilities": [{ "id": "video-generation", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://lumen5.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt merkvideo's van blogs en teksten",
+      "description": "Lumen5 komt uit Vancouver. Het zet artikelen en teksten om in korte video's. Je kiest een sjabloon in je eigen huisstijl. AI helpt om de tekst per scène samen te vatten.",
+      "bestFor": ["Marketingteams die blogs willen hergebruiken", "Video's in je eigen huisstijl"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Makes branded videos from blogs and texts",
+      "description": "Lumen5 is based in Vancouver. It turns articles and texts into short videos. You choose a template in your own brand style. AI helps summarise the text for each scene.",
+      "bestFor": ["Marketing teams reusing blog posts", "Videos in your own brand style"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

@@ -48,6 +48,8 @@ export interface SnapshotPlan {
   confidence: number;
   observedAt: Date;
   verifiedAt: Date | null;
+  /** How the price was recorded; an editorial entry no source has confirmed is not a check. */
+  method?: string | null;
 }
 
 export interface SnapshotInput {
@@ -70,6 +72,11 @@ function maxDate(dates: (Date | null | undefined)[]): Date | null {
   let best: Date | null = null;
   for (const d of dates) if (d && (!best || d > best)) best = d;
   return best;
+}
+
+/** Only an observation of a source dates a check: editorial knowledge that no source confirmed waits for the agents. */
+export function countsAsCheck(x: { method?: string | null; status: FactStatus; verifiedAt: Date | null }): boolean {
+  return Boolean(x.verifiedAt) || !(x.method === 'editorial' && x.status === 'unverified');
 }
 
 export function derivePricingModel(plans: SnapshotPlan[], openSource: boolean | null): PricingModel {
@@ -117,8 +124,9 @@ export function computeSnapshot(
       ? (statusFact as ToolStatus)
       : input.currentStatus;
 
-  const priceCheckedAt = maxDate(plans.map((p) => p.verifiedAt ?? p.observedAt));
-  const priceFreshness: Freshness = plans.length
+  const checked = plans.filter(countsAsCheck);
+  const priceCheckedAt = maxDate(checked.map((p) => p.verifiedAt ?? p.observedAt));
+  const priceFreshness: Freshness = checked.length
     ? freshnessOf(priceCheckedAt, 'price', freshnessRules, now)
     : 'unknown';
   const websiteFreshness = freshnessOf(input.websiteCheckedAt, 'website', freshnessRules, now);

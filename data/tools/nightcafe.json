@@ -1,0 +1,51 @@
+{
+  "slug": "nightcafe",
+  "name": "NightCafe",
+  "website": "https://creator.nightcafe.studio",
+  "company": { "name": "NightCafe", "slug": "nightcafe" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "everyone"],
+  "capabilities": [{ "id": "image-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://creator.nightcafe.studio", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://creator.nightcafe.studio", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://creator.nightcafe.studio", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-kunst maken met verschillende modellen en een community",
+      "description": "NightCafe is een platform om AI-kunst te maken. Je kiest uit verschillende beeldmodellen. Je deelt je werk en doet mee aan dagelijkse uitdagingen. Je krijgt elke dag gratis credits.",
+      "bestFor": ["Hobbyisten die AI-kunst maken", "Verschillende beeldmodellen vergelijken"],
+      "notFor": ["Zakelijke ontwerpen"],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Make AI art with different models and a community",
+      "description": "NightCafe is a platform for making AI art. You choose from different image models. You share your work and join daily challenges. You get free credits every day.",
+      "bestFor": ["Hobbyists making AI art", "Comparing different image models"],
+      "notFor": ["Business designs"],
+      "limitations": []
+    }
+  }
+}

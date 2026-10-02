@@ -1,0 +1,52 @@
+{
+  "slug": "jimdo",
+  "name": "Jimdo",
+  "website": "https://www.jimdo.com",
+  "pricingUrl": "https://www.jimdo.com/pricing/",
+  "company": { "name": "Jimdo", "slug": "jimdo", "country": "DE" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "freelancers"],
+  "capabilities": [{ "id": "website-builder", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.jimdo.com/pricing/", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.jimdo.com/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.jimdo.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Duitse websitebouwer voor zzp'ers en kleine bedrijven",
+      "description": "Jimdo komt uit Hamburg. Je maakt er een website of webshop mee. Je beantwoordt een paar vragen en krijgt een eerste ontwerp. Er is een gratis plan met een adres van Jimdo.",
+      "bestFor": ["Zzp'ers en kleine ondernemers", "Een simpele website zonder gedoe"],
+      "notFor": ["Grote webshops"],
+      "limitations": ["Het gratis plan toont reclame van Jimdo"]
+    },
+    "en": {
+      "tagline": "German website builder for freelancers and small businesses",
+      "description": "Jimdo is based in Hamburg. You make a website or online shop with it. You answer a few questions and get a first design. There is a free plan with a Jimdo address.",
+      "bestFor": ["Freelancers and small business owners", "A simple website without hassle"],
+      "notFor": ["Large online shops"],
+      "limitations": ["The free plan shows Jimdo ads"]
+    }
+  }
+}

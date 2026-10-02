@@ -1,0 +1,36 @@
+{
+  "slug": "topaz-photo",
+  "name": "Topaz Photo AI",
+  "website": "https://www.topazlabs.com",
+  "company": { "name": "Topaz Labs", "slug": "topaz-labs", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["designers", "creators"],
+  "capabilities": [{ "id": "upscaling", "strength": "primary" }, { "id": "image-editing", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["windows", "macos"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.topazlabs.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Programma dat foto's scherper maakt en ruis verwijdert",
+      "description": "Topaz Photo AI is een programma voor fotografen. Het verwijdert ruis, maakt foto's scherper en vergroot ze. Het werkt op je eigen computer. Topaz Labs heeft ook een programma voor video.",
+      "bestFor": ["Fotografen met veel foto's", "Foto's die in het donker zijn gemaakt"],
+      "notFor": ["Snelle bewerkingen op je telefoon"],
+      "limitations": ["Vraagt een snelle computer"]
+    },
+    "en": {
+      "tagline": "Software that sharpens photos and removes noise",
+      "description": "Topaz Photo AI is software for photographers. It removes noise, sharpens photos and enlarges them. It runs on your own computer. Topaz Labs also makes software for video.",
+      "bestFor": ["Photographers with many photos", "Photos taken in the dark"],
+      "notFor": ["Quick edits on your phone"],
+      "limitations": ["Needs a fast computer"]
+    }
+  }
+}

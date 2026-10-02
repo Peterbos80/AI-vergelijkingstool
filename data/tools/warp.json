@@ -1,0 +1,52 @@
+{
+  "slug": "warp",
+  "name": "Warp",
+  "website": "https://www.warp.dev",
+  "pricingUrl": "https://www.warp.dev/pricing",
+  "company": { "name": "Warp", "slug": "warp", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "agentic-coding", "strength": "primary" }, { "id": "code-assistant", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.warp.dev/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.warp.dev/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["macos", "linux", "windows"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.warp.dev", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Terminal met ingebouwde AI-agents",
+      "description": "Warp is een moderne terminal voor Mac, Linux en Windows. Je typt in gewone taal wat je wilt doen. De AI stelt commando's voor of voert taken uit als agent. Je kunt ook code schrijven en aanpassen.",
+      "bestFor": ["Ontwikkelaars die veel in de terminal werken", "Commando's vinden zonder ze te kennen"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik van AI is beperkt"]
+    },
+    "en": {
+      "tagline": "Terminal with built-in AI agents",
+      "description": "Warp is a modern terminal for Mac, Linux and Windows. You type what you want to do in plain language. The AI suggests commands or carries out tasks as an agent. You can also write and edit code.",
+      "bestFor": ["Developers who live in the terminal", "Finding commands you do not know"],
+      "notFor": [],
+      "limitations": ["Free AI use is limited"]
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "slug": "activepieces",
+  "name": "Activepieces",
+  "website": "https://www.activepieces.com",
+  "githubRepo": "activepieces/activepieces",
+  "company": { "name": "Activepieces", "slug": "activepieces" },
+  "skillLevel": "intermediate",
+  "audience": ["smb", "developers"],
+  "capabilities": [{ "id": "workflow-automation", "strength": "primary" }, { "id": "ai-agents", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.activepieces.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.activepieces.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "self_hosted"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.activepieces.com", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/activepieces/activepieces", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/activepieces/activepieces", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Open-source tool om taken te automatiseren, met AI",
+      "description": "Activepieces is open-source software om taken te automatiseren. Je koppelt apps aan elkaar met stappen. Er zijn AI-stappen en agents. Je gebruikt het in de cloud of host het zelf.",
+      "bestFor": ["Teams die zelf willen hosten", "Automatiseren met een klein budget"],
+      "notFor": [],
+      "limitations": ["Zelf hosten vraagt technische kennis"]
+    },
+    "en": {
+      "tagline": "Open-source tool to automate tasks, with AI",
+      "description": "Activepieces is open-source software for automating tasks. You connect apps with steps. There are AI steps and agents. You use it in the cloud or host it yourself.",
+      "bestFor": ["Teams that want to self-host", "Automating on a small budget"],
+      "notFor": [],
+      "limitations": ["Self-hosting needs technical skills"]
+    }
+  }
+}

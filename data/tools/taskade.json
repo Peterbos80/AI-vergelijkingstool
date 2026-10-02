@@ -1,0 +1,56 @@
+{
+  "slug": "taskade",
+  "name": "Taskade",
+  "website": "https://www.taskade.com",
+  "pricingUrl": "https://www.taskade.com/pricing",
+  "company": { "name": "Taskade", "slug": "taskade", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["teams", "smb"],
+  "capabilities": [
+    { "id": "ai-agents", "strength": "primary" },
+    { "id": "note-taking", "strength": "secondary" },
+    { "id": "workflow-automation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.taskade.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.taskade.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "windows", "macos"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.taskade.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Projecten, notities en AI-agents in één werkruimte",
+      "description": "Taskade combineert takenlijsten, notities en mindmaps. AI-agents helpen met plannen en schrijven. Je kunt ook workflows automatiseren. Teams werken er samen in.",
+      "bestFor": ["Kleine teams die alles op één plek willen", "Plannen met hulp van AI"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Projects, notes and AI agents in one workspace",
+      "description": "Taskade combines to-do lists, notes and mind maps. AI agents help with planning and writing. You can also automate workflows. Teams work together in it.",
+      "bestFor": ["Small teams that want everything in one place", "Planning with AI help"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

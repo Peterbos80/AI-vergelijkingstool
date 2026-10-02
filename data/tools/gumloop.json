@@ -1,0 +1,52 @@
+{
+  "slug": "gumloop",
+  "name": "Gumloop",
+  "website": "https://www.gumloop.com",
+  "pricingUrl": "https://www.gumloop.com/pricing",
+  "company": { "name": "Gumloop", "slug": "gumloop" },
+  "skillLevel": "intermediate",
+  "audience": ["operations", "marketers"],
+  "capabilities": [{ "id": "workflow-automation", "strength": "primary" }, { "id": "ai-agents", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.gumloop.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.gumloop.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.gumloop.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Automatiseringen met AI bouwen door blokken te verbinden",
+      "description": "Gumloop is een tool om werk te automatiseren met AI. Je sleept blokken in een schema en verbindt ze. Denk aan websites lezen, gegevens verwerken en berichten sturen. Je kunt een flow ook beschrijven en laten bouwen.",
+      "bestFor": ["Teams zonder programmeurs", "Gegevens van websites verzamelen en verwerken"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik heeft een limiet"]
+    },
+    "en": {
+      "tagline": "Build AI automations by connecting blocks",
+      "description": "Gumloop is a tool for automating work with AI. You drag blocks into a diagram and connect them. Think of reading websites, processing data and sending messages. You can also describe a flow and have it built.",
+      "bestFor": ["Teams without programmers", "Collecting and processing website data"],
+      "notFor": [],
+      "limitations": ["Free use has a limit"]
+    }
+  }
+}

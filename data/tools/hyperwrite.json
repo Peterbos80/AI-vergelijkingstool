@@ -1,0 +1,55 @@
+{
+  "slug": "hyperwrite",
+  "name": "HyperWrite",
+  "website": "https://www.hyperwriteai.com",
+  "company": { "name": "OthersideAI", "slug": "othersideai", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["professionals", "students"],
+  "capabilities": [
+    { "id": "copywriting", "strength": "primary" },
+    { "id": "email-writing", "strength": "secondary" },
+    { "id": "research-assistant", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.hyperwriteai.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.hyperwriteai.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.hyperwriteai.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Schrijfassistent die je zinnen afmaakt en herschrijft",
+      "description": "HyperWrite van OthersideAI helpt je bij het schrijven. Hij maakt zinnen af, herschrijft tekst en beantwoordt vragen. Er is een extensie voor je browser die op veel websites werkt.",
+      "bestFor": ["Sneller e-mails en berichten schrijven", "Ideeën voor een tekst"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik is beperkt"]
+    },
+    "en": {
+      "tagline": "Writing assistant that finishes and rewrites your sentences",
+      "description": "HyperWrite from OthersideAI helps you write. It finishes sentences, rewrites text and answers questions. There is a browser extension that works on many websites.",
+      "bestFor": ["Writing emails and messages faster", "Ideas for a text"],
+      "notFor": [],
+      "limitations": ["Free use is limited"]
+    }
+  }
+}

@@ -301,7 +301,7 @@
     "historyCurrent": "actuel",
     "vatNote": "Prix tels qu’affichés par l’éditeur, généralement hors TVA. Les montants dans d’autres devises que l’euro sont convertis à titre indicatif.",
     "currencyNote": "Montants en {currency} ; la conversion en euros est indicative (BCE {date}).",
-    "noPlans": "Aucun tarif public trouvé. Contactez l’éditeur pour un devis.",
+    "noPlans": "Aucun prix vérifié pour l’instant. En attendant, consultez le site de l’éditeur.",
     "watch": "Surveiller ce prix",
     "pendingBadge": "peut avoir changé · en cours de vérification",
     "pendingNotice": "Un ou plusieurs prix ci-dessous ont peut-être changé. Nous avons mesuré un autre prix sur la page officielle et le confirmons ; en attendant, le dernier prix vérifié reste affiché."
@@ -330,6 +330,8 @@
     "metaDescription": "Parcourez {count} outils d’IA par capacité, prix, offre gratuite, plateforme, API, open source, hébergement des données dans l’UE et langue néerlandaise. Chaque prix avec source et date.",
     "intro": "Filtrez selon vos besoins. Chaque prix a une source, une date et un statut.",
     "results": "{count, plural, =0 {Aucun outil trouvé} one {# outil} other {# outils}}",
+    "showing": "{shown} outils affichés sur {count}.",
+    "showAll": "Afficher les {count} outils",
     "search": "Rechercher",
     "searchPlaceholder": "Nom ou ce que vous voulez faire, p. ex. voix off",
     "category": "Catégorie",

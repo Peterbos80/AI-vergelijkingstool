@@ -1,0 +1,52 @@
+{
+  "slug": "prowritingaid",
+  "name": "ProWritingAid",
+  "website": "https://prowritingaid.com",
+  "pricingUrl": "https://prowritingaid.com/pricing",
+  "company": { "name": "ProWritingAid", "slug": "prowritingaid", "country": "GB" },
+  "skillLevel": "beginner",
+  "audience": ["writers", "students"],
+  "capabilities": [{ "id": "grammar-checking", "strength": "primary" }, { "id": "long-form-writing", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://prowritingaid.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://prowritingaid.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "windows", "macos", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://prowritingaid.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Grammatica- en stijlcontrole voor lange Engelse teksten",
+      "description": "ProWritingAid controleert je Engelse tekst op grammatica, stijl en leesbaarheid. Je krijgt rapporten over bijvoorbeeld herhaling en lange zinnen. Een AI-functie helpt met herschrijven. Het werkt in de browser, Word en Google Docs.",
+      "bestFor": ["Schrijvers van boeken en lange stukken", "Studenten die in het Engels schrijven"],
+      "notFor": ["Nederlandse teksten"],
+      "limitations": ["Alleen voor Engels"]
+    },
+    "en": {
+      "tagline": "Grammar and style checks for long English texts",
+      "description": "ProWritingAid checks your English text for grammar, style and readability. You get reports on things like repetition and long sentences. An AI feature helps you rewrite. It works in the browser, Word and Google Docs.",
+      "bestFor": ["Writers of books and long pieces", "Students who write in English"],
+      "notFor": ["Dutch texts"],
+      "limitations": ["English only"]
+    }
+  }
+}

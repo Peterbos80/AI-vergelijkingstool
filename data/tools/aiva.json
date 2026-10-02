@@ -1,0 +1,51 @@
+{
+  "slug": "aiva",
+  "name": "AIVA",
+  "website": "https://www.aiva.ai",
+  "company": { "name": "AIVA Technologies", "slug": "aiva", "country": "LU" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "game-developers"],
+  "capabilities": [{ "id": "music-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.aiva.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.aiva.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "windows", "macos", "linux"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.aiva.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-componist voor achtergrondmuziek, uit Luxemburg",
+      "description": "AIVA componeert muziek met AI. Je kiest een stijl, zoals filmmuziek of pop, en een lengte. Daarna kun je het stuk aanpassen. Met een betaald plan mag je de muziek commercieel gebruiken.",
+      "bestFor": ["Achtergrondmuziek voor video's en games", "Componisten die ideeën zoeken"],
+      "notFor": ["Liedjes met zang"],
+      "limitations": ["Gratis muziek mag je niet commercieel gebruiken"]
+    },
+    "en": {
+      "tagline": "AI composer for background music, from Luxembourg",
+      "description": "AIVA composes music with AI. You pick a style, such as film music or pop, and a length. Then you can adjust the piece. On a paid plan you may use the music commercially.",
+      "bestFor": ["Background music for videos and games", "Composers looking for ideas"],
+      "notFor": ["Songs with vocals"],
+      "limitations": ["Free music may not be used commercially"]
+    }
+  }
+}

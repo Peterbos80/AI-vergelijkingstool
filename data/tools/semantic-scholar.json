@@ -1,0 +1,59 @@
+{
+  "slug": "semantic-scholar",
+  "name": "Semantic Scholar",
+  "website": "https://www.semanticscholar.org",
+  "company": { "name": "Allen Institute for AI", "slug": "ai2", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["researchers", "students"],
+  "capabilities": [{ "id": "academic-research", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.semanticscholar.org", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.semanticscholar.org", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.semanticscholar.org", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.semanticscholar.org", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis zoekmachine voor wetenschappelijke artikelen, met korte samenvattingen",
+      "description": "Semantic Scholar is een gratis zoekmachine voor wetenschap. Hij is gemaakt door het Allen Institute for AI. Bij veel artikelen zie je een samenvatting van één zin. Je ziet ook wie het artikel citeert.",
+      "bestFor": ["Bronnen zoeken voor school of onderzoek", "Snel zien waar een artikel over gaat"],
+      "notFor": ["Nieuws of algemene vragen"],
+      "limitations": ["Niet elk vakgebied is even goed gedekt"]
+    },
+    "en": {
+      "tagline": "Free search engine for scientific papers, with short summaries",
+      "description": "Semantic Scholar is a free search engine for science. It is made by the Allen Institute for AI. Many papers have a one-sentence summary. You also see who cites a paper.",
+      "bestFor": ["Finding sources for school or research", "Quickly seeing what a paper is about"],
+      "notFor": ["News or general questions"],
+      "limitations": ["Not every field is covered equally well"]
+    }
+  }
+}

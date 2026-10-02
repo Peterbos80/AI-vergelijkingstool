@@ -1,0 +1,44 @@
+{
+  "slug": "cleanvoice",
+  "name": "Cleanvoice",
+  "website": "https://cleanvoice.ai",
+  "company": { "name": "Cleanvoice", "slug": "cleanvoice" },
+  "skillLevel": "beginner",
+  "audience": ["podcasters"],
+  "capabilities": [{ "id": "audio-editing", "strength": "primary" }, { "id": "audio-enhancement", "strength": "secondary" }],
+  "facts": {
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://cleanvoice.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://cleanvoice.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Haalt \"ehm\", stiltes en smakgeluiden uit je opname",
+      "description": "Cleanvoice bewerkt je audio automatisch. Het haalt stopwoorden zoals \"ehm\", lange stiltes en mondgeluiden weg. Dat scheelt veel knipwerk bij podcasts. Je uploadt een bestand en downloadt het resultaat.",
+      "bestFor": ["Podcasters die tijd willen besparen", "Interviews netter maken"],
+      "notFor": [],
+      "limitations": ["Controleer altijd of er niets belangrijks is weggeknipt"]
+    },
+    "en": {
+      "tagline": "Removes \"um\"s, silences and mouth sounds from your recording",
+      "description": "Cleanvoice edits your audio automatically. It removes filler words like \"um\", long silences and mouth sounds. That saves a lot of cutting for podcasts. You upload a file and download the result.",
+      "bestFor": ["Podcasters who want to save time", "Making interviews cleaner"],
+      "notFor": [],
+      "limitations": ["Always check nothing important was cut"]
+    }
+  }
+}

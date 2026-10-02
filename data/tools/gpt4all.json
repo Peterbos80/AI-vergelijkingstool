@@ -1,0 +1,68 @@
+{
+  "slug": "gpt4all",
+  "name": "GPT4All",
+  "website": "https://www.nomic.ai/gpt4all",
+  "githubRepo": "nomic-ai/gpt4all",
+  "company": { "name": "Nomic AI", "slug": "nomic-ai", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["privacy-conscious", "developers"],
+  "capabilities": [{ "id": "local-llm", "strength": "primary" }, { "id": "document-chat", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.nomic.ai/gpt4all", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.nomic.ai/gpt4all", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["windows", "macos", "linux"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.nomic.ai/gpt4all", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/nomic-ai/gpt4all", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/nomic-ai/gpt4all", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis desktop-app van Nomic om AI lokaal te gebruiken",
+      "description": "GPT4All is een gratis app van Nomic AI. Je draait er open AI-modellen mee op je eigen computer, ook zonder internet. Je kunt ook chatten met je eigen documenten. De software is open source.",
+      "bestFor": ["Privé chatten met je eigen documenten", "Werken zonder internetverbinding"],
+      "notFor": ["Wie de nieuwste grote modellen wil gebruiken"],
+      "limitations": ["Hoe snel het werkt, hangt af van je computer"]
+    },
+    "en": {
+      "tagline": "Free desktop app from Nomic to use AI locally",
+      "description": "GPT4All is a free app from Nomic AI. It runs open AI models on your own computer, even without internet. You can also chat with your own documents. The software is open source.",
+      "bestFor": ["Private chat with your own documents", "Working without an internet connection"],
+      "notFor": ["People who want the newest large models"],
+      "limitations": ["How fast it runs depends on your computer"]
+    }
+  }
+}

@@ -174,7 +174,8 @@ describe('EU alternatives on the real seed', () => {
     }
     expect(alts.map((a) => a.tool.slug)).toEqual(expect.arrayContaining(['amberscript', 'happy-scribe', 'veed']));
     const chatgpt = euAlternatives(catalog, catalog.toolsBySlug.get('chatgpt')!)!;
-    expect(chatgpt[0]).toMatchObject({ tool: { slug: 'le-chat' }, overlap: 1 });
+    expect(chatgpt.find((a) => a.tool.slug === 'le-chat')).toMatchObject({ overlap: 1 });
+    expect(chatgpt.every((a, i) => i === 0 || a.overlap <= chatgpt[i - 1]!.overlap)).toBe(true);
   });
   it('shows no section for European companies or an unknown country', () => {
     expect(euAlternatives(catalog, catalog.toolsBySlug.get('amberscript')!)).toBeNull();

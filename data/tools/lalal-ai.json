@@ -1,0 +1,36 @@
+{
+  "slug": "lalal-ai",
+  "name": "LALAL.AI",
+  "website": "https://www.lalal.ai",
+  "company": { "name": "LALAL.AI", "slug": "lalal-ai" },
+  "skillLevel": "beginner",
+  "audience": ["musicians", "creators"],
+  "capabilities": [{ "id": "audio-editing", "strength": "primary" }, { "id": "audio-enhancement", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web", "windows", "macos", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.lalal.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Haalt zang, instrumenten of ruis los uit een nummer",
+      "description": "LALAL.AI splitst audio in losse sporen. Je haalt bijvoorbeeld de zang uit een nummer, of de muziek onder een stem. Het kan ook ruis en echo verwijderen. Je betaalt per aantal minuten.",
+      "bestFor": ["Karaoke-versies of remixen maken", "Stemmen opschonen in een video"],
+      "notFor": [],
+      "limitations": ["Gratis proberen kan maar met een paar minuten"]
+    },
+    "en": {
+      "tagline": "Pulls vocals, instruments or noise out of a track",
+      "description": "LALAL.AI splits audio into separate tracks. For example, you take the vocals out of a song, or the music out from under a voice. It can also remove noise and echo. You pay per number of minutes.",
+      "bestFor": ["Making karaoke versions or remixes", "Cleaning up voices in a video"],
+      "notFor": [],
+      "limitations": ["The free try covers only a few minutes"]
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "activecampaign",
+  "name": "ActiveCampaign",
+  "website": "https://www.activecampaign.com",
+  "pricingUrl": "https://www.activecampaign.com/pricing",
+  "company": { "name": "ActiveCampaign", "slug": "activecampaign", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["smb", "marketers"],
+  "capabilities": [
+    { "id": "email-marketing", "strength": "primary" },
+    { "id": "email-writing", "strength": "secondary" },
+    { "id": "workflow-automation", "strength": "secondary" }
+  ],
+  "facts": {
+    "has_free_tier": {
+      "value": false,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.activecampaign.com/pricing", "type": "official" }]
+    },
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.activecampaign.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.activecampaign.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "E-mailmarketing en automatisering met AI",
+      "description": "ActiveCampaign verstuurt e-mails en automatiseert marketing. Je maakt flows die reageren op wat klanten doen. AI helpt met teksten, onderwerpregels en het bouwen van flows. Er is ook een CRM voor sales.",
+      "bestFor": ["Bedrijven die klantreizen willen automatiseren", "Webwinkels en dienstverleners"],
+      "notFor": ["Wie alleen af en toe een nieuwsbrief stuurt"],
+      "limitations": ["Geen gratis plan"]
+    },
+    "en": {
+      "tagline": "Email marketing and automation with AI",
+      "description": "ActiveCampaign sends emails and automates marketing. You build flows that react to what customers do. AI helps with copy, subject lines and building flows. There is also a CRM for sales.",
+      "bestFor": ["Businesses automating customer journeys", "Online shops and service providers"],
+      "notFor": ["People who only send the odd newsletter"],
+      "limitations": ["No free plan"]
+    }
+  }
+}

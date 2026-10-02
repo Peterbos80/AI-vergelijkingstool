@@ -1,0 +1,51 @@
+{
+  "slug": "poe",
+  "name": "Poe",
+  "website": "https://poe.com",
+  "company": { "name": "Quora", "slug": "quora", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone"],
+  "capabilities": [{ "id": "chat-assistant", "strength": "primary" }, { "id": "image-generation", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://poe.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://poe.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "windows", "macos"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://poe.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Eén app om met veel verschillende AI-modellen te chatten",
+      "description": "Poe is van Quora. In één app chat je met modellen van verschillende makers, zoals OpenAI, Anthropic en Google. Je kunt ook eigen bots maken zonder code.",
+      "bestFor": ["Modellen van verschillende makers uitproberen", "Eigen chatbots maken zonder code"],
+      "notFor": ["Wie maar één vaste assistent nodig heeft"],
+      "limitations": ["Gratis gebruik is beperkt", "Zware modellen kosten meer punten"]
+    },
+    "en": {
+      "tagline": "One app to chat with many different AI models",
+      "description": "Poe is made by Quora. In one app you chat with models from different makers, such as OpenAI, Anthropic and Google. You can also make your own bots without code.",
+      "bestFor": ["Trying models from different makers", "Making your own chatbots without code"],
+      "notFor": ["People who need just one fixed assistant"],
+      "limitations": ["Free use is limited", "Heavier models cost more points"]
+    }
+  }
+}

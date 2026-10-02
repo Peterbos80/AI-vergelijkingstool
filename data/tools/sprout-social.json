@@ -1,0 +1,53 @@
+{
+  "slug": "sprout-social",
+  "name": "Sprout Social",
+  "website": "https://sproutsocial.com",
+  "pricingUrl": "https://sproutsocial.com/pricing/",
+  "company": { "name": "Sprout Social", "slug": "sprout-social", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["marketers", "agencies", "enterprise"],
+  "capabilities": [{ "id": "social-scheduling", "strength": "primary" }],
+  "facts": {
+    "has_free_tier": {
+      "value": false,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://sproutsocial.com/pricing/", "type": "official" }]
+    },
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://sproutsocial.com/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://sproutsocial.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Socialmediabeheer voor teams, met AI-hulp bij posts en antwoorden",
+      "description": "Sprout Social helpt teams met social media. Je plant posts, beantwoordt berichten en bekijkt cijfers op één plek. AI helpt met teksten en met het zien van trends. Het is gericht op grotere teams.",
+      "bestFor": ["Merken met veel kanalen", "Teams die samen berichten beantwoorden"],
+      "notFor": ["Zzp'ers met een klein budget"],
+      "limitations": ["Geen gratis plan"]
+    },
+    "en": {
+      "tagline": "Social media management for teams, with AI help for posts and replies",
+      "description": "Sprout Social helps teams with social media. You schedule posts, reply to messages and see statistics in one place. AI helps with texts and spotting trends. It is aimed at larger teams.",
+      "bestFor": ["Brands with many channels", "Teams that answer messages together"],
+      "notFor": ["Freelancers on a small budget"],
+      "limitations": ["No free plan"]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "slug": "botpress",
+  "name": "Botpress",
+  "website": "https://botpress.com",
+  "pricingUrl": "https://botpress.com/pricing",
+  "company": { "name": "Botpress", "slug": "botpress", "country": "CA" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "agencies", "smb"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }, { "id": "ai-agents", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://botpress.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://botpress.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://botpress.com", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://botpress.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Bouw AI-chatbots en agents voor je website en apps",
+      "description": "Botpress komt uit Canada. Je bouwt er chatbots en agents mee in een visuele editor. De bots gebruiken je eigen kennis, zoals je website of documenten. Je zet ze op je site, in WhatsApp en in andere kanalen.",
+      "bestFor": ["Bedrijven die een eigen chatbot willen", "Ontwikkelaars en bureaus"],
+      "notFor": [],
+      "limitations": ["AI-gebruik betaal je naar verbruik"]
+    },
+    "en": {
+      "tagline": "Build AI chatbots and agents for your website and apps",
+      "description": "Botpress is based in Canada. You build chatbots and agents in a visual editor. The bots use your own knowledge, such as your website or documents. You put them on your site, in WhatsApp and in other channels.",
+      "bestFor": ["Companies that want their own chatbot", "Developers and agencies"],
+      "notFor": [],
+      "limitations": ["You pay for AI usage as you go"]
+    }
+  }
+}

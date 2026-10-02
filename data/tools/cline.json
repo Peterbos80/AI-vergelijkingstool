@@ -1,0 +1,68 @@
+{
+  "slug": "cline",
+  "name": "Cline",
+  "website": "https://cline.bot",
+  "githubRepo": "cline/cline",
+  "company": { "name": "Cline", "slug": "cline", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "agentic-coding", "strength": "primary" }, { "id": "code-assistant", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://cline.bot", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://cline.bot", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["vscode"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://cline.bot", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/cline/cline", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/cline/cline", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Open-source codeeragent in VS Code",
+      "description": "Cline is een open-source agent voor VS Code. Hij maakt bestanden, voert commando's uit en test in de browser. Je keurt elke stap goed. Je kiest zelf welk AI-model je gebruikt.",
+      "bestFor": ["Ontwikkelaars die stap voor stap controle willen", "Werken met je eigen API-sleutel"],
+      "notFor": ["Beginners"],
+      "limitations": ["Je betaalt zelf voor het gebruik van het AI-model"]
+    },
+    "en": {
+      "tagline": "Open-source coding agent in VS Code",
+      "description": "Cline is an open-source agent for VS Code. It creates files, runs commands and tests in the browser. You approve each step. You choose which AI model to use.",
+      "bestFor": ["Developers who want step-by-step control", "Working with your own API key"],
+      "notFor": ["Beginners"],
+      "limitations": ["You pay for the AI model you use"]
+    }
+  }
+}

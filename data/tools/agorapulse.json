@@ -1,0 +1,52 @@
+{
+  "slug": "agorapulse",
+  "name": "Agorapulse",
+  "website": "https://www.agorapulse.com",
+  "pricingUrl": "https://www.agorapulse.com/pricing/",
+  "company": { "name": "Agorapulse", "slug": "agorapulse", "country": "FR" },
+  "skillLevel": "beginner",
+  "audience": ["agencies", "marketers"],
+  "capabilities": [{ "id": "social-scheduling", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.agorapulse.com/pricing/", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.agorapulse.com/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.agorapulse.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Franse tool voor socialmediabeheer, met inbox en rapporten",
+      "description": "Agorapulse komt uit Parijs. Je plant posts, beantwoordt alle reacties in één inbox en maakt rapporten. AI helpt met teksten en antwoorden. Er is een gratis plan voor kleine gebruikers.",
+      "bestFor": ["Teams die veel reacties krijgen", "Rapporten voor klanten"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "French social media management tool, with an inbox and reports",
+      "description": "Agorapulse is based in Paris. You schedule posts, answer all comments in one inbox and make reports. AI helps with texts and replies. There is a free plan for small users.",
+      "bestFor": ["Teams that get many comments", "Reports for clients"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

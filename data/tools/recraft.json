@@ -1,0 +1,56 @@
+{
+  "slug": "recraft",
+  "name": "Recraft",
+  "website": "https://www.recraft.ai",
+  "pricingUrl": "https://www.recraft.ai/pricing",
+  "company": { "name": "Recraft", "slug": "recraft" },
+  "skillLevel": "intermediate",
+  "audience": ["designers", "marketers"],
+  "capabilities": [
+    { "id": "image-generation", "strength": "primary" },
+    { "id": "graphic-design", "strength": "primary" },
+    { "id": "logo-design", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.recraft.ai/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.recraft.ai/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.recraft.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt illustraties, iconen en vectorbestanden in je eigen stijl",
+      "description": "Recraft is een AI-tool voor ontwerpers. Het maakt plaatjes, iconen en vectorbestanden die je verder kunt bewerken. Je kunt een eigen stijl vastleggen. Zo passen ontwerpen bij elkaar.",
+      "bestFor": ["Iconen en illustraties in één stijl", "Vectorbestanden voor drukwerk of web"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik heeft een limiet"]
+    },
+    "en": {
+      "tagline": "Makes illustrations, icons and vector files in your own style",
+      "description": "Recraft is an AI tool for designers. It makes images, icons and vector files that you can keep editing. You can save your own style. That keeps designs consistent.",
+      "bestFor": ["Icons and illustrations in one style", "Vector files for print or web"],
+      "notFor": [],
+      "limitations": ["Free use has a limit"]
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "ai-studios",
+  "name": "AI Studios",
+  "aliases": ["DeepBrain AI"],
+  "website": "https://www.aistudios.com",
+  "company": { "name": "DeepBrain AI", "slug": "deepbrain-ai", "country": "KR" },
+  "skillLevel": "beginner",
+  "audience": ["educators", "enterprise", "marketers"],
+  "capabilities": [
+    { "id": "avatar-video", "strength": "primary" },
+    { "id": "ai-dubbing", "strength": "secondary" },
+    { "id": "video-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.aistudios.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.aistudios.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.aistudios.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Video's met AI-presentatoren, van DeepBrain AI uit Zuid-Korea",
+      "description": "AI Studios is van DeepBrain AI uit Zuid-Korea. Je maakt video's met een digitale presentator. Je typt een script en kiest een avatar en een taal. Je kunt video's ook laten vertalen.",
+      "bestFor": ["Trainingsvideo's zonder camera", "Video's in meerdere talen"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Videos with AI presenters, from DeepBrain AI in South Korea",
+      "description": "AI Studios is made by DeepBrain AI in South Korea. You make videos with a digital presenter. You type a script and choose an avatar and a language. You can also have videos translated.",
+      "bestFor": ["Training videos without a camera", "Videos in several languages"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

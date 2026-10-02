@@ -1,0 +1,48 @@
+{
+  "slug": "photoshop",
+  "name": "Adobe Photoshop",
+  "website": "https://www.adobe.com/products/photoshop.html",
+  "company": { "name": "Adobe", "slug": "adobe", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["designers", "creators"],
+  "capabilities": [
+    { "id": "image-editing", "strength": "primary" },
+    { "id": "image-generation", "strength": "secondary" },
+    { "id": "background-removal", "strength": "secondary" }
+  ],
+  "facts": {
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.adobe.com/products/photoshop.html", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["windows", "macos", "web", "ios"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.adobe.com/products/photoshop.html", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "De bekende fotobewerker, met generatieve AI van Firefly",
+      "description": "Photoshop is het bekende programma van Adobe om foto's te bewerken. Met Generatieve vulling voeg je iets toe of haal je iets weg door het te typen. Dat werkt met Adobe Firefly. Photoshop is er voor computer, web en iPhone.",
+      "bestFor": ["Professionele fotobewerking", "Ontwerpers die al met Adobe werken"],
+      "notFor": ["Beginners die iets simpels zoeken"],
+      "limitations": ["Alleen met een abonnement"]
+    },
+    "en": {
+      "tagline": "The well-known photo editor, with generative AI from Firefly",
+      "description": "Photoshop is Adobe's well-known program for editing photos. With Generative Fill you add or remove things by typing. That works with Adobe Firefly. Photoshop runs on computer, web and iPhone.",
+      "bestFor": ["Professional photo editing", "Designers who already use Adobe"],
+      "notFor": ["Beginners who want something simple"],
+      "limitations": ["Subscription only"]
+    }
+  }
+}

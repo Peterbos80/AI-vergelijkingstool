@@ -1,0 +1,52 @@
+{
+  "slug": "fliki",
+  "name": "Fliki",
+  "website": "https://fliki.ai",
+  "pricingUrl": "https://fliki.ai/pricing",
+  "company": { "name": "Fliki", "slug": "fliki" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "marketers"],
+  "capabilities": [{ "id": "video-generation", "strength": "primary" }, { "id": "text-to-speech", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://fliki.ai/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://fliki.ai/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://fliki.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Zet tekst om in video met AI-stemmen",
+      "description": "Fliki maakt video's van tekst. Je typt een script of plakt een link naar een blog. Fliki kiest beelden en leest de tekst voor met een AI-stem. Er zijn stemmen in veel talen, ook in het Nederlands.",
+      "bestFor": ["Video's met voice-over zonder je eigen stem", "Video's voor social media van een blog"],
+      "notFor": [],
+      "limitations": ["Gratis video's hebben een watermerk"]
+    },
+    "en": {
+      "tagline": "Turns text into video with AI voices",
+      "description": "Fliki makes videos from text. You type a script or paste a link to a blog. Fliki picks footage and reads the text aloud with an AI voice. There are voices in many languages, including Dutch.",
+      "bestFor": ["Videos with a voice-over without your own voice", "Social videos from a blog"],
+      "notFor": [],
+      "limitations": ["Free videos have a watermark"]
+    }
+  }
+}

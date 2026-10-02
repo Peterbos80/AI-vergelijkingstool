@@ -1,0 +1,68 @@
+{
+  "slug": "gemini-cli",
+  "name": "Gemini CLI",
+  "website": "https://github.com/google-gemini/gemini-cli",
+  "githubRepo": "google-gemini/gemini-cli",
+  "company": { "name": "Google", "slug": "google", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "agentic-coding", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://github.com/google-gemini/gemini-cli", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/google-gemini/gemini-cli", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["cli"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/google-gemini/gemini-cli", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/google-gemini/gemini-cli", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/google-gemini/gemini-cli", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Open-source AI-agent van Google voor in je terminal",
+      "description": "Gemini CLI is een gratis, open-source agent van Google. Je gebruikt hem in de terminal. Hij leest je project, schrijft code en voert taken uit. Je logt in met een Google-account.",
+      "bestFor": ["Ontwikkelaars die in de terminal werken", "Taken in een bestaand project automatiseren"],
+      "notFor": ["Mensen zonder ervaring met de terminal"],
+      "limitations": ["Controleer wat de agent wil uitvoeren"]
+    },
+    "en": {
+      "tagline": "Open-source AI agent from Google for your terminal",
+      "description": "Gemini CLI is a free, open-source agent from Google. You use it in the terminal. It reads your project, writes code and runs tasks. You sign in with a Google account.",
+      "bestFor": ["Developers who work in the terminal", "Automating tasks in an existing project"],
+      "notFor": ["People without terminal experience"],
+      "limitations": ["Check what the agent wants to run"]
+    }
+  }
+}

@@ -121,6 +121,18 @@ describe('small guards', () => {
     expect(pairs).toHaveLength(1);
     expect(pairs[0]).toMatchObject({ a: 'a', b: 'b' });
   });
+  it('keeps product pages on one shared host apart, but not a site and its own page', () => {
+    const list = [
+      { id: 'a', slug: 'a', name: 'Express', aliases: [], websiteUrl: 'https://www.adobe.com/express/' },
+      { id: 'b', slug: 'b', name: 'Photoshop', aliases: [], websiteUrl: 'https://www.adobe.com/products/photoshop.html' },
+      { id: 'c', slug: 'c', name: 'Whisper', aliases: [], websiteUrl: 'https://github.com/openai/whisper' },
+      { id: 'd', slug: 'd', name: 'Gemini CLI', aliases: [], websiteUrl: 'https://github.com/google-gemini/gemini-cli' },
+      { id: 'e', slug: 'e', name: 'Whisper app', aliases: [], websiteUrl: 'https://github.com/openai/whisper/' },
+      { id: 'f', slug: 'f', name: 'Foo', aliases: [], websiteUrl: 'https://foo.ai/' },
+      { id: 'g', slug: 'g', name: 'Foo Studio', aliases: [], websiteUrl: 'https://foo.ai/studio' },
+    ];
+    expect(duplicatePairs(list).map((p) => `${p.a}-${p.b}:${p.reason}`)).toEqual(['c-e:same_host', 'f-g:same_host']);
+  });
   it('validates affiliate templates before any request', () => {
     expect(validateTemplate('https://partner.example/x?sub={click_id}')).toBeNull();
     expect(validateTemplate('http://partner.example/x')).toBe('not_https');

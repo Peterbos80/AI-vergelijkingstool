@@ -1,0 +1,68 @@
+{
+  "slug": "zed",
+  "name": "Zed",
+  "website": "https://zed.dev",
+  "githubRepo": "zed-industries/zed",
+  "company": { "name": "Zed Industries", "slug": "zed-industries", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "code-assistant", "strength": "primary" }, { "id": "agentic-coding", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://zed.dev", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://zed.dev", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["macos", "linux", "windows"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://zed.dev", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/zed-industries/zed", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/zed-industries/zed", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Snelle open-source code-editor met ingebouwde AI",
+      "description": "Zed is een code-editor die is gemaakt om snel te zijn. Hij is open source. AI helpt met aanvullen, chatten en agents. Je kunt samen in dezelfde code werken.",
+      "bestFor": ["Ontwikkelaars die een snelle editor willen", "Samen programmeren"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Fast open-source code editor with built-in AI",
+      "description": "Zed is a code editor built to be fast. It is open source. AI helps with completions, chat and agents. You can work together in the same code.",
+      "bestFor": ["Developers who want a fast editor", "Programming together"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

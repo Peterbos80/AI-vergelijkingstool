@@ -1,0 +1,36 @@
+{
+  "slug": "ada",
+  "name": "Ada",
+  "website": "https://www.ada.cx",
+  "company": { "name": "Ada", "slug": "ada", "country": "CA" },
+  "skillLevel": "intermediate",
+  "audience": ["enterprise"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.ada.cx", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-agent voor klantenservice bij grote bedrijven",
+      "description": "Ada komt uit Toronto. Het levert een AI-agent die klantvragen zelf oplost, in chat, e-mail en telefoon. De agent volgt de regels van je bedrijf. Ada richt zich op grote organisaties.",
+      "bestFor": ["Grote klantenservice-afdelingen"],
+      "notFor": ["Kleine bedrijven"],
+      "limitations": ["Prijs alleen op aanvraag"]
+    },
+    "en": {
+      "tagline": "AI agent for customer service at large companies",
+      "description": "Ada is based in Toronto. It provides an AI agent that resolves customer questions on its own, in chat, email and phone. The agent follows your company's rules. Ada focuses on large organisations.",
+      "bestFor": ["Large customer service departments"],
+      "notFor": ["Small businesses"],
+      "limitations": ["Price on request only"]
+    }
+  }
+}

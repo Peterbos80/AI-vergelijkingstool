@@ -1,0 +1,59 @@
+{
+  "slug": "google-ai-studio",
+  "name": "Google AI Studio",
+  "website": "https://aistudio.google.com",
+  "company": { "name": "Google", "slug": "google", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "app-builder", "strength": "primary" }, { "id": "chat-assistant", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://aistudio.google.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://aistudio.google.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://aistudio.google.com", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://aistudio.google.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis werkplek van Google om met Gemini-modellen te bouwen",
+      "description": "Google AI Studio is een gratis werkplek in je browser. Je probeert er de Gemini-modellen uit en maakt API-sleutels. Je kunt ook kleine apps bouwen door te chatten. Het is vooral voor ontwikkelaars.",
+      "bestFor": ["Ontwikkelaars die Gemini willen testen", "Snel een prototype bouwen"],
+      "notFor": ["Mensen die alleen willen chatten"],
+      "limitations": ["Bij gratis gebruik mag Google je invoer gebruiken om producten te verbeteren"]
+    },
+    "en": {
+      "tagline": "Free Google workspace for building with Gemini models",
+      "description": "Google AI Studio is a free workspace in your browser. You try out the Gemini models and create API keys. You can also build small apps by chatting. It is mainly for developers.",
+      "bestFor": ["Developers who want to test Gemini", "Building a quick prototype"],
+      "notFor": ["People who only want to chat"],
+      "limitations": ["On free use, Google may use your input to improve its products"]
+    }
+  }
+}

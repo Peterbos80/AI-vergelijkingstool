@@ -1,0 +1,52 @@
+{
+  "slug": "stable-diffusion",
+  "name": "Stable Diffusion",
+  "website": "https://stability.ai",
+  "company": { "name": "Stability AI", "slug": "stability-ai", "country": "GB" },
+  "skillLevel": "advanced",
+  "audience": ["developers", "designers"],
+  "capabilities": [{ "id": "image-generation", "strength": "primary" }, { "id": "image-editing", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["api", "self_hosted"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://stability.ai", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://stability.ai", "type": "official" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://stability.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Open beeldmodellen van Stability AI die je zelf kunt draaien",
+      "description": "Stable Diffusion is een reeks beeldmodellen van Stability AI uit Londen. Je kunt de modellen downloaden en op je eigen computer gebruiken. Veel andere apps zijn erop gebouwd. Voor zakelijk gebruik gelden licentieregels.",
+      "bestFor": ["Zelf plaatjes maken op je eigen computer", "Ontwikkelaars die beeld-AI inbouwen"],
+      "notFor": ["Beginners die direct willen starten"],
+      "limitations": ["Lokaal draaien vraagt een sterke videokaart"]
+    },
+    "en": {
+      "tagline": "Open image models from Stability AI that you can run yourself",
+      "description": "Stable Diffusion is a family of image models from Stability AI in London. You can download the models and use them on your own computer. Many other apps are built on them. Licence rules apply to business use.",
+      "bestFor": ["Making pictures on your own computer", "Developers who build image AI into products"],
+      "notFor": ["Beginners who want to start right away"],
+      "limitations": ["Running it locally needs a strong graphics card"]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "duck-ai",
+  "name": "Duck.ai",
+  "website": "https://duck.ai",
+  "company": { "name": "DuckDuckGo", "slug": "duckduckgo", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "privacy-conscious"],
+  "capabilities": [{ "id": "chat-assistant", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://duck.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://duck.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://duck.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Anoniem chatten met AI-modellen, van DuckDuckGo",
+      "description": "Duck.ai is de AI-chat van DuckDuckGo. Je chat met bekende AI-modellen, zonder account. DuckDuckGo haalt je IP-adres weg voordat een vraag naar de maker gaat. Volgens DuckDuckGo worden je gesprekken niet gebruikt om modellen te trainen.",
+      "bestFor": ["Privacybewust chatten zonder account", "Snelle vragen tussen het zoeken door"],
+      "notFor": ["Lange projecten met bestanden en geheugen"],
+      "limitations": ["Minder functies dan de apps van de makers zelf"]
+    },
+    "en": {
+      "tagline": "Anonymous chat with AI models, from DuckDuckGo",
+      "description": "Duck.ai is the AI chat from DuckDuckGo. You chat with well-known AI models without an account. DuckDuckGo removes your IP address before a question goes to the model maker. According to DuckDuckGo, your chats are not used to train models.",
+      "bestFor": ["Private chat without an account", "Quick questions while you search"],
+      "notFor": ["Long projects with files and memory"],
+      "limitations": ["Fewer features than the makers' own apps"]
+    }
+  }
+}

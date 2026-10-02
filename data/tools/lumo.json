@@ -1,0 +1,51 @@
+{
+  "slug": "lumo",
+  "name": "Lumo",
+  "website": "https://lumo.proton.me",
+  "company": { "name": "Proton", "slug": "proton", "country": "CH" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "privacy-conscious"],
+  "capabilities": [{ "id": "chat-assistant", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://lumo.proton.me", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://lumo.proton.me", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://lumo.proton.me", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Privacygerichte AI-assistent van Proton uit Zwitserland",
+      "description": "Lumo is de AI-assistent van Proton, bekend van Proton Mail. Je gesprekken worden versleuteld bewaard. Proton zegt ze niet te gebruiken om modellen te trainen. Lumo werkt met open-source modellen in Europese datacenters van Proton.",
+      "bestFor": ["Chatten zonder dat je gesprekken voor training worden gebruikt", "Wie al Proton gebruikt"],
+      "notFor": ["Plaatjes of video maken"],
+      "limitations": ["Gratis gebruik is beperkt"]
+    },
+    "en": {
+      "tagline": "Privacy-first AI assistant from Proton in Switzerland",
+      "description": "Lumo is the AI assistant from Proton, known for Proton Mail. Your chats are stored encrypted. Proton says it does not use them to train models. Lumo runs open-source models in Proton's European data centres.",
+      "bestFor": ["Chatting without your chats being used for training", "People who already use Proton"],
+      "notFor": ["Making pictures or video"],
+      "limitations": ["Free use is limited"]
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "clipdrop",
+  "name": "Clipdrop",
+  "website": "https://clipdrop.co",
+  "company": { "name": "Jasper", "slug": "jasper", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["creators", "ecommerce", "designers"],
+  "capabilities": [
+    { "id": "image-editing", "strength": "primary" },
+    { "id": "background-removal", "strength": "primary" },
+    { "id": "upscaling", "strength": "secondary" },
+    { "id": "image-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://clipdrop.co", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://clipdrop.co", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://clipdrop.co", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Snelle AI-beeldbewerking: achtergrond weg, opschalen en meer",
+      "description": "Clipdrop bundelt handige beeldtools. Je haalt achtergronden weg, wist voorwerpen en maakt foto's scherper. Je kunt ook plaatjes maken met tekst. Clipdrop is onderdeel van Jasper.",
+      "bestFor": ["Snel een productfoto opschonen", "Kleine bewerkingen zonder Photoshop"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik heeft een limiet"]
+    },
+    "en": {
+      "tagline": "Quick AI image editing: remove backgrounds, upscale and more",
+      "description": "Clipdrop bundles handy image tools. You remove backgrounds, erase objects and make photos sharper. You can also make pictures from text. Clipdrop is part of Jasper.",
+      "bestFor": ["Cleaning up a product photo fast", "Small edits without Photoshop"],
+      "notFor": [],
+      "limitations": ["Free use has a limit"]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "chatpdf",
+  "name": "ChatPDF",
+  "website": "https://www.chatpdf.com",
+  "company": { "name": "ChatPDF", "slug": "chatpdf" },
+  "skillLevel": "beginner",
+  "audience": ["students", "everyone"],
+  "capabilities": [{ "id": "document-chat", "strength": "primary" }, { "id": "summarization", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.chatpdf.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.chatpdf.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.chatpdf.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Stel vragen aan je pdf en zie waar het antwoord staat",
+      "description": "ChatPDF laat je chatten met een pdf. Je uploadt een bestand en stelt vragen. Het antwoord verwijst naar de plek in het document. Er is een gratis versie met een limiet per dag.",
+      "bestFor": ["Snel iets opzoeken in een lang document", "Studenten met veel leesstof"],
+      "notFor": ["Vertrouwelijke documenten"],
+      "limitations": ["Gratis gebruik is beperkt per dag"]
+    },
+    "en": {
+      "tagline": "Ask your PDF questions and see where the answer is",
+      "description": "ChatPDF lets you chat with a PDF. You upload a file and ask questions. The answer points to the place in the document. There is a free version with a daily limit.",
+      "bestFor": ["Finding something in a long document", "Students with a lot to read"],
+      "notFor": ["Confidential documents"],
+      "limitations": ["Free use is limited per day"]
+    }
+  }
+}

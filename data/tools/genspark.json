@@ -1,0 +1,55 @@
+{
+  "slug": "genspark",
+  "name": "Genspark",
+  "website": "https://www.genspark.ai",
+  "company": { "name": "Genspark", "slug": "genspark", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["professionals"],
+  "capabilities": [
+    { "id": "ai-agents", "strength": "primary" },
+    { "id": "research-assistant", "strength": "secondary" },
+    { "id": "presentation-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.genspark.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.genspark.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.genspark.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-agent die zoekt, presentaties maakt en taken uitvoert",
+      "description": "Genspark is een AI-werkplek met agents. Je vraagt bijvoorbeeld om onderzoek, een presentatie of een spreadsheet. De agent zoekt informatie en maakt het resultaat. Er is een gratis versie met credits.",
+      "bestFor": ["Snel een presentatie of rapport", "Onderzoek met bronnen"],
+      "notFor": [],
+      "limitations": ["Controleer feiten en bronnen zelf"]
+    },
+    "en": {
+      "tagline": "AI agent that searches, makes slides and carries out tasks",
+      "description": "Genspark is an AI workspace with agents. You ask for research, a presentation or a spreadsheet, for example. The agent finds information and makes the result. There is a free version with credits.",
+      "bestFor": ["A quick presentation or report", "Research with sources"],
+      "notFor": [],
+      "limitations": ["Check facts and sources yourself"]
+    }
+  }
+}

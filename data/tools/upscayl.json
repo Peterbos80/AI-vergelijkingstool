@@ -1,0 +1,68 @@
+{
+  "slug": "upscayl",
+  "name": "Upscayl",
+  "website": "https://upscayl.org",
+  "githubRepo": "upscayl/upscayl",
+  "company": { "name": "Upscayl", "slug": "upscayl" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "designers", "privacy-conscious"],
+  "capabilities": [{ "id": "upscaling", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://upscayl.org", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://upscayl.org", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["windows", "macos", "linux"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://upscayl.org", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/upscayl/upscayl", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/upscayl/upscayl", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis open-source app om afbeeldingen te vergroten",
+      "description": "Upscayl is een gratis app voor Windows, Mac en Linux. Het vergroot afbeeldingen met AI op je eigen computer. Je foto's gaan dus niet naar internet. De software is open source.",
+      "bestFor": ["Gratis en privé foto's vergroten", "Veel afbeeldingen tegelijk verwerken"],
+      "notFor": [],
+      "limitations": ["Werkt het best met een geschikte videokaart"]
+    },
+    "en": {
+      "tagline": "Free open-source app to enlarge images",
+      "description": "Upscayl is a free app for Windows, Mac and Linux. It enlarges images with AI on your own computer. So your photos do not go to the internet. The software is open source.",
+      "bestFor": ["Enlarging photos for free and privately", "Processing many images at once"],
+      "notFor": [],
+      "limitations": ["Works best with a suitable graphics card"]
+    }
+  }
+}

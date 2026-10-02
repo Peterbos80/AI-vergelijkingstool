@@ -1,0 +1,51 @@
+{
+  "slug": "base44",
+  "name": "Base44",
+  "website": "https://base44.com",
+  "company": { "name": "Base44", "slug": "base44", "country": "IL" },
+  "skillLevel": "beginner",
+  "audience": ["founders", "smb"],
+  "capabilities": [{ "id": "app-builder", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://base44.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://base44.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://base44.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Bouwt apps door te chatten, zonder code",
+      "description": "Base44 maakt complete apps op basis van een beschrijving. Je krijgt een app met database, inloggen en hosting. Je past de app aan door te chatten. Base44 is overgenomen door Wix.",
+      "bestFor": ["Interne tools en kleine apps", "Ondernemers zonder programmeerkennis"],
+      "notFor": ["Grote, ingewikkelde software"],
+      "limitations": ["Gratis gebruik heeft een limiet"]
+    },
+    "en": {
+      "tagline": "Builds apps by chatting, without code",
+      "description": "Base44 makes complete apps from a description. You get an app with a database, login and hosting. You change the app by chatting. Base44 was bought by Wix.",
+      "bestFor": ["Internal tools and small apps", "Founders who do not code"],
+      "notFor": ["Large, complex software"],
+      "limitations": ["Free use has a limit"]
+    }
+  }
+}

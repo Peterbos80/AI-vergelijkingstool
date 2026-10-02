@@ -1,0 +1,56 @@
+{
+  "slug": "rytr",
+  "name": "Rytr",
+  "website": "https://rytr.me",
+  "pricingUrl": "https://rytr.me/pricing",
+  "company": { "name": "Rytr", "slug": "rytr" },
+  "skillLevel": "beginner",
+  "audience": ["freelancers", "smb", "marketers"],
+  "capabilities": [
+    { "id": "copywriting", "strength": "primary" },
+    { "id": "email-writing", "strength": "secondary" },
+    { "id": "long-form-writing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://rytr.me/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://rytr.me/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://rytr.me", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Eenvoudige AI-schrijfhulp voor korte teksten",
+      "description": "Rytr helpt je snel korte teksten te schrijven. Denk aan e-mails, posts voor social media, productteksten en blogintro's. Je kiest een soort tekst en een toon. Er is een gratis plan met een limiet per maand.",
+      "bestFor": ["Korte marketingteksten", "Beginners met een klein budget"],
+      "notFor": ["Lange, diepgaande artikelen"],
+      "limitations": ["Teksten hebben vaak nog redactie nodig"]
+    },
+    "en": {
+      "tagline": "Simple AI writing help for short texts",
+      "description": "Rytr helps you write short texts quickly. Think of emails, social media posts, product descriptions and blog intros. You pick a type of text and a tone. There is a free plan with a monthly limit.",
+      "bestFor": ["Short marketing copy", "Beginners on a small budget"],
+      "notFor": ["Long, in-depth articles"],
+      "limitations": ["Texts often still need editing"]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "soundraw",
+  "name": "Soundraw",
+  "website": "https://soundraw.io",
+  "company": { "name": "Soundraw", "slug": "soundraw", "country": "JP" },
+  "skillLevel": "beginner",
+  "audience": ["creators"],
+  "capabilities": [{ "id": "music-generation", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://soundraw.io", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-muziek zonder rechtenproblemen, die je zelf aanpast",
+      "description": "Soundraw maakt muziek op basis van stemming, genre en lengte. Daarna pas je het nummer aan, bijvoorbeeld de opbouw. Met een abonnement mag je de muziek in je video's gebruiken. Het bedrijf komt uit Japan.",
+      "bestFor": ["Muziek onder YouTube-video's", "Makers die geen gedoe met rechten willen"],
+      "notFor": ["Liedjes met tekst en zang"],
+      "limitations": ["Downloaden vraagt een abonnement"]
+    },
+    "en": {
+      "tagline": "Royalty-free AI music that you adjust yourself",
+      "description": "Soundraw makes music based on mood, genre and length. Then you adjust the track, for example its structure. With a subscription you may use the music in your videos. The company is from Japan.",
+      "bestFor": ["Music for YouTube videos", "Makers who want no copyright trouble"],
+      "notFor": ["Songs with lyrics and vocals"],
+      "limitations": ["Downloading needs a subscription"]
+    }
+  }
+}

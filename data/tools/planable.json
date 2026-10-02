@@ -1,0 +1,52 @@
+{
+  "slug": "planable",
+  "name": "Planable",
+  "website": "https://planable.io",
+  "pricingUrl": "https://planable.io/pricing/",
+  "company": { "name": "Planable", "slug": "planable" },
+  "skillLevel": "beginner",
+  "audience": ["agencies", "marketers"],
+  "capabilities": [{ "id": "social-scheduling", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://planable.io/pricing/", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://planable.io/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://planable.io", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Samen posts voor social media maken en goedkeuren",
+      "description": "Planable helpt teams om samen posts te maken. Je ziet een voorbeeld zoals de post er echt uit komt te zien. Collega's of klanten geven feedback en keuren goed. AI helpt met teksten.",
+      "bestFor": ["Bureaus die met goedkeuring van klanten werken", "Teams die veel overleggen over posts"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Create and approve social media posts together",
+      "description": "Planable helps teams create posts together. You see a preview of how the post will really look. Colleagues or clients give feedback and approve. AI helps with texts.",
+      "bestFor": ["Agencies that need client approval", "Teams that discuss posts a lot"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "prezi",
+  "name": "Prezi",
+  "website": "https://prezi.com",
+  "pricingUrl": "https://prezi.com/pricing/",
+  "company": { "name": "Prezi", "slug": "prezi" },
+  "skillLevel": "beginner",
+  "audience": ["educators", "students", "professionals"],
+  "capabilities": [{ "id": "presentation-generation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://prezi.com/pricing/", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://prezi.com/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "windows", "macos", "ios"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://prezi.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Presentaties met beweging, ook gemaakt met AI",
+      "description": "Prezi is bekend van presentaties waarin je in- en uitzoomt. Met Prezi AI maak je een presentatie op basis van een onderwerp of tekst. Je kunt ook video's maken waarin je naast je dia's in beeld bent.",
+      "bestFor": ["Presentaties die opvallen", "Lessen en webinars"],
+      "notFor": [],
+      "limitations": ["Het zoomeffect past niet bij elke presentatie"]
+    },
+    "en": {
+      "tagline": "Presentations with motion, also made with AI",
+      "description": "Prezi is known for presentations where you zoom in and out. With Prezi AI you make a presentation from a topic or text. You can also make videos where you appear next to your slides.",
+      "bestFor": ["Presentations that stand out", "Lessons and webinars"],
+      "notFor": [],
+      "limitations": ["The zoom effect does not suit every presentation"]
+    }
+  }
+}

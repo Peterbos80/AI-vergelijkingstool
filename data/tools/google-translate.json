@@ -1,0 +1,59 @@
+{
+  "slug": "google-translate",
+  "name": "Google Translate",
+  "website": "https://translate.google.com",
+  "company": { "name": "Google", "slug": "google", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone"],
+  "capabilities": [{ "id": "translation", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://translate.google.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://translate.google.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://translate.google.com", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://translate.google.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis vertalen van tekst, foto's, documenten en gesprekken",
+      "description": "Google Translate vertaalt tekst tussen heel veel talen. Je kunt ook foto's, documenten en websites vertalen. In de app vertaal je gesprekken en wat je camera ziet. Het is gratis.",
+      "bestFor": ["Snel iets vertalen op vakantie", "Een buitenlandse tekst begrijpen"],
+      "notFor": ["Officiële of juridische vertalingen"],
+      "limitations": ["Controleer belangrijke vertalingen altijd"]
+    },
+    "en": {
+      "tagline": "Free translation of text, photos, documents and conversations",
+      "description": "Google Translate translates text between a great many languages. You can also translate photos, documents and websites. In the app you translate conversations and what your camera sees. It is free.",
+      "bestFor": ["Quick translations on holiday", "Understanding a text in another language"],
+      "notFor": ["Official or legal translations"],
+      "limitations": ["Always check important translations"]
+    }
+  }
+}

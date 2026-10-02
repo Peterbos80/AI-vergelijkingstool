@@ -1,0 +1,51 @@
+{
+  "slug": "speechify",
+  "name": "Speechify",
+  "website": "https://speechify.com",
+  "company": { "name": "Speechify", "slug": "speechify", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["students", "everyone"],
+  "capabilities": [{ "id": "text-to-speech", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://speechify.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://speechify.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "chrome_extension", "macos"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://speechify.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Leest teksten, pdf's en websites voor met natuurlijke stemmen",
+      "description": "Speechify leest tekst voor. Denk aan boeken, pdf's, e-mails en websites. Je past de snelheid aan en kiest uit veel stemmen. Het helpt bijvoorbeeld mensen met dyslexie.",
+      "bestFor": ["Lezen met je oren, bijvoorbeeld bij dyslexie", "Teksten luisteren onderweg"],
+      "notFor": [],
+      "limitations": ["De beste stemmen zitten in het betaalde plan"]
+    },
+    "en": {
+      "tagline": "Reads texts, PDFs and websites aloud with natural voices",
+      "description": "Speechify reads text aloud. Think of books, PDFs, emails and websites. You adjust the speed and choose from many voices. It helps, for example, people with dyslexia.",
+      "bestFor": ["Reading with your ears, for example with dyslexia", "Listening to texts on the go"],
+      "notFor": [],
+      "limitations": ["The best voices are in the paid plan"]
+    }
+  }
+}

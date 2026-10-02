@@ -1,0 +1,56 @@
+{
+  "slug": "wordtune",
+  "name": "Wordtune",
+  "website": "https://www.wordtune.com",
+  "company": { "name": "AI21 Labs", "slug": "ai21-labs", "country": "IL" },
+  "skillLevel": "beginner",
+  "audience": ["students", "professionals", "writers"],
+  "capabilities": [
+    { "id": "copywriting", "strength": "primary" },
+    { "id": "grammar-checking", "strength": "primary" },
+    { "id": "summarization", "strength": "secondary" },
+    { "id": "email-writing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.wordtune.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.wordtune.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.wordtune.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Herschrijft je zinnen duidelijker, korter of formeler",
+      "description": "Wordtune is van het Israëlische AI21 Labs. Je selecteert een zin en krijgt andere versies. Zo maak je een tekst korter, formeler of vlotter. Het werkt als extensie in je browser.",
+      "bestFor": ["Zinnen herschrijven in het Engels", "E-mails een betere toon geven"],
+      "notFor": ["Nederlandse teksten"],
+      "limitations": ["Herschrijft vooral Engelse tekst"]
+    },
+    "en": {
+      "tagline": "Rewrites your sentences clearer, shorter or more formal",
+      "description": "Wordtune is made by AI21 Labs in Israel. You select a sentence and get other versions. That way you make a text shorter, more formal or smoother. It works as a browser extension.",
+      "bestFor": ["Rewriting sentences in English", "Giving emails a better tone"],
+      "notFor": ["Dutch texts"],
+      "limitations": ["Mainly rewrites English text"]
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "slug": "neuroflash",
+  "name": "neuroflash",
+  "website": "https://neuroflash.com",
+  "company": { "name": "neuroflash", "slug": "neuroflash", "country": "DE" },
+  "skillLevel": "beginner",
+  "audience": ["marketers", "agencies"],
+  "capabilities": [
+    { "id": "copywriting", "strength": "primary" },
+    { "id": "seo-optimization", "strength": "secondary" },
+    { "id": "long-form-writing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://neuroflash.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://neuroflash.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://neuroflash.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Duitse AI-schrijftool voor marketingteksten",
+      "description": "neuroflash komt uit Hamburg. Het schrijft marketingteksten, zoals advertenties, posts en blogs. Je stelt een merkstem in, zodat teksten bij je merk passen.",
+      "bestFor": ["Marketingteams in Europa", "Teksten in de stijl van je merk"],
+      "notFor": [],
+      "limitations": ["Teksten moet je altijd nakijken"]
+    },
+    "en": {
+      "tagline": "German AI writing tool for marketing copy",
+      "description": "neuroflash is based in Hamburg. It writes marketing copy, such as ads, posts and blogs. You set a brand voice, so texts fit your brand.",
+      "bestFor": ["Marketing teams in Europe", "Texts in your brand's style"],
+      "notFor": [],
+      "limitations": ["Always check the texts"]
+    }
+  }
+}

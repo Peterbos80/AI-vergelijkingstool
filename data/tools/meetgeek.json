@@ -1,0 +1,51 @@
+{
+  "slug": "meetgeek",
+  "name": "MeetGeek",
+  "website": "https://meetgeek.ai",
+  "company": { "name": "MeetGeek", "slug": "meetgeek" },
+  "skillLevel": "beginner",
+  "audience": ["teams", "sales"],
+  "capabilities": [{ "id": "meeting-notes", "strength": "primary" }, { "id": "transcription", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://meetgeek.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://meetgeek.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://meetgeek.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-notulist die vergaderingen opneemt, samenvat en deelt",
+      "description": "MeetGeek doet mee in je online vergaderingen. Het maakt een verslag met de belangrijkste punten en taken. Je deelt verslagen automatisch in andere apps. Het werkt met Zoom, Teams en Google Meet.",
+      "bestFor": ["Teams die verslagen automatisch willen delen", "Salesgesprekken teruglezen"],
+      "notFor": [],
+      "limitations": ["Vraag deelnemers altijd om toestemming voor opnemen"]
+    },
+    "en": {
+      "tagline": "AI note-taker that records, summarises and shares meetings",
+      "description": "MeetGeek joins your online meetings. It writes a report with the key points and to-dos. You can share reports automatically in other apps. It works with Zoom, Teams and Google Meet.",
+      "bestFor": ["Teams that want reports shared automatically", "Reviewing sales calls"],
+      "notFor": [],
+      "limitations": ["Always ask participants for consent to record"]
+    }
+  }
+}

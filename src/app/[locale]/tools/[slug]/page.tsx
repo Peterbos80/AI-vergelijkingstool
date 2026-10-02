@@ -169,7 +169,11 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
               {tool.companyName && <span>{t('tool.by', { company: tool.companyName })}</span>}
               {tool.pricingStatus && <StatusStamp status={tool.pricingStatus} t={t} />}
               <FreshnessDial freshness={tool.freshness} t={t} />
-              <span>{t('freshness.checkedOn', { date: formatDate(tool.lastCheckedAt ?? tool.priceCheckedAt, locale) })}</span>
+              <span>
+                {(tool.lastCheckedAt ?? tool.priceCheckedAt)
+                  ? t('freshness.checkedOn', { date: formatDate(tool.lastCheckedAt ?? tool.priceCheckedAt, locale) })
+                  : t('freshness.unknown')}
+              </span>
             </p>
             <div className="mt-5 flex flex-wrap items-start gap-3">
               <VisitLink slug={tool.slug} name={tool.name} t={t} locale={locale} src="tool" affiliate={isAffiliate} />

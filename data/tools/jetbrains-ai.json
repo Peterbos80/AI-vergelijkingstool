@@ -1,0 +1,52 @@
+{
+  "slug": "jetbrains-ai",
+  "name": "JetBrains AI",
+  "aliases": ["Junie", "JetBrains AI Assistant"],
+  "website": "https://www.jetbrains.com/ai/",
+  "company": { "name": "JetBrains", "slug": "jetbrains", "country": "CZ" },
+  "skillLevel": "intermediate",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "code-assistant", "strength": "primary" }, { "id": "agentic-coding", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.jetbrains.com/ai/", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.jetbrains.com/ai/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["jetbrains"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.jetbrains.com/ai/", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-assistent en codeeragent Junie in de editors van JetBrains",
+      "description": "JetBrains komt uit Praag en maakt editors zoals IntelliJ en PyCharm. AI Assistant helpt met code en uitleg. Junie is een agent die taken zelf uitvoert. Er is een gratis versie met een limiet.",
+      "bestFor": ["Ontwikkelaars die al JetBrains gebruiken", "Grotere taken aan een agent geven"],
+      "notFor": [],
+      "limitations": ["Werkt alleen in de editors van JetBrains"]
+    },
+    "en": {
+      "tagline": "AI assistant and the coding agent Junie in JetBrains editors",
+      "description": "JetBrains is based in Prague and makes editors such as IntelliJ and PyCharm. AI Assistant helps with code and explanations. Junie is an agent that carries out tasks itself. There is a free version with a limit.",
+      "bestFor": ["Developers who already use JetBrains", "Handing bigger tasks to an agent"],
+      "notFor": [],
+      "limitations": ["Only works in JetBrains editors"]
+    }
+  }
+}

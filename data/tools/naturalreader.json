@@ -1,0 +1,51 @@
+{
+  "slug": "naturalreader",
+  "name": "NaturalReader",
+  "website": "https://www.naturalreaders.com",
+  "company": { "name": "NaturalSoft", "slug": "naturalsoft", "country": "CA" },
+  "skillLevel": "beginner",
+  "audience": ["students", "everyone"],
+  "capabilities": [{ "id": "text-to-speech", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.naturalreaders.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.naturalreaders.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "windows", "macos", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.naturalreaders.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Tekst laten voorlezen, gratis te proberen in je browser",
+      "description": "NaturalReader zet tekst om in spraak. Je plakt tekst of opent een document en laat het voorlezen. Er zijn stemmen in veel talen. Er is ook een versie voor commercieel gebruik van audio.",
+      "bestFor": ["Leren door te luisteren", "Documenten laten voorlezen"],
+      "notFor": [],
+      "limitations": ["Voor commercieel gebruik heb je een aparte licentie nodig"]
+    },
+    "en": {
+      "tagline": "Have text read aloud, free to try in your browser",
+      "description": "NaturalReader turns text into speech. You paste text or open a document and have it read aloud. There are voices in many languages. There is also a version for commercial use of audio.",
+      "bestFor": ["Studying by listening", "Having documents read aloud"],
+      "notFor": [],
+      "limitations": ["Commercial use needs a separate licence"]
+    }
+  }
+}

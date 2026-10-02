@@ -1,0 +1,45 @@
+{
+  "slug": "rev",
+  "name": "Rev",
+  "website": "https://www.rev.com",
+  "pricingUrl": "https://www.rev.com/pricing",
+  "company": { "name": "Rev", "slug": "rev", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["journalists", "researchers"],
+  "capabilities": [{ "id": "transcription", "strength": "primary" }, { "id": "auto-subtitles", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web", "ios", "android", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.rev.com", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.rev.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Uitschrijven door AI of door mensen, vooral voor Engels",
+      "description": "Rev schrijft audio en video uit. Je kiest voor snelle AI of voor werk door mensen. Rev maakt ook ondertitels. Het is vooral bekend in de Verenigde Staten.",
+      "bestFor": ["Engelstalige interviews", "Ondertitels die door mensen zijn gecontroleerd"],
+      "notFor": [],
+      "limitations": ["Uitschrijven door mensen kost meer"]
+    },
+    "en": {
+      "tagline": "Transcription by AI or by people, mainly for English",
+      "description": "Rev transcribes audio and video. You choose fast AI or work by people. Rev also makes subtitles. It is best known in the United States.",
+      "bestFor": ["English-language interviews", "Human-checked subtitles"],
+      "notFor": [],
+      "limitations": ["Human transcription costs more"]
+    }
+  }
+}

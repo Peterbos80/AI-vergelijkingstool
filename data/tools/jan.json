@@ -1,0 +1,68 @@
+{
+  "slug": "jan",
+  "name": "Jan",
+  "website": "https://jan.ai",
+  "githubRepo": "menloresearch/jan",
+  "company": { "name": "Menlo Research", "slug": "menlo-research" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "privacy-conscious"],
+  "capabilities": [{ "id": "local-llm", "strength": "primary" }, { "id": "chat-assistant", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://jan.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://jan.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["windows", "macos", "linux"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://jan.ai", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/menloresearch/jan", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/menloresearch/jan", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Gratis open-source app om AI-modellen op je eigen computer te draaien",
+      "description": "Jan is een open-source app voor Windows, Mac en Linux. Je downloadt een AI-model en chat daarmee op je eigen computer. Je gesprekken blijven dan op je apparaat. Je kunt ook online modellen koppelen.",
+      "bestFor": ["Offline en privé chatten met AI", "Open modellen uitproberen"],
+      "notFor": ["Oudere of trage computers"],
+      "limitations": ["Grote modellen vragen een snelle computer met veel geheugen"]
+    },
+    "en": {
+      "tagline": "Free open-source app to run AI models on your own computer",
+      "description": "Jan is an open-source app for Windows, Mac and Linux. You download an AI model and chat with it on your own computer. Your chats then stay on your device. You can also connect online models.",
+      "bestFor": ["Offline and private AI chat", "Trying open models"],
+      "notFor": ["Old or slow computers"],
+      "limitations": ["Large models need a fast computer with a lot of memory"]
+    }
+  }
+}

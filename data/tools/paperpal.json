@@ -1,0 +1,51 @@
+{
+  "slug": "paperpal",
+  "name": "Paperpal",
+  "website": "https://paperpal.com",
+  "company": { "name": "Cactus Communications", "slug": "cactus" },
+  "skillLevel": "beginner",
+  "audience": ["researchers", "students"],
+  "capabilities": [{ "id": "grammar-checking", "strength": "primary" }, { "id": "academic-research", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://paperpal.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://paperpal.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "windows", "macos"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://paperpal.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Schrijfhulp voor wetenschappelijke teksten in het Engels",
+      "description": "Paperpal helpt onderzoekers en studenten met academisch Engels. Het controleert taal en stijl en geeft tips per zin. Er zijn ook functies om bronnen te zoeken en tekst te parafraseren. Het werkt in Word en in de browser.",
+      "bestFor": ["Promovendi en onderzoekers", "Een artikel klaarmaken voor een tijdschrift"],
+      "notFor": ["Nederlandse teksten"],
+      "limitations": ["Gericht op Engels"]
+    },
+    "en": {
+      "tagline": "Writing help for academic texts in English",
+      "description": "Paperpal helps researchers and students with academic English. It checks language and style and gives tips per sentence. There are also features to find sources and paraphrase text. It works in Word and in the browser.",
+      "bestFor": ["PhD students and researchers", "Getting a paper ready for a journal"],
+      "notFor": ["Dutch texts"],
+      "limitations": ["Focused on English"]
+    }
+  }
+}

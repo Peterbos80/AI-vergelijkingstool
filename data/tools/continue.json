@@ -1,0 +1,68 @@
+{
+  "slug": "continue",
+  "name": "Continue",
+  "website": "https://www.continue.dev",
+  "githubRepo": "continuedev/continue",
+  "company": { "name": "Continue", "slug": "continue", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "code-assistant", "strength": "primary" }, { "id": "local-llm", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.continue.dev", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.continue.dev", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["vscode", "jetbrains"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.continue.dev", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/continuedev/continue", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/continuedev/continue", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Open-source code-assistent die je zelf instelt",
+      "description": "Continue is een open-source assistent voor VS Code en JetBrains. Je chat over je code en laat code aanvullen. Je kiest zelf de modellen, ook lokale. Teams delen hun instellingen.",
+      "bestFor": ["Teams die eigen of lokale modellen willen", "Ontwikkelaars die alles zelf willen instellen"],
+      "notFor": [],
+      "limitations": ["Instellen kost wat tijd"]
+    },
+    "en": {
+      "tagline": "Open-source code assistant you configure yourself",
+      "description": "Continue is an open-source assistant for VS Code and JetBrains. You chat about your code and get completions. You choose the models, including local ones. Teams share their settings.",
+      "bestFor": ["Teams that want their own or local models", "Developers who want to configure everything"],
+      "notFor": [],
+      "limitations": ["Setting it up takes some time"]
+    }
+  }
+}

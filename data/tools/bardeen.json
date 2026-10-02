@@ -1,0 +1,51 @@
+{
+  "slug": "bardeen",
+  "name": "Bardeen",
+  "website": "https://www.bardeen.ai",
+  "company": { "name": "Bardeen", "slug": "bardeen", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["sales"],
+  "capabilities": [{ "id": "workflow-automation", "strength": "primary" }, { "id": "ai-agents", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.bardeen.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.bardeen.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.bardeen.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Automatiseert taken in je browser, vooral voor sales",
+      "description": "Bardeen is een extensie die taken in je browser automatiseert. Het zet bijvoorbeeld gegevens van websites in een spreadsheet. AI helpt met onderzoek naar bedrijven en klanten. Het richt zich vooral op sales.",
+      "bestFor": ["Salesteams die klanten onderzoeken", "Gegevens van websites overnemen"],
+      "notFor": [],
+      "limitations": ["Werkt via je browser"]
+    },
+    "en": {
+      "tagline": "Automates tasks in your browser, mainly for sales",
+      "description": "Bardeen is an extension that automates tasks in your browser. For example, it puts data from websites into a spreadsheet. AI helps research companies and customers. It focuses mainly on sales.",
+      "bestFor": ["Sales teams researching prospects", "Copying data from websites"],
+      "notFor": [],
+      "limitations": ["Works through your browser"]
+    }
+  }
+}

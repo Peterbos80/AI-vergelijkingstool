@@ -1,0 +1,51 @@
+{
+  "slug": "noota",
+  "name": "Noota",
+  "website": "https://www.noota.io",
+  "company": { "name": "Noota", "slug": "noota", "country": "FR" },
+  "skillLevel": "beginner",
+  "audience": ["sales", "hr", "teams"],
+  "capabilities": [{ "id": "meeting-notes", "strength": "primary" }, { "id": "transcription", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.noota.io", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.noota.io", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "chrome_extension"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.noota.io", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Franse notulist voor vergaderingen en sollicitatiegesprekken",
+      "description": "Noota komt uit Frankrijk. Het neemt online vergaderingen op, schrijft ze uit en maakt een verslag. Je stuurt het verslag door naar je CRM of wervingssysteem.",
+      "bestFor": ["Recruiters en salesteams", "Europese teams die op privacy letten"],
+      "notFor": [],
+      "limitations": ["Vraag deelnemers altijd om toestemming voor opnemen"]
+    },
+    "en": {
+      "tagline": "French note-taker for meetings and job interviews",
+      "description": "Noota is based in France. It records online meetings, transcribes them and writes a report. You send the report on to your CRM or recruiting system.",
+      "bestFor": ["Recruiters and sales teams", "European teams that care about privacy"],
+      "notFor": [],
+      "limitations": ["Always ask participants for consent to record"]
+    }
+  }
+}

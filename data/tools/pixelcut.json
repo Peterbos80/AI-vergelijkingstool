@@ -1,0 +1,56 @@
+{
+  "slug": "pixelcut",
+  "name": "Pixelcut",
+  "website": "https://www.pixelcut.ai",
+  "company": { "name": "Pixelcut", "slug": "pixelcut" },
+  "skillLevel": "beginner",
+  "audience": ["ecommerce", "smb"],
+  "capabilities": [
+    { "id": "product-photography", "strength": "primary" },
+    { "id": "background-removal", "strength": "primary" },
+    { "id": "upscaling", "strength": "secondary" },
+    { "id": "image-editing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.pixelcut.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.pixelcut.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.pixelcut.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Productfoto's maken met AI-achtergronden, op je telefoon of web",
+      "description": "Pixelcut helpt webwinkels met productfoto's. Je haalt de achtergrond weg en zet het product in een nieuwe scène. Je kunt ook foto's vergroten en voorwerpen wissen. Het werkt in de app en in de browser.",
+      "bestFor": ["Kleine webwinkels", "Productfoto's zonder fotostudio"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik is beperkt"]
+    },
+    "en": {
+      "tagline": "Product photos with AI backgrounds, on your phone or the web",
+      "description": "Pixelcut helps online shops with product photos. You remove the background and place the product in a new scene. You can also enlarge photos and erase objects. It works in the app and in the browser.",
+      "bestFor": ["Small online shops", "Product photos without a studio"],
+      "notFor": [],
+      "limitations": ["Free use is limited"]
+    }
+  }
+}

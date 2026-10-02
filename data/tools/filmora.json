@@ -1,0 +1,52 @@
+{
+  "slug": "filmora",
+  "name": "Wondershare Filmora",
+  "aliases": ["Filmora"],
+  "website": "https://filmora.wondershare.com",
+  "company": { "name": "Wondershare", "slug": "wondershare", "country": "CN" },
+  "skillLevel": "beginner",
+  "audience": ["creators"],
+  "capabilities": [{ "id": "video-editing", "strength": "primary" }, { "id": "auto-subtitles", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://filmora.wondershare.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://filmora.wondershare.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["windows", "macos", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://filmora.wondershare.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Videobewerker voor beginners, met veel AI-functies",
+      "description": "Filmora is een videobewerker van Wondershare. Je leert hem snel. AI helpt met ondertitels, het wegknippen van stiltes en het maken van muziek. De gratis versie zet een watermerk in je video.",
+      "bestFor": ["YouTube-video's bewerken", "Beginners die meer willen dan een telefoon-app"],
+      "notFor": [],
+      "limitations": ["De gratis versie zet een watermerk in je video"]
+    },
+    "en": {
+      "tagline": "Video editor for beginners, with many AI features",
+      "description": "Filmora is a video editor from Wondershare. It is quick to learn. AI helps with subtitles, cutting silences and making music. The free version adds a watermark to your video.",
+      "bestFor": ["Editing YouTube videos", "Beginners who want more than a phone app"],
+      "notFor": [],
+      "limitations": ["The free version adds a watermark"]
+    }
+  }
+}

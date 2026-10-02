@@ -1,0 +1,51 @@
+{
+  "slug": "moises",
+  "name": "Moises",
+  "website": "https://moises.ai",
+  "company": { "name": "Moises", "slug": "moises", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["musicians"],
+  "capabilities": [{ "id": "audio-editing", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://moises.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://moises.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android", "windows", "macos"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://moises.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Muziekapp die sporen splitst en akkoorden herkent",
+      "description": "Moises is een app voor muzikanten. Je haalt instrumenten of zang uit een nummer. De app herkent ook akkoorden en het tempo. Zo oefen je op je eigen tempo.",
+      "bestFor": ["Muzikanten die een nummer willen instuderen", "Meespelen zonder jouw instrument in de mix"],
+      "notFor": [],
+      "limitations": ["Veel functies zitten in het betaalde plan"]
+    },
+    "en": {
+      "tagline": "Music app that splits tracks and detects chords",
+      "description": "Moises is an app for musicians. You take instruments or vocals out of a song. The app also detects chords and tempo. That way you practise at your own pace.",
+      "bestFor": ["Musicians learning a song", "Playing along without your instrument in the mix"],
+      "notFor": [],
+      "limitations": ["Many features are in the paid plan"]
+    }
+  }
+}

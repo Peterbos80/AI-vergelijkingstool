@@ -1,0 +1,56 @@
+{
+  "slug": "kittl",
+  "name": "Kittl",
+  "website": "https://www.kittl.com",
+  "pricingUrl": "https://www.kittl.com/pricing",
+  "company": { "name": "Kittl", "slug": "kittl", "country": "DE" },
+  "skillLevel": "beginner",
+  "audience": ["designers", "creators", "ecommerce"],
+  "capabilities": [
+    { "id": "graphic-design", "strength": "primary" },
+    { "id": "logo-design", "strength": "secondary" },
+    { "id": "image-generation", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.kittl.com/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.kittl.com/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.kittl.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Ontwerpplatform voor logo's, posters en merchandise, met AI",
+      "description": "Kittl komt uit Berlijn. Je ontwerpt er logo's, posters en prints voor T-shirts. Er zijn veel sjablonen en lettertypes. AI helpt met plaatjes en tekst.",
+      "bestFor": ["Merchandise en printontwerpen", "Logo's en posters met mooie letters"],
+      "notFor": [],
+      "limitations": ["Gratis gebruik heeft beperkingen"]
+    },
+    "en": {
+      "tagline": "Design platform for logos, posters and merchandise, with AI",
+      "description": "Kittl is based in Berlin. You design logos, posters and T-shirt prints with it. There are many templates and fonts. AI helps with images and text.",
+      "bestFor": ["Merchandise and print designs", "Logos and posters with great type"],
+      "notFor": [],
+      "limitations": ["Free use has restrictions"]
+    }
+  }
+}

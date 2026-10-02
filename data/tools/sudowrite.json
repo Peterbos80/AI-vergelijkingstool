@@ -1,0 +1,37 @@
+{
+  "slug": "sudowrite",
+  "name": "Sudowrite",
+  "website": "https://www.sudowrite.com",
+  "pricingUrl": "https://www.sudowrite.com/pricing",
+  "company": { "name": "Sudowrite", "slug": "sudowrite", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["writers"],
+  "capabilities": [{ "id": "long-form-writing", "strength": "primary" }, { "id": "script-writing", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.sudowrite.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-schrijfhulp voor verhalen en romans",
+      "description": "Sudowrite is gemaakt voor schrijvers van fictie. Het helpt je met ideeën, beschrijvingen en het verder schrijven van een scène. Je kunt ook een heel verhaal plannen. Je blijft zelf de schrijver.",
+      "bestFor": ["Romanschrijvers die vastzitten", "Ideeën voor personages en plots"],
+      "notFor": ["Zakelijke teksten"],
+      "limitations": ["Werkt het best in het Engels"]
+    },
+    "en": {
+      "tagline": "AI writing help for stories and novels",
+      "description": "Sudowrite is made for fiction writers. It helps with ideas, descriptions and continuing a scene. You can also plan a whole story. You stay the writer.",
+      "bestFor": ["Novelists who are stuck", "Ideas for characters and plots"],
+      "notFor": ["Business texts"],
+      "limitations": ["Works best in English"]
+    }
+  }
+}

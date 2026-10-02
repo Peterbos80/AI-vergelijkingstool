@@ -1,0 +1,52 @@
+{
+  "slug": "bubble",
+  "name": "Bubble",
+  "website": "https://bubble.io",
+  "pricingUrl": "https://bubble.io/pricing",
+  "company": { "name": "Bubble", "slug": "bubble", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["founders", "startups"],
+  "capabilities": [{ "id": "app-builder", "strength": "primary" }, { "id": "website-builder", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://bubble.io/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://bubble.io/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://bubble.io", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "No-code platform voor webapps, nu met een AI-bouwer",
+      "description": "Bubble is een bekend platform om webapps te bouwen zonder code. Je ontwerpt schermen en logica met blokken. AI maakt een eerste versie op basis van je beschrijving. Daarna bouw je zelf verder.",
+      "bestFor": ["Startups die een product willen bouwen", "Apps met eigen logica en database"],
+      "notFor": ["Wie snel een simpele website wil"],
+      "limitations": ["Het kost tijd om het te leren"]
+    },
+    "en": {
+      "tagline": "No-code platform for web apps, now with an AI builder",
+      "description": "Bubble is a well-known platform for building web apps without code. You design screens and logic with blocks. AI makes a first version from your description. Then you keep building yourself.",
+      "bestFor": ["Startups building a product", "Apps with their own logic and database"],
+      "notFor": ["People who want a simple website fast"],
+      "limitations": ["It takes time to learn"]
+    }
+  }
+}

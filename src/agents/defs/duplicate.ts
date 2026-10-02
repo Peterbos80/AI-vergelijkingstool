@@ -1,7 +1,9 @@
 /**
  * Duplicate agent: flags published tools that look like the same product
- * (same website host, or the same normalised name/alias). Merging is a human
- * decision (R2); the item expires as P3 when ignored.
+ * (same website, or the same normalised name/alias). Merging is a human
+ * decision (R2); the item expires as P3 when ignored. Two product pages on one
+ * shared host (adobe.com/products/photoshop and adobe.com/express) are
+ * different products; a root site and a page on it are not.
  */
 import { eq } from 'drizzle-orm';
 import { tools } from '@/lib/db/schema';
@@ -16,6 +18,14 @@ export function hostOf(url: string): string | null {
   }
 }
 
+/** The website's host and its path ('' for the root), lowercased, without a trailing slash or index page. */
+export function siteKey(url: string): { host: string; path: string } | null {
+  const host = hostOf(url);
+  if (!host) return null;
+  const path = new URL(url).pathname.toLowerCase().replace(/\/index\.html?$/, '/').replace(/\/+$/, '');
+  return { host, path };
+}
+
 export function duplicatePairs(list: { id: string; slug: string; name: string; aliases: string[]; websiteUrl: string }[]): { a: string; b: string; reason: 'same_host' | 'same_name' }[] {
   const out: { a: string; b: string; reason: 'same_host' | 'same_name' }[] = [];
   const seen = new Set<string>();
@@ -26,14 +36,15 @@ export function duplicatePairs(list: { id: string; slug: string; name: string; a
     seen.add(key);
     out.push({ a: x!, b: y!, reason });
   };
-  const byHost = new Map<string, string>();
+  const byHost = new Map<string, { id: string; path: string }[]>();
   const byName = new Map<string, string>();
   for (const t of list) {
-    const host = hostOf(t.websiteUrl);
-    if (host) {
-      const other = byHost.get(host);
-      if (other) push(other, t.id, 'same_host');
-      else byHost.set(host, t.id);
+    const site = siteKey(t.websiteUrl);
+    if (site) {
+      const here = byHost.get(site.host) ?? [];
+      for (const other of here) if (other.path === '' || site.path === '' || other.path === site.path) push(other.id, t.id, 'same_host');
+      here.push({ id: t.id, path: site.path });
+      byHost.set(site.host, here);
     }
     for (const n of [t.name, ...t.aliases].map(normalize).filter((x) => x.length >= 3)) {
       const other = byName.get(n);

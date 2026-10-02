@@ -1,0 +1,48 @@
+{
+  "slug": "claid",
+  "name": "Claid.ai",
+  "website": "https://claid.ai",
+  "company": { "name": "Claid.ai", "slug": "claid" },
+  "skillLevel": "intermediate",
+  "audience": ["ecommerce", "marketplaces"],
+  "capabilities": [
+    { "id": "product-photography", "strength": "primary" },
+    { "id": "upscaling", "strength": "secondary" },
+    { "id": "background-removal", "strength": "secondary" }
+  ],
+  "facts": {
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://claid.ai", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://claid.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Verbetert en maakt productfoto's voor webwinkels en marktplaatsen",
+      "description": "Claid.ai is gemaakt voor webwinkels. Het verbetert productfoto's automatisch en maakt nieuwe achtergronden. Via de API verwerk je veel foto's tegelijk. Zo krijgen al je producten dezelfde stijl.",
+      "bestFor": ["Webwinkels met veel producten", "Marktplaatsen die foto's gelijk willen trekken"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Improves and creates product photos for shops and marketplaces",
+      "description": "Claid.ai is made for online shops. It improves product photos automatically and creates new backgrounds. Through the API you process many photos at once. That gives all your products the same style.",
+      "bestFor": ["Online shops with many products", "Marketplaces that want consistent photos"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

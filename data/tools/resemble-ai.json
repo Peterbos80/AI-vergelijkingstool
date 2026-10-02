@@ -1,0 +1,44 @@
+{
+  "slug": "resemble-ai",
+  "name": "Resemble AI",
+  "website": "https://www.resemble.ai",
+  "company": { "name": "Resemble AI", "slug": "resemble" },
+  "skillLevel": "intermediate",
+  "audience": ["developers", "enterprise"],
+  "capabilities": [{ "id": "voice-cloning", "strength": "primary" }, { "id": "text-to-speech", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web", "api"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.resemble.ai", "type": "official" }]
+    },
+    "api_available": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.resemble.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Stemmen klonen en spraak maken, plus herkenning van nep-audio",
+      "description": "Resemble AI maakt synthetische stemmen. Je kunt een eigen stem klonen, met toestemming. Er is ook een tool die nep-audio herkent. Bedrijven gebruiken het voor apps, games en klantenservice.",
+      "bestFor": ["Bedrijven die een eigen merkstem willen", "Deepfake-audio opsporen"],
+      "notFor": ["Iemands stem klonen zonder toestemming"],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Voice cloning and speech, plus detection of fake audio",
+      "description": "Resemble AI makes synthetic voices. You can clone a voice, with consent. There is also a tool that detects fake audio. Companies use it for apps, games and customer service.",
+      "bestFor": ["Companies that want their own brand voice", "Detecting deepfake audio"],
+      "notFor": ["Cloning someone's voice without consent"],
+      "limitations": []
+    }
+  }
+}

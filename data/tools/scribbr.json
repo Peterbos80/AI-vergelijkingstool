@@ -1,0 +1,55 @@
+{
+  "slug": "scribbr",
+  "name": "Scribbr",
+  "website": "https://www.scribbr.nl",
+  "company": { "name": "Scribbr", "slug": "scribbr", "country": "NL" },
+  "skillLevel": "beginner",
+  "audience": ["students"],
+  "capabilities": [
+    { "id": "grammar-checking", "strength": "primary" },
+    { "id": "academic-research", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.scribbr.nl", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.scribbr.nl", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.scribbr.nl", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Nederlandse schrijfhulp voor studenten, met gratis AI-tools",
+      "description": "Scribbr komt uit Amsterdam en helpt studenten met verslagen en scripties. Er zijn gratis tools, zoals een parafraseertool, een grammaticacheck en een AI-detector. Voor een plagiaatcontrole of een menselijke redacteur betaal je.",
+      "bestFor": ["Studenten die aan een verslag of scriptie werken", "Bronnen vermelden in APA-stijl"],
+      "notFor": ["Marketingteksten"],
+      "limitations": ["De plagiaatcontrole en menselijke correctie zijn betaald"]
+    },
+    "en": {
+      "tagline": "Dutch writing help for students, with free AI tools",
+      "description": "Scribbr is based in Amsterdam and helps students with reports and theses. There are free tools, such as a paraphraser, a grammar check and an AI detector. A plagiarism check or a human editor costs money.",
+      "bestFor": ["Students working on a report or thesis", "Citing sources in APA style"],
+      "notFor": ["Marketing copy"],
+      "limitations": ["The plagiarism check and human proofreading are paid"]
+    }
+  }
+}

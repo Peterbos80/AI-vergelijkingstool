@@ -1,0 +1,36 @@
+{
+  "slug": "userlike",
+  "name": "Userlike",
+  "website": "https://www.userlike.com",
+  "company": { "name": "Userlike", "slug": "userlike", "country": "DE" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "support-teams"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }],
+  "facts": {
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.userlike.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Duitse livechat en berichten met AI, gericht op de AVG",
+      "description": "Userlike komt uit Keulen. Je chat met klanten via je website, WhatsApp en andere kanalen. Een AI-chatbot beantwoordt veelgestelde vragen. Volgens Userlike worden gegevens in Duitsland opgeslagen.",
+      "bestFor": ["Europese bedrijven die op privacy letten", "Klantcontact via WhatsApp en chat"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "German live chat and messaging with AI, focused on the GDPR",
+      "description": "Userlike is based in Cologne. You chat with customers on your website, WhatsApp and other channels. An AI chatbot answers common questions. According to Userlike, data is stored in Germany.",
+      "bestFor": ["European companies that care about privacy", "Customer contact via WhatsApp and chat"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

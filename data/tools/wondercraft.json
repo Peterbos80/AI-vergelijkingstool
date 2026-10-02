@@ -1,0 +1,55 @@
+{
+  "slug": "wondercraft",
+  "name": "Wondercraft",
+  "website": "https://www.wondercraft.ai",
+  "company": { "name": "Wondercraft", "slug": "wondercraft" },
+  "skillLevel": "beginner",
+  "audience": ["podcasters", "marketers"],
+  "capabilities": [
+    { "id": "text-to-speech", "strength": "primary" },
+    { "id": "voice-cloning", "strength": "secondary" },
+    { "id": "podcast-recording", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.wondercraft.ai", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.wondercraft.ai", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.wondercraft.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Maakt podcasts en audio met AI-stemmen",
+      "description": "Wondercraft maakt audio, zoals podcasts en advertenties. Je schrijft een script of laat AI dat doen. AI-stemmen lezen het voor, met muziek eronder. Je kunt ook je eigen stem klonen.",
+      "bestFor": ["Podcasts zonder opnamestudio", "Audio-advertenties"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Makes podcasts and audio with AI voices",
+      "description": "Wondercraft makes audio, such as podcasts and ads. You write a script or let AI write it. AI voices read it aloud, with music underneath. You can also clone your own voice.",
+      "bestFor": ["Podcasts without a studio", "Audio ads"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "slug": "crewai",
+  "name": "CrewAI",
+  "website": "https://www.crewai.com",
+  "githubRepo": "crewAIInc/crewAI",
+  "company": { "name": "CrewAI", "slug": "crewai", "country": "US" },
+  "skillLevel": "advanced",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "ai-agents", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.crewai.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.crewai.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["api", "self_hosted"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.crewai.com", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/crewAIInc/crewAI", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/crewAIInc/crewAI", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Open-source framework om samenwerkende AI-agents te bouwen",
+      "description": "CrewAI is een open-source framework in Python. Je bouwt er teams van AI-agents mee, elk met een eigen rol. Ze werken samen aan een taak. Er is ook een betaald platform voor bedrijven.",
+      "bestFor": ["Ontwikkelaars die systemen met meerdere agents bouwen", "Prototypes van AI-workflows"],
+      "notFor": ["Mensen die niet programmeren"],
+      "limitations": ["Vraagt kennis van Python"]
+    },
+    "en": {
+      "tagline": "Open-source framework for building AI agents that work together",
+      "description": "CrewAI is an open-source framework in Python. You build teams of AI agents with it, each with its own role. They work together on a task. There is also a paid platform for companies.",
+      "bestFor": ["Developers building multi-agent systems", "Prototyping AI workflows"],
+      "notFor": ["People who do not code"],
+      "limitations": ["Needs Python skills"]
+    }
+  }
+}

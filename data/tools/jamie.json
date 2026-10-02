@@ -1,0 +1,36 @@
+{
+  "slug": "jamie",
+  "name": "jamie",
+  "website": "https://www.meetjamie.ai",
+  "company": { "name": "jamie", "slug": "jamie" },
+  "skillLevel": "beginner",
+  "audience": ["professionals", "teams"],
+  "capabilities": [{ "id": "meeting-notes", "strength": "primary" }, { "id": "transcription", "strength": "secondary" }],
+  "facts": {
+    "platforms": {
+      "value": ["windows", "macos", "ios"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.meetjamie.ai", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Notulist zonder bot, ook voor gesprekken in een vergaderzaal",
+      "description": "jamie maakt notulen van vergaderingen zonder dat er een bot meedoet. Het neemt op via je eigen apparaat. Daardoor werkt het met elke belapp en ook bij gesprekken in een zaal. Je krijgt een verslag met taken en besluiten.",
+      "bestFor": ["Vergaderingen op locatie en online", "Notulen zonder bot in de call"],
+      "notFor": [],
+      "limitations": ["Vraag deelnemers altijd om toestemming voor opnemen"]
+    },
+    "en": {
+      "tagline": "Bot-free note-taker, also for meetings in a room",
+      "description": "jamie takes meeting notes without a bot joining. It records through your own device. So it works with any calling app and also for meetings in a room. You get a report with tasks and decisions.",
+      "bestFor": ["Meetings in person and online", "Notes without a bot in the call"],
+      "notFor": [],
+      "limitations": ["Always ask participants for consent to record"]
+    }
+  }
+}

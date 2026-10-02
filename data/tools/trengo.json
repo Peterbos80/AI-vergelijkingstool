@@ -1,0 +1,60 @@
+{
+  "slug": "trengo",
+  "name": "Trengo",
+  "website": "https://trengo.com",
+  "company": { "name": "Trengo", "slug": "trengo", "country": "NL" },
+  "skillLevel": "beginner",
+  "audience": ["smb", "support-teams"],
+  "capabilities": [{ "id": "support-chatbot", "strength": "primary" }],
+  "facts": {
+    "has_free_tier": {
+      "value": false,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://trengo.com", "type": "official" }]
+    },
+    "has_free_trial": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://trengo.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://trengo.com", "type": "official" }]
+    },
+    "supports_dutch": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://trengo.com", "type": "official" }]
+    }
+  },
+  "plans": [],
+  "i18n": {
+    "nl": {
+      "tagline": "Nederlandse inbox voor klantcontact met AI, uit Utrecht",
+      "description": "Trengo komt uit Utrecht. Alle berichten van klanten komen in één inbox: e-mail, WhatsApp, chat en social media. AI helpt met antwoorden en kan vragen zelf afhandelen. De software is ook in het Nederlands.",
+      "bestFor": ["Nederlandse mkb-bedrijven", "Teams die WhatsApp gebruiken voor klantcontact"],
+      "notFor": [],
+      "limitations": ["Geen gratis plan"]
+    },
+    "en": {
+      "tagline": "Dutch customer contact inbox with AI, from Utrecht",
+      "description": "Trengo is based in Utrecht. All customer messages land in one inbox: email, WhatsApp, chat and social media. AI helps with replies and can handle questions on its own. The software is also available in Dutch.",
+      "bestFor": ["Dutch small businesses", "Teams using WhatsApp for customer contact"],
+      "notFor": [],
+      "limitations": ["No free plan"]
+    }
+  }
+}

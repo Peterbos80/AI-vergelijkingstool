@@ -1,0 +1,52 @@
+{
+  "slug": "omnisend",
+  "name": "Omnisend",
+  "website": "https://www.omnisend.com",
+  "pricingUrl": "https://www.omnisend.com/pricing/",
+  "company": { "name": "Omnisend", "slug": "omnisend", "country": "LT" },
+  "skillLevel": "beginner",
+  "audience": ["ecommerce"],
+  "capabilities": [{ "id": "email-marketing", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.omnisend.com/pricing/", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.omnisend.com/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.omnisend.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "EUR", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "E-mail- en sms-marketing voor webwinkels",
+      "description": "Omnisend komt uit Litouwen en is gemaakt voor webwinkels. Je stuurt e-mails en sms'jes, bijvoorbeeld bij een verlaten winkelwagen. AI helpt met onderwerpregels en teksten. Het werkt samen met Shopify en andere platforms.",
+      "bestFor": ["Webwinkels op Shopify of WooCommerce", "Automatische e-mails na een bestelling"],
+      "notFor": [],
+      "limitations": []
+    },
+    "en": {
+      "tagline": "Email and SMS marketing for online shops",
+      "description": "Omnisend is based in Lithuania and made for online shops. You send emails and text messages, for example for an abandoned cart. AI helps with subject lines and copy. It works with Shopify and other platforms.",
+      "bestFor": ["Shops on Shopify or WooCommerce", "Automatic emails after an order"],
+      "notFor": [],
+      "limitations": []
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "kiro",
+  "name": "Kiro",
+  "website": "https://kiro.dev",
+  "pricingUrl": "https://kiro.dev/pricing/",
+  "company": { "name": "Amazon Web Services", "slug": "aws", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "agentic-coding", "strength": "primary" }, { "id": "code-assistant", "strength": "secondary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://kiro.dev/pricing/", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://kiro.dev/pricing/", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["windows", "macos", "linux"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://kiro.dev", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "AI-ontwikkelomgeving van AWS die eerst een plan maakt",
+      "description": "Kiro is een code-editor met AI-agents, gemaakt door AWS. Je beschrijft wat je wilt bouwen. Kiro schrijft eerst de eisen en een ontwerp, en daarna de code. Zo blijft een project overzichtelijk.",
+      "bestFor": ["Grotere projecten met duidelijke eisen", "Ontwikkelaars die graag eerst plannen"],
+      "notFor": ["Mensen die nog nooit hebben geprogrammeerd"],
+      "limitations": ["Gratis gebruik heeft een limiet per maand"]
+    },
+    "en": {
+      "tagline": "AI development environment from AWS that plans first",
+      "description": "Kiro is a code editor with AI agents, made by AWS. You describe what you want to build. Kiro first writes the requirements and a design, and then the code. That keeps a project organised.",
+      "bestFor": ["Bigger projects with clear requirements", "Developers who like to plan first"],
+      "notFor": ["People who have never coded"],
+      "limitations": ["Free use has a monthly limit"]
+    }
+  }
+}

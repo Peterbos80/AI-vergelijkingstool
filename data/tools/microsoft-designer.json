@@ -1,0 +1,55 @@
+{
+  "slug": "microsoft-designer",
+  "name": "Microsoft Designer",
+  "website": "https://designer.microsoft.com",
+  "company": { "name": "Microsoft", "slug": "microsoft", "country": "US" },
+  "skillLevel": "beginner",
+  "audience": ["everyone", "smb"],
+  "capabilities": [
+    { "id": "graphic-design", "strength": "primary" },
+    { "id": "image-generation", "strength": "secondary" },
+    { "id": "image-editing", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://designer.microsoft.com", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://designer.microsoft.com", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web", "ios", "android"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://designer.microsoft.com", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Ontwerpapp van Microsoft voor posts, kaarten en plaatjes",
+      "description": "Microsoft Designer maakt ontwerpen op basis van je beschrijving. Denk aan uitnodigingen, posts en kaarten. Je kunt ook plaatjes maken en bewerken. Je hebt een Microsoft-account nodig.",
+      "bestFor": ["Snel een uitnodiging of post maken", "Wie al Microsoft 365 gebruikt"],
+      "notFor": ["Een professionele huisstijl"],
+      "limitations": ["Gratis gebruik heeft een limiet"]
+    },
+    "en": {
+      "tagline": "Design app from Microsoft for posts, cards and pictures",
+      "description": "Microsoft Designer makes designs from your description. Think of invitations, posts and cards. You can also make and edit pictures. You need a Microsoft account.",
+      "bestFor": ["Making an invitation or post quickly", "People who already use Microsoft 365"],
+      "notFor": ["A professional brand identity"],
+      "limitations": ["Free use has a limit"]
+    }
+  }
+}

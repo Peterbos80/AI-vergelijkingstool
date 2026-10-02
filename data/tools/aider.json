@@ -1,0 +1,68 @@
+{
+  "slug": "aider",
+  "name": "Aider",
+  "website": "https://aider.chat",
+  "githubRepo": "Aider-AI/aider",
+  "company": { "name": "Aider", "slug": "aider" },
+  "skillLevel": "advanced",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "agentic-coding", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://aider.chat", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://aider.chat", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["cli"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://aider.chat", "type": "official" }]
+    },
+    "open_source": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/Aider-AI/aider", "type": "github" }]
+    },
+    "self_hostable": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://github.com/Aider-AI/aider", "type": "github" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Open-source programmeerhulp voor in je terminal",
+      "description": "Aider is een open-source tool voor de terminal. Je beschrijft een wijziging en Aider past je code aan. Het werkt met git en maakt zelf commits. Je kiest zelf het AI-model.",
+      "bestFor": ["Ontwikkelaars die met git werken", "Wie zelf het model wil kiezen"],
+      "notFor": ["Beginners"],
+      "limitations": ["Je betaalt zelf voor het gebruik van het AI-model"]
+    },
+    "en": {
+      "tagline": "Open-source coding help for your terminal",
+      "description": "Aider is an open-source tool for the terminal. You describe a change and Aider edits your code. It works with git and makes commits itself. You choose the AI model.",
+      "bestFor": ["Developers who work with git", "People who want to choose the model"],
+      "notFor": ["Beginners"],
+      "limitations": ["You pay for the AI model you use"]
+    }
+  }
+}

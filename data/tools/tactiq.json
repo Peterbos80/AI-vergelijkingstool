@@ -1,0 +1,55 @@
+{
+  "slug": "tactiq",
+  "name": "Tactiq",
+  "website": "https://tactiq.io",
+  "company": { "name": "Tactiq", "slug": "tactiq" },
+  "skillLevel": "beginner",
+  "audience": ["teams", "professionals"],
+  "capabilities": [
+    { "id": "meeting-notes", "strength": "primary" },
+    { "id": "transcription", "strength": "secondary" },
+    { "id": "summarization", "strength": "secondary" }
+  ],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://tactiq.io", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://tactiq.io", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["chrome_extension", "web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://tactiq.io", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Live uitschrijven van Google Meet, Zoom en Teams in je browser",
+      "description": "Tactiq is een extensie voor Chrome. Het schrijft je online vergadering live uit, zonder bot in de call. Na afloop maakt AI een samenvatting of een takenlijst. Je bewaart de tekst in bijvoorbeeld Google Docs of Notion.",
+      "bestFor": ["Meelezen tijdens een gesprek", "Notities zonder extra deelnemer"],
+      "notFor": ["Gesprekken buiten de browser"],
+      "limitations": ["Werkt via je browser"]
+    },
+    "en": {
+      "tagline": "Live transcripts of Google Meet, Zoom and Teams in your browser",
+      "description": "Tactiq is a Chrome extension. It transcribes your online meeting live, without a bot in the call. Afterwards AI writes a summary or a to-do list. You save the text in, for example, Google Docs or Notion.",
+      "bestFor": ["Reading along during a call", "Notes without an extra participant"],
+      "notFor": ["Calls outside the browser"],
+      "limitations": ["Works through your browser"]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "coderabbit",
+  "name": "CodeRabbit",
+  "website": "https://www.coderabbit.ai",
+  "pricingUrl": "https://www.coderabbit.ai/pricing",
+  "company": { "name": "CodeRabbit", "slug": "coderabbit", "country": "US" },
+  "skillLevel": "intermediate",
+  "audience": ["developers"],
+  "capabilities": [{ "id": "code-assistant", "strength": "primary" }],
+  "pricingEvidence": {
+    "status": "unverified",
+    "method": "editorial",
+    "observed": "2026-10-01",
+    "note": "Editorial knowledge; pending automated verification on the official page.",
+    "sources": [{ "url": "https://www.coderabbit.ai/pricing", "type": "official" }]
+  },
+  "facts": {
+    "has_free_tier": {
+      "value": true,
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.coderabbit.ai/pricing", "type": "official" }]
+    },
+    "platforms": {
+      "value": ["web"],
+      "status": "unverified",
+      "method": "editorial",
+      "observed": "2026-10-01",
+      "note": "Editorial knowledge; pending automated verification on the official page.",
+      "sources": [{ "url": "https://www.coderabbit.ai", "type": "official" }]
+    }
+  },
+  "plans": [{ "key": "free", "name": "Free", "price": 0, "currency": "USD", "period": "month", "isFree": true }],
+  "i18n": {
+    "nl": {
+      "tagline": "Automatische code-reviews op je pull requests",
+      "description": "CodeRabbit leest elke pull request en geeft commentaar per regel. Het vat wijzigingen samen en wijst op mogelijke fouten. Het werkt met GitHub, GitLab en andere platforms. Voor open-source projecten is het gratis.",
+      "bestFor": ["Teams met veel pull requests", "Open-source projecten"],
+      "notFor": [],
+      "limitations": ["Een AI-review vervangt geen review door een mens"]
+    },
+    "en": {
+      "tagline": "Automatic code reviews on your pull requests",
+      "description": "CodeRabbit reads every pull request and comments line by line. It summarises changes and points out possible bugs. It works with GitHub, GitLab and other platforms. It is free for open-source projects.",
+      "bestFor": ["Teams with many pull requests", "Open-source projects"],
+      "notFor": [],
+      "limitations": ["An AI review does not replace a human review"]
+    }
+  }
+}
