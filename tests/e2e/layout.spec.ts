@@ -18,14 +18,14 @@ test('desktop header: five navigation items, search, view level and language', a
   await page.goto('/nl/tools');
   const nav = page.getByRole('navigation', { name: 'Hoofdnavigatie' });
   await expect(nav.getByRole('link')).toHaveCount(5);
-  await expect(nav.getByRole('link', { name: 'Verkennen' })).toHaveAttribute('aria-current', 'page');
+  await expect(nav.getByRole('link', { name: 'Alle tools' })).toHaveAttribute('aria-current', 'page');
   await expect(page.getByRole('button', { name: 'Zoek een tool' })).toBeVisible();
-  await expect(page.getByRole('banner').getByRole('tab', { name: 'Advanced', exact: true })).toBeVisible();
+  await expect(page.getByRole('banner').getByRole('tab', { name: 'Technisch', exact: true })).toBeVisible();
   await expect(page.getByRole('navigation', { name: 'Taal kiezen' })).toBeVisible();
   await expect(page.getByRole('button', { name: /Menu/ })).toBeHidden();
   expect((await page.getByRole('banner').boundingBox())!.height).toBeLessThanOrEqual(65);
-  // No ticker: Pulse carries the number of changes of the last 30 days (hidden at 0).
-  await expect(nav.getByRole('link', { name: /^Pulse( \d+ wijziging(en)? in de laatste 30 dagen)?$/ })).toBeVisible();
+  // No ticker: "Wat is nieuw" (Pulse) carries the number of changes of the last 30 days (hidden at 0).
+  await expect(nav.getByRole('link', { name: /^Wat is nieuw( \d+ wijziging(en)? in de laatste 30 dagen)?$/ })).toBeVisible();
   await expect(page.locator('[class*="ticker"]')).toHaveCount(0);
 });
 
@@ -44,8 +44,8 @@ test('below 1024px: logo, search and a full-screen menu that closes with Esc', a
   await expect(menu).toHaveAttribute('aria-expanded', 'true');
   const box = (await dialog.boundingBox())!;
   expect([box.x, box.y, box.width, box.height]).toEqual([0, 0, 390, 844]);
-  await expect(dialog.getByRole('link', { name: 'Stack Doctor' })).toBeVisible();
-  await expect(dialog.getByRole('tab', { name: /Advanced/ })).toBeVisible();
+  await expect(dialog.getByRole('link', { name: 'Check je tools' })).toBeVisible();
+  await expect(dialog.getByRole('tab', { name: /Technisch/ })).toBeVisible();
   await expect(dialog.getByRole('link', { name: 'English' })).toBeVisible();
 
   await page.keyboard.press('Escape');
@@ -55,7 +55,7 @@ test('below 1024px: logo, search and a full-screen menu that closes with Esc', a
 
   // Following a link closes the menu.
   await menu.click();
-  await dialog.getByRole('link', { name: 'Pulse' }).click();
+  await dialog.getByRole('link', { name: /^Wat is nieuw/ }).click();
   await expect(page).toHaveURL(/\/nl\/pulse$/);
   await expect(page.getByRole('dialog')).toBeHidden();
 });
@@ -65,7 +65,7 @@ test('search opens with "/" and leads to the tool explorer', async ({ page }) =>
   await page.goto('/nl/pulse');
   await hydrated(page, '.search-btn');
   await page.keyboard.press('/');
-  const dialog = page.getByRole('dialog', { name: 'Zoek in de tooldatabase' });
+  const dialog = page.getByRole('dialog', { name: 'Zoek tussen alle tools' });
   await expect(dialog).toBeVisible();
   await expect(dialog.getByRole('searchbox')).toBeFocused();
   await page.keyboard.press('Escape');

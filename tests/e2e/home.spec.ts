@@ -12,7 +12,7 @@ test('a prompt fills the question box and switches the level and the matrix', as
   await expect(page.locator('.ask[data-hydrated]')).toBeVisible();
   await expect(page.locator('html')).not.toHaveAttribute('data-level', 'advanced');
 
-  await page.getByRole('link', { name: /LLM via API koppelen/ }).click();
+  await page.getByRole('link', { name: /AI koppelen aan je eigen app/ }).click();
   await expect(page).toHaveURL(/\/nl$/);
   await expect(page.locator('html')).toHaveAttribute('data-level', 'advanced');
   await expect(page.locator('#match-q')).toHaveValue(/API/);
@@ -25,7 +25,7 @@ test('a prompt fills the question box and switches the level and the matrix', as
   await page.getByRole('tab', { name: /Basis/ }).last().click();
   await expect(page.locator('html')).toHaveAttribute('data-level', 'basis');
   await expect(panel.locator('thead th', { hasText: 'Kosten' })).toBeVisible();
-  await page.getByRole('tab', { name: /Advanced/ }).last().click();
+  await page.getByRole('tab', { name: /Technisch/ }).last().click();
   await page.goto('/nl/tasks');
   await expect(page.locator('html')).toHaveAttribute('data-level', 'advanced');
 
@@ -58,7 +58,7 @@ test('the starter plans follow the view level', async ({ page }) => {
   await expect(starters.filter({ visible: true })).toHaveCount(3);
   await expect(page.locator('.ask[data-hydrated]')).toBeVisible();
   const first = await starters.filter({ visible: true }).first().innerText();
-  await page.getByRole('tab', { name: /Advanced/ }).last().click();
+  await page.getByRole('tab', { name: /Technisch/ }).last().click();
   await expect(starters.filter({ visible: true })).toHaveCount(3);
   expect(await starters.filter({ visible: true }).first().innerText()).not.toBe(first);
 });

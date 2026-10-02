@@ -7,7 +7,7 @@ import { clipText, Frame, OG_SIZE, og, renderOg } from '@/lib/og';
 
 export const size = OG_SIZE;
 export const contentType = 'image/png';
-export const alt = 'AIToolsWijzer Fair Fight';
+export const alt = 'AIToolsWijzer: two tools compared';
 
 /** Fair Fight: two tools side by side with their entry prices. */
 export default async function Image({ params }: { params: Promise<{ locale: string; pair: string }> }) {

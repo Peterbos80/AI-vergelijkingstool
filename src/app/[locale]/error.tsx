@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 
 /**
  * Route error boundary. Strings are bilingual by design: this component
- * cannot load server messages, and the locale is read from the URL.
+ * cannot load server messages, and the locale is read from the URL. Keep
+ * them in step with errors.* in src/i18n/messages (plain language).
  */
 const TEXT = {
-  nl: { title: 'Er ging iets mis.', body: 'We hebben de fout gelogd. Probeer het opnieuw.', retry: 'Opnieuw proberen' },
-  en: { title: 'Something went wrong.', body: "We've logged the error. Please try again.", retry: 'Try again' },
+  nl: { title: 'Er ging iets mis.', body: 'We hebben de fout genoteerd. Probeer het opnieuw.', retry: 'Opnieuw proberen' },
+  en: { title: 'Something went wrong.', body: "We've noted the error. Please try again.", retry: 'Try again' },
 } as const;
 
 export default function RouteError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
