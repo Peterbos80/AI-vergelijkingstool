@@ -248,6 +248,8 @@ export const eventSeed = z.object({
   ]),
   title: z.object({ nl: z.string(), en: z.string() }),
   summary: z.object({ nl: z.string(), en: z.string() }).optional(),
+  /** A price change with one old and one new price (major units), as its sources state it; Pulse shows old → new. */
+  price: z.object({ old: z.number().nonnegative(), new: z.number().nonnegative(), currency: z.string().length(3) }).optional(),
   /** YYYY-MM-DD, or YYYY-MM when only the month is known. */
   occurred: z.string().regex(/^\d{4}-\d{2}(-\d{2})?$/),
   significance: z.number().int().min(0).max(100).default(50),

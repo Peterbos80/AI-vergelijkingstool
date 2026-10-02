@@ -1119,6 +1119,8 @@
     },
     "empty": "Pas encore de changement de ce type. Choisissez autre chose ci-dessus.",
     "source": "Source",
+    "was": "avant",
+    "now": "maintenant",
     "detected": "vu le {date}",
     "monthPrecision": "{month}"
   },

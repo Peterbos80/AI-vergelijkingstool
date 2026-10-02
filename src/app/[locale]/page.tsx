@@ -17,6 +17,7 @@ import { SponsoredCard } from '@/components/data/SponsoredCard';
 import { AskBox, MatrixPanels, type AskChoice, type AskPrompt, type MatrixPanel } from '@/components/home/AskBox';
 import { HeroStage, type StageWorld } from '@/components/home/HeroStage';
 import { RadarPanel } from '@/components/home/RadarPanel';
+import { NewTools } from '@/components/data/NewTools';
 import { ToolMark } from '@/components/data/ToolMark';
 import { WorldCard } from '@/components/worlds/WorldCard';
 import { toolWorld } from '@/lib/catalog/helpers';
@@ -224,6 +225,10 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
           </ul>
         </div>
       </section>
+
+      <div className="container-page empty:hidden">
+        <NewTools catalog={catalog} locale={locale} t={t} limit={4} />
+      </div>
 
       <section className="home-section home-band" aria-labelledby="matrix-title">
         <div className="container-page">

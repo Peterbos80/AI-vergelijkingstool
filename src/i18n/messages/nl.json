@@ -1109,6 +1109,8 @@
     },
     "empty": "Nog geen wijzigingen van deze soort. Kies hierboven iets anders.",
     "source": "Bron",
+    "was": "was",
+    "now": "nu",
     "detected": "gezien op {date}",
     "monthPrecision": "{month}"
   },

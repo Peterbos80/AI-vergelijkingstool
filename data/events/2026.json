@@ -29,6 +29,7 @@
   {
     "tool": "gemini", "kind": "price_decrease", "occurred": "2026-06-08", "significance": 70, "status": "supported", "observed": "2026-09-29",
     "title": { "nl": "Google AI Plus 38% goedkoper: van $7,99 naar $4,99 per maand", "en": "Google AI Plus drops 38%: from $7.99 to $4.99 per month" },
+    "price": { "old": 7.99, "new": 4.99, "currency": "USD" },
     "summary": { "nl": "Tegelijk verdubbelde de opslag naar 400 GB. Geldt ook voor Gemini Notebook Plus en Flow-credits.", "en": "Storage doubled to 400 GB at the same time. Also applies to Gemini Notebook Plus and Flow credits." },
     "sources": [
       { "url": "https://9to5google.com/2026/06/08/google-ai-plus-price-drop/", "type": "media", "publisher": "9to5Google" },

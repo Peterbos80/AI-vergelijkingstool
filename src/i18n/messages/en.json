@@ -1109,6 +1109,8 @@
     },
     "empty": "No changes of this kind yet. Pick something else above.",
     "source": "Source",
+    "was": "was",
+    "now": "now",
     "detected": "spotted {date}",
     "monthPrecision": "{month}"
   },

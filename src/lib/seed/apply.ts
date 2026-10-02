@@ -578,9 +578,16 @@ export async function applySeed(db: Database, bundle: SeedBundle, now: Date = ne
       if (ev.tool && !toolId) continue;
       const e = await evidenceFor(reg, { ...ev, method: 'web_search', evidence: undefined }, toolId, 'reference', now);
       const monthOnly = ev.occurred.length === 7;
-      const res = await tx
+      const price = ev.price
+        ? {
+            oldValue: { priceCents: toCents(ev.price.old), currency: ev.price.currency },
+            newValue: { priceCents: toCents(ev.price.new), currency: ev.price.currency },
+          }
+        : {};
+      const insert = tx
         .insert(changeEvents)
         .values({
+          ...price,
           toolId,
           kind: ev.kind,
           title: ev.title,
@@ -596,9 +603,12 @@ export async function applySeed(db: Database, bundle: SeedBundle, now: Date = ne
           significance: ev.significance,
           status: 'published',
           dedupeKey: `seed:${ev.tool ?? 'general'}:${ev.kind}:${ev.occurred}:${ev.title.en.slice(0, 60)}`,
-        })
-        .onConflictDoNothing({ target: changeEvents.dedupeKey })
-        .returning({ id: changeEvents.id });
+        });
+      // An event seeded before it had a structured price gets it once; nothing else is ever overwritten.
+      const res = await (ev.price
+        ? insert.onConflictDoUpdate({ target: changeEvents.dedupeKey, set: price, where: isNull(changeEvents.oldValue) })
+        : insert.onConflictDoNothing({ target: changeEvents.dedupeKey })
+      ).returning({ id: changeEvents.id });
       report.events += res.length;
     }
 

@@ -36,7 +36,7 @@ const PRICING_SEARCH_PER_RUN = 3;
  * A home page without such a link is read again after 30 days, one that
  * could not be fetched after a day.
  */
-async function findPricingPages(ctx: AgentContext): Promise<number> {
+async function findPricingPages(ctx: AgentContext): Promise<Set<string>> {
   const { db } = ctx;
   const now = ctx.now();
   const due = await queryRows<{ id: string; website_url: string }>(
@@ -51,7 +51,7 @@ async function findPricingPages(ctx: AgentContext): Promise<number> {
          ORDER BY t.created_at, t.slug
          LIMIT ${PRICING_SEARCH_PER_RUN}`,
   );
-  let found = 0;
+  const found = new Set<string>();
   for (const t of due) {
     if (ctx.signal.aborted) break;
     const res = await ctx.fetcher.get(t.website_url, { accept: 'html' });
@@ -90,9 +90,9 @@ async function findPricingPages(ctx: AgentContext): Promise<number> {
       decision: 'auto_published',
       reason: 'linked from the official home page',
     });
-    found++;
+    found.add(src.id);
   }
-  if (found) ctx.stat('pricing_pages_found', found);
+  if (found.size) ctx.stat('pricing_pages_found', found.size);
   return found;
 }
 
@@ -108,7 +108,8 @@ export const pricingAgent: AgentDefinition = {
     const now = ctx.now();
     const added = await ensurePricingSources(db);
     if (added) ctx.stat('pricing_sources_added', added);
-    await findPricingPages(ctx);
+    // A page found in this run is checked in this run, ahead of the queue.
+    const fresh = await findPricingPages(ctx);
     const all = await db.select().from(tools).where(eq(tools.published, true));
     const pricingSources = await db
       .select()
@@ -121,7 +122,7 @@ export const pricingAgent: AgentDefinition = {
         return { s, p: priority(impact.get(s.toolId!) ?? 0, ageH, s.checkIntervalHours) };
       })
       .filter((x) => x.p >= 0)
-      .sort((a, b) => b.p - a.p)
+      .sort((a, b) => Number(fresh.has(b.s.id)) - Number(fresh.has(a.s.id)) || b.p - a.p)
       .slice(0, ctx.limits.maxItems);
 
     const confirmed: (PriceChange & { oldCents: number | null; pendingId: string })[] = [];

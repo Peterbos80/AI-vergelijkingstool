@@ -803,6 +803,32 @@
   .price-receipt[data-status='community'] .icon {
     color: var(--community);
   }
+  /* A price change in Pulse (components/data/PriceDelta.tsx): old struck through → new, and the percentage. */
+  .price-delta {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem;
+    margin-top: 0.5rem;
+    padding: 0.125rem 0.75rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.875rem;
+  }
+  .price-delta[data-dir='up'] {
+    background: var(--price-up-bg);
+    color: var(--price-up);
+  }
+  .price-delta[data-dir='down'] {
+    background: var(--price-down-bg);
+    color: var(--price-down);
+  }
+  .price-delta s {
+    color: var(--ink-2);
+  }
+  .price-delta-new,
+  .price-delta-pct {
+    font-weight: 650;
+  }
   @media (min-width: 40rem) {
     .tool-row {
       grid-template-columns: 2.75rem minmax(0, 1fr) 10.5rem auto;

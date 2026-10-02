@@ -11,6 +11,7 @@ import { alternates } from '@/lib/seo';
 import { track } from '@/lib/analytics/track';
 import { Icon } from '@/components/ui/Icon';
 import { NewTools } from '@/components/data/NewTools';
+import { PriceDelta } from '@/components/data/PriceDelta';
 
 const GROUPS: Record<string, ChangeKind[]> = {
   price: ['price_increase', 'price_decrease'],
@@ -104,6 +105,7 @@ export default async function PulsePage({ params, searchParams }: PageProps<'/[l
                           {tool ? ' — ' : ''}
                           {eventTitle(e, locale)}
                         </p>
+                        <PriceDelta oldValue={e.oldValue} newValue={e.newValue} t={t} locale={locale} />
                         {summary && <p className="mt-1 text-sm text-ink-2">{summary}</p>}
                         <p className="mt-1 text-xs text-ink-3">
                           {e.sourceUrl && (
