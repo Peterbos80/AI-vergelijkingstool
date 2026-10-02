@@ -96,6 +96,23 @@ test('the tool page says "new, being checked" and is noindex', async ({ page }) 
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
 });
 
+test('every page the static export crawls from it works: pricing, alternatives, the share image, the outbound link', async ({ page, request }) => {
+  await page.goto(`/nl/tools/${SLUG}`);
+  const og = await page.locator('meta[property="og:image"]').first().getAttribute('content');
+  const paths = [`/nl/tools/${SLUG}/pricing`, `/nl/tools/${SLUG}/alternatives`, new URL(og!).pathname + new URL(og!).search];
+  for (const path of paths) {
+    const res = await request.get(path);
+    expect(res.status(), path).toBeLessThan(400);
+  }
+  for (const path of paths.slice(0, 2)) {
+    await page.goto(path);
+    await expect(page.locator('meta[name="robots"]'), path).toHaveAttribute('content', /noindex/);
+  }
+  const go = await request.get(`/go/${SLUG}`, { maxRedirects: 0 });
+  expect(go.status()).toBeGreaterThanOrEqual(300);
+  expect(go.status()).toBeLessThan(400);
+});
+
 test('Pulse shows "Just in" too', async ({ page }) => {
   await page.goto('/nl/pulse');
   await expect(page.getByTestId('new-tools').getByRole('link', { name: 'Scoutly' })).toBeVisible();
