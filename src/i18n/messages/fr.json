@@ -642,7 +642,7 @@
     "heading": "Que voulez-vous faire ?",
     "inputLabel": "Décrivez ce que vous voulez faire",
     "placeholder": "Par exemple : je veux faire des vidéos pour les réseaux sociaux, mais je ne sais pas avec quels outils",
-    "submit": "Trouver des outils",
+    "submit": "Chercher",
     "understood": "Voici ce que nous avons compris",
     "engineLlm": "IA (un modèle de langage)",
     "engineLexical": "recherche par mots",

@@ -30,7 +30,7 @@ Deze regels gelden voor elke tekst die een bezoeker ziet. De bewaker test regel 
    - Kun je een woord niet missen? Leg het dan in dezelfde zin uit, bijvoorbeeld "API (voor ontwikkelaars)".
 3. **Zeg wat de bezoeker krijgt of moet doen.** Gebruik werkwoorden en "je". Wel: "Vergelijk twee tools." Niet: "Vergelijkingsfunctionaliteit".
 4. **Menu-items hebben 1 tot 3 woorden** en zeggen wat je daar vindt. Dat geldt ook voor korte labels in drukke plekken: de weergaveknop, statuslabels in toolrijen, filters en "+ Vergelijk".
-5. **Knoppen beginnen met een werkwoord**: "Laat de tools zien", "Zoek tools", "Check mijn tools", "Toon tools".
+5. **Knoppen beginnen met een werkwoord**: "Laat de tools zien", "Zoek", "Check mijn tools", "Toon tools".
 6. **Lege staten en meldingen** zeggen wat er is, wat je kunt doen en waarom. Geen interne termen zoals agent, pipeline of queue. Voorbeeld: "We vonden geen tools die hierbij passen. Haal een paar filters weg."
 7. **Cijfers en status in gewone taal.**
    - "Onderbouwd" blijft een vast merkwoord, maar altijd met uitleg erbij: "Er staat een bron bij: meerdere bronnen zeggen hetzelfde, of de officiële site noemt het."
@@ -120,7 +120,7 @@ De teksten staan in het Nederlands. Bij de punten die de eigenaar noemde, staat 
 | 27 | Radar · `hub.radarTitle` | AI-trend- en nieuwsradar | Wat er speelt in AI | Drie zware woorden in één. |
 | 28 | Radar · `hub.radarSub` | Automatisch verzameld door onze agents: elk uur … | Onze software haalt dit elk uur op: … | "Agents" is een intern woord. |
 | 29 | Stappenplannen · `hub.startStack` | Stel mijn stack samen | Toon mijn advies | Geen "stack". Hetzelfde als de knop in "Stap voor stap". |
-| 30 | Vraag · `match.submit` | Match | Zoek tools | Een knop begint met een werkwoord. |
+| 30 | Vraag · `match.submit` | Match | Zoek (en: Search) | Een knop begint met een werkwoord. Eén woord, want de knop staat smal naast het vraagveld. |
 
 ### Vergelijken
 

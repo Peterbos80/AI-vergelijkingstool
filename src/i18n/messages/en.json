@@ -664,7 +664,7 @@
     "heading": "What do you want to do?",
     "inputLabel": "Describe what you want to do",
     "placeholder": "For example: I want to make videos for social media, but don't know which tools to use",
-    "submit": "Find tools",
+    "submit": "Search",
     "understood": "This is what we understood",
     "engineLlm": "AI (a language model)",
     "engineLexical": "searching for words",
