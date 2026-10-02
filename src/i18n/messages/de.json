@@ -1476,5 +1476,21 @@
       "marketing": "Marketing und Social Media",
       "business": "Kunden helfen"
     }
+  },
+  "newTools": {
+    "title": "Neu dabei",
+    "intro": "Neue KI-Tools, die unser Tool-Scout gefunden hat. Wir beobachten sie 7 Tage, bevor wir sie empfehlen.",
+    "badge": "Neu",
+    "inCheck": "wird noch geprüft",
+    "quoteFrom": "So beschreibt sich {site} selbst.",
+    "foundThrough": "Gefunden über",
+    "more": "Alle {count} neuen Tools in Pulse",
+    "signal": {
+      "hackernews": "Hacker News · {value} Punkte",
+      "github": "GitHub · {value} Sterne",
+      "producthunt": "Product Hunt · {value} Stimmen",
+      "announcement": "Ankündigung von {maker}",
+      "announcementOwn": "Ankündigung auf der eigenen Website"
+    }
   }
 }

@@ -1476,5 +1476,21 @@
       "marketing": "Marketing et réseaux sociaux",
       "business": "Aider des clients"
     }
+  },
+  "newTools": {
+    "title": "Nouveautés",
+    "intro": "De nouveaux outils d'IA trouvés par notre éclaireur. Nous les observons pendant 7 jours avant de les recommander.",
+    "badge": "Nouveau",
+    "inCheck": "encore en vérification",
+    "quoteFrom": "Comment {site} se décrit.",
+    "foundThrough": "Trouvé via",
+    "more": "Les {count} nouveaux outils dans Pulse",
+    "signal": {
+      "hackernews": "Hacker News · {value} points",
+      "github": "GitHub · {value} étoiles",
+      "producthunt": "Product Hunt · {value} votes",
+      "announcement": "Annonce de {maker}",
+      "announcementOwn": "Annonce sur son propre site"
+    }
   }
 }

@@ -2227,5 +2227,21 @@
       "marketing": "Marketing and social media",
       "business": "Help customers"
     }
+  },
+  "newTools": {
+    "title": "Just in",
+    "intro": "New AI tools our tool scout found. We watch them for 7 days before we recommend them.",
+    "badge": "New",
+    "inCheck": "still being checked",
+    "quoteFrom": "How {site} describes itself.",
+    "foundThrough": "Found through",
+    "more": "All {count} new tools in Pulse",
+    "signal": {
+      "hackernews": "Hacker News · {value} points",
+      "github": "GitHub · {value} stars",
+      "producthunt": "Product Hunt · {value} votes",
+      "announcement": "Announcement by {maker}",
+      "announcementOwn": "Announcement on its own site"
+    }
   }
 }

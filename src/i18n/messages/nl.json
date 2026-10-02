@@ -2227,5 +2227,21 @@
       "marketing": "Marketing en social media",
       "business": "Klanten helpen"
     }
+  },
+  "newTools": {
+    "title": "Nieuw binnen",
+    "intro": "Nieuwe AI-tools die onze tool-scout vond. We houden ze eerst 7 dagen in de gaten voordat we ze aanraden.",
+    "badge": "Nieuw",
+    "inCheck": "nog in controle",
+    "quoteFrom": "Zo beschrijft {site} zichzelf.",
+    "foundThrough": "Gevonden via",
+    "more": "Alle {count} nieuwe tools in Pulse",
+    "signal": {
+      "hackernews": "Hacker News · {value} punten",
+      "github": "GitHub · {value} sterren",
+      "producthunt": "Product Hunt · {value} stemmen",
+      "announcement": "Aankondiging van {maker}",
+      "announcementOwn": "Aankondiging op de eigen site"
+    }
   }
 }

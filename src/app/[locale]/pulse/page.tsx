@@ -10,6 +10,7 @@ import { href } from '@/lib/routes';
 import { alternates } from '@/lib/seo';
 import { track } from '@/lib/analytics/track';
 import { Icon } from '@/components/ui/Icon';
+import { NewTools } from '@/components/data/NewTools';
 
 const GROUPS: Record<string, ChangeKind[]> = {
   price: ['price_increase', 'price_decrease'],
@@ -51,6 +52,11 @@ export default async function PulsePage({ params, searchParams }: PageProps<'/[l
     <div className="container-page py-10">
       <h1 className="text-3xl md:text-4xl">{t('pulse.title')}</h1>
       <p className="mt-2 max-w-2xl text-ink-2">{t('pulse.intro')}</p>
+      {!type && (
+        <div className="mt-8">
+          <NewTools catalog={catalog} locale={locale} t={t} />
+        </div>
+      )}
       <nav aria-label={t('pulse.filter')} className="mt-6">
         <ul className="flex flex-wrap gap-2">
           <li>

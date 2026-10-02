@@ -7,6 +7,7 @@ import { parseFilters } from '@/lib/engine/search';
 import { href } from '@/lib/routes';
 import { track } from '@/lib/analytics/track';
 import { ExplorerView } from '@/components/explorer/ExplorerView';
+import { NewTools } from '@/components/data/NewTools';
 import { StaticQueryPage } from '@/components/static/StaticQueryPage';
 
 type SP = Record<string, string | string[] | undefined>;
@@ -34,11 +35,13 @@ export default async function ToolsPage({ params, searchParams }: PageProps<'/[l
     // Free edition: the full list is static; filters are applied in the browser.
     return (
       <StaticQueryPage kind="explorer" locale={locale} labels={{ loading: t('static.loading'), failed: t('static.failed') }}>
-        <ExplorerView locale={locale} t={t} catalog={catalog} sp={{}} />
+        <ExplorerView locale={locale} t={t} catalog={catalog} sp={{}} lead={<NewTools catalog={catalog} locale={locale} t={t} />} />
       </StaticQueryPage>
     );
   }
   const filters = parseFilters(sp, catalog, locale);
   await track({ path: href.tools(locale), pageType: 'tools', locale, searchParams: sp, props: filters.q ? { q: filters.q.slice(0, 80) } : undefined });
-  return <ExplorerView locale={locale} t={t} catalog={catalog} sp={sp} />;
+  // "Just in" on the unfiltered page only (as in the static edition, where filters run in the browser).
+  const lead = Object.keys(sp).length === 0 ? <NewTools catalog={catalog} locale={locale} t={t} /> : undefined;
+  return <ExplorerView locale={locale} t={t} catalog={catalog} sp={sp} lead={lead} />;
 }

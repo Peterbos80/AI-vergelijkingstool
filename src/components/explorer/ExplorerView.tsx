@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import type { Locale } from '@/i18n/config';
 import type { Translator } from '@/i18n/format';
 import { nameOf } from '@/lib/catalog/helpers';
@@ -10,8 +11,11 @@ import { ToolRow } from '@/components/data/ToolRow';
 type SP = Record<string, string | string[] | undefined>;
 const PLATFORMS = ['web', 'ios', 'android', 'windows', 'macos', 'linux', 'api', 'chrome_extension'];
 
-/** The explorer page body (filters + results), shared by the server page and the static edition. */
-export function ExplorerView({ locale, t, catalog, sp }: { locale: Locale; t: Translator; catalog: Catalog; sp: SP }) {
+/**
+ * The explorer page body (filters + results), shared by the server page and the static edition.
+ * `lead`: a server-rendered block under the intro ("Just in" on the unfiltered page).
+ */
+export function ExplorerView({ locale, t, catalog, sp, lead }: { locale: Locale; t: Translator; catalog: Catalog; sp: SP; lead?: ReactNode }) {
   const filters = parseFilters(sp, catalog, locale);
   const hits = searchTools(catalog, filters, locale);
 
@@ -20,6 +24,7 @@ export function ExplorerView({ locale, t, catalog, sp }: { locale: Locale; t: Tr
     <div className="container-page py-10">
       <h1 className="text-3xl md:text-4xl">{t('explorer.title')}</h1>
       <p className="mt-2 max-w-2xl text-ink-2">{t('explorer.intro')}</p>
+      {lead && <div className="mt-8">{lead}</div>}
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[18rem_1fr]">
         <aside aria-labelledby="filters-heading">
