@@ -234,6 +234,13 @@ describe('quarantine keeps a new tool out of rankings, recommendations and Match
     for (const t of catalog.tools) expect(fairFightsFor(catalog, t).some((o) => o.id === toolId)).toBe(false);
   });
 
+  it('shows a logo stored with the tool (matched on its own domain), in the same shape as the generated ones', async () => {
+    const logo = { title: 'EchoScribe', slug: 'echoscribe', version: '16.33.0', hex: '0B996E', path: 'M0 0h24v24H0z', source: 'https://echoscribe.example/brand', license: 'CC0-1.0' as const };
+    await db.update(tools).set({ logo }).where(eq(tools.id, toolId));
+    const catalog = await loadCatalog(db, 3, T0);
+    expect(catalog.toolsBySlug.get('echoscribe')?.logo).toEqual({ title: 'EchoScribe', light: '#0b996e', dark: '#0b996e', path: 'M0 0h24v24H0z' });
+  });
+
   it('is ranked once promoted (so the checks above are meaningful)', async () => {
     await db.update(tools).set({ quarantineUntil: null }).where(eq(tools.id, toolId));
     const catalog = await loadCatalog(db, 2, T0);

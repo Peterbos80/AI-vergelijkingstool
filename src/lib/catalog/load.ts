@@ -30,6 +30,7 @@ import {
 } from '@/lib/db/schema';
 import { isLocale, type Locale } from '@/i18n/config';
 import { LOGOS } from '@/generated/logos';
+import { toToolLogo } from '@/lib/logos/brand';
 import { statusRank } from '@/lib/provenance/confidence';
 import type {
   Catalog,
@@ -217,7 +218,8 @@ export async function loadCatalog(db: Database, version: number, now: Date = new
       websiteStatus: t.websiteStatus,
       unreachableSince: t.unreachableSince,
       quarantineUntil: t.quarantineUntil,
-      logo: LOGOS[t.slug] ?? null,
+      // data/logos.json first; else a logo the tool scout matched on the tool's own domain.
+      logo: LOGOS[t.slug] ?? toToolLogo(t.logo),
       discovery: discoveryOf(t.discovery),
       qualityScore: t.qualityScore,
       // A tool in quarantine (tool scout) is never indexable, whatever its data: noindex until promoted.

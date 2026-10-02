@@ -15,7 +15,7 @@ import { formatDate } from '@/i18n/formatters';
 import { getT } from '@/i18n/server';
 import type { Locale } from '@/i18n/config';
 import type { Database } from '@/lib/db/client';
-import { changeEvents, facts, sources, toolCandidates, toolCapabilities, tools, type SourceType, type StoredDiscovery } from '@/lib/db/schema';
+import { changeEvents, facts, sources, toolCandidates, toolCapabilities, tools, type SourceType, type StoredDiscovery, type StoredLogo } from '@/lib/db/schema';
 import { slugify, uniqueSlug } from '@/lib/admin/candidates';
 import { computeConfidence, type Anchor } from '@/lib/provenance/confidence';
 import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
@@ -71,6 +71,8 @@ export async function publishInQuarantine(
   dossier: ScoutDossier,
   signals: CandidateSignals,
   pop: { signals: PopularitySignal[]; score: number },
+  /** Only from an exact match on the tool's own domain (lib/scout/logo.ts). */
+  logo: StoredLogo | null = null,
 ): Promise<{ toolId: string; slug: string }> {
   const { db } = ctx;
   const now = ctx.now();
@@ -99,6 +101,7 @@ export async function publishInQuarantine(
       quarantineUntil: until,
       skillLevel: dossier.skillLevel,
       discovery,
+      logo,
       websiteStatus: 'up',
       websiteCheckedAt: now,
       createdAt: now,

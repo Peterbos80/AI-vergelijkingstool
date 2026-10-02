@@ -22,6 +22,7 @@ import { newToolPolicy, SCOUT_LIMITS } from '../lib/scout/config';
 import { popularity, type GateReason } from '../lib/scout/gates';
 import { promote, publishedSince, publishInQuarantine } from '../lib/scout/publish';
 import { verifyCandidate } from '../lib/scout/verify';
+import { loadIcons, logoForDomain } from '../lib/scout/logo';
 import { knownTools } from './verification';
 import type { AgentContext, AgentDefinition } from '../types';
 
@@ -155,10 +156,13 @@ export const newToolsAgent: AgentDefinition = {
     if (last24h + planned.length > SCOUT_LIMITS.anomalyPerDay) return freeze('new_tools_over_daily_limit', { planned: planned.map((x) => x.out.dossier.name) });
 
     let published = 0;
+    const icons = planned.length ? (loadIcons() ?? []) : [];
     for (const { c, out } of planned) {
       const pop = popularity(out.signals as Record<string, unknown>, c.lastSeenAt);
       if (!pop.ok) continue;
-      await publishInQuarantine(ctx, c, out.dossier, out.signals, pop);
+      const logo = logoForDomain(c.domain, icons);
+      if (logo) ctx.stat('logos');
+      await publishInQuarantine(ctx, c, out.dossier, out.signals, pop, logo);
       published++;
     }
     if (published) ctx.stat('published', published);
