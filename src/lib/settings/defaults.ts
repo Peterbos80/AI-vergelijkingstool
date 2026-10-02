@@ -15,8 +15,23 @@ export const settingsSchema = z.object({
     queue: z.number().int().min(0).max(100),
     priceIncreasePct: z.number().positive(),
     priceDecreasePct: z.number().positive(),
-    /** New tools always go to the owner (quarantine auto-publish is designed in doc 12 but not built). */
-    newToolMode: z.enum(['queue']),
+    /**
+     * New tools (docs/strategy/12 §4.4): 'queue' = every candidate is an owner
+     * decision; 'quarantine' = the tool scout publishes the best candidates that
+     * pass every hard gate, labelled "new, being checked", noindex and outside
+     * the recommendations for 7 days. NEW_TOOL_MODE in the environment overrides
+     * this (the free edition on GitHub Pages sets 'quarantine').
+     */
+    newToolMode: z.enum(['queue', 'quarantine']),
+    /**
+     * Quarantine publication: at most this many new tools per day, the most
+     * popular that pass every gate (fewer when fewer pass; the gates are never
+     * lowered to reach the number). NEW_TOOLS_PER_DAY overrides. More than 25
+     * publications in 24 hours is an anomaly: nothing is published and the
+     * owner gets one escalation. Hence at most 12: two daily batches can fall
+     * within 24 hours (the hourly job runs late at times) without tripping it.
+     */
+    newToolsPerDay: z.number().int().min(0).max(12),
   }),
   freshness: z.object({
     price: days,
@@ -84,6 +99,7 @@ export const DEFAULT_SETTINGS: Settings = {
     priceIncreasePct: 50,
     priceDecreasePct: 70,
     newToolMode: 'queue',
+    newToolsPerDay: 10,
   },
   freshness: {
     price: [14, 45],

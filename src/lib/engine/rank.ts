@@ -23,7 +23,8 @@ export function capabilityScore(tool: CatalogTool, capabilityId: string): number
 
 export function rankForCapability(catalog: Catalog, capabilityId: string): CatalogTool[] {
   return catalog.tools
-    .filter((t) => t.status !== 'shutdown' && t.capabilities.some((c) => c.id === capabilityId))
+    // Tools in quarantine (tool scout) are never ranked; the catalog keeps them out of `tools`, this guards hand-built catalogs.
+    .filter((t) => t.status !== 'shutdown' && t.quarantineUntil === null && t.capabilities.some((c) => c.id === capabilityId))
     .map((t) => ({ t, s: capabilityScore(t, capabilityId) }))
     .sort((a, b) => b.s - a.s || a.t.name.localeCompare(b.t.name))
     .map((x) => x.t);

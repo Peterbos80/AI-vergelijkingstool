@@ -1,6 +1,7 @@
 import type {
   BillingPeriod,
   ChangeKind,
+  DiscoverySignalKind,
   FactStatus,
   Freshness,
   PriceUnit,
@@ -52,6 +53,24 @@ export interface ToolText {
   contentStatus: 'editorial' | 'ai_draft' | 'machine_translated' | 'reviewed';
 }
 
+/** A signal that made the tool scout pick a tool: where it came from, how much, when. */
+export interface DiscoverySignal {
+  kind: DiscoverySignalKind;
+  /** Points, stars or votes as the source reported them; null for an announcement. */
+  value: number | null;
+  url: string;
+  at: Date | null;
+  /** The maker's name for an announcement in a maker's feed; null otherwise. */
+  label: string | null;
+}
+
+/** How a tool came in through the tool scout (docs/strategy/12 §4.4). */
+export interface ToolDiscovery {
+  addedAt: Date;
+  signals: DiscoverySignal[];
+  promotedAt: Date | null;
+}
+
 export interface CatalogTool {
   id: string;
   slug: string;
@@ -92,6 +111,8 @@ export interface CatalogTool {
   quarantineUntil: Date | null;
   /** The tool's own logo where we may show it (data/logos.json), else null: a two-letter mark. */
   logo: ToolLogo | null;
+  /** Set for tools the tool scout added; null (or absent) for editorial tools. */
+  discovery?: ToolDiscovery | null;
   qualityScore: number;
   indexable: { tool: boolean; pricing: boolean; alternatives: boolean };
   text: Partial<Record<Locale, ToolText>>;
@@ -172,7 +193,14 @@ export interface CatalogStats {
 export interface Catalog {
   version: number;
   loadedAt: Date;
+  /** Published tools outside quarantine: the only tools rankings, recommendations and Match ever see. */
   tools: CatalogTool[];
+  /**
+   * New tools still in quarantine (tool scout, docs/strategy/12 §4.4): live
+   * on their own page (noindex, "new, being checked") and reachable through
+   * toolsBySlug/toolsById, but never in `tools`. Newest first.
+   */
+  quarantined?: CatalogTool[];
   toolsBySlug: Map<string, CatalogTool>;
   toolsById: Map<string, CatalogTool>;
   categories: CatalogCategory[];

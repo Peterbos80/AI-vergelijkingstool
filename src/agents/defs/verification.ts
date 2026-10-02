@@ -1,40 +1,35 @@
 /**
- * Verification agent: turns raw candidates into a dossier with hard gates
- * (docs/strategy/08 §3, 12 §5.5). New tools are never auto-published here:
- * a verified candidate becomes an owner decision with a safe default
- * ("not published; expires after 30 days, re-assessed on new signals").
+ * Verification agent (the tool scout's checks; docs/strategy/08 §3, 12 §4.4).
+ * Every hour, a small batch:
+ *  1. re-checks the tools in quarantine: duplicates and the owner's blocklist
+ *     every run, the official site about every 20 hours (hourly after a
+ *     failure). A gate that fails takes the tool offline at once; an
+ *     unreachable site after two failures in a row. Logged and reversible.
+ *  2. verifies new candidates, the most popular first, against the hard gates
+ *     (own HTTPS site, robots.txt, no duplicate, not blocked or parked, about
+ *     AI, the name on the site, a certain function, an anchored fact) and
+ *     writes a dossier. Popularity is checked at publication (new-tools).
+ * In queue mode (newToolMode 'queue') a candidate whose site checks pass goes
+ * to the owner with its dossier, as before; nothing is published here.
  */
-import { and, asc, eq, inArray } from 'drizzle-orm';
+import { and, asc, desc, eq, isNotNull, sql } from 'drizzle-orm';
+import type { Database } from '@/lib/db/client';
 import { toolCandidates, tools } from '@/lib/db/schema';
 import { loadCatalog } from '@/lib/catalog/load';
-import { detectIntent } from '@/lib/engine/intent';
-import { normalize } from '@/lib/engine/text';
 import { sourceDomain } from '@/lib/provenance/confidence';
 import { readDataVersion } from '@/lib/settings';
 import { htmlToText, type PageText } from '../fetcher/text';
+import { newToolPolicy, SCOUT_LIMITS } from '../lib/scout/config';
+import { AI_TERMS, BLOCKLIST, blockedDomainGate, contentGate, duplicateGate, PARKED, siteGate, type GateReason, type KnownTool } from '../lib/scout/gates';
+import { depublish } from '../lib/scout/publish';
+import { candidateKey } from '../lib/scout/sources';
+import { verifyCandidate, type ScoutDossier } from '../lib/scout/verify';
 import type { AgentContext, AgentDefinition } from '../types';
 
-const BLOCKLIST = /\b(casino|betting|sportsbook|porn|xxx|nsfw|onlyfans|escort|nudify|undress|deepnude|airdrop|pump\s*and\s*dump|guaranteed profits?|forex signals?|essay mill|fake reviews?)\b/i;
-const PARKED = /\b(domain (is )?for sale|buy this domain|this domain may be for sale|parked (free|domain)|domain parking)\b/i;
-const WAITLIST = /\b(join (the|our) waitlist|request (early )?access|coming soon|launching soon)\b/i;
-const AI_TERMS = /\b(ai|a\.i\.|artificial intelligence|gpt|llm|genai|generative|machine learning|neural|agent|copilot|chatbot|diffusion|text[- ]to[- ](speech|image|video)|voice (clone|cloning)|transcri(be|ption))\b/i;
-const PRICE = /(?:[$€£]\s?\d{1,4}(?:[.,]\d{2})?|\d{1,4}(?:[.,]\d{2})?\s?(?:usd|eur|€|\$)\b)(?:\s?(?:\/|per)\s?(?:mo|month|maand|user|seat|year|yr))?/gi;
+/** @deprecated kept for callers of the first version; the gates live in lib/scout/gates. */
+export type Dossier = ScoutDossier;
 
-export interface Dossier {
-  name: string;
-  url: string;
-  title: string | null;
-  /** Verbatim meta description (short quote, with the URL as source). */
-  description: string | null;
-  capabilityIds: string[];
-  pricing: { url: string | null; mentionsFree: boolean; amounts: string[] };
-  legal: { privacy: boolean; terms: boolean };
-  waitlist: boolean;
-  signals: Record<string, unknown>;
-  score: number;
-  breakdown: Record<string, number>;
-}
-
+/** Blocklist, parked domain or not about AI (the first content gates). */
 export function gate(page: PageText): 'blocklist' | 'parked' | 'not_ai' | null {
   const head = `${page.title ?? ''} ${page.description ?? ''} ${page.text.slice(0, 5000)}`;
   if (BLOCKLIST.test(head)) return 'blocklist';
@@ -43,6 +38,7 @@ export function gate(page: PageText): 'blocklist' | 'parked' | 'not_ai' | null {
   return null;
 }
 
+/** The dossier score the owner sees in queue mode (reachability, evidence, traction). */
 export function score(input: { https: boolean; description: boolean; pricingPage: boolean; legal: number; signals: Record<string, unknown> }): { score: number; breakdown: Record<string, number> } {
   const hn = Number(input.signals.hnPoints ?? 0);
   const stars = Number(input.signals.githubStars ?? 0);
@@ -58,110 +54,180 @@ export function score(input: { https: boolean; description: boolean; pricingPage
   return { score: Object.values(breakdown).reduce((a, b) => a + b, 0), breakdown };
 }
 
-async function dossierFor(ctx: AgentContext, c: typeof toolCandidates.$inferSelect, page: PageText, finalUrl: string): Promise<Dossier> {
-  const pricingLink = page.links.find((l) => /\/(pricing|prices|plans|prijzen|tarifs|preise)\b/i.test(l.href) && sourceDomain(l.href) === sourceDomain(finalUrl));
-  let pricingText = '';
-  if (pricingLink) {
-    const res = await ctx.fetcher.get(pricingLink.href, { accept: 'html' });
-    if (res.ok) pricingText = htmlToText(res.body, res.finalUrl).text.slice(0, 20_000);
+/** Every tool (published or not) for duplicate checks. */
+export async function knownTools(db: Database): Promise<(KnownTool & { published: boolean })[]> {
+  return db.select({ id: tools.id, name: tools.name, aliases: tools.aliases, websiteUrl: tools.websiteUrl, published: tools.published }).from(tools);
+}
+
+const HOUR = 3600_000;
+/** Strict gates the owner may still overrule in queue mode (the site itself is fine). */
+const OWNER_CAN_JUDGE = new Set<GateReason>(['name_not_on_site', 'function_uncertain', 'no_anchored_fact']);
+
+/** Signal strength in SQL (most popular candidates are verified first). */
+const POPULARITY_SQL = sql`(
+  CASE WHEN jsonb_typeof(${toolCandidates.signals}->'hnPoints') = 'number' THEN (${toolCandidates.signals}->>'hnPoints')::numeric / 50 ELSE 0 END
+  + CASE WHEN jsonb_typeof(${toolCandidates.signals}->'githubStars') = 'number' THEN (${toolCandidates.signals}->>'githubStars')::numeric / 300 ELSE 0 END
+  + CASE WHEN jsonb_typeof(${toolCandidates.signals}->'phVotes') = 'number' THEN (${toolCandidates.signals}->>'phVotes')::numeric / 200 ELSE 0 END
+  + CASE WHEN ${toolCandidates.signals} ? 'announcementUrl' THEN 1 ELSE 0 END)`;
+
+/** Re-check the tools in quarantine; a failing gate takes the tool offline. */
+async function recheckQuarantine(ctx: AgentContext, known: (KnownTool & { published: boolean })[]): Promise<{ checked: number; depublished: number }> {
+  const { db } = ctx;
+  const now = ctx.now();
+  const rows = await db
+    .select()
+    .from(tools)
+    .where(and(eq(tools.published, true), isNotNull(tools.quarantineUntil), isNotNull(tools.discovery)));
+  let checked = 0;
+  let depublished = 0;
+  const live = rows.filter((t) => t.discovery);
+  const offline = new Set<string>();
+  // Every run: duplicates of another live tool, and the owner's blocklist (no fetch needed).
+  for (const t of live) {
+    const domain = candidateKey(t.websiteUrl)?.domain ?? sourceDomain(t.websiteUrl);
+    const others = known.filter((k) => k.id !== t.id && k.published && !offline.has(k.id));
+    const r = [blockedDomainGate(domain), duplicateGate(domain, [t.name, ...t.aliases], others)].find((g) => !g.ok);
+    if (r && !r.ok) {
+      await depublish(ctx, t, r.reason);
+      offline.add(t.id);
+      depublished++;
+      ctx.stat(`depublished_${r.reason}`);
+    }
   }
-  const amounts = [...new Set((pricingText.match(PRICE) ?? []).map((s) => s.trim()))].slice(0, 5);
-  const legalLinks = page.links.map((l) => `${l.href} ${l.text}`.toLowerCase());
-  const legal = { privacy: legalLinks.some((l) => /privacy|privacidad|datenschutz/.test(l)), terms: legalLinks.some((l) => /terms|voorwaarden|agb|conditions/.test(l)) };
-  const s = score({
-    https: finalUrl.startsWith('https://'),
-    description: Boolean(page.description),
-    pricingPage: Boolean(pricingLink),
-    legal: Number(legal.privacy) + Number(legal.terms),
-    signals: c.signals,
-  });
-  return {
-    name: c.name,
-    url: finalUrl,
-    title: page.title?.slice(0, 120) ?? null,
-    description: page.description?.slice(0, 200) ?? null,
-    capabilityIds: [],
-    pricing: { url: pricingLink?.href ?? null, mentionsFree: /\bfree\b|\bgratis\b|€0|\$0/i.test(pricingText), amounts },
-    legal,
-    waitlist: WAITLIST.test(`${page.title ?? ''} ${page.text.slice(0, 3000)}`),
-    signals: c.signals,
-    score: s.score,
-    breakdown: s.breakdown,
-  };
+  // The official site, about every 20 hours (hourly after a failure), oldest check first.
+  const due = live
+    .filter((t) => !offline.has(t.id))
+    .filter((t) => {
+      const c = t.discovery!.checks;
+      const age = c.lastAt ? now.getTime() - new Date(c.lastAt).getTime() : Infinity;
+      return age >= (c.failures > 0 ? HOUR : 20 * HOUR);
+    })
+    .sort((a, b) => (a.discovery!.checks.lastAt ?? '').localeCompare(b.discovery!.checks.lastAt ?? ''))
+    .slice(0, 10);
+  for (const t of due) {
+    if (ctx.signal.aborted) break;
+    const d = t.discovery!;
+    const domain = candidateKey(t.websiteUrl)?.domain ?? sourceDomain(t.websiteUrl);
+    const res = await ctx.fetcher.get(t.websiteUrl, { accept: 'html' });
+    let r = siteGate(domain, res);
+    if (r.ok) r = contentGate(htmlToText(res.body, res.finalUrl));
+    checked++;
+    if (r.ok) {
+      await db
+        .update(tools)
+        .set({ discovery: { ...d, checks: { ...d.checks, green: d.checks.green + 1, lastAt: now.toISOString(), lastOk: true, failures: 0, lastReason: null } }, websiteCheckedAt: now })
+        .where(eq(tools.id, t.id));
+      ctx.stat('quarantine_green');
+      continue;
+    }
+    const failures = d.checks.failures + 1;
+    if (r.hard || failures >= 2) {
+      await depublish(ctx, t, r.hard ? r.reason : `site_down (${failures} checks in a row)`);
+      depublished++;
+      ctx.stat(`depublished_${r.hard ? r.reason : 'site_down'}`);
+      continue;
+    }
+    // A first failure: check again in an hour; the 7 green days start again.
+    const until = new Date(Math.max(t.quarantineUntil!.getTime(), now.getTime() + SCOUT_LIMITS.quarantineDays * 86_400_000));
+    await db
+      .update(tools)
+      .set({ quarantineUntil: until, discovery: { ...d, checks: { ...d.checks, lastAt: now.toISOString(), lastOk: false, failures, lastFailureAt: now.toISOString(), lastReason: r.reason } } })
+      .where(eq(tools.id, t.id));
+    ctx.stat('quarantine_failed_once');
+  }
+  return { checked, depublished };
 }
 
 export const verificationAgent: AgentDefinition = {
   name: 'verification',
-  description: 'Checks new candidates (reachability, AI relevance, blocklist, duplicates, pricing, legal pages) and hands verified ones to the owner with a dossier.',
-  schedule: 'daily:03:20',
+  description:
+    'Every hour, a small batch: re-checks the tools in quarantine (a failing gate takes one offline at once) and checks new candidates against the hard gates (own HTTPS site, robots.txt, no duplicate, not blocked or parked, about AI, name on the site, a certain function, an anchored fact) with a dossier. In queue mode a candidate whose site checks pass goes to the owner.',
+  schedule: 'every:1h',
   autonomy: 'auto',
-  maxItems: 15,
-  timeoutMs: 10 * 60_000,
+  maxItems: 8,
+  timeoutMs: 8 * 60_000,
   async run(ctx) {
     const { db } = ctx;
     const now = ctx.now();
-    const list = await db.select().from(toolCandidates).where(inArray(toolCandidates.status, ['new'])).orderBy(asc(toolCandidates.firstSeenAt)).limit(ctx.limits.maxItems);
-    if (!list.length) return { status: 'skipped', summary: 'no new candidates' };
-    const existing = await db.select({ id: tools.id, name: tools.name, aliases: tools.aliases, url: tools.websiteUrl }).from(tools);
-    const byName = new Map<string, string>();
-    for (const t of existing) for (const n of [t.name, ...t.aliases]) byName.set(normalize(n), t.id);
-    const byDomain = new Map(existing.map((t) => [sourceDomain(t.url), t.id]));
+    const policy = newToolPolicy(ctx.settings);
+    // A run that stopped half-way leaves no candidate stuck in "verifying".
+    await db.update(toolCandidates).set({ status: 'new' }).where(eq(toolCandidates.status, 'verifying'));
+    const known = await knownTools(db);
+    const recheck = await recheckQuarantine(ctx, known);
+    const list = await db
+      .select()
+      .from(toolCandidates)
+      .where(eq(toolCandidates.status, 'new'))
+      .orderBy(desc(POPULARITY_SQL), asc(toolCandidates.firstSeenAt))
+      .limit(ctx.limits.maxItems);
+    const head = `quarantine: ${recheck.checked} checked, ${recheck.depublished} taken offline`;
+    if (!list.length) return { status: recheck.checked || recheck.depublished ? 'success' : 'skipped', summary: `${head} · no new candidates`, dataChanged: recheck.depublished > 0 };
     const catalog = await loadCatalog(db, await readDataVersion(db), now);
     let verified = 0;
+    let rejected = 0;
     for (const c of list) {
       if (ctx.signal.aborted) break;
-      const dup = byDomain.get(c.domain) ?? byName.get(normalize(c.name));
-      if (dup) {
-        await db.update(toolCandidates).set({ status: 'duplicate', duplicateOfToolId: dup, notes: 'matches an existing tool' }).where(eq(toolCandidates.id, c.id));
+      await db.update(toolCandidates).set({ status: 'verifying' }).where(eq(toolCandidates.id, c.id));
+      const out = await verifyCandidate(ctx, c, known, catalog);
+      const base = { ...c.signals };
+      delete base.dossier;
+      if (out.kind === 'fail' && (out.reason === 'duplicate_domain' || out.reason === 'duplicate_name')) {
+        await db.update(toolCandidates).set({ status: 'duplicate', duplicateOfToolId: out.duplicateOf ?? null, notes: out.reason }).where(eq(toolCandidates.id, c.id));
         ctx.stat('duplicate');
         continue;
       }
-      await db.update(toolCandidates).set({ status: 'verifying' }).where(eq(toolCandidates.id, c.id));
-      const res = await ctx.fetcher.get(c.url, { accept: 'html' });
-      if (!res.ok) {
+      if (out.kind === 'fail' && !out.hard) {
+        // Maybe temporary: try again next hour; after two failures it is rejected.
         const failures = Number(c.signals.verifyFailures ?? 0) + 1;
-        const reject = failures >= 2 || res.errorKind === 'robots' || res.errorKind === 'ssrf' || res.errorKind === 'invalid_url';
         await db
           .update(toolCandidates)
-          .set({ status: reject ? 'rejected' : 'new', signals: { ...c.signals, verifyFailures: failures }, notes: `unreachable: ${res.errorKind ?? 'error'}` })
+          .set({ status: failures >= 2 ? 'rejected' : 'new', signals: { ...base, verifyFailures: failures }, notes: out.reason })
           .where(eq(toolCandidates.id, c.id));
-        ctx.stat(reject ? 'rejected_unreachable' : 'retry_later');
+        ctx.stat(failures >= 2 ? `rejected_${out.reason}` : 'retry_later');
+        if (failures >= 2) rejected++;
         continue;
       }
-      const page = htmlToText(res.body, res.finalUrl);
-      const blocked = gate(page);
-      if (blocked) {
-        await db.update(toolCandidates).set({ status: 'rejected', notes: blocked, confidence: 0 }).where(eq(toolCandidates.id, c.id));
-        ctx.stat(`rejected_${blocked}`);
+      const dossier = out.dossier;
+      const legacy = dossier
+        ? score({ https: dossier.url.startsWith('https://'), description: Boolean(dossier.description), pricingPage: Boolean(dossier.pricing.url), legal: Number(dossier.legal.privacy) + Number(dossier.legal.terms), signals: base })
+        : { score: 0, breakdown: {} };
+      const forOwner = policy.mode === 'queue' && dossier && (out.kind === 'pass' || OWNER_CAN_JUDGE.has(out.reason)) && legacy.score >= 60;
+      if (out.kind === 'fail' && !forOwner) {
+        await db
+          .update(toolCandidates)
+          .set({ status: 'rejected', confidence: 0, notes: out.reason, signals: dossier ? { ...base, dossier } : base })
+          .where(eq(toolCandidates.id, c.id));
+        ctx.stat(`rejected_${out.reason}`);
+        rejected++;
         continue;
       }
-      const d = await dossierFor(ctx, c, page, res.finalUrl);
-      d.capabilityIds = detectIntent(`${d.title ?? ''}. ${d.description ?? ''}`, catalog, 'en').capabilityIds.slice(0, 5);
-      const ok = d.score >= 60;
+      const signals = out.kind === 'pass' ? out.signals : base;
       await db
         .update(toolCandidates)
-        .set({ status: ok ? 'verified' : 'rejected', confidence: d.score, notes: ok ? null : `score ${d.score} < 60`, signals: { ...c.signals, dossier: d } })
-        .where(and(eq(toolCandidates.id, c.id)));
-      if (!ok) {
-        ctx.stat('rejected_low_score');
-        continue;
-      }
-      await ctx.inbox.escalate({
-        kind: 'new_tool',
-        severity: 'p3',
-        category: 'data',
-        title: `New tool candidate: ${d.name} (score ${d.score})`,
-        reasonCode: 'new_tool_needs_review',
-        payload: { candidateId: c.id, dossier: d },
-        confidence: d.score,
-        defaultAction: 'reject_after_30d',
-        dueInHours: 30 * 24,
-        dedupeKey: `new_tool:${c.domain}`,
-        createdBy: 'agent:verification',
-      });
+        .set({ status: 'verified', confidence: legacy.score, notes: out.kind === 'pass' ? null : `owner decides: ${out.reason}`, signals: { ...signals, dossier: { ...dossier!, score: legacy.score, breakdown: legacy.breakdown } } })
+        .where(eq(toolCandidates.id, c.id));
       verified++;
+      ctx.stat('verified');
+      if (policy.mode === 'queue') {
+        await ctx.inbox.escalate({
+          kind: 'new_tool',
+          severity: 'p3',
+          category: 'data',
+          title: `New tool candidate: ${dossier!.name} (score ${legacy.score})`,
+          reasonCode: 'new_tool_needs_review',
+          payload: { candidateId: c.id, dossier: { ...dossier!, signals, score: legacy.score, breakdown: legacy.breakdown } },
+          confidence: legacy.score,
+          defaultAction: 'reject_after_30d',
+          dueInHours: 30 * 24,
+          dedupeKey: `new_tool:${c.domain}`,
+          createdBy: 'agent:verification',
+        });
+      }
     }
-    ctx.stat('verified', verified);
-    return { status: 'success', summary: `${list.length} candidates checked · ${verified} verified for review` };
+    return {
+      status: 'success',
+      summary: `${head} · ${list.length} candidates checked · ${verified} verified${policy.mode === 'queue' ? ' for review' : ' for the daily publication'} · ${rejected} rejected`,
+      dataChanged: recheck.depublished > 0,
+    };
   },
 };

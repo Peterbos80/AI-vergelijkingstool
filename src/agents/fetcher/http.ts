@@ -57,18 +57,20 @@ export function createFetcher(partial: Partial<FetcherConfig> = {}): Fetcher {
     active.set(host, Math.max(0, (active.get(host) ?? 1) - 1));
   }
 
-  async function raw(url: URL, opts: FetchOptions, light: boolean) {
+  async function raw(url: URL, opts: FetchOptions, light: boolean, postBody?: string) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), opts.timeoutMs ?? cfg.timeoutMs);
     try {
       const res = await transport(url, {
-        method: 'GET',
+        method: postBody === undefined ? 'GET' : 'POST',
+        body: postBody,
         redirect: 'manual',
         signal: controller.signal,
         headers: {
           'User-Agent': cfg.userAgent,
           Accept: opts.accept === 'json' ? 'application/json' : opts.accept === 'xml' ? 'application/rss+xml, application/atom+xml, application/xml, text/xml' : 'text/html,application/xhtml+xml',
           'Accept-Language': 'en,nl;q=0.8',
+          ...(postBody === undefined ? {} : { 'Content-Type': 'application/json' }),
           ...(opts.headers ?? {}),
         },
       });
@@ -184,12 +186,53 @@ export function createFetcher(partial: Partial<FetcherConfig> = {}): Fetcher {
       }
       return fail('redirects', 'too many redirects');
     },
+
+    async post(input: string, body: string, opts: FetchOptions = {}): Promise<FetchResult> {
+      const started = Date.now();
+      const fail = (errorKind: FetchResult['errorKind'], error: string, status: number | null = null): FetchResult => ({
+        ok: false,
+        url: input,
+        finalUrl: input,
+        status,
+        contentType: null,
+        body: '',
+        durationMs: Date.now() - started,
+        errorKind,
+        error,
+        redirects: [],
+      });
+      const url = checkUrlShape(input);
+      if (!url || url.protocol !== 'https:' || !opts.api || !API_HOSTS.has(url.hostname)) return fail('invalid_url', 'POST only to documented API hosts');
+      if (body.length > 8192) return fail('too_large', 'request body too large');
+      try {
+        await assertPublicHost(url.hostname, cfg.resolver);
+      } catch (e) {
+        return fail('ssrf', e instanceof Error ? e.message : 'blocked host');
+      }
+      await throttle(url.hostname);
+      let res: Awaited<ReturnType<typeof raw>>;
+      try {
+        res = await raw(url, { ...opts, accept: opts.accept ?? 'json' }, false, body);
+      } catch (e) {
+        const err = e as Error & { kind?: 'too_large'; name?: string };
+        if (err.kind === 'too_large') return fail('too_large', err.message);
+        if (err.name === 'AbortError') return fail('timeout', 'timeout');
+        return fail('network', err.message);
+      } finally {
+        release(url.hostname);
+      }
+      const contentType = res.headers.get('content-type');
+      if (res.status >= 300 && res.status < 400) return fail('http', 'redirects are not followed for POST', res.status);
+      if (res.status >= 400) return { ...fail('http', `HTTP ${res.status}`, res.status), contentType };
+      if (contentType && !ACCEPT[opts.accept ?? 'json'].test(contentType)) return { ...fail('content_type', `unexpected content-type ${contentType}`, res.status), contentType };
+      return { ok: true, url: input, finalUrl: url.toString(), status: res.status, contentType, body: res.body, durationMs: Date.now() - started, redirects: [] };
+    },
   };
 }
 
-/** A fetcher backed by fixtures (tests, dry runs). */
+/** A fetcher backed by fixtures (tests, dry runs). POST requests are looked up as "POST <url>". */
 export function fixtureFetcher(pages: Record<string, { status?: number; body: string; contentType?: string } | Error>): Fetcher {
-  return {
+  const fetcher: Fetcher = {
     async get(url) {
       const p = pages[url];
       const base = { url, finalUrl: url, durationMs: 1, redirects: [] as string[] };
@@ -205,5 +248,9 @@ export function fixtureFetcher(pages: Record<string, { status?: number; body: st
         ...(status >= 400 ? { errorKind: 'http' as const, error: `HTTP ${status}` } : {}),
       };
     },
+    async post(url, _body, opts) {
+      return fetcher.get(`POST ${url}`, opts);
+    },
   };
+  return fetcher;
 }

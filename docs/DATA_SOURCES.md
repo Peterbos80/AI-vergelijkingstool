@@ -23,7 +23,7 @@ All agent traffic goes through `src/agents/fetcher/http.ts`:
 | Limits | 15 s timeout, 2 MB per body (16 KB for light reachability checks), content-type allow-list per request |
 | Identity | `AGENT_USER_AGENT`, default `AIToolsWijzerBot/1.0 (+https://aitoolswijzer.nl/bot)` |
 | No state | No cookies, no logins, no forms, no JavaScript execution (there is no headless browser) |
-| APIs | The `api` option skips robots.txt only for documented API hosts (`api.github.com`, `hn.algolia.com`, `www.googleapis.com`); the SSRF guard and throttle still apply |
+| APIs | The `api` option skips robots.txt only for documented API hosts (`api.github.com`, `hn.algolia.com`, `www.googleapis.com`, `api.producthunt.com`); the SSRF guard and throttle still apply. `post` (a JSON body of at most 8 KB, e.g. a read-only GraphQL query) exists only for these hosts over HTTPS and follows no redirects |
 
 Tests use `fixtureFetcher()`, which serves canned pages, so no test touches the network.
 
@@ -32,7 +32,7 @@ Tests use `fixtureFetcher()`, which serves canned pages, so no test touches the 
 | Source | Used by | Access | What we take | What we publish |
 | --- | --- | --- | --- | --- |
 | Official pricing pages | `pricing` | HTML, robots.txt, at most daily per page | plan prices found next to the plan name | price, currency, period, date, source URL, ≤ 600-char quote |
-| Official home pages | `broken-link` | light GET (≤ 16 KB), about every 6 h | reachability only | "unreachable since <date>" after ≥ 3 failures over ≥ 24 h |
+| Official home pages | `broken-link`, `pricing` | light GET (≤ 16 KB), hourly in small batches, a site at most every 5.5 h; `pricing` reads a home page once to find the link to the official pricing page (tools whose plans have none) | reachability; the pricing link | "unreachable since <date>" after ≥ 3 failures over ≥ 24 h; the pricing page becomes a monitored source |
 | Official changelogs, RSS/Atom | `change-detection` | feed XML, every 6 h | item title, link, date | Pulse event with the vendor's own title and link |
 | GitHub REST API | `social`, `discovery` | `api.github.com` (optional `GITHUB_TOKEN` for a higher rate limit) | stars, releases; repository search for candidates | star counts over time, release events with link |
 | Hacker News via Algolia API | `social`, `discovery` | `hn.algolia.com` | mention counts; Show HN posts as candidates | "buzz" event only above a threshold, with link |
@@ -40,7 +40,12 @@ Tests use `fixtureFetcher()`, which serves canned pages, so no test touches the 
 | YouTube channel feeds | `video`, `news` | public feed per channel, only where robots.txt allows (else skipped and named in the run summary) | video id, title, channel, date | tool videos: embedded (privacy-enhanced, loads on click); news: title, channel and a link to YouTube |
 | YouTube Data API v3 | `video`, `news` (optional, `YOUTUBE_API_KEY`) | `www.googleapis.com`: channel uploads playlists (1 quota unit per call) and search | the same fields; search results for reviews/tutorials | the same; API data is refreshed within 30 days or removed, per the API terms. The privacy page names the YouTube API Services and links YouTube's terms and Google's privacy policy |
 | ECB reference rates | `fx` | `eurofxref-daily.xml` | daily EUR rates | "≈ €x (ECB rate of <date>)", always labelled indicative |
-| Candidate websites | `verification` | HTML, robots.txt | reachability, AI relevance, pricing and legal page presence, meta description | nothing public: a dossier for the owner, who decides |
+| Hacker News via Algolia API | `discovery` (tool scout) | `hn.algolia.com`, hourly | Show HN, "Launch HN" and stories that launch a named AI product: id, points, comments, date (never the author) | with a published tool: "Hacker News · 231 points" with a link and date |
+| GitHub search API | `discovery` (tool scout) | `api.github.com`, hourly, 4 queries | new repositories of organisations with AI topics: stars, creation date, license id (persons' repositories are skipped: a user name is personal data) | with a published tool: "GitHub · 4,200 stars" with a link and date; an open-source license as a fact |
+| Makers' news feeds (`data/discovery/sources.json`) | `discovery` (tool scout) | the makers' own RSS/Atom feeds, robots.txt, hourly; the launch post itself (at most 6 per run) | launch posts ("Introducing …", "… is now available"): name, link, date, and the product link in the post | with a published tool: "announcement by OpenAI" with a link |
+| Product Hunt API | `discovery` (tool scout), **only with `PRODUCTHUNT_TOKEN`** | `api.producthunt.com` (GraphQL), hourly; its product links only where producthunt.com's robots.txt allows following them | AI launches: id, votes, date, post link (never makers or taglines) | with a published tool: "Product Hunt · 420 votes" with a link and date |
+| Candidate websites | `verification`, `new-tools` (tool scout) | HTML, robots.txt; home page, pricing page, the site's own feed | reachability, AI relevance, the name, title and meta description, pricing (free plan, prices), legal pages, a launch post | in quarantine: name, URL, the meta description as a literal quote (≤ 160 characters, with the URL), functions and anchored pricing facts, all UNVERIFIED with their source |
+| simple-icons (dev dependency, CC0) | `new-tools` (tool scout) | the installed package, no network | an icon whose `source` or `guidelines` host equals the tool's own domain | the logo's path and brand colour, served by the site itself |
 | Affiliate link targets | `monetization` | light GET with a test sub-id | reachability | nothing; a broken link falls back to the direct link |
 | Tool websites (LLM drafts) | `content` (optional) | HTML, robots.txt | title, meta description, ≤ 6,000 chars of text as input to Claude | a new text in our own words, labelled `ai_draft`, published only after owner approval |
 
@@ -54,12 +59,16 @@ The seed dataset in `data/` was compiled from public sources (official pages fir
 - Videos: id, title, channel and date, never the video itself.
 - News items: headline, outlet, date, link and tagged experts; articles are removed after 90 days, YouTube items 30 days after the channel last listed them.
 - Social signals: counts and links.
+- Tool candidates: name, URL, domain and the signals' ids, counts, dates and links; never descriptions, article text or people's user names.
 
 ## What we never do
 
 - Log in to vendor accounts, submit forms, bypass paywalls, solve CAPTCHAs or rotate IPs to get around blocks.
 - Fetch pages disallowed by robots.txt, or keep crawling a site that blocks us. A blocked source goes stale on the site ("may be outdated") instead of being worked around.
-- Use Product Hunt or other sources whose terms do not allow this use. (The schema has a `producthunt` enum value; no code reads or writes it.)
+- Use sources whose terms do not allow this use. Product Hunt's API terms ask for permission for commercial use: the tool scout reads it only when the owner set `PRODUCTHUNT_TOKEN` after getting that permission; otherwise it is skipped and the weekly report says so.
+- Scrape other AI-tool directories (There's An AI For That, Futurepedia, Toolify and the like): their selection is their work. They are never fetched and never a candidate.
+- Use media headlines as a popularity signal: they can only be linked to a tool by its name, and namesakes would put wrong signals on a tool.
+- Match a logo by name: only by the tool's own domain.
 - Copy reviews, ratings or testimonials, or invent any metric.
 - Render a JavaScript-only pricing page. There is no renderer (`sources.fetch_mode = 'render'` is reserved). Such a price stays at its last sourced value and ages to "possibly outdated". The pricing agent logs `reanchor_needed` in the action ledger (Admin → Operations), and the weekly report counts the tool under stale data.
 

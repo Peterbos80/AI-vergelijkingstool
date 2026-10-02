@@ -5,11 +5,16 @@
  *    observations ≥ confirmHours apart (confirmation by repetition);
  *  - confirmed changes pass the anomaly guard and the policy (hard rules);
  *  - ambiguity or a missing plan never changes data ("re-anchoring needed").
+ * Coverage: every published tool with a pricing URL has a pricing source, and
+ * a few tools per run whose plans have no official page yet get theirs from
+ * the link on their own home page (robots.txt respected), so the hourly runs
+ * keep every tool's prices current, each page at most once a day.
  */
-import { and, eq, inArray, isNull } from 'drizzle-orm';
+import { and, eq, inArray, isNull, sql } from 'drizzle-orm';
 import { createHash } from 'node:crypto';
 import { pendingChanges, pricingPlans, sources, tools } from '@/lib/db/schema';
-import { computeConfidence } from '@/lib/provenance/confidence';
+import { queryRows } from '@/lib/db/sql';
+import { computeConfidence, sourceDomain } from '@/lib/provenance/confidence';
 import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
 import { anomalyVerdict, type ProposedChange } from '../anomaly';
 import { decide, priceHardRule, sanityCheckPrice } from '../policy';
@@ -17,21 +22,93 @@ import { htmlToText } from '../fetcher/text';
 import { checkPlan } from '../lib/anchor';
 import { priority, toolImpact } from '../lib/planner';
 import { publishPriceChange, type PriceChange } from '../lib/publish-price';
-import { recordFetch } from '../lib/tool-sources';
-import type { AgentDefinition } from '../types';
+import { ensurePricingSources, pricingLinkOf, recordFetch } from '../lib/tool-sources';
+import type { AgentContext, AgentDefinition } from '../types';
 
 const hashValue = (cents: number, currency: string) => createHash('sha1').update(`${cents}:${currency}`).digest('hex').slice(0, 16);
+
+/** Tools whose official pricing page is looked up per run (one home page fetch each). */
+const PRICING_SEARCH_PER_RUN = 3;
+
+/**
+ * Published tools with plans but no official pricing page: read the link on
+ * their own home page and make it their pricing source (logged, reversible).
+ * A home page without such a link is read again after 30 days, one that
+ * could not be fetched after a day.
+ */
+async function findPricingPages(ctx: AgentContext): Promise<number> {
+  const { db } = ctx;
+  const now = ctx.now();
+  const due = await queryRows<{ id: string; website_url: string }>(
+    db,
+    sql`SELECT t.id::text AS id, t.website_url FROM tools t
+         WHERE t.published AND t.pricing_url IS NULL
+           AND EXISTS (SELECT 1 FROM pricing_plans p WHERE p.tool_id = t.id AND p.valid_to IS NULL)
+           AND NOT EXISTS (SELECT 1 FROM sources s WHERE s.tool_id = t.id AND s.role = 'pricing')
+           AND NOT EXISTS (SELECT 1 FROM agent_actions a WHERE a.tool_id = t.id AND a.action IN ('pricing_page_search', 'pricing_url_found')
+                             AND a.created_at > ${now.toISOString()}::timestamptz
+                                 - CASE WHEN a.reason LIKE 'home page:%' THEN interval '1 day' ELSE interval '30 days' END)
+         ORDER BY t.created_at, t.slug
+         LIMIT ${PRICING_SEARCH_PER_RUN}`,
+  );
+  let found = 0;
+  for (const t of due) {
+    if (ctx.signal.aborted) break;
+    const res = await ctx.fetcher.get(t.website_url, { accept: 'html' });
+    const sameSite = res.ok && sourceDomain(res.finalUrl) === sourceDomain(t.website_url);
+    const link = sameSite ? pricingLinkOf(htmlToText(res.body, res.finalUrl), res.finalUrl) : null;
+    if (!link) {
+      await ctx.log.action({
+        action: 'pricing_page_search',
+        toolId: t.id,
+        sourceUrl: t.website_url,
+        decision: 'info',
+        reason: !res.ok ? `home page: ${res.errorKind ?? 'error'}` : !sameSite ? 'home page redirects to another site' : 'no pricing link on the home page',
+      });
+      ctx.stat('pricing_page_not_found');
+      continue;
+    }
+    const [src] = await db
+      .insert(sources)
+      .values({ url: link, domain: new URL(link).hostname.replace(/^www\./, ''), sourceType: 'official', toolId: t.id, role: 'pricing', checkIntervalHours: 24 })
+      .onConflictDoUpdate({ target: sources.url, set: { role: 'pricing', toolId: t.id, sourceType: 'official' }, setWhere: sql`${sources.toolId} IS NULL OR ${sources.toolId} = ${t.id}::uuid` })
+      .returning({ id: sources.id });
+    if (!src) {
+      ctx.stat('pricing_page_taken');
+      continue;
+    }
+    await db.update(tools).set({ pricingUrl: link, updatedAt: now }).where(and(eq(tools.id, t.id), isNull(tools.pricingUrl)));
+    await ctx.log.action({
+      action: 'pricing_url_found',
+      entityType: 'source',
+      entityId: src.id,
+      toolId: t.id,
+      field: 'pricing_url',
+      oldValue: { pricingUrl: null },
+      newValue: { pricingUrl: link, sourceId: src.id },
+      sourceUrl: t.website_url,
+      decision: 'auto_published',
+      reason: 'linked from the official home page',
+    });
+    found++;
+  }
+  if (found) ctx.stat('pricing_pages_found', found);
+  return found;
+}
 
 export const pricingAgent: AgentDefinition = {
   name: 'pricing',
   description: 'Verifies prices on official pricing pages; detects and publishes confirmed changes.',
   schedule: 'every:1h',
   autonomy: 'auto',
-  maxItems: 12,
+  maxItems: 20,
   timeoutMs: 8 * 60_000,
   async run(ctx) {
     const { db, settings } = ctx;
     const now = ctx.now();
+    const added = await ensurePricingSources(db);
+    if (added) ctx.stat('pricing_sources_added', added);
+    await findPricingPages(ctx);
     const all = await db.select().from(tools).where(eq(tools.published, true));
     const pricingSources = await db
       .select()

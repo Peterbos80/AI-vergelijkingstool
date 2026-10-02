@@ -32,8 +32,9 @@ CI tests the static edition on every push (`playwright.static.config.ts`).
 3. DNS at the registrar (TransIP): `@` A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`; `www` CNAME `peterbos80.github.io.`. GitHub redirects `www` to the bare domain.
 4. Optional repository variables (*Settings → Secrets and variables → Actions → Variables*): `SITE_URL` (if not `https://aitoolswijzer.nl`; it must match the custom domain), `LEGAL_NAME`, `LEGAL_KVK`, `LEGAL_VAT` (btw-id), `LEGAL_ADDRESS`, `LEGAL_EMAIL` (shown on /about; required for a commercial site in the Netherlands). No secrets are needed.
 5. Optional repository secret (*Settings → Secrets and variables → Actions → Secrets*): `YOUTUBE_API_KEY`, a free YouTube Data API key (Google Cloud console → enable "YouTube Data API v3" → Credentials → API key, restricted to that API). With it, the news and video agents read YouTube channels through the API; without it they use the channel feeds only where YouTube's robots.txt allows (the news agent's run summary names every skipped channel). The hourly news run uses about 120 of the 10,000 free daily quota units.
-6. Affiliate links (after a programme has approved you): add them to `data/affiliates.json` and commit; see [MONETIZATION.md](MONETIZATION.md#free-edition-dataaffiliatesjson).
-7. Run the workflow once (*Actions → Site and agents → Run workflow*) or push to the default branch.
+6. The tool scout publishes new AI tools itself, in quarantine (see [AGENTS.md](AGENTS.md#tool-scout)). Optional repository variables change it without code: `NEW_TOOL_MODE` (`quarantine` by default; `queue` stops publishing) and `NEW_TOOLS_PER_DAY` (0–12, default 10). Optional repository secret `PRODUCTHUNT_TOKEN` (a Product Hunt developer token): set it **only after Product Hunt has allowed commercial use** (their API terms; hello@producthunt.com); without it Product Hunt is skipped and the weekly report says so. To keep a domain off the site, add it to `blockedDomains` in `data/discovery/sources.json`.
+7. Affiliate links (after a programme has approved you): add them to `data/affiliates.json` and commit; see [MONETIZATION.md](MONETIZATION.md#free-edition-dataaffiliatesjson).
+8. Run the workflow once (*Actions → Site and agents → Run workflow*) or push to the default branch.
 
 **Limits to know.**
 
@@ -70,6 +71,9 @@ Everything else (e-mail, LLM, YouTube, GitHub, heartbeat) is optional and degrad
 | `LLM_MATCH_ENABLED` | no | `false` disables the LLM in Match |
 | `GITHUB_TOKEN` | no | Higher GitHub API rate limit for the social and discovery agents |
 | `YOUTUBE_API_KEY` | no | YouTube Data API: channel uploads for the news and video agents, and video search. Without it: channel feeds only where robots.txt allows, no search. |
+| `PRODUCTHUNT_TOKEN` | no | Product Hunt launches for the tool scout. Set it only once Product Hunt has allowed commercial use (their API terms). |
+| `NEW_TOOL_MODE` | no | `queue` (every new tool is an owner decision; the default of the full platform) or `quarantine` (the tool scout publishes the best candidates that pass every gate; the free edition's workflow sets this). Overrides the `policy.newToolMode` setting. |
+| `NEW_TOOLS_PER_DAY` | no | New tools per day in quarantine mode, 0–12 (default 10; the `policy.newToolsPerDay` setting). |
 | `AGENT_USER_AGENT` | no | Bot identity (keep the `+https://…/bot` link pointing at your domain) |
 | `ENABLED_LOCALES` | no | Live locales, comma-separated (default `nl,en`) |
 | `LEGAL_NAME`, `LEGAL_KVK`, `LEGAL_VAT`, `LEGAL_ADDRESS`, `LEGAL_EMAIL` | before launch | Shown on /about (`LEGAL_VAT` is the btw-id). `LEGAL_EMAIL` also enables `security.txt` and the bot contact line. |

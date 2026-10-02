@@ -171,6 +171,16 @@ export const DEPENDENCIES: DependencyCheck[] = [
     run: async () => (env().GITHUB_TOKEN ? { status: 'ok', message: 'configured' } : { status: 'not_configured', message: 'unauthenticated GitHub limits apply (enough for daily runs)' }),
   },
   {
+    key: 'producthunt',
+    escalate: null,
+    ownerAction:
+      'Optional: PRODUCTHUNT_TOKEN lets the tool scout read Product Hunt launches through its API. The API terms only allow commercial use with permission from Product Hunt (hello@producthunt.com): set the token once you have it.',
+    run: async () =>
+      env().PRODUCTHUNT_TOKEN
+        ? { status: 'ok', message: 'configured' }
+        : { status: 'not_configured', message: 'Product Hunt is skipped: no PRODUCTHUNT_TOKEN (the API terms ask for permission for commercial use)' },
+  },
+  {
     key: 'search_console',
     escalate: null,
     ownerAction: 'Optional: verify the domain in Google Search Console (not connected in this version).',

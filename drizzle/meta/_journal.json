@@ -43,6 +43,13 @@
       "when": 1790778292890,
       "tag": "0005_news_items",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790875013898,
+      "tag": "0006_tool_scout",
+      "breakpoints": true
     }
   ]
 }

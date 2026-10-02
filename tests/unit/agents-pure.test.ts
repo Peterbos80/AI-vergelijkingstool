@@ -42,10 +42,12 @@ describe('discovery parsing (external JSON is untrusted)', () => {
   it('prefers a repository homepage and drops forks, archives and small repos', () => {
     const json = {
       items: [
-        { full_name: 'a/tool', name: 'tool', html_url: 'https://github.com/a/tool', homepage: 'https://tool.dev', stargazers_count: 900, created_at: '2026-09-01' },
-        { full_name: 'b/fork', name: 'fork', html_url: 'https://github.com/b/fork', stargazers_count: 5000, fork: true, created_at: '2026-09-01' },
-        { full_name: 'c/small', name: 'small', html_url: 'https://github.com/c/small', stargazers_count: 10, created_at: '2026-09-01' },
-        { full_name: 'd/nohome', name: 'nohome', html_url: 'https://github.com/d/nohome', homepage: '', stargazers_count: 400, created_at: '2026-09-01' },
+        { full_name: 'a/tool', name: 'tool', html_url: 'https://github.com/a/tool', homepage: 'https://tool.dev', stargazers_count: 900, created_at: '2026-09-01', owner: { type: 'Organization' } },
+        { full_name: 'b/fork', name: 'fork', html_url: 'https://github.com/b/fork', stargazers_count: 5000, fork: true, created_at: '2026-09-01', owner: { type: 'Organization' } },
+        { full_name: 'c/small', name: 'small', html_url: 'https://github.com/c/small', stargazers_count: 10, created_at: '2026-09-01', owner: { type: 'Organization' } },
+        { full_name: 'd/nohome', name: 'nohome', html_url: 'https://github.com/d/nohome', homepage: '', stargazers_count: 400, created_at: '2026-09-01', owner: { type: 'Organization' } },
+        // A person's repository: never kept (the user name is personal data).
+        { full_name: 'e/mine', name: 'mine', html_url: 'https://github.com/e/mine', homepage: 'https://mine.dev', stargazers_count: 4000, created_at: '2026-09-01', owner: { type: 'User' } },
       ],
     };
     expect(parseGithub(json, 300).map((c) => c.domain)).toEqual(['tool.dev', 'github.com/d/nohome']);

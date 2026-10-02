@@ -1,0 +1,14 @@
+{
+  "note": "Where the tool scout looks for new AI tools (docs/DATA_SOURCES.md, 'Tool scout'). Besides the Hacker News and GitHub APIs (and Product Hunt with PRODUCTHUNT_TOKEN), it reads these makers' own news feeds every hour for launch posts ('Introducing …', '… is now available'); robots.txt decides, a disallowed feed is skipped and named in the run summary. Never add other AI-tool directories: their selection is their work. blockedDomains: registrable domains that are never published; a tool already in quarantine on such a domain is taken offline at the next check.",
+  "officialFeeds": [
+    { "id": "openai", "maker": "OpenAI", "url": "https://openai.com/news/rss.xml", "homepage": "https://openai.com/news/" },
+    { "id": "google-ai", "maker": "Google", "url": "https://blog.google/technology/ai/rss/", "homepage": "https://blog.google/technology/ai/" },
+    { "id": "deepmind", "maker": "Google DeepMind", "url": "https://deepmind.google/blog/feed", "homepage": "https://deepmind.google/discover/blog/" },
+    { "id": "huggingface", "maker": "Hugging Face", "url": "https://huggingface.co/blog/feed.xml", "homepage": "https://huggingface.co/blog" },
+    { "id": "microsoft-ai", "maker": "Microsoft", "url": "https://blogs.microsoft.com/ai/feed/", "homepage": "https://blogs.microsoft.com/ai/" },
+    { "id": "github-ai", "maker": "GitHub", "url": "https://github.blog/ai-and-ml/feed/", "homepage": "https://github.blog/ai-and-ml/" },
+    { "id": "aws-ml", "maker": "AWS", "url": "https://aws.amazon.com/blogs/machine-learning/feed/", "homepage": "https://aws.amazon.com/blogs/machine-learning/" },
+    { "id": "nvidia", "maker": "NVIDIA", "url": "https://blogs.nvidia.com/feed/", "homepage": "https://blogs.nvidia.com/" }
+  ],
+  "blockedDomains": []
+}

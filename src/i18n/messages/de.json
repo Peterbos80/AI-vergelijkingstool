@@ -1442,7 +1442,16 @@
     "websiteUp": "Website wieder erreichbar",
     "release": "Neues Release: {version}",
     "buzz": "{count, plural, one {# Hacker-News-Beitrag} other {# Hacker-News-Beiträge}} diese Woche",
-    "newTool": "Neu im Katalog"
+    "newTool": "Neu im Katalog",
+    "newToolScout": "Neu, wird noch geprüft",
+    "newToolScoutSummary": "Gefunden über {signals}. Wir prüfen dieses Tool bis {date}. Erst danach kann es in unseren Tipps erscheinen.",
+    "scoutSignal": {
+      "hackernews": "Hacker News ({value} Punkte)",
+      "github": "GitHub ({value} Sterne)",
+      "producthunt": "Product Hunt ({value} Stimmen)",
+      "announcement": "eine Ankündigung von {maker}",
+      "announcementOwn": "eine Ankündigung auf der eigenen Website"
+    }
   },
   "worlds": {
     "title": "Welten",
@@ -1470,6 +1479,22 @@
       "automation": "Arbeit automatisch erledigen lassen",
       "marketing": "Werbung und Social Media",
       "business": "Kunden helfen"
+    }
+  },
+  "newTools": {
+    "title": "Neu dabei",
+    "intro": "Neue KI-Tools, die unser Tool-Scout gefunden hat. Wir beobachten sie 7 Tage, bevor wir sie empfehlen.",
+    "badge": "Neu",
+    "inCheck": "wird noch geprüft",
+    "quoteFrom": "So beschreibt sich {site} selbst.",
+    "foundThrough": "Gefunden über",
+    "more": "Alle {count} neuen Tools in Pulse",
+    "signal": {
+      "hackernews": "Hacker News · {value} Punkte",
+      "github": "GitHub · {value} Sterne",
+      "producthunt": "Product Hunt · {value} Stimmen",
+      "announcement": "Ankündigung von {maker}",
+      "announcementOwn": "Ankündigung auf der eigenen Website"
     }
   }
 }

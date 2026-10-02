@@ -39,6 +39,11 @@ env:
   LEGAL_VAT: ${{ vars.LEGAL_VAT }}
   LEGAL_ADDRESS: ${{ vars.LEGAL_ADDRESS }}
   LEGAL_EMAIL: ${{ vars.LEGAL_EMAIL }}
+  # The free edition has no admin area: the tool scout publishes new tools itself, in quarantine
+  # (docs/AGENTS.md, "Tool scout"). Repository variables change it without code: NEW_TOOL_MODE=queue
+  # stops publishing (candidates then only wait for an owner decision), NEW_TOOLS_PER_DAY sets 0–12 (default 10).
+  NEW_TOOL_MODE: ${{ vars.NEW_TOOL_MODE || 'quarantine' }}
+  NEW_TOOLS_PER_DAY: ${{ vars.NEW_TOOLS_PER_DAY }}
 
 jobs:
   run:
@@ -115,10 +120,13 @@ jobs:
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: npm run agents -- due
         env:
-          # Higher GitHub API rate limit for the social and discovery agents.
+          # Higher GitHub API rate limit for the social and discovery agents (the tool scout).
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Optional (repository secret): YouTube channels for the news and video agents via the YouTube Data API.
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          # Optional (repository secret): Product Hunt launches for the tool scout. Set it only once Product Hunt
+          # has allowed commercial use (their API terms); without it Product Hunt is skipped and the report says so.
+          PRODUCTHUNT_TOKEN: ${{ secrets.PRODUCTHUNT_TOKEN }}
 
       - name: Owner inbox and weekly report as issues
         run: npx tsx scripts/ops-github.ts sync

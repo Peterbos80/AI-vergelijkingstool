@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t('admin.automation.title') };
 }
 
-const SELECTS: Record<string, string[]> = { newToolMode: ['queue'], locale: ['nl', 'en'], currency: ['EUR'] };
+const SELECTS: Record<string, string[]> = { newToolMode: ['queue', 'quarantine'], locale: ['nl', 'en'], currency: ['EUR'] };
 const STEP: Record<string, string> = { gatingThreshold: '0.05', gatingMin: '0.05', gatingMax: '0.05', dailyBudgetUsd: '0.5', confirmHours: '1', priceIncreasePct: '1', priceDecreasePct: '1', maxToolsPct: '1', p1Pct: '1' };
 const SKIP = new Set(['freshness']); // day ranges are documented, not tuned from the UI
 

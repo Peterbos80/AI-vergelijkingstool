@@ -89,14 +89,14 @@ describe('registry and dependency register', () => {
   it('registers every agent once with a valid schedule', () => {
     const names = AGENTS.map((a) => a.name);
     expect(new Set(names).size).toBe(names.length);
-    expect(names.length).toBe(20);
+    expect(names.length).toBe(21);
     for (const a of AGENTS) expect(validSchedule(a.schedule), a.name).toBe(true);
   });
   it('dependencies-registered: every required integration and optional key is in the register', () => {
     const keys = new Set(DEPENDENCIES.map((d) => d.key));
     for (const a of AGENTS) for (const r of a.requires ?? []) expect(keys.has(r), `${a.name} requires ${r}`).toBe(true);
     const actions = DEPENDENCIES.map((d) => d.ownerAction).join(' ');
-    for (const env of ['DATABASE_URL', 'HEARTBEAT_URL', 'RESEND_API_KEY', 'ANTHROPIC_API_KEY', 'YOUTUBE_API_KEY', 'GITHUB_TOKEN', 'LEGAL_NAME']) {
+    for (const env of ['DATABASE_URL', 'HEARTBEAT_URL', 'RESEND_API_KEY', 'ANTHROPIC_API_KEY', 'YOUTUBE_API_KEY', 'GITHUB_TOKEN', 'PRODUCTHUNT_TOKEN', 'LEGAL_NAME']) {
       expect(actions, env).toContain(env);
     }
   });

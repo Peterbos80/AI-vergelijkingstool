@@ -30,7 +30,7 @@ The design reasoning (in Dutch) is in [`docs/strategy/07-database-schema.md`](st
 | Table | Purpose |
 | --- | --- |
 | `companies` | Vendor |
-| `tools` | Identity, URLs (website, pricing, changelog, RSS, GitHub repo, YouTube channel), status, `published`, and the snapshot columns |
+| `tools` | Identity, URLs (website, pricing, changelog, RSS, GitHub repo, YouTube channel), status, `published`, and the snapshot columns. Tool scout: `quarantine_until` (live but noindex and outside recommendations until promoted), `discovery` (how the scout found it: signals with links and dates, quarantine checks) and `logo` (a simple-icons logo matched on the tool's own domain: path, colour, source, license) |
 | `tool_i18n` | Tagline, description, best for / not for / limitations. `content_status`: `editorial`, `ai_draft`, `machine_translated`, `reviewed` |
 | `tool_capabilities` | Tool × capability, `primary` or `secondary` |
 | `tool_relations` | Alternatives, integrations, built-on, complements. `source`: `editorial`, `computed` (capability overlap) or `fact` |
@@ -56,7 +56,7 @@ The design reasoning (in Dutch) is in [`docs/strategy/07-database-schema.md`](st
 | `pending_changes` | Confirmation by repetition: a measured value is only published after N identical observations at least M hours apart |
 | `reports` | Weekly owner reports (one per period; data, summary per locale, e-mailed at) |
 | `health_checks` | The dependency register: last status and last OK per dependency |
-| `tool_candidates` | Tools found by discovery, one per domain, with signals and verification status. Never published automatically. |
+| `tool_candidates` | Tools found by discovery, one per domain, with signals (counts, dates, links; no texts or user names), the verification dossier and status. Published only through quarantine (`newToolMode = quarantine`), never directly. |
 | `error_log` | Errors grouped by fingerprint per day, with a count |
 | `llm_usage` | LLM calls, tokens, estimated cost and failures, per day and purpose |
 | `settings` | Owner settings as one JSON document per key, merged onto safe defaults (`src/lib/settings/defaults.ts`). Also holds `data_version`. |
