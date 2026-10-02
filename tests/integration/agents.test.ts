@@ -89,7 +89,7 @@ describe('registry and dependency register', () => {
   it('registers every agent once with a valid schedule', () => {
     const names = AGENTS.map((a) => a.name);
     expect(new Set(names).size).toBe(names.length);
-    expect(names.length).toBe(20);
+    expect(names.length).toBe(21);
     for (const a of AGENTS) expect(validSchedule(a.schedule), a.name).toBe(true);
   });
   it('dependencies-registered: every required integration and optional key is in the register', () => {

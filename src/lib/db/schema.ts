@@ -238,6 +238,8 @@ export interface StoredDiscovery {
   popularity: number;
   /** The independent popularity signals, each with its source link and date. */
   signals: { kind: DiscoverySignalKind; value: number | null; url: string; at: string | null; label: string | null }[];
+  /** The function that becomes primary at promotion (all functions are secondary while in quarantine). */
+  primaryCapability: string | null;
   /** Quarantine checks: green runs, the last check, consecutive failures. */
   checks: { green: number; lastAt: string | null; lastOk: boolean | null; failures: number; lastFailureAt: string | null; lastReason: string | null };
   promotedAt: string | null;

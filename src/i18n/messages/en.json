@@ -1404,7 +1404,16 @@
     "websiteUp": "Website reachable again",
     "release": "New release: {version}",
     "buzz": "{count, plural, one {# Hacker News story} other {# Hacker News stories}} this week",
-    "newTool": "New in the catalogue"
+    "newTool": "New in the catalogue",
+    "newToolScout": "New, still being checked",
+    "newToolScoutSummary": "Found through {signals}. We keep checking this tool until {date}. Only after that can it show up in our tips.",
+    "scoutSignal": {
+      "hackernews": "Hacker News ({value} points)",
+      "github": "GitHub ({value} stars)",
+      "producthunt": "Product Hunt ({value} votes)",
+      "announcement": "an announcement by {maker}",
+      "announcementOwn": "an announcement on its own site"
+    }
   },
   "digest": {
     "watchSubject": "{count, plural, one {# change} other {# changes}} in the AI tools you follow",
@@ -1814,7 +1823,10 @@
         "draft_rejected": "Text draft discarded",
         "tool_published": "Tool published",
         "pricing_url_found": "Pricing page found on the tool's own site",
-        "pricing_page_search": "Pricing page searched (not found)"
+        "pricing_page_search": "Pricing page searched (not found)",
+        "tool_quarantined": "New tool published in quarantine",
+        "tool_promoted": "Tool out of quarantine (7 green days)",
+        "tool_depublished": "Tool taken offline (a gate failed)"
       },
       "ranNow": "{agent}: {status} — {summary}",
       "noRuns": "No runs yet. Start the worker (npm run agents:worker) or a cron job.",
@@ -2166,7 +2178,8 @@
       "content": "Optional (LLM): drafts texts for new draft tools and translates tool texts into extra languages.",
       "reporter": "Builds the weekly report and e-mails it to you when e-mail is configured.",
       "audit": "Monthly random sample of automated decisions for you to judge; measures precision per confidence band.",
-      "news": "Reads media feeds (RSS and YouTube) every hour and publishes AI news: headline, outlet and link, never the article text."
+      "news": "Reads media feeds (RSS and YouTube) every hour and publishes AI news: headline, outlet and link, never the article text.",
+      "new-tools": "Every morning around 07:00: puts the most popular new tools that pass every hard gate again online in quarantine (at most the daily number you set), and takes tools out of quarantine after 7 green days. More than 25 in 24 hours: publishes nothing and asks you."
     }
   },
   "og": {

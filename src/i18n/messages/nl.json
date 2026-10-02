@@ -1404,7 +1404,16 @@
     "websiteUp": "Website weer bereikbaar",
     "release": "Nieuwe release: {version}",
     "buzz": "{count, plural, one {# Hacker News-verhaal} other {# Hacker News-verhalen}} deze week",
-    "newTool": "Nieuw in de catalogus"
+    "newTool": "Nieuw in de catalogus",
+    "newToolScout": "Nieuw, nog in controle",
+    "newToolScoutSummary": "Gevonden via {signals}. We controleren deze tool tot {date}. Pas daarna kan hij in onze tips komen.",
+    "scoutSignal": {
+      "hackernews": "Hacker News ({value} punten)",
+      "github": "GitHub ({value} sterren)",
+      "producthunt": "Product Hunt ({value} stemmen)",
+      "announcement": "een aankondiging van {maker}",
+      "announcementOwn": "een aankondiging op de eigen site"
+    }
   },
   "digest": {
     "watchSubject": "{count, plural, one {# wijziging} other {# wijzigingen}} in de AI-tools die je volgt",
@@ -1814,7 +1823,10 @@
         "draft_rejected": "Tekstconcept verworpen",
         "tool_published": "Tool gepubliceerd",
         "pricing_url_found": "Prijzenpagina gevonden op de eigen site",
-        "pricing_page_search": "Prijzenpagina gezocht (niet gevonden)"
+        "pricing_page_search": "Prijzenpagina gezocht (niet gevonden)",
+        "tool_quarantined": "Nieuwe tool in quarantaine gepubliceerd",
+        "tool_promoted": "Tool uit quarantaine (7 groene dagen)",
+        "tool_depublished": "Tool offline gehaald (poort faalde)"
       },
       "ranNow": "{agent}: {status} — {summary}",
       "noRuns": "Nog geen runs. Start de worker (npm run agents:worker) of een cronjob.",
@@ -2166,7 +2178,8 @@
       "content": "Optioneel (LLM): schrijft tekstconcepten voor nieuwe concepttools en vertaalt toolteksten naar extra talen.",
       "reporter": "Maakt het weekrapport en mailt het naar jou als e-mail is ingesteld.",
       "audit": "Maandelijkse willekeurige steekproef van automatische beslissingen om te beoordelen; meet de precisie per vertrouwensband.",
-      "news": "Leest elk uur de feeds van media (RSS en YouTube) en publiceert AI-nieuws: kop, bron en link, nooit de artikeltekst."
+      "news": "Leest elk uur de feeds van media (RSS en YouTube) en publiceert AI-nieuws: kop, bron en link, nooit de artikeltekst.",
+      "new-tools": "Elke ochtend rond 07:00: zet de populairste nieuwe tools die opnieuw alle harde poorten halen in quarantaine online (max. het ingestelde aantal per dag), en haalt tools na 7 groene dagen uit quarantaine. Meer dan 25 in 24 uur: niets publiceren en jou vragen."
     }
   },
   "og": {

@@ -187,6 +187,7 @@ describe('quarantine keeps a new tool out of rankings, recommendations and Match
       { kind: 'hackernews', value: 231, url: 'https://news.ycombinator.com/item?id=1', at: T0.toISOString(), label: null },
       { kind: 'github', value: 4200, url: 'https://github.com/echo-labs/echoscribe', at: T0.toISOString(), label: null },
     ],
+    primaryCapability: 'transcription',
     checks: { green: 1, lastAt: T0.toISOString(), lastOk: true, failures: 0, lastFailureAt: null, lastReason: null },
     promotedAt: null,
   };

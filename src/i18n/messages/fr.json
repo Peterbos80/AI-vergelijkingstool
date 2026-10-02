@@ -1438,7 +1438,16 @@
     "websiteUp": "Site de nouveau accessible",
     "release": "Nouvelle version : {version}",
     "buzz": "{count, plural, one {# article Hacker News} other {# articles Hacker News}} cette semaine",
-    "newTool": "Nouveau dans le catalogue"
+    "newTool": "Nouveau dans le catalogue",
+    "newToolScout": "Nouveau, encore en vérification",
+    "newToolScoutSummary": "Trouvé via {signals}. Nous vérifions cet outil jusqu'au {date}. Ensuite seulement, il peut apparaître dans nos conseils.",
+    "scoutSignal": {
+      "hackernews": "Hacker News ({value} points)",
+      "github": "GitHub ({value} étoiles)",
+      "producthunt": "Product Hunt ({value} votes)",
+      "announcement": "une annonce de {maker}",
+      "announcementOwn": "une annonce sur son propre site"
+    }
   },
   "worlds": {
     "title": "Mondes",

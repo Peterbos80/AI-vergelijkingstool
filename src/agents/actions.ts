@@ -5,7 +5,7 @@
  */
 import { and, desc, eq, isNull } from 'drizzle-orm';
 import type { Database } from '@/lib/db/client';
-import { affiliateLinks, agentActions, changeEvents, pricingPlans, sources, tools, videos, type Decision } from '@/lib/db/schema';
+import { affiliateLinks, agentActions, changeEvents, pricingPlans, sources, toolCandidates, toolCapabilities, tools, videos, type Decision } from '@/lib/db/schema';
 import { recomputeToolSnapshot } from '@/lib/provenance/snapshot';
 import { bumpDataVersion, loadSettings, saveSetting } from '@/lib/settings';
 
@@ -104,6 +104,50 @@ const REVERTERS: Record<string, Reverter> = {
   tool_published: async (db, a) => {
     if (!a.toolId) return false;
     await db.update(tools).set({ published: false, quarantineUntil: null }).where(eq(tools.id, a.toolId));
+    return true;
+  },
+  // Tool scout (docs/strategy/12 §4.4): a tool published in quarantine goes offline again.
+  tool_quarantined: async (db, a) => {
+    if (!a.toolId) return false;
+    const [tool] = await db.select().from(tools).where(eq(tools.id, a.toolId));
+    if (!tool?.published) return false;
+    await db.update(tools).set({ published: false }).where(eq(tools.id, a.toolId));
+    await db.update(changeEvents).set({ status: 'rejected' }).where(and(eq(changeEvents.toolId, a.toolId), eq(changeEvents.kind, 'new_tool')));
+    if (tool.discovery?.candidateId) await db.update(toolCandidates).set({ status: 'rejected', notes: 'publication reverted' }).where(eq(toolCandidates.id, tool.discovery.candidateId));
+    return true;
+  },
+  // A depublished tool comes back in quarantine (at least one more day of checks).
+  tool_depublished: async (db, a) => {
+    const old = a.oldValue as { quarantineUntil?: string | null } | null;
+    if (!a.toolId) return false;
+    const [tool] = await db.select().from(tools).where(eq(tools.id, a.toolId));
+    if (!tool || tool.published) return false;
+    const until = old?.quarantineUntil ? new Date(old.quarantineUntil) : null;
+    await db
+      .update(tools)
+      .set({ published: true, quarantineUntil: until && until.getTime() > Date.now() ? until : new Date(Date.now() + 86_400_000) })
+      .where(eq(tools.id, a.toolId));
+    await db.update(changeEvents).set({ status: 'published' }).where(and(eq(changeEvents.toolId, a.toolId), eq(changeEvents.kind, 'new_tool')));
+    if (tool.discovery?.candidateId) await db.update(toolCandidates).set({ status: 'promoted', notes: 'depublication reverted' }).where(eq(toolCandidates.id, tool.discovery.candidateId));
+    return true;
+  },
+  // A promoted tool goes back into quarantine; its main function is secondary again.
+  tool_promoted: async (db, a) => {
+    const old = a.oldValue as { quarantineUntil?: string | null; primaryCapability?: string | null } | null;
+    if (!a.toolId) return false;
+    const [tool] = await db.select().from(tools).where(eq(tools.id, a.toolId));
+    if (!tool || tool.quarantineUntil !== null) return false;
+    const until = old?.quarantineUntil ? new Date(old.quarantineUntil) : null;
+    await db
+      .update(tools)
+      .set({
+        quarantineUntil: until && until.getTime() > Date.now() ? until : new Date(Date.now() + 86_400_000),
+        discovery: tool.discovery ? { ...tool.discovery, promotedAt: null } : null,
+      })
+      .where(eq(tools.id, a.toolId));
+    if (old?.primaryCapability) {
+      await db.update(toolCapabilities).set({ strength: 'secondary' }).where(and(eq(toolCapabilities.toolId, a.toolId), eq(toolCapabilities.capabilityId, old.primaryCapability)));
+    }
     return true;
   },
   // A pricing page found on the official home page: the tool goes back to having none; the source is no longer checked.

@@ -10,6 +10,7 @@ import type { Escalator } from '@/lib/ops/inbox';
 export type AgentName =
   | 'discovery'
   | 'verification'
+  | 'new-tools'
   | 'pricing'
   | 'change-detection'
   | 'news'
