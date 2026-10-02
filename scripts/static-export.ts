@@ -41,7 +41,15 @@ function write(rel: string, body: string | Buffer) {
 }
 
 async function get(p: string, init: RequestInit = {}): Promise<Response> {
-  return fetch(`${BASE}${p}`, { ...init, headers: { ...HEADERS, ...(init.headers ?? {}) } });
+  // A kept-alive connection the server has just closed fails ("other side closed"): try again on a new one.
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await fetch(`${BASE}${p}`, { ...init, headers: { ...HEADERS, ...(init.headers ?? {}) } });
+    } catch (err) {
+      if (attempt >= 3) throw new Error(`${p}: ${err instanceof Error ? err.message : String(err)}`, { cause: err });
+      await new Promise((r) => setTimeout(r, 250 * attempt));
+    }
+  }
 }
 
 async function pool<T>(items: T[], fn: (x: T) => Promise<void>) {
@@ -166,6 +174,8 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('[static-export] failed:', err instanceof Error ? err.message : err);
+  // "fetch failed" alone hides why: the cause says which connection broke.
+  const cause = err instanceof Error && err.cause instanceof Error ? ` (${err.cause.message})` : '';
+  console.error('[static-export] failed:', err instanceof Error ? err.message : err, cause);
   process.exitCode = 1;
 });

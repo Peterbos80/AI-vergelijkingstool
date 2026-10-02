@@ -12,11 +12,11 @@ const PLATFORMS = ['web', 'ios', 'android', 'windows', 'macos', 'linux', 'api', 
 /** Results shown before "Show all": a list of 230+ rows is a long scroll, most visitors filter first. */
 const FIRST = 48;
 
-/** The same search with every result: the current query plus all=1. */
+/** The same search with every result: the current query plus rows=all ("all" already means "also discontinued"). */
 function allHref(base: string, sp: SP): string {
   const q = new URLSearchParams();
-  for (const [k, v] of Object.entries(sp)) for (const x of Array.isArray(v) ? v : v === undefined ? [] : [v]) if (k !== 'all') q.append(k, x);
-  q.set('all', '1');
+  for (const [k, v] of Object.entries(sp)) for (const x of Array.isArray(v) ? v : v === undefined ? [] : [v]) if (k !== 'rows') q.append(k, x);
+  q.set('rows', 'all');
   return `${base}?${q.toString()}`;
 }
 
@@ -24,7 +24,7 @@ function allHref(base: string, sp: SP): string {
 export function ExplorerView({ locale, t, catalog, sp }: { locale: Locale; t: Translator; catalog: Catalog; sp: SP }) {
   const filters = parseFilters(sp, catalog, locale);
   const hits = searchTools(catalog, filters, locale);
-  const shown = sp.all === '1' ? hits : hits.slice(0, FIRST);
+  const shown = sp.rows === 'all' ? hits : hits.slice(0, FIRST);
 
   const selectedCategory = filters.category ? catalog.categoriesById.get(filters.category) : undefined;
   return (
