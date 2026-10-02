@@ -301,7 +301,7 @@
     "historyCurrent": "actuel",
     "vatNote": "Prix tels qu’affichés par l’éditeur, généralement hors TVA. Nous convertissons approximativement en euros les montants en dollars ou autres devises.",
     "currencyNote": "Montants en {currency}. La conversion en euros est une estimation (taux BCE du {date}).",
-    "noPlans": "Nous n’avons trouvé aucun prix public. Demandez le prix à l’éditeur.",
+    "noPlans": "Aucun tarif public trouvé. Contactez l’éditeur pour un devis.",
     "watch": "Surveiller ce prix",
     "pendingBadge": "peut avoir changé · en cours de vérification",
     "pendingNotice": "Un ou plusieurs prix ci-dessous ont peut-être changé. Nous avons vu un autre prix sur le site officiel et le vérifions encore. En attendant, vous voyez le dernier prix dont nous sommes sûrs."
@@ -1161,61 +1161,61 @@
     "ackBody": "Bonjour {name},\n\nMerci pour votre demande à AIToolsWijzer. Nous vous contacterons sous deux jours ouvrés.\n\nAIToolsWijzer"
   },
   "methodology": {
-    "title": "Méthodologie",
-    "metaDescription": "Comment AIToolsWijzer classe les outils, ce que signifient nos statuts, comment fonctionnent la confiance et la fraîcheur et ce que nos agents vérifient automatiquement.",
-    "intro": "Transparents sur notre classement et sur la façon dont nous savons ce que nous savons. C’est aussi notre information sur le classement au titre du droit européen de la consommation (directive Omnibus).",
-    "rankingTitle": "Notre classement",
-    "rankingBody": "Dans Match, le moteur choisit l’outil le plus adapté à chaque étape de votre tâche. Les principaux paramètres, par ordre de poids :\n\n1. Adéquation : est-ce la capacité principale de l’outil ou une capacité secondaire ?\n2. Vos exigences : budget, niveau, hébergement des données dans l’UE, langue, plateforme, filigrane et open source. Les exigences strictes filtrent ; si rien ne convient, nous le disons.\n3. Qualité des données : confiance, fraîcheur et statut du prix.\n4. Prix : le prix mensuel de l’offre adaptée la moins chère ; une offre gratuite compte.\n5. Simplicité : un outil qui couvre plusieurs étapes compte dans la variante « Le moins d’outils » et légèrement dans « Recommandée ».\n\nSur les pages de capacités, les outils dont c’est la capacité principale apparaissent en premier, puis classés par confiance, fraîcheur et prix d’entrée. Dans l’explorateur, vous choisissez : pertinence, nom, prix ou fraîcheur.",
+    "title": "Notre méthode",
+    "metaDescription": "Comment AIToolsWijzer fixe l’ordre, ce que signifient nos statuts, comment nous suivons la certitude et la date des informations, et ce que notre logiciel vérifie automatiquement.",
+    "intro": "Ici, vous lisez comment nous fixons l’ordre et comment nous savons ce que nous savons. C’est aussi notre explication des classements, comme le demande le droit européen de la consommation (directive Omnibus).",
+    "rankingTitle": "Comment nous fixons l’ordre",
+    "rankingBody": "Quand vous posez une question, notre système choisit, pour chaque étape de votre tâche, l’outil qui convient le mieux. Voici ce qui compte, le plus important d’abord :\n\n1. Ça convient : est-ce la fonction principale de l’outil, ou sait-il le faire aussi ?\n2. Vos exigences : budget, niveau, données dans l’UE, langue, où il marche, filigrane et open source. Une exigence stricte retire des outils. Rien ne convient ? Alors nous le disons.\n3. La qualité de nos données : leur certitude, leur date et si le prix est vérifié.\n4. Le prix : le prix mensuel du forfait le moins cher qui convient. Une offre gratuite compte aussi.\n5. La simplicité : un outil qui fait plusieurs étapes compte dans le choix « Le moins d’outils », et un peu dans « Recommandé ».\n\nSur la page d’une fonction, les outils dont c’est la fonction principale viennent d’abord. Ensuite, comptent la certitude et la date de nos données, puis le prix le plus bas. Dans Tous les outils, vous choisissez l’ordre vous-même : le plus adapté, nom, prix ou dernière vérification.",
     "moneyTitle": "L’argent ne change jamais l’ordre",
-    "moneyBody": "Les liens affiliés et le sponsoring ne sont pas des critères de classement. Le code de classement ne peut techniquement pas lire les données de monétisation, et chaque modification lance un test qui compare les résultats avec et sans liens affiliés : ils doivent être identiques. Les emplacements sponsorisés sont toujours signalés « Sponsorisé » et séparés des résultats.",
+    "moneyBody": "Les liens partenaires et les places payées ne comptent pas pour l’ordre. Le code qui fixe l’ordre ne peut même pas lire les données sur l’argent. À chaque changement, un test compare les résultats avec et sans liens partenaires : ils doivent être exactement identiques. Les places payées portent toujours l’étiquette « Sponsorisé » et restent séparées des résultats.",
     "statusTitle": "Ce que signifient les statuts",
-    "statusVerified": "Confirmé sur la source officielle de l’éditeur, avec une citation mot pour mot et une confiance élevée.",
-    "statusSupported": "Plusieurs sources indépendantes concordent, ou la source officielle le mentionne sans vérification mot pour mot.",
-    "statusCommunity": "Basé uniquement sur des sources communautaires ou sociales.",
-    "statusUnverified": "Une seule source secondaire ou une hypothèse éditoriale qui doit encore être vérifiée.",
-    "confidenceTitle": "Confiance (0–100)",
-    "confidenceBody": "La confiance est calculée à partir de preuves, pas d’une impression. Facteurs : le type de source (l’officielle pèse le plus), la présence de la citation mot pour mot sur la page, l’âge de l’observation, la méthode (une vérification automatique pèse plus qu’une recherche web) et le nombre de sources indépendantes concordantes. Si un contrôle de plausibilité échoue (p. ex. une hausse de prix impossible), la confiance reste basse. La certitude déclarée par un modèle de langage n’est jamais acceptée comme preuve.",
-    "freshnessTitle": "Fraîcheur",
-    "freshnessBody": "Chaque type de données a une durée de validité. À son expiration, nous affichons « Ces informations sont peut-être obsolètes » avec la date de la dernière vérification. Limites actuelles (frais / vieillissant) :",
-    "freshnessRow": "{kind} : frais jusqu’à {fresh} jours, puis vieillissant jusqu’à {aging} jours",
+    "statusVerified": "Nous l’avons vu mot pour mot sur le site officiel de l’éditeur, et nous en sommes très sûrs.",
+    "statusSupported": "Il y a une source : plusieurs sources indépendantes disent la même chose, ou le site officiel le mentionne. Nous ne l’avons pas encore vu mot pour mot.",
+    "statusCommunity": "Basé uniquement sur ce que disent des utilisateurs en ligne, par exemple sur des forums et les réseaux sociaux.",
+    "statusUnverified": "Un autre site, ou une estimation de la rédaction. Nous devons encore le vérifier.",
+    "confidenceTitle": "Notre degré de certitude (0–100)",
+    "confidenceBody": "Nous calculons ce nombre à partir des preuves. Ce n’est pas une impression. Il dépend de cinq choses : le type de source (le site officiel compte le plus), si la phrase figure vraiment mot pour mot sur la page, l’âge de l’observation, la façon dont nous avons vérifié (une vérification automatique compte plus qu’une recherche en ligne) et le nombre de sources indépendantes qui disent la même chose. Une vérification échoue, par exemple un saut de prix impossible ? Alors le nombre reste bas. Une IA ne peut jamais dire elle-même à quel point elle est sûre : cela ne compte pas comme preuve.",
+    "freshnessTitle": "La date des informations",
+    "freshnessBody": "Chaque type de donnée ne reste valable qu’un temps. Quand ce temps est passé, vous voyez « Ces informations sont peut-être obsolètes » avec la date de la dernière vérification. Voici les délais actuels :",
+    "freshnessRow": "{kind} : récent jusqu’à {fresh} jours, peut-être obsolète après {aging} jours",
     "freshnessKinds": {
       "price": "Prix",
-      "website": "Accessibilité du site",
-      "features": "Capacités",
-      "social": "Signaux sociaux",
+      "website": "Si le site marche",
+      "features": "Fonctions",
+      "social": "Ce que les gens disent en ligne",
       "video": "Vidéos"
     },
-    "agentsTitle": "Ce que nos agents font automatiquement",
-    "agentsBody": "Les agents vérifient les pages de tarifs officielles, les journaux de modifications et les sites, et découvrent de nouveaux outils. Un changement de prix n’est publié qu’après avoir été mesuré deux fois, à quelque temps d’intervalle, avec le même résultat. Les fortes hausses, les arrêts sans annonce officielle et les nouveaux outils passent par défaut par un humain. Si une exécution voit un nombre inhabituel de changements à la fois, la publication est gelée automatiquement. Chaque modification automatique est journalisée et peut être annulée.",
+    "agentsTitle": "Ce que notre logiciel fait automatiquement",
+    "agentsBody": "Notre logiciel vérifie les pages de prix officielles, les listes de mises à jour et les sites. Il trouve aussi de nouveaux outils. Nous ne publions un nouveau prix qu’après l’avoir vu deux fois identique, à quelque temps d’intervalle. Les grands sauts de prix, les outils qui s’arrêtent sans annonce officielle et les nouveaux outils sont d’abord examinés par une personne. Le logiciel voit soudain beaucoup de changements ? Alors la publication s’arrête d’elle-même. Nous notons chaque changement automatique, et nous pouvons l’annuler.",
     "aiTitle": "Où nous utilisons l’IA",
-    "aiBody": "Pour comprendre votre question (quand l’analyse de mots-clés hésite) et pour extraire des données des pages officielles, toujours avec une vérification que chaque valeur figure mot pour mot dans la source. Les textes rédigés avec l’IA sont signalés. Les recommandations elles-mêmes sont calculées, pas générées.",
-    "limitsTitle": "Limites",
-    "limitsBody": "Les prix sont ceux affichés par l’éditeur, généralement hors TVA et parfois différents selon la région. Les montants en dollars sont convertis au taux quotidien de la BCE et sont indicatifs. Une partie des données provient de recherches web sur plusieurs sources et est donc marquée Étayé jusqu’à ce que nos agents la confirment sur la page officielle.",
-    "correctionsTitle": "Corrections",
-    "correctionsBody": "Une erreur ? Signalez-la avec une source ; nous répondons et tenons un journal public des corrections."
+    "aiBody": "Nous utilisons l’IA pour comprendre votre question, quand la recherche par mots ne suffit pas. Et pour tirer des données des pages officielles. Nous vérifions alors toujours que chaque valeur figure vraiment mot pour mot dans la source. Les textes faits avec l’IA portent une étiquette. Le conseil lui-même est calculé ; aucune IA ne l’écrit.",
+    "limitsTitle": "Ce que nous ne pouvons pas faire",
+    "limitsBody": "Les prix sont ceux affichés par l’éditeur : généralement hors TVA, et parfois différents selon le pays. Nous convertissons les montants en dollars au taux BCE du jour. C’est une estimation. Une partie des données vient d’autres sites. Ces données ont le statut Sourcé jusqu’à ce que notre logiciel les ait vues sur le site officiel.",
+    "correctionsTitle": "Vous avez vu une erreur ?",
+    "correctionsBody": "Quelque chose ne va pas ? Signalez-le, avec une source. Nous répondons, et vous pouvez relire toutes les corrections en public."
   },
   "disclosureInfo": {
-    "title": "Transparence : affiliation et sponsoring",
+    "title": "Comment nous gagnons de l’argent",
     "metaDescription": "Comment AIToolsWijzer gagne de l’argent, et pourquoi cela n’influence jamais l’ordre.",
-    "intro": "AIToolsWijzer est gratuit. Nous gagnons de l’argent d’une manière qui ne doit pas influencer vos recommandations. Voici comment :",
-    "affiliateTitle": "Liens affiliés",
+    "intro": "AIToolsWijzer est gratuit. Nous gagnons bien de l’argent, mais cela ne doit jamais changer nos conseils. Voici comment :",
+    "affiliateTitle": "Liens partenaires",
     "affiliateBody": "Pour certains outils, nous recevons de l’argent (une commission) si vous souscrivez un abonnement payant via notre lien. Ce lien porte l’étiquette « lien partenaire », et rel=\"sponsored\" dans le code. Vous ne payez rien de plus. L’ordre et nos conseils restent les mêmes, avec ou sans lien. Nous le testons automatiquement.",
-    "clicksTitle": "Comment fonctionnent les clics",
-    "clicksBody": "Les liens sortants passent par /go/ pour que nous puissions mesurer quelles pages sont utiles. Nous ne stockons pour cela aucune donnée personnelle : pas de cookies, seulement un code irréversible qui change chaque jour.",
-    "sponsoredTitle": "Sponsoring",
-    "sponsoredBody": "Les emplacements sponsorisés sont toujours signalés « Sponsorisé », présentés différemment et jamais placés parmi les résultats organiques.",
+    "clicksTitle": "Ce que nous notons quand vous cliquez",
+    "clicksBody": "Les liens vers d’autres sites passent par /go/. Nous voyons ainsi quelles pages sont utiles. Nous ne gardons rien sur vous : pas de cookies, seulement un code qui change chaque jour et qu’on ne peut pas remonter.",
+    "sponsoredTitle": "Places payées",
+    "sponsoredBody": "Les places payées portent toujours l’étiquette « Sponsorisé » et ont un autre aspect. Elles ne sont jamais placées parmi les résultats normaux.",
     "neverTitle": "Ce que nous ne faisons jamais",
-    "never1": "Accepter de l’argent pour une meilleure position (pay-to-rank) ou pour l’inclusion dans la base.",
-    "never2": "Avis payés ou notes inventées.",
-    "never3": "Écarter des outils parce qu’ils n’ont pas de programme d’affiliation.",
-    "activeTitle": "Outils avec un lien affilié actif",
-    "activeNone": "Il n’y a actuellement aucun lien affilié actif.",
+    "never1": "Accepter de l’argent pour une meilleure place, ou pour entrer dans notre liste.",
+    "never2": "Des avis payés ou inventés.",
+    "never3": "Écarter des outils parce qu’ils ne nous rapportent rien.",
+    "activeTitle": "Outils avec un lien partenaire",
+    "activeNone": "Nous n’avons pas de lien partenaire pour le moment.",
     "activeCount": "{count, plural, one {# outil} other {# outils}} actuellement :"
   },
   "corrections": {
-    "title": "Corrections",
-    "metaDescription": "Signalez une erreur dans nos données, avec une source. Consultez le journal public des corrections.",
-    "intro": "Une erreur ? Signalez-la ici avec une source. Les éditeurs d’outils sont aussi les bienvenus ; nous ne modifions que sur la base de preuves.",
+    "title": "Signaler une erreur",
+    "metaDescription": "Signalez une erreur dans nos données, avec une source. Consultez aussi toutes les corrections.",
+    "intro": "Quelque chose ne va pas ? Signalez-le ici, avec une source. Les éditeurs d’outils peuvent aussi signaler. Nous ne changeons rien sans preuve.",
     "tool": "Quel outil ?",
     "field": "Qu’est-ce qui est faux ?",
     "fieldOptions": {
@@ -1226,25 +1226,25 @@
       "privacy": "Confidentialité / UE",
       "other": "Autre chose"
     },
-    "correct": "Quelle est l’information correcte ?",
-    "source": "Source (URL de la page officielle)",
-    "email": "E-mail (facultatif, pour le suivi)",
+    "correct": "Qu’est-ce qui est juste ?",
+    "source": "Source (lien vers la page officielle)",
+    "email": "E-mail (facultatif ; nous vous dirons alors ce que nous avons fait)",
     "vendor": "Je travaille pour l’éditeur de cet outil",
-    "submit": "Envoyer la correction",
-    "thanks": "Merci. La correction est dans notre file d’attente et sera vérifiée par rapport à la source.",
-    "invalid": "Choisissez un outil, décrivez la correction et indiquez une URL source valide.",
-    "logTitle": "Journal des corrections",
+    "submit": "Envoyer votre signalement",
+    "thanks": "Merci. Nous vérifions votre signalement avec la source.",
+    "invalid": "Choisissez un outil, écrivez ce qui ne va pas et donnez un lien valide vers la source.",
+    "logTitle": "Toutes les corrections",
     "logEmpty": "Aucune correction traitée pour l’instant.",
-    "logApproved": "appliquée",
-    "logRejected": "non appliquée",
+    "logApproved": "modifié",
+    "logRejected": "pas modifié",
     "logAuto": "résolue automatiquement"
   },
   "about": {
     "title": "À propos d’AIToolsWijzer",
-    "metaDescription": "AIToolsWijzer vous mène de l’objectif aux bons outils d’IA, avec sources et sans classement payant.",
-    "intro": "AIToolsWijzer répond à une question : je veux faire quelque chose — quelle solution d’IA utiliser ? Nous proposons une stack argumentée avec tarifs, sources et alternatives.",
+    "metaDescription": "AIToolsWijzer vous aide à trouver les bons outils d’IA pour ce que vous voulez faire. Avec des sources, et personne ne peut payer pour une meilleure place.",
+    "intro": "AIToolsWijzer répond à une question : je veux faire quelque chose, quel outil d’IA convient ? Vous recevez un conseil avec prix, sources et alternatives.",
     "howTitle": "Comment nous travaillons",
-    "howBody": "Une petite équipe éditoriale et un ensemble d’agents qui vérifient automatiquement les sources officielles. Les humains décident des nouveaux outils, des grands changements et des corrections ; le travail de routine est automatisé et chaque action automatique est journalisée.",
+    "howBody": "Une petite rédaction et un logiciel qui vérifie automatiquement les sources officielles. Des personnes décident des nouveaux outils, des grands changements et des corrections. Le logiciel fait le travail de routine, et nous notons chaque action automatique.",
     "contactTitle": "Contact et informations sur l’entreprise",
     "legalName": "Nom",
     "legalKvk": "Chambre de commerce (KvK)",
@@ -1257,40 +1257,40 @@
   },
   "privacy": {
     "title": "Confidentialité et cookies",
-    "metaDescription": "Les données traitées par AIToolsWijzer : statistiques sans cookies, pas de pistage, e-mail uniquement avec double confirmation.",
-    "intro": "En bref : nous n’utilisons pas de cookies de pistage et ne vendons pas de données. Voici exactement ce que nous traitons, pourquoi et pendant combien de temps.",
+    "metaDescription": "Ce qu’AIToolsWijzer fait des données : compter les visites sans cookies, pas de pistage, et des e-mails seulement si vous confirmez deux fois.",
+    "intro": "En bref : nous ne vous suivons pas avec des cookies et ne vendons pas de données. Voici exactement ce que nous faisons de vos données, pourquoi et pendant combien de temps.",
     "controller": "Responsable du traitement",
     "sections": {
       "analytics": {
         "title": "Statistiques de visite (sans cookies)",
-        "body": "Nous comptons les visites de pages sur le serveur. Pour cela, nous créons un code quotidien et irréversible à partir de l’adresse IP et de la version du navigateur, avec une clé secrète qui change chaque jour. Nous ne stockons pas l’adresse IP elle-même, et les visites ne peuvent pas être reliées d’un jour à l’autre. Base juridique : intérêt légitime (comprendre l’utilisation)."
+        "body": "Nous comptons les visites de pages sur notre serveur. Pour cela, nous créons chaque jour un code à partir de votre adresse IP et de la version du navigateur. On ne peut pas remonter ce code, et la clé secrète change chaque jour. Nous ne gardons pas votre adresse IP elle-même. Nous ne pouvons pas relier des visites de jours différents. Base juridique : intérêt légitime (nous voulons voir comment le site est utilisé)."
       },
       "match": {
-        "title": "Questions Match",
-        "body": "Ce que vous saisissez dans Match est stocké sans adresses e-mail, numéros de téléphone, URL ni longs numéros, afin d’améliorer le service. Conservation : 90 jours. Lorsque le modèle de langage est utilisé pour comprendre votre question, le texte est transmis à notre fournisseur d’IA (Anthropic), qui ne le traite que pour produire la réponse."
+        "title": "Les questions que vous posez",
+        "body": "Ce que vous tapez comme question est enregistré pour améliorer le site. Nous retirons d’abord les adresses e-mail, numéros de téléphone, liens et longs numéros. Nous le gardons 90 jours. Utilisons-nous l’IA (un modèle de langage) pour comprendre votre question ? Alors votre question va à notre fournisseur d’IA (Anthropic). Il ne l’utilise que pour donner la réponse."
       },
       "cookie": {
-        "title": "Un cookie fonctionnel",
-        "body": "Si vous enregistrez une stack, nous déposons le cookie « aitw_my » pour que vous retrouviez vos stacks sur cet appareil. Il est nécessaire à la fonction que vous demandez ; il n’y a pas d’autres cookies. Conservation : 12 mois."
+        "title": "Un seul cookie, nécessaire",
+        "body": "Si vous enregistrez un justificatif, nous plaçons le cookie « aitw_my ». Vous retrouvez ainsi vos justificatifs sur cet appareil. Ce cookie est nécessaire pour ce que vous demandez vous-même. Il n’y a pas d’autres cookies. Nous le gardons 12 mois."
       },
       "email": {
-        "title": "E-mail (newsletter et Watch)",
-        "body": "Uniquement après double confirmation. Nous conservons votre adresse e-mail, votre langue, le texte du consentement et le moment du consentement. Vous pouvez vous désinscrire en un clic dans chaque e-mail ; nous supprimons alors vos alertes. Les e-mails sont envoyés via notre prestataire d’e-mail. Les inscriptions non confirmées sont supprimées après 30 jours. Les copies des e-mails envoyés sont conservées 90 jours pour résoudre les problèmes de distribution."
+        "title": "E-mail (newsletter et alertes)",
+        "body": "Seulement si vous confirmez votre inscription deux fois. Nous gardons votre adresse e-mail, votre langue, le texte que vous avez accepté et le moment. Vous pouvez vous désinscrire en un clic dans chaque e-mail. Nous supprimons alors vos alertes. Nous envoyons les e-mails via notre prestataire d’e-mail. Les inscriptions non confirmées sont supprimées après 30 jours. Les copies des e-mails envoyés sont gardées 90 jours, pour régler les problèmes de livraison."
       },
       "leads": {
         "title": "Demandes de conseil",
-        "body": "Si vous demandez un conseil, nous conservons nom, e-mail, entreprise et votre message pour vous recontacter. Conservation : 24 mois après le dernier contact."
+        "body": "Vous demandez un conseil ? Nous gardons alors votre nom, votre e-mail, votre entreprise et votre message, pour vous contacter. Nous les gardons 24 mois après le dernier contact."
       },
       "video": {
         "title": "Vidéos",
-        "body": "Les vidéos ne se chargent depuis YouTube (mode de confidentialité renforcée) que lorsque vous cliquez sur lecture.",
+        "body": "Les vidéos ne se chargent depuis YouTube (en mode confidentialité renforcée) que lorsque vous lancez la lecture.",
         "api": "Nous obtenons les listes et titres de vidéos auprès de YouTube, via les flux publics des chaînes ou via les services d’API YouTube. Les contenus YouTube sont soumis aux Conditions d’utilisation de YouTube et aux Règles de confidentialité de Google.",
         "youtubeTerms": "Conditions d’utilisation de YouTube",
         "googlePrivacy": "Règles de confidentialité de Google"
       },
       "rights": {
         "title": "Vos droits",
-        "body": "Vous pouvez demander l’accès, la rectification ou l’effacement, et vous opposer au traitement. Contactez-nous à l’adresse e-mail ci-dessous. Vous pouvez aussi introduire une réclamation auprès de votre autorité de protection des données (aux Pays-Bas : Autoriteit Persoonsgegevens)."
+        "body": "Vous pouvez demander quelles données nous avons sur vous, et nous demander de les corriger ou de les effacer. Vous pouvez aussi vous opposer au traitement. Écrivez-nous à l’adresse e-mail ci-dessous. Vous pouvez aussi porter plainte auprès de votre autorité de protection des données (aux Pays-Bas : Autoriteit Persoonsgegevens)."
       }
     }
   },
@@ -1319,14 +1319,14 @@
   "static": {
     "loading": "Chargement…",
     "failed": "Le chargement a échoué. Vérifiez votre connexion et réessayez.",
-    "needsJs": "Cette fonction s’exécute dans votre navigateur et nécessite JavaScript.",
+    "needsJs": "Cette fonction calcule dans votre navigateur. Pour cela, JavaScript doit être activé.",
     "correctionsIntro": "Une erreur ? Indiquez l’outil, ce qui ne va pas et un lien vers la source. Nous vérifions sur la page officielle.",
     "correctionsIssue": "Le signaler sur GitHub",
     "correctionsEmail": "Ou écrivez à {email}.",
-    "privacyHostingTitle": "Hébergement",
-    "privacyHosting": "Ce site est composé de pages statiques servies par GitHub Pages. GitHub traite à cette occasion des données techniques comme votre adresse IP pour livrer les pages et prévenir les abus (voir la déclaration de confidentialité de GitHub). Nous ne mesurons pas les visites et ne déposons aucun cookie.",
-    "privacyBrowserTitle": "Match et Stack Doctor",
-    "privacyBrowser": "Match et Stack Doctor s’exécutent entièrement dans votre navigateur. Ce que vous saisissez ne nous est pas envoyé et n’est pas conservé.",
+    "privacyHostingTitle": "Où le site est hébergé",
+    "privacyHosting": "Ce site est hébergé sur GitHub Pages. GitHub traite des données techniques, comme votre adresse IP, pour afficher les pages et éviter les abus (voir la déclaration de confidentialité de GitHub). Nous ne comptons pas les visites et ne plaçons pas de cookies.",
+    "privacyBrowserTitle": "Votre question et Vérifier vos outils",
+    "privacyBrowser": "Votre question et Vérifier vos outils sont calculés entièrement dans votre navigateur. Ce que vous saisissez ne nous est pas envoyé et n’est pas enregistré.",
     "disclosureClicks": "Les liens vers les outils passent par une page de redirection qui mène directement au site de l’outil. Nous ne comptons pas les clics.",
     "apiTermsBody": "L’utilisation est gratuite avec mention de la source et un lien vers la page concernée d’AIToolsWijzer. L’API est un ensemble de fichiers JSON statiques, régénérés dès que les données changent. Aucune garantie d’exactitude ni de disponibilité ; vérifiez toujours les décisions importantes à la source."
   },
@@ -1338,7 +1338,7 @@
     "tools": "Tous les outils publiés avec prix d’entrée, fraîcheur et statut",
     "tool": "Un outil avec offres, faits et sources",
     "tasks": "Tâches avec étapes et capacités",
-    "changes": "Changements récents (Pulse)",
+    "changes": "Changements récents (Nouveautés)",
     "terms": "Conditions",
     "termsBody": "L’utilisation est gratuite avec mention de la source et un lien vers la page AIToolsWijzer concernée. Une limite de 60 requêtes par minute et par IP s’applique. Aucune garantie d’exactitude ni de disponibilité ; vérifiez toujours les décisions importantes à la source.",
     "llms": "Pour les modèles de langage, un résumé est disponible sur /llms.txt."
@@ -1356,10 +1356,10 @@
     "emailBody": "Bonjour,\n\nVeuillez confirmer votre abonnement via ce lien :\n{link}\n\nVous ne vous êtes pas inscrit(e) ? Ignorez simplement cet e-mail ; vous ne recevrez rien d’autre.\n\nAIToolsWijzer",
     "confirmedTitle": "Abonnement confirmé",
     "confirmedBody": "Merci. Vous ne recevrez que les e-mails auxquels vous vous êtes inscrit(e).",
-    "confirmFailed": "Ce lien de confirmation n’est pas valide ou a déjà été utilisé.",
+    "confirmFailed": "Ce lien ne marche pas (ou plus). Vous l’avez peut-être déjà utilisé.",
     "unsubscribedTitle": "Désinscription effectuée",
     "unsubscribedBody": "Vous êtes désinscrit(e). Vos alertes sur les outils ont été supprimées.",
-    "unsubscribeFailed": "Ce lien de désinscription n’est pas valide.",
+    "unsubscribeFailed": "Ce lien de désinscription ne marche pas.",
     "confirmTitle": "Confirmez votre abonnement",
     "confirmButton": "Oui, confirmer mon abonnement",
     "unsubscribeTitle": "Se désinscrire",
