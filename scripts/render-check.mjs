@@ -41,8 +41,23 @@ for (const p of PAGES) {
     await page.goto(base + p, { timeout: 20_000 });
     const h1 = page.locator('h1').first();
     await h1.waitFor({ state: 'visible', timeout: 10_000 });
-    const box = await h1.boundingBox();
-    verdict = box && box.height > 0 ? (errors.length ? `errors: ${errors.join(' | ').slice(0, 200)}` : 'ok') : 'heading without size';
+    // Painted, not only parsed: the heading takes room (measured a few times, as hydration may still be busy).
+    let box = null;
+    for (let k = 0; k < 20 && !(box && box.height > 0); k++) {
+      if (k) await new Promise((r) => setTimeout(r, 100));
+      box = await h1.boundingBox().catch(() => null);
+    }
+    if (box && box.height > 0) verdict = errors.length ? `errors: ${errors.join(' | ').slice(0, 200)}` : 'ok';
+    else {
+      const how = await ask(page, () => {
+        const h = document.querySelector('h1');
+        if (!h) return 'no h1';
+        const s = getComputedStyle(h);
+        const r = h.getBoundingClientRect();
+        return `"${h.textContent.trim().slice(0, 40)}" ${Math.round(r.width)}x${Math.round(r.height)}, display ${s.display}, visibility ${s.visibility}, font-size ${s.fontSize}, line-height ${s.lineHeight}, ${document.readyState}`;
+      });
+      verdict = `heading without size: ${how ?? 'no answer'}`;
+    }
   } catch (e) {
     // Why: still loading files or fonts, or a main thread that no longer answers (a hang)?
     const state = await ask(page, () => {
