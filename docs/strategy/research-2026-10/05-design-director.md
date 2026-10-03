@@ -231,6 +231,15 @@ De eigenaar koos Dropbox Brand als voorbeeld. Eerst kwam een klikbaar ontwerp op
   - de vorige versie teruggezet;
   - de maten voortaan uit de schermbreedte berekend, zonder container queries en zonder geregistreerde CSS-eigenschap;
   - een vaste test toegevoegd: de belangrijkste pagina's moeten in WebKit verschijnen (`tests/e2e-static/render.spec.ts`, in CI bij elke wijziging).
+- Daarna nagespeeld in de motoren van oudere iPhones (workflow "Browser check": WebKit uit Playwright 1.41.2 tot 1.52, ruwweg iOS 17.4 tot 18.4):
+  - ook de veilige versie bleef in de motor van iOS 17.4 hangen, op de vergelijkingspagina's; nieuwere motoren laadden ze wel;
+  - zonder CSS of zonder JavaScript laadde de pagina wél, en de zoektest (`scripts/render-bisect.mjs`) vond vier verschillende, onschuldige regels die de pagina elk lieten hangen: geen enkele regel was "de" oorzaak;
+  - wat de pagina wel had: een onzichtbaar label voor schermlezers in de tabel viel buiten het schuifvak van de tabel en maakte de pagina 91 px breder dan een telefoon. De taakpagina's waren om een andere reden te breed (133 px, door het stempel "Nog niet gecontroleerd").
+- Gerepareerd: geen pagina is nog breder dan een telefoon, tot 320 px (iPhone SE uit 2016); gecontroleerd op alle 1860 pagina's. Daarna laden alle 27 soorten pagina's in de motor van iOS 17.4, de vergelijkingspagina in 0,4 seconde.
+- Bewaking:
+  - `render.spec.ts` controleert één pagina van elke soort (27) in Chrome en WebKit, en dat geen ervan breder is dan 320 px, ook nadat de scripts geladen zijn;
+  - CI zet de site pas live als die pagina's ook laden in de motor van iOS 17.4 en 18.2;
+  - "Browser check" test elke versie in vier oudere motoren, en zoekt met `bisect` welke CSS een pagina laat hangen.
 
 ### Nog te doen
 - De categoriepagina's, Alle tools en Vergelijken in dezelfde stijl.
