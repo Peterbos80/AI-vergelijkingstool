@@ -45,7 +45,7 @@ export function SiteMenu({ labels, brand, children }: { labels: { menu: string; 
         }}
       >
         <Icon name="menu" size={20} />
-        <span>{labels.menu}</span>
+        <span className="menu-btn-text">{labels.menu}</span>
       </button>
       <dialog
         ref={dialog}

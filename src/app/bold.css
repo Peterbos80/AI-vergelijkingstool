@@ -207,6 +207,12 @@
     .ask-mode svg {
       display: none;
     }
+    /* On the narrowest phones a label wraps inside its pill rather than make the page wider. */
+    .ask-mode {
+      line-height: 1.2;
+      text-align: center;
+      white-space: normal;
+    }
   }
   .ask[data-hydrated][data-mode='choose'] .ask-panel-type,
   .ask[data-hydrated][data-mode='type'] .ask-panel-choose {

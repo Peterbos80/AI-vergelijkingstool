@@ -244,6 +244,8 @@
     letter-spacing: -0.015em;
     font-weight: 700;
     text-wrap: balance;
+    /* A long Dutch compound ("programmeerassistent") breaks only when it does not fit the screen at all. */
+    overflow-wrap: break-word;
   }
   h1 {
     font-weight: 750;
@@ -262,6 +264,10 @@
   }
   p {
     text-wrap: pretty;
+  }
+  /* A fieldset is as wide as its content by default; on a narrow phone that sticks out. */
+  fieldset {
+    min-inline-size: 0;
   }
   a {
     color: inherit;
@@ -483,6 +489,15 @@
   .menu-btn {
     border-color: var(--ink);
     padding-inline: 1rem;
+  }
+  /* Below 360px (an iPhone SE of 2016) only the icon fits; the button keeps its aria-label. */
+  @media (max-width: 22.49rem) {
+    .menu-btn {
+      padding-inline: 0.625rem;
+    }
+    .menu-btn-text {
+      display: none;
+    }
   }
   /* The button's text is its accessible name; on narrow screens only the icon shows. */
   .search-btn-text {
@@ -1163,8 +1178,14 @@
     border-bottom: 1px solid var(--line);
     vertical-align: top;
   }
+  /*
+   * Positioned, so an absolutely positioned descendant (the visually hidden
+   * name in a receipt chip) scrolls with the table instead of sticking out of
+   * the page: it made a fair fight 91px wider than a phone (3 Oct 2026).
+   */
   .table-scroll {
     --receipt-edge: var(--card);
+    position: relative;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     border: 1px solid var(--line);

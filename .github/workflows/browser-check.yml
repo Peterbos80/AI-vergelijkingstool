@@ -52,8 +52,9 @@ jobs:
           HARNESS: ${{ github.sha }}
         run: |
           mkdir -p tests/e2e-static
-          git show "$HARNESS:tests/e2e-static/render.spec.ts" > tests/e2e-static/render.spec.ts
-          git show "$HARNESS:playwright.static.config.ts" > playwright.static.config.ts
+          for f in tests/e2e-static/render.spec.ts tests/e2e-static/render-pages.json playwright.static.config.ts; do
+            git show "$HARNESS:$f" > "$f"
+          done
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -113,8 +114,10 @@ jobs:
         env:
           HARNESS: ${{ github.sha }}
         run: |
-          git show "$HARNESS:scripts/render-check.mjs" > render-check.mjs
-          git show "$HARNESS:scripts/render-bisect.mjs" > render-bisect.mjs
+          mkdir -p scripts tests/e2e-static
+          for f in scripts/render-check.mjs scripts/render-bisect.mjs tests/e2e-static/render-pages.json; do
+            git show "$HARNESS:$f" > "$f"
+          done
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -137,7 +140,7 @@ jobs:
         run: |
           OUT=out PORT=3400 npx tsx scripts/serve-static.ts > serve.log 2>&1 &
           for i in $(seq 1 30); do curl -fs -o /dev/null http://127.0.0.1:3400/nl && break; sleep 1; done
-          PW_DIR=/tmp/pw node render-check.mjs http://127.0.0.1:3400
+          PW_DIR=/tmp/pw node scripts/render-check.mjs http://127.0.0.1:3400
       - name: Which CSS hangs ${{ inputs.bisect }}
         if: ${{ !cancelled() && inputs.bisect != '' }}
         env:
@@ -147,4 +150,4 @@ jobs:
             OUT=out PORT=3400 npx tsx scripts/serve-static.ts > serve.log 2>&1 &
             for i in $(seq 1 30); do curl -fs -o /dev/null http://127.0.0.1:3400/nl && break; sleep 1; done
           }
-          PW_DIR=/tmp/pw node render-bisect.mjs http://127.0.0.1:3400 "$BISECT"
+          PW_DIR=/tmp/pw node scripts/render-bisect.mjs http://127.0.0.1:3400 "$BISECT"

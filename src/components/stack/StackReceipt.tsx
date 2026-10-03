@@ -107,7 +107,7 @@ export function StackReceipt({
                     </Link>
                     {plan && <span className="ml-1.5 text-ink-3">{plan.name}</span>}
                   </span>
-                  <span className="flex items-center justify-end gap-2 text-right num max-sm:col-start-3 max-sm:row-start-1">
+                  <span className="flex flex-wrap items-center justify-end gap-x-2 gap-y-1 text-right num max-sm:col-span-2 max-sm:col-start-2">
                     {line?.paidCents === null || line === undefined ? (
                       <span className="text-ink-3">{t('stack.priceUnknown')}</span>
                     ) : line.paidCents === 0 ? (

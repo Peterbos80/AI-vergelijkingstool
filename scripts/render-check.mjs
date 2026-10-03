@@ -8,13 +8,15 @@
  *
  * PW_DIR is a folder with that Playwright installed (npm i playwright@x.y.z).
  */
+import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
 const base = process.argv[2] ?? 'http://127.0.0.1:3400';
 const require = createRequire(path.resolve(process.env.PW_DIR ?? '.') + '/');
 const { webkit, devices } = require('playwright');
-const PAGES = ['/nl', '/en', '/nl/tools', '/nl/tools/elevenlabs', '/nl/tools/le-chat', '/nl/categories', '/nl/categories/ai-assistenten', '/nl/compare/adobe-firefly-vs-midjourney', '/nl/pulse'];
+// One page of every kind, the same as the render tests (tests/e2e-static/render.spec.ts).
+const PAGES = JSON.parse(readFileSync(new URL('../tests/e2e-static/render-pages.json', import.meta.url), 'utf8'));
 
 const browser = await webkit.launch();
 console.log(`WebKit ${browser.version()}`);

@@ -107,3 +107,56 @@ jobs:
       - run: npx playwright test -c playwright.static.config.ts
         env:
           OUT: out
+
+  older-iphones:
+    name: Key pages paint in the WebKit of older iPhones
+    # The WebKit of iOS 17.4 hung on a page that the WebKit of today showed fine
+    # (3 Oct 2026): every key page must also load in the WebKit of older
+    # Playwright releases, which run on Ubuntu 22.04 (scripts/render-check.mjs).
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    needs: checks
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: aitw
+          POSTGRES_PASSWORD: aitw
+          POSTGRES_DB: aitoolswijzer
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U aitw" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://aitw:aitw@localhost:5432/aitoolswijzer
+      SITE_URL: https://aitoolswijzer.nl
+      APP_SECRET: ci-app-secret-ci-app-secret-ci-app-secret-0123
+      PUBLIC_ISSUES_URL: https://github.com/${{ github.repository }}/issues/new?template=correction.yml
+      # Roughly the WebKit of iOS 17.4 and of iOS 18.2.
+      PLAYWRIGHT_VERSIONS: 1.41.2 1.49.1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Older WebKits
+        run: |
+          for v in $PLAYWRIGHT_VERSIONS; do
+            mkdir -p "/tmp/pw-$v" && (cd "/tmp/pw-$v" && npm init -y > /dev/null && npm install --no-audit --no-fund "playwright@$v")
+            "/tmp/pw-$v/node_modules/.bin/playwright" install --with-deps webkit
+          done
+      - run: npm run db:migrate && npm run db:seed
+      - run: npm run build
+      - name: Export the static site
+        run: |
+          SITE_MODE=static NODE_ENV=production npx next start -p 3000 -H 127.0.0.1 > server.log 2>&1 &
+          for i in $(seq 1 60); do curl -fs -o /dev/null http://127.0.0.1:3000/nl && break; sleep 1; done
+          BASE=http://127.0.0.1:3000 OUT=out npx tsx scripts/static-export.ts || { tail -50 server.log; exit 1; }
+      - name: Key pages paint
+        run: |
+          OUT=out PORT=3400 npx tsx scripts/serve-static.ts > serve.log 2>&1 &
+          for i in $(seq 1 30); do curl -fs -o /dev/null http://127.0.0.1:3400/nl && break; sleep 1; done
+          status=0
+          for v in $PLAYWRIGHT_VERSIONS; do PW_DIR="/tmp/pw-$v" node scripts/render-check.mjs http://127.0.0.1:3400 || status=1; done
+          exit $status
