@@ -183,7 +183,47 @@ Bekeken op 1440, 1024, 768 en 390 px, in dark en licht, met reduced motion.
 - **Nieuw binnen**: de nieuwe tools van de tool-scout (B6) staan op de home, op Alle tools en op Wat is nieuw. Zolang er nog geen zijn, is het blok leeg.
 - **Eenvoudige taal** (B5) is samengevoegd: menu, titels en knoppen zonder vakjargon, bewaakt door een test.
 
+### Ronde 5: de gedurfde editie (2–3 okt)
+De eigenaar koos Dropbox Brand als voorbeeld. Eerst kwam een klikbaar ontwerp op een canvas (home, toolpagina, mobiel). Na het akkoord is het gebouwd in `app/bold.css`. Er is niets van Dropbox overgenomen: geen logo, geen lettertypen, geen kleuren.
+
+**Systeem**
+- Elke wereld heeft een fel kleurenpaar (`--tile-x` / `--tile-x-ink` in `worlds.css`), in beide thema's hetzelfde. Tekst op een tegel haalt ≥ 4,5:1.
+- Er zijn drie koppen in zwaar, strak schrift (`display-1` tot `display-4`) en een mono-regel (`kicker`) erboven.
+- Hoeken zijn ruimer: 24, 28 en 36 px voor kaarten, tegels en blokken.
+- De donkere band (feitenband, voettekst) gebruikt `--band`. Op de donkere pagina krijgt elke tegel een lichte rand (`--tile-edge`), zodat ook de bijna zwarte tegel van Code zichtbaar blijft.
+- Namen en titels passen zich aan hun vak aan. De CSS kent de lengte van het langste woord (`--len`), zodat geen woord buiten een tegel of het titelblok valt.
+- Beweging alleen bij aanwijzen en focus, en niet bij "minder beweging".
+
+**Home**
+- Een grote kop, een witte vraagkaart met de twee manieren van vragen en genummerde, gekleurde stappen.
+- Het podium is een kleurvlak met een scheef bonnetje:
+  - eerst de laatst gecontroleerde prijs met een officiële status en bron;
+  - daarna het bonnetje van de bovenste tool van de wereld waar de vraag over gaat.
+- De werelden staan als tegels in een raster: twee grote, twee brede, de rest gewoon, en een tegel voor alle tools.
+- Een feitenband laat drie dingen zien: het aantal tools, dat de software elk uur controleert, en dat er bij elke prijs een bron staat.
+- Drie duels zijn grote kaarten in de kleur van de wereld.
+- De tooltabel onder de vraag is weg. Het niveau Basis of Technisch kies je in de kopbalk.
+
+**Toolpagina**
+- Een titelblok in de kleur van de wereld, met:
+  - het merk op een witte tegel;
+  - de naam zo groot als past;
+  - de status als strookje papier;
+  - knoppen in het kleurenpaar.
+- Kerngegevens staan als tegels. Een onbekende waarde staat in een gestippelde tegel met "Nog niet bekend".
+- "Wat het is" heeft functies als pillen. "Handig voor" staat op limoen, "Let op" en "Minder handig voor" op oranje.
+- Alternatieven zijn kaarten met hun prijsbonnetje. Daaronder staat een donkere balk naar het eerlijke duel.
+- In de zijkolom staan:
+  - de prijzen als bonnetje, met per plan de status en het bewijs;
+  - wat we controleren;
+  - privacy en Europa;
+  - de bronnen.
+
+**Kopbalk en voettekst**
+- Een groter logo, vette menulinks met een zwarte streep onder de actieve pagina, en zoeken als pil.
+- De voettekst is een donkere band met de naam in groot schrift.
+
 ### Nog te doen
-- Een ontwerpronde op basis van voorbeelden van de eigenaar: welke sites vindt de eigenaar mooi? Eerst een klikbaar ontwerp ter goedkeuring, daarna bouwen.
+- De categoriepagina's, Alle tools en Vergelijken in dezelfde stijl.
 - Toolkaarten 2.0 als alternatieve weergave op Alle tools, naast de rijen.
 - Beeldmateriaal per tool: schermafbeeldingen van de eigen site, mits de voorwaarden van de maker dat toestaan.

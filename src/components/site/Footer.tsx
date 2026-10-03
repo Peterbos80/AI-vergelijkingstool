@@ -33,16 +33,16 @@ export function Footer({ locale, t, stats, newsletter }: { locale: Locale; t: Tr
     ],
   ];
   return (
-    <footer className="mt-24 border-t border-line bg-paper-2">
-      <div className="container-page grid gap-10 py-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+    <footer className="site-footer">
+      <div className="container-page site-footer-grid">
         <div className="max-w-sm">
-          <div className="flex items-center gap-2 font-bold">
-            <Logo /> {t('meta.siteName')}
-          </div>
-          <p className="mt-2 text-sm text-ink-2">{t('meta.tagline')}</p>
-          <p className="mt-4 text-sm text-ink-3">{t('footer.explanation')}</p>
+          <p className="site-footer-name">
+            <Logo size={28} /> {t('meta.siteName')}
+          </p>
+          <p className="site-footer-tagline">{t('meta.tagline')}</p>
+          <p className="site-footer-text">{t('footer.explanation')}</p>
           {stats && stats.tools > 0 && (
-            <p className="mono mt-4 text-xs text-ink-3">
+            <p className="site-footer-data">
               {t('footer.dataLine', {
                 tools: formatNumber(stats.tools, locale),
                 facts: formatNumber(stats.facts + stats.plans, locale),
@@ -53,12 +53,10 @@ export function Footer({ locale, t, stats, newsletter }: { locale: Locale; t: Tr
         </div>
         {cols.map((col, i) => (
           <nav key={i} aria-label={t('a11y.footerNav')}>
-            <ul className="space-y-2 text-sm">
+            <ul className="site-footer-links">
               {col.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-ink-2 no-underline hover:text-ink hover:underline">
-                    {l.label}
-                  </Link>
+                  <Link href={l.href}>{l.label}</Link>
                 </li>
               ))}
             </ul>

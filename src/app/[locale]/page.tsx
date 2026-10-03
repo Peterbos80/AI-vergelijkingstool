@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import type { Locale } from '@/i18n/config';
+import type { Translator } from '@/i18n/format';
 import { getT } from '@/i18n/server';
 import { formatDate, formatNumber } from '@/i18n/formatters';
 import { getCatalog, taskSlug, taskTextOf } from '@/lib/catalog';
 import { radar, type Radar } from '@/lib/catalog/radar';
 import { getDb } from '@/lib/db/client';
-import { rankForCapability } from '@/lib/engine/rank';
 import { logError } from '@/lib/ops/errors';
 import { href } from '@/lib/routes';
 import { alternates } from '@/lib/seo';
@@ -14,21 +14,23 @@ import { emailEnabled } from '@/lib/env';
 import { track } from '@/lib/analytics/track';
 import { NewsletterForm } from '@/components/forms/NewsletterForm';
 import { SponsoredCard } from '@/components/data/SponsoredCard';
-import { AskBox, MatrixPanels, type AskChoice, type AskPrompt, type MatrixPanel } from '@/components/home/AskBox';
-import { HeroStage, type StageWorld } from '@/components/home/HeroStage';
+import { entryPriceLabel } from '@/components/data/format';
+import { AskBox, type AskChoice, type AskPrompt } from '@/components/home/AskBox';
+import { HeroReceipt, type StageReceipt, type StageWorld } from '@/components/home/HeroReceipt';
 import { RadarPanel } from '@/components/home/RadarPanel';
 import { NewTools } from '@/components/data/NewTools';
 import { ToolMark } from '@/components/data/ToolMark';
-import { WorldCard } from '@/components/worlds/WorldCard';
+import { fitStyle } from '@/components/ui/fit';
+import { WorldGlyph } from '@/components/worlds/WorldGlyph';
+import { WorldTile, type TileSize } from '@/components/worlds/WorldTile';
 import { toolWorld } from '@/lib/catalog/helpers';
 import { worldSummaries } from '@/lib/catalog/worlds';
 import { pickDuels } from '@/lib/catalog/duels';
 import { worldLexicon } from '@/lib/worlds';
 import { WORLDS, type WorldId } from '@/lib/world-ids';
 import { StarterWorkflows } from '@/components/home/StarterWorkflows';
-import { ToolMatrix } from '@/components/home/ToolMatrix';
 import { activePlacement } from '@/lib/monetization/placements';
-import type { Catalog, CatalogTask, CatalogTool } from '@/lib/catalog/types';
+import type { Catalog, CatalogTool } from '@/lib/catalog/types';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]'>): Promise<Metadata> {
   const { locale } = (await params) as { locale: Locale };
@@ -48,12 +50,59 @@ const STARTERS = {
   advanced: ['connect-llm-api', 'code-with-ai', 'automate-work'],
 };
 
-/** Tools for a task's required steps, in the engine's ranking order (never sponsoring). */
-function taskTools(catalog: Catalog, task: CatalogTask, n: number): CatalogTool[] {
-  const lists = task.steps.filter((s) => s.required).flatMap((s) => s.capabilityIds.map((c) => rankForCapability(catalog, c)));
-  const out = new Map<string, CatalogTool>();
-  for (let i = 0; out.size < n && lists.some((l) => l[i]); i++) for (const l of lists) if (l[i] && out.size < n) out.set(l[i]!.id, l[i]!);
-  return [...out.values()];
+/** The bento: two big tiles, two wide ones, the rest normal; bento-span takes the full row on phones (app/bold.css). */
+const TILES: Record<WorldId, { size: TileSize; span?: boolean }> = {
+  assistant: { size: 'big', span: true },
+  writing: { size: 'normal' },
+  research: { size: 'normal' },
+  image: { size: 'wide' },
+  video: { size: 'big' },
+  audio: { size: 'normal' },
+  code: { size: 'normal' },
+  automation: { size: 'wide', span: true },
+  marketing: { size: 'normal' },
+  business: { size: 'normal' },
+};
+
+/** "elevenlabs.io/pricing": the host and the first part of the path. */
+function sourceLabel(url: string): string | null {
+  try {
+    const u = new URL(url);
+    const first = u.pathname.split('/').filter(Boolean)[0];
+    return `${u.hostname.replace(/^www\./, '')}${first ? `/${first}` : ''}`;
+  } catch {
+    return null;
+  }
+}
+
+/** A tool's entry price as a receipt for the stage. */
+function stageReceipt(tool: CatalogTool, t: Translator, locale: Locale): StageReceipt {
+  return {
+    name: tool.name,
+    logo: tool.logo,
+    href: href.tool(locale, tool.slug),
+    plan: tool.entryPlanName,
+    price: entryPriceLabel(tool, t, locale),
+    status: tool.pricingStatus,
+    statusLabel: tool.pricingStatus ? t(`status.${tool.pricingStatus}.label`) : null,
+    date: tool.priceCheckedAt ? formatDate(tool.priceCheckedAt, locale) : null,
+    dateIso: tool.priceCheckedAt ? tool.priceCheckedAt.toISOString().slice(0, 10) : null,
+    source: tool.pricingUrl ? sourceLabel(tool.pricingUrl) : null,
+  };
+}
+
+/** The most recently checked price with a source and an official status: the stage before the visitor asks. */
+function latestChecked(catalog: Catalog): CatalogTool | undefined {
+  return catalog.tools
+    .filter(
+      (x) =>
+        x.status !== 'shutdown' &&
+        x.pricingUrl &&
+        x.priceCheckedAt &&
+        x.entryPriceCents !== null &&
+        (x.pricingStatus === 'verified' || x.pricingStatus === 'supported'),
+    )
+    .sort((a, b) => b.priceCheckedAt!.getTime() - a.priceCheckedAt!.getTime() || a.name.localeCompare(b.name))[0];
 }
 
 export default async function HomePage({ params }: PageProps<'/[locale]'>) {
@@ -72,10 +121,10 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
     await logError('app', 'home: radar unavailable', err);
   }
 
-  // Six duels (Fair Fights) from different worlds, each tool once.
-  const duels = pickDuels(catalog, 6);
+  // Three duels (Fair Fights) from different worlds, each tool once.
+  const duels = pickDuels(catalog, 3);
   const popular = catalog.tasks.slice(0, 8);
-  const worlds = worldSummaries(catalog, t, locale);
+  const worlds = worldSummaries(catalog, t, locale).sort((a, b) => WORLDS.indexOf(a.id) - WORLDS.indexOf(b.id));
   // The dropdowns: every world in plain words, with its tasks.
   const choices: AskChoice[] = WORLDS.map((w) => ({
     world: w,
@@ -85,9 +134,20 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
       .sort((a, b) => a.position - b.position)
       .map((x) => ({ id: x.id, title: taskTextOf(x, locale).title })),
   })).filter((c) => c.tasks.length > 0);
+  // The stage: per world its place and the receipt of its top tool; before asking, the latest checked price.
   const stageWorlds: Partial<Record<WorldId, StageWorld>> = Object.fromEntries(
-    worlds.map((w) => [w.id, { place: w.place, name: w.name, count: t('home.toolsCount', { count: w.toolCount }), href: w.href }]),
+    worlds.map((w) => [
+      w.id,
+      { place: w.place, name: w.name, count: t('home.toolsCount', { count: w.toolCount }), href: w.href, receipt: w.top[0] ? stageReceipt(w.top[0], t, locale) : null },
+    ]),
   );
+  const homeTool = latestChecked(catalog) ?? worlds.find((w) => w.top[0])?.top[0];
+  // The facts band: three big words with what they mean.
+  const stats: [string, string][] = [
+    [formatNumber(s.tools, locale), t('home.statsTools')],
+    [t('home.statsHourly'), t('home.statsHourlyText')],
+    [t('home.statsSource'), t('home.statsSourceText')],
+  ];
   // Paid placement: labelled and separate from everything the engine recommends.
   const sponsored = await activePlacement('home_sponsored');
   const sponsoredTool = sponsored ? catalog.toolsById.get(sponsored.toolId) : undefined;
@@ -110,92 +170,72 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
     ];
   });
 
-  const assistants = rankForCapability(catalog, 'chat-assistant').slice(0, 6);
-  const panels: MatrixPanel[] = [
-    {
-      key: 'assistants',
-      title: t('hub.matrixAssistants'),
-      node: <ToolMatrix tools={assistants} t={t} locale={locale} caption={t('hub.matrixAssistants')} catalog={catalog} />,
-      matchHref: href.match(locale, { q: taskTextOf(catalog.tasksById.get('everyday-ai-assistant') ?? catalog.tasks[0]!, locale).title, task: 'everyday-ai-assistant' }),
-    },
-  ];
-  for (const p of PROMPTS) {
-    const task = catalog.tasksById.get(p.task);
-    const prompt = prompts.find((x) => x.key === p.key);
-    if (!task || !prompt) continue;
-    let tools: CatalogTool[];
-    if (p.key === 'api') {
-      // Language models you can reach from code: API first, then the ones you run yourself.
-      const models = [...new Map([...rankForCapability(catalog, 'chat-assistant'), ...rankForCapability(catalog, 'local-llm')].map((x) => [x.id, x])).values()];
-      const api = (x: CatalogTool) => (x.apiAvailable ?? x.platforms.includes('api')) === true;
-      tools = [...models.filter(api), ...models.filter((x) => !api(x))].slice(0, 7);
-    } else {
-      tools = taskTools(catalog, task, 12);
-      if (p.budget === 'free') tools = tools.filter((x) => x.hasFreeTier === true);
-      tools = tools.slice(0, 6);
-    }
-    const title = t('hub.matrixFor', { task: taskTextOf(task, locale).title });
-    panels.push({ key: p.key, title, node: <ToolMatrix tools={tools} t={t} locale={locale} caption={title} catalog={catalog} />, matchHref: prompt.href });
-  }
-
   return (
     <>
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="container-page hero-grid">
-          <div className="hero-copy">
-            <p className="hero-eyebrow">{t('meta.tagline')}</p>
-            <h1 id="hero-title" className="hero-title">
+      <section className="home-hero" aria-labelledby="hero-title">
+        <div className="container-page home-hero-grid">
+          <div className="home-hero-copy">
+            <p className="kicker">{t('meta.tagline')}</p>
+            <h1 id="hero-title" className="display-1">
               {t('home.heroTitle')}
             </h1>
-            <p className="hero-sub">{t('home.heroSub')}</p>
-            <div className="mt-7">
-              <AskBox
-                action={href.match(locale)}
-                prompts={prompts}
-                afterPrompts={
-                  <p className="mt-4 text-sm">
-                    <Link href={href.start(locale)} className="link-accent font-semibold">
-                      {t('start.homeCta')} →
-                    </Link>
-                  </p>
-                }
-                choices={choices}
-                labels={{
-                  label: t('match.inputLabel'),
-                  placeholder: t('hub.placeholder'),
-                  submit: t('match.submit'),
-                  hint: t('hub.enterHint'),
-                  prompts: t('hub.promptsLabel'),
-                  modes: t('home.chooserModes'),
-                  modeChoose: t('home.chooserChoose'),
-                  modeType: t('home.chooserType'),
-                  stepWorld: t('home.chooserStepWorld'),
-                  stepTask: t('home.chooserStepTask'),
-                  stepBudget: t('home.chooserStepBudget'),
-                  chooseWorld: t('home.chooserPickWorld'),
-                  chooseTask: t('home.chooserPickTask'),
-                  budgets: [
-                    { value: 'free', label: t('home.chooserBudgetFree') },
-                    { value: '25', label: t('home.chooserBudget25') },
-                    { value: '100', label: t('home.chooserBudget100') },
-                    { value: 'any', label: t('home.chooserBudgetAny') },
-                  ],
-                  show: t('home.chooserShow'),
-                }}
-              />
-            </div>
-          </div>
-          <div className="hero-visual">
-            <HeroStage
-              lexicon={worldLexicon(catalog, locale)}
-              worlds={stageWorlds}
-              labels={{ homePlace: t('worlds.places.home'), homeHint: t('home.stageHint'), enter: t('home.stageEnter'), announce: t('home.stageAnnounce') }}
+            <p className="home-hero-sub">{t('home.heroSub')}</p>
+            <AskBox
+              action={href.match(locale)}
+              prompts={prompts}
+              afterPrompts={
+                <p className="mt-5">
+                  <Link href={href.start(locale)} className="link-bold">
+                    {t('start.homeCta')} →
+                  </Link>
+                </p>
+              }
+              choices={choices}
+              labels={{
+                label: t('match.inputLabel'),
+                placeholder: t('hub.placeholder'),
+                submit: t('match.submit'),
+                hint: t('hub.enterHint'),
+                prompts: t('hub.promptsLabel'),
+                modes: t('home.chooserModes'),
+                modeChoose: t('home.chooserChoose'),
+                modeType: t('home.chooserType'),
+                stepWorld: t('home.chooserStepWorld'),
+                stepTask: t('home.chooserStepTask'),
+                stepBudget: t('home.chooserStepBudget'),
+                chooseWorld: t('home.chooserPickWorld'),
+                chooseTask: t('home.chooserPickTask'),
+                budgets: [
+                  { value: 'free', label: t('home.chooserBudgetFree') },
+                  { value: '25', label: t('home.chooserBudget25') },
+                  { value: '100', label: t('home.chooserBudget100') },
+                  { value: 'any', label: t('home.chooserBudgetAny') },
+                ],
+                show: t('home.chooserShow'),
+              }}
             />
           </div>
+          <HeroReceipt
+            lexicon={worldLexicon(catalog, locale)}
+            worlds={stageWorlds}
+            home={homeTool ? stageReceipt(homeTool, t, locale) : null}
+            labels={{
+              receipt: t('receipts.label'),
+              plan: t('home.receiptPlan', { name: '{name}' }),
+              price: t('plans.price'),
+              status: t('receipts.status'),
+              seen: t('receipts.observed'),
+              source: t('common.source'),
+              note: t('home.receiptNote'),
+              caption: t('home.receiptCaption'),
+              enter: t('home.stageEnter'),
+              announce: t('home.stageAnnounce', { place: '{place}' }),
+            }}
+          />
         </div>
         {s.tools > 0 && (
           <div className="container-page">
-            <p className="hero-proof mono">
+            <p className="home-proof">
               {t('home.proof', {
                 tools: formatNumber(s.tools, locale),
                 facts: formatNumber(s.facts + s.plans, locale),
@@ -207,77 +247,87 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         )}
       </section>
 
-      <section className="home-section" aria-labelledby="worlds-title">
+      <section className="home-section pt-6" aria-labelledby="worlds-title">
         <div className="container-page">
-          <header className="section-head">
-            <p className="eyebrow">{t('home.worldsEyebrow')}</p>
-            <h2 id="worlds-title" className="section-title">
-              {t('home.worldsTitle')}
-            </h2>
-            <p className="section-sub">{t('home.worldsSub')}</p>
+          <header className="bold-head">
+            <div>
+              <p className="kicker">
+                {t('home.worldsEyebrow')} · {t('common.tools', { count: s.tools })}
+              </p>
+              <h2 id="worlds-title" className="display-2">
+                {t('home.worldsTitle')}
+              </h2>
+            </div>
+            <Link href={href.tools(locale)} className="link-bold">
+              {t('explorer.showAll', { count: s.tools })} →
+            </Link>
           </header>
-          <ul className="world-grid">
+          <ul className="bento">
             {worlds.map((w) => (
-              <li key={w.id}>
-                <WorldCard world={w} count={t('home.toolsCount', { count: w.toolCount })} topLabel={t('home.worldTop')} />
+              <li key={w.id} className={`bento-${TILES[w.id].size}${TILES[w.id].span ? ' bento-span' : ''}`}>
+                <WorldTile world={w} size={TILES[w.id].size} count={t('home.toolsCount', { count: w.toolCount })} topLabel={t('home.worldTop')} />
               </li>
             ))}
+            <li className="bento-wide bento-span">
+              <Link href={href.tools(locale)} className="tile tile-all">
+                <span className="tile-top">
+                  <span className="tile-place">{t('home.allPlace')}</span>
+                  <span className="tile-count">{t('common.tools', { count: s.tools })}</span>
+                </span>
+                <span className="tile-body">
+                  <span className="tile-title" style={fitStyle(t('home.allTitle'))}>
+                    {t('home.allTitle')} →
+                  </span>
+                  <span className="tile-text">{t('home.allText')}</span>
+                </span>
+                <WorldGlyph world="all" className="tile-art" />
+              </Link>
+            </li>
           </ul>
         </div>
       </section>
 
-      <div className="container-page empty:hidden">
-        <NewTools catalog={catalog} locale={locale} t={t} limit={4} />
-      </div>
-
-      <section className="home-section home-band" aria-labelledby="matrix-title">
-        <div className="container-page">
-          <p className="eyebrow mb-2">{t('home.matrixEyebrow')}</p>
-          <MatrixPanels
-            panels={panels}
-            defaultPanel="assistants"
-            labels={{
-              levelGroup: t('hub.levelGroup'),
-              levelBasis: t('hub.levelBasis'),
-              levelAdvanced: t('hub.levelAdvanced'),
-              levelBasisHint: t('hub.levelBasisHint'),
-              levelAdvancedHint: t('hub.levelAdvancedHint'),
-              fullStack: t('hub.fullStack'),
-              note: t('hub.matrixNote'),
-            }}
-          />
-        </div>
-      </section>
-
-      {radarData && (
-        <div className="home-section">
-          <div className="container-page">
-            <RadarPanel data={radarData} catalog={catalog} t={t} locale={locale} />
-          </div>
+      {s.tools > 0 && (
+        <div className="stats-band">
+          <ul className="container-page stats-grid" style={{ ['--len' as string]: String(Math.max(...stats.map(([big]) => [...big].length))) }}>
+            {stats.map(([big, text]) => (
+              <li key={big} className="stat">
+                <span className="stat-big">{big}</span>
+                <span className="stat-text">{text}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
+      <div className="container-page home-new mt-16 empty:hidden">
+        <NewTools catalog={catalog} locale={locale} t={t} limit={4} />
+      </div>
+
       {duels.length > 0 && (
-        <section className="home-section pt-0" aria-labelledby="fights-title">
+        <section className="home-section" aria-labelledby="fights-title">
           <div className="container-page">
-            <header className="section-head">
-              <p className="eyebrow">{t('home.fightsEyebrow')}</p>
-              <h2 id="fights-title" className="section-title">
+            <header className="mb-7">
+              <h2 id="fights-title" className="display-3">
                 {t('home.fightsTitle')}
               </h2>
-              <p className="section-sub">{t('home.fightsSub')}</p>
+              <p className="bold-sub">{t('home.fightsSub')}</p>
             </header>
-            <ul className="versus-grid">
+            <ul className="duel-grid">
               {duels.map(([a, b]) => (
                 <li key={`${a.slug}-${b.slug}`}>
-                  <Link href={href.fairFight(locale, a.slug, b.slug)} className="versus">
-                    <span className="versus-marks" aria-hidden="true">
-                      <ToolMark tool={a} world={toolWorld(a, catalog)} size={44} />
-                      <span className="versus-vs">vs</span>
-                      <ToolMark tool={b} world={toolWorld(b, catalog)} size={44} />
+                  <Link href={href.fairFight(locale, a.slug, b.slug)} className="duel marks-light" data-world={toolWorld(a, catalog)}>
+                    <span className="duel-marks" aria-hidden="true">
+                      <span className="duel-mark">
+                        <ToolMark tool={a} world={toolWorld(a, catalog)} size={40} />
+                      </span>
+                      <span className="duel-vs">vs</span>
+                      <span className="duel-mark">
+                        <ToolMark tool={b} world={toolWorld(b, catalog)} size={40} />
+                      </span>
                     </span>
-                    <span className="versus-names">
-                      {a.name} <span className="text-ink-3">vs</span> {b.name}
+                    <span className="duel-names">
+                      {a.name} vs {b.name}
                     </span>
                   </Link>
                 </li>
@@ -287,16 +337,24 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         </section>
       )}
 
+      {radarData && (
+        <div className="home-section pt-0">
+          <div className="container-page">
+            <RadarPanel data={radarData} catalog={catalog} t={t} locale={locale} />
+          </div>
+        </div>
+      )}
+
       <section className="home-section pt-0" aria-labelledby="tasks-title">
         <div className="container-page">
-          <header className="section-head section-head-row">
+          <header className="bold-head">
             <div>
-              <p className="eyebrow">{t('home.tasksEyebrow')}</p>
-              <h2 id="tasks-title" className="section-title">
+              <p className="kicker">{t('home.tasksEyebrow')}</p>
+              <h2 id="tasks-title" className="display-3">
                 {t('home.tasksTitle')}
               </h2>
             </div>
-            <Link href={href.tasks(locale)} className="link-accent text-sm font-semibold">
+            <Link href={href.tasks(locale)} className="link-bold">
               {t('home.tasksAll')} →
             </Link>
           </header>

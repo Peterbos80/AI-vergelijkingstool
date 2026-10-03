@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { Locale } from '@/i18n/config';
 import { getT } from '@/i18n/server';
-import { formatDate, formatMoney } from '@/i18n/formatters';
+import { formatDate } from '@/i18n/formatters';
 import { getCatalog, nameOf, toolText } from '@/lib/catalog';
 import { toolWorld } from '@/lib/catalog/helpers';
 import { getToolDetail } from '@/lib/catalog/detail';
@@ -18,18 +18,18 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { ToolMark } from '@/components/data/ToolMark';
 import { StatusStamp } from '@/components/data/StatusStamp';
-import { FreshnessDial } from '@/components/data/FreshnessDial';
 import { StaleBanner } from '@/components/data/StaleBanner';
 import { VisitLink } from '@/components/data/VisitLink';
 import { ReceiptDrawer } from '@/components/data/ReceiptDrawer';
 import { FactList, hasFactValue } from '@/components/data/FactList';
-import { ToolRow } from '@/components/data/ToolRow';
+import { ToolCard } from '@/components/data/ToolCard';
 import { VideoFacade } from '@/components/data/VideoFacade';
 import { DisclosureNote } from '@/components/data/DisclosureNote';
 import { Icon } from '@/components/ui/Icon';
 import { entryPriceLabel, factValueLabel, planPriceLabel } from '@/components/data/format';
-import { ReceiptChip } from '@/components/data/ReceiptChip';
-import { WorldScene } from '@/components/worlds/WorldScene';
+import { STATUS_GLYPH, receiptChipName } from '@/components/data/ReceiptChip';
+import { fitStyle } from '@/components/ui/fit';
+import { WorldGlyph } from '@/components/worlds/WorldGlyph';
 import { FxApprox } from '@/components/data/Price';
 import { EuAlternatives } from '@/components/compare/EuAlternatives';
 
@@ -139,6 +139,10 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
     ...(offers.length ? { offers } : {}),
   };
 
+  const checkedAt = tool.lastCheckedAt ?? tool.priceCheckedAt;
+  // The points of care: limitations first, then who it suits less; the first list carries the card's heading.
+  const care = text ? (['limitations', 'notFor'] as const).filter((k) => text[k].length > 0) : [];
+
   return (
     <article className="container-page py-8">
       <Breadcrumbs t={t} items={[{ label: t('tool.breadcrumbTools'), href: href.tools(locale) }, { label: tool.name }]} />
@@ -148,73 +152,102 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
       {tool.status === 'deprecated' && <p className="notice notice-warning mt-4">{t('tool.deprecatedNotice', { name: tool.name })}</p>}
       {tool.quarantineUntil && tool.quarantineUntil > new Date() && <p className="notice mt-4">{t('tool.quarantineNotice')}</p>}
 
-      <header className="tool-hero" data-world={world === 'home' ? undefined : world}>
-        {world !== 'home' && (
-          <div className="tool-hero-scene" aria-hidden="true">
-            <WorldScene world={world} uid={`tool-${tool.slug}`} />
-          </div>
-        )}
-        <div className="tool-hero-main">
-          <ToolMark tool={tool} world={world} size={88} />
-          <div className="min-w-0 flex-1">
+      <header className="tool-banner marks-light" data-world={world}>
+        <div className="tool-banner-copy">
+          <div className="tool-banner-top">
+            <span className="tool-banner-mark">
+              <ToolMark tool={tool} world={world} size={64} />
+            </span>
             {mainCategory && world !== 'home' && (
-              <Link href={href.category(locale, nameOf(mainCategory, locale).slug)} className="tool-hero-world">
-                <span className="prompt-dot" aria-hidden="true" />
+              <Link href={href.category(locale, nameOf(mainCategory, locale).slug)} className="tool-banner-world">
                 {t(`worlds.places.${world}`)} · {nameOf(mainCategory, locale).name}
               </Link>
             )}
-            <h1 className="tool-hero-title">{tool.name}</h1>
-            <p className="mt-2 text-lg text-ink-2">{text?.tagline}</p>
-            <p className="mt-3 flex flex-wrap items-center gap-2 text-sm text-ink-3">
-              {tool.companyName && <span>{t('tool.by', { company: tool.companyName })}</span>}
-              {tool.pricingStatus && <StatusStamp status={tool.pricingStatus} t={t} />}
-              <FreshnessDial freshness={tool.freshness} t={t} />
-              {(tool.lastCheckedAt ?? tool.priceCheckedAt) ? (
-                <span>{t('freshness.checkedOn', { date: formatDate(tool.lastCheckedAt ?? tool.priceCheckedAt, locale) })}</span>
-              ) : (
-                tool.pricingStatus !== 'unverified' && <span>{t('freshness.unknown')}</span>
-              )}
-            </p>
-            <div className="mt-5 flex flex-wrap items-start gap-3">
-              <VisitLink slug={tool.slug} name={tool.name} t={t} locale={locale} src="tool" affiliate={isAffiliate} />
-              <Link href={href.compare(locale, [tool.slug, ...alternativesList.slice(0, 1).map((a) => a.slug)])} className="btn btn-ghost">
-                {t('common.compare')}
+          </div>
+          <h1 className="tool-banner-title" style={fitStyle(tool.name)}>
+            {tool.name}
+          </h1>
+          {text?.tagline && <p className="tool-banner-tagline">{text.tagline}</p>}
+          <p className="tool-banner-meta">
+            {tool.companyName && <span>{t('tool.by', { company: tool.companyName })}</span>}
+            {tool.pricingStatus && (
+              <Link
+                href={href.toolPricing(locale, tool.slug)}
+                className="banner-chip"
+                data-status={tool.pricingStatus}
+                title={t(`status.${tool.pricingStatus}.tooltip`)}
+                prefetch={false}
+              >
+                <Icon name={STATUS_GLYPH[tool.pricingStatus]} size={16} />
+                {t(`status.${tool.pricingStatus}.label`)}
               </Link>
-            </div>
+            )}
+            {checkedAt ? (
+              <span>{t('freshness.checkedOn', { date: formatDate(checkedAt, locale) })}</span>
+            ) : (
+              tool.pricingStatus !== 'unverified' && <span>{t('freshness.unknown')}</span>
+            )}
+          </p>
+          <div className="tool-banner-actions">
+            <VisitLink slug={tool.slug} name={tool.name} t={t} locale={locale} src="tool" affiliate={isAffiliate} />
+            <Link href={href.compare(locale, [tool.slug, ...alternativesList.slice(0, 1).map((a) => a.slug)])} className="btn btn-ghost">
+              {t('common.compare')}
+            </Link>
           </div>
         </div>
-        <dl className="tool-facts">
-          <div className="tool-fact">
-            <dt>{t('compare.criteria.entry_price')}</dt>
-            <dd>
-              <span className="num">{entryPriceLabel(tool, t, locale)}</span>
-              <FxApprox cents={tool.entryPriceCents} currency={tool.entryPriceCurrency} fx={catalog.fx} t={t} locale={locale} />
-            </dd>
-          </div>
-          {HERO_FACTS.map((key) => {
-            const receipt = detail.facts[key];
-            const value = receipt ? receipt.value : snapshot[key];
-            const shown = key === 'platforms' && Array.isArray(value) && value.length > 3 ? [...value.slice(0, 3), `+${value.length - 3}`] : value;
-            return (
-              <div key={key} className="tool-fact">
-                <dt>{t(`facts.${key}`)}</dt>
-                <dd>
-                  {hasFactValue(value) ? (
-                    <>
-                      <span>{factValueLabel(key, shown, t)}</span>
-                      {receipt && <ReceiptChip status={receipt.status} t={t} locale={locale} sources={receipt.sources.length} date={receipt.verifiedAt ?? receipt.observedAt} />}
-                    </>
-                  ) : (
-                    <span className="text-ink-3" aria-label={t('hub.noData')} title={t('hub.noData')}>
-                      –
-                    </span>
-                  )}
-                </dd>
-              </div>
-            );
-          })}
-        </dl>
+        <div className="tool-banner-art" aria-hidden="true">
+          <span className="stage-shape stage-shape-1" />
+          <span className="stage-shape stage-shape-2" />
+          <WorldGlyph world={world} className="tool-banner-glyph" />
+        </div>
       </header>
+
+      <dl className="fact-tiles">
+        <div className="fact-tile" data-known={entryPriceLabel(tool, t, locale) === '—' ? 'false' : 'true'}>
+          <dt>{t('compare.criteria.entry_price')}</dt>
+          <dd>
+            <span className="fact-tile-value fact-tile-price">{entryPriceLabel(tool, t, locale)}</span>
+            <FxApprox cents={tool.entryPriceCents} currency={tool.entryPriceCurrency} fx={catalog.fx} t={t} locale={locale} />
+            {tool.pricingStatus && (
+              <Link href={href.toolPricing(locale, tool.slug)} className="price-receipt" data-status={tool.pricingStatus} title={t('receipts.open')} prefetch={false}>
+                <Icon name={STATUS_GLYPH[tool.pricingStatus]} size={14} />
+                {receiptChipName({ status: tool.pricingStatus, t, locale, date: tool.priceCheckedAt })}
+              </Link>
+            )}
+          </dd>
+        </div>
+        {HERO_FACTS.map((key) => {
+          const receipt = detail.facts[key];
+          const value = receipt ? receipt.value : snapshot[key];
+          const shown = key === 'platforms' && Array.isArray(value) && value.length > 3 ? [...value.slice(0, 3), `+${value.length - 3}`] : value;
+          const known = hasFactValue(value);
+          return (
+            <div key={key} className="fact-tile" data-known={known ? 'true' : 'false'}>
+              <dt>{t(`facts.${key}`)}</dt>
+              <dd>
+                {known ? (
+                  <>
+                    <span className="fact-tile-value">{factValueLabel(key, shown, t)}</span>
+                    {receipt && (
+                      <span className="price-receipt" data-status={receipt.status}>
+                        <Icon name={STATUS_GLYPH[receipt.status]} size={14} />
+                        {receiptChipName({ status: receipt.status, t, locale, sources: receipt.sources.length, date: receipt.verifiedAt ?? receipt.observedAt })}
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <span className="fact-tile-value" aria-hidden="true">
+                      —
+                    </span>
+                    <span className="fact-tile-note">{t('hub.noData')}</span>
+                  </>
+                )}
+              </dd>
+            </div>
+          );
+        })}
+      </dl>
 
       <div className="mt-4">
         <StaleBanner freshness={tool.freshness} checkedAt={tool.priceCheckedAt} t={t} locale={locale} />
@@ -230,46 +263,23 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
         </div>
       )}
 
-      <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_22rem]">
-        <div className="min-w-0 space-y-10">
-          <section>
-            <p className="max-w-3xl text-ink-2">{text?.description}</p>
+      <div className="tool-body">
+        <div className="tool-main" data-world={world}>
+          <section aria-labelledby="about">
+            <h2 id="about" className="display-4">
+              {t('tool.about')}
+            </h2>
+            <p className="tool-about">{text?.description}</p>
             {text?.contentStatus === 'ai_draft' && <p className="mt-2 text-xs text-ink-3">{t('tool.contentAiDraft')}</p>}
             {text?.contentStatus === 'machine_translated' && <p className="mt-2 text-xs text-ink-3">{t('tool.contentMachineTranslated')}</p>}
-            <div className="mt-6 grid gap-6 sm:grid-cols-3">
-              {(['bestFor', 'notFor', 'limitations'] as const).map((k) =>
-                text && text[k].length > 0 ? (
-                  <div key={k}>
-                    <h2 className="eyebrow">{t(`tool.${k}`)}</h2>
-                    <ul className="mt-2 space-y-1.5 text-sm">
-                      {text[k].map((x) => (
-                        <li key={x} className="flex gap-2">
-                          <span aria-hidden="true" className="text-ink-3">
-                            {k === 'bestFor' ? '+' : k === 'notFor' ? '−' : '!'}
-                          </span>
-                          {x}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : null,
-              )}
-            </div>
-          </section>
-
-          <section aria-labelledby="dna">
-            <h2 id="dna" className="text-xl">
-              {t('tool.dna')}
-            </h2>
-            <ul className="mt-3 flex flex-wrap gap-2">
+            <ul className="cap-chips" aria-label={t('tool.dna')}>
               {tool.capabilities.map((c) => {
                 const cap = catalog.capabilitiesById.get(c.id);
                 if (!cap) return null;
                 const n = nameOf(cap, locale);
                 return (
                   <li key={c.id}>
-                    <Link href={href.capability(locale, n.slug)} className="chip">
-                      <span aria-hidden="true">{c.strength === 'primary' ? '●' : '○'}</span>
+                    <Link href={href.capability(locale, n.slug)} className="cap-chip" data-strength={c.strength}>
                       {n.name}
                       <span className="visually-hidden">({t(`tool.${c.strength}`)})</span>
                     </Link>
@@ -277,7 +287,7 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
                 );
               })}
             </ul>
-            <dl className="mt-4 grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
+            <dl className="mt-5 grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
               <div className="flex justify-between gap-3 border-b border-line py-1.5">
                 <dt className="text-ink-2">{t('tool.skillLevel')}</dt>
                 <dd>{t(`skill.${tool.skillLevel}`)}</dd>
@@ -291,46 +301,50 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
             </dl>
           </section>
 
-          <section aria-labelledby="pricing">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h2 id="pricing" className="text-xl">
-                {t('tool.pricing')}
-              </h2>
-              <Link href={href.toolPricing(locale, tool.slug)} className="text-sm">
-                {t('tool.allPlans')} →
-              </Link>
-            </div>
-            {tool.plans.length === 0 ? (
-              <p className="mt-2 text-ink-2">{t('plans.noPlans')}</p>
-            ) : (
-              <ul className="receipt mt-4 divide-y divide-dashed divide-line px-4 py-3">
-                {tool.plans.map((p) => {
-                  return (
-                    <li key={p.key} className="py-2.5">
-                      <div className="flex flex-wrap items-baseline justify-between gap-2">
-                        <span className="font-semibold">{p.name}</span>
-                        <span className="num flex flex-wrap items-center justify-end gap-x-2 gap-y-1">
-                          {planPriceLabel(p, t, locale)}
-                          <FxApprox cents={p.priceCents} currency={p.currency} fx={catalog.fx} t={t} locale={locale} />
-                          <StatusStamp status={p.status} t={t} />
-                        </span>
+          {text && (text.bestFor.length > 0 || care.length > 0) && (
+            <div className="pros-cons">
+              {text.bestFor.length > 0 && (
+                <section className="pro-card pro-card-good" aria-labelledby="best-for">
+                  <h2 id="best-for">{t('tool.bestFor')}</h2>
+                  <ul className="pro-list">
+                    {text.bestFor.map((x) => (
+                      <li key={x}>
+                        <Icon name="check" size={20} />
+                        {x}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+              {care.length > 0 && (
+                <section className="pro-card pro-card-care" aria-labelledby={`care-${care[0]}`}>
+                  {care.map((k, i) => {
+                    const Heading = i === 0 ? 'h2' : 'h3';
+                    return (
+                      <div key={k}>
+                        <Heading id={`care-${k}`}>{t(`tool.${k}`)}</Heading>
+                        <ul className="pro-list">
+                          {text[k].map((x) => (
+                            <li key={x}>
+                              <Icon name={k === 'limitations' ? 'triangle-alert' : 'x'} size={20} />
+                              {x}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                      {p.quota && <p className="mt-0.5 text-xs text-ink-3">{p.quota}</p>}
-                      {p.pendingChange && <p className="mt-1 text-xs font-semibold text-warning-ink">{t('plans.pendingBadge')}</p>}
-                      <ReceiptDrawer receipt={detail.plans[p.key]} t={t} locale={locale} />
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </section>
+                    );
+                  })}
+                </section>
+              )}
+            </div>
+          )}
 
           {knownFacts.length > 0 && (
             <section aria-labelledby="facts">
-              <h2 id="facts" className="text-xl">
+              <h2 id="facts" className="display-4">
                 {t('tool.facts')}
               </h2>
-              <div className="card mt-3 px-4">
+              <div className="card mt-5 px-4">
                 <FactList keys={OTHER_KEYS} detail={detail} snapshot={snapshot} t={t} locale={locale} technical={TECHNICAL_KEYS} />
               </div>
               {missingFacts && (
@@ -343,13 +357,13 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
           )}
 
           <section aria-labelledby="timeline">
-            <h2 id="timeline" className="text-xl">
+            <h2 id="timeline" className="display-4">
               {t('tool.timeline')}
             </h2>
             {detail.events.length === 0 ? (
-              <p className="mt-2 text-sm text-ink-2">{t('tool.timelineEmpty')}</p>
+              <p className="mt-4 text-ink-2">{t('tool.timelineEmpty')}</p>
             ) : (
-              <ol className="mt-3 space-y-3 border-l border-line pl-4">
+              <ol className="mt-5 space-y-3 border-l border-line pl-4">
                 {detail.events.map((e) => (
                   <li key={e.id} className="text-sm">
                     <p className="mono text-xs text-ink-3">
@@ -373,10 +387,10 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
 
           {detail.videos.length > 0 && (
             <section aria-labelledby="videos">
-              <h2 id="videos" className="text-xl">
+              <h2 id="videos" className="display-4">
                 {t('tool.videos')}
               </h2>
-              <ul className="mt-3 grid gap-4 sm:grid-cols-2">
+              <ul className="mt-5 grid gap-4 sm:grid-cols-2">
                 {detail.videos.map((v) => (
                   <li key={v.videoId}>
                     <VideoFacade videoId={v.videoId} title={v.title} channel={v.channelTitle} t={t} />
@@ -387,44 +401,91 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
           )}
 
           <section aria-labelledby="alternatives">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h2 id="alternatives" className="text-xl">
+            <header className="bold-head">
+              <h2 id="alternatives" className="display-4">
                 {t('tool.alternatives')}
               </h2>
-              <Link href={href.toolAlternatives(locale, tool.slug)} className="text-sm">
+              <Link href={href.toolAlternatives(locale, tool.slug)} className="link-bold">
                 {t('tool.allAlternatives', { name: tool.name })} →
               </Link>
-            </div>
-            <ul className="card mt-3 px-4">
-              {alternativesList.map((a) => (
-                <ToolRow key={a.id} tool={a} catalog={catalog} t={t} locale={locale} />
-              ))}
-            </ul>
-            {fights.length > 0 && (
-              <div className="mt-4">
-                <h3 className="eyebrow">{t('tool.fairFights')}</h3>
-                <ul className="mt-2 flex flex-wrap gap-2">
-                  {fights.map((f) => (
-                    <li key={f.id}>
-                      <Link href={href.fairFight(locale, tool.slug, f.slug)} className="chip">
-                        {tool.name} vs {f.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            </header>
+            {alternativesList.length > 0 && (
+              <ul className="card-grid">
+                {alternativesList.map((a) => (
+                  <li key={a.id}>
+                    <ToolCard tool={a} catalog={catalog} t={t} locale={locale} />
+                  </li>
+                ))}
+              </ul>
+            )}
+            {fights[0] && (
+              <Link href={href.fairFight(locale, tool.slug, fights[0].slug)} className="fight-bar">
+                <span>
+                  {t('tool.fairFights')}: {tool.name} vs {fights[0].name}
+                </span>
+                <Icon name="arrow-right" size={26} />
+              </Link>
+            )}
+            {fights.length > 1 && (
+              <ul className="mt-3 flex flex-wrap gap-2" aria-label={t('tool.fairFights')}>
+                {fights.slice(1).map((f) => (
+                  <li key={f.id}>
+                    <Link href={href.fairFight(locale, tool.slug, f.slug)} className="chip">
+                      {tool.name} vs {f.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             )}
           </section>
 
           <EuAlternatives tool={tool} catalog={catalog} t={t} locale={locale} />
         </div>
 
-        <aside className="space-y-6">
-          <section className="card p-4" aria-labelledby="vitals">
-            <h2 id="vitals" className="eyebrow">
-              {t('tool.vitals')}
-            </h2>
-            <dl className="mt-2 space-y-2 text-sm">
+        <aside className="tool-aside">
+          <section className="receipt price-receipt-card" aria-labelledby="pricing">
+            <div className="price-receipt-head">
+              <h2 id="pricing">{t('tool.pricing')}</h2>
+              <span className="price-receipt-label">{t('receipts.label')}</span>
+            </div>
+            {tool.plans.length === 0 ? (
+              <p className="mt-4 border-t-2 border-dashed border-line pt-4 font-sans">{t('plans.noPlans')}</p>
+            ) : (
+              <ul className="price-receipt-plans">
+                {tool.plans.map((p) => (
+                  <li key={p.key}>
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <span className="font-semibold">{p.name}</span>
+                      <span className="num flex flex-wrap items-center justify-end gap-x-2 gap-y-1">
+                        {planPriceLabel(p, t, locale)}
+                        <FxApprox cents={p.priceCents} currency={p.currency} fx={catalog.fx} t={t} locale={locale} />
+                        <StatusStamp status={p.status} t={t} />
+                      </span>
+                    </div>
+                    {p.quota && <p className="mt-0.5 text-xs text-ink-3">{p.quota}</p>}
+                    {p.pendingChange && <p className="mt-1 text-xs font-semibold text-warning-ink">{t('plans.pendingBadge')}</p>}
+                    <ReceiptDrawer receipt={detail.plans[p.key]} t={t} locale={locale} />
+                  </li>
+                ))}
+              </ul>
+            )}
+            {tool.priceCheckedAt && (
+              <dl className="price-receipt-foot">
+                <div>
+                  <dt>{t('receipts.observed')}</dt>
+                  <dd>{formatDate(tool.priceCheckedAt, locale)}</dd>
+                </div>
+              </dl>
+            )}
+            {priceSince && history.length > 0 && <p className="mt-1.5 text-[0.8125rem] text-ink-3">{t('tool.priceStable', { date: formatDate(priceSince, locale) })}</p>}
+            <Link href={href.toolPricing(locale, tool.slug)} className="price-receipt-more">
+              {t('tool.allPlans')} →
+            </Link>
+          </section>
+
+          <section className="aside-card" aria-labelledby="vitals">
+            <h2 id="vitals">{t('tool.vitals')}</h2>
+            <dl className="mt-4 space-y-2.5 text-[0.9375rem]">
               <div className="flex justify-between gap-3">
                 <dt className="text-ink-2">{t('tool.website')}</dt>
                 <dd className="text-right">
@@ -437,50 +498,36 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
               </div>
               <div className="flex justify-between gap-3">
                 <dt className="text-ink-2">{t('tool.lastChecked')}</dt>
-                <dd>{formatDate(tool.lastCheckedAt ?? tool.priceCheckedAt, locale)}</dd>
+                <dd>{formatDate(checkedAt, locale)}</dd>
               </div>
               <div className="flex justify-between gap-3">
                 <dt className="text-ink-2">{t('tool.lastChange')}</dt>
                 <dd className="text-right">{lastEvent ? formatDate(eventDate(lastEvent), locale) : t('tool.noChange')}</dd>
               </div>
-              {priceSince && history.length > 0 && (
-                <div className="text-xs text-ink-3">{t('tool.priceStable', { date: formatDate(priceSince, locale) })}</div>
-              )}
-              {tool.entryPriceCents !== null && tool.entryPriceCurrency && (
-                <div className="flex justify-between gap-3">
-                  <dt className="text-ink-2">{t('tool.pricing')}</dt>
-                  <dd>{t('tool.fromPrice', { price: `${formatMoney(tool.entryPriceCents, tool.entryPriceCurrency, locale)}${t('period.month')}` })}</dd>
-                </div>
-              )}
             </dl>
           </section>
 
           {knownEu.length > 0 && (
-            <section className="card p-4" aria-labelledby="eu-lens">
-              <h2 id="eu-lens" className="eyebrow">
-                {t('tool.euLens')}
-              </h2>
+            <section className="aside-card" aria-labelledby="eu-lens">
+              <h2 id="eu-lens">{t('tool.euLens')}</h2>
               <FactList keys={EU_KEYS} detail={detail} snapshot={snapshot} t={t} locale={locale} />
             </section>
           )}
 
-          <section className="card p-4" aria-labelledby="sources">
-            <h2 id="sources" className="eyebrow">
-              {t('tool.sources')}
-            </h2>
-            <ul className="mt-2 space-y-1.5 text-xs">
+          <section className="aside-card" aria-labelledby="sources">
+            <h2 id="sources">{t('tool.sources')}</h2>
+            <ul className="source-list">
               {detail.sources.map((s) => (
-                <li key={s.id} className="break-words">
-                  <span className="text-ink-3">[{t(`sourceType.${s.type}`)}]</span>{' '}
+                <li key={s.id}>
                   <a href={s.url} rel="nofollow noopener noreferrer">
                     {s.title ?? s.domain}
                   </a>
+                  <span className="source-type">{t(`sourceType.${s.type}`)}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-3 text-xs text-ink-3">
-              {t('receipts.explainer')}{' '}
-              <Link href={href.page(locale, 'methodology')}>{t('receipts.methodologyLink')}</Link>
+            <p className="mt-4 text-sm text-ink-2">
+              {t('receipts.explainer')} <Link href={href.page(locale, 'methodology')}>{t('receipts.methodologyLink')}</Link>
             </p>
           </section>
         </aside>
