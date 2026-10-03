@@ -2,8 +2,10 @@ name: Browser check
 
 # Builds the static edition of any commit (input `ref`) and checks that its key
 # pages paint in Chromium and in WebKit, the engine of every browser on an
-# iPhone, with the render tests of this branch (tests/e2e-static/render.spec.ts).
-# It never deploys: use it to test a fix, or to reproduce a problem in an old commit.
+# iPhone, with the render tests of this branch (tests/e2e-static/render.spec.ts),
+# and in the WebKit of earlier Playwright releases: the engine of older iPhones
+# (scripts/render-check.mjs). It never deploys: use it to test a fix, or to
+# reproduce a problem in an old commit.
 on:
   workflow_dispatch:
     inputs:
@@ -69,3 +71,61 @@ jobs:
           name: browser-check-results
           path: test-results
           retention-days: 7
+
+  older-webkit:
+    name: Key pages paint in the WebKit of Playwright ${{ matrix.playwright }}
+    # Older WebKit builds run on Ubuntu 22.04.
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        # From 2024 to mid-2025: roughly the WebKit of iOS 17.4 up to iOS 18.
+        playwright: ['1.41.2', '1.45.3', '1.49.1', '1.52.0']
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: aitw
+          POSTGRES_PASSWORD: aitw
+          POSTGRES_DB: aitoolswijzer
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U aitw" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://aitw:aitw@localhost:5432/aitoolswijzer
+      SITE_URL: https://aitoolswijzer.nl
+      APP_SECRET: ci-app-secret-ci-app-secret-ci-app-secret-0123
+      PUBLIC_ISSUES_URL: https://github.com/${{ github.repository }}/issues/new?template=correction.yml
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+      - name: The render check of this branch, whatever the commit under test
+        env:
+          HARNESS: ${{ github.sha }}
+        run: git show "$HARNESS:scripts/render-check.mjs" > render-check.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: The WebKit of Playwright ${{ matrix.playwright }}
+        env:
+          PLAYWRIGHT_VERSION: ${{ matrix.playwright }}
+        run: |
+          mkdir -p /tmp/pw && cd /tmp/pw && npm init -y > /dev/null && npm install --no-audit --no-fund "playwright@$PLAYWRIGHT_VERSION"
+          /tmp/pw/node_modules/.bin/playwright install --with-deps webkit
+      - run: npm run db:migrate && npm run db:seed
+      - run: npm run build
+      - name: Export the static site
+        run: |
+          SITE_MODE=static NODE_ENV=production npx next start -p 3000 -H 127.0.0.1 > server.log 2>&1 &
+          for i in $(seq 1 60); do curl -fs -o /dev/null http://127.0.0.1:3000/nl && break; sleep 1; done
+          BASE=http://127.0.0.1:3000 OUT=out npx tsx scripts/static-export.ts || { tail -50 server.log; exit 1; }
+      - name: Key pages paint
+        run: |
+          OUT=out PORT=3400 npx tsx scripts/serve-static.ts > serve.log 2>&1 &
+          for i in $(seq 1 30); do curl -fs -o /dev/null http://127.0.0.1:3400/nl && break; sleep 1; done
+          PW_DIR=/tmp/pw node render-check.mjs http://127.0.0.1:3400
