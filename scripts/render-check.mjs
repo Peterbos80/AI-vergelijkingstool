@@ -19,12 +19,19 @@ const PAGES = ['/nl', '/en', '/nl/tools', '/nl/tools/elevenlabs', '/nl/tools/le-
 const browser = await webkit.launch();
 console.log(`WebKit ${browser.version()}`);
 let failed = 0;
+/** Resolves with the page's answer, or null when its main thread does not answer in time. */
+const ask = (page, fn, ms = 3000) => Promise.race([page.evaluate(fn).catch((e) => `error: ${e.message}`), new Promise((r) => setTimeout(() => r(null), ms))]);
+
 for (const p of PAGES) {
   // A fresh iPhone for every page: one page that hangs must not take the others down.
   const context = await browser.newContext({ ...devices['iPhone 13'] });
   const page = await context.newPage();
   const errors = [];
+  const pending = new Set();
   page.on('pageerror', (e) => errors.push(e.message));
+  page.on('request', (r) => pending.add(r.url()));
+  page.on('requestfinished', (r) => pending.delete(r.url()));
+  page.on('requestfailed', (r) => pending.delete(r.url()));
   const t0 = Date.now();
   let verdict;
   try {
@@ -34,7 +41,10 @@ for (const p of PAGES) {
     const box = await h1.boundingBox();
     verdict = box && box.height > 0 ? (errors.length ? `errors: ${errors.join(' | ').slice(0, 200)}` : 'ok') : 'heading without size';
   } catch (e) {
-    verdict = `FAIL: ${String(e.message ?? e).split('\n')[0].slice(0, 160)}`;
+    // Why: still loading files, or a main thread that no longer answers (a hang)?
+    const state = await ask(page, () => `${document.readyState}, h1: ${Boolean(document.querySelector('h1'))}, body: ${document.body ? document.body.innerText.length : 0} chars`);
+    const waiting = [...pending].map((u) => u.replace(base, '')).slice(0, 6);
+    verdict = `FAIL: ${String(e.message ?? e).split('\n')[0].slice(0, 120)} | page: ${state ?? 'no answer (main thread busy)'} | waiting for: ${waiting.join(', ') || 'nothing'}${errors.length ? ` | errors: ${errors.join(' | ').slice(0, 200)}` : ''}`;
   }
   if (verdict !== 'ok') failed++;
   console.log(`${verdict === 'ok' ? 'ok  ' : 'FAIL'} ${p} (${Date.now() - t0} ms)${verdict === 'ok' ? '' : ` ${verdict}`}`);
