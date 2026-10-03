@@ -23,8 +23,7 @@ test('desktop header: five navigation items, search, view level and language', a
   await expect(page.getByRole('banner').getByRole('tab', { name: 'Technisch', exact: true })).toBeVisible();
   await expect(page.getByRole('navigation', { name: 'Taal kiezen' })).toBeVisible();
   await expect(page.getByRole('button', { name: /Menu/ })).toBeHidden();
-  // 76px and its border line (the bold edition).
-  expect((await page.getByRole('banner').boundingBox())!.height).toBeLessThanOrEqual(77);
+  expect((await page.getByRole('banner').boundingBox())!.height).toBeLessThanOrEqual(65);
   // No ticker: "Wat is nieuw" (Pulse) carries the number of changes of the last 30 days (hidden at 0).
   await expect(nav.getByRole('link', { name: /^Wat is nieuw( \d+ wijziging(en)? in de laatste 30 dagen)?$/ })).toBeVisible();
   await expect(page.locator('[class*="ticker"]')).toHaveCount(0);
@@ -35,8 +34,7 @@ test('below 1024px: logo, search and a full-screen menu that closes with Esc', a
   await page.goto('/nl/tools/descript');
   await expect(page.getByRole('navigation', { name: 'Hoofdnavigatie' })).toBeHidden();
   await expect(page.getByRole('button', { name: 'Zoek een tool' })).toBeVisible();
-  // 64px and its border line.
-  expect((await page.getByRole('banner').boundingBox())!.height).toBeLessThanOrEqual(65);
+  expect((await page.getByRole('banner').boundingBox())!.height).toBeLessThanOrEqual(57);
 
   const menu = page.getByRole('button', { name: 'Menu openen' });
   await hydrated(page, '.menu-btn');

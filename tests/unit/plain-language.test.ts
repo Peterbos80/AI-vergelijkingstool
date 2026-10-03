@@ -126,6 +126,7 @@ const BUTTONS = [
   'corrections.submit',
   'hub.startPlan',
   'hub.startStack',
+  'hub.fullStack',
   'errors.retry',
   'errors.notFoundCta',
   'common.compare',
