@@ -5,14 +5,13 @@
  *   do (a world), what exactly (a task of that world), what it may cost —
  *   because typing a question is hard for many people;
  * - "Typ je vraag": type in your own words (Enter asks, Shift+Enter adds a
- *   line), or pick a prompt. A prompt fills the box, sets the view level and
- *   switches the tool matrix to its task.
- * The stage follows the chosen world or the typed words; a hovered prompt
+ *   line), or pick a prompt. A prompt fills the box and sets the view level.
+ * The two ways sit in one card; the prompts follow under it. The stage
+ * (HeroReceipt) follows the chosen world or the typed words; a hovered prompt
  * previews its world. Without JavaScript both are plain GET forms to Match
  * (the task list then shows every task, grouped by world).
  */
 import { useEffect, useRef, useSyncExternalStore, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
-import { LevelTabs } from '@/components/level/LevelTabs';
 import { Icon } from '@/components/ui/Icon';
 import { MATCH_LEVEL, readLevel, subscribeLevel, writeLevel, type ViewLevel } from '@/lib/levels';
 import { askIntent } from './ask-intent';
@@ -27,14 +26,6 @@ export interface AskPrompt {
   world: string | null;
   /** Match for this prompt (no-JS fallback and "see the full stack"). */
   href: string;
-}
-
-export interface MatrixPanel {
-  key: string;
-  title: string;
-  node: ReactNode;
-  /** Link to the full, personalised stack for this panel. */
-  matchHref: string;
 }
 
 export interface AskLabels {
@@ -133,121 +124,123 @@ export function AskBox({
 
   return (
     <div className="ask" data-hydrated={hydrated ? '1' : undefined} data-mode={intent.mode}>
-      {hydrated && (
-        <div role="tablist" aria-label={labels.modes} className="ask-modes">
-          {(['choose', 'type'] as const).map((m) => (
-            <button
-              key={m}
-              type="button"
-              role="tab"
-              id={`ask-tab-${m}`}
-              aria-selected={intent.mode === m}
-              aria-controls={`ask-panel-${m}`}
-              className="ask-mode"
-              onClick={() => setMode(m)}
-            >
-              <Icon name={m === 'choose' ? 'list-plus' : 'pen-line'} size={16} />
-              {m === 'choose' ? labels.modeChoose : labels.modeType}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <div className="ask-panel ask-panel-choose" id="ask-panel-choose" role={hydrated ? 'tabpanel' : undefined} aria-labelledby={hydrated ? 'ask-tab-choose' : undefined}>
-        <form method="get" action={action} className="ask-box ask-choose">
-          <div className="choose-row">
-            <label htmlFor="ask-world" className="choose-label">
-              <span className="choose-n">1</span>
-              {labels.stepWorld}
-            </label>
-            <select id="ask-world" className="input" value={intent.chosen ?? ''} onChange={(e) => pickWorld(e.target.value)}>
-              <option value="">{labels.chooseWorld}</option>
-              {choices.map((c) => (
-                <option key={c.world} value={c.world}>
-                  {c.label}
-                </option>
-              ))}
-            </select>
+      <div className="ask-card">
+        {hydrated && (
+          <div role="tablist" aria-label={labels.modes} className="ask-modes">
+            {(['choose', 'type'] as const).map((m) => (
+              <button
+                key={m}
+                type="button"
+                role="tab"
+                id={`ask-tab-${m}`}
+                aria-selected={intent.mode === m}
+                aria-controls={`ask-panel-${m}`}
+                className="ask-mode"
+                onClick={() => setMode(m)}
+              >
+                <Icon name={m === 'choose' ? 'list-plus' : 'pen-line'} size={16} />
+                {m === 'choose' ? labels.modeChoose : labels.modeType}
+              </button>
+            ))}
           </div>
-          <div className="choose-row">
-            <label htmlFor="ask-task" className="choose-label">
-              <span className="choose-n">2</span>
-              {labels.stepTask}
-            </label>
-            <select id="ask-task" name="task" className="input" required value={intent.task ?? ''} onChange={(e) => pickTask(e.target.value)}>
-              <option value="">{labels.chooseTask}</option>
-              {(choice ? [choice] : choices).map((c) =>
-                choice ? (
-                  c.tasks.map((x) => (
-                    <option key={x.id} value={x.id}>
-                      {x.title}
-                    </option>
-                  ))
-                ) : (
-                  <optgroup key={c.world} label={c.label}>
-                    {c.tasks.map((x) => (
+        )}
+
+        <div className="ask-panel ask-panel-choose" id="ask-panel-choose" role={hydrated ? 'tabpanel' : undefined} aria-labelledby={hydrated ? 'ask-tab-choose' : undefined}>
+          <form method="get" action={action} className="ask-box ask-choose">
+            <div className="choose-row">
+              <label htmlFor="ask-world" className="choose-label">
+                <span className="choose-n">1</span>
+                {labels.stepWorld}
+              </label>
+              <select id="ask-world" className="input" value={intent.chosen ?? ''} onChange={(e) => pickWorld(e.target.value)}>
+                <option value="">{labels.chooseWorld}</option>
+                {choices.map((c) => (
+                  <option key={c.world} value={c.world}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="choose-row">
+              <label htmlFor="ask-task" className="choose-label">
+                <span className="choose-n">2</span>
+                {labels.stepTask}
+              </label>
+              <select id="ask-task" name="task" className="input" required value={intent.task ?? ''} onChange={(e) => pickTask(e.target.value)}>
+                <option value="">{labels.chooseTask}</option>
+                {(choice ? [choice] : choices).map((c) =>
+                  choice ? (
+                    c.tasks.map((x) => (
                       <option key={x.id} value={x.id}>
                         {x.title}
                       </option>
-                    ))}
-                  </optgroup>
-                ),
-              )}
-            </select>
-          </div>
-          <div className="choose-row">
-            <label htmlFor="ask-budget" className="choose-label">
-              <span className="choose-n">3</span>
-              {labels.stepBudget}
-            </label>
-            <select id="ask-budget" name="b" className="input" defaultValue={labels.budgets[0]?.value}>
-              {labels.budgets.map((b) => (
-                <option key={b.value} value={b.value}>
-                  {b.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          {taskTitle && <input type="hidden" name="q" value={taskTitle} />}
-          <input type="hidden" name="lvl" value={MATCH_LEVEL[level]} />
-          <div className="choose-go">
-            <button type="submit" className="btn btn-go" disabled={hydrated && !intent.task}>
-              {labels.show}
-              <Icon name="arrow-right" size={18} />
-            </button>
-          </div>
-        </form>
-      </div>
+                    ))
+                  ) : (
+                    <optgroup key={c.world} label={c.label}>
+                      {c.tasks.map((x) => (
+                        <option key={x.id} value={x.id}>
+                          {x.title}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ),
+                )}
+              </select>
+            </div>
+            <div className="choose-row">
+              <label htmlFor="ask-budget" className="choose-label">
+                <span className="choose-n">3</span>
+                {labels.stepBudget}
+              </label>
+              <select id="ask-budget" name="b" className="input" defaultValue={labels.budgets[0]?.value}>
+                {labels.budgets.map((b) => (
+                  <option key={b.value} value={b.value}>
+                    {b.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {taskTitle && <input type="hidden" name="q" value={taskTitle} />}
+            <input type="hidden" name="lvl" value={MATCH_LEVEL[level]} />
+            <div className="choose-go">
+              <button type="submit" className="btn btn-go" disabled={hydrated && !intent.task}>
+                {labels.show}
+                <Icon name="arrow-right" size={18} />
+              </button>
+            </div>
+          </form>
+        </div>
 
-      <div className="ask-panel ask-panel-type" id="ask-panel-type" role={hydrated ? 'tabpanel' : undefined} aria-labelledby={hydrated ? 'ask-tab-type' : undefined}>
-        <form ref={form} method="get" action={action} role="search" className="ask-box ask-type">
-          <label htmlFor="match-q" className="visually-hidden">
-            {labels.label}
-          </label>
-          <textarea
-            id="match-q"
-            ref={input}
-            name="q"
-            rows={2}
-            required
-            minLength={3}
-            maxLength={300}
-            value={q}
-            onChange={(e) => askIntent.set({ text: e.target.value })}
-            onKeyDown={onKeyDown}
-            placeholder={labels.placeholder}
-            className="ask-input"
-            autoComplete="off"
-            enterKeyHint="search"
-          />
-          <input type="hidden" name="lvl" value={MATCH_LEVEL[level]} />
-          <div className="ask-bar">
-            <p className="ask-hint">{labels.hint}</p>
-            <button type="submit" className="ask-submit" aria-label={labels.submit} title={labels.submit}>
-              <Icon name="arrow-right" size={20} />
-            </button>
-          </div>
-        </form>
+        <div className="ask-panel ask-panel-type" id="ask-panel-type" role={hydrated ? 'tabpanel' : undefined} aria-labelledby={hydrated ? 'ask-tab-type' : undefined}>
+          <form ref={form} method="get" action={action} role="search" className="ask-box ask-type">
+            <label htmlFor="match-q" className="visually-hidden">
+              {labels.label}
+            </label>
+            <textarea
+              id="match-q"
+              ref={input}
+              name="q"
+              rows={2}
+              required
+              minLength={3}
+              maxLength={300}
+              value={q}
+              onChange={(e) => askIntent.set({ text: e.target.value })}
+              onKeyDown={onKeyDown}
+              placeholder={labels.placeholder}
+              className="ask-input"
+              autoComplete="off"
+              enterKeyHint="search"
+            />
+            <input type="hidden" name="lvl" value={MATCH_LEVEL[level]} />
+            <div className="ask-bar">
+              <p className="ask-hint">{labels.hint}</p>
+              <button type="submit" className="ask-submit" aria-label={labels.submit} title={labels.submit}>
+                <Icon name="arrow-right" size={20} />
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
       <ul className="ask-prompts" aria-label={labels.prompts}>
@@ -273,60 +266,5 @@ export function AskBox({
       </ul>
       {afterPrompts}
     </div>
-  );
-}
-
-/** The tool matrix under the question box; a prompt picks its panel. */
-export function MatrixPanels({
-  panels,
-  defaultPanel,
-  labels,
-}: {
-  panels: MatrixPanel[];
-  defaultPanel: string;
-  labels: { levelGroup: string; levelBasis: string; levelAdvanced: string; levelBasisHint: string; levelAdvancedHint: string; fullStack: string; note: string };
-}) {
-  const intent = useSyncExternalStore(askIntent.subscribe, askIntent.get, askIntent.server);
-  const level = useSyncExternalStore(subscribeLevel, readLevel, () => 'basis' as ViewLevel);
-  const active = panels.find((p) => p.key === (intent.panel ?? defaultPanel)) ?? panels[0];
-  /** The full stack follows the chosen view level. */
-  const withLevel = (h: string) => {
-    const u = new URL(h, 'https://x.invalid');
-    u.searchParams.set('lvl', MATCH_LEVEL[level]);
-    return `${u.pathname}${u.search}`;
-  };
-  return (
-    <>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 id="matrix-title" className="text-xl">
-          {active?.title}
-        </h2>
-        <LevelTabs
-          controls="tool-matrix"
-          labels={{
-            group: labels.levelGroup,
-            basis: labels.levelBasis,
-            advanced: labels.levelAdvanced,
-            basisHint: labels.levelBasisHint,
-            advancedHint: labels.levelAdvancedHint,
-          }}
-        />
-      </div>
-      <div id="tool-matrix" className="mt-4" aria-live="polite">
-        {panels.map((p) => (
-          <div key={p.key} hidden={p.key !== active?.key} className="matrix-panel">
-            {p.node}
-          </div>
-        ))}
-      </div>
-      <div className="mt-3 flex flex-wrap items-baseline justify-between gap-2 text-sm">
-        <p className="text-ink-3">{labels.note}</p>
-        {active && (
-          <a href={withLevel(active.matchHref)} className="link-accent font-semibold">
-            {labels.fullStack} →
-          </a>
-        )}
-      </div>
-    </>
   );
 }

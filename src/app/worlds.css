@@ -5,8 +5,33 @@
  * in scenes, dots and bars (≥ 3:1 as a graphic on the dark page).
  * --world-x-ink is its text colour (≥ 4.5:1 on paper and card in each theme).
  * A world colour says "where you are"; it is never an evidence status.
+ * --tile-x / --tile-x-ink is the world's bold duotone for tiles, banners and
+ * the home receipt block: the same in both themes, text ≥ 4.5:1 on the tile.
  */
 :root {
+  --tile-home: #ffd84d;
+  --tile-assistant: #5b3ff0;
+  --tile-writing: #ffd84d;
+  --tile-research: #0e6b5c;
+  --tile-image: #ff8fc4;
+  --tile-video: #ff5a36;
+  --tile-audio: #1f6bff;
+  --tile-code: #17161c;
+  --tile-automation: #b6ff4d;
+  --tile-marketing: #ff9e2c;
+  --tile-business: #9ed8ff;
+  --tile-home-ink: #2a1f00;
+  --tile-assistant-ink: #ffffff;
+  --tile-writing-ink: #2a1f00;
+  --tile-research-ink: #e3fff6;
+  --tile-image-ink: #3d0a24;
+  --tile-video-ink: #2b0800;
+  --tile-audio-ink: #ffffff;
+  --tile-code-ink: #b6ff4d;
+  --tile-automation-ink: #102808;
+  --tile-marketing-ink: #331500;
+  --tile-business-ink: #062b47;
+
   --world-home: #c8bca9;
   --world-assistant: #c4acff;
   --world-writing: #d0bc86;
@@ -195,18 +220,18 @@
   --sc-paper-edge: transparent;
 }
 
-/* Any element can set its world: children get --w (light) and --w-ink (text). */
-[data-world='home'] { --w: var(--world-home); --w-ink: var(--world-home-ink); }
-[data-world='assistant'] { --w: var(--world-assistant); --w-ink: var(--world-assistant-ink); }
-[data-world='writing'] { --w: var(--world-writing); --w-ink: var(--world-writing-ink); }
-[data-world='research'] { --w: var(--world-research); --w-ink: var(--world-research-ink); }
-[data-world='image'] { --w: var(--world-image); --w-ink: var(--world-image-ink); }
-[data-world='video'] { --w: var(--world-video); --w-ink: var(--world-video-ink); }
-[data-world='audio'] { --w: var(--world-audio); --w-ink: var(--world-audio-ink); }
-[data-world='code'] { --w: var(--world-code); --w-ink: var(--world-code-ink); }
-[data-world='automation'] { --w: var(--world-automation); --w-ink: var(--world-automation-ink); }
-[data-world='marketing'] { --w: var(--world-marketing); --w-ink: var(--world-marketing-ink); }
-[data-world='business'] { --w: var(--world-business); --w-ink: var(--world-business-ink); }
+/* Any element can set its world: children get --w (light), --w-ink (text) and --t/--t-ink (the tile duotone). */
+[data-world='home'] { --w: var(--world-home); --w-ink: var(--world-home-ink); --t: var(--tile-home); --t-ink: var(--tile-home-ink); }
+[data-world='assistant'] { --w: var(--world-assistant); --w-ink: var(--world-assistant-ink); --t: var(--tile-assistant); --t-ink: var(--tile-assistant-ink); }
+[data-world='writing'] { --w: var(--world-writing); --w-ink: var(--world-writing-ink); --t: var(--tile-writing); --t-ink: var(--tile-writing-ink); }
+[data-world='research'] { --w: var(--world-research); --w-ink: var(--world-research-ink); --t: var(--tile-research); --t-ink: var(--tile-research-ink); }
+[data-world='image'] { --w: var(--world-image); --w-ink: var(--world-image-ink); --t: var(--tile-image); --t-ink: var(--tile-image-ink); }
+[data-world='video'] { --w: var(--world-video); --w-ink: var(--world-video-ink); --t: var(--tile-video); --t-ink: var(--tile-video-ink); }
+[data-world='audio'] { --w: var(--world-audio); --w-ink: var(--world-audio-ink); --t: var(--tile-audio); --t-ink: var(--tile-audio-ink); }
+[data-world='code'] { --w: var(--world-code); --w-ink: var(--world-code-ink); --t: var(--tile-code); --t-ink: var(--tile-code-ink); }
+[data-world='automation'] { --w: var(--world-automation); --w-ink: var(--world-automation-ink); --t: var(--tile-automation); --t-ink: var(--tile-automation-ink); }
+[data-world='marketing'] { --w: var(--world-marketing); --w-ink: var(--world-marketing-ink); --t: var(--tile-marketing); --t-ink: var(--tile-marketing-ink); }
+[data-world='business'] { --w: var(--world-business); --w-ink: var(--world-business-ink); --t: var(--tile-business); --t-ink: var(--tile-business-ink); }
 
 /*
  * ───────────── World scenes (components/worlds) ─────────────
@@ -370,11 +395,4 @@
 .world-live:focus-visible .scene .s-lit,
 .world-live:focus-within .scene .s-lit {
   opacity: 1;
-}
-
-/* The stage's light follows its world smoothly (a registered colour animates). */
-@property --stage-light {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: transparent;
 }
