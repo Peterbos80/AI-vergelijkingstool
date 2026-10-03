@@ -95,7 +95,8 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      # WebKit too: every browser on an iPhone uses it (tests/e2e-static/render.spec.ts).
+      - run: npx playwright install --with-deps chromium webkit
       - run: npm run db:migrate && npm run db:seed
       - run: npm run build
       - name: Export the static site

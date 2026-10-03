@@ -1,0 +1,71 @@
+name: Browser check
+
+# Builds the static edition of any commit (input `ref`) and checks that its key
+# pages paint in Chromium and in WebKit, the engine of every browser on an
+# iPhone, with the render tests of this branch (tests/e2e-static/render.spec.ts).
+# It never deploys: use it to test a fix, or to reproduce a problem in an old commit.
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Commit, branch or tag whose site to check
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    name: Key pages paint in Chromium and WebKit
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: aitw
+          POSTGRES_PASSWORD: aitw
+          POSTGRES_DB: aitoolswijzer
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U aitw" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://aitw:aitw@localhost:5432/aitoolswijzer
+      SITE_URL: https://aitoolswijzer.nl
+      APP_SECRET: ci-app-secret-ci-app-secret-ci-app-secret-0123
+      PUBLIC_ISSUES_URL: https://github.com/${{ github.repository }}/issues/new?template=correction.yml
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+      - name: The render tests of this branch, whatever the commit under test
+        env:
+          HARNESS: ${{ github.sha }}
+        run: |
+          mkdir -p tests/e2e-static
+          git show "$HARNESS:tests/e2e-static/render.spec.ts" > tests/e2e-static/render.spec.ts
+          git show "$HARNESS:playwright.static.config.ts" > playwright.static.config.ts
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run db:migrate && npm run db:seed
+      - run: npm run build
+      - name: Export the static site
+        run: |
+          SITE_MODE=static NODE_ENV=production npx next start -p 3000 -H 127.0.0.1 > server.log 2>&1 &
+          for i in $(seq 1 60); do curl -fs -o /dev/null http://127.0.0.1:3000/nl && break; sleep 1; done
+          BASE=http://127.0.0.1:3000 OUT=out npx tsx scripts/static-export.ts || { tail -50 server.log; exit 1; }
+      - run: npx playwright test -c playwright.static.config.ts render.spec.ts
+        env:
+          OUT: out
+          STATIC_WEBKIT: '1'
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-check-results
+          path: test-results
+          retention-days: 7
