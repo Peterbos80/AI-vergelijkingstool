@@ -161,35 +161,128 @@ function variant(keep, decls) {
   return new Map(sheets.map((s) => [s.path, serialize(s.tree, keep, decls)]));
 }
 
-let tries = 0;
-let version = '';
-/** Load the page with the given stylesheets (null: as published), JavaScript on or off: 'ok', 'hangs' or what went wrong. */
-async function load({ css = null, js = true } = {}) {
-  tries++;
-  // A fresh browser every time: a web process that hangs must not slow the next try down.
-  const browser = await webkit.launch();
-  version ||= browser.version();
+/** Pages the render check (scripts/render-check.mjs) visits before the target, in the same browser. */
+const WARMUP = (process.env.WARMUP ?? '/nl,/en,/nl/tools,/nl/tools/elevenlabs,/nl/tools/le-chat,/nl/categories,/nl/categories/ai-assistenten').split(',').filter(Boolean);
+const REPEAT = 3;
+
+/** Resolves with the page's answer, or null when its main thread does not answer in time. */
+const ask = (page, fn, ms = ANSWER_MS) => Promise.race([page.evaluate(fn).catch(() => null), sleep(ms).then(() => null)]);
+
+/** What a page that did not load is doing: its state, its fonts and the requests still open. */
+async function diagnose(page, open) {
+  const state = await ask(
+    page,
+    () => {
+      const fonts = [...document.fonts].filter((f) => f.status !== 'unloaded').map((f) => `${f.family} ${f.weight} ${f.status}`);
+      const images = [...document.images].filter((i) => !i.complete).length;
+      return `${document.readyState}, fonts ${document.fonts.status} (${fonts.join(', ')}), images loading: ${images}, resources: ${performance.getEntriesByType('resource').length}`;
+    },
+    3000,
+  );
+  const waiting = [...open].map((r) => r.url().replace(base, '')).slice(0, 6);
+  return `page: ${state ?? 'no answer (main thread busy)'} | open requests: ${waiting.join(', ') || 'none'}`;
+}
+
+/** A new iPhone context in `browser` with the stylesheets of `css` (path → text; null: as published). */
+async function open(browser, { css, js }) {
+  const context = await browser.newContext({ ...devices['iPhone 13'], javaScriptEnabled: js });
+  if (css) await context.route((url) => css.has(url.pathname), (route) => route.fulfill({ status: 200, contentType: 'text/css', body: css.get(new URL(route.request().url()).pathname) }));
+  const page = await context.newPage();
+  const requests = new Set();
+  page.on('request', (r) => requests.add(r));
+  page.on('requestfinished', (r) => requests.delete(r));
+  page.on('requestfailed', (r) => requests.delete(r));
+  return { context, page, requests };
+}
+
+/** Explain why a page did not load (while measuring; not while narrowing down, where it only costs time). */
+let explain = true;
+
+/** Wait for a navigation: { outcome: 'ok' | 'hangs' | what went wrong, why }. */
+async function settle(navigation, page, requests) {
   try {
-    const context = await browser.newContext({ ...devices['iPhone 13'], javaScriptEnabled: js });
-    const page = await context.newPage();
-    if (css) await page.route((url) => css.has(url.pathname), (route) => route.fulfill({ status: 200, contentType: 'text/css', body: css.get(new URL(route.request().url()).pathname) }));
-    try {
-      await page.goto(base + target, { timeout: LOAD_MS });
-    } catch (e) {
-      return /timeout/i.test(String(e.message)) ? 'hangs' : `fails: ${String(e.message).split('\n')[0].slice(0, 120)}`;
-    }
-    // Loaded, but does its main thread still answer (a hang can start after the load, with hydration)?
-    const answer = await Promise.race([page.evaluate(() => document.readyState).catch(() => null), sleep(ANSWER_MS).then(() => null)]);
-    return answer === null ? 'hangs' : 'ok';
+    await navigation;
+  } catch (e) {
+    const outcome = /timeout/i.test(String(e.message)) ? 'hangs' : `fails: ${String(e.message).split('\n')[0].slice(0, 120)}`;
+    return { outcome, why: explain ? await diagnose(page, requests) : '' };
+  }
+  // Loaded, but does its main thread still answer (a hang can start after the load, with hydration)?
+  if ((await ask(page, () => document.readyState)) === null) return { outcome: 'hangs', why: 'no answer after the load (main thread busy)' };
+  return { outcome: 'ok', why: '' };
+}
+
+/** Visit these pages one by one, each in a context of its own, as the render check does. */
+async function visitAll(browser, paths, opts) {
+  for (const p of paths) {
+    const v = await open(browser, opts);
+    await v.page.goto(base + p, { timeout: LOAD_MS }).catch(() => undefined);
+    await v.context.close().catch(() => undefined);
+  }
+}
+
+/** Ways to meet the target: in a cold browser, or in one that has shown pages before (warm caches, reused processes). */
+const CONDITIONS = {
+  'in a cold browser': async (browser, opts) => {
+    const { page, requests } = await open(browser, opts);
+    return settle(page.goto(base + target, { timeout: LOAD_MS }), page, requests);
+  },
+  'on a reload': async (browser, opts) => {
+    const { page, requests } = await open(browser, opts);
+    await page.goto(base + target, { timeout: LOAD_MS }).catch(() => undefined);
+    return settle(page.reload({ timeout: LOAD_MS }), page, requests);
+  },
+  'on a second visit': async (browser, opts) => {
+    await visitAll(browser, [target], opts);
+    const { page, requests } = await open(browser, opts);
+    return settle(page.goto(base + target, { timeout: LOAD_MS }), page, requests);
+  },
+  'after the home page': async (browser, opts) => {
+    await visitAll(browser, ['/nl'], opts);
+    const { page, requests } = await open(browser, opts);
+    return settle(page.goto(base + target, { timeout: LOAD_MS }), page, requests);
+  },
+  'after the pages of the render check': async (browser, opts) => {
+    await visitAll(browser, WARMUP, opts);
+    const { page, requests } = await open(browser, opts);
+    return settle(page.goto(base + target, { timeout: LOAD_MS }), page, requests);
+  },
+};
+
+let tries = 0;
+/** Meet the target in a fresh browser (a web process that hangs must not slow the next try down). */
+async function load(condition, { css = null, js = true } = {}) {
+  tries++;
+  const browser = await webkit.launch();
+  try {
+    return await CONDITIONS[condition](browser, { css, js });
   } finally {
     await Promise.race([browser.close().catch(() => undefined), sleep(5_000)]);
   }
 }
 
-const published = await load();
-const noJs = await load({ js: false });
-const noCss = await load({ css: variant(new Set()) });
-console.log(`WebKit ${version} · as published: ${published} · without JavaScript: ${noJs} · without CSS: ${noCss}`);
+const probe = await webkit.launch();
+console.log(`WebKit ${probe.version()}: how often does ${target} not load, and why?`);
+await probe.close();
+const failures = {};
+for (const name of Object.keys(CONDITIONS)) {
+  failures[name] = 0;
+  for (let k = 0; k < REPEAT; k++) {
+    const { outcome, why } = await load(name);
+    if (outcome === 'ok') continue;
+    failures[name]++;
+    console.log(`  ${name}: ${outcome} | ${why}`);
+  }
+  console.log(`${name}: ${failures[name]} of ${REPEAT} did not load`);
+}
+// The cheapest way that fails most often; a flaky one gets a few attempts per try (a try that fails once fails).
+const most = Math.max(...Object.values(failures));
+const condition = Object.keys(CONDITIONS).find((name) => failures[name] === most);
+const attempts = most === REPEAT ? 1 : most === 2 ? 2 : 4;
+/** Does the target fail to load with these stylesheets, in any of `attempts` tries? */
+async function fails(opts) {
+  for (let k = 0; k < attempts; k++) if ((await load(condition, opts)).outcome !== 'ok') return true;
+  return false;
+}
 
 /** Delta debugging (ddmin): a smallest subset of `items` for which `fails` still holds. */
 async function ddmin(items, fails) {
@@ -228,14 +321,21 @@ async function ddmin(items, fails) {
   return set;
 }
 
-if (published === 'ok') {
-  console.log('The page loads here; nothing to narrow down.');
-} else if (noCss !== 'ok') {
-  console.log('It does not load without CSS either: the cause is not in the stylesheets.');
+let noCss = true;
+let noJs = true;
+explain = false;
+if (most === 0) {
+  console.log('\nThe page loads here every time; nothing to narrow down.');
 } else {
-  // With JavaScript only when the hang needs it: without, every try is quicker and the cause purer.
-  const js = noJs === 'ok';
-  const hangs = async (keep, decls) => (await load({ css: variant(new Set(keep), decls), js })) !== 'ok';
+  noCss = await fails({ css: variant(new Set()) });
+  noJs = await fails({ js: false });
+  console.log(`\n${condition} (${attempts} attempt${attempts > 1 ? 's' : ''} per try): without CSS it ${noCss ? 'still fails' : 'loads'}, without JavaScript it ${noJs ? 'still fails' : 'loads'}`);
+  if (noCss) console.log('The cause is not in the stylesheets.');
+}
+if (!noCss) {
+  // With JavaScript only when the failure needs it: without, every try is quicker and the cause purer.
+  const js = !noJs;
+  const hangs = async (keep, decls) => fails({ css: variant(new Set(keep), decls), js });
   let rest = all.map((l) => l.id);
   let more = await hangs(rest);
   if (!more) console.log('The stylesheets as parsed here do not hang it: the parser loses something.');

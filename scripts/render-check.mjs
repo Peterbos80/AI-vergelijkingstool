@@ -27,11 +27,12 @@ for (const p of PAGES) {
   const context = await browser.newContext({ ...devices['iPhone 13'] });
   const page = await context.newPage();
   const errors = [];
+  // Requests, not URLs: the same file can be asked for twice.
   const pending = new Set();
   page.on('pageerror', (e) => errors.push(e.message));
-  page.on('request', (r) => pending.add(r.url()));
-  page.on('requestfinished', (r) => pending.delete(r.url()));
-  page.on('requestfailed', (r) => pending.delete(r.url()));
+  page.on('request', (r) => pending.add(r));
+  page.on('requestfinished', (r) => pending.delete(r));
+  page.on('requestfailed', (r) => pending.delete(r));
   const t0 = Date.now();
   let verdict;
   try {
@@ -41,9 +42,12 @@ for (const p of PAGES) {
     const box = await h1.boundingBox();
     verdict = box && box.height > 0 ? (errors.length ? `errors: ${errors.join(' | ').slice(0, 200)}` : 'ok') : 'heading without size';
   } catch (e) {
-    // Why: still loading files, or a main thread that no longer answers (a hang)?
-    const state = await ask(page, () => `${document.readyState}, h1: ${Boolean(document.querySelector('h1'))}, body: ${document.body ? document.body.innerText.length : 0} chars`);
-    const waiting = [...pending].map((u) => u.replace(base, '')).slice(0, 6);
+    // Why: still loading files or fonts, or a main thread that no longer answers (a hang)?
+    const state = await ask(page, () => {
+      const fonts = [...document.fonts].filter((f) => f.status !== 'unloaded').map((f) => `${f.family} ${f.weight} ${f.status}`);
+      return `${document.readyState}, h1: ${Boolean(document.querySelector('h1'))}, body: ${document.body ? document.body.innerText.length : 0} chars, fonts ${document.fonts.status} (${fonts.join(', ')})`;
+    });
+    const waiting = [...pending].map((r) => r.url().replace(base, '')).slice(0, 6);
     verdict = `FAIL: ${String(e.message ?? e).split('\n')[0].slice(0, 120)} | page: ${state ?? 'no answer (main thread busy)'} | waiting for: ${waiting.join(', ') || 'nothing'}${errors.length ? ` | errors: ${errors.join(' | ').slice(0, 200)}` : ''}`;
   }
   if (verdict !== 'ok') failed++;
