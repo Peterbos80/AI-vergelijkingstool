@@ -4,14 +4,20 @@ name: Browser check
 # pages paint in Chromium and in WebKit, the engine of every browser on an
 # iPhone, with the render tests of this branch (tests/e2e-static/render.spec.ts),
 # and in the WebKit of earlier Playwright releases: the engine of older iPhones
-# (scripts/render-check.mjs). It never deploys: use it to test a fix, or to
-# reproduce a problem in an old commit.
+# (scripts/render-check.mjs). With `bisect` (a page path), it also finds the CSS
+# that hangs that page in each of those WebKits (scripts/render-bisect.mjs).
+# It never deploys: use it to test a fix, or to reproduce a problem in an old
+# commit.
 on:
   workflow_dispatch:
     inputs:
       ref:
         description: Commit, branch or tag whose site to check
         required: true
+      bisect:
+        description: A page that hangs (e.g. /nl/compare/x-vs-y), to find the CSS that hangs it
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -76,7 +82,8 @@ jobs:
     name: Key pages paint in the WebKit of Playwright ${{ matrix.playwright }}
     # Older WebKit builds run on Ubuntu 22.04.
     runs-on: ubuntu-22.04
-    timeout-minutes: 30
+    # A bisect can take a while: every try that hangs waits out its timeout.
+    timeout-minutes: 75
     strategy:
       fail-fast: false
       matrix:
@@ -102,10 +109,12 @@ jobs:
         with:
           ref: ${{ inputs.ref }}
           fetch-depth: 0
-      - name: The render check of this branch, whatever the commit under test
+      - name: The render check and bisect of this branch, whatever the commit under test
         env:
           HARNESS: ${{ github.sha }}
-        run: git show "$HARNESS:scripts/render-check.mjs" > render-check.mjs
+        run: |
+          git show "$HARNESS:scripts/render-check.mjs" > render-check.mjs
+          git show "$HARNESS:scripts/render-bisect.mjs" > render-bisect.mjs
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -129,3 +138,13 @@ jobs:
           OUT=out PORT=3400 npx tsx scripts/serve-static.ts > serve.log 2>&1 &
           for i in $(seq 1 30); do curl -fs -o /dev/null http://127.0.0.1:3400/nl && break; sleep 1; done
           PW_DIR=/tmp/pw node render-check.mjs http://127.0.0.1:3400
+      - name: Which CSS hangs ${{ inputs.bisect }}
+        if: ${{ !cancelled() && inputs.bisect != '' }}
+        env:
+          BISECT: ${{ inputs.bisect }}
+        run: |
+          curl -fs -o /dev/null http://127.0.0.1:3400/nl || {
+            OUT=out PORT=3400 npx tsx scripts/serve-static.ts > serve.log 2>&1 &
+            for i in $(seq 1 30); do curl -fs -o /dev/null http://127.0.0.1:3400/nl && break; sleep 1; done
+          }
+          PW_DIR=/tmp/pw node render-bisect.mjs http://127.0.0.1:3400 "$BISECT"
