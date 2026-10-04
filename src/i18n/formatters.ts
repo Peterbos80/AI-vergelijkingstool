@@ -28,34 +28,77 @@ export function formatPercent(fraction: number, locale: Locale): string {
   return new Intl.NumberFormat(intl(locale), { style: 'percent', maximumFractionDigits: 0 }).format(fraction);
 }
 
+/**
+ * Month names as they stand in a date, fixed here instead of taken from Intl:
+ * every browser ships its own ICU, and an older one writes "29 sep. 2026"
+ * where the server wrote "29 sep 2026". In a client component React then
+ * finds other text than the server sent and renders that part again (React
+ * error #418 in the WebKit of iOS 17, 3 Oct 2026). These are the names
+ * Node 22 writes, so the server's output does not change.
+ */
+const MONTHS: Record<Locale, { short: readonly string[]; long: readonly string[] }> = {
+  nl: {
+    short: ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
+    long: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
+  },
+  en: {
+    short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+    long: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  },
+  de: {
+    short: ['Jan.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 'Sept.', 'Okt.', 'Nov.', 'Dez.'],
+    long: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+  },
+  fr: {
+    short: ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'],
+    long: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+  },
+};
+
+const AMSTERDAM = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/Amsterdam',
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  hourCycle: 'h23',
+});
+
+/** The calendar day and time of a moment in Amsterdam: digits only, the same in every ICU. */
+function inAmsterdam(date: Date | string | null | undefined): { y: number; m: number; d: number; hh: number; mm: number } | null {
+  if (!date) return null;
+  const at = typeof date === 'string' ? new Date(date) : date;
+  if (Number.isNaN(at.getTime())) return null;
+  const parts = AMSTERDAM.formatToParts(at);
+  const n = (type: Intl.DateTimeFormatPartTypes) => Number(parts.find((p) => p.type === type)?.value);
+  return { y: n('year'), m: n('month'), d: n('day'), hh: n('hour') % 24, mm: n('minute') };
+}
+
+/** "29 sep" / "29 Sept" / "29. Sept." / "29 sept.": the day and month as they stand in a date. */
+function dayAndMonth(t: { m: number; d: number }, locale: Locale, style: 'short' | 'long'): string {
+  const month = MONTHS[locale][style][t.m - 1];
+  return locale === 'de' ? `${t.d}. ${month}` : `${t.d} ${month}`;
+}
+
 export function formatDate(date: Date | string | null | undefined, locale: Locale, style: 'short' | 'long' = 'short'): string {
-  if (!date) return '—';
-  const d = typeof date === 'string' ? new Date(date) : date;
-  if (Number.isNaN(d.getTime())) return '—';
-  return new Intl.DateTimeFormat(intl(locale), {
-    day: 'numeric',
-    month: style === 'long' ? 'long' : 'short',
-    year: 'numeric',
-    timeZone: 'Europe/Amsterdam',
-  }).format(d);
+  const t = inAmsterdam(date);
+  return t ? `${dayAndMonth(t, locale, style)} ${t.y}` : '—';
 }
 
 /** Day and month only ("29 sep"), for dense rows where the year is evident. */
 export function formatDayMonth(date: Date | string | null | undefined, locale: Locale): string {
-  if (!date) return '—';
-  const d = typeof date === 'string' ? new Date(date) : date;
-  if (Number.isNaN(d.getTime())) return '—';
-  return new Intl.DateTimeFormat(intl(locale), { day: 'numeric', month: 'short', timeZone: 'Europe/Amsterdam' }).format(d);
+  const t = inAmsterdam(date);
+  return t ? dayAndMonth(t, locale, 'short') : '—';
 }
 
 export function formatDateTime(date: Date | string | null | undefined, locale: Locale): string {
-  if (!date) return '—';
-  const d = typeof date === 'string' ? new Date(date) : date;
-  return new Intl.DateTimeFormat(intl(locale), {
-    dateStyle: 'medium',
-    timeStyle: 'short',
-    timeZone: 'Europe/Amsterdam',
-  }).format(d);
+  const t = inAmsterdam(date);
+  if (!t) return '—';
+  const two = (n: number) => String(n).padStart(2, '0');
+  const time = `${two(t.hh)}:${two(t.mm)}`;
+  // German writes a date with a time as numbers ("29.09.2026, 12:05").
+  return locale === 'de' ? `${two(t.d)}.${two(t.m)}.${t.y}, ${time}` : `${formatDate(date, locale)}, ${time}`;
 }
 
 /** "3 days ago" / "3 dagen geleden". */
