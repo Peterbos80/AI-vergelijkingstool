@@ -17,11 +17,12 @@ The free edition leaves server-only features out instead of showing buttons that
 
 **How it works.** The workflow `.github/workflows/site.yml` ("Site and agents"):
 
-1. restores the database from the `ops-state` branch (a gzipped `pg_dump`) into a Postgres service container;
-2. runs the agents that are due (hourly schedule; manual runs too), or applies an owner command from an issue comment;
-3. turns new P1/P2 inbox items and each new weekly report into issues, and closes issues whose item is resolved;
-4. saves the database back to `ops-state` (one force-pushed commit, so the branch never grows);
-5. when code changed (green CI on the default branch), the agents changed published data, or the last deploy is 6 hours old: builds the app, starts it with `SITE_MODE=static`, exports every page with `scripts/static-export.ts` and deploys the files to GitHub Pages.
+1. checks out the code: after green CI the commit that CI tested, otherwise (hourly, manual, owner command) the newest commit on the default branch whose CI passed, so a commit that is still being tested or failed CI never goes live;
+2. restores the database from the `ops-state` branch (a gzipped `pg_dump`) into a Postgres service container;
+3. runs the agents that are due (hourly schedule; manual runs too), or applies an owner command from an issue comment;
+4. turns new P1/P2 inbox items and each new weekly report into issues, and closes issues whose item is resolved;
+5. saves the database back to `ops-state` (one force-pushed commit, so the branch never grows);
+6. when code changed (green CI on the default branch), the agents changed published data, or the last deploy is 6 hours old: builds the app, starts it with `SITE_MODE=static`, exports every page with `scripts/static-export.ts` and deploys the files to GitHub Pages.
 
 CI tests the static edition on every push (`playwright.static.config.ts`).
 

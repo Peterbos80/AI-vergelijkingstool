@@ -8,7 +8,8 @@ name: Site and agents
 #    commands in issue comments (/approve, /reject, /snooze, /default) apply;
 #  - the site is rebuilt and deployed after green CI on the default branch,
 #    whenever the agents changed published data, and at least every 6 hours
-#    (so dates such as the last check on the home page stay current).
+#    (so dates such as the last check on the home page stay current);
+#  - every run builds a commit whose CI passed, never one still being tested.
 on:
   workflow_run:
     workflows: [CI]
@@ -20,6 +21,7 @@ on:
     types: [created]
 
 permissions:
+  actions: read # the last commit with green CI
   contents: write # the ops-state branch
   issues: write # owner inbox and weekly report
   pages: write
@@ -74,9 +76,25 @@ jobs:
     outputs:
       deploy: ${{ steps.save.outputs.deploy }}
     steps:
+      - name: Last commit with green CI
+        # After green CI the event names the commit. The hourly run, a manual run
+        # and owner commands build the newest commit whose CI passed (with the
+        # older-iPhone gate), never one whose CI is still running or failed.
+        id: green
+        if: github.event_name != 'workflow_run'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          sha=$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?branch=$BRANCH&event=push&status=success&per_page=1" |
+            jq -r '.workflow_runs[0].head_sha // empty')
+          if [ -z "$sha" ]; then echo "::error::No commit on $BRANCH has green CI yet"; exit 1; fi
+          echo "Building $sha"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.event.repository.default_branch }}
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || steps.green.outputs.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc

@@ -239,6 +239,7 @@ De eigenaar koos Dropbox Brand als voorbeeld. Eerst kwam een klikbaar ontwerp op
 - Bewaking:
   - `render.spec.ts` controleert één pagina van elke soort (27) in Chrome en WebKit, en dat geen ervan breder is dan 320 px, ook nadat de scripts geladen zijn;
   - CI zet de site pas live als die pagina's ook laden in de motor van iOS 17.4 en 18.2;
+  - ook de uurlijkse run bouwt alleen een versie waarvan CI geslaagd is (sinds 4 okt; daarvoor kon die een versie live zetten terwijl CI nog liep);
   - "Browser check" test elke versie in vier oudere motoren, en zoekt met `bisect` welke CSS een pagina laat hangen.
 
 ### Ronde 6: de rustige editie (4 okt)
