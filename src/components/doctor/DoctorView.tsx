@@ -203,10 +203,10 @@ export function DoctorView({
             {d.recipe.every((r) => r.action === 'keep') ? (
               <p className="mt-2 text-ink-2">{t('doctor.nothing')}</p>
             ) : null}
-            <ol className="receipt mt-3 divide-y divide-dashed divide-line px-4 py-3">
+            <ol className="receipt mt-3 divide-y divide-line px-4 py-3">
               {d.recipe.map((r, i) => (
                 <li key={i} className="flex flex-wrap items-baseline gap-2 py-2">
-                  <span className="w-24 shrink-0 font-semibold uppercase">{t(`doctor.action.${r.action}`)}</span>
+                  <span className="w-24 shrink-0 font-semibold">{t(`doctor.action.${r.action}`)}</span>
                   <Link href={href.tool(locale, catalog.toolsById.get(r.toolId)?.slug ?? '')}>{name(r.toolId)}</Link>
                   {r.withId && <span className="text-ink-2">{t('doctor.withTool', { tool: name(r.withId) })}</span>}
                 </li>

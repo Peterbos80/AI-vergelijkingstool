@@ -34,13 +34,12 @@ export function RadarPanel({ data, catalog, t, locale }: { data: Radar; catalog:
     <section aria-labelledby="radar-title" className="hub-panel">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 id="radar-title" className="flex items-center gap-2 text-2xl">
-            <Icon name="radar" size={24} className="text-ink-3" />
+          <h2 id="radar-title" className="display-3">
             {t('hub.radarTitle')}
           </h2>
           <p className="mt-1 max-w-2xl text-sm text-ink-2">{t('hub.radarSub')}</p>
         </div>
-        <Link href={href.news(locale)} className="link-accent text-sm font-semibold">
+        <Link href={href.news(locale)} className="link-bold">
           {t('hub.radarAll')} →
         </Link>
       </div>

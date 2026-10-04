@@ -32,7 +32,7 @@ export function NewTools({ catalog, locale, t, now = new Date(), limit = 8 }: { 
   return (
     <section aria-labelledby="new-tools-title" className="new-tools" data-testid="new-tools">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h2 id="new-tools-title" className="text-xl">
+        <h2 id="new-tools-title" className="display-3">
           {t('newTools.title')}
         </h2>
         {all.length > shown.length && (

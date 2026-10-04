@@ -73,14 +73,14 @@ export function StackReceipt({
   const budgetAmount = result.budget ? formatMoney(result.budget.limitCents, result.budget.currency, locale) : null;
   return (
     <section className="receipt print-in px-5 py-6" aria-label={t('stack.receipt')} data-testid="stack-receipt">
-      <header className="flex flex-wrap items-baseline justify-between gap-2 border-b border-dashed border-line pb-3">
-        <h2 className="font-mono text-sm font-semibold uppercase tracking-wider">{t('stack.receipt')}</h2>
+      <header className="flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-3">
+        <h2 className="text-base font-semibold">{t('stack.receipt')}</h2>
         <p className="text-xs text-ink-3" data-dynamic="">
           {t('stack.number')} {receiptNo} · {formatDate(date, locale)}
         </p>
       </header>
       <p className="mt-3 font-sans text-base font-semibold">{title}</p>
-      <ol className="mt-3 divide-y divide-dashed divide-line">
+      <ol className="mt-3 divide-y divide-line">
         {result.steps.map((s, i) => {
           const tool = s.toolId ? catalog.toolsById.get(s.toolId) : undefined;
           const line = result.lines.find((l) => l.toolId === s.toolId);
@@ -119,7 +119,7 @@ export function StackReceipt({
                     <FreshnessDial freshness={tool.freshness} t={t} size={14} />
                   </span>
                   {line && line.freePlanAvailable && (line.paidCents ?? 0) > 0 && (
-                    <span className="col-start-3 text-[0.6875rem] text-verified max-sm:col-start-2">{t('stack.freeAvailable')}</span>
+                    <span className="col-start-3 text-xs text-ink-3 max-sm:col-start-2">{t('stack.freeAvailable')}</span>
                   )}
                 </>
               )}
@@ -130,7 +130,7 @@ export function StackReceipt({
       <hr className="receipt-rule my-3" />
       <dl className="space-y-1.5 text-sm">
         <div className="flex flex-wrap justify-between gap-2">
-          <dt className="font-semibold uppercase">{t('stack.totalCore')}</dt>
+          <dt className="font-semibold">{t('stack.totalCore')}</dt>
           <dd className="num font-semibold">
             {core.paid.length ? `${moneyList(core.paid, locale)}${t('period.month')}` : t('common.free')}
           </dd>

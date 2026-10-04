@@ -23,12 +23,11 @@ for (const path of PAGES) {
   });
 }
 
-test('the home page: the question, the stage with a receipt, ten worlds and the facts band', async ({ page }) => {
+test('the home page: the question, ten worlds and the fair fights', async ({ page }) => {
   await page.goto('/nl');
   await expect(page.locator('.ask[data-hydrated]')).toBeVisible();
-  await expect(page.locator('.stage .stage-paper')).toBeVisible();
-  await expect(page.locator('.bento .tile[data-world]')).toHaveCount(10);
-  await expect(page.locator('.stats-band .stat')).toHaveCount(3);
+  await expect(page.locator('.world-grid .world-card[data-world]')).toHaveCount(10);
+  await expect(page.locator('.duel-grid .duel').first()).toBeVisible();
 });
 
 // Nothing sticks out sideways on a phone, down to the 320px of an iPhone SE: a page wider than

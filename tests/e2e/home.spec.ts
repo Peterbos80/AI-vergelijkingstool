@@ -1,8 +1,7 @@
 /**
  * The home page: the question box (pick from lists or type), prompts that
- * fill the box and switch the view level, the stage with the receipt of the
- * world asked about, the worlds as tiles, and the live panels that show only
- * real data.
+ * fill the box and switch the view level, the worlds as cards, and the live
+ * panels that show only real data.
  */
 import { expect, test } from '@playwright/test';
 import { watchErrors } from './fixtures';
@@ -60,40 +59,16 @@ test('the starter plans follow the view level', async ({ page }) => {
   expect(await starters.filter({ visible: true }).first().innerText()).not.toBe(first);
 });
 
-test('the stage shows the world of the question, with the receipt of its top tool', async ({ page }) => {
+test('ten worlds, each a card linking to its category with its tool count, and a link to all tools', async ({ page }) => {
   await page.goto('/nl');
-  await expect(page.locator('.ask[data-hydrated]')).toBeVisible();
-  const stage = page.locator('.stage');
-  await expect(stage).toHaveAttribute('data-world', 'home');
-  // Before asking: the latest checked price, with its status, date and source.
-  const receipt = stage.locator('.stage-paper');
-  await expect(receipt.locator('.stage-tool')).toHaveAttribute('href', /^\/nl\/tools\//);
-  await expect(receipt.locator('.stage-status')).toHaveText(/^(Gecontroleerd|Onderbouwd)$/);
-  await expect(receipt.locator('time')).toHaveAttribute('datetime', /^\d{4}-\d{2}-\d{2}$/);
-  await page.getByRole('tab', { name: 'Typ je vraag' }).click();
-  await page.locator('#match-q').fill('ik wil een podcast opnemen');
-  await expect(stage).toHaveAttribute('data-world', 'audio');
-  await expect(page.locator('.stage-caption a')).toHaveAttribute('href', /^\/nl\/categories\//);
-  await expect(receipt.locator('.stage-tool')).toHaveAttribute('href', /^\/nl\/tools\//);
-  // A prompt previews its world while the pointer is on it.
-  await page.getByRole('link', { name: /Social video/ }).hover();
-  await expect(stage).toHaveAttribute('data-world', 'video');
-  await page.mouse.move(0, 0);
-  await expect(stage).toHaveAttribute('data-world', 'audio');
-  // An empty box goes back to the wijzer's office.
-  await page.locator('#match-q').fill('');
-  await expect(stage).toHaveAttribute('data-world', 'home');
-});
-
-test('ten worlds, each a tile linking to its category with its tool count, and one tile for all tools', async ({ page }) => {
-  await page.goto('/nl');
-  const tiles = page.locator('section[aria-labelledby="worlds-title"] .tile[data-world]');
-  await expect(tiles).toHaveCount(10);
-  for (const tile of await tiles.all()) {
-    await expect(tile).toHaveAttribute('href', /^\/nl\/categories\//);
-    await expect(tile.locator('.tile-count')).toHaveText(/^\d+ tools?$/);
+  const worlds = page.locator('section[aria-labelledby="worlds-title"]');
+  const cards = worlds.locator('.world-card[data-world]');
+  await expect(cards).toHaveCount(10);
+  for (const card of await cards.all()) {
+    await expect(card).toHaveAttribute('href', /^\/nl\/categories\//);
+    await expect(card.locator('.world-card-meta')).toHaveText(/^\d+ tools?\b/);
   }
-  await expect(page.locator('section[aria-labelledby="worlds-title"] .tile-all')).toHaveAttribute('href', '/nl/tools');
+  await expect(worlds.getByRole('link', { name: /^Toon alle \d+ tools/ })).toHaveAttribute('href', '/nl/tools');
 });
 
 test('pick from lists: what you want to do, what exactly, what it may cost', async ({ page }) => {
@@ -105,8 +80,7 @@ test('pick from lists: what you want to do, what exactly, what it may cost', asy
   const go = page.getByRole('button', { name: 'Laat de tools zien' });
   await expect(go).toBeDisabled();
   await page.getByRole('combobox', { name: 'Wat wil je doen?' }).selectOption('video');
-  // The stage follows the world, the second list shows its tasks.
-  await expect(page.locator('.stage')).toHaveAttribute('data-world', 'video');
+  // The second list shows the tasks of that world.
   await expect(page.getByRole('combobox', { name: 'Wat precies?' })).toHaveValue('create-social-media-videos');
   await page.getByRole('combobox', { name: 'Wat mag het kosten?' }).selectOption('free');
   await go.click();

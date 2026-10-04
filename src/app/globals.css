@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @import './worlds.css';
-@import './bold.css';
+@import './calm.css';
 
 /*
  * ───────────── Design tokens ─────────────
@@ -56,11 +56,6 @@
   --receipt-ink-2: #3d3c37;
   --receipt-ink-3: #66655f;
   --receipt-line: #d9d3c4;
-  /* The dark band (facts band, footer) and the edge that keeps a dark tile visible on the dark page (app/bold.css). */
-  --band: #16151a;
-  --band-ink: #f4f1ea;
-  --band-ink-2: #cfc8bb;
-  --tile-edge: transparent;
   /* Depth: flat by default; e1 hover, e2 popovers and drawers, e3 dialogs. */
   --e1: 0 1px 2px rgb(21 21 19 / 0.06), 0 4px 12px -4px rgb(21 21 19 / 0.1);
   --e2: 0 12px 32px -12px rgb(21 21 19 / 0.22);
@@ -109,10 +104,6 @@
     --receipt-ink-2: #34332e;
     --receipt-ink-3: #57554d;
     --receipt-line: #c9c2b2;
-    --band: #15151f;
-    --band-ink: #f4f4f6;
-    --band-ink-2: #c5c6d0;
-    --tile-edge: rgb(255 255 255 / 0.16);
     --e1: inset 0 1px 0 rgb(255 255 255 / 0.04);
     --e2: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 16px 40px -16px rgb(0 0 0 / 0.7);
     --e3: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 24px 64px -16px rgb(0 0 0 / 0.8);
@@ -160,10 +151,6 @@
   --receipt-ink-2: #34332e;
   --receipt-ink-3: #57554d;
   --receipt-line: #c9c2b2;
-  --band: #15151f;
-  --band-ink: #f4f4f6;
-  --band-ink-2: #c5c6d0;
-  --tile-edge: rgb(255 255 255 / 0.16);
   --e1: inset 0 1px 0 rgb(255 255 255 / 0.04);
   --e2: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 16px 40px -16px rgb(0 0 0 / 0.7);
   --e3: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 24px 64px -16px rgb(0 0 0 / 0.8);
@@ -235,32 +222,29 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  /* Type scale: H1 750, H2 700, H3/H4 650; sizes come from the page. */
+  /* Type scale: one weight (600) for every heading, gentle tracking; sizes come from the page. */
   h1,
   h2,
   h3,
   h4 {
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-weight: 600;
     text-wrap: balance;
     /* A long Dutch compound ("programmeerassistent") breaks only when it does not fit the screen at all. */
     overflow-wrap: break-word;
   }
   h1 {
-    font-weight: 750;
-    line-height: 1.05;
-    letter-spacing: -0.025em;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
   h2 {
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
   }
   h3,
   h4 {
-    font-weight: 650;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
   }
   p {
     text-wrap: pretty;
@@ -322,7 +306,7 @@
   }
 
   /*
-   * Site header (components/site/Header.tsx): 64px, 76px from 1024px.
+   * Site header (components/site/Header.tsx): 64px.
    * Below 1024px only logo, search and Menu; never wider than the viewport.
    */
   .site-header {
@@ -344,15 +328,15 @@
     flex-shrink: 0;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.1875rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
     text-decoration: none;
     white-space: nowrap;
   }
   .site-logo svg {
-    width: 1.625rem;
-    height: 1.625rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
   .site-nav,
   .site-level,
@@ -368,15 +352,10 @@
   }
   @media (min-width: 64rem) {
     .site-header-bar {
-      height: 4.75rem;
       gap: 1.25rem;
     }
     .site-logo {
-      font-size: 1.375rem;
-    }
-    .site-logo svg {
-      width: 1.875rem;
-      height: 1.875rem;
+      font-size: 1.1875rem;
     }
     .site-nav {
       display: block;
@@ -403,11 +382,15 @@
     align-items: center;
     gap: 0.375rem;
     padding-inline: 0.75rem;
-    color: var(--ink);
-    font-size: 1rem;
-    font-weight: 600;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+    font-weight: 500;
     text-decoration: none;
     white-space: nowrap;
+  }
+  .site-nav-link:hover,
+  .site-nav-link[aria-current='page'] {
+    color: var(--ink);
   }
   .site-nav-link::after {
     content: '';
@@ -415,11 +398,8 @@
     left: 0.75rem;
     right: 0.75rem;
     bottom: -1px;
-    height: 3px;
+    height: 2px;
     background: transparent;
-  }
-  .site-nav-link:hover::after {
-    background: var(--line-strong);
   }
   .site-nav-link[aria-current='page']::after {
     background: var(--ink);
@@ -435,7 +415,6 @@
     border-radius: var(--radius-pill);
     background: var(--live-bg);
     color: var(--live-ink);
-    font-family: var(--font-mono);
     font-size: 0.6875rem;
     font-weight: 600;
     line-height: 1;
@@ -450,20 +429,18 @@
     align-items: center;
     padding-inline: 0.375rem;
     border-radius: var(--radius-sm);
-    color: var(--ink-2);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.04em;
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+    font-weight: 500;
     text-transform: uppercase;
     text-decoration: none;
   }
-  .site-lang a:hover {
-    background: var(--paper-2);
+  .site-lang a:hover,
+  .site-lang a[aria-current='true'] {
     color: var(--ink);
   }
   .site-lang a[aria-current='true'] {
-    background: var(--ink);
-    color: var(--paper);
+    font-weight: 650;
   }
   .header-btn {
     display: inline-flex;
@@ -471,24 +448,24 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-width: 2.75rem;
-    height: 2.75rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
     padding-inline: 0.625rem;
-    border: 2px solid transparent;
-    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
     background: transparent;
     color: var(--ink);
     font: inherit;
     font-size: 0.9375rem;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
   }
   .header-btn:hover {
     background: var(--paper-2);
   }
   .menu-btn {
-    border-color: var(--ink);
-    padding-inline: 1rem;
+    border-color: var(--line-strong);
+    padding-inline: 0.875rem;
   }
   /* Below 360px (an iPhone SE of 2016) only the icon fits; the button keeps its aria-label. */
   @media (max-width: 22.49rem) {
@@ -515,8 +492,9 @@
     .search-btn {
       min-width: 11rem;
       justify-content: flex-start;
-      padding-inline: 1.125rem;
-      border-color: var(--ink);
+      padding-inline: 0.875rem;
+      border-color: var(--line-strong);
+      color: var(--ink-2);
     }
     .search-btn-text {
       position: static;
@@ -531,7 +509,6 @@
       padding: 0 0.375rem;
       border: 1px solid var(--line);
       border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
       font-size: 0.75rem;
       line-height: 1.4;
     }
@@ -643,10 +620,7 @@
       var(--e3);
   }
 
-  /*
-   * Receipt chip (components/data/ReceiptChip.tsx): the status glyph in a
-   * 24px box on its tint; unverified is transparent with a dashed border.
-   */
+  /* Receipt chip (components/data/ReceiptChip.tsx): the status glyph in its colour, in a 24px box. */
   .rchip {
     display: inline-flex;
     flex-shrink: 0;
@@ -661,22 +635,18 @@
   }
   .rchip-verified {
     color: var(--verified);
-    background: var(--verified-bg);
   }
   .rchip-supported {
     color: var(--supported);
-    background: var(--supported-bg);
   }
   .rchip-community {
     color: var(--community);
-    background: var(--community-bg);
   }
   .rchip-unverified {
     color: var(--unverified);
-    border: 1px dashed var(--line-strong);
   }
   a.rchip:hover {
-    border-color: currentColor;
+    border-color: var(--line-strong);
   }
 
   /* Fact rows (components/data/FactList.tsx): a row with a receipt is the <summary> of its drawer. */
@@ -743,8 +713,7 @@
   }
   .tool-row-link {
     font-size: 1.0625rem;
-    font-weight: 650;
-    letter-spacing: -0.01em;
+    font-weight: 600;
     text-decoration: none;
   }
   .tool-row-link::after {
@@ -805,14 +774,11 @@
     font-size: 0.9375rem;
     font-weight: 600;
   }
+  /* "Gratis plan" under a price: plain words, not a coloured label (green means checked). */
   .free-pill {
-    display: inline-flex;
-    padding: 0.0625rem 0.5rem;
-    border-radius: var(--radius-pill);
-    background: var(--verified-bg);
-    color: var(--verified);
+    color: var(--ink-2);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     white-space: nowrap;
   }
   /* The price's receipt: status glyph in its colour, "Onderbouwd · 29 sep". */
@@ -865,8 +831,9 @@
     font-weight: 650;
   }
   @media (min-width: 40rem) {
+    /* The price column fits the longest receipt ("Nog niet gecontroleerd · 29 sep"), so every row lines up. */
     .tool-row {
-      grid-template-columns: 2.75rem minmax(0, 1fr) 10.5rem auto;
+      grid-template-columns: 2.75rem minmax(0, 1fr) 12.5rem auto;
       align-items: center;
     }
     /* Every cell gets its column: an item fixed to row 1 alone would be placed first. */
@@ -879,9 +846,15 @@
     .tool-row-price {
       grid-area: 1 / 3;
       flex-direction: column;
+      flex-wrap: nowrap;
       align-items: flex-end;
       gap: 0.25rem;
       text-align: right;
+    }
+    /* A longer receipt (another language) wraps inside the column instead of pushing the row out. */
+    .tool-row-price .price-receipt {
+      max-width: 100%;
+      white-space: normal;
     }
     .tool-row-actions {
       grid-area: 1 / 4;
@@ -936,25 +909,20 @@
     vertical-align: -0.15em;
   }
 
-  /* Mono is for facts only: prices, dates, domains, counts. */
-  .mono {
-    font-family: var(--font-mono);
-  }
-  /* Amounts: always Plex Mono (already tabular). Never tabular-nums on Schibsted:
-     it widens the decimal comma ("18 ,33"). `.tabular` is kept as an alias. */
+  /* One typeface: facts (prices, dates, domains, counts) are set in the text's own sans.
+     Never tabular-nums on Schibsted: it widens the decimal comma ("18 ,33"). */
+  .mono,
   .num,
   .tabular {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
   }
-  /* Label: small caps-style heading for groups and table heads (replaces the mono eyebrow). */
+  /* Label: a quiet heading for groups (sentence case, never capitals or tracking). */
   .eyebrow {
     font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 650;
+    font-size: 0.8125rem;
+    font-weight: 500;
     line-height: 1.4;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--ink-2);
+    color: var(--ink-3);
   }
 
   .btn {
@@ -1037,7 +1005,6 @@
   }
 
   .card {
-    --receipt-edge: var(--card);
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
@@ -1068,92 +1035,49 @@
     margin-bottom: 0.375rem;
   }
 
-  /*
-   * Receipt: thermal paper in both themes (a light island in dark mode) with a
-   * torn zigzag edge. The teeth are painted in the colour behind the receipt
-   * (--receipt-edge: the page, or the card it sits in).
-   */
+  /* Receipt: a plain card in the page's own theme; what makes it a receipt is its rows, not its paper. */
   .receipt {
-    color-scheme: light;
-    --ink: var(--receipt-ink);
-    --ink-2: var(--receipt-ink-2);
-    --ink-3: var(--receipt-ink-3);
-    --line: var(--receipt-line);
-    --line-strong: #8a867d;
-    --accent: #00707c;
-    --accent-ink: #ffffff;
-    --focus: #00707c;
-    --verified: #15643c;
-    --verified-bg: #e3f2ea;
-    --supported: #2148ae;
-    --supported-bg: #e7edfa;
-    --community: #7a4700;
-    --community-bg: #f6ecdc;
-    --unverified: var(--receipt-ink-3);
-    --price-up: #9f1239;
-    --price-up-bg: #fce8ec;
-    --price-down: #15643c;
-    --price-down-bg: #e3f2ea;
-    --ok: #15643c;
-    --danger: #9f1f17;
-    --warning-ink: #5c3900;
     position: relative;
-    background: var(--receipt);
-    color: var(--receipt-ink);
-    border: 1px solid var(--receipt-line);
-    border-radius: 0;
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-  }
-  .receipt::before,
-  .receipt::after {
-    content: '';
-    position: absolute;
-    left: -1px;
-    right: -1px;
-    height: 6px;
-    background: conic-gradient(from -45deg at 50% 100%, var(--receipt-edge, var(--paper)) 90deg, transparent 0) 0 0 / 12px 6px repeat-x;
-    pointer-events: none;
-  }
-  .receipt::before {
-    top: -1px;
-  }
-  .receipt::after {
-    bottom: -1px;
-    transform: rotate(180deg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--card);
+    color: var(--ink);
   }
   .receipt-rule {
     border: 0;
-    border-top: 1px dashed var(--line);
+    border-top: 1px solid var(--line);
   }
 
+  /* Status: the word in the text colour, with a dot in the status colour (hollow when not checked). */
   .stamp {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    padding: 0.0625rem 0.375rem;
-    border: 1.5px solid currentColor;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    line-height: 1.5;
-    white-space: nowrap;
+    gap: 0.375rem;
+    color: var(--ink-2);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .stamp::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    flex-shrink: 0;
+    border-radius: var(--radius-pill);
+    background: var(--stamp, var(--ink-3));
   }
   .stamp-verified {
-    color: var(--verified);
+    --stamp: var(--verified);
   }
   .stamp-supported {
-    color: var(--supported);
+    --stamp: var(--supported);
   }
   .stamp-community {
-    color: var(--community);
+    --stamp: var(--community);
   }
-  .stamp-unverified {
-    color: var(--unverified);
-    border-style: dashed;
+  .stamp-unverified::before {
+    background: transparent;
+    box-shadow: inset 0 0 0 1.5px var(--unverified);
   }
 
   .table-data {
@@ -1163,13 +1087,11 @@
   .table-data th {
     text-align: left;
     font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    background: var(--paper-2);
-    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--ink-3);
+    background: transparent;
+    padding: 0.625rem 0.75rem;
     border-bottom: 1px solid var(--line);
     white-space: nowrap;
   }
@@ -1184,7 +1106,6 @@
    * the page: it made a fair fight 91px wider than a phone (3 Oct 2026).
    */
   .table-scroll {
-    --receipt-edge: var(--card);
     position: relative;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -1375,9 +1296,6 @@
   }
 
   /* Home sections */
-  .home-section {
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
   .section-head {
     max-width: 46rem;
     margin-bottom: 2rem;
@@ -1392,18 +1310,22 @@
   }
   .section-title {
     margin-top: 0.375rem;
-    font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+    font-size: clamp(1.375rem, 1.25rem + 0.6vw, 1.75rem);
   }
   .section-sub {
     margin-top: 0.625rem;
     color: var(--ink-2);
   }
 
-  /* World cards (components/worlds/WorldCard) */
+  /* World cards (components/worlds/WorldCard): quiet cards; the world shows as a dot before its name. */
   .world-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
+  }
+  @media (min-width: 40rem) {
+    .world-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   @media (min-width: 64rem) {
     .world-grid {
@@ -1412,82 +1334,47 @@
     }
   }
   .world-card {
+    position: relative;
     display: flex;
     height: 100%;
     flex-direction: column;
-    overflow: hidden;
+    gap: 0.375rem;
+    padding: 1rem 1.125rem;
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
     background: var(--card);
     color: var(--ink);
     text-decoration: none;
-    transition:
-      transform var(--dur-2) var(--ease-std),
-      border-color var(--dur-2) var(--ease-std),
-      box-shadow var(--dur-2) var(--ease-std);
   }
-  .world-card:hover,
-  .world-card:focus-visible {
-    transform: translateY(-2px);
-    border-color: color-mix(in srgb, var(--w) 50%, var(--line));
-    box-shadow: var(--e2);
-  }
-  .world-card-stage {
-    display: block;
-    padding: 0.5rem 0.5rem 0;
-    background: radial-gradient(70% 60% at 50% 62%, color-mix(in srgb, var(--w) 10%, transparent), transparent 75%), var(--paper-2);
-    border-bottom: 1px solid var(--line);
-  }
-  .world-card-body {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    gap: 0.125rem;
-    padding: 0.75rem 0.875rem 0.875rem;
-  }
-  .world-card-place {
-    font-size: 0.6875rem;
-    font-weight: 650;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--w-ink);
+  .world-card:hover {
+    border-color: var(--line-strong);
   }
   .world-card-name {
-    font-size: 1.0625rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-  }
-  .world-card-meta {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--ink-3);
-  }
-  .world-card-top {
     display: flex;
-    min-width: 0;
     align-items: center;
     gap: 0.5rem;
-    margin-top: auto;
-    padding-top: 0.625rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
   }
-  .world-card-marks {
-    display: flex;
+  .world-card-name::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
     flex-shrink: 0;
+    border-radius: var(--radius-pill);
+    background: var(--w, var(--ink-3));
   }
-  .world-card-marks .mark {
-    box-shadow: 0 0 0 2px var(--card);
-  }
-  .world-card-marks .mark + .mark {
-    margin-left: -5px;
-  }
-  .world-card-names {
-    min-width: 0;
-    overflow: hidden;
-    font-size: 0.75rem;
+  .world-card-text {
+    font-size: 0.875rem;
+    line-height: 1.45;
     color: var(--ink-2);
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  }
+  .world-card-meta {
+    margin-top: auto;
+    padding-top: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
   }
 
   /* Duels (Fair Fights) */
@@ -1643,11 +1530,9 @@
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--w-ink, var(--ink-2));
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink);
   }
   .chooser-grid {
     display: grid;
@@ -1711,8 +1596,7 @@
     white-space: nowrap;
   }
   .pick-price {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     color: var(--ink-3);
   }
   .pick-check {
@@ -1819,48 +1703,23 @@
     font-size: 0.875rem;
   }
 
-  /* World page (app/[locale]/categories/[slug]): the world's room beside its name. */
+  /* World page (app/[locale]/categories/[slug]): the name, what it is for, its tasks; a hairline below. */
   .world-hero {
     border-bottom: 1px solid var(--line);
-    background: radial-gradient(60% 80% at 80% 40%, color-mix(in srgb, var(--w) 9%, transparent), transparent 70%), var(--paper);
   }
   .world-hero-grid {
-    display: grid;
-    gap: 1.5rem;
     padding-block: 1.5rem 2rem;
   }
   @media (min-width: 64rem) {
     .world-hero-grid {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      align-items: center;
-      gap: 3rem;
-      padding-block: 2rem 3rem;
+      padding-block: 2rem 2.5rem;
     }
-  }
-  .world-hero-visual {
-    width: 100%;
-    max-width: 22rem;
-    margin-inline: auto;
-  }
-  @media (min-width: 64rem) {
-    .world-hero-visual {
-      max-width: none;
-      margin-inline: 0;
-    }
-  }
-  .world-hero-place {
-    margin-top: 1.5rem;
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--w-ink);
   }
   .world-hero-title {
-    margin-top: 0.375rem;
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
-    line-height: 1;
-    letter-spacing: -0.03em;
+    margin-top: 1rem;
+    font-size: clamp(1.875rem, 1.5rem + 1.4vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
   .world-hero-stats {
     margin-top: 1rem;
@@ -1883,10 +1742,11 @@
   }
   .world-section-title::before {
     content: '';
-    width: 0.25rem;
-    height: 1.25em;
+    width: 0.5rem;
+    height: 0.5rem;
+    flex-shrink: 0;
     border-radius: var(--radius-pill);
-    background: var(--w);
+    background: var(--w, var(--ink-3));
   }
   /* Categories: every function by world, as a compact index under the world cards. */
   .functions-index {
@@ -1924,26 +1784,6 @@
     margin-top: 0.5rem;
   }
 
-  /* Entrances: rooms light up as they scroll in; text never fades (contrast stays whole). */
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      .world-card-stage .scene {
-        animation: enter-room linear both;
-        animation-timeline: view();
-        animation-range: entry 10% entry 70%;
-      }
-    }
-  }
-  @keyframes enter-room {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
   .link-accent {
     color: var(--accent);
     text-decoration: none;
@@ -1996,9 +1836,8 @@
 
   /* Panels: radar, starters */
   .hub-panel {
-    --receipt-edge: var(--card);
     border: 1px solid var(--line);
-    border-radius: var(--r-card-lg);
+    border-radius: var(--radius-card);
     background: var(--card);
     padding: 1.25rem;
   }
@@ -2015,10 +1854,8 @@
     align-items: center;
     gap: 0.5rem;
     color: var(--ink-2);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 600;
   }
   .live-dot {
     width: 0.5rem;
@@ -2030,21 +1867,10 @@
     margin-top: 0.5rem;
   }
   .radar-list > li + li {
-    border-top: 1px dashed var(--line);
+    border-top: 1px solid var(--line);
   }
   .radar-item {
     padding: 0.625rem 0;
-  }
-  .radar-item[data-kind='price_increase'],
-  .radar-item[data-kind='shutdown'],
-  .radar-item[data-kind='free_tier_removed'] {
-    box-shadow: inset 2px 0 0 var(--price-up);
-    padding-left: 0.625rem;
-  }
-  .radar-item[data-kind='price_decrease'],
-  .radar-item[data-kind='free_tier_added'] {
-    box-shadow: inset 2px 0 0 var(--price-down);
-    padding-left: 0.625rem;
   }
   .radar-empty {
     margin-top: 0.75rem;
@@ -2056,7 +1882,7 @@
     margin-top: 0.5rem;
   }
   .news-list > li + li {
-    border-top: 1px dashed var(--line);
+    border-top: 1px solid var(--line);
   }
   .news-item {
     padding: 0.625rem 0;
@@ -2113,12 +1939,11 @@
   .starter-card {
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
-    background: var(--paper-2);
+    background: var(--card);
     padding: 1.125rem;
-    transition: border-color 200ms ease-out;
   }
   .starter-card:hover {
-    border-color: var(--accent);
+    border-color: var(--line-strong);
   }
   .step-check {
     display: inline-flex;
@@ -2127,12 +1952,11 @@
     justify-content: center;
     width: 1.375rem;
     height: 1.375rem;
+    border: 1px solid var(--line-strong);
     border-radius: var(--radius-pill);
-    background: var(--verified-bg);
-    color: var(--verified);
-    font-family: var(--font-mono);
+    color: var(--ink-2);
     font-size: 0.6875rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 }
 

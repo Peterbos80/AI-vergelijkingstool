@@ -10,7 +10,6 @@ import { alternates, clip, robots } from '@/lib/seo';
 import { track } from '@/lib/analytics/track';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ToolRow } from '@/components/data/ToolRow';
-import { WorldScene } from '@/components/worlds/WorldScene';
 import { isWorld } from '@/lib/world-ids';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/categories/[slug]'>): Promise<Metadata> {
@@ -48,12 +47,11 @@ export default async function CategoryPage({ params }: PageProps<'/[locale]/cate
         <div className="container-page world-hero-grid">
           <div>
             <Breadcrumbs t={t} items={[{ label: t('categories.breadcrumb'), href: href.categories(locale) }, { label: n.name }]} />
-            {world && <p className="world-hero-place">{t(`worlds.places.${world}`)}</p>}
             <h1 id="world-title" className="world-hero-title">
               {n.name}
             </h1>
             {n.description && <p className="hero-sub">{n.description}</p>}
-            <p className="world-hero-stats mono">{t('categories.worldStats', { tools: toolCount, functions: caps.length, tasks: tasks.length })}</p>
+            <p className="world-hero-stats">{t('categories.worldStats', { tools: toolCount, functions: caps.length, tasks: tasks.length })}</p>
             {tasks.length > 0 && (
               <div className="mt-6">
                 <h2 id="tasks" className="eyebrow">
@@ -72,11 +70,6 @@ export default async function CategoryPage({ params }: PageProps<'/[locale]/cate
               </div>
             )}
           </div>
-          {world && (
-            <div className="world-hero-visual">
-              <WorldScene world={world} uid={`world-${world}`} />
-            </div>
-          )}
         </div>
       </section>
 

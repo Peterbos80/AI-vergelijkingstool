@@ -241,7 +241,37 @@ De eigenaar koos Dropbox Brand als voorbeeld. Eerst kwam een klikbaar ontwerp op
   - CI zet de site pas live als die pagina's ook laden in de motor van iOS 17.4 en 18.2;
   - "Browser check" test elke versie in vier oudere motoren, en zoekt met `bisect` welke CSS een pagina laat hangen.
 
+### Ronde 6: de rustige editie (4 okt)
+De eigenaar vond de site te druk: de tekst moest veel rustiger en strakker. De gedurfde editie is daarom vervangen. `app/calm.css` komt in de plaats van `app/bold.css`.
+
+**Systeem**
+- Eén lettertype in drie gewichten: 400 voor tekst, 500 voor labels, 600 voor koppen. Mono alleen nog voor code. Labels gewoon in zinsvorm: geen hoofdletters, geen letterspatiëring.
+- Kleinere koppen: de paginakop 32 tot 44 px, sectiekoppen 22 tot 28 px.
+- Neutrale vlakken: papier, witte kaarten, lijnen van 1 px, hoeken van 8 en 12 px. Geen schaduwen, gestippelde lijnen, gekleurde blokken, donkere banden of beweging bij aanwijzen.
+- Kleur alleen waar die iets betekent:
+  - het accent voor acties;
+  - een status als gekleurde stip met een woord;
+  - een wereld als stip.
+- Weg: de tegelkleuren, de isometrische kamers (`WorldScene`, `iso.ts`, `rooms.ts`), de aanpasbare titels (`fit.ts`) en het podium met de wereldherkenning (`lib/worlds.ts`).
+
+**Home**
+- Kop, één zin uitleg en de vraagkaart. Daaronder één regel met feiten: tools, prijzen, bronnen en de laatste controle.
+- Werelden als rustige kaarten: stip, naam, één zin, het aantal tools en de drie bovenste.
+- Duels als witte kaarten met de twee merken. Geen podium en geen feitenband meer.
+
+**Toolpagina**
+- Een kop met merk, wereld (stip), naam, één zin, de status (stip en woord) en twee knoppen, met een lijn eronder.
+- Kerngegevens in zes rustige vakken met haarlijnen ertussen.
+- "Handig voor" en "Let op" als witte kaarten. Prijzen, controles en bronnen als witte kaarten in de zijkolom.
+
+**Overal**
+- Een lichte voettekst en een kopbalk van 64 px.
+- Lijsten met tools:
+  - "Gratis plan" als gewone tekst, want groen betekent "gecontroleerd";
+  - de prijskolom is breed genoeg voor het langste bonnetje, zodat alle rijen gelijk lopen.
+- Het bonnetje bij een vraag en het recept in "Check je tools": geen mono, geen hoofdletters, doorlopende lijnen.
+
 ### Nog te doen
-- De categoriepagina's, Alle tools en Vergelijken in dezelfde stijl.
+- De deelafbeeldingen (`lib/og.tsx`) gebruiken nog mono en hoofdletters. Die moeten ook in de rustige stijl.
 - Toolkaarten 2.0 als alternatieve weergave op Alle tools, naast de rijen.
 - Beeldmateriaal per tool: schermafbeeldingen van de eigen site, mits de voorwaarden van de maker dat toestaan.

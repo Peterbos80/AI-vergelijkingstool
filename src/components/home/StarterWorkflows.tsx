@@ -54,8 +54,8 @@ export function StarterWorkflows({
     );
   };
   return (
-    <section aria-labelledby="start-title" className="hub-panel">
-      <h2 id="start-title" className="text-2xl">
+    <section aria-labelledby="start-title">
+      <h2 id="start-title" className="display-3">
         {t('hub.startTitle')}
       </h2>
       <p className="mt-1 max-w-2xl text-sm text-ink-2">{t('hub.startSub')}</p>

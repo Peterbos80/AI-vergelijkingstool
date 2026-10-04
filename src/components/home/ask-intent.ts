@@ -1,13 +1,10 @@
 /**
- * What the visitor is asking on the home page, shared by the question box
- * and the stage that shows the matching world. A tiny external store: no
- * context provider, and it costs nothing until used.
+ * What the visitor is asking on the home page: the question box's state in a
+ * tiny external store (no context provider, and it costs nothing until used).
  */
 export interface AskIntent {
   /** The text in the question box. */
   text: string;
-  /** A world shown while a prompt is hovered or focused. */
-  preview: string | null;
   /** The prompt that filled the box (null: none). */
   panel: string | null;
   /** The world and the task picked in the dropdowns ("choose" mode). */
@@ -17,7 +14,7 @@ export interface AskIntent {
   mode: 'choose' | 'type';
 }
 
-const INITIAL: AskIntent = { text: '', preview: null, panel: null, chosen: null, task: null, mode: 'choose' };
+const INITIAL: AskIntent = { text: '', panel: null, chosen: null, task: null, mode: 'choose' };
 let state = INITIAL;
 const listeners = new Set<() => void>();
 

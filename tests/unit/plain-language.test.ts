@@ -102,7 +102,6 @@ const H1 = [
 /** Buttons and calls to action. */
 const BUTTONS = [
   'home.chooserShow',
-  'home.stageEnter',
   'match.submit',
   'match.apply',
   'match.startOver',

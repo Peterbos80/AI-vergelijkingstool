@@ -9,7 +9,7 @@ import { StatusStamp } from './StatusStamp';
 export function ReceiptPanel({ receipt, t, locale }: { receipt: Receipt; t: Translator; locale: Locale }) {
   return (
     <div className="receipt mt-2 p-4 pt-5 text-xs leading-relaxed">
-      <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1">
+      <dl className="grid grid-cols-[max-content_minmax(0,1fr)] gap-x-4 gap-y-1 break-words">
         <dt className="text-ink-3">{t('receipts.status')}</dt>
         <dd>
           <StatusStamp status={receipt.status} t={t} />

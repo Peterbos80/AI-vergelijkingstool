@@ -6,10 +6,9 @@
  *   because typing a question is hard for many people;
  * - "Typ je vraag": type in your own words (Enter asks, Shift+Enter adds a
  *   line), or pick a prompt. A prompt fills the box and sets the view level.
- * The two ways sit in one card; the prompts follow under it. The stage
- * (HeroReceipt) follows the chosen world or the typed words; a hovered prompt
- * previews its world. Without JavaScript both are plain GET forms to Match
- * (the task list then shows every task, grouped by world).
+ * The two ways sit in one card; the prompts follow under it. Without
+ * JavaScript both are plain GET forms to Match (the task list then shows
+ * every task, grouped by world).
  */
 import { useEffect, useRef, useSyncExternalStore, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react';
 import { Icon } from '@/components/ui/Icon';
@@ -22,7 +21,7 @@ export interface AskPrompt {
   badge: string;
   level: ViewLevel;
   query: string;
-  /** The world of the prompt's task (the stage previews it). */
+  /** The world of the prompt's task (its dot). */
   world: string | null;
   /** Match for this prompt (no-JS fallback and "see the full stack"). */
   href: string;
@@ -81,7 +80,7 @@ export function AskBox({
     }
   }, []);
   const setMode = (mode: 'choose' | 'type') => {
-    askIntent.set({ mode, preview: null });
+    askIntent.set({ mode });
     try {
       localStorage.setItem(MODE_KEY, mode);
     } catch {
@@ -99,12 +98,11 @@ export function AskBox({
     // New tab, new window: follow the link as usual.
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     e.preventDefault();
-    askIntent.set({ text: p.query, panel: p.key, preview: null, mode: 'type' });
+    askIntent.set({ text: p.query, panel: p.key, mode: 'type' });
     writeLevel(p.level);
     // The box appears with this render; focus it right after.
     window.setTimeout(() => input.current?.focus(), 0);
   };
-  const preview = (world: string | null) => () => askIntent.set({ preview: world });
 
   const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
@@ -249,10 +247,6 @@ export function AskBox({
             <a
               href={p.href}
               onClick={pick(p)}
-              onPointerEnter={preview(p.world)}
-              onPointerLeave={preview(null)}
-              onFocus={preview(p.world)}
-              onBlur={preview(null)}
               className="prompt-tag"
               data-world={p.world ?? undefined}
               data-prompt-level={p.level}

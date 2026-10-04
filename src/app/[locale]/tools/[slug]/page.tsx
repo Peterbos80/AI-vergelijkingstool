@@ -28,8 +28,6 @@ import { DisclosureNote } from '@/components/data/DisclosureNote';
 import { Icon } from '@/components/ui/Icon';
 import { entryPriceLabel, factValueLabel, planPriceLabel } from '@/components/data/format';
 import { STATUS_GLYPH, receiptChipName } from '@/components/data/ReceiptChip';
-import { fitStyle } from '@/components/ui/fit';
-import { WorldGlyph } from '@/components/worlds/WorldGlyph';
 import { FxApprox } from '@/components/data/Price';
 import { EuAlternatives } from '@/components/compare/EuAlternatives';
 
@@ -152,21 +150,19 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
       {tool.status === 'deprecated' && <p className="notice notice-warning mt-4">{t('tool.deprecatedNotice', { name: tool.name })}</p>}
       {tool.quarantineUntil && tool.quarantineUntil > new Date() && <p className="notice mt-4">{t('tool.quarantineNotice')}</p>}
 
-      <header className="tool-banner marks-light" data-world={world}>
+      <header className="tool-banner" data-world={world}>
         <div className="tool-banner-copy">
           <div className="tool-banner-top">
             <span className="tool-banner-mark">
-              <ToolMark tool={tool} world={world} size={64} />
+              <ToolMark tool={tool} world={world} size={48} />
             </span>
             {mainCategory && world !== 'home' && (
               <Link href={href.category(locale, nameOf(mainCategory, locale).slug)} className="tool-banner-world">
-                {t(`worlds.places.${world}`)} · {nameOf(mainCategory, locale).name}
+                {nameOf(mainCategory, locale).name}
               </Link>
             )}
           </div>
-          <h1 className="tool-banner-title" style={fitStyle(tool.name)}>
-            {tool.name}
-          </h1>
+          <h1 className="tool-banner-title">{tool.name}</h1>
           {text?.tagline && <p className="tool-banner-tagline">{text.tagline}</p>}
           <p className="tool-banner-meta">
             {tool.companyName && <span>{t('tool.by', { company: tool.companyName })}</span>}
@@ -178,7 +174,6 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
                 title={t(`status.${tool.pricingStatus}.tooltip`)}
                 prefetch={false}
               >
-                <Icon name={STATUS_GLYPH[tool.pricingStatus]} size={16} />
                 {t(`status.${tool.pricingStatus}.label`)}
               </Link>
             )}
@@ -194,11 +189,6 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
               {t('common.compare')}
             </Link>
           </div>
-        </div>
-        <div className="tool-banner-art" aria-hidden="true">
-          <span className="stage-shape stage-shape-1" />
-          <span className="stage-shape stage-shape-2" />
-          <WorldGlyph world={world} className="tool-banner-glyph" />
         </div>
       </header>
 
@@ -309,7 +299,7 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
                   <ul className="pro-list">
                     {text.bestFor.map((x) => (
                       <li key={x}>
-                        <Icon name="check" size={20} />
+                        <Icon name="check" size={16} />
                         {x}
                       </li>
                     ))}
@@ -326,7 +316,7 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
                         <ul className="pro-list">
                           {text[k].map((x) => (
                             <li key={x}>
-                              <Icon name={k === 'limitations' ? 'triangle-alert' : 'x'} size={20} />
+                              <Icon name={k === 'limitations' ? 'triangle-alert' : 'x'} size={16} />
                               {x}
                             </li>
                           ))}
@@ -449,7 +439,7 @@ export default async function ToolPage({ params }: PageProps<'/[locale]/tools/[s
               <span className="price-receipt-label">{t('receipts.label')}</span>
             </div>
             {tool.plans.length === 0 ? (
-              <p className="mt-4 border-t-2 border-dashed border-line pt-4 font-sans">{t('plans.noPlans')}</p>
+              <p className="mt-3 border-t border-line pt-3">{t('plans.noPlans')}</p>
             ) : (
               <ul className="price-receipt-plans">
                 {tool.plans.map((p) => (
